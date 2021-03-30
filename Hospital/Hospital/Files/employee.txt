@@ -1,0 +1,5 @@
+50000;5;2,pedja,pedja,Predrag,Despotovic,063817234,pedja@gmail.com;MANAGER
+55000;10;3,nikola,nikola,Nikola,Matijevic,06345678,nikola@gmail.com;DOCTOR
+60000;15;4,marko,marko,Marko,Todorcevic,063215678,marko@gmail.com;SECRETARY
+65000;20;5,ivana,ivana,Ivana,Ivanovic,061234567,ivana@gmail.com;DOCTOR
+70000;17;6,petar,petar,Petar,Petrovic,061234567,petar@gmail.com;DOCTOR

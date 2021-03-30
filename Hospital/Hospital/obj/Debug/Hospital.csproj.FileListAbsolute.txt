@@ -1,0 +1,15 @@
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital.csprojAssemblyReference.cache
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\MainWindow.g.cs
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\App.g.cs
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital_MarkupCompile.cache
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital_MarkupCompile.lref
+C:\Users\Dell\source\repos\Hospital\Hospital\bin\Debug\Hospital.exe.config
+C:\Users\Dell\source\repos\Hospital\Hospital\bin\Debug\Hospital.exe
+C:\Users\Dell\source\repos\Hospital\Hospital\bin\Debug\Hospital.pdb
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\MainWindow.baml
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital.g.resources
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital.Properties.Resources.resources
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital.csproj.GenerateResource.cache
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital.csproj.CoreCompileInputs.cache
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital.exe
+C:\Users\Dell\source\repos\Hospital\Hospital\obj\Debug\Hospital.pdb
