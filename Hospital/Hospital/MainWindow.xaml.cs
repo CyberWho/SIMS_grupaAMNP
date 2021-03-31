@@ -50,9 +50,7 @@ namespace Hospital
             {
                 if (user == reader.GetString(1) & pass == reader.GetString(2))
                 {
-                    //MessageBox.Show("IMA BOGA");
                     id = int.Parse(reader.GetString(0));
-                    MessageBox.Show(id.ToString());
                 }
             }
             if (id == -1)
@@ -77,7 +75,6 @@ namespace Hospital
             }
             if (uloga == "")
                 isPatient = true;
-            MessageBox.Show(isPatient.ToString() + " " + user);
             //sada znamo koji role koji id da li pacijent
             con.Close();
             con.Dispose();

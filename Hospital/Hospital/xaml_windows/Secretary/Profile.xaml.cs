@@ -187,6 +187,9 @@ namespace Hospital.xaml_windows.Secretary
             int rowsAffected = cmd.ExecuteNonQuery();
             MessageBox.Show("Uspesno izmenjeno " + rowsAffected.ToString() + " redova u bazi!");
 
+            connection.Close();
+            connection.Dispose();
+
             this.Close();
         }
     }
