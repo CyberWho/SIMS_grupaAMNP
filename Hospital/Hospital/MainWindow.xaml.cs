@@ -98,7 +98,7 @@ namespace Hospital
                     s.Show();
                     break;
                 case "Secretary":
-                    s = new SecretaryUI();
+                    s = new SecretaryUI(id);
                     s.Show();
                     break;
             }
