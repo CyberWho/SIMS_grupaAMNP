@@ -62,3 +62,5 @@ C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.csproj
 C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.csproj.CopyComplete
 C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.exe
 C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.pdb
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientNewAppointment.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientNewAppointment.baml

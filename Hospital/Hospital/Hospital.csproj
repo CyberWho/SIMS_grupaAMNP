@@ -70,6 +70,9 @@
     <Compile Include="xaml_windows\Patient\PatientInfo.xaml.cs">
       <DependentUpon>PatientInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\PatientNewAppointment.xaml.cs">
+      <DependentUpon>PatientNewAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\PatientUI.xaml.cs">
       <DependentUpon>PatientUI.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
     <Page Include="xaml_windows\Patient\PatientInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientNewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\PatientUI.xaml">
       <SubType>Designer</SubType>

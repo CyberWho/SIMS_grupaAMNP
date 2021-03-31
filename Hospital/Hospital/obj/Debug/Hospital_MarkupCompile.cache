@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\App.xaml
-7-109322457
+8-938780820
 
-41-1140104677
+421236403708
 14829982013
-MainWindow.xaml;xaml_windows\Doctor\DoctorUI.xaml;xaml_windows\Manager\ManagerUI.xaml;xaml_windows\Patient\PatientAppointments.xaml;xaml_windows\Patient\PatientInfo.xaml;xaml_windows\Patient\PatientUI.xaml;xaml_windows\Secretary\SecretaryUI.xaml;
+MainWindow.xaml;xaml_windows\Doctor\DoctorUI.xaml;xaml_windows\Manager\ManagerUI.xaml;xaml_windows\Patient\PatientAppointments.xaml;xaml_windows\Patient\PatientInfo.xaml;xaml_windows\Patient\PatientNewAppointment.xaml;xaml_windows\Patient\PatientUI.xaml;xaml_windows\Secretary\SecretaryUI.xaml;
 
 False
 

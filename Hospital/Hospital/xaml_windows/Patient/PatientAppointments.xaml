@@ -17,7 +17,23 @@
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
 
         </Menu>
-        <DataGrid x:Name="myDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="386" Margin="305,24,0,0" VerticalAlignment="Top" Width="379"/>
+        <DataGrid x:Name="myDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="386" Margin="305,10,0,0" VerticalAlignment="Top" Width="379" SelectionChanged="myDataGrid_SelectionChanged"/>
+
+
+        <TextBox x:Name="duration_mins_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,46,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="room_id_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,136,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_name_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,187,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_surname_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="date" Grid.Column="1" HorizontalAlignment="Left" Margin="121,86,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Izmeni" Content="Izmeni termin" Grid.Column="1" HorizontalAlignment="Left" Margin="10,303,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click"/>
+        <Button x:Name="Obrisi" Content="Obrisi termin" Grid.Column="1" HorizontalAlignment="Left" Margin="144,303,0,0" VerticalAlignment="Top" Width="86" Click="Obrisi_Click"/>
+        <Button x:Name="ZakaziNoviTermin" Content="Zakazi novi termin" Grid.Column="1" HorizontalAlignment="Left" Margin="66,344,0,0" VerticalAlignment="Top" Width="111" Click="ZakaziNoviTermin_Click"/>
+        <Label Content="Trajanje:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,46,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vreme:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,86,0,0" VerticalAlignment="Top"/>
+        <Label Content="Soba:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,133,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,187,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prezime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,245,0,0" VerticalAlignment="Top" Height="23" Width="99"/>
+        <GroupBox x:Name="groupBox" Grid.Column="1" Header="Termini" HorizontalAlignment="Left" Height="375" Margin="5,21,0,0" VerticalAlignment="Top" Width="262"/>
 
     </Grid>
 </Window>

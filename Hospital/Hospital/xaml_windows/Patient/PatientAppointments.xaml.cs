@@ -39,7 +39,7 @@ namespace Hospital.xaml_windows.Patient
             try
             {
                 con.Open();
-                MessageBox.Show("Connected");
+                
             }
             catch (Exception exp)
             {
@@ -59,7 +59,7 @@ namespace Hospital.xaml_windows.Patient
             {
                 if (id == int.Parse(dr.GetString(4)))
                 {
-                    //MessageBox.Show("IMA BOGA");
+                    
                     patient_id = int.Parse(dr.GetString(0));
                     
                 }
@@ -114,6 +114,70 @@ namespace Hospital.xaml_windows.Patient
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.updateDataGrid();
+        }
+
+        private void Izmeni_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Obrisi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientNewAppointment(id);
+            s.Show();
+            this.Close();
+        }
+
+        private void ud_opp(String sql_stmnt,int state)
+        {
+
+            String msg = "";
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = sql_stmnt;
+            cmd.CommandType = CommandType.Text;
+
+            switch(state)
+            {
+                case 0:
+
+                    break;
+                case 1:
+                    break;
+            }
+
+            try
+            {
+                int n = cmd.ExecuteNonQuery();
+                if(n>0)
+                {
+                    MessageBox.Show(msg);
+                    this.updateDataGrid();
+                } 
+            } catch(Exception exp)
+            {
+
+            }
+
+        }
+
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = sender as DataGrid;
+            DataRowView dr = dg.SelectedItem as DataRowView;
+            if(dr!=null)
+            {
+                duration_mins_txtbx.Text = dr["APPOINTMENT.DURATION_MINS"].ToString();
+                room_id_txtbx.Text = dr["APPOINTMENT.ROOM_ID"].ToString();
+                doctor_name_txtbx.Text = dr["USERS.NAME"].ToString();
+                doctor_surname_txtbx.Text = dr["USERS.SURNAME"].ToString();
+                date.SelectedDate = DateTime.Parse(dr["APPOINTMENT.DATE_TIME"].ToString());
+
+            }
         }
     }
 }
