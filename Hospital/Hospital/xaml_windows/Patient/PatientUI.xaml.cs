@@ -19,9 +19,31 @@ namespace Hospital.xaml_windows.Patient
     /// </summary>
     public partial class PatientUI : Window
     {
-        public PatientUI()
+        int id;
+        public PatientUI(int id)
         {
             InitializeComponent();
+            this.id = id;
+        }
+        private void MojProfil_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientInfo(id);
+            s.Show();
+            this.Close();
+        }
+
+        private void MojiPregledi_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientUI(id);
+            s.Show();
+            this.Close();
+        }
+
+        private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientUI(id);
+            s.Show();
+            this.Close();
         }
     }
 }

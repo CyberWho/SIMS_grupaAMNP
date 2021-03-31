@@ -32,3 +32,33 @@ C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\H
 C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\Hospital.csproj.CopyComplete
 C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\DoctorUI.g.cs
 C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\DoctorUI.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\bin\Debug\Hospital.exe.config
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\bin\Debug\Hospital.exe
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\bin\Debug\Hospital.pdb
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.csprojAssemblyReference.cache
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\MainWindow.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\DoctorUI.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Manager\ManagerUI.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientAppointments.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientInfo.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientUI.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\SecretaryUI.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\App.g.cs
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital_MarkupCompile.cache
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital_MarkupCompile.lref
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\App.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\MainWindow.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\DoctorUI.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Manager\ManagerUI.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientAppointments.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientInfo.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientUI.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\SecretaryUI.baml
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.g.resources
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.Properties.Resources.resources
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.csproj.GenerateResource.cache
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.csproj.CopyComplete
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.exe
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\Hospital.pdb

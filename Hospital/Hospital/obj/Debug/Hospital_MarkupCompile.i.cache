@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\obj\Debug\
 Hospital
 none
 false
 DEBUG;TRACE
-C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\App.xaml
-5-34819263
+C:\Users\Dell\Desktop\New folder (8)\Hospital\Hospital\App.xaml
+7-109322457
 
-401273553751
-14-1782981549
-MainWindow.xaml;xaml_windows\Doctor\DoctorUI.xaml;xaml_windows\Manager\ManagerUI.xaml;xaml_windows\Patient\PatientUI.xaml;xaml_windows\Secretary\SecretaryUI.xaml;
+42-1982464044
+14829982013
+MainWindow.xaml;xaml_windows\Doctor\DoctorUI.xaml;xaml_windows\Manager\ManagerUI.xaml;xaml_windows\Patient\PatientAppointments.xaml;xaml_windows\Patient\PatientInfo.xaml;xaml_windows\Patient\PatientUI.xaml;xaml_windows\Secretary\SecretaryUI.xaml;
 
 True
 

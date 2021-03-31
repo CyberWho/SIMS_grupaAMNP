@@ -86,19 +86,19 @@ namespace Hospital
             switch (uloga)
             {
                 case "":
-                    s = new PatientUI();
+                    s = new PatientUI(id);
                     s.Show();
                     break;
                 case "Doctor":
-                    s = new DoctorUI();
+                    s = new DoctorUI(id);
                     s.Show();
                     break;
                 case "Manager":
-                    s = new ManagerUI();
+                    s = new ManagerUI(id);
                     s.Show();
                     break;
                 case "Secretary":
-                    s = new SecretaryUI();
+                    s = new SecretaryUI(id);
                     s.Show();
                     break;
             }
