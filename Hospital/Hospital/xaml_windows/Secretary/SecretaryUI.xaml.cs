@@ -219,7 +219,21 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Obrisi_karton(object sender, RoutedEventArgs e)
         {
+            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            OracleConnection connection = new OracleConnection(conString);
+            OracleCommand cmd = connection.CreateCommand();
 
+            connection.Open();
+
+            cmd.CommandText = "DELETE FROM patient where user_id = " + current_user_id;
+            int patientRowsAffected = cmd.ExecuteNonQuery();
+            cmd.CommandText = "DELETE FROM users WHERE id = " + current_user_id;
+            int userRowsAffected = cmd.ExecuteNonQuery();
+
+            MessageBox.Show("Uspesno izmenjeno " + userRowsAffected.ToString() + " redova u bazi!");
+
+            connection.Close();
+            connection.Dispose();
         }
 
         private void Izmeni_karton(object sender, RoutedEventArgs e)
