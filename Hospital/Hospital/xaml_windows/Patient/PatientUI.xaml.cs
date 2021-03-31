@@ -19,9 +19,11 @@ namespace Hospital.xaml_windows.Patient
     /// </summary>
     public partial class PatientUI : Window
     {
-        public PatientUI()
+        int id;
+        public PatientUI(int id)
         {
             InitializeComponent();
+            this.id = id;
         }
     }
 }

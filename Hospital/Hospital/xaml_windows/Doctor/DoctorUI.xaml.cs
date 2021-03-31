@@ -19,9 +19,11 @@ namespace Hospital.xaml_windows.Doctor
     /// </summary>
     public partial class DoctorUI : Window
     {
-        public DoctorUI()
+        int id;
+        public DoctorUI(int id)
         {
             InitializeComponent();
+            this.id = id;
         }
     }
 }
