@@ -130,9 +130,11 @@ namespace Hospital.xaml_windows.Secretary
 
         public SecretaryUI(int id)
         {
+            
             InitializeComponent();
             this.DataContext = this;
             this.id = id;
+            
 
             ObservableCollection<User> users = new ObservableCollection<User>();
             ObservableCollection<Model.Patient> patients = new ObservableCollection<Model.Patient>();
@@ -142,29 +144,18 @@ namespace Hospital.xaml_windows.Secretary
             OracleCommand cmd = connection.CreateCommand();
             connection.Open();
 
-            /*md.CommandText = "SELECT users.id, users.username, users.name, users.surname, users.phone_number, users.email " +
-                "FROM users " +
-                "MINUS SELECT users.id, users.username, users.name, users.surname, users.phone_number, users.email " +
-                "FROM users, employees, role where users.ID = employees.USER_ID and employees.ROLE_ID = role.ID";*/
-
             cmd.CommandText = "SELECT users.id, users.username, users.name, users.surname, users.phone_number, users.email, " +
                 "patient.jmbg, patient.date_of_birth " +
                 "FROM users, patient " +
                 "WHERE users.id = patient.user_id";
-
-
-            /*OracleDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-
-            MessageBox.Show(reader.GetString(6));*/
-
             DataTable dt = new DataTable();
+            dt.Clear();
             dt.Load(cmd.ExecuteReader());
 
             dataGridPatients.DataContext = dt;
 
             connection.Close();
-
+            
             foreach (DataRow row in dt.Rows)
             {
                 User nUser = new User
@@ -177,12 +168,6 @@ namespace Hospital.xaml_windows.Secretary
                     EMail = row["email"].ToString()
                 };
                 users.Add(nUser);
-                /*patients.Add(new Model.Patient
-                {
-                    DateOfBirth = DateTime.Parse(row["date_of_birth"].ToString()),
-                    JMBG = row["jmbg"].ToString(),
-                    User = nUser
-                });*/
             }
 
             dataGridPatients.ItemsSource = users;
@@ -266,7 +251,8 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Dodaj_karton(object sender, RoutedEventArgs e)
         {
-
+            Window s = new PatientCreate(current_user_id);
+            s.Show();
 
             User nUser = new User();
 
@@ -308,6 +294,8 @@ namespace Hospital.xaml_windows.Secretary
 
             connection.Close();
             connection.Dispose();
+
+            this.Close();
         }
 
         public void Update(User uUser)
@@ -364,7 +352,7 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            /*string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection connection = new OracleConnection(conString);
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT date_of_birth FROM patient where id = 1";
@@ -376,8 +364,43 @@ namespace Hospital.xaml_windows.Secretary
             MessageBox.Show(reader.GetString(0));
 
             connection.Close();
-            connection.Dispose();
-        
+            connection.Dispose();*/
+
+            /*ObservableCollection<User> users = new ObservableCollection<User>();
+            ObservableCollection<Model.Patient> patients = new ObservableCollection<Model.Patient>();
+
+            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            OracleConnection connection = new OracleConnection(conString);
+            OracleCommand cmd = connection.CreateCommand();
+            connection.Open();
+
+            cmd.CommandText = "SELECT users.id, users.username, users.name, users.surname, users.phone_number, users.email, " +
+                "patient.jmbg, patient.date_of_birth " +
+                "FROM users, patient " +
+                "WHERE users.id = patient.user_id";
+            DataTable dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+
+            dataGridPatients.DataContext = dt;
+
+            connection.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                User nUser = new User
+                {
+                    Id = int.Parse(row["id"].ToString()),
+                    Username = row["username"].ToString(),
+                    Name = row["name"].ToString(),
+                    Surname = row["surname"].ToString(),
+                    PhoneNumber = row["phone_number"].ToString(),
+                    EMail = row["email"].ToString()
+                };
+                users.Add(nUser);
+            }
+
+            dataGridPatients.ItemsSource = users;*/
+
         }
     }
 }

@@ -25,40 +25,7 @@ namespace Hospital.xaml_windows.Secretary
 
         int user_id;
         #region NotifyProperties
-        private string _dob;
-        private string _jmbg;
         private string _id_address;
-        private string _id_user;
-        public string Dob
-        {
-            get
-            {
-                return _dob;
-            }
-            set
-            {
-                if (value != _dob)
-                {
-                    _dob = value;
-                    OnPropertyChanged("Dob");
-                }
-            }
-        }
-        public string Jmbg
-        {
-            get
-            {
-                return _jmbg;
-            }
-            set
-            {
-                if (value != _jmbg)
-                {
-                    _jmbg = value;
-                    OnPropertyChanged("Jmbg");
-                }
-            }
-        }
         public string Id_address
         {
             get
@@ -71,21 +38,6 @@ namespace Hospital.xaml_windows.Secretary
                 {
                     _id_address = value;
                     OnPropertyChanged("Id_address");
-                }
-            }
-        }
-        public string Id_user
-        {
-            get
-            {
-                return _id_user;
-            }
-            set
-            {
-                if (value != _id_user)
-                {
-                    _id_user = value;
-                    OnPropertyChanged("Id_user");
                 }
             }
         }

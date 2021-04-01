@@ -61,3 +61,5 @@ C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj
 C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\Profile.baml
 C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\PatientUpdate.g.cs
 C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\PatientUpdate.baml
+C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\PatientCreate.g.cs
+C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\PatientCreate.baml
