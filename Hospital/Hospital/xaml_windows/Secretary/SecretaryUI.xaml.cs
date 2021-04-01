@@ -266,6 +266,8 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Dodaj_karton(object sender, RoutedEventArgs e)
         {
+
+
             User nUser = new User();
 
             nUser.Username = Username;
@@ -274,8 +276,38 @@ namespace Hospital.xaml_windows.Secretary
             nUser.PhoneNumber = PhoneNumber;
             nUser.EMail = Email;
 
-            MessageBox.Show(nUser.Name);
+            //MessageBox.Show(nUser.Name);
 
+            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            OracleConnection connection = new OracleConnection(conString);
+            OracleCommand cmd = connection.CreateCommand();
+            connection.Open();
+            cmd.CommandText = "SELECT MAX(id) FROM users";
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            int max_id = int.Parse(reader.GetString(0));
+            int nUser_id = max_id + 1;
+
+            nUser.Id = nUser_id;
+            nUser.Password = Username.ToLower();
+
+            cmd.CommandText = "INSERT INTO users (id, username, password, name, surname, phone_number, email) VALUES " +
+                "(:id, :username, :password, :name, :surname, :phone_number, :email)";
+
+
+            cmd.Parameters.Add("@id", nUser.Id);
+            cmd.Parameters.Add("@username", nUser.Username);
+            cmd.Parameters.Add("@password", nUser.Password);
+            cmd.Parameters.Add("@name", nUser.Name);
+            cmd.Parameters.Add("@surname", nUser.Surname);
+            cmd.Parameters.Add("@phone_number", nUser.PhoneNumber);
+            cmd.Parameters.Add("@email", nUser.EMail);
+
+            cmd.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
         }
 
         public void Update(User uUser)
