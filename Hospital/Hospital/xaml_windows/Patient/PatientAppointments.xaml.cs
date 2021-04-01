@@ -120,9 +120,10 @@ namespace Hospital.xaml_windows.Patient
         {
             
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText =  "UPDATE APPOINTMENT SET DATE_TIME = TO_DATE(':DATE_TIME','DD/MM/YYYY HH24:MI:SS') WHERE ID = :ID";
+            cmd.CommandText =  "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
+            DateTime date = DateTime.Parse(date_txt.Text);
+            cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = date;
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = app_id_txt.Text;
-            cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = date_txt.Value;
             int a = cmd.ExecuteNonQuery();
             updateDataGrid();
         }
