@@ -11,7 +11,7 @@ namespace Hospital.Model
     public class Appointment
     {
         public int Id { get; set; }
-        public double DurationInHours { get; set; }
+        public double DurationInMinutes { get; set; }
         public DateTime StartTime { get; set; }
 
         public Doctor Doctor;
