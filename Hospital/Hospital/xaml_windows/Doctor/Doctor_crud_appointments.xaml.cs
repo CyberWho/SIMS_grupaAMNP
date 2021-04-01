@@ -135,8 +135,12 @@ namespace Hospital.xaml_windows.Doctor
                 OracleCommand cmd = con.CreateCommand();
                 con.Open();
 
+                string[] niz = dt.ToString().Split(' ');
+                string dat = niz[0] + " " + niz[1];
+
                 cmd.CommandText = "update appointment set room_id = " + id_sobe.ToString()
-                                  + ", date_time = to_date('" + dt.ToString() + "', 'DD/MM/YYYY HH24:MI:SS') where id =" + id_app.ToString();
+                                  + ", date_time = to_date('" + dat + "', 'DD/MM/YYYY HH24:MI:SS') where id =" + id_app.ToString();
+
 
                 int a = cmd.ExecuteNonQuery();
                 //MessageBox.Show(a.ToString());

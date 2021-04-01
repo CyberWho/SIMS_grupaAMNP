@@ -11,7 +11,6 @@
         <ListBox Name="lb_appointments" SelectionChanged="PrintText"  SelectionMode="Single" Margin="519,98,-0.4,111">
         </ListBox>
         <Button Content="Brisi selektovano" HorizontalAlignment="Center" Margin="145,339,518.6,0" VerticalAlignment="Top" Height="71" Width="130" Click="DelateAppointment" />
-        <Button Content="Sacuvaj sve izmene" HorizontalAlignment="Left" Margin="654,339,0,0" VerticalAlignment="Top" Width="130" Height="71"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="519,339,0,0" VerticalAlignment="Top" Width="130"  Height="71" Click="ReturnOption"/>
         <Button Content="Azuriraj" HorizontalAlignment="Center" Margin="10,339,653.6,0" VerticalAlignment="Top" Height="71" Width="130" Click="UpdateAppointment" />
         <ListBox Name ="lb_rooms" SelectionChanged="SelekcijaSobe" SelectionMode="Single" Margin="10,211,508.6,111" >
