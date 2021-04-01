@@ -350,23 +350,9 @@ namespace Hospital.xaml_windows.Secretary
             connection.Dispose();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Refresh(object sender, RoutedEventArgs e)
         {
-            /*string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection connection = new OracleConnection(conString);
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT date_of_birth FROM patient where id = 1";
-
-            connection.Open();
-            OracleDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-
-            MessageBox.Show(reader.GetString(0));
-
-            connection.Close();
-            connection.Dispose();*/
-
-            /*ObservableCollection<User> users = new ObservableCollection<User>();
+            ObservableCollection<User> users = new ObservableCollection<User>();
             ObservableCollection<Model.Patient> patients = new ObservableCollection<Model.Patient>();
 
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -399,7 +385,7 @@ namespace Hospital.xaml_windows.Secretary
                 users.Add(nUser);
             }
 
-            dataGridPatients.ItemsSource = users;*/
+            dataGridPatients.ItemsSource = users;
 
         }
     }
