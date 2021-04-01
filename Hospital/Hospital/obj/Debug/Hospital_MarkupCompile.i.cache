@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\App.xaml
-61756995940
+7467926548
 
-41183256085
+42452477984
 141065799258
-MainWindow.xaml;xaml_windows\Doctor\DoctorUI.xaml;xaml_windows\Manager\ManagerUI.xaml;xaml_windows\Patient\PatientUI.xaml;xaml_windows\Secretary\Profile.xaml;xaml_windows\Secretary\SecretaryUI.xaml;
+MainWindow.xaml;xaml_windows\Doctor\DoctorUI.xaml;xaml_windows\Manager\ManagerUI.xaml;xaml_windows\Patient\PatientUI.xaml;xaml_windows\Secretary\PatientUpdate.xaml;xaml_windows\Secretary\Profile.xaml;xaml_windows\Secretary\SecretaryUI.xaml;
 
 True
 

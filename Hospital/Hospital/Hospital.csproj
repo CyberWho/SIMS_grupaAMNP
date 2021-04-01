@@ -67,6 +67,9 @@
     <Compile Include="xaml_windows\Patient\PatientUI.xaml.cs">
       <DependentUpon>PatientUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\PatientUpdate.xaml.cs">
+      <DependentUpon>PatientUpdate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\PatientUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\PatientUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

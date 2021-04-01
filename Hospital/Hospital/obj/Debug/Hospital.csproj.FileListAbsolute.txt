@@ -59,3 +59,5 @@ C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj
 C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\Hospital.pdb
 C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\Profile.g.cs
 C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\Profile.baml
+C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\PatientUpdate.g.cs
+C:\Users\todor\Desktop\Marko\SIMS_grupaAMNP\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\PatientUpdate.baml

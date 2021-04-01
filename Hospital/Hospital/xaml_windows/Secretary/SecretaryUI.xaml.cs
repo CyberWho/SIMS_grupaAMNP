@@ -34,7 +34,7 @@ namespace Hospital.xaml_windows.Secretary
         User secretary { get; set; }
         #region NotifyProperties
         private string _username;
-        private string _name;
+        private string _nname;
         private string _surname;
         private string _phonenumber;
         private string _email;
@@ -57,13 +57,13 @@ namespace Hospital.xaml_windows.Secretary
         {
             get
             {
-                return _name;
+                return _nname;
             }
             set
             {
-                if (value != _name)
+                if (value != _nname)
                 {
-                    _name = value;
+                    _nname = value;
                     OnPropertyChanged("NName");
                 }
             }
@@ -238,6 +238,9 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Izmeni_karton(object sender, RoutedEventArgs e)
         {
+            Window sp = new PatientUpdate(current_user_id);
+            sp.Show();
+
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection connection = new OracleConnection(conString);
             OracleCommand cmd = connection.CreateCommand();
@@ -258,10 +261,20 @@ namespace Hospital.xaml_windows.Secretary
 
             connection.Close();
             connection.Dispose();
+            // KADA SE KORISTI LISTVIEW NE KREIRA SE NPR NEW ROOM OBJEKAT NEGO SAMO OBJEKAT NEW {} I TO JE TO
         }
 
         private void Dodaj_karton(object sender, RoutedEventArgs e)
         {
+            User nUser = new User();
+
+            nUser.Username = Username;
+            nUser.Name = NName;
+            nUser.Surname = Surname;
+            nUser.PhoneNumber = PhoneNumber;
+            nUser.EMail = Email;
+
+            MessageBox.Show(nUser.Name);
 
         }
 
@@ -285,7 +298,7 @@ namespace Hospital.xaml_windows.Secretary
 
             connection.Open();
             int rowsAffected = cmd.ExecuteNonQuery();
-            MessageBox.Show("Uspesno izmenjeno " + rowsAffected.ToString() + " redova u bazi!");
+            //MessageBox.Show("Uspesno izmenjeno " + rowsAffected.ToString() + " redova u bazi!");
 
             connection.Close();
             connection.Dispose();
@@ -308,13 +321,31 @@ namespace Hospital.xaml_windows.Secretary
             reader.Read();
 
             Username = reader.GetString(1);
-            Name = reader.GetString(3);
+            NName = reader.GetString(3);
             Surname = reader.GetString(4);
             PhoneNumber = reader.GetString(5);
             Email = reader.GetString(6);
 
             connection.Close();
             connection.Dispose();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            OracleConnection connection = new OracleConnection(conString);
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT date_of_birth FROM patient where id = 1";
+
+            connection.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            MessageBox.Show(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
+        
         }
     }
 }
