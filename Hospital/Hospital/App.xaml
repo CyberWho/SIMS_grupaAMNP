@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:Hospital"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Menu" x:Key="Horizontal">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel VerticalAlignment="Top"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
