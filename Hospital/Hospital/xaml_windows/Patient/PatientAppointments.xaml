@@ -1,9 +1,10 @@
-﻿<Window x:Class="Hospital.xaml_windows.Patient.PatientAppointments"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientAppointments"
         mc:Ignorable="d"
         Title="PatientAppointments" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid>
@@ -20,20 +21,35 @@
         <DataGrid x:Name="myDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="386" Margin="305,10,0,0" VerticalAlignment="Top" Width="379" SelectionChanged="myDataGrid_SelectionChanged"/>
 
 
-        <TextBox x:Name="duration_mins_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,46,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="room_id_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,136,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_name_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,187,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_surname_txtbx" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="date" Grid.Column="1" HorizontalAlignment="Left" Margin="121,86,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Izmeni" Content="Izmeni termin" Grid.Column="1" HorizontalAlignment="Left" Margin="10,303,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click"/>
-        <Button x:Name="Obrisi" Content="Obrisi termin" Grid.Column="1" HorizontalAlignment="Left" Margin="144,303,0,0" VerticalAlignment="Top" Width="86" Click="Obrisi_Click"/>
-        <Button x:Name="ZakaziNoviTermin" Content="Zakazi novi termin" Grid.Column="1" HorizontalAlignment="Left" Margin="66,344,0,0" VerticalAlignment="Top" Width="111" Click="ZakaziNoviTermin_Click"/>
-        <Label Content="Trajanje:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,46,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vreme:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,86,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soba:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,133,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,187,0,0" VerticalAlignment="Top"/>
-        <Label Content="Prezime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,245,0,0" VerticalAlignment="Top" Height="23" Width="99"/>
-        <GroupBox x:Name="groupBox" Grid.Column="1" Header="Termini" HorizontalAlignment="Left" Height="375" Margin="5,21,0,0" VerticalAlignment="Top" Width="262"/>
+        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,141,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,199,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,261,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,292,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="Izmeni" Content="Izmeni termin" Grid.Column="1" HorizontalAlignment="Left" Margin="11,345,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click"/>
+        <Button x:Name="Obrisi" Content="Obrisi termin" Grid.Column="1" HorizontalAlignment="Left" Margin="182,345,0,0" VerticalAlignment="Top" Width="86" Click="Obrisi_Click"/>
+        <Button x:Name="ZakaziNoviTermin" Content="Zakazi novi termin" Grid.Column="1" HorizontalAlignment="Left" Margin="64,381,0,0" VerticalAlignment="Top" Width="111" Click="ZakaziNoviTermin_Click"/>
+        <Label Content="Trajanje:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,137,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vreme:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,168,0,0" VerticalAlignment="Top"/>
+        <Label Content="Soba:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,199,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,261,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prezime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,292,0,0" VerticalAlignment="Top" Height="23" Width="99"/>
+        <Label Content="Oznaka doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,230,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,230,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Oznaka termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,111,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,111,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+
+
+        <xctk:DateTimePicker x:Name="date_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="121,175,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Status termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,44,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tip termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,80,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,80,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+
 
     </Grid>
 </Window>
+
+

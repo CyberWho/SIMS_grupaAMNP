@@ -73,7 +73,7 @@ namespace Hospital.xaml_windows.Patient
             
             int patient_id = getPatientId();
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT APPOINTMENT.DURATIONS_MINS,APPOINTMENT.DATE_TIME,APPOINTMENT.ROOM_ID,USERS.NAME,USERS.SURNAME FROM APPOINTMENT,DOCTOR,EMPLOYEES,USERS WHERE APPOINTMENT.PATIENT_ID = :patient_id AND APPOINTMENT.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEES.ID AND EMPLOYEES.USER_ID = USERS.ID";
+            cmd.CommandText = "SELECT APPOINTMENT.ID,APPOINTMENT.APPTYPE_ID,APPOINTMENT.APPSTAT_ID,APPOINTMENT.DURATIONS_MINS,APPOINTMENT.DATE_TIME,APPOINTMENT.ROOM_ID,APPOINTMENT.DOCTOR_ID,USERS.NAME,USERS.SURNAME FROM APPOINTMENT,DOCTOR,EMPLOYEES,USERS WHERE APPOINTMENT.PATIENT_ID = :patient_id AND APPOINTMENT.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEES.ID AND EMPLOYEES.USER_ID = USERS.ID";
             cmd.Parameters.Add(new OracleParameter("patient_id", patient_id));
             cmd.CommandType = CommandType.Text;
             OracleDataReader drugi = cmd.ExecuteReader();
@@ -118,6 +118,14 @@ namespace Hospital.xaml_windows.Patient
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
+            /*String sql = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
+            MessageBox.Show("1");
+            this.ud_opp(sql, 1);*/
+            OracleCommand cmd = con.CreateCommand();
+           // cmd.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = TO_DATE('" + date_txt + "','DD/MM/YYYY HH24:MI:SS') WHERE ID =" + app_id_txt.ToString();
+
+            
+           // int a = cmd.ExecuteNonQuery();
 
         }
 
@@ -144,10 +152,18 @@ namespace Hospital.xaml_windows.Patient
             switch(state)
             {
                 case 0:
-
+                    msg = "Uspesno ste otkazali termin!";
                     break;
                 case 1:
+                    msg = "Uspesno ste promenili vreme termina!";
+                    /* cmd.Parameters.Add("PATIENT_ID", OracleDbType.Int32).Value = getPatientId();
+                     cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = date_txt.Value;*/
+                    MessageBox.Show("3");
+                    
+                    /*cmd.Parameters.Add("ID", OracleDbType.Int32).Value = app_id_txt.Text;
+                    cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = date_txt.Value;*/
                     break;
+                    
             }
 
             try
@@ -171,11 +187,16 @@ namespace Hospital.xaml_windows.Patient
             DataRowView dr = dg.SelectedItem as DataRowView;
             if(dr!=null)
             {
-                duration_mins_txtbx.Text = dr["APPOINTMENT.DURATION_MINS"].ToString();
-                room_id_txtbx.Text = dr["APPOINTMENT.ROOM_ID"].ToString();
-                doctor_name_txtbx.Text = dr["USERS.NAME"].ToString();
-                doctor_surname_txtbx.Text = dr["USERS.SURNAME"].ToString();
-                date.SelectedDate = DateTime.Parse(dr["APPOINTMENT.DATE_TIME"].ToString());
+                app_id_txt.Text = dr["ID"].ToString();
+
+                duration_mins_txtbx.Text = dr["DURATIONS_MINS"].ToString();
+                room_id_txtbx.Text = dr["ROOM_ID"].ToString();
+                doctor_id_txt.Text = dr["DOCTOR_ID"].ToString();
+                doctor_name_txtbx.Text = dr["NAME"].ToString();
+                doctor_surname_txtbx.Text = dr["SURNAME"].ToString();
+                date_txt.Value = DateTime.Parse(dr["DATE_TIME"].ToString());
+                app_stat_txt.Text = dr["APPSTAT_ID"].ToString();
+                app_type_txt.Text = dr["APPTYPE_ID"].ToString();
 
             }
         }
