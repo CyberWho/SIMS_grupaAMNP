@@ -129,7 +129,11 @@ namespace Hospital.xaml_windows.Doctor
                 int id_app = int.Parse(split1[1]); //id app koji menjamo
                 string[] split2 = time_for_update.Text.Split(':');
                 string[] split3 = (date_for_update.SelectedDate.ToString().Split(' '))[0].Split('/');
-                DateTime dt = new DateTime(int.Parse(split3[2]), int.Parse(split3[1]), int.Parse(split3[0]), int.Parse(split2[0]), int.Parse(split2[1]), 0);
+                // MessageBox.Show(split3[0]); // mesec
+                // MessageBox.Show(split3[1]); // dan
+                // MessageBox.Show(split3[2]); // godina
+                DateTime dt = new DateTime(int.Parse(split3[2]), int.Parse(split3[0]), int.Parse(split3[1]), int.Parse(split2[0]), int.Parse(split2[1]), 0);
+                //DateTime dt = new DateTime(int.Parse(split3[1]), int.Parse(split3[0]), int.Parse(split3[2]), int.Parse(split2[0]), int.Parse(split2[1]), 0);
                 string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
                 OracleConnection con = new OracleConnection(conString);
                 OracleCommand cmd = con.CreateCommand();
@@ -139,7 +143,7 @@ namespace Hospital.xaml_windows.Doctor
                 string dat = niz[0] + " " + niz[1];
 
                 cmd.CommandText = "update appointment set room_id = " + id_sobe.ToString()
-                                  + ", date_time = to_date('" + dat + "', 'DD/MM/YYYY HH24:MI:SS') where id =" + id_app.ToString();
+                                  + ", date_time = to_date('" + dat + "', 'MM/DD/YYYY HH24:MI:SS') where id =" + id_app.ToString();
 
 
                 int a = cmd.ExecuteNonQuery();
