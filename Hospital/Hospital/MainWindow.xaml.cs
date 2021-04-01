@@ -29,7 +29,8 @@ namespace Hospital
         public MainWindow()
         {
             InitializeComponent();
-            OracleConfiguration.TnsAdmin = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Oracle\network\admin\DBTIM1";
+            if(OracleConfiguration.TnsAdmin == null)
+                OracleConfiguration.TnsAdmin = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Oracle\network\admin\DBTIM1";
         }
 
         private void Potvrda_Click(object sender, RoutedEventArgs e)
@@ -50,7 +51,9 @@ namespace Hospital
             {
                 if (user == reader.GetString(1) & pass == reader.GetString(2))
                 {
+                    //MessageBox.Show("IMA BOGA");
                     id = int.Parse(reader.GetString(0));
+                    //MessageBox.Show(id.ToString());
                 }
             }
             if (id == -1)
@@ -75,6 +78,7 @@ namespace Hospital
             }
             if (uloga == "")
                 isPatient = true;
+            //MessageBox.Show(isPatient.ToString() + " " + user);
             //sada znamo koji role koji id da li pacijent
             con.Close();
             con.Dispose();
@@ -83,15 +87,15 @@ namespace Hospital
             switch (uloga)
             {
                 case "":
-                    s = new PatientUI();
+                    s = new PatientUI(id);
                     s.Show();
                     break;
                 case "Doctor":
-                    s = new DoctorUI();
+                    s = new DoctorUI(id);
                     s.Show();
                     break;
                 case "Manager":
-                    s = new ManagerUI();
+                    s = new ManagerUI(id);
                     s.Show();
                     break;
                 case "Secretary":

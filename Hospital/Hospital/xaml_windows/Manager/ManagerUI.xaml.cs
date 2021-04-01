@@ -19,9 +19,11 @@ namespace Hospital.xaml_windows.Manager
     /// </summary>
     public partial class ManagerUI : Window
     {
-        public ManagerUI()
+        int id;
+        public ManagerUI(int id)
         {
             InitializeComponent();
+            this.id = id;
         }
     }
 }
