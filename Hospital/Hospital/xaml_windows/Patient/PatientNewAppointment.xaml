@@ -1,0 +1,36 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientNewAppointment"
+        mc:Ignorable="d"
+        Title="PatientNewAppointment" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14.069" />
+            <ColumnDefinition Width="85.931"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Menu Style="{StaticResource Horizontal}" Grid.ColumnSpan="2">
+            <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
+            <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
+            <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
+
+        </Menu>
+        <DataGrid x:Name="myDataGrid"  Grid.Column="2" HorizontalAlignment="Left" Height="359" Margin="373,33,0,0" VerticalAlignment="Top" Width="311" SelectionChanged="myDataGrid_SelectionChanged_1"/>
+        <Label Content="Oznaka doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prezime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top"/>
+        <Label Content="Soba:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vreme:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="doc_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doc_name_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,89,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doc_surname_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,132,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="room_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,173,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="Zakazi" Content="Zakazi" Grid.Column="2" HorizontalAlignment="Left" Margin="109,315,0,0" VerticalAlignment="Top" Width="75" Click="Zakazi_Click"/>
+        <xctk:DateTimePicker x:Name="date_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="166,220,0,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>
