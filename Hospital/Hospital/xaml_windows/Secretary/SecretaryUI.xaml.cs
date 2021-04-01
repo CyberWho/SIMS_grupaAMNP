@@ -19,9 +19,11 @@ namespace Hospital.xaml_windows.Secretary
     /// </summary>
     public partial class SecretaryUI : Window
     {
-        public SecretaryUI()
+        int id;
+        public SecretaryUI(int id)
         {
             InitializeComponent();
+            this.id = id;
         }
     }
 }

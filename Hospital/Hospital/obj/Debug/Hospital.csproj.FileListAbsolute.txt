@@ -32,3 +32,13 @@ C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\H
 C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\Hospital.csproj.CopyComplete
 C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\DoctorUI.g.cs
 C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\DoctorUI.baml
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Manager\ManagerUI.g.cs
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientUI.g.cs
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\SecretaryUI.g.cs
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Manager\ManagerUI.baml
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Patient\PatientUI.baml
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Secretary\SecretaryUI.baml
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\Doctor_crud_appointments.g.cs
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\Doctor_crud_appointments.baml
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\Create_appointment.g.cs
+C:\Users\Nikola\Desktop\Nikola-sims\SIMS_grupaAMNP\Hospital\Hospital\obj\Debug\xaml_windows\Doctor\Create_appointment.baml
