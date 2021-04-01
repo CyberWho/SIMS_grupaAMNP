@@ -94,7 +94,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(id);
+            var s = new PatientAppointments(id);
             s.Show();
             this.Close();
         }
