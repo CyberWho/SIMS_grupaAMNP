@@ -210,5 +210,16 @@ namespace Hospital.xaml_windows.Manager
                 delete_btn.IsEnabled = true;
             }
         }
+
+        private void clear_btn_Click(object sender, RoutedEventArgs e)
+        {
+            floor_txtbx.Text = "";
+            area_txtbx.Text = "";
+            desc_txtbx.Text = "";
+            rtype_cmbbx.SelectedValue = null;
+            update_btn.IsEnabled = false;
+            delete_btn.IsEnabled = false;
+            add_btn.IsEnabled = true;
+        }
     }
 }
