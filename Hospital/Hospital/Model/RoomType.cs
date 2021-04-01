@@ -10,8 +10,8 @@ namespace Hospital.Model
 {
     public class RoomType
     {
-
-        private string Type { get; set; }
+        public int Id;
+        public string Type;
 
         public System.Collections.ArrayList Room;
 

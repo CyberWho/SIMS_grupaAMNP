@@ -10,6 +10,8 @@ namespace Hospital.Model
 {
    public class Role
    {
+      public int Id;
+
       public string Type;
       
       public System.Collections.ArrayList Employees;
