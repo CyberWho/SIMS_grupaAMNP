@@ -73,8 +73,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="xaml_windows\Doctor\Create_appointment.xaml.cs">
+      <DependentUpon>Create_appointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Doctor\DoctorUI.xaml.cs">
       <DependentUpon>DoctorUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml.cs">
+      <DependentUpon>Doctor_crud_appointments.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
@@ -91,6 +97,15 @@
     <Compile Include="xaml_windows\Patient\PatientUI.xaml.cs">
       <DependentUpon>PatientUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\PatientCreate.xaml.cs">
+      <DependentUpon>PatientCreate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\PatientUpdate.xaml.cs">
+      <DependentUpon>PatientUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\SecretaryUI.xaml.cs">
       <DependentUpon>SecretaryUI.xaml</DependentUpon>
     </Compile>
@@ -106,7 +121,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="xaml_windows\Doctor\Create_appointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Doctor\DoctorUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,6 +150,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\PatientUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\PatientCreate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\PatientUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
