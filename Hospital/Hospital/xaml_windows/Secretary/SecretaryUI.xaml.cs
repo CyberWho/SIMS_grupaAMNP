@@ -130,11 +130,11 @@ namespace Hospital.xaml_windows.Secretary
 
         public SecretaryUI(int id)
         {
-            
+
             InitializeComponent();
             this.DataContext = this;
             this.id = id;
-            
+
 
             ObservableCollection<User> users = new ObservableCollection<User>();
             ObservableCollection<Model.Patient> patients = new ObservableCollection<Model.Patient>();
@@ -155,7 +155,7 @@ namespace Hospital.xaml_windows.Secretary
             dataGridPatients.DataContext = dt;
 
             connection.Close();
-            
+
             foreach (DataRow row in dt.Rows)
             {
                 User nUser = new User
@@ -328,26 +328,34 @@ namespace Hospital.xaml_windows.Secretary
 
         private void dataGridPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var info = dataGridPatients.SelectedCells[0];
-            var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
-            current_user_id = int.Parse(content.ToString());
 
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection connection = new OracleConnection(conString);
-            OracleCommand cmd = connection.CreateCommand();
-            connection.Open();
-            cmd.CommandText = "SELECT * FROM users WHERE id = " + current_user_id;
-            OracleDataReader reader = cmd.ExecuteReader();
-            reader.Read();
+            if (dataGridPatients.SelectedCells[0] != null)
+            {
+                var info = dataGridPatients.SelectedCells[0];
+                if (info.Column.GetCellContent(info.Item) != null)
+                {
+                    var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
+                    current_user_id = int.Parse(content.ToString());
 
-            Username = reader.GetString(1);
-            NName = reader.GetString(3);
-            Surname = reader.GetString(4);
-            PhoneNumber = reader.GetString(5);
-            Email = reader.GetString(6);
+                    string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+                    OracleConnection connection = new OracleConnection(conString);
+                    OracleCommand cmd = connection.CreateCommand();
+                    connection.Open();
+                    cmd.CommandText = "SELECT * FROM users WHERE id = " + current_user_id;
+                    OracleDataReader reader = cmd.ExecuteReader();
+                    reader.Read();
 
-            connection.Close();
-            connection.Dispose();
+                    Username = reader.GetString(1);
+                    NName = reader.GetString(3);
+                    Surname = reader.GetString(4);
+                    PhoneNumber = reader.GetString(5);
+                    Email = reader.GetString(6);
+
+                    connection.Close();
+                    connection.Dispose();
+                }
+            }
+
         }
 
         private void Refresh(object sender, RoutedEventArgs e)
