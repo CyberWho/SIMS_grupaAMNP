@@ -10,8 +10,7 @@ namespace Hospital.Model
 {
    public class Role
    {
-
-      public int Id { get; set; }
+      public int Id;
 
       public string Type;
       

@@ -2,7 +2,6 @@
 using Hospital.xaml_windows.Manager;
 using Hospital.xaml_windows.Patient;
 using Hospital.xaml_windows.Secretary;
-
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;

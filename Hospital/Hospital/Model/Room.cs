@@ -12,7 +12,7 @@ namespace Hospital.Model
     {
 
         private int Id { get; set; }
-        private uint Floor { get; set; }
+        private int Floor { get; set; }
         private double Area { get; set; }
         private string Description { get; set; }
        // public Renovation Renovation { get; set; }
@@ -21,6 +21,15 @@ namespace Hospital.Model
         public System.Collections.ArrayList Appointment;
         public System.Collections.ArrayList ItemInRoom;
         public System.Collections.ArrayList Doctor;
+
+        public Room(int id, int floor, double area, string description, RoomType roomType)
+        {
+            Id = id;
+            Floor = floor;
+            Area = area;
+            Description = description;
+            RoomType = roomType;
+        }
 
         public bool Reserve()
         {
