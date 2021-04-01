@@ -63,6 +63,9 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Sacuvaj_pacijenta(object sender, RoutedEventArgs e)
         {
+            Window s = new SecretaryUI(this.user_id);
+            s.Show();
+
             Model.Patient nPatient = new Model.Patient();
 
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
