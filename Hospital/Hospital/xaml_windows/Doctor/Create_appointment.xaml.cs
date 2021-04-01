@@ -114,7 +114,7 @@ namespace Hospital.xaml_windows.Doctor
                                                      + id_sobe.ToString() + "," + id_patient.ToString() + "," + this.id_doc.ToString() + ",1,1)";
 
                 int a = cmd.ExecuteNonQuery();
-                //MessageBox.Show(a.ToString());
+                MessageBox.Show("Uspesno dodato");
                 con.Close();
                 con.Dispose();
 

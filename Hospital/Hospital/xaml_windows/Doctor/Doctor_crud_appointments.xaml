@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Doctor_crud_appointments" Height="450" Width="800">
     <Grid>
-        <TextBox Name="more_info" Margin="319,98,279.6,111"/>
+        <TextBlock Name="more_info" Margin="319,98,279.6,111"/>
         <ListBox Name="lb_appointments" SelectionChanged="PrintText"  SelectionMode="Single" Margin="519,98,-0.4,111">
         </ListBox>
         <Button Content="Brisi selektovano" HorizontalAlignment="Center" Margin="145,339,518.6,0" VerticalAlignment="Top" Height="71" Width="130" Click="DelateAppointment" />
