@@ -118,20 +118,22 @@ namespace Hospital.xaml_windows.Patient
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
-            /*String sql = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
-            MessageBox.Show("1");
-            this.ud_opp(sql, 1);*/
-            OracleCommand cmd = con.CreateCommand();
-           // cmd.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = TO_DATE('" + date_txt + "','DD/MM/YYYY HH24:MI:SS') WHERE ID =" + app_id_txt.ToString();
-
             
-           // int a = cmd.ExecuteNonQuery();
-
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText =  "UPDATE APPOINTMENT SET DATE_TIME = TO_DATE(':DATE_TIME','DD/MM/YYYY HH24:MI:SS') WHERE ID = :ID";
+            cmd.Parameters.Add("ID", OracleDbType.Int32).Value = app_id_txt.Text;
+            cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = date_txt.Value;
+            int a = cmd.ExecuteNonQuery();
+            updateDataGrid();
         }
 
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "delete from appointment where id = :id";
+            cmd.Parameters.Add("ID", OracleDbType.Int32).Value = app_id_txt.Text;
+            int a = cmd.ExecuteNonQuery();
+            updateDataGrid();
         }
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)
