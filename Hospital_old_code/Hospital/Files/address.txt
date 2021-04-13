@@ -1,0 +1,7 @@
+200;Ive Andrica 23;21000;150
+201;Bulevar Oslobodjenja 34;21000;150
+202;Cara Dusana 15;11000;151
+203;Cara Lazara 31;13000;152
+204;Tolstojeva 11;25000;153
+205;Dostojevka 1;30000;154
+206;Balzakova 43;10000;155
