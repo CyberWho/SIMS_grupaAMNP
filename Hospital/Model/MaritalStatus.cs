@@ -8,12 +8,12 @@ using System;
 
 namespace Hospital.Model
 {
-   public class MaritalStatus
-   {
-      private EnumConstant Married;
-      private EnumConstant NotMarried;
-      private EnumConstant Divorced;
-      private EnumConstant Widow;
-   
-   }
+    public class MaritalStatus
+    {
+        private EnumConstant Married;
+        private EnumConstant NotMarried;
+        private EnumConstant Divorced;
+        private EnumConstant Widow;
+
+    }
 }

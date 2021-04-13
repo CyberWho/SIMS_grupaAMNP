@@ -8,11 +8,11 @@ using System;
 
 namespace Hospital.Model
 {
-   public class AppointmentType
-   {
-      private EnumConstant Examination;
-      private EnumConstant Operation;
-      private EnumConstant Referral;
-   
-   }
+    public class AppointmentType
+    {
+        private EnumConstant Examination;
+        private EnumConstant Operation;
+        private EnumConstant Referral;
+
+    }
 }

@@ -8,33 +8,35 @@ using System;
 
 namespace Hospital.Service
 {
-   public class AddressService
-   {
-      public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Address GetAddressById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteAddressById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Address UpdateAddress(Hospital.Model.Address address)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      public Hospital.Repository.AddressRepository addressRepository;
-   
-   }
+    public class AddressService
+    {
+        public Hospital.Repository.AddressRepository addressRepository;
+
+
+        public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
+        {
+            // TODO: implement
+            return addressRepository.NewAddrress(address);
+        }
+
+        public Hospital.Model.Address GetAddressById(int id)
+        {
+            // TODO: implement
+            return addressRepository.GetAddressById(id);
+        }
+
+        public Boolean DeleteAddressById(int id)
+        {
+            // TODO: implement
+            return addressRepository.DeleteAddressById(id);
+        }
+
+        public Hospital.Model.Address UpdateAddress(Hospital.Model.Address address)
+        {
+            // TODO: implement
+            return null;
+        }
+
+
+    }
 }

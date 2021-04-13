@@ -8,19 +8,20 @@ using System;
 
 namespace Hospital.Model
 {
-   public class Renovation
-   {
-      public Boolean End()
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      public int Id;
-      public DateTime StartDate;
-      public RenovationType Type;
-      
-      public Room room;
-   
-   }
+    public class Renovation
+    {
+        public int Id { get; set; }
+        public DateTime StartDate { get; set; }
+
+        public RenovationType Type { get; set; }
+        public Room room;
+
+
+        public Boolean End()
+        {
+            // TODO: implement
+            return null;
+        }
+
+    }
 }

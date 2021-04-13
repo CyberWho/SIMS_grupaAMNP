@@ -8,10 +8,10 @@ using System;
 
 namespace Hospital.Model
 {
-   public class Gender
-   {
-      private EnumConstant Male;
-      private EnumConstant Female;
-   
-   }
+    public class Gender
+    {
+        private EnumConstant Male;
+        private EnumConstant Female;
+
+    }
 }

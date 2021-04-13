@@ -8,16 +8,16 @@ using System;
 
 namespace Hospital.Model
 {
-   public class ReferralForClinicalTreatment
-   {
-      public int Id;
-      public Boolean IsActive;
-      public String Description;
-      public DateTime StartTime;
-      public DateTime EndTime;
-      
-      public Appointment appointment;
-      public HealthRecord healthRecord;
-   
-   }
+    public class ReferralForClinicalTreatment
+    {
+        public int Id { get; set; }
+        public Boolean IsActive { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public String Description { get; set; }
+
+        public Appointment appointment { get; set; }
+        public HealthRecord healthRecord { get; set; }
+
+    }
 }

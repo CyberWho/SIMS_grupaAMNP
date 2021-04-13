@@ -8,14 +8,14 @@ using System;
 
 namespace Hospital.Model
 {
-   public class ReferralForSpecialist
-   {
-      public int Id;
-      public Boolean IsActive;
-      
-      public Doctor doctor;
-      public HealthRecord healthRecord;
-      public Appointment appointment;
-   
-   }
+    public class ReferralForSpecialist
+    {
+        public int Id { get; set; }
+        public Boolean IsActive { get; set; }
+
+        public Doctor doctor { get; set; }
+        public HealthRecord healthRecord { get; set; }
+        public Appointment appointment { get; set; }
+
+    }
 }

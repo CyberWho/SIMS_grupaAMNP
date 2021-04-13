@@ -8,13 +8,13 @@ using System;
 
 namespace Hospital.Model
 {
-   public class ReservedItem
-   {
-      public int Id;
-      public DateTime ReservedDate;
-      
-      public Room room;
-      public ItemInRoom itemInRoom;
-   
-   }
+    public class ReservedItem
+    {
+        public int Id { get; set; }
+        public DateTime ReservedDate { get; set; }
+
+        public Room room { get; set; }
+        public ItemInRoom itemInRoom { get; set; }
+
+    }
 }

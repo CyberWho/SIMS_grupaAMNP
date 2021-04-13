@@ -8,11 +8,11 @@ using System;
 
 namespace Hospital.Model
 {
-   public class RenovationType
-   {
-      private EnumConstant Regular;
-      private EnumConstant Merge;
-      private EnumConstant Split;
-   
-   }
+    public class RenovationType
+    {
+        private EnumConstant Regular;
+        private EnumConstant Merge;
+        private EnumConstant Split;
+
+    }
 }

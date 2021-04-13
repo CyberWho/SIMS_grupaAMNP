@@ -8,10 +8,10 @@ using System;
 
 namespace Hospital.Model
 {
-   public class ItemType
-   {
-      private EnumConstant Expendable;
-      private EnumConstant Persistent;
-   
-   }
+    public class ItemType
+    {
+        private EnumConstant Expendable;
+        private EnumConstant Persistent;
+
+    }
 }

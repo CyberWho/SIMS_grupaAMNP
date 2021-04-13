@@ -8,12 +8,12 @@ using System;
 
 namespace Hospital.Model
 {
-   /// Pending - upravnik je uneo lek i poslat je zahtev lekaru za approval
-   public class DrugStatus
-   {
-      private EnumConstant Approved;
-      private EnumConstant Rejected;
-      private EnumConstant Pending;
-   
-   }
+    /// Pending - upravnik je uneo lek i poslat je zahtev lekaru za approval
+    public class DrugStatus
+    {
+        private EnumConstant Approved;
+        private EnumConstant Rejected;
+        private EnumConstant Pending;
+
+    }
 }

@@ -8,10 +8,10 @@ using System;
 
 namespace Hospital.Model
 {
-   public class State
-   {
-      public int Id;
-      public String Name;
-   
-   }
+    public class State
+    {
+        public int Id { get; set; }
+        public String Name { get; set; }
+
+    }
 }
