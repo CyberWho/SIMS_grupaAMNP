@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Hospital",
-    "\\Hospital\\Hospital",
-    "\\Hospital\\Hospital\\xaml_windows",
-    "\\Hospital\\Hospital\\xaml_windows\\Manager",
-    "\\Hospital\\Hospital\\xaml_windows\\Patient",
-    "\\Hospital\\Hospital\\xaml_windows\\Secretary"
+    ""
   ],
-  "SelectedNode": "\\Hospital\\Hospital\\xaml_windows\\Manager\\ManagerUI.xaml.cs",
+  "SelectedNode": "\\Hospital.sln",
   "PreviewInSolutionExplorer": false
 }
