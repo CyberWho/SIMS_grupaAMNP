@@ -4,8 +4,10 @@
     "\\Hospital",
     "\\Hospital\\Hospital",
     "\\Hospital\\Hospital\\xaml_windows",
+    "\\Hospital\\Hospital\\xaml_windows\\Manager",
+    "\\Hospital\\Hospital\\xaml_windows\\Patient",
     "\\Hospital\\Hospital\\xaml_windows\\Secretary"
   ],
-  "SelectedNode": "\\Hospital\\Hospital\\xaml_windows\\Secretary\\SecretaryUI.xaml",
+  "SelectedNode": "\\Hospital\\Hospital\\xaml_windows\\Manager\\ManagerUI.xaml.cs",
   "PreviewInSolutionExplorer": false
 }

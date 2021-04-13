@@ -52,7 +52,7 @@ namespace Hospital.xaml_windows.Manager
             mngr_role.Type  = "Manager";
 
             con.Open();
-            cmd.CommandText = "SELECT * FROM employees LEFT OUTER JOIN users ON employees.user_id = users.id WHERE users.id = " + id.ToString();
+            cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.id WHERE users.id = " + id.ToString();
 
             reader = cmd.ExecuteReader();
             reader.Read();

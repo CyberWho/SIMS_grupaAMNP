@@ -66,7 +66,7 @@ namespace Hospital
             //id radnika sa role
             bool isPatient = false;
             string uloga = "";
-            cmd.CommandText = "select users.ID, role.roletype FROM users, employees, role where users.ID = employees.USER_ID and employees.ROLE_ID = role.ID";
+            cmd.CommandText = "select users.ID, role.roletype FROM users, employee, role where users.ID = employee.USER_ID and employee.ROLE_ID = role.ID";
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
