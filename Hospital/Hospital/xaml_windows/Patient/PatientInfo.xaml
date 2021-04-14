@@ -1,0 +1,22 @@
+﻿<Window x:Class="Hospital.xaml_windows.Patient.PatientInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
+        mc:Ignorable="d"
+        Title="PatientInfo" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Menu Style="{StaticResource Horizontal}">
+            <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
+            <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
+            <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
+
+        </Menu>
+        <DataGrid x:Name="myDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="336" Margin="314,30,0,0" VerticalAlignment="Top" Width="359"/>
+    </Grid>
+</Window>

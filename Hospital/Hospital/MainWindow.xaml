@@ -1,0 +1,24 @@
+﻿<Window x:Class="Hospital.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital"
+        mc:Ignorable="d"
+        Title="Prijava" Height="450" Width="800">
+    <Grid>
+        <Border Background="White" CornerRadius="20" Margin="20">
+            <StackPanel Margin="20">
+                <Label Content="Prijava" Foreground="LimeGreen" FontSize="40" HorizontalAlignment="Center"/>
+                <Separator></Separator>
+                <Label Content="Korisnicko ime" HorizontalAlignment ="Center" Foreground="LimeGreen"/>
+                <TextBox x:Name="Username" Foreground="LimeGreen" HorizontalAlignment="Center" Width="400" Background="White" FontSize="20"/>
+                <Label Content="Lozinka" Foreground="LimeGreen" HorizontalAlignment="Center"/>
+                <PasswordBox x:Name="Password" Background="White" HorizontalAlignment="Center" Width ="400" Foreground="LimeGreen" FontSize="20"/>
+                <Button x:Name="Potvrda" HorizontalAlignment="Center" Width="200"  Click="Potvrda_Click" Content="Potvrda" Margin="00 10" Background="OrangeRed"/>
+
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
