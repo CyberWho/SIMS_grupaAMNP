@@ -18,6 +18,20 @@ namespace Hospital.Model
       
       public Appointment Appointment { get; set; }
       public HealthRecord HealthRecord { get; set; }
-   
-   }
+
+        public ReferralForClinicalTreatment(int id, bool isActive, string description, DateTime startTime, DateTime endTime, Appointment appointment, HealthRecord healthRecord)
+        {
+            Id = id;
+            IsActive = isActive;
+            Description = description;
+            StartTime = startTime;
+            EndTime = endTime;
+            Appointment = appointment;
+            HealthRecord = healthRecord;
+        }
+
+        public ReferralForClinicalTreatment()
+        {
+        }
+    }
 }

@@ -12,6 +12,15 @@ namespace Hospital.Model
    {
       public int Id { get; set; }
       public String Type { get; set; }
-   
-   }
+
+        public AllergyType(int id, string type)
+        {
+            Id = id;
+            Type = type;
+        }
+
+        public AllergyType()
+        {
+        }
+    }
 }

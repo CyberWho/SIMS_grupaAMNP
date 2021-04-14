@@ -8,37 +8,46 @@ using System;
 
 namespace Hospital.Model
 {
-   public class Allergy
-   {
-      public int Id { get; set; }
+    public class Allergy
+    {
+        public int Id { get; set; }
 
         public HealthRecord healthRecord;
-      
-      /// <pdGenerated>default parent getter</pdGenerated>
-      public HealthRecord GetHealthRecord()
-      {
-         return healthRecord;
-      }
-      
-      /// <pdGenerated>default parent setter</pdGenerated>
-      /// <param>newHealthRecord</param>
-      public void SetHealthRecord(HealthRecord newHealthRecord)
-      {
-         if (this.healthRecord != newHealthRecord)
-         {
-            if (this.healthRecord != null)
+
+        /// <pdGenerated>default parent getter</pdGenerated>
+        public HealthRecord GetHealthRecord()
+        {
+            return healthRecord;
+        }
+
+        /// <pdGenerated>default parent setter</pdGenerated>
+        /// <param>newHealthRecord</param>
+        public void SetHealthRecord(HealthRecord newHealthRecord)
+        {
+            if (this.healthRecord != newHealthRecord)
             {
-               HealthRecord oldHealthRecord = this.healthRecord;
-               this.healthRecord = null;
-               oldHealthRecord.RemoveAllergy(this);
+                if (this.healthRecord != null)
+                {
+                    HealthRecord oldHealthRecord = this.healthRecord;
+                    this.healthRecord = null;
+                    oldHealthRecord.RemoveAllergy(this);
+                }
+                if (newHealthRecord != null)
+                {
+                    this.healthRecord = newHealthRecord;
+                    this.healthRecord.AddAllergy(this);
+                }
             }
-            if (newHealthRecord != null)
-            {
-               this.healthRecord = newHealthRecord;
-               this.healthRecord.AddAllergy(this);
-            }
-         }
-      }
-   
-   }
+        }
+
+        public Allergy(int id, HealthRecord healthRecord)
+        {
+            Id = id;
+            this.healthRecord = healthRecord;
+        }
+
+        public Allergy()
+        {
+        }
+    }
 }

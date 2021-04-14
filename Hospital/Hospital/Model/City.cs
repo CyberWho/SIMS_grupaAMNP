@@ -8,13 +8,24 @@ using System;
 
 namespace Hospital.Model
 {
-   public class City
-   {
-      public int Id { get; set; }
-      public String Name { get; set; }
-      public String PostalCode { get; set; }
-      
-      public State State { get; set; }
-   
-   }
+    public class City
+    {
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String PostalCode { get; set; }
+
+        public State State { get; set; }
+
+        public City(int id, string name, string postalCode, State state)
+        {
+            Id = id;
+            Name = name;
+            PostalCode = postalCode;
+            State = state;
+        }
+
+        public City()
+        {
+        }
+    }
 }

@@ -8,42 +8,54 @@ using System;
 
 namespace Hospital.Model
 {
-   public class WorkHours
-   {
-      
-   
-      public int Id { get; set; }
-      public DateTime ShiftStart { get; set; }
-      public DateTime ShiftEnd { get; set; }
-      public Boolean Approved { get; set; }
-      
-      public Doctor doctor;
-      
-      /// <pdGenerated>default parent getter</pdGenerated>
-      public Doctor GetDoctor()
-      {
-         return doctor;
-      }
-      
-      /// <pdGenerated>default parent setter</pdGenerated>
-      /// <param>newDoctor</param>
-      public void SetDoctor(Doctor newDoctor)
-      {
-         if (this.doctor != newDoctor)
-         {
-            if (this.doctor != null)
+    public class WorkHours
+    {
+
+
+        public int Id { get; set; }
+        public DateTime ShiftStart { get; set; }
+        public DateTime ShiftEnd { get; set; }
+        public Boolean Approved { get; set; }
+
+        public Doctor doctor;
+
+        /// <pdGenerated>default parent getter</pdGenerated>
+        public Doctor GetDoctor()
+        {
+            return doctor;
+        }
+
+        /// <pdGenerated>default parent setter</pdGenerated>
+        /// <param>newDoctor</param>
+        public void SetDoctor(Doctor newDoctor)
+        {
+            if (this.doctor != newDoctor)
             {
-               Doctor oldDoctor = this.doctor;
-               this.doctor = null;
-               oldDoctor.RemoveWorkHours(this);
+                if (this.doctor != null)
+                {
+                    Doctor oldDoctor = this.doctor;
+                    this.doctor = null;
+                    oldDoctor.RemoveWorkHours(this);
+                }
+                if (newDoctor != null)
+                {
+                    this.doctor = newDoctor;
+                    this.doctor.AddWorkHours(this);
+                }
             }
-            if (newDoctor != null)
-            {
-               this.doctor = newDoctor;
-               this.doctor.AddWorkHours(this);
-            }
-         }
-      }
-   
-   }
+        }
+
+        public WorkHours(int id, DateTime shiftStart, DateTime shiftEnd, bool approved, Doctor doctor)
+        {
+            Id = id;
+            ShiftStart = shiftStart;
+            ShiftEnd = shiftEnd;
+            Approved = approved;
+            this.doctor = doctor;
+        }
+
+        public WorkHours()
+        {
+        }
+    }
 }

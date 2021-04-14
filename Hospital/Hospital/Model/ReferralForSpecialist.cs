@@ -16,6 +16,18 @@ namespace Hospital.Model
       public Doctor Doctor { get; set; }
       public HealthRecord HealthRecord { get; set; }
       public Appointment Appointment { get; set; }
-   
-   }
+
+        public ReferralForSpecialist(int id, bool isActive, Doctor doctor, HealthRecord healthRecord, Appointment appointment)
+        {
+            Id = id;
+            IsActive = isActive;
+            Doctor = doctor;
+            HealthRecord = healthRecord;
+            Appointment = appointment;
+        }
+
+        public ReferralForSpecialist()
+        {
+        }
+    }
 }

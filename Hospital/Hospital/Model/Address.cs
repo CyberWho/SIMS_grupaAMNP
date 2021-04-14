@@ -8,12 +8,22 @@ using System;
 
 namespace Hospital.Model
 {
-   public class Address
-   {
-      public int Id { get; set; }
-      public String Name { get; set; }
-      
-      public City City { get; set; }
-   
-   }
+    public class Address
+    {
+        public int Id { get; set; }
+        public String Name { get; set; }
+
+        public City City { get; set; }
+
+        public Address(int id, string name, City city)
+        {
+            Id = id;
+            Name = name;
+            City = city;
+        }
+
+        public Address()
+        {
+        }
+    }
 }

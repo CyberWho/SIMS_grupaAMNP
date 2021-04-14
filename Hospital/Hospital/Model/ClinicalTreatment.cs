@@ -16,6 +16,18 @@ namespace Hospital.Model
       
       public Room Room { get; set; }
       public HealthRecord HealthRecord { get; set; }
-   
-   }
+
+        public ClinicalTreatment(int id, DateTime startTime, DateTime endTime, Room room, HealthRecord healthRecord)
+        {
+            Id = id;
+            StartTime = startTime;
+            EndTime = endTime;
+            Room = room;
+            HealthRecord = healthRecord;
+        }
+
+        public ClinicalTreatment()
+        {
+        }
+    }
 }

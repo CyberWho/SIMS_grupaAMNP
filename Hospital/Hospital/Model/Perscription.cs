@@ -42,6 +42,18 @@ namespace Hospital.Model
             }
          }
       }
-   
-   }
+
+        public Perscription(int id, bool isActive, string description, Drug drug, Anamnesis anamnesis)
+        {
+            Id = id;
+            IsActive = isActive;
+            Description = description;
+            Drug = drug;
+            this.anamnesis = anamnesis;
+        }
+
+        public Perscription()
+        {
+        }
+    }
 }
