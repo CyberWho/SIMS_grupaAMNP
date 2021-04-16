@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,13 +18,13 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<InventoryItem> GetAllInventoryItems()
+      public ObservableCollection<InventoryItem> GetAllInventoryItems()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<InventoryItem> GetAllInvenotryItemsByItemTypeId(int itemTypeId)
+      public ObservableCollection<InventoryItem> GetAllInvenotryItemsByItemTypeId(int itemTypeId)
       {
          // TODO: implement
          return null;
@@ -31,7 +33,7 @@ namespace Hospital.Controller
       public Boolean DeleteInventoryItemById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.InventoryItem UpdateInventoryItem(Hospital.Model.InventoryItem inventoryItem)

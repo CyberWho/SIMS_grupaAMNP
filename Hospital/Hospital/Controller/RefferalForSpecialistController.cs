@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,19 +18,19 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Referral> GetAllReferrals()
+      public ObservableCollection<ReferralForSpecialist> GetAllReferrals()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Referral> GetAllReferralsByPatientId(int patientId)
+      public ObservableCollection<ReferralForSpecialist> GetAllReferralsByPatientId(int patientId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Referral> GetAllReferralsByDoctorId(int doctorId)
+      public ObservableCollection<ReferralForSpecialist> GetAllReferralsByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
@@ -37,19 +39,19 @@ namespace Hospital.Controller
       public Boolean DeleteReferralById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteReferralByPatientId(int patientId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteReferralByDoctorId(int doctorId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.ReferralForSpecialist UpdateReferral(Hospital.Model.ReferralForSpecialist referral)

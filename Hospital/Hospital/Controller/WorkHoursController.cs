@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -25,13 +27,13 @@ namespace Hospital.Controller
       public Boolean DeleteWorkHoursByDoctorId(int doctorId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteWorkHoursById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.WorkHours ApproveWorkHours(Hospital.Model.WorkHours workHours)
@@ -46,25 +48,25 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<WorkHours> GetAllWorkHoursByDoctorId(int doctorId)
+      public ObservableCollection<WorkHours> GetAllWorkHoursByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<WorkHours> GetWorkHoursById(int id)
+      public ObservableCollection<WorkHours> GetWorkHoursById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<WorkHours> GetAllApprovedWorkHoursByDoctorId(int doctorId)
+      public ObservableCollection<WorkHours> GetAllApprovedWorkHoursByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<WorkHours> GetAllPendingWorkHoursByDoctorId(int doctorId)
+      public ObservableCollection<WorkHours> GetAllPendingWorkHoursByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;

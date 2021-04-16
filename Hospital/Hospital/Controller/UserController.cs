@@ -5,6 +5,15 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
+using Hospital.xaml_windows.Doctor;
+using Hospital.xaml_windows.Manager;
+using Hospital.xaml_windows.Patient;
+using Hospital.xaml_windows.Secretary;
+using System.Windows;
 
 namespace Hospital.Controller
 {
@@ -84,13 +93,13 @@ namespace Hospital.Controller
         public Boolean IsValidUsername()
         {
             // TODO: implement
-            return null;
+            return false;
         }
 
         public Boolean IsValidPassword()
         {
             // TODO: implement
-            return null;
+            return false;
         }
 
         public Hospital.Model.User GetUserById(int id)
@@ -105,7 +114,7 @@ namespace Hospital.Controller
             return null;
         }
 
-        public System.Array<User> GetAllUsers()
+        public ObservableCollection<User> GetAllUsers()
         {
             // TODO: implement
             return null;
@@ -114,13 +123,13 @@ namespace Hospital.Controller
         public Boolean DeleteUserById(int id)
         {
             // TODO: implement
-            return null;
+            return false;
         }
 
         public Boolean DeleteUserByUsername(String username)
         {
             // TODO: implement
-            return null;
+            return false;
         }
 
         public Hospital.Model.User UpdateUser(Hospital.Model.User user)

@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,13 +18,13 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<int> GetAllergiesByTypeId(int allergyTypeId)
+      public ObservableCollection<Allergy> GetAllergiesByTypeId(int allergyTypeId)
       {
          // TODO: implement
          return null;
       }
-      
-      public System.Array<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
+
+        public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
       {
          // TODO: implement
          return null;
@@ -31,13 +33,13 @@ namespace Hospital.Controller
       public Boolean DeleteAllergyById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteAllergiesByHealthRecordId(int healthRecordId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Allergy UpdateAllergy(Hospital.Model.Allergy allergy)
@@ -45,8 +47,8 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-      
-      public System.Array<Allergy> GetAllAllergies()
+
+        public ObservableCollection<Allergy> GetAllAllergies()
       {
          // TODO: implement
          return null;

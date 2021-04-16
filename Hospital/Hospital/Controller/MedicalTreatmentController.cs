@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,7 +18,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
+      public ObservableCollection<MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
       {
          // TODO: implement
          return null;
@@ -25,13 +27,13 @@ namespace Hospital.Controller
       public Boolean DeleteMedicalTreatmentById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DelelteAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.MedicalTreatment UpdateMedicalTreatment(Hospital.Model.MedicalTreatment medicalTreatment)

@@ -5,12 +5,14 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
    public class RenovationController
    {
-      public System.Array<Renovation> GetAllRenovations()
+      public ObservableCollection<Renovation> GetAllRenovations()
       {
          // TODO: implement
          return null;
@@ -22,7 +24,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Renovation> GetRenovationByRoomId(int roomId)
+      public ObservableCollection<Renovation> GetRenovationByRoomId(int roomId)
       {
          // TODO: implement
          return null;
@@ -31,13 +33,13 @@ namespace Hospital.Controller
       public Boolean DeleteRenovationById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteRenovationByRoomId(int roomId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Renovation UpdateRenovation(Hospital.Model.Renovation renovation)

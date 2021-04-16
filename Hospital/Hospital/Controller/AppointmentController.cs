@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,25 +18,25 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Appointment> GetAllReservedAppointments()
+      public ObservableCollection<Appointment> GetAllReservedAppointments()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Appointment> GetAllReservedAppointmentsWeekly()
+      public ObservableCollection<Appointment> GetAllReservedAppointmentsWeekly()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Appontment> GetAllAppointmentsByDoctorId(int doctorId)
+      public ObservableCollection<Appointment> GetAllAppointmentsByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Appointment> GetAllByAppointmentsPatientId(int patientId)
+      public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
       {
          // TODO: implement
          return null;
@@ -43,13 +45,13 @@ namespace Hospital.Controller
       public Boolean CancelAppointmentById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteAppointmentByPatientId(int patientId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
@@ -76,13 +78,13 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Appointment> GetAllFreeAppointmentsByDoctorId(int doctorId)
+      public ObservableCollection<Appointment> GetAllFreeAppointmentsByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Appointment> GetAllFreeAppointmentsByDesiredTime(DateTime startTime, DateTime endTime)
+      public ObservableCollection<Appointment> GetAllFreeAppointmentsByDesiredTime(DateTime startTime, DateTime endTime)
       {
          // TODO: implement
          return null;

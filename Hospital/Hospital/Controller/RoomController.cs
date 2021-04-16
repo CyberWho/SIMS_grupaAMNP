@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -28,19 +30,19 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Room> GetAllRooms()
+      public ObservableCollection<Room> GetAllRooms()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Room> GetAllRoomsByFloor(int floor)
+      public ObservableCollection<ReservedItem> GetAllRoomsByFloor(int floor)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Room> GetAllRoomsByRoomType(Hospital.Model.RoomType roomType)
+      public ObservableCollection<ReservedItem> GetAllRoomsByRoomType(Hospital.Model.RoomType roomType)
       {
          // TODO: implement
          return null;
@@ -49,19 +51,19 @@ namespace Hospital.Controller
       public Boolean DeleteRoomById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteRoomByAppointmentId(int appointmentId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteRoomByDoctorId(int doctorId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Room ChangeRoomArea(Hospital.Model.Room room, double newArea)

@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,7 +18,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<ItemInRoom> GetAllItemsInRoomByRoomId()
+      public ObservableCollection<ItemInRoom> GetAllItemsInRoomByRoomId()
       {
          // TODO: implement
          return null;
@@ -25,13 +27,13 @@ namespace Hospital.Controller
       public Boolean DeleteItemInRoomById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteAllItemsInRoomByRoomId(int roomId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.ItemInRoom UpdateQuantity(Hospital.Model.ItemInRoom itemInRoom, int newQuantity)

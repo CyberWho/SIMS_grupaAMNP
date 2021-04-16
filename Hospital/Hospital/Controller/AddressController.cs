@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -25,7 +27,7 @@ namespace Hospital.Controller
       public Boolean DeleteAddressById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Address UpdateAddress(Hospital.Model.Address address)

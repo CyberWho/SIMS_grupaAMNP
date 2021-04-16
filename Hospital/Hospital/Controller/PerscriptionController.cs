@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,19 +18,19 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Perscription> GetAllPerscriptionsByAnamnesisId(int anamnesisId)
+      public ObservableCollection<Perscription> GetAllPerscriptionsByAnamnesisId(int anamnesisId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Perscription> GetAllActivePerscriptions()
+      public ObservableCollection<Perscription> GetAllActivePerscriptions()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Perscription> GetAllActivePerscriptionsByAnamnesisId(int anamnesisId)
+      public ObservableCollection<Perscription> GetAllActivePerscriptionsByAnamnesisId(int anamnesisId)
       {
          // TODO: implement
          return null;
@@ -37,13 +39,13 @@ namespace Hospital.Controller
       public Boolean DeletePerscriptionById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteAllPerscriptionsByAnamnesisId(int anamnesisId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Perscription UpdatePerscription(Hospital.Model.Perscription perscription)

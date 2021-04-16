@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,7 +18,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Reminder> GetAllRemindersByPatientId(int patientId)
+      public ObservableCollection<Reminder> GetAllRemindersByPatientId(int patientId)
       {
          // TODO: implement
          return null;
@@ -25,13 +27,13 @@ namespace Hospital.Controller
       public Boolean DeleteReminderById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteAllRemindersByPatientId(int patientId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)

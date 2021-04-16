@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,13 +18,13 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Doctor> GetAllDoctors()
+      public ObservableCollection<Doctor> GetAllDoctors()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
+      public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
       {
          // TODO: implement
          return null;
@@ -31,7 +33,7 @@ namespace Hospital.Controller
       public Boolean DeleteDoctorById(int doctorId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)

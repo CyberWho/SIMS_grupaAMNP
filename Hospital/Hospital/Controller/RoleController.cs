@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -22,7 +24,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<Role> GetAllRoles()
+      public ObservableCollection<Role> GetAllRoles()
       {
          // TODO: implement
          return null;
@@ -31,7 +33,7 @@ namespace Hospital.Controller
       public Boolean DeleteRoleById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.Role UpdateRole(Hospital.Model.Role role)

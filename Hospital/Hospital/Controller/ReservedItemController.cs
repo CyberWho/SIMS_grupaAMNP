@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,13 +18,13 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<ReservedItem> GetAllReservedItemsByRoomId(int roomId)
+      public ObservableCollection<ReservedItem> GetAllReservedItemsByRoomId(int roomId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<ReservedItem> GetAllReservedItemsByItemInRoomId(int itemInRoomId)
+      public ObservableCollection<ReservedItem> GetAllReservedItemsByItemInRoomId(int itemInRoomId)
       {
          // TODO: implement
          return null;
@@ -31,19 +33,19 @@ namespace Hospital.Controller
       public Boolean DeleteReservedItemById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteAllReservedItemsByRoomId(int roomId)
       {
-         // TODO: implement
-         return null;
+            // TODO: implement
+            return false;
       }
       
       public Boolean DeleteAllReservedItemsByItemInRoomId(int itemInRoomId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.ReservedItem UpdateReservedItem(Hospital.Model.ReservedItem reservedItem)

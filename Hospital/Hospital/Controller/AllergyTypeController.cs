@@ -5,12 +5,14 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Model;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Controller
 {
    public class AllergyTypeController
    {
-      public System,Array<AllergyType> GetAllAllergyTypes()
+      public ObservableCollection<AllergyType> GetAllAllergyTypes()
       {
          // TODO: implement
          return null;
@@ -19,7 +21,7 @@ namespace Hospital.Controller
       public Boolean DeleteAllergieTypeById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.AllergyType UpdateAllergyType(int allergyType)

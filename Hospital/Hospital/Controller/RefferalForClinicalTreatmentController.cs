@@ -5,30 +5,32 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
    public class RefferalForClinicalTreatmentController
    {
-      public System.Array<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatment()
+      public ObservableCollection<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatment()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatmentByPatientId(int patientId)
+      public ObservableCollection<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatmentByPatientId(int patientId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatmentByDoctorId(int doctorId)
+      public ObservableCollection<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatmentByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatmentByRoomId(int roomId)
+      public ObservableCollection<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatmentByRoomId(int roomId)
       {
          // TODO: implement
          return null;
@@ -43,19 +45,19 @@ namespace Hospital.Controller
       public Boolean DeleteReferralForClinicalTreatmentById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteReferralForClinicalTreatmentByPatientId(int patientId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteReferralForClinicalTreatmentByDoctorId(int doctorId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.ReferralForClinicalTreatment UpdateReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment)
@@ -76,7 +78,7 @@ namespace Hospital.Controller
          return 0;
       }
       
-      public System.Array<ReferralForClinicalTreatment> GetAllActiveReferralsForClinicalTreatmentByPatientId(int patientId)
+      public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveReferralsForClinicalTreatmentByPatientId(int patientId)
       {
          // TODO: implement
          return null;

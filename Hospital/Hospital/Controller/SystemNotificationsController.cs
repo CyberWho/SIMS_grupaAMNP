@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Controller
 {
@@ -16,7 +18,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public System.Array<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
+      public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
       {
          // TODO: implement
          return null;
@@ -25,13 +27,13 @@ namespace Hospital.Controller
       public Boolean DeleteSystemNotificationById(int id)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Boolean DeleteAllSystemNotificationsByUserId(int userId)
       {
          // TODO: implement
-         return null;
+         return false;
       }
       
       public Hospital.Model.SystemNotification UpdateSystemNotification(Hospital.Model.SystemNotification systemNotification)
