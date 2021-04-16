@@ -1,52 +1,52 @@
 /***********************************************************************
- * Module:  DoctorController.cs
+ * Module:  EmployeeController.cs
  * Author:  todor
- * Purpose: Definition of the Class Hospital.Controller.DoctorController
+ * Purpose: Definition of the Class Hospital.Controller.EmployeeController
  ***********************************************************************/
 
 using System;
 
 namespace Hospital.Controller
 {
-   public class DoctorController
+   public class EmployeeController
    {
-      public Hospital.Model.Doctor GetDoctorById(int id)
+      public Hospital.Model.Employee GetEmployeeById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Doctor> GetAllDoctors()
+      public System.Array<Employee> GetAllEmployees()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
+      public System.Array<Employee> GetAllEmployeesByRoleId(int roleId)
       {
          // TODO: implement
          return null;
       }
       
-      public Boolean DeleteDoctorById(int doctorId)
+      public Boolean DeleteEmployeeById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+      public Hospital.Model.Employee UpdateEmployee(Hospital.Model.Employee employee)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Doctor AddDoctor(Hospital.Model.Doctor doctor)
+      public Hospital.Model.Employee AddEmployee(Hospital.Model.Employee employee)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.DoctorService doctorService;
+      public Hospital.Service.EmployeeService employeeService;
    
    }
 }

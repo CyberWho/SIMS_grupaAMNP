@@ -1,52 +1,52 @@
 /***********************************************************************
- * Module:  DoctorController.cs
+ * Module:  Class20.cs
  * Author:  todor
- * Purpose: Definition of the Class Hospital.Controller.DoctorController
+ * Purpose: Definition of the Class Hospital.Controller.Class20
  ***********************************************************************/
 
 using System;
 
 namespace Hospital.Controller
 {
-   public class DoctorController
+   public class RoleController
    {
-      public Hospital.Model.Doctor GetDoctorById(int id)
+      public Hospital.Model.Role GetRoleById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Doctor> GetAllDoctors()
+      public Hospital.Model.Role GetRoleByRole(String role)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Array<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
+      public System.Array<Role> GetAllRoles()
       {
          // TODO: implement
          return null;
       }
       
-      public Boolean DeleteDoctorById(int doctorId)
+      public Boolean DeleteRoleById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+      public Hospital.Model.Role UpdateRole(Hospital.Model.Role role)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Doctor AddDoctor(Hospital.Model.Doctor doctor)
+      public Hospital.Model.Role AddRole(Hospital.Model.Role role)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.DoctorService doctorService;
+      public Hospital.Service.RoleService roleService;
    
    }
 }

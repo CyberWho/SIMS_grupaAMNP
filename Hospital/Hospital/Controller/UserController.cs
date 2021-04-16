@@ -1,27 +1,15 @@
 /***********************************************************************
- * Module:  UserController.cs
- * Author:  Dell
- * Purpose: Definition of the Class Hospital.Controller.UserController
+ * Module:  Class20.cs
+ * Author:  todor
+ * Purpose: Definition of the Class Hospital.Controller.Class20
  ***********************************************************************/
 
-using Hospital.xaml_windows.Doctor;
-using Hospital.xaml_windows.Manager;
-using Hospital.xaml_windows.Patient;
-using Hospital.xaml_windows.Secretary;
-using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Windows;
 
 namespace Hospital.Controller
 {
     public class UserController
     {
-        public Hospital.Model.User RegisterUser(String username, String password)
-        {
-            // TODO: implement
-            return null;
-        }
-
         public bool LoginUser(String username, String password)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -43,7 +31,7 @@ namespace Hospital.Controller
                 MessageBox.Show("Pogresan unos");
                 return false;
             }
-            
+
             string uloga = "";
             cmd.CommandText = "select users.ID, role.roletype FROM users, employee, role where users.ID = employee.USER_ID and employee.ROLE_ID = role.ID";
             reader = cmd.ExecuteReader();
@@ -80,8 +68,68 @@ namespace Hospital.Controller
             return true;
         }
 
+
+        public Hospital.Model.User RegisterUser(String username, String password)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.User Unguest(Hospital.Model.User user)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean IsValidUsername()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean IsValidPassword()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.User GetUserById(int id)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.User GetUserByUsername(String username)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Array<User> GetAllUsers()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean DeleteUserById(int id)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean DeleteUserByUsername(String username)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.User UpdateUser(Hospital.Model.User user)
+        {
+            // TODO: implement
+            return null;
+        }
+
         public Hospital.Service.UserService userService;
-        public Hospital.Service.SystemNotificationService systemNotificationService;
 
     }
 }
