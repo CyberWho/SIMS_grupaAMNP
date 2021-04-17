@@ -32,7 +32,7 @@ namespace Hospital.xaml_windows.Doctor
             OracleConnection con = new OracleConnection(conString);
             OracleCommand cmd = con.CreateCommand();
             con.Open();
-            cmd.CommandText = "select doctor.id from employees, doctor where user_id = "+ id.ToString() + " and doctor.EMPLOYEE_ID =  employees.ID";// RIGHT JOIN employees ON users.ID == employees.USER_ID";
+            cmd.CommandText = "select doctor.id from employee, doctor where user_id = "+ id.ToString() + " and doctor.EMPLOYEE_ID =  employee.ID";// RIGHT JOIN employees ON users.ID == employees.USER_ID";
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
             id_doc = int.Parse(reader.GetString(0));

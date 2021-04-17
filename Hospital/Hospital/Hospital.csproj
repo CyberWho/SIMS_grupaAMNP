@@ -97,8 +97,10 @@
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\StateController.cs" />
     <Compile Include="Controller\SystemNotificationsController.cs" />
+    <Compile Include="Controller\TimeSlotController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WorkHoursController.cs" />
+    <Compile Include="Model\TimeSlot.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
     <Compile Include="Repository\AllergyTypeRepository.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\SystemNotificationRepository.cs" />
+    <Compile Include="Repository\TimeSlotRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\WorkHoursRepository.cs" />
     <Compile Include="Service\AddressService.cs" />
@@ -150,6 +153,7 @@
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\StateService.cs" />
     <Compile Include="Service\SystemNotificationService.cs" />
+    <Compile Include="Service\TimeSLotService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\WorkHoursService.cs" />
     <Compile Include="xaml_windows\Doctor\Create_appointment.xaml.cs">
