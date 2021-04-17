@@ -11,13 +11,18 @@ namespace Hospital.Service
 {
    public class PatientService
    {
-      public Hospital.Model.Patient GetPatientById(int id)
+      public Hospital.Model.Patient GetPatientByUserId(int id)
       {
             Patient patient = new Patient();
-            patient = patientRepository.GetPatientById(id);
-         return patient;
+            patient = patientRepository.GetPatientByUserId(id);
+            return patient;
       }
       
+      public Hospital.Model.Patient GetPatientById(int id)
+        {
+            return null;
+        }
+
       public System.Collections.ArrayList GetAllPatients()
       {
          // TODO: implement

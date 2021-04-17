@@ -9,6 +9,8 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Repository
 {
@@ -30,7 +32,12 @@ namespace Hospital.Repository
 
             }
         }
+
         public Hospital.Model.Patient GetPatientById(int id)
+        {
+            return null;
+        }
+        public Hospital.Model.Patient GetPatientByUserId(int id)
       {
             setConnection();
             OracleCommand cmd = con.CreateCommand();

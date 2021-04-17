@@ -8,6 +8,8 @@ using System;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Repository
 {
@@ -35,10 +37,11 @@ namespace Hospital.Repository
          return null;
       }
       
-      public System.Collections.ArrayList GetAllReservedAppointments()
+      public ObservableCollection<Appointment> GetAllReservedAppointments()
       {
-         // TODO: implement
-         return null;
+            
+       
+            return null;
       }
       
       public System.Collections.ArrayList GetAllReservedAppointmentsWeekly()
@@ -53,19 +56,152 @@ namespace Hospital.Repository
          return null;
       }
       
-      public System.Collections.ArrayList GetAllByAppointmentsPatientId(int patientId)
+      public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteAppointmentById(int id)
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM APPOINTMENT WHERE PATIENT_ID = :patient_id AND APPSTAT_ID = 1";
+            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Appointment appointment = new Appointment();
+                appointment.Id = reader.GetInt32(0);
+                appointment.DurationInMinutes = reader.GetInt32(1);
+                appointment.StartTime = reader.GetDateTime(2);
+                int roomId = reader.GetInt32(3);
+                int patId = reader.GetInt32(4);
+                int doctorId = reader.GetInt32(5);
+                int apptypeid = reader.GetInt32(6);
+                int appstatid = reader.GetInt32(7);
+                if (apptypeid == 0)
+                {
+                    appointment.Type = AppointmentType.EXAMINATION;
+                }
+                else
+                {
+                    if (apptypeid == 1)
+                    {
+                        appointment.Type = AppointmentType.OPERATION;
+                    }
+                    else
+                    {
+                        appointment.Type = AppointmentType.REFERRAL;
+                    }
+                }
+                if (appstatid == 0)
+                {
+                    appointment.Status = AppointmentStatus.DIDNTCOME;
+                }
+                else
+                {
+                    if (appstatid == 1)
+                    {
+                        appointment.Status = AppointmentStatus.FINISHED;
+                    }
+                    else
+                    {
+                        appointment.Status = AppointmentStatus.RESERDVED;
+                    }
+                }
+                OracleCommand cmd1 = con.CreateCommand();
+                cmd1.CommandText = "SELECT * FROM ROOM WHERE ID = :room_id";
+                cmd1.Parameters.Add("room_id", OracleDbType.Int32).Value = roomId.ToString();
+                OracleDataReader a = cmd1.ExecuteReader();
+                a.Read();
+                Room room = new Room();
+                room.Id = a.GetInt32(0);
+                room.Floor = a.GetInt32(1);
+                room.Area = a.GetDouble(2);
+                room.Description = a.GetString(3);
+
+                appointment.room = room;
+                cmd1.CommandText = "SELECT * FROM USERS,PATIENT WHERE PATIENT.ID = " + patientId + "AND USERS.ID = PATIENT.USER_ID";
+
+                a = cmd1.ExecuteReader();
+                a.Read();
+                User user = new User();
+                Patient patient = new Patient();
+                user.Id = int.Parse(a.GetString(0));
+                user.Username = a.GetString(1);
+                user.Password = a.GetString(2);
+                user.Name = a.GetString(3);
+                user.Surname = a.GetString(4);
+                user.PhoneNumber = a.GetString(5);
+                user.EMail = a.GetString(6);
+                patient.User = user;
+                patient.Id = int.Parse(a.GetString(7));
+                patient.JMBG = a.GetString(8);
+                patient.DateOfBirth = a.GetDateTime(9);
+                int addressId = a.GetInt32(10);
+                cmd1.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + addressId + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
+
+                a = cmd1.ExecuteReader();
+                a.Read();
+                State state = new State
+                {
+                    Id = int.Parse(a.GetString(8)),
+                    Name = a.GetString(9)
+                };
+
+                City city = new City
+                {
+                    Id = int.Parse(a.GetString(4)),
+                    Name = a.GetString(5),
+                    PostalCode = a.GetString(6),
+                    State = state
+                };
+                Address address = new Address
+                {
+                    Id = int.Parse(a.GetString(0)),
+                    Name = a.GetString(1),
+
+                    City = city
+                };
+                patient.Address = address;
+                appointment.patient = patient;
+
+                User docUser = new User();
+                cmd1.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID =" + doctorId;
+
+                a = cmd1.ExecuteReader();
+                a.Read();
+                docUser.Id = int.Parse(a.GetString(0));
+                docUser.Username = a.GetString(1);
+                docUser.Password = a.GetString(2);
+                docUser.Name = a.GetString(3);
+                docUser.Surname = a.GetString(4);
+                docUser.PhoneNumber = a.GetString(5);
+                docUser.EMail = a.GetString(6);
+                int dId = a.GetInt32(7);
+                int salary = a.GetInt32(8);
+                int yearsOfService = a.GetInt32(9);
+                int roleId = a.GetInt32(10);
+                Role role = new Role();
+                role.Id = roleId;
+                role.RoleType = "DOCTOR";
+                Doctor doctor = new Doctor(dId, salary, yearsOfService, docUser, role);
+                doctor.Id = doctorId;
+                appointment.doctor = doctor;
+                int roomdoc = a.GetInt32(12);
+                int specId = a.GetInt32(13);
+
+                appointments.Add(appointment);
+
+            }
+
+            return appointments;
+        }
+
+            public Boolean DeleteAppointmentById(int id)
       {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "delete from appointment where id = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             int a = cmd.ExecuteNonQuery();
+            con.Close();
             return true;
       }
       
@@ -83,6 +219,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
             int a = cmd.ExecuteNonQuery();
+            con.Close();
             return null;
       }
       
@@ -94,6 +231,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("ROOM_ID", OracleDbType.Date).Value = room.Id.ToString();
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
             int a = cmd.ExecuteNonQuery();
+            con.Close();
             return null;
            
         }
@@ -106,7 +244,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("APPOINTMENT_STATUS", OracleDbType.Date).Value = appointmentStatus.ToString();
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
             int a = cmd.ExecuteNonQuery();
-            
+            con.Close();
             return null;
         }
 
@@ -124,6 +262,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("PATIENT_ID", OracleDbType.Int32).Value = appointment.patient.Id.ToString();
             cmd.Parameters.Add("DOCTOR_ID", OracleDbType.Int32).Value = appointment.doctor.Id.ToString();
             int a = cmd.ExecuteNonQuery();
+            con.Close();
             return appointment;
       }
       
@@ -137,6 +276,7 @@ namespace Hospital.Repository
             reader = cmd.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
+            con.Close();
             return 0;
       }
    

@@ -129,7 +129,7 @@ namespace Hospital.xaml_windows.Patient
             
             InitializeComponent();
             this.id = id;
-            patient = patientController.GetPatientById(id);
+            patient = patientController.GetPatientByUserId(id);
             this.DataContext = this;
             Username = patient.User.Username;
             NName = patient.User.Name;

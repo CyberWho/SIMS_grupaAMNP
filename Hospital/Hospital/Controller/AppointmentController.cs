@@ -38,8 +38,9 @@ namespace Hospital.Controller
       
       public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            appointments = appointmentService.GetAllByAppointmentsPatientId(patientId);
+            return appointments;
       }
       
       public Boolean CancelAppointmentById(int id)
@@ -90,7 +91,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.AppointmentService appointmentService;
+      public Hospital.Service.AppointmentService appointmentService = new Service.AppointmentService();
    
    }
 }
