@@ -102,7 +102,7 @@ namespace Hospital.xaml_windows.Patient
             id = int.Parse(app_id_txt.Text);
             appointment = appointmentController.GetAppointmentById(id);
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
-            if(hours > 24)
+            if(hours > 24 && appointment.Type != AppointmentType.OPERATION)
             {
                 var s = new PatientUpdateAppointment(id, appointment);
                 s.Show();
