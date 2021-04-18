@@ -36,8 +36,60 @@ namespace Hospital.Repository
         }
         public Hospital.Model.Appointment GetAppointmentById(int id)
       {
-         // TODO: implement
-         return null;
+            setConnection();
+            Appointment appointment = new Appointment();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM APPOINTMENT WHERE ID = " + id;
+            OracleDataReader reader = cmd.ExecuteReader();
+            appointment.Id = reader.GetInt32(0);
+            appointment.DurationInMinutes = reader.GetInt32(1);
+            appointment.StartTime = reader.GetDateTime(2);
+            int roomId = reader.GetInt32(3);
+            int patId = reader.GetInt32(4);
+            int doctorId = reader.GetInt32(5);
+            int apptypeid = reader.GetInt32(6);
+            int appstatid = reader.GetInt32(7);
+            if (apptypeid == 0)
+            {
+                appointment.Type = AppointmentType.EXAMINATION;
+            }
+            else
+            {
+                if (apptypeid == 1)
+                {
+                    appointment.Type = AppointmentType.OPERATION;
+                }
+                else
+                {
+                    appointment.Type = AppointmentType.REFERRAL;
+                }
+            }
+            if(appstatid == 0)
+            {
+                appointment.Status = AppointmentStatus.FINISHED;
+            } else
+            {
+                if(appstatid == 1)
+                {
+                    appointment.Status = AppointmentStatus.RESERVED;
+                } else
+                {
+                    appointment.Status = AppointmentStatus.DIDNTCOME;
+                }
+            }
+            Room room = new Room();
+            room = roomRepository.GetAppointmentRoomById(roomId);
+
+            appointment.room = room;
+            Patient patient = new Patient();
+            patient = patientRepository.GetPatientById(patId);
+            appointment.patient = patient;
+
+            Doctor doctor = new Doctor();
+            doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
+            appointment.doctor = doctor;
+            
+            return appointment;
       }
       
       public ObservableCollection<Appointment> GetAllReservedAppointments()
@@ -93,7 +145,7 @@ namespace Hospital.Repository
                         appointment.Type = AppointmentType.REFERRAL;
                     }
                 }
-                appointment.Status = AppointmentStatus.RESERDVED;
+                appointment.Status = AppointmentStatus.RESERVED;
                 
                 Room room = new Room();
                 room = roomRepository.GetAppointmentRoomById(roomId);

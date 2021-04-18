@@ -14,8 +14,9 @@ namespace Hospital.Controller
    {
       public Hospital.Model.Appointment GetAppointmentById(int id)
       {
-         // TODO: implement
-         return null;
+            Appointment appointment = new Appointment();
+            appointment = appointmentService.GetAppointmentById(id);
+         return appointment;
       }
       
       public ObservableCollection<Appointment> GetAllReservedAppointments()

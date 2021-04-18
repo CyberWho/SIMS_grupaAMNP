@@ -56,9 +56,9 @@ namespace Hospital.Repository
             patient.JMBG = reader.GetString(8);
             patient.DateOfBirth = reader.GetDateTime(9);
             int addressId = reader.GetInt32(10);
-            Address address = new Address();
-            address = addressRepository.GetAddressById(addressId);
-            patient.Address = address;
+            
+            //Address address = addressRepository.GetAddressById(addressId);
+            //patient.Address = address;
             con.Close();
             return patient;
 
@@ -86,7 +86,9 @@ namespace Hospital.Repository
             patient.JMBG = reader.GetString(8);
             patient.DateOfBirth = reader.GetDateTime(9);
             int addressId = reader.GetInt32(10);
-            cmd.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + addressId + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
+            
+            Address address = addressRepository.GetAddressById(addressId);
+            /*cmd.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + id + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
             reader = cmd.ExecuteReader();
             reader.Read();
             State state = new State
@@ -109,7 +111,7 @@ namespace Hospital.Repository
                 Name = reader.GetString(1),
 
                 City = city
-            };
+            };*/
             patient.Address = address;
             con.Close();
             return patient;

@@ -10,8 +10,8 @@ namespace Hospital.Model
 {
    public enum AppointmentType
    {
-      EXAMINATION,
       OPERATION,
+      EXAMINATION,
       REFERRAL
    
    }

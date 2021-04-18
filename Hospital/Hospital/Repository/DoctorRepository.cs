@@ -40,7 +40,7 @@ namespace Hospital.Repository
             setConnection();
             User docUser = new User();
             OracleCommand cmd1 = con.CreateCommand();
-            cmd1.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID =" + id;
+            cmd1.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID =" + id + "AND USERS.ID = EMPLOYEE.USER_ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID";
 
             
             OracleDataReader a = cmd1.ExecuteReader();

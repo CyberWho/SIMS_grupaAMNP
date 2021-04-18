@@ -98,9 +98,20 @@ namespace Hospital.xaml_windows.Patient
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-            updateDataGrid();
+            Appointment appointment = new Appointment();
+            id = int.Parse(app_id_txt.Text);
+            appointment = appointmentController.GetAppointmentById(id);
+            var hours = (appointment.StartTime - DateTime.Now).TotalHours;
+            if(hours > 24)
+            {
+                var s = new PatientUpdateAppointment(id, appointment);
+                s.Show();
+                this.Close();
+            } else
+            {
+                MessageBox.Show("Ne mozete promeniti vreme odrzavanja termina jer je ostalo manje od 24h pre odrzavanja!");
+            }
+           
         }
 
         private void Obrisi_Click(object sender, RoutedEventArgs e)

@@ -17,5 +17,16 @@ namespace Hospital.Model
         public Boolean Free;
         public DateTime StartTime;
 
+        public TimeSlot()
+        {
+
+        }
+        public TimeSlot(int id,Boolean free,DateTime startTime)
+        {
+            this.Id = id;
+            this.Free = free;
+            this.StartTime = startTime;
+        }
+
     }
 }

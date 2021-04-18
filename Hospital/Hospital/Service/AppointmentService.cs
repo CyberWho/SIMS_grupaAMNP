@@ -14,8 +14,9 @@ namespace Hospital.Service
    {
       public Hospital.Model.Appointment GetAppointmentById(int id)
       {
-         // TODO: implement
-         return null;
+            Appointment appointment = new Appointment();
+            appointment = appointmentRepository.GetAppointmentById(id);
+         return appointment;
       }
       
       public System.Collections.ArrayList GetAllReservedAppointments()
