@@ -88,30 +88,7 @@ namespace Hospital.Repository
             int addressId = reader.GetInt32(10);
             
             Address address = addressRepository.GetAddressById(addressId);
-            /*cmd.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + id + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
-            reader = cmd.ExecuteReader();
-            reader.Read();
-            State state = new State
-            {
-                Id = int.Parse(reader.GetString(8)),
-                Name = reader.GetString(9)
-            };
-
-            City city = new City
-            {
-                Id = int.Parse(reader.GetString(4)),
-                Name = reader.GetString(5),
-                PostalCode = reader.GetString(6),
-                State = state
-            };
-
-            Address address = new Address
-            {
-                Id = int.Parse(reader.GetString(0)),
-                Name = reader.GetString(1),
-
-                City = city
-            };*/
+            
             patient.Address = address;
             con.Close();
             return patient;

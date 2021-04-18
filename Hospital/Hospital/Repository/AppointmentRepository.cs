@@ -38,10 +38,11 @@ namespace Hospital.Repository
       {
             setConnection();
             Appointment appointment = new Appointment();
+            appointment.Id = id;
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM APPOINTMENT WHERE ID = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
-            appointment.Id = reader.GetInt32(0);
+            reader.Read();
             appointment.DurationInMinutes = reader.GetInt32(1);
             appointment.StartTime = reader.GetDateTime(2);
             int roomId = reader.GetInt32(3);
