@@ -30,6 +30,7 @@ namespace Hospital.xaml_windows.Patient
         AppointmentController appointmentController = new AppointmentController();
         PatientController patientController = new PatientController();
         ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
+        Appointment app = new Appointment();
         Appointment Appointment = new Appointment();
 
         public PatientAppointments(int id)
@@ -104,7 +105,8 @@ namespace Hospital.xaml_windows.Patient
 
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            
+            int appointmentId = int.Parse(app_id_txt.Text);
+            appointmentController.CancelAppointmentById(appointmentId);
             updateDataGrid();
         }
 
@@ -120,8 +122,8 @@ namespace Hospital.xaml_windows.Patient
           
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
 
+            
             
         }
     }

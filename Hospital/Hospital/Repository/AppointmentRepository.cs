@@ -90,21 +90,7 @@ namespace Hospital.Repository
                         appointment.Type = AppointmentType.REFERRAL;
                     }
                 }
-                if (appstatid == 0)
-                {
-                    appointment.Status = AppointmentStatus.DIDNTCOME;
-                }
-                else
-                {
-                    if (appstatid == 1)
-                    {
-                        appointment.Status = AppointmentStatus.FINISHED;
-                    }
-                    else
-                    {
-                        appointment.Status = AppointmentStatus.RESERDVED;
-                    }
-                }
+                appointment.Status = AppointmentStatus.RESERDVED;
                 OracleCommand cmd1 = con.CreateCommand();
                 cmd1.CommandText = "SELECT * FROM ROOM WHERE ID = :room_id";
                 cmd1.Parameters.Add("room_id", OracleDbType.Int32).Value = roomId.ToString();

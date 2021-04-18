@@ -45,8 +45,8 @@ namespace Hospital.Controller
       
       public Boolean CancelAppointmentById(int id)
       {
-         // TODO: implement
-         return false;
+            appointmentService.CancelAppointmentById(id);
+            return true;
       }
       
       public Boolean DeleteAppointmentByPatientId(int patientId)
