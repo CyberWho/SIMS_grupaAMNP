@@ -10,13 +10,13 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
 using System.Collections.ObjectModel;
-using Hospital.Model;
 
 namespace Hospital.Repository
 {
    public class PatientRepository
    {
         OracleConnection con = null;
+        AddressRepository addressRepository = new AddressRepository();
 
         private void setConnection()
         {
@@ -56,30 +56,8 @@ namespace Hospital.Repository
             patient.JMBG = reader.GetString(8);
             patient.DateOfBirth = reader.GetDateTime(9);
             int addressId = reader.GetInt32(10);
-            cmd.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + addressId + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
-            reader = cmd.ExecuteReader();
-            reader.Read();
-            State state = new State
-            {
-                Id = int.Parse(reader.GetString(8)),
-                Name = reader.GetString(9)
-            };
-
-            City city = new City
-            {
-                Id = int.Parse(reader.GetString(4)),
-                Name = reader.GetString(5),
-                PostalCode = reader.GetString(6),
-                State = state
-            };
-
-            Address address = new Address
-            {
-                Id = int.Parse(reader.GetString(0)),
-                Name = reader.GetString(1),
-
-                City = city
-            };
+            Address address = new Address();
+            address = addressRepository.GetAddressById(addressId);
             patient.Address = address;
             con.Close();
             return patient;

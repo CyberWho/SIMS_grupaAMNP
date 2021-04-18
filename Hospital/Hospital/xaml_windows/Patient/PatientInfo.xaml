@@ -29,5 +29,6 @@
         <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="238,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
         <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="238,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
         <TextBox   Grid.Column="1" Text="{Binding Path=Email, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="238,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        
     </Grid>
 </Window>
