@@ -16,6 +16,9 @@ namespace Hospital.Repository
    public class AppointmentRepository
    {
         OracleConnection con = null;
+        RoomRepository roomRepository = new RoomRepository();
+        PatientRepository patientRepository = new PatientRepository();
+        DoctorRepository doctorRepository = new DoctorRepository();
 
         private void setConnection()
         {
@@ -91,92 +94,22 @@ namespace Hospital.Repository
                     }
                 }
                 appointment.Status = AppointmentStatus.RESERDVED;
-                OracleCommand cmd1 = con.CreateCommand();
-                cmd1.CommandText = "SELECT * FROM ROOM WHERE ID = :room_id";
-                cmd1.Parameters.Add("room_id", OracleDbType.Int32).Value = roomId.ToString();
-                OracleDataReader a = cmd1.ExecuteReader();
-                a.Read();
+                
                 Room room = new Room();
-                room.Id = a.GetInt32(0);
-                room.Floor = a.GetInt32(1);
-                room.Area = a.GetDouble(2);
-                room.Description = a.GetString(3);
+                room = roomRepository.GetAppointmentRoomById(roomId);
 
                 appointment.room = room;
-                cmd1.CommandText = "SELECT * FROM USERS,PATIENT WHERE PATIENT.ID = " + patientId + "AND USERS.ID = PATIENT.USER_ID";
-
-                a = cmd1.ExecuteReader();
-                a.Read();
-                User user = new User();
                 Patient patient = new Patient();
-                user.Id = int.Parse(a.GetString(0));
-                user.Username = a.GetString(1);
-                user.Password = a.GetString(2);
-                user.Name = a.GetString(3);
-                user.Surname = a.GetString(4);
-                user.PhoneNumber = a.GetString(5);
-                user.EMail = a.GetString(6);
-                patient.User = user;
-                patient.Id = int.Parse(a.GetString(7));
-                patient.JMBG = a.GetString(8);
-                patient.DateOfBirth = a.GetDateTime(9);
-                int addressId = a.GetInt32(10);
-                cmd1.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + addressId + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
-
-                a = cmd1.ExecuteReader();
-                a.Read();
-                State state = new State
-                {
-                    Id = int.Parse(a.GetString(8)),
-                    Name = a.GetString(9)
-                };
-
-                City city = new City
-                {
-                    Id = int.Parse(a.GetString(4)),
-                    Name = a.GetString(5),
-                    PostalCode = a.GetString(6),
-                    State = state
-                };
-                Address address = new Address
-                {
-                    Id = int.Parse(a.GetString(0)),
-                    Name = a.GetString(1),
-
-                    City = city
-                };
-                patient.Address = address;
+                patient = patientRepository.GetPatientById(patientId);
                 appointment.patient = patient;
 
-                User docUser = new User();
-                cmd1.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID =" + doctorId;
-
-                a = cmd1.ExecuteReader();
-                a.Read();
-                docUser.Id = int.Parse(a.GetString(0));
-                docUser.Username = a.GetString(1);
-                docUser.Password = a.GetString(2);
-                docUser.Name = a.GetString(3);
-                docUser.Surname = a.GetString(4);
-                docUser.PhoneNumber = a.GetString(5);
-                docUser.EMail = a.GetString(6);
-                int dId = a.GetInt32(7);
-                int salary = a.GetInt32(8);
-                int yearsOfService = a.GetInt32(9);
-                int roleId = a.GetInt32(10);
-                Role role = new Role();
-                role.Id = roleId;
-                role.RoleType = "DOCTOR";
-                Doctor doctor = new Doctor(dId, salary, yearsOfService, docUser, role);
-                doctor.Id = doctorId;
+                Doctor doctor = new Doctor();
+                doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
                 appointment.doctor = doctor;
-                int roomdoc = a.GetInt32(12);
-                int specId = a.GetInt32(13);
-
                 appointments.Add(appointment);
 
             }
-
+            con.Close();
             return appointments;
         }
 
