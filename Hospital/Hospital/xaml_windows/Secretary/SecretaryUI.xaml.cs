@@ -169,7 +169,7 @@ namespace Hospital.xaml_windows.Secretary
                 };
                 users.Add(nUser);
             }
-
+            // U OVOME JE FORA MSM
             dataGridPatients.ItemsSource = users;
 
         }

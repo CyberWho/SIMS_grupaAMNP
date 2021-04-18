@@ -4,66 +4,162 @@
  * Purpose: Definition of the Class Hospital.Repository.AllergyRepository
  ***********************************************************************/
 
+using Hospital.Model;
+using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Windows;
 
 namespace Hospital.Repository
 {
-   /// GetAllergiesByTypeId vraca konkretno sve id-eve kartona koji su alergicni na to i to cije je id TypeId
-   public class AllergyRepository
-   {
-      public System.Collections.ArrayList GetAllergiesByTypeId(int allergyTypeId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllAllergiesByHealthRecordId(int healthRecordId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteAllergyById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteAllergiesByHealthRecordId(int healthRecordId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.Allergy UpdateAllergy(Hospital.Model.Allergy allergy)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Allergy NewAllergy(Hospital.Model.Allergy allergy)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
-      
-      public Hospital.Model.Allergy GetAllergyById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllAllergies()
-      {
-         // TODO: implement
-         return null;
-      }
-   
-   }
+    /// GetAllergiesByTypeId vraca konkretno sve id-eve kartona koji su alergicni na to i to cije je id TypeId
+    public class AllergyRepository
+    {
+        OracleConnection connection = null;
+        UserRepository userRepository = new UserRepository();
+        PatientRepository patientRepository = new PatientRepository();
+        HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
+
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            connection = new OracleConnection(conString);
+            try
+            {
+                connection.Open();
+
+            }
+            catch (Exception exp)
+            {
+                
+            }
+        }
+
+        public ObservableCollection<Allergy> GetAllAllergiesByUserId(int userId)
+        {
+            setConnection();
+
+            // trazim pacijenta sa user id-em userId, 
+            // trazim karton sa pacijent id-em koji sam dobio gore
+            // trazim sve alergije iz kartona na osnovu karton id-a koji sam dobio gore
+            ObservableCollection<Allergy> allergies = new ObservableCollection<Allergy>();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM patient WHERE user_id = " + userId;
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            int patientId = int.Parse(reader.GetString(0));
+            command.CommandText = "SELECT * FROM health_record WHERE patient_id = " + patientId;
+            reader = command.ExecuteReader();
+            reader.Read();
+
+            int healthRecordId = int.Parse(reader.GetString(0));
+            command.CommandText = "SELECT allergy_type.name FROM allergy, allergy_type WHERE allergy.allergy_type_id = allergy_type.id AND health_record_id = " + healthRecordId;
+            reader = command.ExecuteReader();
+
+            HealthRecord healthRecord = new HealthRecord();
+            healthRecord.Id = healthRecordId;
+
+            while (reader.Read())
+            {
+                Allergy allergy = new Allergy();
+                AllergyType allergyType = new AllergyType();
+                allergyType.Type = reader.GetString(0);
+                allergy.allergyType = allergyType;
+
+                allergies.Add(allergy);
+            }
+
+            connection.Close();
+            connection.Dispose();
+
+            return allergies;
+        }
+
+        public System.Collections.ArrayList GetAllergiesByTypeId(int allergyTypeId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllAllergiesByHealthRecordId(int healthRecordId)
+        {
+            // TODO: implement
+            return null;
+        }
+        public Boolean DeleteAllergyByUserIdAndAllergyTypeId(int userId, int atId)
+        {
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM users WHERE user_id = " + userId;
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            int patientId = int.Parse(reader.GetString(0));
+            command.CommandText = "SELECT * FROM health_record WHERE patient_id = " + patientId;
+            reader = command.ExecuteReader();
+            reader.Read();
+
+            int healthRecordId = int.Parse(reader.GetString(0));
+            command.CommandText = "SELECT allergy.id FROM allergy, allergy_type WHERE allergy.allergy_type_id = " + atId +" AND health_record_id = " + healthRecordId;
+            reader = command.ExecuteReader();
+            reader.Read();
+
+            int allergyId = int.Parse(reader.GetString(0));
+
+            return this.DeleteAllergyById(allergyId);
+        }
+
+        public Boolean DeleteAllergyById(int id)
+        {
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "DELETE FROM allergy WHERE allergy_id = " + id;
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public Boolean DeleteAllergiesByHealthRecordId(int healthRecordId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Hospital.Model.Allergy UpdateAllergy(Hospital.Model.Allergy allergy)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.Allergy NewAllergy(Hospital.Model.Allergy allergy)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
+
+        public Hospital.Model.Allergy GetAllergyById(int id)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllAllergies()
+        {
+            // TODO: implement
+            return null;
+        }
+
+    }
 }

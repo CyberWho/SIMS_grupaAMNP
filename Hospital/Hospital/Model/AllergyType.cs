@@ -8,10 +8,10 @@ using System;
 
 namespace Hospital.Model
 {
-   public class AllergyType
-   {
-      public int Id { get; set; }
-      public String Type { get; set; }
+    public class AllergyType
+    {
+        public int Id { get; set; }
+        public String Type { get; set; }
 
         public AllergyType(int id, string type)
         {
