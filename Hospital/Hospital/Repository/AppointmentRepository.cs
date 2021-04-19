@@ -19,6 +19,7 @@ namespace Hospital.Repository
         RoomRepository roomRepository = new RoomRepository();
         PatientRepository patientRepository = new PatientRepository();
         DoctorRepository doctorRepository = new DoctorRepository();
+        TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
 
         private void setConnection()
         {
@@ -37,12 +38,12 @@ namespace Hospital.Repository
         public Hospital.Model.Appointment GetAppointmentById(int id)
       {
             setConnection();
-            Appointment appointment = new Appointment();
-            appointment.Id = id;
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM APPOINTMENT WHERE ID = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
+            Appointment appointment = new Appointment();
+            appointment.Id = id;
             appointment.DurationInMinutes = reader.GetInt32(1);
             appointment.StartTime = reader.GetDateTime(2);
             int roomId = reader.GetInt32(3);
@@ -169,6 +170,11 @@ namespace Hospital.Repository
             public Boolean DeleteAppointmentById(int id)
       {
             setConnection();
+            Appointment appointment = new Appointment();
+             appointment =  GetAppointmentById(id);
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
+            timeSlotRepository.FreeTimeSlot(timeSlot);
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "delete from appointment where id = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();

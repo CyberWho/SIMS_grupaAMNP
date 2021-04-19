@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hospital.Model;
 
+
 /***********************************************************************
  * Module:  TimeSlotService.cs
  * Author:  Nikola
@@ -18,7 +19,7 @@ namespace Hospital.Service
     {
         public TimeSlot GetTimeSlotById(int id)
         {
-            // TODO: implement
+            //TODO: implement
             return null;
         }
 
@@ -32,6 +33,13 @@ namespace Hospital.Service
         {
             // TODO: implement
             return null;
+        }
+
+        public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date,int doctorId)
+        {
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(date, doctorId);
+            return timeSlot;
         }
 
         public Boolean DeleteSlotByWorkhoursId(int workHoursId)
@@ -48,17 +56,17 @@ namespace Hospital.Service
 
         public Boolean TakeTimeSlot(TimeSlot timeSlot)
         {
-            // TODO: implement
-            return false;
+            timeSlotRepository.TakeTimeSlot(timeSlot);
+            return true;
         }
 
         public Boolean FreeTimeSlot(TimeSlot timeSlot)
         {
-            // TODO: implement
-            return false;
+            timeSlotRepository.FreeTimeSlot(timeSlot);
+            return true;
         }
 
-        public Hospital.Repository.TimeSlotRepository timeSlotRepository;
+        public Hospital.Repository.TimeSlotRepository timeSlotRepository = new Repository.TimeSlotRepository();
 
     }
 }

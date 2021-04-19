@@ -34,6 +34,13 @@ namespace Hospital.Controller
             return null;
         }
 
+        public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date,int doctorId)
+        {
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot = timeSlotService.GetAppointmentTimeSlotByDateAndDoctorId(date, doctorId);
+            return timeSlot;
+        }
+
         public Boolean DeleteSlotByWorkhoursId(int workHoursId)
         {
             // TODO: implement
@@ -48,17 +55,17 @@ namespace Hospital.Controller
 
         public Boolean TakeTimeSlot(TimeSlot timeSlot)
         {
-            // TODO: implement
-            return false;
+            timeSlotService.TakeTimeSlot(timeSlot);
+            return true;
         }
 
         public Boolean FreeTimeSlot(TimeSlot timeSlot)
         {
-            // TODO: implement
-            return false;
+            timeSlotService.FreeTimeSlot(timeSlot);
+            return true;
         }
 
-        public Hospital.Service.TimeSlotService timeSlotService;
+        public Hospital.Service.TimeSlotService timeSlotService = new Service.TimeSlotService();
 
     }
 }
