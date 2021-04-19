@@ -192,8 +192,13 @@ namespace Hospital.xaml_windows.Patient
             updateMyGrid();
         }
 
-       
 
+        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientReminders(id);
+            s.Show();
+            this.Close();
+        }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {

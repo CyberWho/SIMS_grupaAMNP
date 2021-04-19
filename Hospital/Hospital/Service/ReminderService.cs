@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Model;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Service
 {
@@ -21,7 +23,13 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-      
+        public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            reminders = reminderRepository.GetAllPastRemindersByPatientId(patientId);
+            return reminders;
+        }
+
       public Boolean DeleteReminderById(int id)
       {
          // TODO: implement
@@ -52,7 +60,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.ReminderRepository reminderRepository;
+      public Hospital.Repository.ReminderRepository reminderRepository = new Repository.ReminderRepository();
    
    }
 }

@@ -5,21 +5,64 @@
  ***********************************************************************/
 
 using System;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
+using Hospital.Model;
+using System.Collections.ObjectModel;
+using System.Configuration;
 
 namespace Hospital.Repository
 {
    public class ReminderRepository
    {
-      public Hospital.Model.Reminder GetReminderById(int id)
+        OracleConnection con = null;
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            con = new OracleConnection(conString);
+            try
+            {
+                con.Open();
+
+            }
+            catch (Exception exp)
+            {
+
+            }
+        }
+        public Hospital.Model.Reminder GetReminderById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public System.Collections.ArrayList GetAllRemindersByPatientId(int patientId)
+      public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            setConnection();
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
+            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+           // cmd.Parameters.Add("date_now", OracleDbType.Date).Value = DateTime.Now.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                Reminder reminder = new Reminder();
+                reminder.Id = reader.GetInt32(0);
+                reminder.Name = reader.GetString(1);
+                reminder.Description = reader.GetString(2);
+                reminder.AlarmTime = reader.GetDateTime(3);
+                if(reminder.AlarmTime >= DateTime.Now)
+                {
+                    continue;
+                } else
+                {
+                    reminders.Add(reminder);
+                }
+                
+            }
+            con.Close();
+         return reminders;
       }
       
       public Boolean DeleteReminderById(int id)

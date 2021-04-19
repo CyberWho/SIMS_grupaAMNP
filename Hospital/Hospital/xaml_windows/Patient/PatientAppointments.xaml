@@ -16,7 +16,7 @@
             <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
             <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
-
+            <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
         
             <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Appointments}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="390" Margin="273,10,0,0" VerticalAlignment="Top" Width="411" SelectionChanged="myDataGrid_SelectionChanged">

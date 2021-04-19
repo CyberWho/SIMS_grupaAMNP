@@ -23,7 +23,13 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-      
+        public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            reminders = reminderService.GetAllPastRemindersByPatientId(patientId);
+            return reminders;
+        }
+
       public Boolean DeleteReminderById(int id)
       {
          // TODO: implement
@@ -54,7 +60,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.ReminderService reminderService;
+      public Hospital.Service.ReminderService reminderService = new Service.ReminderService();
    
    }
 }

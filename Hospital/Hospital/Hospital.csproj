@@ -180,6 +180,9 @@
     <Compile Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml.cs">
       <DependentUpon>PatientNewAppointmentRecommendations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\PatientReminders.xaml.cs">
+      <DependentUpon>PatientReminders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\PatientUI.xaml.cs">
       <DependentUpon>PatientUI.xaml</DependentUpon>
     </Compile>
@@ -239,6 +242,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientReminders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -90,6 +90,12 @@ namespace Hospital.xaml_windows.Patient
         {
            
         }
+        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientReminders(id);
+            s.Show();
+            this.Close();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
