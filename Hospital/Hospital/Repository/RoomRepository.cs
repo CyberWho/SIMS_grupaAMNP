@@ -44,10 +44,9 @@ namespace Hospital.Repository
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM ROOM WHERE ID = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            
             OracleDataReader a = cmd.ExecuteReader();
-            Room room = new Room();
             a.Read();
+            Room room = new Room();
             room.Id = a.GetInt32(0);
             room.Floor = a.GetInt32(1);
             room.Area = a.GetDouble(2);

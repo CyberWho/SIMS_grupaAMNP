@@ -17,6 +17,7 @@ namespace Hospital.Model
         public Boolean Free { get; set; }
         public DateTime StartTime { get; set; }
 
+        public WorkHours WorkHours { get; set; }
         public TimeSlot()
         {
 

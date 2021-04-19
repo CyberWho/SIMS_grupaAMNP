@@ -17,7 +17,13 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-      
+
+        public Doctor GetWorkHoursDoctorById(int id)
+        {
+            Doctor doctor = new Doctor();
+            doctor = doctorRepository.GetWorkHoursDoctorById(id);
+            return doctor;
+        }
       public System.Collections.ArrayList GetAllDoctors()
       {
          // TODO: implement

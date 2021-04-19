@@ -55,6 +55,12 @@ namespace Hospital.Controller
             return false;
         }
 
+        public ObservableCollection<TimeSlot> GetTimeSlotRecomendationsByDatesAndDoctorIdAndPriority(DateTime startTime, DateTime endTime, int doctorId, int priority)
+        {
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            timeSlots = timeSlotService.GetTimeSlotRecomendationsByDatesAndDoctorIdAndPriority(startTime, endTime, doctorId, priority);
+            return timeSlots;
+        }
         public System.Array NewTimeSlots(int workHoursId)
         {
             // TODO: implement

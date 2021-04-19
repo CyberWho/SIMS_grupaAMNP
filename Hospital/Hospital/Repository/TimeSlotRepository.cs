@@ -20,6 +20,7 @@ namespace Hospital.Repository
     public class TimeSlotRepository
     {
         OracleConnection con = null;
+        DoctorRepository doctorRepository = new DoctorRepository();
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -62,6 +63,132 @@ namespace Hospital.Repository
         {
             // TODO: implement
             return null;
+        }
+
+        public ObservableCollection<TimeSlot> GetTimeSlotsByDatesAndDoctorId(DateTime startTime,DateTime endTime,int doctorId)
+        {
+            setConnection();
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            
+            cmd.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
+            cmd.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
+            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+
+                TimeSlot timeSlot = new TimeSlot();
+                timeSlot.Id = reader.GetInt32(0);
+                int free = reader.GetInt32(1);
+                if (free == 0)
+                {
+                    timeSlot.Free = false;
+                }
+                else
+                {
+                    timeSlot.Free = true;
+                }
+                timeSlot.StartTime = reader.GetDateTime(2);
+                WorkHours workHours = new WorkHours();
+                workHours.Id = reader.GetInt32(4);
+                workHours.ShiftStart = reader.GetDateTime(5);
+                workHours.ShiftEnd = reader.GetDateTime(6);
+                int approved = reader.GetInt32(7);
+                if(approved == 0)
+                {
+                    workHours.Approved = false;
+                } else
+                {
+                    workHours.Approved = true;
+                }
+                
+                Doctor doctor = new Doctor();
+                doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
+                workHours.doctor = doctor;
+                timeSlot.WorkHours = workHours;
+                timeSlots.Add(timeSlot);
+                
+            }
+            con.Close();
+            return timeSlots;
+        }
+
+        public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDates(DateTime startTime,DateTime endTime)
+        {
+            setConnection();
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.SPEC_ID=1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            cmd.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
+            cmd.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                TimeSlot timeSlot = new TimeSlot();
+                int timeSlotId = reader.GetInt32(0);
+                timeSlot = GetTimeSlotById(timeSlotId);
+                WorkHours workHours = new WorkHours();
+                workHours.Id = reader.GetInt32(4);
+                workHours.ShiftStart = reader.GetDateTime(5);
+                workHours.ShiftEnd = reader.GetDateTime(6);
+                int approved = reader.GetInt32(7);
+                if (approved == 0)
+                {
+                    workHours.Approved = false;
+                }
+                else
+                {
+                    workHours.Approved = true;
+                }
+                int doctorId = reader.GetInt32(8);
+                Doctor doctor = new Doctor();
+                doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
+                workHours.doctor = doctor;
+                timeSlot.WorkHours = workHours;
+                timeSlots.Add(timeSlot);
+            }
+            return timeSlots;
+
+        }
+
+        public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
+        {
+            setConnection();
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+           
+            OracleDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                TimeSlot timeSlot = new TimeSlot();
+                int timeSlotId = reader.GetInt32(0);
+                timeSlot = GetTimeSlotById(timeSlotId);
+                WorkHours workHours = new WorkHours();
+                workHours.Id = reader.GetInt32(4);
+                workHours.ShiftStart = reader.GetDateTime(5);
+                workHours.ShiftEnd = reader.GetDateTime(6);
+                int approved = reader.GetInt32(7);
+                if (approved == 0)
+                {
+                    workHours.Approved = false;
+                }
+                else
+                {
+                    workHours.Approved = true;
+                }
+
+                Doctor doctor = new Doctor();
+                doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
+                workHours.doctor = doctor;
+                timeSlot.WorkHours = workHours;
+                timeSlots.Add(timeSlot);
+            }
+            con.Close();
+            return timeSlots;
         }
 
         public ObservableCollection<TimeSlot> GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(DateTime date,int doctorId)

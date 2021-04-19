@@ -17,7 +17,7 @@ namespace Hospital.Model
         public DateTime ShiftEnd { get; set; }
         public Boolean Approved { get; set; }
 
-        public Doctor doctor;
+        public Doctor doctor { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Doctor GetDoctor()

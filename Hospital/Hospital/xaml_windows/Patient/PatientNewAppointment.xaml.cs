@@ -29,6 +29,7 @@ namespace Hospital.xaml_windows.Patient
         int id;
         ObservableCollection<Hospital.Model.Doctor> Doctors = new ObservableCollection<Hospital.Model.Doctor>();
         DoctorController doctorController = new DoctorController();
+        int priority = 0;
         
         public PatientNewAppointment(int id)
         {
@@ -110,9 +111,26 @@ namespace Hospital.xaml_windows.Patient
                     MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
                 } else
                 {
-
+                    var s = new PatientNewAppointmentRecommendations(id, startDate, endDate, doctorId,priority);
+                    s.Show();
+                    this.Close();
                 }
             }
+        }
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DoktorPrioritet_Checked(object sender, RoutedEventArgs e)
+        {
+            this.priority = 0;
+        }
+
+        private void VremePrioritet_Checked(object sender, RoutedEventArgs e)
+        {
+            this.priority = 1;
         }
     }
 

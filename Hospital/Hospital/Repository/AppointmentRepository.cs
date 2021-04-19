@@ -237,6 +237,11 @@ namespace Hospital.Repository
       {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
+
+            TimeSlot newTimeSlot = new TimeSlot();
+            newTimeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
+            timeSlotRepository.TakeTimeSlot(newTimeSlot);
+
             cmd.CommandText = "INSERT INTO APPOINTMENT (ID,DURATIONS_MINS,DATE_TIME,ROOM_ID,PATIENT_ID,DOCTOR_ID,APPTYPE_ID,APPSTAT_ID) VALUES (:ID,30,:DATE_TIME,:ROOM_ID,:PATIENT_ID,:DOCTOR_ID,1,1)";
 
             int id = GetLastId();
@@ -262,7 +267,7 @@ namespace Hospital.Repository
             reader.Read();
             id = int.Parse(reader.GetString(0));
             con.Close();
-            return 0;
+            return id;
       }
    
    }

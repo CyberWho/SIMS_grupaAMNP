@@ -58,8 +58,8 @@ namespace Hospital.Controller
       
       public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
       {
-         // TODO: implement
-         return null;
+            appointmentService.ReserveAppointment(appointment);
+         return appointment;
       }
       
       public Hospital.Model.Appointment ChangeAppointmentStatus(Hospital.Model.Appointment appointment)

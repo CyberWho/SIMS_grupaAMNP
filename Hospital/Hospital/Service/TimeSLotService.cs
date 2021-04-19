@@ -43,6 +43,22 @@ namespace Hospital.Service
             return null;
         }
 
+        public ObservableCollection<TimeSlot> GetTimeSlotRecomendationsByDatesAndDoctorIdAndPriority(DateTime startTime,DateTime endTime,int doctorId,int priority)
+        {
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            timeSlots = timeSlotRepository.GetTimeSlotsByDatesAndDoctorId(startTime, endTime, doctorId);
+            if(timeSlots.Count == 0)
+            {
+                if(priority == 0)
+                {
+                    timeSlots = timeSlotRepository.GetAllFreeTimeSlotsByDoctorId(doctorId);
+                } else
+                {
+                    timeSlots = timeSlotRepository.GetAllFreeTimeSlotsByDates(startTime, endTime);
+                }
+            }
+            return timeSlots;
+        }
         public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date,int doctorId)
         {
             TimeSlot timeSlot = new TimeSlot();

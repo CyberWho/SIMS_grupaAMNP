@@ -17,7 +17,14 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-      
+        public Doctor GetWorkHoursDoctorById(int id)
+        {
+            Doctor doctor = new Doctor();
+            doctor = doctorService.GetWorkHoursDoctorById(id);
+            return doctor;
+        }
+
+
       public ObservableCollection<Doctor> GetAllDoctors()
       {
          // TODO: implement
