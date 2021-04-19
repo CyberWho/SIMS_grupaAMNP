@@ -77,11 +77,6 @@ namespace Hospital.xaml_windows.Patient
 
         
 
-        private void Zakazi_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
        
 
         private void Window_Closed(object sender, EventArgs e)
@@ -97,6 +92,27 @@ namespace Hospital.xaml_windows.Patient
         private void myDataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void Predlozi_Click(object sender, RoutedEventArgs e)
+        {
+            int doctorId = int.Parse(doc_id_txt.Text);
+            DateTime startDate = DateTime.Parse(date_txt.Text);
+            DateTime endDate = DateTime.Parse(date_end_txt.Text);
+            if(endDate <= startDate)
+            {
+                MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!");
+            } else
+            {
+                var dayDifference = (endDate - startDate).TotalDays;
+                if(dayDifference > 5)
+                {
+                    MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
+                } else
+                {
+
+                }
+            }
         }
     }
 

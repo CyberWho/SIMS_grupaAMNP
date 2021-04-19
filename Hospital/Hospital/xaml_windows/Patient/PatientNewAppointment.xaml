@@ -31,13 +31,16 @@
         <Label Content="Ime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
         <Label Content="Prezime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top"/>
         <Label Content="Soba:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vreme:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vremenski interval:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="doc_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,48,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="doc_name_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,89,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="doc_surname_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,132,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="room_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,173,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
 
-        <Button x:Name="Zakazi" Content="Zakazi" Grid.Column="2" HorizontalAlignment="Left" Margin="109,315,0,0" VerticalAlignment="Top" Width="75" Click="Zakazi_Click"/>
-        <xctk:DateTimePicker x:Name="date_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="166,220,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Predlozi" Content="Prikazi predloge termina" Grid.Column="2" HorizontalAlignment="Left" Margin="109,315,0,0" VerticalAlignment="Top" Width="75" Click="Predlozi_Click"/>
+        <xctk:DateTimePicker x:Name="date_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="167,213,0,0" VerticalAlignment="Top" Width="117" Height="24"/>
+
+
+        <xctk:DateTimePicker x:Name="date_end_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="166,255,0,0" VerticalAlignment="Top" Width="120" Height="21"/>
     </Grid>
 </Window>
