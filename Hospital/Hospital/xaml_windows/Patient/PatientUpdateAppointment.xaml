@@ -20,17 +20,17 @@
         <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="390" Margin="273,10,0,0" VerticalAlignment="Top" Width="411">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Vreme}" Width="*"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding StartTime}" Width="*"/>
                 
                 
             </DataGrid.Columns>
         </DataGrid>
 
 
-        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,141,0,0" TextWrapping="Wrap" Text="{Binding appointment.DurationInMinutes}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,199,0,0" TextWrapping="Wrap" Text="{Binding appointment.room.Id}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,261,0,0" TextWrapping="Wrap" Text="{Binding appointment.doctor.User.Name}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,292,0,0" TextWrapping="Wrap" Text="{Binding appointment.doctor.User.Surname}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,141,0,0" TextWrapping="Wrap" Text="{Binding Path=DurationInMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,199,0,0" TextWrapping="Wrap" Text="{Binding Path=RoomId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,261,0,0" TextWrapping="Wrap" Text="{Binding Path=NName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,292,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
 
         <Button x:Name="Izmeni" Content="Izmeni termin" Grid.Column="1" HorizontalAlignment="Left" Margin="133,346,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click"/>
         <Label Content="Trajanje:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,137,0,0" VerticalAlignment="Top"/>
@@ -39,15 +39,15 @@
         <Label Content="Ime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,261,0,0" VerticalAlignment="Top"/>
         <Label Content="Prezime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,292,0,0" VerticalAlignment="Top" Height="23" Width="99"/>
         <Label Content="Oznaka doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,230,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,230,0,0" TextWrapping="Wrap" Text="{Binding appointment.doctor.Id}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,230,0,0" TextWrapping="Wrap" Text="{Binding Path=DoctorId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <Label Content="Oznaka termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,111,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,111,0,0" TextWrapping="Wrap" Text="{Binding apppointment.Id}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,111,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         
         <Label Content="Status termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,44,0,0" VerticalAlignment="Top"/>
         <Label Content="Tip termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,80,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,48,0,0" TextWrapping="Wrap" Text="{Binding appointment.Status}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,80,0,0" TextWrapping="Wrap" Text="{Binding appointment.Type}" VerticalAlignment="Top" Width="120"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,169,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.StartTime,ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,48,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,80,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="timeslot_id_txt" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,169,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

@@ -40,11 +40,13 @@ namespace Hospital.Repository
         public Room GetAppointmentRoomById(int id)
         {
             setConnection();
-            Room room = new Room();
+            
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM ROOM WHERE ID = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            
             OracleDataReader a = cmd.ExecuteReader();
+            Room room = new Room();
             a.Read();
             room.Id = a.GetInt32(0);
             room.Floor = a.GetInt32(1);

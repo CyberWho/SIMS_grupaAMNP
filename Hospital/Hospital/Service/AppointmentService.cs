@@ -76,8 +76,8 @@ namespace Hospital.Service
       
       public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
       {
-         // TODO: implement
-         return null;
+            appointmentRepository.UpdateAppointmentStartTime(appointment, newStartTime);
+         return appointment;
       }
 
       public Hospital.Model.Appointment ChangeStartTimePatient(Hospital.Model.Appointment appointment,DateTime newStartTime)

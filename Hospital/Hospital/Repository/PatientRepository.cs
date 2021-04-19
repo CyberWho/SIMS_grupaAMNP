@@ -87,9 +87,9 @@ namespace Hospital.Repository
             patient.DateOfBirth = reader.GetDateTime(9);
             int addressId = reader.GetInt32(10);
             
-            Address address = addressRepository.GetAddressById(addressId);
+            //Address address = addressRepository.GetAddressById(addressId);
             
-            patient.Address = address;
+           // patient.Address = address;
             con.Close();
             return patient;
            

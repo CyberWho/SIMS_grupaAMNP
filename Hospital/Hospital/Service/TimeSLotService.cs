@@ -20,8 +20,9 @@ namespace Hospital.Service
     {
         public TimeSlot GetTimeSlotById(int id)
         {
-            //TODO: implement
-            return null;
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot = timeSlotRepository.GetTimeSlotById(id);
+            return timeSlot;
         }
 
         public System.Array GetAllByDateAndDoctorId(DateTime date, int doctorId)

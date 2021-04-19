@@ -36,8 +36,26 @@ namespace Hospital.Repository
         }
         public Hospital.Model.TimeSlot GetTimeSlotById(int id)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM TIME_SLOT WHERE ID = :id";
+            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot.Id = reader.GetInt32(0);
+            int free = reader.GetInt32(1);
+            if (free == 0)
+            {
+                timeSlot.Free = false;
+            }
+            else
+            {
+                timeSlot.Free = true;
+            }
+            timeSlot.StartTime = reader.GetDateTime(2);
+            con.Close();
+            return timeSlot;
         }
 
         public System.Array GetAllByDateAndDoctorId(DateTime date, int doctorId)
@@ -52,9 +70,9 @@ namespace Hospital.Repository
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
             DateTime lastDate = date.AddHours(48);
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME BETWEEN :date AND :last_date";
+            cmd.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME BETWEEN :start_date AND :last_date";
             cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
-            cmd.Parameters.Add("date", OracleDbType.Date).Value = date;
+            cmd.Parameters.Add("start_date", OracleDbType.Date).Value = date;
             cmd.Parameters.Add("last_date", OracleDbType.Date).Value = lastDate;
             OracleDataReader reader = cmd.ExecuteReader();
             while(reader.Read())

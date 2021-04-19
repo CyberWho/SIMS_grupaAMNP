@@ -76,8 +76,8 @@ namespace Hospital.Controller
       
       public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
       {
-         // TODO: implement
-         return null;
+            appointmentService.ChangeStartTime(appointment, newStartTime);
+             return appointment;
       }
       
       public ObservableCollection<Appointment> GetAllFreeAppointmentsByDoctorId(int doctorId)

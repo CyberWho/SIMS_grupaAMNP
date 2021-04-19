@@ -39,11 +39,12 @@ namespace Hospital.Repository
       {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM APPOINTMENT WHERE ID = " + id;
+            cmd.CommandText = "SELECT * FROM APPOINTMENT WHERE ID = :id";
+            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
             Appointment appointment = new Appointment();
-            appointment.Id = id;
+            appointment.Id = reader.GetInt32(0);
             appointment.DurationInMinutes = reader.GetInt32(1);
             appointment.StartTime = reader.GetDateTime(2);
             int roomId = reader.GetInt32(3);
@@ -90,7 +91,7 @@ namespace Hospital.Repository
             Doctor doctor = new Doctor();
             doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
             appointment.doctor = doctor;
-            
+            con.Close();
             return appointment;
       }
       
