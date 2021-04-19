@@ -8,37 +8,35 @@
         Title="PatientUpdate" Height="750" Width="430">
     <Grid Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="67*"/>
-            <ColumnDefinition Width="353*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Menu HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="420" Grid.ColumnSpan="2"/>
+        <Menu HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="420"/>
 
-        <Label Content="Upravljanje kartonom pacijenta&#xD;&#xA;" HorizontalAlignment="Left" Margin="16,9,0,0" VerticalAlignment="Top" Height="31" Grid.Column="1"/>
+        <Label Content="Upravljanje kartonom pacijenta&#xD;&#xA;" HorizontalAlignment="Left" Margin="83,9,0,0" VerticalAlignment="Top" Height="31"/>
 
-        <Expander Header="Meni" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="68" Grid.ColumnSpan="2">
+        <Expander Header="Meni" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="68">
             <Grid Background="#FFE5E5E5"/>
         </Expander>
-        <Expander Header="Akcije" HorizontalAlignment="Left" Height="100" Margin="278,10,0,0" VerticalAlignment="Top" Width="65" Grid.Column="1">
+        <Expander Header="Akcije" HorizontalAlignment="Left" Height="100" Margin="345,10,0,0" VerticalAlignment="Top" Width="65">
             <Grid Background="#FFE5E5E5"/>
         </Expander>
 
         <DataGrid x:Name="dataGridAllergies" IsReadOnly="True" ItemsSource="{Binding Allergies}"
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
-                  Height="664" Margin="10,45,0,0" VerticalAlignment="Top" Width="137" SelectionChanged="dataGridPatients_SelectionChanged" Grid.ColumnSpan="2">
+                  Height="664" Margin="10,45,0,0" VerticalAlignment="Top" Width="137" SelectionChanged="dataGridPatients_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="10"/>
                 <DataGridTextColumn Header="Alergija" Binding="{Binding Type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox Grid.Row="0" HorizontalAlignment="Left" Text ="{Binding Path=Nova_alergija, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="93,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <TextBox Grid.Row="0" HorizontalAlignment="Left" Text ="{Binding Path=Id_address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="93,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <!--<TextBox Grid.Row="0" HorizontalAlignment="Left" Text ="{Binding Path=Nova_alergija, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="160,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
+        <ComboBox Name ="selection" Loaded="selection_loaded" HorizontalAlignment="Left" Margin="164,88,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="selection_SelectionChanged"/>
 
-        <Button Content="Obrisi selektovani alergen" HorizontalAlignment="Left" Margin="150,170,0,0" VerticalAlignment="Top" Width="150" Click="Izmeni_alergiju" Grid.Column="1"/>
-        <Button Content="Dodaj alergiju" HorizontalAlignment="Left" Margin="243,58,0,0" VerticalAlignment="Top" Width="100" Click="Dodaj_alergiju" Grid.Column="1"/>
-        <Button Content="Izmeni adresu" HorizontalAlignment="Left" Margin="243,110,0,0" VerticalAlignment="Top" Width="100" Click="Izmeni_adresu" Grid.Column="1"/>
-
-        <Button Content="Sacuvajte pacijenta" HorizontalAlignment="Left" Margin="166,340,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_pacijenta" Height="30" Grid.Column="1"/>
+        <Button Content="Obrisi selektovani alergen" HorizontalAlignment="Left" Margin="220,186,0,0" VerticalAlignment="Top" Width="150" Click="Obrisi_alergen"/>
+        <Button Content="Dodaj alergiju" HorizontalAlignment="Left" Margin="314,88,0,0" VerticalAlignment="Top" Width="100" Click="Dodaj_alergiju"/>
+        <!--<Button Content="Izmeni adresu" HorizontalAlignment="Left" Margin="310,69,0,0" VerticalAlignment="Top" Width="100" Click="Izmeni_adresu"/>-->
+        <Button Content="Sacuvajte pacijenta" HorizontalAlignment="Left" Margin="233,340,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_pacijenta" Height="30"/>
 
     </Grid>
 </Window>

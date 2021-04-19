@@ -12,6 +12,10 @@ namespace Hospital.Model
     public class HealthRecord
     {
         public int Id { get; set; }
+        public int patient_id { get; set; }
+        public int gender_id { get; set; }
+        public int marital_status_id { get; set; }
+        public int birth_place_id { get; set; }
         public Gender Gender { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
 

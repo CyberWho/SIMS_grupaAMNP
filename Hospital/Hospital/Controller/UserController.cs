@@ -14,11 +14,14 @@ using Hospital.xaml_windows.Manager;
 using Hospital.xaml_windows.Patient;
 using Hospital.xaml_windows.Secretary;
 using System.Windows;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
     public class UserController
     {
+        public UserService userService = new UserService();
+
         public bool LoginUser(String username, String password)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -78,13 +81,13 @@ namespace Hospital.Controller
         }
 
 
-        public Hospital.Model.User RegisterUser(String username, String password)
+        public User RegisterUser(String username, String password)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.User Unguest(Hospital.Model.User user)
+        public User Unguest(User user)
         {
             // TODO: implement
             return null;
@@ -102,13 +105,13 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Model.User GetUserById(int id)
+        public User GetUserById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.User GetUserByUsername(String username)
+        public User GetUserByUsername(String username)
         {
             // TODO: implement
             return null;
@@ -116,8 +119,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<User> GetAllUsers()
         {
-            // TODO: implement
-            return null;
+            return this.userService.GetAllUsers();
         }
 
         public Boolean DeleteUserById(int id)
@@ -132,13 +134,12 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Model.User UpdateUser(Hospital.Model.User user)
+        public User UpdateUser(User user)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Service.UserService userService;
 
     }
 }

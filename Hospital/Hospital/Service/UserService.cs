@@ -4,76 +4,78 @@
  * Purpose: Definition of the Class Hospital.Service.UserService
  ***********************************************************************/
 
+using Hospital.Model;
+using Hospital.Repository;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Service
 {
-   public class UserService
-   {
-      public Hospital.Model.User RegisterUser(String username, String password)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.User Unguest(Hospital.Model.User user)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean IsValidUsername()
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean IsValidPassword()
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.User GetUserById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.User GetUserByUsername(String username)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllUsers()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteUserById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteUserByUsername(String username)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.User UpdateUser(Hospital.Model.User user)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      public Boolean IsGuest;
-      public int MinPasswordLength;
-      
-      public Hospital.Repository.UserRepository userRepository;
-   
-   }
+    public class UserService
+    {
+        public UserRepository userRepository = new UserRepository();
+
+        public Boolean IsGuest;
+        public int MinPasswordLength;
+
+        public User RegisterUser(String username, String password)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public User Unguest(User user)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean IsValidUsername()
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Boolean IsValidPassword()
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public User GetUserById(int id)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public User GetUserByUsername(String username)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public ObservableCollection<User> GetAllUsers()
+        {
+            return this.userRepository.GetAllUsers();
+        }
+
+        public Boolean DeleteUserById(int id)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Boolean DeleteUserByUsername(String username)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public User UpdateUser(User user)
+        {
+            // TODO: implement
+            return null;
+        }
+
+    }
 }

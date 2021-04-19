@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Oracle.ManagedDataAccess.Client;
 using System.Collections.ObjectModel;
 using System.Data;
+using Hospital.Controller;
 
 namespace Hospital.xaml_windows.Secretary
 {
@@ -25,10 +26,18 @@ namespace Hospital.xaml_windows.Secretary
     public partial class PatientUpdate : Window, INotifyPropertyChanged
     {
 
-        int user_id;
+        int user_id = 0;
         int currentAllergyTypeId;
+        string type;
+        int patient_id;
+        int health_record_id;
+        int address_id;
         ObservableCollection<AllergyType> allergyTypes = new ObservableCollection<AllergyType>();
-        Controller.AllergyTypeController allergyTypeController = new Controller.AllergyTypeController();
+        AllergyTypeController allergyTypeController = new AllergyTypeController();
+        AllergyController allergyController = new AllergyController();
+        PatientController patientController = new PatientController();
+        HealthRecordController healthRecordController = new HealthRecordController();
+        AddressController addressController = new AddressController();
         #region NotifyProperties
         private string _id_address;
         private string _atype;
@@ -79,23 +88,27 @@ namespace Hospital.xaml_windows.Secretary
         {
             InitializeComponent();
             this.DataContext = this;
-            this.user_id = current_user_id;
+            if (user_id == 0)
+            {
+                this.user_id = current_user_id;
+                this.patient_id = this.patientController.GetPatientByUserId(user_id).Id;
+                this.health_record_id = this.healthRecordController.GetHealthRecordByPatientId(patient_id).Id;
+                this.address_id = this.addressController.GetAddressByPatientId(patient_id).Id;
+            }
 
             fill_data();
-        
         }
 
         private void fill_data()
         {
             this.DataContext = this;
 
-            ObservableCollection<AllergyType> allergyTypes = allergyTypeController.GetAllTypesByUserId(user_id);
+            ObservableCollection<AllergyType> allergyTypes = allergyTypeController.GetAllTypesByHealthRecordId(health_record_id);
             DataTable dt = new DataTable();
 
             dataGridAllergies.DataContext = dt;
             dataGridAllergies.ItemsSource = allergyTypes;
         }
-
 
         private void Sacuvaj_pacijenta(object sender, RoutedEventArgs e)
         {
@@ -104,7 +117,7 @@ namespace Hospital.xaml_windows.Secretary
 
             Model.Patient nPatient = new Model.Patient();
 
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            /*string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection connection = new OracleConnection(conString);
             OracleCommand cmd = connection.CreateCommand();
             connection.Open();
@@ -130,16 +143,16 @@ namespace Hospital.xaml_windows.Secretary
             {
                 Id = int.Parse(reader.GetString(0)),
                 Name = reader.GetString(1),
-               // PostalCode = reader.GetString(2),
+                // PostalCode = reader.GetString(2),
                 City = city
             };
 
-            nPatient.Address = address;
+            nPatient.Address = address;*/
 
             Update(nPatient);
 
-            connection.Close();
-            connection.Dispose();
+            /*connection.Close();
+            connection.Dispose();*/
         }
         public void Update(Model.Patient uPatient)
         {
@@ -152,9 +165,9 @@ namespace Hospital.xaml_windows.Secretary
             reader.Read();
             int patient_id = int.Parse(reader.GetString(0));
 
-            cmd.CommandText = "UPDATE patient SET address_id=:address_id WHERE ID = " + patient_id;
+            //cmd.CommandText = "UPDATE patient SET address_id=:address_id WHERE ID = " + patient_id;
 
-            cmd.Parameters.Add("@address_id", uPatient.Address.Id);
+            //cmd.Parameters.Add("@address_id", uPatient.Address.Id);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -163,16 +176,35 @@ namespace Hospital.xaml_windows.Secretary
 
             this.Close();
         }
-
+        // ovde
         private void Obrisi_alergen(object sender, RoutedEventArgs e)
         {
-            
-
+            _ = this.allergyController.DeleteAllergyByUserIdAndAllergyTypeId(user_id, currentAllergyTypeId);
+            fill_data();
+            refresh();
         }
-
+        // i ovde
         private void Dodaj_alergiju(object sender, RoutedEventArgs e)
         {
+            AllergyType alleryType = this.allergyTypeController.GetAllergyTypeByType(type);
+            Allergy allergy = new Allergy();
 
+            allergy.allergyType = alleryType;
+            allergy.allergy_type_id = alleryType.Id;
+            allergy.health_record_id = this.health_record_id;
+
+            this.allergyController.AddAllergy(allergy);
+            fill_data();
+            refresh();
+            ObservableCollection<AllergyType> allergyTypes = this.allergyTypeController.GetAllMissingAllergyTypesByUserId(user_id);
+            ObservableCollection<String> types = new ObservableCollection<String>();
+
+            foreach (AllergyType at in allergyTypes)
+            {
+                types.Add(at.Type);
+            }
+
+            this.selection.ItemsSource = types;
         }
 
         private void Izmeni_adresu(object sender, RoutedEventArgs e)
@@ -182,34 +214,55 @@ namespace Hospital.xaml_windows.Secretary
 
         private void dataGridPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            if (dataGridAllergies.SelectedCells[0] != null)
+            var info = dataGridAllergies.SelectedCells[0];
+            if (info != null)
             {
-                var info = dataGridAllergies.SelectedCells[0];
                 if (info.Column.GetCellContent(info.Item) != null)
                 {
                     var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
                     currentAllergyTypeId = int.Parse(content.ToString());
 
-                    /*AllergyType at = this.allergyTypeController.GetAllergyTypeById(allergyTypeId);
-                    aType = at.Type;*/
-                    
+                    dataGridAllergies.UnselectAll();
                 }
             }
-            /*if (dataGridAllergies.SelectedCells[0] != null)
+        }
+
+        private void selection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (selection.SelectedItem != null)
             {
-                var info = dataGridAllergies.SelectedCells[0];
-                if (info.Column.GetCellContent(info.Item) != null)
-                {
-                    var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
-                    int allergyTypeId = int.Parse(content.ToString());
+                type = selection.SelectedItem.ToString();
+            }
 
-                    AllergyType at = this.allergyTypeController.GetAllergyTypeById(allergyTypeId);
-                    MessageBox.Show(at.Type);
+        }
 
-                    aType = at.Type;
-                }
-            }*/
+        private void selection_loaded(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<AllergyType> allergyTypes = this.allergyTypeController.GetAllMissingAllergyTypesByUserId(user_id);
+            ObservableCollection<String> types = new ObservableCollection<String>();
+
+            foreach (AllergyType at in allergyTypes)
+            {
+                types.Add(at.Type);
+            }
+
+            this.selection.ItemsSource = types;
+        }
+
+        private void refresh()
+        {
+            ObservableCollection<AllergyType> allergyTypes = allergyTypeController.GetAllTypesByHealthRecordId(health_record_id);
+            dataGridAllergies.ItemsSource = allergyTypes;
+
+            allergyTypes = this.allergyTypeController.GetAllMissingAllergyTypesByUserId(user_id);
+            ObservableCollection<String> types = new ObservableCollection<String>();
+
+            foreach (AllergyType at in allergyTypes)
+            {
+                types.Add(at.Type);
+            }
+
+            this.selection.ItemsSource = types;
         }
     }
 }

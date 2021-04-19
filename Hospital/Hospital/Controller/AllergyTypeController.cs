@@ -14,10 +14,7 @@ namespace Hospital.Controller
     {
         public Hospital.Service.AllergyTypeService allergyTypeService = new Service.AllergyTypeService();
 
-        public ObservableCollection<AllergyType> GetAllTypesByUserId(int userId)
-        {
-            return this.allergyTypeService.GetAllTypesByUserId(userId);
-        }
+        
 
         public ObservableCollection<AllergyType> GetAllAllergyTypes()
         {
@@ -42,7 +39,18 @@ namespace Hospital.Controller
             // TODO: implement
             return null;
         }
-
+        public AllergyType GetAllergyTypeByType(string type)
+        {
+            return this.allergyTypeService.GetAllergyTypeByType(type);
+        }
+        public ObservableCollection<AllergyType> GetAllMissingAllergyTypesByUserId(int userId)
+        {
+            return this.allergyTypeService.GetAllMissingAllergyTypesByUserId(userId);
+        }
+        public ObservableCollection<AllergyType> GetAllTypesByHealthRecordId(int id)
+        {
+            return this.allergyTypeService.GetAllTypesByHealthRecordId(id);
+        }
         public Hospital.Model.AllergyType GetAllergyTypeById(int id)
         {
             return this.allergyTypeService.GetAllergyTypeById(id);

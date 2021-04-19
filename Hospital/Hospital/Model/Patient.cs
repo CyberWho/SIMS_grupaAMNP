@@ -13,8 +13,11 @@ namespace Hospital.Model
     {
 
         public int Id { get; set; }
+        public int addres_id { get; set; }
+        public int user_id { get; set; }
         public string JMBG { get; set; }
         public DateTime DateOfBirth { get; set; }
+        
 
         public User User { get; set; }
         public System.Collections.ArrayList Appointments;
@@ -87,6 +90,19 @@ namespace Hospital.Model
             User = user;
             Appointments = appointments;
             Address = address;
+            HealthRecord = healthRecord;
+        }
+
+        public Patient(int id, int addres_id, int user_id, string jMBG, DateTime dateOfBirth, User user, ArrayList appointments, Address address, HealthRecord healthRecord)
+        {
+            Id = id;
+            this.addres_id = addres_id;
+            this.user_id = user_id;
+            JMBG = jMBG;
+            DateOfBirth = dateOfBirth;
+            User = null;
+            Appointments = appointments;
+            Address = null;
             HealthRecord = healthRecord;
         }
 

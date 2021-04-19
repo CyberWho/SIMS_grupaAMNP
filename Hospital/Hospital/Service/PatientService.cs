@@ -4,49 +4,57 @@
  * Purpose: Definition of the Class Hospital.Service.PatientService
  ***********************************************************************/
 
+using Hospital.Model;
+using Hospital.Repository;
 using System;
 
 namespace Hospital.Service
 {
-   public class PatientService
-   {
-      public Hospital.Model.Patient GetPatientById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllPatients()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllPatientsByDoctorId(int doctorId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeletePatientById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.Patient UpdatePatient(Hospital.Model.Patient patient)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Patient RegisterPatient(Hospital.Model.Patient patient)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      public Hospital.Repository.PatientRepository patientRepository;
-   
-   }
+    public class PatientService
+    {
+        public PatientRepository patientRepository = new PatientRepository();
+
+        public Patient GetPatientByUserId(int id)
+        {
+            return this.patientRepository.GetPatientByUserId(id);
+        }
+
+        public Patient GetPatientById(int id)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllPatients()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllPatientsByDoctorId(int doctorId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean DeletePatientById(int id)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Patient UpdatePatient(Patient patient)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Patient RegisterPatient(Patient patient)
+        {
+            // TODO: implement
+            return null;
+        }
+
+
+    }
 }

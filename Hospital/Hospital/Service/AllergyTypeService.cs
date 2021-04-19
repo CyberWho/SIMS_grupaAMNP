@@ -16,10 +16,6 @@ namespace Hospital.Service
         public Hospital.Repository.AllergyTypeRepository allergyTypeRepository = new Repository.AllergyTypeRepository();
 
 
-        public ObservableCollection<AllergyType> GetAllTypesByUserId(int userId)
-        {
-            return this.allergyTypeRepository.GetAllTypesByUserId(userId);
-        }
 
         public System.Collections.ArrayList GetAllAllergyTypes()
         {
@@ -45,6 +41,18 @@ namespace Hospital.Service
             return null;
         }
 
+        public AllergyType GetAllergyTypeByType(string type)
+        {
+            return this.allergyTypeRepository.GetAllergyTypeByType(type);
+        }
+        public ObservableCollection<AllergyType> GetAllMissingAllergyTypesByUserId(int userId)
+        {
+            return this.allergyTypeRepository.GetAllMissingAllergyTypesByUserId(userId);
+        }
+        public ObservableCollection<AllergyType> GetAllTypesByHealthRecordId(int id)
+        {
+            return this.allergyTypeRepository.GetAllTypesByHealthRecordId(id);
+        }
         public Hospital.Model.AllergyType GetAllergyTypeById(int id)
         {
             return this.allergyTypeRepository.GetAllergyTypeById(id);

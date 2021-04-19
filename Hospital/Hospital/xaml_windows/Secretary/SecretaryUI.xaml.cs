@@ -15,7 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using Hospital.Controller;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 
@@ -28,6 +28,10 @@ namespace Hospital.xaml_windows.Secretary
     {
         int id;
         int current_user_id;
+
+        UserController userController = new UserController();
+        PatientController patientController = new PatientController();
+        HealthRecordController healthRecordController = new HealthRecordController();
 
         public System.Collections.IEnumerable Patients { get; set; }
 
@@ -126,54 +130,18 @@ namespace Hospital.xaml_windows.Secretary
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-
-
+        // ispravljeno
         public SecretaryUI(int id)
         {
-
             InitializeComponent();
             this.DataContext = this;
+            
             this.id = id;
-
-
-            ObservableCollection<User> users = new ObservableCollection<User>();
-            ObservableCollection<Model.Patient> patients = new ObservableCollection<Model.Patient>();
-
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection connection = new OracleConnection(conString);
-            OracleCommand cmd = connection.CreateCommand();
-            connection.Open();
-
-            cmd.CommandText = "SELECT users.id, users.username, users.name, users.surname, users.phone_number, users.email, " +
-                "patient.jmbg, patient.date_of_birth " +
-                "FROM users, patient " +
-                "WHERE users.id = patient.user_id";
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Load(cmd.ExecuteReader());
-
-            dataGridPatients.DataContext = dt;
-
-            connection.Close();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                User nUser = new User
-                {
-                    Id = int.Parse(row["id"].ToString()),
-                    Username = row["username"].ToString(),
-                    Name = row["name"].ToString(),
-                    Surname = row["surname"].ToString(),
-                    PhoneNumber = row["phone_number"].ToString(),
-                    EMail = row["email"].ToString()
-                };
-                users.Add(nUser);
-            }
-            // U OVOME JE FORA MSM
+            
+            ObservableCollection<User> users = this.userController.GetAllUsers();
             dataGridPatients.ItemsSource = users;
-
         }
-
+        // TODO: ispraviti
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var p = new Profile(id);
@@ -187,7 +155,6 @@ namespace Hospital.xaml_windows.Secretary
             cmd.CommandText = "SELECT * FROM users WHERE ID = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            string username = reader.GetString(1);
 
             secretary = new User();
             secretary.Id = int.Parse(reader.GetString(0));
@@ -201,8 +168,8 @@ namespace Hospital.xaml_windows.Secretary
             connection.Close();
             connection.Dispose();
         }
-
-        private void Obrisi_karton(object sender, RoutedEventArgs e)
+        // TODO: ispraviti
+        private void Obrisi_korisnika(object sender, RoutedEventArgs e)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection connection = new OracleConnection(conString);
@@ -220,20 +187,9 @@ namespace Hospital.xaml_windows.Secretary
             connection.Close();
             connection.Dispose();
         }
-
-        private void Izmeni_karton(object sender, RoutedEventArgs e)
-        {
-            Window sp = new PatientUpdate(current_user_id);
-            sp.Show();
-
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection connection = new OracleConnection(conString);
-            OracleCommand cmd = connection.CreateCommand();
-            connection.Open();
-            cmd.CommandText = "SELECT * FROM users WHERE ID = " + current_user_id;
-            OracleDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-
+        // ispravljeno
+        private void Izmeni_korisnika(object sender, RoutedEventArgs e)
+        { 
             User uUser = new User();
 
             uUser.Username = Username;
@@ -242,14 +198,12 @@ namespace Hospital.xaml_windows.Secretary
             uUser.PhoneNumber = PhoneNumber;
             uUser.EMail = Email;
 
-            Update(uUser);
-
-            connection.Close();
-            connection.Dispose();
+            this.Update(uUser);
+            this.Refresh(sender, e);
             // KADA SE KORISTI LISTVIEW NE KREIRA SE NPR NEW ROOM OBJEKAT NEGO SAMO OBJEKAT NEW {} I TO JE TO
         }
-
-        private void Dodaj_karton(object sender, RoutedEventArgs e)
+        // TODO: ispraviti
+        private void Dodaj_korisnika(object sender, RoutedEventArgs e)
         {
             Window s = new PatientCreate(current_user_id);
             s.Show();
@@ -281,7 +235,6 @@ namespace Hospital.xaml_windows.Secretary
             cmd.CommandText = "INSERT INTO users (id, username, password, name, surname, phone_number, email) VALUES " +
                 "(:id, :username, :password, :name, :surname, :phone_number, :email)";
 
-
             cmd.Parameters.Add("@id", nUser.Id);
             cmd.Parameters.Add("@username", nUser.Username);
             cmd.Parameters.Add("@password", nUser.Password);
@@ -297,7 +250,7 @@ namespace Hospital.xaml_windows.Secretary
 
             this.Close();
         }
-
+        // TODO: ispraviti
         public void Update(User uUser)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -318,14 +271,11 @@ namespace Hospital.xaml_windows.Secretary
 
             connection.Open();
             int rowsAffected = cmd.ExecuteNonQuery();
-            //MessageBox.Show("Uspesno izmenjeno " + rowsAffected.ToString() + " redova u bazi!");
 
             connection.Close();
             connection.Dispose();
-
-            this.Close();
         }
-
+        // TODO: ispraviti
         private void dataGridPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -353,47 +303,36 @@ namespace Hospital.xaml_windows.Secretary
 
                     connection.Close();
                     connection.Dispose();
+
+                    dataGridPatients.UnselectAll();
                 }
             }
 
         }
-
+        // ispravljeno
         private void Refresh(object sender, RoutedEventArgs e)
-        {
-            ObservableCollection<User> users = new ObservableCollection<User>();
-            ObservableCollection<Model.Patient> patients = new ObservableCollection<Model.Patient>();
-
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection connection = new OracleConnection(conString);
-            OracleCommand cmd = connection.CreateCommand();
-            connection.Open();
-
-            cmd.CommandText = "SELECT users.id, users.username, users.name, users.surname, users.phone_number, users.email, " +
-                "patient.jmbg, patient.date_of_birth " +
-                "FROM users, patient " +
-                "WHERE users.id = patient.user_id";
-            DataTable dt = new DataTable();
-            dt.Load(cmd.ExecuteReader());
-
-            dataGridPatients.DataContext = dt;
-
-            connection.Close();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                User nUser = new User
-                {
-                    Id = int.Parse(row["id"].ToString()),
-                    Username = row["username"].ToString(),
-                    Name = row["name"].ToString(),
-                    Surname = row["surname"].ToString(),
-                    PhoneNumber = row["phone_number"].ToString(),
-                    EMail = row["email"].ToString()
-                };
-                users.Add(nUser);
-            }
-
+        {            
+            ObservableCollection<User> users = this.userController.GetAllUsers();
             dataGridPatients.ItemsSource = users;
+
+            foreach (Control control in page.Children)
+            {
+                if (control.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)control).Text = String.Empty;
+                }
+            }
+        }
+
+        private void Karton_korisnika(object sender, RoutedEventArgs e)
+        {
+            User user = this.userController.GetUserById(current_user_id);
+            Model.Patient patient = this.patientController.GetPatientByUserId(current_user_id);
+            HealthRecord healthRecord = this.healthRecordController.GetHealthRecordByPatientId(patient.Id);
+
+            Window sp = new PatientUpdate(current_user_id);
+            sp.Show();
+
 
         }
     }

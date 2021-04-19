@@ -11,6 +11,7 @@ namespace Hospital.Model
     public class Address
     {
         public int Id { get; set; }
+        public int city_id { get; set; }
         public String Name { get; set; }
 
         public City City { get; set; }
@@ -20,6 +21,13 @@ namespace Hospital.Model
             Id = id;
             Name = name;
             City = city;
+        }
+        public Address(int id, int city_id, string name)
+        {
+            Id = id;
+            this.city_id = city_id;
+            Name = name;
+            City = null;
         }
 
         public Address()

@@ -8,13 +8,20 @@ using System;
 
 using System.Collections.ObjectModel;
 using Hospital.Model;
-
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
    public class AddressController
-   {
-      public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
+    {
+        public AddressService addressService = new AddressService();
+       
+        public Address GetAddressByPatientId(int id)
+        {
+            return this.addressService.GetAddressByPatientId(id);
+        }
+
+        public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
       {
          // TODO: implement
          return null;
@@ -38,7 +45,6 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.AddressService addressService;
    
    }
 }

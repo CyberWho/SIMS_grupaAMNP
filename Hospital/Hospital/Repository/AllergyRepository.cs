@@ -32,9 +32,25 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-                
+
             }
         }
+        public int GetLastId()
+        {
+            setConnection();
+
+            int id = 0;
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT MAX(ID) FROM allergy";
+            OracleDataReader reader = command.ExecuteReader();
+            reader = command.ExecuteReader();
+            reader.Read();
+            id = int.Parse(reader.GetString(0));
+            connection.Close();
+
+            return id;
+        }
+
 
         public ObservableCollection<Allergy> GetAllAllergiesByUserId(int userId)
         {
@@ -93,19 +109,13 @@ namespace Hospital.Repository
         {
             setConnection();
 
+            Patient patient = this.patientRepository.GetPatientByUserId(userId);
+            HealthRecord healthRecord = this.healthRecordRepository.GetHealthRecordByPatientId(patient.Id);
+
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM users WHERE user_id = " + userId;
+
+            command.CommandText = "SELECT allergy.id FROM allergy, allergy_type WHERE allergy.allergy_type_id = " + atId + " AND health_record_id = " + healthRecord.Id;
             OracleDataReader reader = command.ExecuteReader();
-            reader.Read();
-
-            int patientId = int.Parse(reader.GetString(0));
-            command.CommandText = "SELECT * FROM health_record WHERE patient_id = " + patientId;
-            reader = command.ExecuteReader();
-            reader.Read();
-
-            int healthRecordId = int.Parse(reader.GetString(0));
-            command.CommandText = "SELECT allergy.id FROM allergy, allergy_type WHERE allergy.allergy_type_id = " + atId +" AND health_record_id = " + healthRecordId;
-            reader = command.ExecuteReader();
             reader.Read();
 
             int allergyId = int.Parse(reader.GetString(0));
@@ -116,7 +126,8 @@ namespace Hospital.Repository
         public Boolean DeleteAllergyById(int id)
         {
             OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "DELETE FROM allergy WHERE allergy_id = " + id;
+            cmd.CommandText = "DELETE FROM allergy WHERE id = " + id;
+
             if (cmd.ExecuteNonQuery() > 0)
             {
                 return true;
@@ -131,25 +142,33 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Allergy UpdateAllergy(Hospital.Model.Allergy allergy)
+        public Allergy UpdateAllergy(Allergy allergy)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Allergy NewAllergy(Hospital.Model.Allergy allergy)
+        public Allergy NewAllergy(Allergy allergy)
         {
-            // TODO: implement
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO allergy (allergy_type_id, health_record_id) VALUES (:at_id, :hr_id)";
+
+            command.Parameters.Add("at_id", OracleDbType.Int32).Value = allergy.allergy_type_id.ToString();
+            command.Parameters.Add("hr_id", OracleDbType.Int32).Value = allergy.health_record_id.ToString();
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                return allergy;
+            }
+
+            connection.Close();
             return null;
         }
 
-        public int GetLastId()
-        {
-            // TODO: implement
-            return 0;
-        }
-
-        public Hospital.Model.Allergy GetAllergyById(int id)
+        public Allergy GetAllergyById(int id)
         {
             // TODO: implement
             return null;

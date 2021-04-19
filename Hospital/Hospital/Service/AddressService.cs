@@ -4,13 +4,21 @@
  * Purpose: Definition of the Class Hospital.Service.AddressService
  ***********************************************************************/
 
+using Hospital.Model;
+using Hospital.Repository;
 using System;
 
 namespace Hospital.Service
 {
    public class AddressService
-   {
-      public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
+    {
+        public AddressRepository addressRepository = new AddressRepository();
+
+        public Address GetAddressByPatientId(int id)
+        {
+            return this.addressRepository.GetAddressByPatientId(id);
+        }
+        public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
       {
          // TODO: implement
          return null;
@@ -34,7 +42,6 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.AddressRepository addressRepository;
    
    }
 }

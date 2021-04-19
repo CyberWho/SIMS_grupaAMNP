@@ -18,11 +18,14 @@ namespace Hospital.Service
         {
             return this.allergyRepository.GetAllAllergiesByUserId(userId);
         }
-
-        public Hospital.Model.Allergy AddAllergy(Hospital.Model.Allergy allergy)
+        public Boolean DeleteAllergyByUserIdAndAllergyTypeId(int userId, int atId)
         {
-            // TODO: implement
-            return null;
+            return this.allergyRepository.DeleteAllergyByUserIdAndAllergyTypeId(userId, atId);
+        }
+
+        public Allergy AddAllergy(Allergy allergy)
+        {
+            return this.allergyRepository.NewAllergy(allergy);
         }
 
         public System.Collections.ArrayList GetAllergiesByTypeId(int allergyTypeId)
