@@ -43,7 +43,6 @@ namespace Hospital.Repository
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
             cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
-           // cmd.Parameters.Add("date_now", OracleDbType.Date).Value = DateTime.Now.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             while(reader.Read())
             {
@@ -64,6 +63,35 @@ namespace Hospital.Repository
             con.Close();
          return reminders;
       }
+
+        public ObservableCollection<Reminder> GetAllFutureRemindersByPatientId(int patientId)
+        {
+            setConnection();
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
+            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Reminder reminder = new Reminder();
+                reminder.Id = reader.GetInt32(0);
+                reminder.Name = reader.GetString(1);
+                reminder.Description = reader.GetString(2);
+                reminder.AlarmTime = reader.GetDateTime(3);
+                if (reminder.AlarmTime < DateTime.Now)
+                {
+                    continue;
+                }
+                else
+                {
+                    reminders.Add(reminder);
+                }
+
+            }
+            con.Close();
+            return null;
+        }
       
       public Boolean DeleteReminderById(int id)
       {

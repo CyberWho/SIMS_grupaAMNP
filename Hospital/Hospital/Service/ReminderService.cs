@@ -30,6 +30,13 @@ namespace Hospital.Service
             return reminders;
         }
 
+       public ObservableCollection<Reminder> GetAllFutureRemindersByPatientId(int patientId)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            reminders = reminderRepository.GetAllFutureRemindersByPatientId(patientId);
+            return reminders;
+        }
+
       public Boolean DeleteReminderById(int id)
       {
          // TODO: implement
