@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hospital.Model;
+using System.Collections.ObjectModel;
 
 
 /***********************************************************************
@@ -27,6 +28,12 @@ namespace Hospital.Service
         {
             // TODO: implement
             return null;
+        }
+        public ObservableCollection<TimeSlot> GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(DateTime date, int doctorId)
+        {
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            timeSlots = timeSlotRepository.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(date, doctorId);
+            return timeSlots;
         }
 
         public System.Array GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)

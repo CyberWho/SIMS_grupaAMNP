@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital.Model;
 using System.Configuration;
+using Hospital.Controller;
+using System.Collections.ObjectModel;
+using System.Data;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -23,6 +26,8 @@ namespace Hospital.xaml_windows.Patient
     {
         int id;
         Appointment appointment;
+        ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
+        TimeSlotController timeSlotController = new TimeSlotController();
         public PatientUpdateAppointment(int id,Appointment appointment)
         {
             InitializeComponent();
@@ -54,6 +59,17 @@ namespace Hospital.xaml_windows.Patient
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void updateMyGrid()
+        {
+            this.DataContext = this;
+            int doctorId = int.Parse(doctor_id_txt.Text);
+            DateTime dateTime = appointment.StartTime;
+            TimeSlots = timeSlotController.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(dateTime, doctorId);
+            DataTable dt = new DataTable();
+            myGrid.DataContext = dt;
+            myGrid.ItemsSource = TimeSlots;
         }
 
     }

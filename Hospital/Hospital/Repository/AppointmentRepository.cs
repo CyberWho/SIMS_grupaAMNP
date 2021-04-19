@@ -134,13 +134,13 @@ namespace Hospital.Repository
                 int appstatid = reader.GetInt32(7);
                 if (apptypeid == 0)
                 {
-                    appointment.Type = AppointmentType.EXAMINATION;
+                    appointment.Type = AppointmentType.OPERATION;
                 }
                 else
                 {
                     if (apptypeid == 1)
                     {
-                        appointment.Type = AppointmentType.OPERATION;
+                        appointment.Type = AppointmentType.EXAMINATION;
                     }
                     else
                     {
@@ -193,6 +193,12 @@ namespace Hospital.Repository
       {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
+            timeSlotRepository.FreeTimeSlot(timeSlot);
+            TimeSlot newTimeSlot = new TimeSlot();
+            newTimeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(startTime, appointment.doctor.Id);
+            timeSlotRepository.TakeTimeSlot(newTimeSlot);
             cmd.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
             cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();

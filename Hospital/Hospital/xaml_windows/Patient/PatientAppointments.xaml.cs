@@ -106,7 +106,7 @@ namespace Hospital.xaml_windows.Patient
             {
                 MessageBox.Show("Nije moguce promeniti vreme odrzavanja operacije!");
             }
-            if(hours > 24 && appointment.Type != AppointmentType.OPERATION)
+            if(hours < 24 && appointment.Type != AppointmentType.OPERATION)
             {
                 var s = new PatientUpdateAppointment(id, appointment);
                 s.Show();

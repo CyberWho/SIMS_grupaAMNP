@@ -46,6 +46,28 @@ namespace Hospital.Repository
             return null;
         }
 
+        public ObservableCollection<TimeSlot> GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(DateTime date,int doctorId)
+        {
+            setConnection();
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            DateTime lastDate = date.AddHours(48);
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME BETWEEN :date AND :last_date";
+            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+            cmd.Parameters.Add("date", OracleDbType.Date).Value = date;
+            cmd.Parameters.Add("last_date", OracleDbType.Date).Value = lastDate;
+            OracleDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                TimeSlot timeSlot = new TimeSlot();
+                timeSlot.Id = reader.GetInt32(5);
+                timeSlot.StartTime = reader.GetDateTime(7);
+                timeSlots.Add(timeSlot);
+            }
+            con.Close();
+            return timeSlots;
+        }
+
         public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date,int doctorId)
         {
             setConnection();

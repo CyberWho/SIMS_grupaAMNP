@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hospital.Model;
+using System.Collections.ObjectModel;
 
 /***********************************************************************
  * Module:  TimeSlotController.cs
@@ -32,6 +33,12 @@ namespace Hospital.Controller
         {
             // TODO: implement
             return null;
+        }
+        public ObservableCollection<TimeSlot> GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(DateTime date, int doctorId)
+        {
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            timeSlots = timeSlotService.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(date, doctorId);
+            return timeSlots;
         }
 
         public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date,int doctorId)
