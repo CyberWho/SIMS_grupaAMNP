@@ -19,16 +19,23 @@
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
 
         </Menu>
-        <DataGrid x:Name="myDataGrid"  Grid.Column="2" HorizontalAlignment="Left" Height="359" Margin="373,33,0,0" VerticalAlignment="Top" Width="311" SelectionChanged="myDataGrid_SelectionChanged_1"/>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Doctors}"  AutoGenerateColumns="False" Grid.Column="2" HorizontalAlignment="Left" Height="359" Margin="373,33,0,0" VerticalAlignment="Top" Width="311" SelectionChanged="myDataGrid_SelectionChanged_1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding User.Name}" Width="*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding User.Surname}" Width="*"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding room.Id}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Label Content="Oznaka doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top"/>
         <Label Content="Ime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
         <Label Content="Prezime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top"/>
         <Label Content="Soba:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
         <Label Content="Vreme:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="doc_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doc_name_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,89,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doc_surname_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,132,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="room_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,173,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doc_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,48,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doc_name_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,89,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doc_surname_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,132,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="room_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,173,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
 
         <Button x:Name="Zakazi" Content="Zakazi" Grid.Column="2" HorizontalAlignment="Left" Margin="109,315,0,0" VerticalAlignment="Top" Width="75" Click="Zakazi_Click"/>
         <xctk:DateTimePicker x:Name="date_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="166,220,0,0" VerticalAlignment="Top" Width="120"/>
