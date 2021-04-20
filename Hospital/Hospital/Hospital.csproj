@@ -177,8 +177,17 @@
     <Compile Include="xaml_windows\Patient\PatientNewAppointment.xaml.cs">
       <DependentUpon>PatientNewAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml.cs">
+      <DependentUpon>PatientNewAppointmentRecommendations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PatientReminders.xaml.cs">
+      <DependentUpon>PatientReminders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\PatientUI.xaml.cs">
       <DependentUpon>PatientUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PatientUpdateAppointment.xaml.cs">
+      <DependentUpon>PatientUpdateAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Secretary\PatientCreate.xaml.cs">
       <DependentUpon>PatientCreate.xaml</DependentUpon>
@@ -232,9 +241,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientReminders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Patient\PatientUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientUpdateAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Secretary\PatientCreate.xaml">
       <Generator>MSBuild:Compile</Generator>

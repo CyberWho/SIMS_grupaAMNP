@@ -15,8 +15,20 @@
             <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
             <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
-
+            <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
-        <DataGrid x:Name="myDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="336" Margin="314,30,0,0" VerticalAlignment="Top" Width="359"/>
+        <Label Content="Moj profil" Grid.Column="1" FontSize="24" HorizontalAlignment="Left" Margin="267,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
+
+        <Label Content="Korisnicko ime:" Grid.Column="1" HorizontalAlignment="Left" Margin="124,90,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime:" Grid.Column="1" HorizontalAlignment="Left" Margin="124,121,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prezime:" Grid.Column="1" HorizontalAlignment="Left" Margin="124,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
+        <Label Content="Email:" Grid.Column="1" HorizontalAlignment="Left" Margin="124,214,0,0" VerticalAlignment="Top"/>
+        <Label Content="Telefon:" Grid.Column="1" HorizontalAlignment="Left" Margin="124,183,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="238,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <TextBox Grid.Column="1" Text="{Binding Path=NName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="238,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="238,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="238,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=Email, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="238,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        
     </Grid>
 </Window>

@@ -17,7 +17,14 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-      
+        public Doctor GetWorkHoursDoctorById(int id)
+        {
+            Doctor doctor = new Doctor();
+            doctor = doctorService.GetWorkHoursDoctorById(id);
+            return doctor;
+        }
+
+
       public ObservableCollection<Doctor> GetAllDoctors()
       {
          // TODO: implement
@@ -29,7 +36,13 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-      
+
+        public ObservableCollection<Doctor> GetAllGeneralPurposeDoctors()
+        {
+            ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+            doctors = doctorService.GetAllGeneralPurposeDoctors();
+            return doctors;
+        }
       public Boolean DeleteDoctorById(int doctorId)
       {
          // TODO: implement
@@ -48,7 +61,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.DoctorService doctorService;
+      public Hospital.Service.DoctorService doctorService = new Service.DoctorService();
    
    }
 }

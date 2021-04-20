@@ -14,8 +14,9 @@ namespace Hospital.Controller
    {
       public Hospital.Model.Appointment GetAppointmentById(int id)
       {
-         // TODO: implement
-         return null;
+            Appointment appointment = new Appointment();
+            appointment = appointmentService.GetAppointmentById(id);
+         return appointment;
       }
       
       public ObservableCollection<Appointment> GetAllReservedAppointments()
@@ -38,14 +39,15 @@ namespace Hospital.Controller
       
       public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            appointments = appointmentService.GetAllByAppointmentsPatientId(patientId);
+            return appointments;
       }
       
       public Boolean CancelAppointmentById(int id)
       {
-         // TODO: implement
-         return false;
+            appointmentService.CancelAppointmentById(id);
+            return true;
       }
       
       public Boolean DeleteAppointmentByPatientId(int patientId)
@@ -56,8 +58,8 @@ namespace Hospital.Controller
       
       public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
       {
-         // TODO: implement
-         return null;
+            appointmentService.ReserveAppointment(appointment);
+         return appointment;
       }
       
       public Hospital.Model.Appointment ChangeAppointmentStatus(Hospital.Model.Appointment appointment)
@@ -74,8 +76,8 @@ namespace Hospital.Controller
       
       public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
       {
-         // TODO: implement
-         return null;
+            appointmentService.ChangeStartTime(appointment, newStartTime);
+             return appointment;
       }
       
       public ObservableCollection<Appointment> GetAllFreeAppointmentsByDoctorId(int doctorId)
@@ -90,7 +92,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.AppointmentService appointmentService;
+      public Hospital.Service.AppointmentService appointmentService = new Service.AppointmentService();
    
    }
 }

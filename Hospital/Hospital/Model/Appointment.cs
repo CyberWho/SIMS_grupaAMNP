@@ -18,7 +18,7 @@ namespace Hospital.Model
         public AppointmentType Type { get; set; }
         public AppointmentStatus Status { get; set; }
 
-        public Doctor doctor;
+        public Doctor doctor { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Doctor GetDoctor()
@@ -72,7 +72,7 @@ namespace Hospital.Model
                 }
             }
         }
-        public Room room;
+        public Room room { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()

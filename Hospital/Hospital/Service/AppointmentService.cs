@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -12,8 +14,9 @@ namespace Hospital.Service
    {
       public Hospital.Model.Appointment GetAppointmentById(int id)
       {
-         // TODO: implement
-         return null;
+            Appointment appointment = new Appointment();
+            appointment = appointmentRepository.GetAppointmentById(id);
+         return appointment;
       }
       
       public System.Collections.ArrayList GetAllReservedAppointments()
@@ -34,16 +37,17 @@ namespace Hospital.Service
          return null;
       }
       
-      public System.Collections.ArrayList GetAllByAppointmentsPatientId(int patientId)
+      public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            appointments = appointmentRepository.GetAllByAppointmentsPatientId(patientId);
+             return appointments;
       }
       
       public Boolean CancelAppointmentById(int id)
       {
-         // TODO: implement
-         return false;
+            appointmentRepository.DeleteAppointmentById(id);
+            return true;
       }
       
       public Boolean DeleteAppointmentByPatientId(int patientId)
@@ -54,8 +58,8 @@ namespace Hospital.Service
       
       public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
       {
-         // TODO: implement
-         return null;
+            appointmentRepository.NewAppointment(appointment);
+         return appointment;
       }
       
       public Hospital.Model.Appointment ChangeAppointmentStatus(Hospital.Model.Appointment appointment)
@@ -72,8 +76,8 @@ namespace Hospital.Service
       
       public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
       {
-         // TODO: implement
-         return null;
+            appointmentRepository.UpdateAppointmentStartTime(appointment, newStartTime);
+         return appointment;
       }
 
       public Hospital.Model.Appointment ChangeStartTimePatient(Hospital.Model.Appointment appointment,DateTime newStartTime)
@@ -94,7 +98,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.AppointmentRepository appointmentRepository;
+      public Hospital.Repository.AppointmentRepository appointmentRepository = new Repository.AppointmentRepository();
    
    }
 }

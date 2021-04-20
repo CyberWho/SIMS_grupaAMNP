@@ -5,17 +5,24 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
    public class PatientService
    {
-      public Hospital.Model.Patient GetPatientById(int id)
+      public Hospital.Model.Patient GetPatientByUserId(int id)
       {
-         // TODO: implement
-         return null;
+            Patient patient = new Patient();
+            patient = patientRepository.GetPatientByUserId(id);
+            return patient;
       }
       
+      public Hospital.Model.Patient GetPatientById(int id)
+        {
+            return null;
+        }
+
       public System.Collections.ArrayList GetAllPatients()
       {
          // TODO: implement
@@ -46,7 +53,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.PatientRepository patientRepository;
+      public Hospital.Repository.PatientRepository patientRepository = new Repository.PatientRepository();
    
    }
 }

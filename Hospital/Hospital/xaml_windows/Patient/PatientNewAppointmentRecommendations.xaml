@@ -1,0 +1,53 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
+        
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientNewAppointmentRecommendations"
+        
+        mc:Ignorable="d"
+        Title="PatientNewAppointmentRecommendations" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14.069" />
+            <ColumnDefinition Width="85.931"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Menu Style="{StaticResource Horizontal}" Grid.ColumnSpan="2">
+            <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
+            <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
+            <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
+            <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
+        </Menu>
+
+        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" AutoGenerateColumns="False" Grid.Column="2" HorizontalAlignment="Left" Height="390" Margin="273,10,0,0" VerticalAlignment="Top" Width="411">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime}" Width="*"/>
+                <DataGridTextColumn Header="Oznaka" Binding="{Binding WorkHours.doctor.Id}" Width="*"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding WorkHours.doctor.User.Name}" Width="*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding WorkHours.doctor.User.Surname}" Width="*"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding WorkHours.doctor.room.Id}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Id:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.185,0.539"/>
+        <Label Content="Vreme:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Oznaka doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prezime doktora:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
+        <Label Content="Soba:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="timeslot_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="109,41,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="109,103,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_name_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="109,138,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="doctor_surname_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="109,169,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="room_id_txt" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="109,199,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Zakazi" x:Name="Zakazi" Grid.Column="2" HorizontalAlignment="Left" Margin="130,242,0,0" VerticalAlignment="Top" Width="75" Click="Zakazi_Click"/>
+
+
+        <xctk:DateTimePicker x:Name="datepicker_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="109,72,0,0" Value="{Binding SelectedItem.StartTime,ElementName=myGrid}"  VerticalAlignment="Top"  Width="120" RenderTransformOrigin="0.507,-1.51"/>
+
+
+    </Grid>
+</Window>

@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -15,7 +17,13 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-      
+
+        public Doctor GetWorkHoursDoctorById(int id)
+        {
+            Doctor doctor = new Doctor();
+            doctor = doctorRepository.GetWorkHoursDoctorById(id);
+            return doctor;
+        }
       public System.Collections.ArrayList GetAllDoctors()
       {
          // TODO: implement
@@ -27,7 +35,13 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-      
+
+        public ObservableCollection<Doctor> GetAllGeneralPurposeDoctors()
+        {
+            ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+            doctors = doctorRepository.GetAllGeneralPurposeDoctors();
+            return doctors;
+        }
       public Boolean DeleteDoctorById(int doctorId)
       {
          // TODO: implement
@@ -46,7 +60,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.DoctorRepository doctorRepository;
+      public Hospital.Repository.DoctorRepository doctorRepository = new Repository.DoctorRepository();
    
    }
 }

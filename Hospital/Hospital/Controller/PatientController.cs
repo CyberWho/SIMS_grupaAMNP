@@ -12,11 +12,17 @@ namespace Hospital.Controller
 {
    public class PatientController
    {
-      public Hospital.Model.Patient GetPatientById(int id)
+      public Hospital.Model.Patient GetPatientByUserId(int id)
       {
-         // TODO: implement
-         return null;
+            Patient patient = new Patient();
+            patient = patientService.GetPatientByUserId(id);
+             return patient;
       }
+
+      public Hospital.Model.Patient GetPatientById(int id)
+        {
+            return null;
+        }
       
       public ObservableCollection<Patient> GetAllPatients()
       {
@@ -48,7 +54,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.PatientService patientService;
+      public Hospital.Service.PatientService patientService = new Service.PatientService();
    
    }
 }

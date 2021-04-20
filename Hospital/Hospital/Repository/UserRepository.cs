@@ -5,14 +5,35 @@
  ***********************************************************************/
 
 using System;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
+using System.Configuration;
+using Hospital.Model;
 
 namespace Hospital.Repository
 {
    public class UserRepository
    {
-      public Hospital.Model.User GetUserById(int id)
+        OracleConnection con = null;
+        
+
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            con = new OracleConnection(conString);
+            try
+            {
+                con.Open();
+
+            }
+            catch (Exception exp)
+            {
+
+            }
+        }
+        public Hospital.Model.User GetUserById(int id)
       {
-         // TODO: implement
+            
          return null;
       }
       
