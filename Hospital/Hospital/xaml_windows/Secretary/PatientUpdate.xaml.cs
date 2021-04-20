@@ -17,6 +17,7 @@ using Oracle.ManagedDataAccess.Client;
 using System.Collections.ObjectModel;
 using System.Data;
 using Hospital.Controller;
+using Hospital.Repository;
 
 namespace Hospital.xaml_windows.Secretary
 {
@@ -38,6 +39,7 @@ namespace Hospital.xaml_windows.Secretary
         PatientController patientController = new PatientController();
         HealthRecordController healthRecordController = new HealthRecordController();
         AddressController addressController = new AddressController();
+        UserController userController = new UserController();
         #region NotifyProperties
         private string _id_address;
         private string _atype;
@@ -93,7 +95,13 @@ namespace Hospital.xaml_windows.Secretary
                 this.user_id = current_user_id;
                 this.patient_id = this.patientController.GetPatientByUserId(user_id).Id;
                 this.health_record_id = this.healthRecordController.GetHealthRecordByPatientId(patient_id).Id;
-                this.address_id = this.addressController.GetAddressByPatientId(patient_id).Id;
+                /////////////////////////////////////// ovde
+
+                User user = this.userController.GetUserById(this.user_id);
+                if (!user.Username.Contains("guestUser"))
+                {
+                    this.address_id = this.addressController.GetAddressByPatientId(patient_id).Id;
+                }
             }
 
             fill_data();

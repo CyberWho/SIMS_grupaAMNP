@@ -13,7 +13,9 @@ namespace Hospital.Repository
 {
     public class UserRepository
     {
-        
+        PatientRepository patientRepository = new PatientRepository();
+        HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
+
 
         OracleConnection connection = null;
         private void setConnection()
@@ -36,14 +38,21 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            User user = new User();
             int last_id = this.GetLastId();
 
+            User user = new User();
             user.Id = last_id + 1;
             user.Username = "guestUser" + user.Id;
             user.Password = "guestPass" + user.Id;
+            user = this.NewUser(user, 1);
 
-            this.NewUser(user);
+            Patient patient = new Patient();
+            patient.user_id = user.Id;
+            patient = this.patientRepository.NewPatient(patient, 1);
+
+            HealthRecord healthRecord = new HealthRecord();
+            healthRecord.patient_id = patient.Id;
+            healthRecord = this.healthRecordRepository.NewHealthRecord(healthRecord, 1);
 
             return user;
         }
@@ -51,8 +60,31 @@ namespace Hospital.Repository
 
         public User GetUserById(int id)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+
+            User user = new User();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM users WHERE id = " + id;
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            user.Id = id;
+            user.Username = reader.GetString(1);
+
+            if (user.Username.Contains("guestUser"))
+            {
+                return user;
+            }
+
+            user.Name = reader.GetString(3);
+            user.Surname = reader.GetString(4);
+            user.PhoneNumber = reader.GetString(5);
+            user.EMail = reader.GetString(6);
+
+            connection.Close();
+
+            return user;
         }
 
         public User GetUserByUsername(String username)
@@ -73,18 +105,30 @@ namespace Hospital.Repository
                 "FROM users, patient " +
                 "WHERE users.id = patient.user_id";
             OracleDataReader reader = command.ExecuteReader();
-            
+
             while (reader.Read())
             {
-                User nUser = new User
+                User nUser;
+                if (reader.GetString(1).Contains("guestUser"))
                 {
-                    Id = int.Parse(reader.GetString(0)),
-                    Username = reader.GetString(1),
-                    Name = reader.GetString(3),
-                    Surname = reader.GetString(4),
-                    PhoneNumber = reader.GetString(5),
-                    EMail = reader.GetString(6)
-                };
+                    nUser = new User
+                    {
+                        Id = int.Parse(reader.GetString(0)),
+                        Username = reader.GetString(1)
+                    };
+                }
+                else
+                {
+                    nUser = new User
+                    {
+                        Id = int.Parse(reader.GetString(0)),
+                        Username = reader.GetString(1),
+                        Name = reader.GetString(3),
+                        Surname = reader.GetString(4),
+                        PhoneNumber = reader.GetString(5),
+                        EMail = reader.GetString(6)
+                    };
+                }
 
                 users.Add(nUser);
             }
@@ -110,22 +154,32 @@ namespace Hospital.Repository
             return null;
         }
 
-        public User NewUser(User user)
+        public User NewUser(User user, int guest = 0)
         {
             setConnection();
-
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO users (id, username, password) VALUES (:id, :username, :password)";
 
-            command.Parameters.Add("id", OracleDbType.Int32).Value = user.Id;
-            command.Parameters.Add("username", OracleDbType.Varchar2).Value = user.Username;
-            command.Parameters.Add("password", OracleDbType.Varchar2).Value = user.Password;
-
-            if (command.ExecuteNonQuery() > 0)
+            // kreiranje guest naloga
+            if (guest == 1)
             {
-                connection.Close();
-                return user;
+                command.CommandText = "INSERT INTO users (id, username, password) VALUES (:id, :username, :password)";
+
+                command.Parameters.Add("id", OracleDbType.Int32).Value = user.Id;
+                command.Parameters.Add("username", OracleDbType.Varchar2).Value = user.Username;
+                command.Parameters.Add("password", OracleDbType.Varchar2).Value = user.Password;
+
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    connection.Close();
+                    return user;
+                }
             }
+            // kreiranje obicnog korisnika
+            else
+            {
+
+            }
+
 
             connection.Close();
             return null;

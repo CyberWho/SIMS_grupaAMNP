@@ -46,9 +46,22 @@ namespace Hospital.Repository
             reader.Read();
 
             HealthRecord healthRecord = new HealthRecord();
-            
+
+            PatientRepository pr = new PatientRepository();
+            UserRepository ur = new UserRepository();
+
+            ////////////// ovdeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            Patient p = pr.GetPatientById(id);
+            User u = ur.GetUserById(p.user_id);
+
             healthRecord.Id = int.Parse(reader.GetString(0));
             healthRecord.patient_id = int.Parse(reader.GetString(1));
+
+            if (u.Username.Contains("guestUser"))
+            {
+                return healthRecord;
+            }
+
             healthRecord.gender_id = int.Parse(reader.GetString(2));
             healthRecord.marital_status_id = int.Parse(reader.GetString(3));
             healthRecord.birth_place_id = int.Parse(reader.GetString(4));   
@@ -82,9 +95,32 @@ namespace Hospital.Repository
             return null;
         }
 
-        public HealthRecord NewHealthRecord(HealthRecord healthRecord)
+        public HealthRecord NewHealthRecord(HealthRecord healthRecord, int guest = 0)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+
+            int last_id = this.GetLastId() + 1;
+            healthRecord.Id = last_id;
+
+            if (guest == 1)
+            {
+                command.CommandText = "INSERT INTO health_record (patient_id) VALUES (:patient_id)";
+
+                //command.Parameters.Add("id", OracleDbType.Int32).Value = healthRecord.Id;
+                command.Parameters.Add("patient_id", OracleDbType.Int32).Value = healthRecord.patient_id;
+
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    connection.Close();
+                    return healthRecord;
+                }
+            }
+            else
+            {
+
+            }
+
             return null;
         }
 

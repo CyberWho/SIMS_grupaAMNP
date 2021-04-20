@@ -49,8 +49,7 @@ namespace Hospital.Service
 
         public User GetUserById(int id)
         {
-            // TODO: implement
-            return null;
+            return this.userRepository.GetUserById(id);
         }
 
         public User GetUserByUsername(String username)

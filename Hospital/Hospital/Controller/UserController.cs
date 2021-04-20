@@ -110,8 +110,7 @@ namespace Hospital.Controller
 
         public User GetUserById(int id)
         {
-            // TODO: implement
-            return null;
+            return this.userService.GetUserById(id);
         }
 
         public User GetUserByUsername(String username)

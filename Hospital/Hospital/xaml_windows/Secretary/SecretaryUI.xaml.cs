@@ -135,9 +135,9 @@ namespace Hospital.xaml_windows.Secretary
         {
             InitializeComponent();
             this.DataContext = this;
-            
+
             this.id = id;
-            
+
             ObservableCollection<User> users = this.userController.GetAllUsers();
             dataGridPatients.ItemsSource = users;
         }
@@ -186,10 +186,11 @@ namespace Hospital.xaml_windows.Secretary
 
             connection.Close();
             connection.Dispose();
+            this.Refresh(sender, e);
         }
         // ispravljeno
         private void Izmeni_korisnika(object sender, RoutedEventArgs e)
-        { 
+        {
             User uUser = new User();
 
             uUser.Username = Username;
@@ -287,6 +288,8 @@ namespace Hospital.xaml_windows.Secretary
                     var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
                     current_user_id = int.Parse(content.ToString());
 
+                    //MessageBox.Show(current_user_id.ToString());
+
                     string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
                     OracleConnection connection = new OracleConnection(conString);
                     OracleCommand cmd = connection.CreateCommand();
@@ -296,10 +299,17 @@ namespace Hospital.xaml_windows.Secretary
                     reader.Read();
 
                     Username = reader.GetString(1);
-                    NName = reader.GetString(3);
-                    Surname = reader.GetString(4);
-                    PhoneNumber = reader.GetString(5);
-                    Email = reader.GetString(6);
+                    if (Username.Contains("guestUser"))
+                    {
+                        
+                    }
+                    else
+                    {
+                        NName = reader.GetString(3);
+                        Surname = reader.GetString(4);
+                        PhoneNumber = reader.GetString(5);
+                        Email = reader.GetString(6);
+                    }
 
                     connection.Close();
                     connection.Dispose();
@@ -311,7 +321,7 @@ namespace Hospital.xaml_windows.Secretary
         }
         // ispravljeno
         private void Refresh(object sender, RoutedEventArgs e)
-        {            
+        {
             ObservableCollection<User> users = this.userController.GetAllUsers();
             dataGridPatients.ItemsSource = users;
 
@@ -323,7 +333,6 @@ namespace Hospital.xaml_windows.Secretary
                 }
             }
         }
-
         private void Karton_korisnika(object sender, RoutedEventArgs e)
         {
             User user = this.userController.GetUserById(current_user_id);
@@ -340,20 +349,16 @@ namespace Hospital.xaml_windows.Secretary
         {
             Window s = new PatientAppointment(this.patientController.GetPatientByUserId(current_user_id).Id);
             s.Show();
-            
-
-
-
-
-
         }
 
         private void Guest_nalog(object sender, RoutedEventArgs e)
         {
             _ = this.userController.GuestUser();
+            this.Refresh(sender, e);
+        }
 
-
-
+        private void Hitan_termin(object sender, RoutedEventArgs e)
+        {
 
         }
     }
