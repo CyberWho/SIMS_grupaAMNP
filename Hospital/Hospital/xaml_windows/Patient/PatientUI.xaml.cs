@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
+using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -24,14 +26,36 @@ namespace Hospital.xaml_windows.Patient
         int id;
         ReminderController reminderController = new ReminderController();
         PatientController patientController = new PatientController();
-        
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+
+
         public PatientUI(int id)
         {
             InitializeComponent();
             this.id = id;
             
-            
         }
+
+        private void dispatherTimer_Tick(object sender, EventArgs e)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            Hospital.Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(id);
+            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
+            DateTime now = DateTime.Now;
+            now = now.AddMilliseconds(-now.Millisecond);
+            foreach (Reminder reminder in reminders)
+            {
+                if ((reminder.AlarmTime - now).Minutes == 0)
+                {
+                    MessageBox.Show(reminder.Description);
+                }
+            }
+        }
+
+       
+
+        
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
             var s = new PatientReminders(id);
@@ -58,5 +82,13 @@ namespace Hospital.xaml_windows.Patient
             s.Show();
             this.Close();
         }
-    }
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
+        }
+     }
 }

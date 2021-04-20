@@ -17,7 +17,15 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-      
+
+        public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            reminders = reminderRepository.GetReminderByAlarmTimeAndPatientId(alarmTime, patientId);
+            return reminders;
+        }
+
+
       public System.Collections.ArrayList GetAllRemindersByPatientId(int patientId)
       {
          // TODO: implement
