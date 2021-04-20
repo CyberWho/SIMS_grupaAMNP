@@ -18,6 +18,7 @@ using System.Configuration;
 using Hospital.Model;
 using Hospital.Controller;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -123,6 +124,8 @@ namespace Hospital.xaml_windows.Patient
         #endregion
         int id;
         PatientController patientController = new PatientController();
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        ReminderController reminderController = new ReminderController();
 
         public PatientInfo(int id)
         {
@@ -138,9 +141,25 @@ namespace Hospital.xaml_windows.Patient
             Email = patient.User.EMail;
         }
 
-        
+        private void dispatherTimer_Tick(object sender, EventArgs e)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            Hospital.Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(id);
+            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
+            DateTime now = DateTime.Now;
+            now = now.AddMilliseconds(-now.Millisecond);
+            foreach (Reminder reminder in reminders)
+            {
+                if ((reminder.AlarmTime - now).Minutes == 0)
+                {
+                    MessageBox.Show(reminder.Description);
+                }
+            }
+        }
 
-        
+
+
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
@@ -176,7 +195,9 @@ namespace Hospital.xaml_windows.Patient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
         }
     }
 }

@@ -173,7 +173,10 @@ namespace Hospital.xaml_windows.Patient
         AppointmentController appointmentController = new AppointmentController();
         TimeSlotController timeSlotController = new TimeSlotController();
         Appointment appointment = new Appointment();
-             
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        ReminderController reminderController = new ReminderController();
+        PatientController patientController = new PatientController();
+
         public PatientUpdateAppointment(int id,int appointmentId)
         {
             InitializeComponent();
@@ -192,6 +195,22 @@ namespace Hospital.xaml_windows.Patient
             updateMyGrid();
         }
 
+        private void dispatherTimer_Tick(object sender, EventArgs e)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            Hospital.Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(id);
+            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
+            DateTime now = DateTime.Now;
+            now = now.AddMilliseconds(-now.Millisecond);
+            foreach (Reminder reminder in reminders)
+            {
+                if ((reminder.AlarmTime - now).Minutes == 0)
+                {
+                    MessageBox.Show(reminder.Description);
+                }
+            }
+        }
 
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
@@ -249,5 +268,11 @@ namespace Hospital.xaml_windows.Patient
             myGrid.ItemsSource = TimeSlots;
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
+        }
     }
 }
