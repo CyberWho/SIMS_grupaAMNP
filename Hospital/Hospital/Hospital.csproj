@@ -153,7 +153,7 @@
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\StateService.cs" />
     <Compile Include="Service\SystemNotificationService.cs" />
-    <Compile Include="Service\TimeSLotService.cs" />
+    <Compile Include="Service\TimeSlotService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\WorkHoursService.cs" />
     <Compile Include="xaml_windows\Doctor\Create_appointment.xaml.cs">
@@ -180,11 +180,23 @@
     <Compile Include="xaml_windows\Patient\PatientUI.xaml.cs">
       <DependentUpon>PatientUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\PatientAppointment.xaml.cs">
+      <DependentUpon>PatientAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\PatientCreate.xaml.cs">
       <DependentUpon>PatientCreate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\PatientNewAppointment.xaml.cs">
+      <DependentUpon>PatientNewAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\PatientNewAppointmentRecommendations.xaml.cs">
+      <DependentUpon>PatientNewAppointmentRecommendations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\PatientUpdate.xaml.cs">
       <DependentUpon>PatientUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\PatientUpdateAppointment.xaml.cs">
+      <DependentUpon>PatientUpdateAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Secretary\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
@@ -236,13 +248,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="xaml_windows\Secretary\PatientAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Secretary\PatientCreate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="xaml_windows\Secretary\PatientNewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\PatientNewAppointmentRecommendations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Secretary\PatientUpdate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Secretary\PatientUpdateAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Secretary\Profile.xaml">
       <Generator>MSBuild:Compile</Generator>

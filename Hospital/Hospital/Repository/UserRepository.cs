@@ -32,6 +32,23 @@ namespace Hospital.Repository
         }
 
 
+        public User GuestUser()
+        {
+            setConnection();
+
+            User user = new User();
+            int last_id = this.GetLastId();
+
+            user.Id = last_id + 1;
+            user.Username = "guestUser" + user.Id;
+            user.Password = "guestPass" + user.Id;
+
+            this.NewUser(user);
+
+            return user;
+        }
+
+
         public User GetUserById(int id)
         {
             // TODO: implement
@@ -95,14 +112,38 @@ namespace Hospital.Repository
 
         public User NewUser(User user)
         {
-            // TODO: implement
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO users (id, username, password) VALUES (:id, :username, :password)";
+
+            command.Parameters.Add("id", OracleDbType.Int32).Value = user.Id;
+            command.Parameters.Add("username", OracleDbType.Varchar2).Value = user.Username;
+            command.Parameters.Add("password", OracleDbType.Varchar2).Value = user.Password;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                return user;
+            }
+
+            connection.Close();
             return null;
         }
 
         public int GetLastId()
         {
-            // TODO: implement
-            return 0;
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT MAX(id) FROM users";
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int last_id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+
+            return last_id;
         }
 
     }

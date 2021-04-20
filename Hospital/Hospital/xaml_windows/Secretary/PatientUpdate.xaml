@@ -36,7 +36,7 @@
         <Button Content="Obrisi selektovani alergen" HorizontalAlignment="Left" Margin="220,186,0,0" VerticalAlignment="Top" Width="150" Click="Obrisi_alergen"/>
         <Button Content="Dodaj alergiju" HorizontalAlignment="Left" Margin="314,88,0,0" VerticalAlignment="Top" Width="100" Click="Dodaj_alergiju"/>
         <!--<Button Content="Izmeni adresu" HorizontalAlignment="Left" Margin="310,69,0,0" VerticalAlignment="Top" Width="100" Click="Izmeni_adresu"/>-->
-        <Button Content="Sacuvajte pacijenta" HorizontalAlignment="Left" Margin="233,340,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_pacijenta" Height="30"/>
+        <!--<Button Content="Sacuvajte pacijenta" HorizontalAlignment="Left" Margin="233,340,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_pacijenta" Height="30"/>-->
 
     </Grid>
 </Window>

@@ -5,96 +5,100 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
-   public class AppointmentService
-   {
-      public Hospital.Model.Appointment GetAppointmentById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllReservedAppointments()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllReservedAppointmentsWeekly()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllAppointmentsByDoctorId(int doctorId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllByAppointmentsPatientId(int patientId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean CancelAppointmentById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteAppointmentByPatientId(int patientId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Appointment ChangeAppointmentStatus(Hospital.Model.Appointment appointment)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Appointment ChangeRoom(Hospital.Model.Appointment appointment, int roomId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
-      {
-         // TODO: implement
-         return null;
-      }
+    public class AppointmentService
+    {
+        public Hospital.Model.Appointment GetAppointmentById(int id)
+        {
+            Appointment appointment = new Appointment();
+            appointment = appointmentRepository.GetAppointmentById(id);
+            return appointment;
+        }
 
-      public Hospital.Model.Appointment ChangeStartTimePatient(Hospital.Model.Appointment appointment,DateTime newStartTime)
-      {
+        public System.Collections.ArrayList GetAllReservedAppointments()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllReservedAppointmentsWeekly()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllAppointmentsByDoctorId(int doctorId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
+        {
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            appointments = appointmentRepository.GetAllByAppointmentsPatientId(patientId);
+            return appointments;
+        }
+
+        public Boolean CancelAppointmentById(int id)
+        {
+            appointmentRepository.DeleteAppointmentById(id);
+            return true;
+        }
+
+        public Boolean DeleteAppointmentByPatientId(int patientId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
+        {
+            appointmentRepository.NewAppointment(appointment);
+            return appointment;
+        }
+
+        public Hospital.Model.Appointment ChangeAppointmentStatus(Hospital.Model.Appointment appointment)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.Appointment ChangeRoom(Hospital.Model.Appointment appointment, int roomId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
+        {
+            appointmentRepository.UpdateAppointmentStartTime(appointment, newStartTime);
+            return appointment;
+        }
+
+        public Hospital.Model.Appointment ChangeStartTimePatient(Hospital.Model.Appointment appointment, DateTime newStartTime)
+        {
             //TODO: implement
             return null;
-      }
-      
-      public System.Collections.ArrayList GetAllFreeAppointmentsByDoctorId(int doctorId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllFreeAppointmentsByDesiredTime(DateTime startTime, DateTime endTime)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      public Hospital.Repository.AppointmentRepository appointmentRepository;
-   
-   }
+        }
+
+        public System.Collections.ArrayList GetAllFreeAppointmentsByDoctorId(int doctorId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllFreeAppointmentsByDesiredTime(DateTime startTime, DateTime endTime)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Repository.AppointmentRepository appointmentRepository = new Repository.AppointmentRepository();
+
+    }
 }

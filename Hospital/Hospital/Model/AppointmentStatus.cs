@@ -11,7 +11,7 @@ namespace Hospital.Model
    public enum AppointmentStatus
    {
       FINISHED,
-      RESERDVED,
+      RESERVED,
       DIDNTCOME
    
    }

@@ -18,6 +18,8 @@ namespace Hospital.Model
 
         public DrugType drugType;
 
+        public InventoryItem InventoryItem { get; set; }
+
         /// <pdGenerated>default parent getter</pdGenerated>
         public DrugType GetDrugType()
         {

@@ -11,7 +11,7 @@ namespace Hospital.Model
 {
     public class Doctor : Employee
     {
-        public Room room;
+        public Room room { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
@@ -194,6 +194,11 @@ namespace Hospital.Model
 
         public Doctor()
         {
+        }
+
+        public Doctor(int id, int salary, int yearsOfService, User user, Role role) : base(id, salary, yearsOfService, user, role)
+        {
+
         }
     }
 }

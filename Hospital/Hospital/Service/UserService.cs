@@ -18,6 +18,11 @@ namespace Hospital.Service
         public Boolean IsGuest;
         public int MinPasswordLength;
 
+        public User GuestUser()
+        {
+            return this.userRepository.GuestUser();
+        }
+
         public User RegisterUser(String username, String password)
         {
             // TODO: implement

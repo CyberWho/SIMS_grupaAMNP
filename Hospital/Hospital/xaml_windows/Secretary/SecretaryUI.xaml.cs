@@ -335,5 +335,26 @@ namespace Hospital.xaml_windows.Secretary
 
 
         }
+
+        private void Zakazi_termin(object sender, RoutedEventArgs e)
+        {
+            Window s = new PatientAppointment(this.patientController.GetPatientByUserId(current_user_id).Id);
+            s.Show();
+            
+
+
+
+
+
+        }
+
+        private void Guest_nalog(object sender, RoutedEventArgs e)
+        {
+            _ = this.userController.GuestUser();
+
+
+
+
+        }
     }
 }

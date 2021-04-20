@@ -80,7 +80,10 @@ namespace Hospital.Controller
             return true;
         }
 
-
+        public User GuestUser()
+        {
+            return this.userService.GuestUser();
+        }
         public User RegisterUser(String username, String password)
         {
             // TODO: implement
