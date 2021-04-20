@@ -48,6 +48,25 @@ namespace Hospital.Service
          // TODO: implement
          return false;
       }
+
+      public Boolean AddNewReminderByMedicalTreatment(MedicalTreatment medicalTreatment)
+        {
+            DateTime start = medicalTreatment.StartTime;
+           while(start <= medicalTreatment.EndTime)
+            {
+                Reminder reminder = new Reminder();
+                DateTime startTime = start;
+                DateTime alarmTime = start.AddHours(-1);
+                reminder.AlarmTime = alarmTime;
+                reminder.Name = "Konzumacija leka";
+                reminder.Description = "Za sat vremena popijte lek" + medicalTreatment.Drug.InventoryItem.Name;
+                reminder.Patient = medicalTreatment.anamnesis.healthRecord.Patient;
+                start = start.AddHours(medicalTreatment.Period);
+                reminderRepository.NewReminder(reminder);
+            }
+         
+            return true;
+        }
       
       public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
       {

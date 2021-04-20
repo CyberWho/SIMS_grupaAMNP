@@ -133,7 +133,7 @@ namespace Hospital.Model
                 tmpMedicalTreatments.Clear();
             }
         }
-        public HealthRecord healthRecord;
+        public HealthRecord healthRecord { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public HealthRecord GetHealthRecord()

@@ -113,8 +113,17 @@ namespace Hospital.Repository
       
       public Hospital.Model.Reminder NewReminder(Hospital.Model.Reminder reminder)
       {
-         // TODO: implement
-         return null;
+            setConnection();
+            OracleCommand cmd = new OracleCommand();
+            cmd = con.CreateCommand();
+            cmd.CommandText = "INSERT INTO REMINDER (NAME,DESCRIPTION,ALARM_TIME,PATIENT_ID) VALUES (:name,:description,:alarm_time,:patient_id)";
+            cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = reminder.Name;
+            cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = reminder.Description;
+            cmd.Parameters.Add("alarm_time", OracleDbType.Date).Value = reminder.AlarmTime;
+            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = reminder.Patient.Id;
+            int a = cmd.ExecuteNonQuery();
+            con.Close();
+            return reminder;
       }
       
       public int GetLastId()

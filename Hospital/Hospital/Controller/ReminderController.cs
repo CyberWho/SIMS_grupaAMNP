@@ -41,8 +41,15 @@ namespace Hospital.Controller
          // TODO: implement
          return false;
       }
-      
-      public Boolean DeleteAllRemindersByPatientId(int patientId)
+
+        public Boolean AddNewReminderByMedicalTreatment(MedicalTreatment medicalTreatment)
+        {
+           
+            reminderService.AddNewReminderByMedicalTreatment(medicalTreatment);
+            return true;
+        }
+
+        public Boolean DeleteAllRemindersByPatientId(int patientId)
       {
          // TODO: implement
          return false;

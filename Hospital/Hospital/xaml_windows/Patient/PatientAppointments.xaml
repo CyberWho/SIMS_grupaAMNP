@@ -54,7 +54,7 @@
 
 
 
-            <xctk:DateTimePicker x:Name="date_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="121,175,0,0" VerticalAlignment="Top" Text="{Binding SelectedItem.StartTime,ElementName=myDataGrid}" Width="120"/>
+            <xctk:DateTimePicker x:Name="date_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="121,175,0,0" VerticalAlignment="Top" Value="{Binding SelectedItem.StartTime,ElementName=myDataGrid}" Width="120"/>
             <Label Content="Status termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,44,0,0" VerticalAlignment="Top"/>
             <Label Content="Tip termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,80,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,48,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Status,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>

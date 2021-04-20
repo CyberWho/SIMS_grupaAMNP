@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital.Model;
+using Hospital.Controller;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -20,10 +22,14 @@ namespace Hospital.xaml_windows.Patient
     public partial class PatientUI : Window
     {
         int id;
+        ReminderController reminderController = new ReminderController();
+        PatientController patientController = new PatientController();
         public PatientUI(int id)
         {
             InitializeComponent();
             this.id = id;
+            
+            
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
