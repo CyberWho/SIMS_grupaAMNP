@@ -14,6 +14,8 @@ namespace Hospital.Model
 
         public HealthRecord healthRecord;
 
+        public AllergyType allergyType { get; set; }
+
         /// <pdGenerated>default parent getter</pdGenerated>
         public HealthRecord GetHealthRecord()
         {
@@ -40,9 +42,10 @@ namespace Hospital.Model
             }
         }
 
-        public Allergy(int id, HealthRecord healthRecord)
+        public Allergy(int id, AllergyType allergyType,HealthRecord healthRecord)
         {
             Id = id;
+            this.allergyType = allergyType;
             this.healthRecord = healthRecord;
         }
 

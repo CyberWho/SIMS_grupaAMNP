@@ -24,6 +24,7 @@ namespace Hospital.xaml_windows.Patient
         int id;
         ReminderController reminderController = new ReminderController();
         PatientController patientController = new PatientController();
+        
         public PatientUI(int id)
         {
             InitializeComponent();

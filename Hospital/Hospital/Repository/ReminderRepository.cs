@@ -90,7 +90,7 @@ namespace Hospital.Repository
 
             }
             con.Close();
-            return null;
+            return reminders;
         }
       
       public Boolean DeleteReminderById(int id)

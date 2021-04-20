@@ -171,12 +171,14 @@ namespace Hospital.Repository
             public Boolean DeleteAppointmentById(int id)
       {
             setConnection();
+            OracleCommand cmd = con.CreateCommand();
             Appointment appointment = new Appointment();
              appointment =  GetAppointmentById(id);
             TimeSlot timeSlot = new TimeSlot();
             timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
             timeSlotRepository.FreeTimeSlot(timeSlot);
-            OracleCommand cmd = con.CreateCommand();
+            
+            
             cmd.CommandText = "delete from appointment where id = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             int a = cmd.ExecuteNonQuery();
@@ -205,7 +207,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
             int a = cmd.ExecuteNonQuery();
             con.Close();
-            return null;
+            return appointment;
       }
       
        public Hospital.Model.Appointment UpdateAppointmentRoom(Hospital.Model.Appointment appointment,Hospital.Model.Room room)
@@ -217,7 +219,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
             int a = cmd.ExecuteNonQuery();
             con.Close();
-            return null;
+            return appointment;
            
         }
 
