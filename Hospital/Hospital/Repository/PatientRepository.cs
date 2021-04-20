@@ -37,7 +37,7 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = :id AND USERS.ID = PATIENT.USER_ID";
+            cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE PATIENT.ID = :id AND USERS.ID = PATIENT.USER_ID";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
