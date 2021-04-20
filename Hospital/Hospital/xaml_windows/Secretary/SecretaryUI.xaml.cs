@@ -344,7 +344,6 @@ namespace Hospital.xaml_windows.Secretary
 
 
         }
-
         private void Zakazi_termin(object sender, RoutedEventArgs e)
         {
             Window s = new PatientAppointment(this.patientController.GetPatientByUserId(current_user_id).Id);
@@ -358,6 +357,11 @@ namespace Hospital.xaml_windows.Secretary
         }
 
         private void Hitan_termin(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Pregled_termina(object sender, RoutedEventArgs e)
         {
 
         }

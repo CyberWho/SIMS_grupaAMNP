@@ -50,7 +50,6 @@ namespace Hospital.Repository
             PatientRepository pr = new PatientRepository();
             UserRepository ur = new UserRepository();
 
-            ////////////// ovdeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
             Patient p = pr.GetPatientById(id);
             User u = ur.GetUserById(p.user_id);
 

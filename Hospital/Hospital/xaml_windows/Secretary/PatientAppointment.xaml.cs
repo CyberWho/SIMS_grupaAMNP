@@ -119,7 +119,7 @@ namespace Hospital.xaml_windows.Secretary
             appointments = this.appointmentController.GetAllByAppointmentsPatientId(patient_id);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
-            myDataGrid.ItemsSource = appointments;        
+            myDataGrid.ItemsSource = appointments;
         }
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
@@ -144,8 +144,12 @@ namespace Hospital.xaml_windows.Secretary
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
             int appointmentId = int.Parse(app_id_txt.Text);
-            appointmentController.CancelAppointmentById(appointmentId);
-            update();
+            if (appointmentController.CancelAppointmentById(appointmentId))
+            {
+                update();
+            }
+
+
         }
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)

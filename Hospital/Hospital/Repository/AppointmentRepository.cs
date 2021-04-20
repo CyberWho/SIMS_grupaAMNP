@@ -20,6 +20,7 @@ namespace Hospital.Repository
         PatientRepository patientRepository = new PatientRepository();
         DoctorRepository doctorRepository = new DoctorRepository();
         TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
+        SystemNotificationRepository systemNotificationRepository = new SystemNotificationRepository();
 
         private void setConnection()
         {
@@ -99,6 +100,14 @@ namespace Hospital.Repository
 
         public ObservableCollection<Appointment> GetAllReservedAppointments()
         {
+            setConnection();
+
+            int id = (int) AppointmentStatus.RESERVED;
+
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM appointment WHERE appstat_id = " + id;
+            OracleDataReader reader = cmd.ExecuteReader();
+
 
 
             return null;
@@ -110,10 +119,55 @@ namespace Hospital.Repository
             return null;
         }
 
-        public System.Collections.ArrayList GetAllAppointmentsByDoctorId(int doctorId)
+        public ObservableCollection<Appointment> GetAllAppointmentsByDoctorId(int doctorId)
         {
-            // TODO: implement
-            return null;
+            ObservableCollection<Appointment> appointmnets = new ObservableCollection<Appointment>();
+
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from appointment, patient where appointment.PATIENT_ID = patient.ID and doctor_id =" + doctorId;
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                AppointmentType appointmentType = AppointmentType.EXAMINATION;
+                AppointmentStatus appointmentStatus = AppointmentStatus.DIDNTCOME;
+                switch (reader.GetInt32(6))
+                {
+                    case 0:
+                        appointmentType = AppointmentType.EXAMINATION;
+                        break;
+                    case 1:
+                        appointmentType = AppointmentType.OPERATION;
+                        break;
+                    case 2:
+                        appointmentType = AppointmentType.REFERRAL;
+                        break;
+                }
+
+                switch (reader.GetInt32(7))
+                {
+                    case 0:
+                        appointmentStatus = AppointmentStatus.DIDNTCOME;
+                        break;
+                    case 1:
+                        appointmentStatus = AppointmentStatus.FINISHED;
+                        break;
+                    case 2:
+                        appointmentStatus = AppointmentStatus.RESERVED;
+                        break;
+                }
+                int appointment_id = int.Parse(reader.GetString(0));
+                int duration = int.Parse(reader.GetString(1));
+                DateTime time = reader.GetDateTime(2);
+                int doctor_id = int.Parse(reader.GetString(5));
+                int patient_id = int.Parse(reader.GetString(4));
+                int room_id = int.Parse(reader.GetString(3));
+                Appointment ap = new Appointment(appointment_id, duration, time, appointmentType,
+                   appointmentStatus, doctor_id, patient_id, room_id);
+                appointmnets.Add(ap);
+            }
+            return appointmnets;
         }
 
         public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
@@ -183,9 +237,24 @@ namespace Hospital.Repository
 
             cmd.CommandText = "delete from appointment where id = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            int a = cmd.ExecuteNonQuery();
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                ObavestiLekara(appointment.Doctor_Id);
+                ObavestiPacijenta(appointment.Patient_Id);
+                con.Close();
+                return true;
+            }
+
             con.Close();
-            return true;
+            return false;
+        }
+        private void ObavestiPacijenta(int id)
+        {
+            this.systemNotificationRepository
+        }
+        private void ObavestiLekara(int id)
+        {
+
         }
 
         public Boolean DeleteAppointmentByPatientId(int patientId)

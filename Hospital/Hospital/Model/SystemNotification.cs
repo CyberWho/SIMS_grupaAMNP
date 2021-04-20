@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
@@ -15,13 +16,13 @@ namespace Hospital.Model
         public String Name { get; set; }
         public String Description { get; set; }
 
-        public System.Collections.ArrayList user;
+        public ObservableCollection<User> user;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetUser()
+        public ObservableCollection<User> GetUser()
         {
             if (user == null)
-                user = new System.Collections.ArrayList();
+                user = new ObservableCollection<User>();
             return user;
         }
 
@@ -39,7 +40,7 @@ namespace Hospital.Model
             if (newUser == null)
                 return;
             if (this.user == null)
-                this.user = new System.Collections.ArrayList();
+                this.user = new ObservableCollection<User>();
             if (!this.user.Contains(newUser))
                 this.user.Add(newUser);
         }
@@ -61,7 +62,7 @@ namespace Hospital.Model
                 user.Clear();
         }
 
-        public SystemNotification(int id, string name, string description, ArrayList user)
+        public SystemNotification(int id, string name, string description, ObservableCollection<User> user)
         {
             Id = id;
             Name = name;
