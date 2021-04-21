@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -33,8 +34,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<Appointment> GetAllAppointmentsByDoctorId(int doctorId)
         {
-            // TODO: implement
-            return null;
+            return new AppointmentService().GetAllAppointmentsByDoctorId(doctorId);
         }
 
         public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)

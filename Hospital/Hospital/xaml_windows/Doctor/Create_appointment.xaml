@@ -15,6 +15,8 @@
         <TextBox Name ="time_for_create" HorizontalAlignment="Left" Height="23" Margin="574,292,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.673,0.391"/>
         <Button Content="Dodaj novi pregled" HorizontalAlignment="Left" Margin="254,339,0,0" VerticalAlignment="Top" Height="71" Width="130" Click="AddAppointment"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="422,339,0,0" VerticalAlignment="Top" Width="130"  Height="71" Click="ReturnOption"/>
+        <RadioButton x:Name="Radio1" Content="Pregled" Checked="TypeChecked" GroupName="Type" HorizontalAlignment="Left" Margin="119,339,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="Radio2" Content="Operacija" Checked="TypeChecked"  GroupName="Type" HorizontalAlignment="Left" Margin="119,359,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Patient.cs
- * Author:  Dell
- * Purpose: Definition of the Class Bolnica.Model.Patient.Patient
- ***********************************************************************/
-
 using System;
 using System.Collections;
 
@@ -18,6 +12,7 @@ namespace Hospital.Model
         public string JMBG { get; set; }
         public DateTime DateOfBirth { get; set; }
         
+
 
         public User User { get; set; }
         public System.Collections.ArrayList Appointments;

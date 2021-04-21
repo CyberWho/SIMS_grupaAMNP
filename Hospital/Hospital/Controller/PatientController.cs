@@ -24,10 +24,15 @@ namespace Hospital.Controller
             return this.patientService.GetPatientById(id);
         }
 
+        public Hospital.Model.Patient GetPatientByPatientId(int id)
+        {
+            Patient patient = this.patientService.GetPatientByPatientId(id);
+            return patient;
+        }
+
         public ObservableCollection<Patient> GetAllPatients()
         {
-            // TODO: implement
-            return null;
+            return patientService.GetAllPatients();
         }
 
         public ObservableCollection<Patient> GetAllPatientsByDoctorId(int doctorId)

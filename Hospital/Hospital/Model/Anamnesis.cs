@@ -5,7 +5,7 @@
  ***********************************************************************/
 
 using System;
-using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
@@ -13,14 +13,15 @@ namespace Hospital.Model
     {
         public int Id { get; set; }
         public String Description { get; set; }
+        public HealthRecord healthRecord { get; set; }
 
-        public System.Collections.ArrayList Perscriptions;
+        public ObservableCollection<Perscription> Perscriptions;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetPerscriptions()
+        public ObservableCollection<Perscription> GetPerscriptions()
         {
             if (Perscriptions == null)
-                Perscriptions = new System.Collections.ArrayList();
+                Perscriptions = new ObservableCollection<Perscription>();
             return Perscriptions;
         }
 
@@ -38,7 +39,7 @@ namespace Hospital.Model
             if (newPerscription == null)
                 return;
             if (this.Perscriptions == null)
-                this.Perscriptions = new System.Collections.ArrayList();
+                this.Perscriptions = new ObservableCollection<Perscription>();
             if (!this.Perscriptions.Contains(newPerscription))
             {
                 this.Perscriptions.Add(newPerscription);
@@ -74,13 +75,13 @@ namespace Hospital.Model
             }
         }
         public Appointment appointment;
-        public System.Collections.ArrayList MedicalTreatments;
+        public ObservableCollection<MedicalTreatment> MedicalTreatments;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetMedicalTreatments()
+        public ObservableCollection<MedicalTreatment> GetMedicalTreatments()
         {
             if (MedicalTreatments == null)
-                MedicalTreatments = new System.Collections.ArrayList();
+                MedicalTreatments = new ObservableCollection<MedicalTreatment>();
             return MedicalTreatments;
         }
 
@@ -98,7 +99,7 @@ namespace Hospital.Model
             if (newMedicalTreatment == null)
                 return;
             if (this.MedicalTreatments == null)
-                this.MedicalTreatments = new System.Collections.ArrayList();
+                this.MedicalTreatments = new ObservableCollection<MedicalTreatment>();
             if (!this.MedicalTreatments.Contains(newMedicalTreatment))
             {
                 this.MedicalTreatments.Add(newMedicalTreatment);
@@ -135,41 +136,20 @@ namespace Hospital.Model
         }
         public HealthRecord healthRecord { get; set; }
 
-        /// <pdGenerated>default parent getter</pdGenerated>
-        public HealthRecord GetHealthRecord()
-        {
-            return healthRecord;
-        }
 
-        /// <pdGenerated>default parent setter</pdGenerated>
-        /// <param>newHealthRecord</param>
-        public void SetHealthRecord(HealthRecord newHealthRecord)
-        {
-            if (this.healthRecord != newHealthRecord)
-            {
-                if (this.healthRecord != null)
-                {
-                    HealthRecord oldHealthRecord = this.healthRecord;
-                    this.healthRecord = null;
-                    oldHealthRecord.RemoveAnamnesis(this);
-                }
-                if (newHealthRecord != null)
-                {
-                    this.healthRecord = newHealthRecord;
-                    this.healthRecord.AddAnamnesis(this);
-                }
-            }
-        }
+       
 
-        public Anamnesis(int id, string description, ArrayList perscriptions, Appointment appointment, ArrayList medicalTreatments, HealthRecord healthRecord)
+        public Anamnesis(int id, string description, ObservableCollection<Perscription> perscriptions, Appointment appointment, ObservableCollection<MedicalTreatment> medicalTreatments, HealthRecord healthRecord)
         {
-            Id = id;
+            this.Id = id;
             Description = description;
-            Perscriptions = perscriptions;
+            this.Perscriptions = perscriptions;
             this.appointment = appointment;
-            MedicalTreatments = medicalTreatments;
+            this.MedicalTreatments = medicalTreatments;
             this.healthRecord = healthRecord;
         }
+
+
 
         public Anamnesis()
         {

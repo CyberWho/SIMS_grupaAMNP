@@ -25,7 +25,7 @@ namespace Hospital.Controller
         public bool LoginUser(String username, String password)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection con = new OracleConnection(conString);
+            con = new OracleConnection(conString);
             OracleCommand cmd = con.CreateCommand();
             con.Open();
             cmd.CommandText = "SELECT * FROM users";

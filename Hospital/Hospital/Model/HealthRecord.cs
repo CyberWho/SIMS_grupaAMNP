@@ -5,7 +5,7 @@
  ***********************************************************************/
 
 using System;
-using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
@@ -20,13 +20,17 @@ namespace Hospital.Model
         public MaritalStatus MaritalStatus { get; set; }
 
         public Patient Patient { get; set; }
-        public System.Collections.ArrayList allergy;
+        public ObservableCollection<Model.Allergy> allergy;
+        public City PlaceOfBirth { get; set; }
+        public ObservableCollection<Anamnesis> anamnesis;
+
+        public int patient_id;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetAllergy()
+        public ObservableCollection<Allergy> GetAllergy()
         {
             if (allergy == null)
-                allergy = new System.Collections.ArrayList();
+                allergy = new ObservableCollection<Allergy>();
             return allergy;
         }
 
@@ -44,11 +48,11 @@ namespace Hospital.Model
             if (newAllergy == null)
                 return;
             if (this.allergy == null)
-                this.allergy = new System.Collections.ArrayList();
+                this.allergy = new ObservableCollection<Allergy>();
             if (!this.allergy.Contains(newAllergy))
             {
                 this.allergy.Add(newAllergy);
-                newAllergy.SetHealthRecord(this);
+                //newAllergy.SetHealthRecord(this);
             }
         }
 
@@ -61,7 +65,7 @@ namespace Hospital.Model
                 if (this.allergy.Contains(oldAllergy))
                 {
                     this.allergy.Remove(oldAllergy);
-                    oldAllergy.SetHealthRecord((HealthRecord)null);
+                    //oldAllergy.SetHealthRecord((HealthRecord)null);
                 }
         }
 
@@ -74,19 +78,17 @@ namespace Hospital.Model
                 foreach (Allergy oldAllergy in allergy)
                     tmpAllergy.Add(oldAllergy);
                 allergy.Clear();
-                foreach (Allergy oldAllergy in tmpAllergy)
+                /*foreach (Allergy oldAllergy in tmpAllergy)
                     oldAllergy.SetHealthRecord((HealthRecord)null);
-                tmpAllergy.Clear();
+                tmpAllergy.Clear();*/
             }
         }
-        public City PlaceOfBirth { get; set; }
-        public System.Collections.ArrayList anamnesis;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetAnamnesis()
+        public ObservableCollection<Anamnesis> GetAnamnesis()
         {
             if (anamnesis == null)
-                anamnesis = new System.Collections.ArrayList();
+                anamnesis = new ObservableCollection<Anamnesis>();
             return anamnesis;
         }
 
@@ -104,11 +106,11 @@ namespace Hospital.Model
             if (newAnamnesis == null)
                 return;
             if (this.anamnesis == null)
-                this.anamnesis = new System.Collections.ArrayList();
+                this.anamnesis = new ObservableCollection<Anamnesis>();
             if (!this.anamnesis.Contains(newAnamnesis))
             {
                 this.anamnesis.Add(newAnamnesis);
-                newAnamnesis.SetHealthRecord(this);
+                //newAnamnesis.SetHealthRecord(this);
             }
         }
 
@@ -121,7 +123,7 @@ namespace Hospital.Model
                 if (this.anamnesis.Contains(oldAnamnesis))
                 {
                     this.anamnesis.Remove(oldAnamnesis);
-                    oldAnamnesis.SetHealthRecord((HealthRecord)null);
+                    //oldAnamnesis.SetHealthRecord((HealthRecord)null);
                 }
         }
 
@@ -130,19 +132,19 @@ namespace Hospital.Model
         {
             if (anamnesis != null)
             {
-                System.Collections.ArrayList tmpAnamnesis = new System.Collections.ArrayList();
+                ObservableCollection<Anamnesis> tmpAnamnesis = new ObservableCollection<Anamnesis>();
                 foreach (Anamnesis oldAnamnesis in anamnesis)
                     tmpAnamnesis.Add(oldAnamnesis);
                 anamnesis.Clear();
-                foreach (Anamnesis oldAnamnesis in tmpAnamnesis)
+                /*foreach (Anamnesis oldAnamnesis in tmpAnamnesis)
                     oldAnamnesis.SetHealthRecord((HealthRecord)null);
-                tmpAnamnesis.Clear();
+                tmpAnamnesis.Clear();*/
             }
         }
         public ReferralForClinicalTreatment[] referralForClinicalTreatment;
         public ClinicalTreatment[] clinicalTreatment;
 
-        public HealthRecord(int id, Gender gender, MaritalStatus maritalStatus, Patient patient, ArrayList allergy, City placeOfBirth, ArrayList anamnesis, ReferralForClinicalTreatment[] referralForClinicalTreatment, ClinicalTreatment[] clinicalTreatment)
+        public HealthRecord(int id, Gender gender, MaritalStatus maritalStatus, Patient patient, ObservableCollection<Allergy> allergy, City placeOfBirth, ObservableCollection<Anamnesis> anamnesis, ReferralForClinicalTreatment[] referralForClinicalTreatment, ClinicalTreatment[] clinicalTreatment)
         {
             Id = id;
             Gender = gender;
@@ -153,6 +155,14 @@ namespace Hospital.Model
             this.anamnesis = anamnesis;
             this.referralForClinicalTreatment = referralForClinicalTreatment;
             this.clinicalTreatment = clinicalTreatment;
+        }
+
+        public HealthRecord(int id, Gender gender, MaritalStatus maritalStatus, int patient_id)
+        {
+            Id = id;
+            Gender = gender;
+            MaritalStatus = maritalStatus;
+            this.patient_id = patient_id;
         }
 
         public HealthRecord()

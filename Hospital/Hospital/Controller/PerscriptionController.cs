@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -56,8 +57,7 @@ namespace Hospital.Controller
       
       public Hospital.Model.Perscription AddPerscription(Hospital.Model.Perscription perscription)
       {
-         // TODO: implement
-         return null;
+         return new PerscriptionService().AddPerscription(perscription);
       }
       
       public Hospital.Model.Perscription DeactivatePerscription(Hospital.Model.Perscription perscription)

@@ -7,6 +7,7 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Hospital.Repository
@@ -61,10 +62,42 @@ namespace Hospital.Repository
                 return healthRecord;
             }
 
-            healthRecord.gender_id = int.Parse(reader.GetString(2));
-            healthRecord.marital_status_id = int.Parse(reader.GetString(3));
-            healthRecord.birth_place_id = int.Parse(reader.GetString(4));   
+            MaritalStatus maritalStatus = MaritalStatus.MARRIED;
 
+            switch (int.Parse(reader.GetString(3)))
+            {
+                case 0:
+                    maritalStatus = MaritalStatus.MARRIED;
+                    break;
+                case 1:
+                    maritalStatus = MaritalStatus.NOTMARRIED;
+                    break;
+                case 2:
+                    maritalStatus = MaritalStatus.DIVORCED;
+                    break;
+                case 3:
+                    maritalStatus = MaritalStatus.WIDOW;
+                    break;
+            }
+
+            Gender gender = Gender.MALE;
+            switch (int.Parse(reader.GetString(3)))
+            {
+                case 0:
+                    gender = Gender.MALE;
+                    break;
+                case 1:
+                    gender = Gender.FEMALE;
+                    break;
+            }
+
+            /*healthRecord.gender_id = int.Parse(reader.GetString(2));
+            healthRecord.marital_status_id = int.Parse(reader.GetString(3));
+            healthRecord.birth_place_id = int.Parse(reader.GetString(4));   */
+            healthRecord = new HealthRecord(int.Parse(reader.GetString(0)), gender,
+                                                         maritalStatus, int.Parse(reader.GetString(4)));
+            healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(reader.GetInt32(0));
+            healthRecord.patient_id = id;
             connection.Close();
 
             return healthRecord;

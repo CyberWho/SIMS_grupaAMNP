@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  DoctorRepository.cs
- * Author:  Dell
- * Purpose: Definition of the Class Hospital.Repository.DoctorRepository
- ***********************************************************************/
-
 using System;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;

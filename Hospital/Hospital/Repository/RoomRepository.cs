@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  RoomRepository.cs
- * Author:  Dell
- * Purpose: Definition of the Class Hospital.Repository.RoomRepository
- ***********************************************************************/
-
 using System;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;

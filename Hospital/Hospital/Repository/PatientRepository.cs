@@ -115,10 +115,94 @@ namespace Hospital.Repository
             return patient;
         }
 
-        public System.Collections.ArrayList GetAllPatients()
+        public Hospital.Model.Patient GetPatientByPatientId(int id)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID and PATIENT.ID = " + id;
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            User user = new User();
+            int new_id = reader.GetInt32(0);
+
+
+            user.Id = new_id;
+            user.Username = reader.GetString(1);
+            user.Password = reader.GetString(2);
+            user.Name = reader.GetString(3);
+            user.Surname = reader.GetString(4);
+            user.PhoneNumber = reader.GetString(5);
+            user.EMail = reader.GetString(6);
+
+            Patient patient = new Patient();
+            patient.User = user;
+            patient.Id = int.Parse(reader.GetString(7));
+            patient.JMBG = reader.GetString(8);
+            patient.DateOfBirth = reader.GetDateTime(9);
+            int addressId = reader.GetInt32(10);
+            cmd.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + addressId + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
+            reader = cmd.ExecuteReader();
+            reader.Read();
+
+            State state = new State
+            {
+                Id = int.Parse(reader.GetString(8)),
+                Name = reader.GetString(9)
+            };
+
+            City city = new City
+            {
+                Id = int.Parse(reader.GetString(4)),
+                Name = reader.GetString(5),
+                PostalCode = reader.GetString(6),
+                State = state
+            };
+
+            Address address = new Address
+            {
+                Id = int.Parse(reader.GetString(0)),
+                Name = reader.GetString(1),
+
+                City = city
+            };
+            patient.Address = address;
+            con.Close();
+            return patient;
+        }
+
+        public ObservableCollection<Patient> GetAllPatients()
+        {
+            setConnection();
+            ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
+
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID";
+
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+
+                User user = new User();
+                user.Id = int.Parse(reader.GetString(0));
+                user.Username = reader.GetString(1);
+                user.Password = reader.GetString(2);
+                user.Name = reader.GetString(3);
+                user.Surname = reader.GetString(4);
+                user.PhoneNumber = reader.GetString(5);
+                user.EMail = reader.GetString(6);
+
+                Patient patient = new Patient();
+                patient.User = user;
+                patient.Id = int.Parse(reader.GetString(7));
+                patient.JMBG = reader.GetString(8);
+                patient.DateOfBirth = reader.GetDateTime(9);
+                int addressId = reader.GetInt32(10);
+
+                patients.Add(patient);
+            }
+
+            con.Close();
+            return patients;
         }
 
         public System.Collections.ArrayList GetAllPatientsByDoctorId(int doctorId)

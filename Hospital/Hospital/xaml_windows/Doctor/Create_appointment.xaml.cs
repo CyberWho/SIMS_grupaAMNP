@@ -25,6 +25,7 @@ namespace Hospital.xaml_windows.Doctor
         ListBoxItem room_for_create;
         ListBoxItem patient_for_create;
         int last_id;
+        int termin_type = 1;
         public Create_appointment(int id, int id_doc)
         {
             InitializeComponent();
@@ -53,12 +54,12 @@ namespace Hospital.xaml_windows.Doctor
             last_id = int.Parse(reader.GetString(0));
 
 
-            cmd.CommandText = "select * from room";
+            cmd.CommandText = "select * from room where room.DESCRIPTION like 'Soba za preglede' or room.DESCRIPTION = 'Operaciona sala'";
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 ListBoxItem itm = new ListBoxItem();
-                itm.Content = "soba: " + reader.GetString(0);
+                itm.Content = "soba: " + reader.GetString(0) + " " + reader.GetString(3);
                 lb_rooms.Items.Add(itm);
             }
 
@@ -93,7 +94,8 @@ namespace Hospital.xaml_windows.Doctor
         {
             if (patient_for_create != null && room_for_create != null)
             {
-                string[] split = room_for_create.Content.ToString().Split(':');
+                string[] split = room_for_create.Content.ToString().Split(' ');
+                MessageBox.Show(split[1].ToString());
                 int id_sobe = int.Parse(split[1]); //id za novu sobu
 
                 string[] split1 = patient_for_create.Content.ToString().Split('|');
@@ -109,15 +111,29 @@ namespace Hospital.xaml_windows.Doctor
                 OracleCommand cmd = con.CreateCommand();
                 con.Open();
 
+                int duration = termin_type == 1 ? 30 : 120;
+
                 cmd.CommandText = "insert into appointment (id,durations_mins,date_time, room_id, patient_id, doctor_id, apptype_id, appstat_id) " +
-                                                     "values(" + id_app.ToString() + ",30 , to_date('" + dt.ToString() + "', 'DD/MM/YYYY HH24:MI:SS'),"
-                                                     + id_sobe.ToString() + "," + id_patient.ToString() + "," + this.id_doc.ToString() + ",1,1)";
+                                                     "values(" + id_app.ToString() + ","+ duration +" , to_date('" + dt.ToString() + "', 'DD/MM/YYYY HH24:MI:SS'),"
+                                                     + id_sobe.ToString() + "," + id_patient.ToString() + "," + this.id_doc.ToString() + ","+ termin_type +",1)";
 
                 int a = cmd.ExecuteNonQuery();
                 MessageBox.Show("Uspesno dodato");
                 con.Close();
                 con.Dispose();
 
+            }
+        }
+
+        private void TypeChecked(object sender, RoutedEventArgs e)
+        {
+            if (Radio1.IsChecked == true)
+            {
+                termin_type = 1;
+            }
+            else
+            {
+                termin_type = 2;
             }
         }
     }

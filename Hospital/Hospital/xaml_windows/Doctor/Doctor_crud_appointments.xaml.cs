@@ -36,7 +36,7 @@ namespace Hospital.xaml_windows.Doctor
             OracleCommand cmd = con.CreateCommand();
             //MessageBox.Show(id.ToString());
             con.Open();
-            cmd.CommandText = "select * from appointment where doctor_id = " + id_doc.ToString();// RIGHT JOIN employees ON users.ID == employees.USER_ID";
+            cmd.CommandText = "select * from appointment, enum_appointment_type where appointment.APPTYPE_ID = enum_appointment_type.id  and doctor_id =" + id_doc.ToString();// RIGHT JOIN employees ON users.ID == employees.USER_ID";
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())//prebaciti u appointments pa videti dalje
             {
@@ -44,19 +44,18 @@ namespace Hospital.xaml_windows.Doctor
                 cmd.CommandText = "select surname from patient, users where users.ID = patient.USER_ID and patient.ID = " + reader.GetString(4);
                 OracleDataReader reader_info = cmd.ExecuteReader();
                 reader_info.Read();
-                cmd.CommandText = "select surname from patient, users where users.ID = patient.USER_ID and patient.ID = " + reader.GetString(4);
 
                 ListBoxItem itm = new ListBoxItem();
-                itm.Content = reader.GetDateTime(2).ToString() + " " + reader_info.GetString(0) + "\nsoba: " + reader.GetString(3) + " id_pregleda =" + reader.GetString(0);
+                itm.Content = reader.GetDateTime(2).ToString() + " " + reader_info.GetString(0) + "\nsoba: " + reader.GetString(3) + " id_pregleda =" + reader.GetString(0) + " " + reader.GetString(9);
 
                 lb_appointments.Items.Add(itm);
             }
-            cmd.CommandText = "select * from room";
+            cmd.CommandText = "select * from room where room.DESCRIPTION like 'Examination room' or room.DESCRIPTION = 'Operating room'";
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 ListBoxItem itm = new ListBoxItem();
-                itm.Content = "soba: " + reader.GetString(0);
+                itm.Content = "soba: " + reader.GetString(0) + " " + reader.GetString(3);
                 lb_rooms.Items.Add(itm);
             }
 
@@ -66,10 +65,7 @@ namespace Hospital.xaml_windows.Doctor
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         void PrintText(object sender, SelectionChangedEventArgs args)
         {
@@ -77,8 +73,9 @@ namespace Hospital.xaml_windows.Doctor
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             if (lbi != null)
             {
-                string[] split = lbi.Content.ToString().Split('=');
-                int id_app = int.Parse(split[1]);
+
+                string[] split = (lbi.Content.ToString().Split('='))[1].Split(' ');
+                int id_app = int.Parse(split[0]);
                 string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
                 OracleConnection con = new OracleConnection(conString);
                 OracleCommand cmd = con.CreateCommand();
@@ -167,7 +164,7 @@ namespace Hospital.xaml_windows.Doctor
         private void DelateAppointment(object sender, RoutedEventArgs e)
         {
             string[] split1 = selected.Content.ToString().Split('=');
-            int id_app = int.Parse(split1[1]); //id app koji menjamo
+            int id_app = int.Parse(split1[1].Split(' ')[0]); //id app koji menjamo
 
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection con = new OracleConnection(conString);

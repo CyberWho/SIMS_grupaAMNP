@@ -8,6 +8,8 @@ using Hospital.Model;
 using Hospital.Repository;
 using System;
 using Hospital.Model;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -25,10 +27,14 @@ namespace Hospital.Service
             return this.patientRepository.GetPatientById(id);
         }
 
-        public System.Collections.ArrayList GetAllPatients()
+        public Hospital.Model.Patient GetPatientByPatientId(int id)
         {
-            // TODO: implement
-            return null;
+            Patient patient = this.patientRepository.GetPatientByPatientId(id);
+            return patient;
+        }
+        public ObservableCollection<Patient> GetAllPatients()
+        {
+            return patientRepository.GetAllPatients();
         }
 
         public System.Collections.ArrayList GetAllPatientsByDoctorId(int doctorId)
