@@ -234,7 +234,6 @@ namespace Hospital.Repository
             timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
             timeSlotRepository.FreeTimeSlot(timeSlot);
 
-
             cmd.CommandText = "delete from appointment where id = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             if (cmd.ExecuteNonQuery() > 0)
@@ -253,7 +252,8 @@ namespace Hospital.Repository
             SystemNotification systemNotification = new SystemNotification();
             systemNotification.user_id = app.patient.user_id;
             systemNotification.Name = Name;
-            systemNotification.Description = "Obrisan je termin zakazan za: " + app.StartTime.ToString() + " kod lekara " + app.doctor.User.Name + " " + app.doctor.User.Surname;
+            String desc = Name + " zakazan za: " + app.StartTime.ToString() + " kod lekara " + app.doctor.User.Name + " " + app.doctor.User.Surname;
+            systemNotification.Description = desc;
 
             this.systemNotificationRepository.NewSystemNotification(systemNotification);
         }
@@ -262,7 +262,8 @@ namespace Hospital.Repository
             SystemNotification systemNotification = new SystemNotification();
             systemNotification.user_id = app.doctor.User.Id;
             systemNotification.Name = Name;
-            systemNotification.Description = "Obrisan je termin zakazan za: " + app.StartTime.ToString() + " za pacijenta " + app.patient.User.Name + " " + app.patient.User.Surname;
+            String desc = Name + " zakazan za: " + app.StartTime.ToString() + " za pacijenta " + app.patient.User.Name + " " + app.patient.User.Surname;
+            systemNotification.Description = desc;
 
             this.systemNotificationRepository.NewSystemNotification(systemNotification);
         }
@@ -286,7 +287,16 @@ namespace Hospital.Repository
             cmd.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
             cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
-            int a = cmd.ExecuteNonQuery();
+            // int a = cmd.ExecuteNonQuery();
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                ObavestiPacijenta(appointment, "Izmenjen termin");
+                ObavestiLekara(appointment, "Izmenjen termin");
+                con.Close();
+                return appointment;
+            }
+
             con.Close();
             return appointment;
       }
@@ -298,7 +308,16 @@ namespace Hospital.Repository
             cmd.CommandText = "UPDATE APPOINTMENT SET ROOOM_ID = :ROOM_ID WHERE ID = :ID";
             cmd.Parameters.Add("ROOM_ID", OracleDbType.Date).Value = room.Id.ToString();
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
-            int a = cmd.ExecuteNonQuery();
+            // int a = cmd.ExecuteNonQuery();
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                ObavestiPacijenta(appointment, "Izmenjen termin");
+                ObavestiLekara(appointment, "Izmenjen termin");
+                con.Close();
+                return appointment;
+            }
+
             con.Close();
             return appointment;
            
