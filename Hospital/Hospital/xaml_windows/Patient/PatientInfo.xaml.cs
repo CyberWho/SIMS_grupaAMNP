@@ -15,50 +15,151 @@ using System.Data;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
+using Hospital.Model;
+using Hospital.Controller;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Hospital.xaml_windows.Patient
 {
     /// <summary>
     /// Interaction logic for PatientInfo.xaml
     /// </summary>
-    public partial class PatientInfo : Window
+    public partial class PatientInfo : Window, INotifyPropertyChanged
     {
-        int id;
-        OracleConnection con = null;
-        public PatientInfo(int id)
+        #region NotifyProperties
+        private Hospital.Model.User user;
+        private Hospital.Model.Patient patient;
+        private string _username;
+        private string _name;
+        private string _surname;
+        private string _phonenumber;
+        private string _email;
+        public string Username
         {
-            this.setConnection();
-            InitializeComponent();
-            this.id = id;
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (value != _username)
+                {
+                    _username = value;
+                    OnPropertyChanged("Username");
+                }
+            }
         }
-
-        private void setConnection()
+        public string NName
         {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
-            try
+            get
             {
-                con.Open();
-            } catch(Exception exp)
+                return _name;
+            }
+            set
             {
-
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged("NName");
+                }
+            }
+        }
+        public string Surname
+        {
+            get
+            {
+                return _surname;
+            }
+            set
+            {
+                if (value != _surname)
+                {
+                    _surname = value;
+                    OnPropertyChanged("Surname");
+                }
+            }
+        }
+        public string PhoneNumber
+        {
+            get
+            {
+                return _phonenumber;
+            }
+            set
+            {
+                if (value != _phonenumber)
+                {
+                    _phonenumber = value;
+                    OnPropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                if (value != _email)
+                {
+                    _email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
+        #endregion
+        #region PropertyChangedNotifier
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
 
-        private void updateDataGrid()
-        {
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT USERS.USERNAME,USERS.NAME,USERS.SURNAME,USERS.PHONE_NUMBER,USERS.EMAIL,PATIENT.JMBG FROM USERS,PATIENT WHERE USERS.ID = :id AND USERS.ID = PATIENT.USER_ID";
-            cmd.Parameters.Add(new OracleParameter("id",id));
-            cmd.CommandType = CommandType.Text;
-           
-            OracleDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            myDataGrid.ItemsSource = dt.DefaultView;
-            dr.Close();
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+        int id;
+        PatientController patientController = new PatientController();
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        ReminderController reminderController = new ReminderController();
 
+        public PatientInfo(int id)
+        {
+            
+            InitializeComponent();
+            this.id = id;
+            patient = patientController.GetPatientByUserId(id);
+            this.DataContext = this;
+            Username = patient.User.Username;
+            NName = patient.User.Name;
+            Surname = patient.User.Surname;
+            PhoneNumber = patient.User.PhoneNumber;
+            Email = patient.User.EMail;
         }
+
+        private void dispatherTimer_Tick(object sender, EventArgs e)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            Hospital.Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(id);
+            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
+            DateTime now = DateTime.Now;
+            now = now.AddMilliseconds(-now.Millisecond);
+            foreach (Reminder reminder in reminders)
+            {
+                if ((reminder.AlarmTime - now).Minutes == 0)
+                {
+                    MessageBox.Show(reminder.Description);
+                }
+            }
+        }
+
+
+
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
@@ -73,6 +174,12 @@ namespace Hospital.xaml_windows.Patient
             s.Show();
             this.Close();
         }
+        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientReminders(id);
+            s.Show();
+            this.Close();
+        }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
@@ -83,12 +190,14 @@ namespace Hospital.xaml_windows.Patient
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            con.Close();
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.updateDataGrid();
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
         }
     }
 }

@@ -7,6 +7,7 @@
 using Hospital.Model;
 using Hospital.Repository;
 using System;
+using Hospital.Model;
 
 namespace Hospital.Service
 {

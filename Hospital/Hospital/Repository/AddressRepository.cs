@@ -7,6 +7,10 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
+using System.Configuration;
+using Hospital.Model;
 
 namespace Hospital.Repository
 {

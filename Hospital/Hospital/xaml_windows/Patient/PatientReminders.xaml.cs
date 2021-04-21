@@ -11,29 +11,29 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Hospital.Model;
 using Hospital.Controller;
+using Hospital.Model;
 using System.Collections.ObjectModel;
-using System.Threading;
+using System.Data;
 
 namespace Hospital.xaml_windows.Patient
 {
     /// <summary>
-    /// Interaction logic for PatientUI.xaml
+    /// Interaction logic for PatientReminders.xaml
     /// </summary>
-    public partial class PatientUI : Window
+    public partial class PatientReminders : Window
     {
         int id;
         ReminderController reminderController = new ReminderController();
+        ObservableCollection<Reminder> Reminders = new ObservableCollection<Reminder>();
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
-
-        public PatientUI(int id)
+        public PatientReminders(int id)
         {
             InitializeComponent();
             this.id = id;
-            
+            updateDataGrid();
         }
 
         private void dispatherTimer_Tick(object sender, EventArgs e)
@@ -53,15 +53,19 @@ namespace Hospital.xaml_windows.Patient
             }
         }
 
-       
-
-        
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
             var s = new PatientReminders(id);
             s.Show();
             this.Close();
         }
+        private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientUI(id);
+            s.Show();
+            this.Close();
+        }
+
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var s = new PatientInfo(id);
@@ -75,14 +79,15 @@ namespace Hospital.xaml_windows.Patient
             s.Show();
             this.Close();
         }
-
-        private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
+        private void updateDataGrid()
         {
-            var s = new PatientUI(id);
-            s.Show();
-            this.Close();
+            this.DataContext = this;
+            Hospital.Model.Patient patient = patientController.GetPatientByUserId(id);
+            Reminders = reminderController.GetAllPastRemindersByPatientId(patient.Id);
+            DataTable dt = new DataTable();
+            myDataGrid.DataContext = dt;
+            myDataGrid.ItemsSource = Reminders;
         }
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -90,5 +95,5 @@ namespace Hospital.xaml_windows.Patient
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
         }
-     }
+    }
 }

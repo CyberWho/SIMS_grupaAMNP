@@ -289,9 +289,9 @@ namespace Hospital.Repository
             int a = cmd.ExecuteNonQuery();
             con.Close();
             return appointment;
-        }
-
-        public Hospital.Model.Appointment UpdateAppointmentRoom(Hospital.Model.Appointment appointment, Hospital.Model.Room room)
+      }
+      
+       public Hospital.Model.Appointment UpdateAppointmentRoom(Hospital.Model.Appointment appointment,Hospital.Model.Room room)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -301,7 +301,7 @@ namespace Hospital.Repository
             int a = cmd.ExecuteNonQuery();
             con.Close();
             return appointment;
-
+           
         }
 
         public Hospital.Model.Appointment UpdateAppointmentStatus(Hospital.Model.Appointment appointment, Hospital.Model.AppointmentStatus appointmentStatus)
@@ -351,7 +351,7 @@ namespace Hospital.Repository
             id = int.Parse(reader.GetString(0));
             con.Close();
             return id;
-        }
-
-    }
+      }
+   
+   }
 }

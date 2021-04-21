@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Model;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Service
 {
@@ -15,13 +17,34 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-      
+
+        public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            reminders = reminderRepository.GetReminderByAlarmTimeAndPatientId(alarmTime, patientId);
+            return reminders;
+        }
+
+
       public System.Collections.ArrayList GetAllRemindersByPatientId(int patientId)
       {
          // TODO: implement
          return null;
       }
-      
+        public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            reminders = reminderRepository.GetAllPastRemindersByPatientId(patientId);
+            return reminders;
+        }
+
+       public ObservableCollection<Reminder> GetAllFutureRemindersByPatientId(int patientId)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            reminders = reminderRepository.GetAllFutureRemindersByPatientId(patientId);
+            return reminders;
+        }
+
       public Boolean DeleteReminderById(int id)
       {
          // TODO: implement
@@ -33,6 +56,25 @@ namespace Hospital.Service
          // TODO: implement
          return false;
       }
+
+      public Boolean AddNewReminderByMedicalTreatment(MedicalTreatment medicalTreatment)
+        {
+            DateTime start = medicalTreatment.StartTime;
+           while(start <= medicalTreatment.EndTime)
+            {
+                Reminder reminder = new Reminder();
+                DateTime startTime = start;
+                DateTime alarmTime = start.AddHours(-1);
+                reminder.AlarmTime = alarmTime;
+                reminder.Name = "Konzumacija leka";
+                reminder.Description = "Za sat vremena popijte lek " + medicalTreatment.Drug.InventoryItem.Name;
+                reminder.Patient = medicalTreatment.anamnesis.healthRecord.Patient;
+                start = start.AddHours(medicalTreatment.Period);
+                reminderRepository.NewReminder(reminder);
+            }
+         
+            return true;
+        }
       
       public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
       {
@@ -52,7 +94,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.ReminderRepository reminderRepository;
+      public Hospital.Repository.ReminderRepository reminderRepository = new Repository.ReminderRepository();
    
    }
 }
