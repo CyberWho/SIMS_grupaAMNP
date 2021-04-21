@@ -33,6 +33,8 @@ namespace Hospital.Repository
             }
         }
 
+        
+
         public Patient GetPatientByUserId(int id)
         {
             UserRepository userRepository = new UserRepository();
@@ -47,7 +49,7 @@ namespace Hospital.Repository
 
             Patient patient = new Patient();
             User user = userRepository.GetUserById(user_id);
-
+            
             if (user.Username.Contains("guestUser"))
             {
                 patient.Id = int.Parse(reader.GetString(0));
@@ -63,8 +65,9 @@ namespace Hospital.Repository
                     addres_id = int.Parse(reader.GetString(3)),
                     user_id = int.Parse(reader.GetString(4))                
                 };
+                patient.User = user;
             }
-
+            
             con.Close();
             return patient;
         }
