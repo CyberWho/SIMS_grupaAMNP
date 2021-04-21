@@ -17,8 +17,6 @@ namespace Hospital.Model
 
         public HealthRecord healthRecord;
 
-        public AllergyType allergyType { get; set; }
-
         /// <pdGenerated>default parent getter</pdGenerated>
         public HealthRecord GetHealthRecord()
         {
