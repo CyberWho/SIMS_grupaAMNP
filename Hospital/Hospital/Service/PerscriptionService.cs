@@ -5,7 +5,8 @@
  ***********************************************************************/
 
 using System;
-
+using System.Collections.ObjectModel;
+using Hospital.Repository;
 namespace Hospital.Service
 {
    public class PerscriptionService
@@ -54,8 +55,7 @@ namespace Hospital.Service
       
       public Hospital.Model.Perscription AddPerscription(Hospital.Model.Perscription perscription)
       {
-         // TODO: implement
-         return null;
+         return new PerscriptionRepository().NewPerscription(perscription);
       }
       
       public Hospital.Model.Perscription DeactivatePerscription(Hospital.Model.Perscription perscription)

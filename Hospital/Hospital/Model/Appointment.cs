@@ -18,7 +18,13 @@ namespace Hospital.Model
         public AppointmentType Type { get; set; }
         public AppointmentStatus Status { get; set; }
 
-        public Doctor doctor;
+        public int Doctor_Id { get; set; }
+        public int Patient_Id { get; set; }
+        public int Room_Id { get; set; }
+
+        public Doctor doctor { get; set; }
+
+
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Doctor GetDoctor()
@@ -45,7 +51,7 @@ namespace Hospital.Model
                 }
             }
         }
-        public Patient patient;
+        public Patient patient { set; get; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Patient GetPatient()
@@ -72,7 +78,7 @@ namespace Hospital.Model
                 }
             }
         }
-        public Room room;
+        public Room room { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
@@ -110,6 +116,24 @@ namespace Hospital.Model
             this.doctor = doctor;
             this.patient = patient;
             this.room = room;
+            Doctor_Id = doctor.Id;
+            Patient_Id = patient.Id;
+            Room_Id = room.Id;
+        }
+
+        public Appointment(int id, int durationInMinutes, DateTime startTime, AppointmentType type, AppointmentStatus status, int doctor_Id, int patient_Id, int room_Id)
+        {
+            Id = id;
+            DurationInMinutes = durationInMinutes;
+            StartTime = startTime;
+            Type = type;
+            Status = status;
+            this.doctor = null;
+            this.patient = null;
+            this.room = null;
+            Doctor_Id = doctor_Id;
+            Patient_Id = patient_Id;
+            Room_Id = room_Id;
         }
 
         public Appointment()

@@ -10,7 +10,7 @@ namespace Hospital.Service
 {
    public class AllergyService
    {
-      public Hospital.Model.Allergy AddAllergy(Hospital.Model.Allergy allergy)
+      public Hospital.Model.Anamnesis AddAllergy(Hospital.Model.Anamnesis allergy)
       {
          // TODO: implement
          return null;
@@ -40,7 +40,7 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.Allergy UpdateAllergy(Hospital.Model.Allergy allergy)
+      public Hospital.Model.Anamnesis UpdateAllergy(Hospital.Model.Anamnesis allergy)
       {
          // TODO: implement
          return null;

@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -165,6 +166,18 @@
     <Compile Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml.cs">
       <DependentUpon>Doctor_crud_appointments.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Doctor\HealthRecordDoctorView.xaml.cs">
+      <DependentUpon>HealthRecordDoctorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Doctor\PerscriptionGiving.xaml.cs">
+      <DependentUpon>PerscriptionGiving.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Doctor\Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Doctor\SearchPatient.xaml.cs">
+      <DependentUpon>SearchPatient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
     </Compile>
@@ -215,6 +228,22 @@
     <Page Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Doctor\HealthRecordDoctorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Doctor\PerscriptionGiving.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Doctor\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Doctor\SearchPatient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Manager\ManagerUI.xaml">
       <Generator>MSBuild:Compile</Generator>

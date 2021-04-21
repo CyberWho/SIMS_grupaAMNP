@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -20,8 +21,7 @@ namespace Hospital.Controller
       
       public Hospital.Model.HealthRecord GetHealthRecordByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+         return new HealthRecordService().GetHealthRecordByPatientId(patientId);
       }
       
       public ObservableCollection<HealthRecord> GetAllHealthRecords()
@@ -54,7 +54,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public Hospital.Model.HealthRecord AddAllergiesToHealthRecord(Hospital.Model.HealthRecord healthRecord, Hospital.Model.Allergy allergy)
+      public Hospital.Model.HealthRecord AddAllergiesToHealthRecord(Hospital.Model.HealthRecord healthRecord, Hospital.Model.Anamnesis allergy)
       {
          // TODO: implement
          return null;

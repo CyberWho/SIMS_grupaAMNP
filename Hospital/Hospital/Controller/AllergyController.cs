@@ -12,19 +12,19 @@ namespace Hospital.Controller
 {
    public class AllergyController
    {
-      public Hospital.Model.Allergy AddAllergy(Hospital.Model.Allergy allergy)
+      public Hospital.Model.Anamnesis AddAllergy(Hospital.Model.Anamnesis allergy)
       {
          // TODO: implement
          return null;
       }
       
-      public ObservableCollection<Allergy> GetAllergiesByTypeId(int allergyTypeId)
+      public ObservableCollection<Anamnesis> GetAllergiesByTypeId(int allergyTypeId)
       {
          // TODO: implement
          return null;
       }
 
-        public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
+        public ObservableCollection<Anamnesis> GetAllAllergiesByHealthRecordId(int healthRecordId)
       {
          // TODO: implement
          return null;
@@ -42,13 +42,13 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.Allergy UpdateAllergy(Hospital.Model.Allergy allergy)
+      public Hospital.Model.Anamnesis UpdateAllergy(Hospital.Model.Anamnesis allergy)
       {
          // TODO: implement
          return null;
       }
 
-        public ObservableCollection<Allergy> GetAllAllergies()
+        public ObservableCollection<Anamnesis> GetAllAllergies()
       {
          // TODO: implement
          return null;

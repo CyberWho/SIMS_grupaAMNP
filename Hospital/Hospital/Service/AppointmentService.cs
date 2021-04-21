@@ -5,7 +5,9 @@
  ***********************************************************************/
 
 using System;
-
+using System.Collections.ObjectModel;
+using Hospital.Model;
+using Hospital.Repository;
 namespace Hospital.Service
 {
    public class AppointmentService
@@ -28,16 +30,14 @@ namespace Hospital.Service
          return null;
       }
       
-      public System.Collections.ArrayList GetAllAppointmentsByDoctorId(int doctorId)
+      public ObservableCollection<Appointment> GetAllAppointmentsByDoctorId(int doctorId)
       {
-         // TODO: implement
-         return null;
+         return new AppointmentRepository().GetAllAppointmentsByDoctorId(doctorId);
       }
       
-      public System.Collections.ArrayList GetAllByAppointmentsPatientId(int patientId)
+      public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            return new AppointmentRepository().GetAllByAppointmentsPatientId(patientId);
       }
       
       public Boolean CancelAppointmentById(int id)

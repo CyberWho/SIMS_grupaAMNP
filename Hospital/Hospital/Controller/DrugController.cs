@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -20,8 +21,7 @@ namespace Hospital.Controller
       
       public ObservableCollection<Drug> GetAllDrugs()
       {
-         // TODO: implement
-         return null;
+         return new DrugService().GetAllDrugs();
       }
       
       public ObservableCollection<Drug> GetAllDrugsByDrugTypeId(int drugTypeId)

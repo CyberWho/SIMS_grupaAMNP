@@ -13,12 +13,12 @@ namespace Hospital.Model
 
 
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public uint Price { get; set; }
         public string Unit { get; set; }
         public ItemType Type { get; set; }
 
-        public InventoryItem(int id, int name, uint price, string unit, ItemType type)
+        public InventoryItem(int id, string name, uint price, string unit, ItemType type)
         {
             Id = id;
             Name = name;

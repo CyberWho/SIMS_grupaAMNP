@@ -11,6 +11,9 @@ namespace Hospital.Model
     public class Allergy
     {
         public int Id { get; set; }
+        public int allergy_type_id { get; set; }
+        public int health_record_id { get; set; }
+        public AllergyType allergyType { get; set; }
 
         public HealthRecord healthRecord;
 
@@ -40,9 +43,10 @@ namespace Hospital.Model
             }
         }
 
-        public Allergy(int id, HealthRecord healthRecord)
+        public Allergy(int id, AllergyType allergyType, HealthRecord healthRecord)
         {
             Id = id;
+            this.allergyType = allergyType;
             this.healthRecord = healthRecord;
         }
 

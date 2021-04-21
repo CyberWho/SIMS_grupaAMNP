@@ -1,6 +1,6 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
+//using System.Data.OracleClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -22,14 +23,14 @@ namespace Hospital.xaml_windows.Doctor
     {
         private int id { set; get; } //ID kao radnik
         private int id_doc { set; get; } //ID kao doktor
+        private OracleConnection con = null;
         public DoctorUI(int id)
         {
             InitializeComponent();
             this.id = id;
-
-            //MessageBox.Show(id.ToString());
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection con = new OracleConnection(conString);
+            con = new OracleConnection(conString);
+            //MessageBox.Show(id.ToString());
             OracleCommand cmd = con.CreateCommand();
             con.Open();
             cmd.CommandText = "select doctor.id from employee, doctor where user_id = "+ id.ToString() + " and doctor.EMPLOYEE_ID =  employee.ID";// RIGHT JOIN employees ON users.ID == employees.USER_ID";
@@ -45,6 +46,7 @@ namespace Hospital.xaml_windows.Doctor
             //logout
             Window s = new MainWindow();
             s.Show();
+            con.Close();
             this.Close();
         }
 
@@ -55,9 +57,23 @@ namespace Hospital.xaml_windows.Doctor
             this.Close();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void GoToCreateAppointment(object sender, RoutedEventArgs e)
         {
             Window s = new Create_appointment(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToSchedule(object sender, RoutedEventArgs e)
+        {
+            Window s = new Schedule(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToPatientSearch(object sender, RoutedEventArgs e)
+        {
+            Window s = new SearchPatient(id, id_doc);
             s.Show();
             this.Close();
         }

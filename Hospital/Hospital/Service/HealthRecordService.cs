@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Hospital.Service.HealthRecordService
  ***********************************************************************/
 
+using Hospital.Repository;
 using System;
 
 namespace Hospital.Service
@@ -18,8 +19,7 @@ namespace Hospital.Service
       
       public Hospital.Model.HealthRecord GetHealthRecordByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+         return new HealthRecordRepository().GetHealthRecordByPatientId(patientId);
       }
       
       public System.Collections.ArrayList GetAllHealthRecords()
@@ -52,7 +52,7 @@ namespace Hospital.Service
          return null;
       }
       
-      public Hospital.Model.HealthRecord AddAllergiesToHealthRecord(Hospital.Model.HealthRecord healthRecord, Hospital.Model.Allergy allergy)
+      public Hospital.Model.HealthRecord AddAllergiesToHealthRecord(Hospital.Model.HealthRecord healthRecord, Hospital.Model.Anamnesis allergy)
       {
          // TODO: implement
          return null;

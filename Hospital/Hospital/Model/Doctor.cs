@@ -195,5 +195,10 @@ namespace Hospital.Model
         public Doctor()
         {
         }
+
+        public Doctor(int id, int salary, int yearsOfService, User user, Role role) : base(id, salary, yearsOfService, user, role)
+        {
+
+        }
     }
 }

@@ -13,9 +13,9 @@ namespace Hospital.Model
 {
     public class TimeSlot
     {
-        public int Id;
-        public Boolean Free;
-        public DateTime StartTime;
+        public int Id { get; set; }
+        public Boolean Free { get; set; }
+        public DateTime StartTime { get; set; }
 
     }
 }
