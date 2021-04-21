@@ -24,7 +24,6 @@ namespace Hospital.Model
         public City PlaceOfBirth { get; set; }
         public ObservableCollection<Anamnesis> anamnesis;
 
-        public int patient_id;
 
         /// <pdGenerated>default getter</pdGenerated>
         public ObservableCollection<Allergy> GetAllergy()

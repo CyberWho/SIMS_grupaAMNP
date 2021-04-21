@@ -134,7 +134,6 @@ namespace Hospital.Model
                 tmpMedicalTreatments.Clear();
             }
         }
-        public HealthRecord healthRecord { get; set; }
 
 
        

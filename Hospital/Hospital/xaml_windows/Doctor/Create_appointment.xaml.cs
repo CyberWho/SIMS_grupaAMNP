@@ -95,7 +95,7 @@ namespace Hospital.xaml_windows.Doctor
             if (patient_for_create != null && room_for_create != null)
             {
                 string[] split = room_for_create.Content.ToString().Split(' ');
-                MessageBox.Show(split[1].ToString());
+                //MessageBox.Show(split[1].ToString());
                 int id_sobe = int.Parse(split[1]); //id za novu sobu
 
                 string[] split1 = patient_for_create.Content.ToString().Split('|');

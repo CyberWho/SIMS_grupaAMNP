@@ -63,7 +63,6 @@ namespace Hospital.xaml_windows.Doctor
             if (lbi != null)
             {
                 selected_patient_id = int.Parse(lbi.Content.ToString().Split(' ')[0]);
-                MessageBox.Show(selected_patient_id.ToString());
                 //MessageBox.Show(selected_patient_id.ToString());
 
             }

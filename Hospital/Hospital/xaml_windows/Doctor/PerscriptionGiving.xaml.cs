@@ -52,7 +52,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void AddPerscriptionToDB(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(selected_drug.Name.ToString());
+            MessageBox.Show(selected_drug.Name.ToString() + " dat kao recept");
             if (selected_drug != null)
             {
                 Perscription perscription = new Perscription(-1, true, Perscription_description.Text, selected_drug, anamnesis);

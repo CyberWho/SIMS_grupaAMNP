@@ -36,11 +36,7 @@ namespace Hospital.Repository
 
             }
         }
-        ~AppointmentRepository()
-        {
-            con.Close();
-            con.Dispose();
-        }
+       
 
         public Hospital.Model.Appointment GetAppointmentById(int id)
         {

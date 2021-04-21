@@ -36,11 +36,11 @@ namespace Hospital.xaml_windows.Doctor
         public HealthRecordDoctorView(int id_doc_as_emoloyee, int id_doc, int id_patient)
         {
             InitializeComponent();
-            this.id = id;
+            this.id = id_doc;
             this.id_doc_as_emoloyee = id_doc_as_emoloyee;
             this.id_patient = id_patient;
             healthRecord = healthRecordControleller.GetHealthRecordByPatientId(id_patient);
-            MessageBox.Show(id_patient.ToString());
+            //MessageBox.Show(id_patient.ToString());
             appointments = appointmentController.GetAllByAppointmentsPatientId(id_patient);
             patient = patientController.GetPatientByPatientId(id_patient);
 

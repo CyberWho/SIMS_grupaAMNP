@@ -20,7 +20,6 @@ using Hospital.xaml_windows.Patient;
 using Hospital.xaml_windows.Secretary;
 using Hospital.Controller;
 
-using Hospital.Repository;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 
@@ -46,18 +45,6 @@ namespace Hospital
 
             if(new UserController().LoginUser(user, pass))
                 this.Close();
-            /*Repository.MedicalTreatment medicalTreatmentRepositoy = new Repository.MedicalTreatment();
-            ObservableCollection<Model.MedicalTreatment> treatments = medicalTreatmentRepositoy.GetAllMedicalTreatmentsByAnamnesisId(2);
-            foreach (Model.MedicalTreatment mt in treatments)
-                MessageBox.Show(mt.Description.ToString());*/
-
-            /* Repository.PerscriptionRepository perscriptionRepository= new Repository.PerscriptionRepository();
-             ObservableCollection<Model.Perscription> treatments = perscriptionRepository.GetAllPerscriptionsByAnamnesisId(2);
-             foreach (Model.Perscription mt in treatments)
-                 MessageBox.Show(mt.Description.ToString());*/
-           /*HealthRecordRepository ar = new HealthRecordRepository();
-            foreach (Anamnesis ap in ar.GetHealthRecordByPatientId(1).anamnesis)
-                MessageBox.Show(ap.Description);*/
 
         }
 
