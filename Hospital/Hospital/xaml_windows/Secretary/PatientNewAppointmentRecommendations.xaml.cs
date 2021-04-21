@@ -58,7 +58,7 @@ namespace Hospital.xaml_windows.Secretary
         {
             Appointment appointment = new Appointment();
             Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            patient = patientController.GetPatientById(id);
             appointment.patient = patient;
             TimeSlot timeSlot = new TimeSlot();
             timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));

@@ -21,8 +21,7 @@ namespace Hospital.Service
 
         public Patient GetPatientById(int id)
         {
-            // TODO: implement
-            return null;
+            return this.patientRepository.GetPatientById(id);
         }
 
         public System.Collections.ArrayList GetAllPatients()

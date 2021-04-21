@@ -15,13 +15,13 @@ namespace Hospital.Repository
 {
     public class AppointmentRepository
     {
-        OracleConnection con = null;
         RoomRepository roomRepository = new RoomRepository();
         PatientRepository patientRepository = new PatientRepository();
         DoctorRepository doctorRepository = new DoctorRepository();
         TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
         SystemNotificationRepository systemNotificationRepository = new SystemNotificationRepository();
 
+        OracleConnection con = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -239,8 +239,8 @@ namespace Hospital.Repository
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             if (cmd.ExecuteNonQuery() > 0)
             {
-                ObavestiLekara(appointment.Doctor_Id);
-                ObavestiPacijenta(appointment.Patient_Id);
+                ObavestiPacijenta(appointment, "Obrisan termin");
+                ObavestiLekara(appointment, "Obrisan termin");
                 con.Close();
                 return true;
             }
@@ -248,13 +248,23 @@ namespace Hospital.Repository
             con.Close();
             return false;
         }
-        private void ObavestiPacijenta(int id)
+        private void ObavestiPacijenta(Appointment app, String Name)
         {
-            this.systemNotificationRepository
-        }
-        private void ObavestiLekara(int id)
-        {
+            SystemNotification systemNotification = new SystemNotification();
+            systemNotification.user_id = app.patient.user_id;
+            systemNotification.Name = Name;
+            systemNotification.Description = "Obrisan je termin zakazan za: " + app.StartTime.ToString() + " kod lekara " + app.doctor.User.Name + " " + app.doctor.User.Surname;
 
+            this.systemNotificationRepository.NewSystemNotification(systemNotification);
+        }
+        private void ObavestiLekara(Appointment app, String Name)
+        {
+            SystemNotification systemNotification = new SystemNotification();
+            systemNotification.user_id = app.doctor.User.Id;
+            systemNotification.Name = Name;
+            systemNotification.Description = "Obrisan je termin zakazan za: " + app.StartTime.ToString() + " za pacijenta " + app.patient.User.Name + " " + app.patient.User.Surname;
+
+            this.systemNotificationRepository.NewSystemNotification(systemNotification);
         }
 
         public Boolean DeleteAppointmentByPatientId(int patientId)

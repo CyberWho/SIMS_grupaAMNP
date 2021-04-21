@@ -21,8 +21,7 @@ namespace Hospital.Controller
         }
         public Hospital.Model.Patient GetPatientById(int id)
         {
-            // TODO: implement
-            return null;
+            return this.patientService.GetPatientById(id);
         }
 
         public ObservableCollection<Patient> GetAllPatients()
