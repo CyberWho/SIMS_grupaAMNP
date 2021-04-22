@@ -5,52 +5,150 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using Hospital.Model;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
    public class ItemInRoomRepository
    {
-      public Hospital.Model.ItemInRoom GetItemInRoomById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllItemsInRoomByRoomId()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteItemInRoomById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteAllItemsInRoomByRoomId(int roomId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.ItemInRoom UpdateItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.ItemInRoom NewItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
-   
+        OracleConnection con = null;
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            con = new OracleConnection(conString);
+            try
+            {
+                con.Open();
+            }
+            catch (Exception exp)
+            {
+
+            }
+        }
+        public Hospital.Model.ItemInRoom GetItemInRoomById(int id)
+        {
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM item_in_room WHERE id = " + id.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            ItemInRoom newItemInRoom = ParseFromReader(reader);
+
+            con.Close();
+            return newItemInRoom;
+        }
+
+        public ObservableCollection<ItemInRoom> GetAllItemsInRoomByRoomId(int id)
+        {
+            setConnection();
+            ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT* FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID WHERE room_ID = " + id.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ItemInRoom newItemInRoom = ParseFromReader(reader);
+                itemsInRoom.Add(newItemInRoom);
+            }
+
+            con.Close();
+            return itemsInRoom;
+        }
+
+        public Boolean DeleteItemInRoomById(int id)
+        {
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "DELETE FROM item_in_room WHERE id = " + id.ToString();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Trace.WriteLine("DeleteItemInRoomById");
+                return true;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                return false;
+            }
+        }
+
+        public Boolean DeleteAllItemsInRoomByRoomId(int roomId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Hospital.Model.ItemInRoom UpdateItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        {
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText =
+                "UPDATE item_in_room "     +
+                "SET inventory_item_id = " + itemInRoom.inventoryItem.Id.ToString() + ", " +
+                "quantity = "              + itemInRoom.Quantity.ToString()         + ", " +
+                "room_id = "               + itemInRoom.room.Id.ToString()          + " "  +
+                "WHERE id = "              + itemInRoom.Id.ToString();
+
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Trace.WriteLine("Prosao UpdateItemInRoom");
+                return itemInRoom;  
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                return null;
+            }
+
+        }
+
+        public Hospital.Model.ItemInRoom NewItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        {
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "INSERT INTO item_in_room (inventory_item_id, quantity, room_id) VALUES (" +
+                itemInRoom.inventoryItem.Id.ToString() + ", " +
+                itemInRoom.Quantity.ToString()         + ", " +
+                itemInRoom.room.Id.ToString()          + ")";
+            try
+            {
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return itemInRoom;
+            }
+            catch (Exception exp)
+            {
+                con.Close();
+                return null;
+            }
+
+        }
+
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
+
+        public ItemInRoom ParseFromReader(OracleDataReader reader)
+        {
+            InventoryItem newItem = inventoryItemRepository.GetInventoryItemById(reader.GetInt32(1));
+            Room newRoom = roomRepository.GetRoomById(reader.GetInt32(3));
+            ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), newRoom, newItem);
+            return newItemInRoom;
+        }
+
+        public InventoryItemRepository inventoryItemRepository = new InventoryItemRepository();
+        public RoomRepository roomRepository = new RoomRepository();   
+
    }
 }

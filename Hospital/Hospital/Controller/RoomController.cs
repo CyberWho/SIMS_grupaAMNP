@@ -14,8 +14,7 @@ namespace Hospital.Controller
    {
       public Hospital.Model.Room GetRoomById(int id)
       {
-         // TODO: implement
-         return null;
+         return roomService.GetRoomById(id);
       }
       
       public Hospital.Model.Room GetRoomByAppointmentId(int appointmentId)
@@ -32,8 +31,7 @@ namespace Hospital.Controller
       
       public ObservableCollection<Room> GetAllRooms()
       {
-         // TODO: implement
-         return null;
+         return roomService.GetAllRooms();
       }
       
       public ObservableCollection<ReservedItem> GetAllRoomsByFloor(int floor)
@@ -47,13 +45,27 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-      
+
+        public ObservableCollection<RoomType> GetAllRoomTypesForEachRoom()
+        {
+            return roomService.GetAllRoomTypes();
+        }
+
+        public ObservableCollection<RoomType> GetAllRoomTypes()
+        {
+            return roomService.GetAllRoomTypes();
+        }
+
+        public ObservableCollection<Room> GetAllRoomsExceptSource(int id)
+        {
+            return roomService.GetAllRoomsExceptSource(id);
+        }
+
       public Boolean DeleteRoomById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
+        { 
+            return roomService.DeleteRoomById(id);
+        }
+        
       public Boolean DeleteRoomByAppointmentId(int appointmentId)
       {
          // TODO: implement
@@ -74,17 +86,25 @@ namespace Hospital.Controller
       
       public Hospital.Model.Room AddRoom(Hospital.Model.Room room)
       {
-         // TODO: implement
-         return null;
+         return roomService.AddRoom(room);
       }
       
       public Hospital.Model.Room UpdateRoom(Hospital.Model.Room room)
       {
-         // TODO: implement
-         return null;
+         return roomService.UpdateRoom(room);
       }
-   
-      public Hospital.Service.RoomService roomService;
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
+
+        public RoomType GetRoomTypeByType(string Type)
+        {
+            return roomService.GetRoomTypeByType(Type);
+        }
+
+        public Hospital.Service.RoomService roomService = new Service.RoomService();
    
    }
 }

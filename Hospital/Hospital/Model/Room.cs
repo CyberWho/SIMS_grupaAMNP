@@ -21,13 +21,13 @@ namespace Hospital.Model
         public Renovation Renovation { get; set; }
         public System.Collections.ArrayList appointment;
 
-        public Room(int id, int floor, double area, string description, RoomType roomType)
+        public Room(int id, int floor, double area, string description, RoomType newRoomType)
         {
             Id = id;
             Floor = floor;
             Area = area;
             Description = description;
-            //RoomType = roomType;
+            roomType = newRoomType;
         }
 
         /// <pdGenerated>default getter</pdGenerated>
@@ -87,7 +87,7 @@ namespace Hospital.Model
                 tmpAppointment.Clear();
             }
         }
-        public RoomType roomType;
+        public RoomType roomType { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public RoomType GetRoomType()
