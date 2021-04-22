@@ -1,0 +1,16 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Manager.ManagerRoomsPickDate"
+        mc:Ignorable="d"
+        Title="ManagerRoomsPickDate" Height="244.421" Width="419.158" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <xctk:DateTimePicker x:Name="date_txt" HorizontalAlignment="Left" Margin="107,88,0,0" VerticalAlignment="Top" Value="" Width="195"/>
+        <Label Content="Unesite datum premeštanja:" HorizontalAlignment="Left" Margin="122,57,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="potvrdaBtn" Content="Potvrda" HorizontalAlignment="Left" Margin="160,140,0,0" VerticalAlignment="Top" Width="75" Click="potvrdaBtn_Click"/>
+
+    </Grid>
+</Window>

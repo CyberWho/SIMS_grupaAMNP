@@ -12,10 +12,9 @@ namespace Hospital.Controller
 {
    public class EmployeeController
    {
-      public Hospital.Model.Employee GetEmployeeById(int id)
+      public Hospital.Model.Employee GetEmployeeByUserId(int id)
       {
-         // TODO: implement
-         return null;
+        return employeeService.GetEmployeeByUserId(id);
       }
       
       public ObservableCollection<Employee> GetAllEmployees()
@@ -48,7 +47,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.EmployeeService employeeService;
+      public Hospital.Service.EmployeeService employeeService = new Service.EmployeeService();
    
    }
 }

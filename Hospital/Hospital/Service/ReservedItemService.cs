@@ -54,8 +54,7 @@ namespace Hospital.Service
       
       public Hospital.Model.ReservedItem AddReservedItem(Hospital.Model.ReservedItem reservedItem)
       {
-         // TODO: implement
-         return null;
+         return reservedItemRepository.NewReservedItem(reservedItem);
       }
       
       public Hospital.Model.ReservedItem ChangeReservedDate(Hospital.Model.ReservedItem reservedItem, DateTime newReservedDate)
@@ -64,7 +63,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.ReservedItemRepository reservedItemRepository;
+      public Hospital.Repository.ReservedItemRepository reservedItemRepository = new Repository.ReservedItemRepository();
    
    }
 }

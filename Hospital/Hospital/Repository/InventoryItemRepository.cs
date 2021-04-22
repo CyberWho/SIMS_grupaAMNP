@@ -4,16 +4,43 @@
  * Purpose: Definition of the Class Hospital.Repository.InventoryItemRepository
  ***********************************************************************/
 
+using Oracle.ManagedDataAccess.Client;
 using System;
 
 namespace Hospital.Repository
 {
    public class InventoryItemRepository
    {
-      public Hospital.Model.InventoryItem GetInventoryItemById(int id)
+        OracleConnection con = null;
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            con = new OracleConnection(conString);
+            try
+            {
+                con.Open();
+            }
+            catch (Exception exp)
+            {
+
+            }
+        }
+        public Hospital.Model.InventoryItem GetInventoryItemById(int id)
       {
-         // TODO: implement
-         return null;
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM inventory_item WHERE id = " + id.ToString();
+            Model.InventoryItem item = new Model.InventoryItem();
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            item.Id = reader.GetInt32(0);
+            item.Name = reader.GetString(1);
+            item.Price = Convert.ToUInt32(reader.GetInt32(2));
+            item.Unit = reader.GetString(3);
+            item.Type = (Model.ItemType)reader.GetInt32(4);
+
+            return item;
       }
       
       public System.Collections.ArrayList GetAllInventoryItems()

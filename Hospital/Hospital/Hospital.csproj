@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
@@ -100,6 +101,7 @@
     <Compile Include="Controller\TimeSlotController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WorkHoursController.cs" />
+    <Compile Include="Model\ItemInRoomDTO.cs" />
     <Compile Include="Model\TimeSlot.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
@@ -165,6 +167,18 @@
     <Compile Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml.cs">
       <DependentUpon>Doctor_crud_appointments.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Manager\ManagerRoomInventory.xaml.cs">
+      <DependentUpon>ManagerRoomInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\ManagerRoomInventorySelectDestinationRoom.xaml.cs">
+      <DependentUpon>ManagerRoomInventorySelectDestinationRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\ManagerRoomsCRUD.xaml.cs">
+      <DependentUpon>ManagerRoomsCRUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\ManagerRoomsPickDate.xaml.cs">
+      <DependentUpon>ManagerRoomsPickDate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
     </Compile>
@@ -225,9 +239,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerUI.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="xaml_windows\Manager\ManagerRoomInventory.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\ManagerRoomInventorySelectDestinationRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\ManagerRoomsCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\ManagerRoomsPickDate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\ManagerUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\PatientAppointments.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -13,7 +13,7 @@ namespace Hospital.Model
         public int Id { get; set; }
         public uint Quantity { get; set; }
 
-        public Room room;
+        public Room room { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
@@ -40,7 +40,7 @@ namespace Hospital.Model
                 }
             }
         }
-        public InventoryItem inventoryItem;
+        public InventoryItem inventoryItem { get; set; }
 
         public ItemInRoom(int id, uint quantity, Room room, InventoryItem inventoryItem)
         {
@@ -48,6 +48,14 @@ namespace Hospital.Model
             Quantity = quantity;
             this.room = room;
             this.inventoryItem = inventoryItem;
+        }
+
+        public ItemInRoom(ItemInRoom itemInRoom)
+        {
+            Id = itemInRoom.Id;
+            Quantity = itemInRoom.Quantity;
+            this.room = itemInRoom.room;
+            this.inventoryItem = itemInRoom.inventoryItem;
         }
 
         public ItemInRoom()
