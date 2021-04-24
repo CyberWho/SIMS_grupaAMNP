@@ -11,7 +11,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Menu Style="{StaticResource Horizontal}">
+        <Menu Style="{StaticResource Horizontal}" Background="White">
             <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
             <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
@@ -45,9 +45,9 @@
         
         <Label Content="Status termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,44,0,0" VerticalAlignment="Top"/>
         <Label Content="Tip termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,80,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,48,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,80,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="timeslot_id_txt" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,169,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="app_stat_txt" Style="{StaticResource RoundedTextBox}" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,76,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="app_type_txt" Style="{StaticResource RoundedTextBox}" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,108,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="timeslot_id_txt" Grid.Column="1" Style="{StaticResource RoundedTextBox}" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
 
     </Grid>
 </Window>

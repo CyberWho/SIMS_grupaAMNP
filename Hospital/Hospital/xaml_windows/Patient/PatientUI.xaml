@@ -13,11 +13,12 @@
             <ColumnDefinition Width="32*"/>
             <ColumnDefinition Width="103*"/>
         </Grid.ColumnDefinitions>
-        <Menu Style="{StaticResource Horizontal}">
+        <Menu Style="{StaticResource Horizontal}" Background="White">
             <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
             <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
             <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
+        <Label Content="Dobrodosli!" FontSize="26" Grid.Column="1" HorizontalAlignment="Left" Margin="239,28,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

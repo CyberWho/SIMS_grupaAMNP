@@ -12,14 +12,14 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Menu Style="{StaticResource Horizontal}">
+        <Menu Style="{StaticResource Horizontal}" Background="White">
             <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
             <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
             <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
 
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Appointments}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="271" Margin="299,52,0,0" VerticalAlignment="Top" Width="468" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Appointments}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="281" Margin="316,74,0,0" VerticalAlignment="Top" Width="468" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
@@ -34,31 +34,33 @@
         </DataGrid>
 
 
-        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,141,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.DurationInMinutes, ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="121,199,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="121,261,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="121,292,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,172,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.DurationInMinutes, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Grid.Column="1" FontSize="16" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="155,236,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" FontSize="16"  Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="155,300,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.408,0.328"/>
+        <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" FontSize="16" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="155,332,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
-        <Button x:Name="Izmeni" Content="Izmeni termin" Grid.Column="1" Background="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="22,345,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click"/>
-        <Button x:Name="Obrisi" Content="Obrisi termin" Grid.Column="1" Background="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="155,345,0,0" VerticalAlignment="Top" Width="86" Click="Obrisi_Click"/>
-        <Button x:Name="ZakaziNoviTermin" Content="Zakazi novi termin" Background="White" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="69,381,0,0" VerticalAlignment="Top" Width="111" Click="ZakaziNoviTermin_Click"/>
-        <Label Content="Trajanje:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,137,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vreme:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,168,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soba:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,199,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,261,0,0" VerticalAlignment="Top"/>
-        <Label Content="Prezime doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,292,0,0" VerticalAlignment="Top" Height="23" Width="99"/>
-        <Label Content="Oznaka doktora:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,230,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="121,230,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Oznaka termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,111,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="121,111,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Izmeni" FontSize="16" Content="Izmeni termin" Grid.Column="1" Background="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="5,379,0,0" VerticalAlignment="Top" Width="144" Click="Izmeni_Click"/>
+        <Button x:Name="Obrisi" FontSize="16" Content="Obrisi termin" Grid.Column="1" Background="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="177,379,0,0" VerticalAlignment="Top" Width="144" Click="Obrisi_Click"/>
+        <Button x:Name="ZakaziNoviTermin" FontSize="16" Content="Zakazi novi termin" Background="White" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="90,429,0,0" VerticalAlignment="Top" Width="144" Click="ZakaziNoviTermin_Click" Height="35"/>
+        <Label Content="Trajanje:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="17,167,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.575,1.734"/>
+        <Label Content="Vreme:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="17,199,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,1.774"/>
+        <Label Content="Soba:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="17,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.845,1.661"/>
+        <Label Content="Ime doktora:" FontSize="16"  Grid.Column="1" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.585,0.388"/>
+        <Label Content="Prezime doktora:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="10,329,0,0" VerticalAlignment="Top" Height="46" Width="133" RenderTransformOrigin="0.529,2.016"/>
+        <Label Content="Oznaka doktora:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,268,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Oznaka termina:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="17,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="app_id_txt" IsReadOnly="True" FontSize="16" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="155,76,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
 
 
-        <xctk:DateTimePicker x:Name="date_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="121,175,0,0" VerticalAlignment="Top" Value="{Binding SelectedItem.StartTime,ElementName=myDataGrid}" Width="120"/>
-        <Label Content="Status termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,44,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tip termina:" Grid.Column="1" HorizontalAlignment="Left" Margin="17,80,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="121,48,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Status,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="121,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
+        <xctk:DateTimePicker x:Name="date_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="155,204,0,0" VerticalAlignment="Top" Value="{Binding SelectedItem.StartTime,ElementName=myDataGrid}" Width="144"/>
+        <Label Content="Status termina:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="17,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.634"/>
+        <Label Content="Tip termina:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="17,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,1.052"/>
+        <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="155,108,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Status,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="155,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Odabrani termin:" FontSize="22" Grid.Column="1" HorizontalAlignment="Left" Margin="17,23,0,0" VerticalAlignment="Top"/>
+        <Label Content="Moji termini:" FontSize="22" Grid.Column="1" HorizontalAlignment="Left" Margin="316,23,0,0" VerticalAlignment="Top"/>
 
 
 
