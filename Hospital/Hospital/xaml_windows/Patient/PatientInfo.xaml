@@ -17,18 +17,18 @@
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
             <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
-        <Label Content="Moj profil" Grid.Column="1" FontSize="24" HorizontalAlignment="Left" Margin="323,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
+        <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="323,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
 
-        <Label Content="Korisnicko ime:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="98,107,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="98,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.185,0.324"/>
-        <Label Content="Prezime:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="98,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
-        <Label Content="Email:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="98,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
-        <Label Content="Telefon:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="98,223,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="267,116,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox Grid.Column="1" Text="{Binding Path=NName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,153,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,185,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,226,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=Email, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,269,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <Label Content="Korisnicko ime:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="98,107,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.185,0.324"/>
+        <Label Content="Prezime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
+        <Label Content="Email:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
+        <Label Content="Telefon:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,203,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="267,116,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox Grid.Column="1" Text="{Binding Path=NName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,148,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,180,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,212,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=Email, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,244,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
         
     </Grid>
 </Window>

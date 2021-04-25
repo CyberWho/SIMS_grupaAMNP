@@ -14,7 +14,7 @@
             <ColumnDefinition Width="32*"/>
             <ColumnDefinition Width="103*"/>
         </Grid.ColumnDefinitions>
-        <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,53,218.741,0">
+        <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,219.2,0.4">
             <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click" Height="26"/>
             <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
@@ -22,6 +22,12 @@
         </Menu>
         <Label Content="Dobrodosli!" FontSize="34" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-48.png" Margin="0,0,264.2,428.4" RenderTransformOrigin="-2.137,-1.446" />
-        <Label Content="ZDRAVO KORPORACIJA" FontSize="24" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Top"/>
+        <Label Content="ZDRAVO KORPORACIJA" FontSize="25" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Top" Height="42" Grid.ColumnSpan="2" Width="280"/>
+
+        <Button x:Name="LogOut" Margin="31.6,0,9.6,428.4" Grid.Column="4" Background="White" Click="LogOut_Click" BorderBrush="White">
+            <StackPanel Height="60" Width="90">
+                <Image Source="/Resources/Icons/icons8-exit-26.png" Height="30" Margin="0,0,48.6,0" RenderTransformOrigin="0.213,0.54"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

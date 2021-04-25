@@ -90,5 +90,12 @@ namespace Hospital.xaml_windows.Patient
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
         }
-     }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new MainWindow();
+            s.Show();
+            this.Close();
+        }
+    }
 }
