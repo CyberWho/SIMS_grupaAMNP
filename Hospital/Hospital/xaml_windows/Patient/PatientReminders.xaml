@@ -18,7 +18,7 @@
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
             <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="187" Margin="344,76,0,0" VerticalAlignment="Top" Width="440">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="205" Margin="344,76,0,0" VerticalAlignment="Top" Width="440">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
@@ -26,18 +26,18 @@
                 <DataGridTextColumn Header="Vreme" Binding="{Binding AlarmTime}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Oznaka:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="9,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Oznaka:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
+        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
 
 
-        <Label Content="Vreme oglasavanja:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="9,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
-        <TextBox HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,76,0,0"/>
-        <TextBox HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,108,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="93" Style="{StaticResource RoundedTextBox}" FontSize="16" TextWrapping="Wrap" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,170,0,0"/>
-        <xctk:DateTimePicker x:Name="datepicker_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="155,140,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
-        <Label Content="Odabrani podsetnik:" FontSize="22" Grid.Column="1" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
-        <Label Content="Moji podsetnici" FontSize="22" Grid.Column="1" HorizontalAlignment="Left" Margin="344,24,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vreme oglasavanja:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="9,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
+        <TextBox HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,76,0,0"/>
+        <TextBox HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,108,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="111" Style="{StaticResource RoundedTextBox}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,170,0,0"/>
+        <xctk:DateTimePicker x:Name="datepicker_txt" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,140,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
+        <Label Content="Odabrani podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
+        <Label Content="Moji podsetnici:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="344,24,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -17,7 +17,7 @@
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
             <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
-        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="279" Margin="354,71,0,0" VerticalAlignment="Top" Width="411">
+        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="284" Margin="354,71,0,0" VerticalAlignment="Top" Width="411">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime}" Width="*"/>
@@ -27,31 +27,31 @@
         </DataGrid>
 
 
-        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,204,0,0" TextWrapping="Wrap" Text="{Binding Path=DurationInMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,204,0,0" TextWrapping="Wrap" Text="{Binding Path=DurationInMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
 
-        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,236,0,0" TextWrapping="Wrap" Text="{Binding Path=RoomId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
-        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,300,0,0" TextWrapping="Wrap" Text="{Binding Path=NName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
-        <TextBox x:Name="doctor_surname_txtbx" Style="{StaticResource RoundedTextBox}" FontSize="16"  IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,332,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,236,0,0" TextWrapping="Wrap" Text="{Binding Path=RoomId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,300,0,0" TextWrapping="Wrap" Text="{Binding Path=NName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="doctor_surname_txtbx" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16"  IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,332,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
 
-        <Button x:Name="Izmeni" Content="Izmeni termin" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="155,389,0,0" VerticalAlignment="Top" Width="144" Background="White" Click="Izmeni_Click"/>
-        <Label Content="Oznaka termina:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.369,1.669"/>
-        <Label Content="Trajanje:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soba:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.436,1.166"/>
-        <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.443,1.435"/>
-        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top" Height="31" Width="130"/>
-        <Label Content="Oznaka doktora:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,1.088"/>
-        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,268,0,0" TextWrapping="Wrap" Text="{Binding Path=DoctorId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Oznaka predloga:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,0.623"/>
-        <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedTextBox}" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,172,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <Button x:Name="Izmeni" Content="Izmeni termin" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="155,389,0,0" VerticalAlignment="Top" Width="144" Background="DeepSkyBlue" Foreground="White" Click="Izmeni_Click"/>
+        <Label Content="Oznaka termina:" Grid.Column="1" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.369,1.669"/>
+        <Label Content="Trajanje:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top"/>
+        <Label Content="Soba:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.436,1.166"/>
+        <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.443,1.435"/>
+        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top" Height="31" Width="130"/>
+        <Label Content="Oznaka doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,1.088"/>
+        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,268,0,0" TextWrapping="Wrap" Text="{Binding Path=DoctorId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Oznaka predloga:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.308,0.623"/>
+        <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,172,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
 
 
-        <Label Content="Status termina:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,1.178"/>
-        <Label Content="Tip termina:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,0.451"/>
-        <TextBox x:Name="app_stat_txt" Style="{StaticResource RoundedTextBox}" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,76,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
-        <TextBox x:Name="app_type_txt" Style="{StaticResource RoundedTextBox}" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,108,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
-        <TextBox x:Name="timeslot_id_txt" Grid.Column="1" Style="{StaticResource RoundedTextBox}" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Pregled izmenjenog termina:" FontSize="22" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label Content="Predlozi termina:" FontSize="22" Grid.Column="1" HorizontalAlignment="Left" Margin="354,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.706,-0.804"/>
+        <Label Content="Status termina:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,1.178"/>
+        <Label Content="Tip termina:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,0.451"/>
+        <TextBox x:Name="app_stat_txt" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,76,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="app_type_txt" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,108,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
+        <TextBox x:Name="timeslot_id_txt" Grid.Column="1" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Pregled izmenjenog termina:" FontSize="22" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="10,22,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="Predlozi termina:" FontSize="22" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="354,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.706,-0.804"/>
 
 
 
