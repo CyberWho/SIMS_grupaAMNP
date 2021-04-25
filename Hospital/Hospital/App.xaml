@@ -17,6 +17,7 @@
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="7"/>
+                    
                 </Style>
             </Style.Resources>
         </Style>
@@ -24,7 +25,17 @@
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="7" />
-                    
+                    <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                    <Setter Property="BorderThickness" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="PasswordBox" x:Key="RoundedPasswordBox">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7" />
+                    <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                    <Setter Property="BorderThickness" Value="10"/>
                 </Style>
             </Style.Resources>
         </Style>

@@ -426,6 +426,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-heart-with-pulse-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-male-user-32.png" />
+    <Resource Include="Resources\Icons\icons8-new-message-64.png" />
+    <Resource Include="Resources\Icons\icons8-notification-24.png" />
+    <Resource Include="Resources\Icons\icons8-stethoscope-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-add-reminder-24.png" />
+    <Resource Include="Resources\Icons\icons8-calendar-26.png" />
+    <Resource Include="Resources\Icons\icons8-doctors-bag-64.png" />
+    <Resource Include="Resources\Icons\icons8-exit-26.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

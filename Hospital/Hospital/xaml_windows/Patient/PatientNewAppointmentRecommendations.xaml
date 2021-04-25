@@ -8,7 +8,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientNewAppointmentRecommendations"
         
         mc:Ignorable="d"
-        Title="PatientNewAppointmentRecommendations" Height="600" Width="900" Loaded="Window_Loaded">
+        Title="PatientNewAppointmentRecommendations" Height="500" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="14.069" />

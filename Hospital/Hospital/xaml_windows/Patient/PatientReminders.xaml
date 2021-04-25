@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientReminders"
         mc:Ignorable="d"
-        Title="PatientReminders" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="PatientReminders" Height="500" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -18,7 +18,7 @@
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
             <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="187" Margin="344,76,0,0" VerticalAlignment="Top" Width="340">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="187" Margin="344,76,0,0" VerticalAlignment="Top" Width="440">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>

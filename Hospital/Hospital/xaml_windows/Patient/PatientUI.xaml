@@ -5,20 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         mc:Ignorable="d"
-        Title="PatientUI" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="PatientUI" Height="500" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="318.741" />
+            <ColumnDefinition Width="12.459"/>
             <ColumnDefinition Width="559*" />
             <ColumnDefinition Width="32*"/>
             <ColumnDefinition Width="103*"/>
         </Grid.ColumnDefinitions>
-        <Menu Style="{StaticResource Horizontal}" Background="White">
-            <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click"/>
+        <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,53,218.741,0">
+            <MenuItem x:Name="PocetnaStranica" Header="Pocetna stranica" HorizontalAlignment="Left" Click="PocetnaStranica_Click" Height="26"/>
             <MenuItem x:Name="MojProfil" Header="Moj profil" HorizontalAlignment="Left" Click="MojProfil_Click"/>
             <MenuItem x:Name="MojiPregledi" Header="Pregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" />
             <MenuItem x:Name="MojiPodsetnici" Header="Moji podsetnici" HorizontalAlignment="Left" Click="MojiPodsetnici_Click"/>
         </Menu>
-        <Label Content="Dobrodosli!" FontSize="26" Grid.Column="1" HorizontalAlignment="Left" Margin="239,28,0,0" VerticalAlignment="Top"/>
+        <Label Content="Dobrodosli!" FontSize="34" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="318,53,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-48.png" Margin="0,0,264.2,428.4" RenderTransformOrigin="-2.137,-1.446" />
+        <Label Content="ZDRAVO KORPORACIJA" FontSize="24" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

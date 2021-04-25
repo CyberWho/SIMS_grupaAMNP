@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientAppointments"
         mc:Ignorable="d"
-        Title="PatientAppointments" Height="600" Width="900" Closed="Window_Closed" Loaded="Window_Loaded">
+        Title="PatientAppointments" Height="500" Width="900" Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -41,7 +41,7 @@
 
         <Button x:Name="Izmeni" FontSize="16" Content="Izmeni termin" Grid.Column="1" Background="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="5,379,0,0" VerticalAlignment="Top" Width="144" Click="Izmeni_Click"/>
         <Button x:Name="Obrisi" FontSize="16" Content="Obrisi termin" Grid.Column="1" Background="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="177,379,0,0" VerticalAlignment="Top" Width="144" Click="Obrisi_Click"/>
-        <Button x:Name="ZakaziNoviTermin" FontSize="16" Content="Zakazi novi termin" Background="White" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="90,429,0,0" VerticalAlignment="Top" Width="144" Click="ZakaziNoviTermin_Click" Height="35"/>
+        <Button x:Name="ZakaziNoviTermin" FontSize="16" Content="Zakazi novi termin" Background="White" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="88,409,0,0" VerticalAlignment="Top" Width="144" Click="ZakaziNoviTermin_Click" Height="27"/>
         <Label Content="Trajanje:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="17,167,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.575,1.734"/>
         <Label Content="Vreme:" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="17,199,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,1.774"/>
         <Label Content="Soba:" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="17,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.845,1.661"/>
