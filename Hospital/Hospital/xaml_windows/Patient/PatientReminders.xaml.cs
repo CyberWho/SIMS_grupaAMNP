@@ -95,5 +95,13 @@ namespace Hospital.xaml_windows.Patient
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
         }
+        private void Doktori_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

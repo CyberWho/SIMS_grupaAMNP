@@ -97,5 +97,15 @@ namespace Hospital.xaml_windows.Patient
             s.Show();
             this.Close();
         }
+
+        private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Doktori_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

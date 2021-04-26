@@ -441,5 +441,18 @@
     <Resource Include="Resources\Icons\icons8-doctors-bag-64.png" />
     <Resource Include="Resources\Icons\icons8-exit-26.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-home-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-calendar-52.png" />
+    <Resource Include="Resources\Icons\icons8-exit-52.png" />
+    <Resource Include="Resources\Icons\icons8-heart-with-pulse-100.png" />
+    <Resource Include="Resources\Icons\icons8-male-user-96.png" />
+    <Resource Include="Resources\Icons\icons8-notification-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-home-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

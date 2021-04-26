@@ -146,6 +146,14 @@ namespace Hospital.xaml_windows.Patient
            
         }
 
+        private void Doktori_Click(object sender,RoutedEventArgs e)
+        {
+
+        }
+        private void ZdravstveniKarton_Click(object sender,RoutedEventArgs e)
+        {
+
+        }
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
             int appointmentId = int.Parse(app_id_txt.Text);
