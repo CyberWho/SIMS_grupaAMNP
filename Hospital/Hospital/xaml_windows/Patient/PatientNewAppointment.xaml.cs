@@ -144,10 +144,7 @@ namespace Hospital.xaml_windows.Patient
             }
         }
 
-        private void RadioButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
         private void DoktorPrioritet_Checked(object sender, RoutedEventArgs e)
         {
@@ -157,6 +154,14 @@ namespace Hospital.xaml_windows.Patient
         private void VremePrioritet_Checked(object sender, RoutedEventArgs e)
         {
             this.priority = 1;
+        }
+        private void Doktori_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

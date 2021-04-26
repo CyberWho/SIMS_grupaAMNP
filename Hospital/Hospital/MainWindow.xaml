@@ -7,18 +7,19 @@
         mc:Ignorable="d"
         Title="Prijava" Height="450" Width="800">
     <Grid>
-        <Border Background="White" CornerRadius="20" Margin="20">
-            <StackPanel Margin="20">
-                <Label Content="Prijava" Foreground="LimeGreen" FontSize="40" HorizontalAlignment="Center"/>
-                <Separator></Separator>
-                <Label Content="Korisnicko ime" HorizontalAlignment ="Center" Foreground="LimeGreen"/>
-                <TextBox x:Name="Username" Foreground="LimeGreen" HorizontalAlignment="Center" Width="400" Background="White" FontSize="20"/>
-                <Label Content="Lozinka" Foreground="LimeGreen" HorizontalAlignment="Center"/>
-                <PasswordBox x:Name="Password" Background="White" HorizontalAlignment="Center" Width ="400" Foreground="LimeGreen" FontSize="20"/>
-                <Button x:Name="Potvrda" HorizontalAlignment="Center" Width="200"  Click="Potvrda_Click" Content="Potvrda" Margin="00 10" Background="OrangeRed"/>
 
+        <StackPanel Margin="20">
+            <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" HorizontalAlignment="Center" FontSize="38" Margin="155,0,170,0"/>
+            <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Height="59" Margin="79,-60,595.6,0"/>
+            <Separator Foreground="DeepSkyBlue"/>
+            <Label Content="Prijava" Foreground="DeepSkyBlue" FontSize="40" HorizontalAlignment="Center" Margin="294,0,294.6,0"/>
+            
+            <Label Content="Korisnicko ime" FontSize="16" HorizontalAlignment ="Center" Foreground="DeepSkyBlue"/>
+            <TextBox x:Name="Username" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" HorizontalAlignment="Center" Width="400" Background="White" FontSize="16"/>
+            <Label Content="Lozinka" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Center"/>
+            <PasswordBox x:Name="Password" Style="{StaticResource RoundedPasswordBox}" Background="White" HorizontalAlignment="Center" Width ="400" Foreground="DeepSkyBlue" FontSize="16"/>
+            <Button x:Name="Potvrda" FontSize="16" Style="{StaticResource RoundedButton}" Foreground="White" HorizontalAlignment="Center" Width="200"  Click="Potvrda_Click" Content="Potvrda" Margin="00 10" Background="DeepSkyBlue"/>
+        </StackPanel>
 
-            </StackPanel>
-        </Border>
     </Grid>
 </Window>
