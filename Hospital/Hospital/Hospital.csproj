@@ -89,12 +89,14 @@
     <Compile Include="Controller\ItemInRoomController.cs" />
     <Compile Include="Controller\MedicalTreatmentController.cs" />
     <Compile Include="Controller\PatientController.cs" />
+    <Compile Include="Controller\PatientLogsController.cs" />
     <Compile Include="Controller\PerscriptionController.cs" />
     <Compile Include="Controller\RefferalForClinicalTreatmentController.cs" />
     <Compile Include="Controller\RefferalForSpecialistController.cs" />
     <Compile Include="Controller\ReminderController.cs" />
     <Compile Include="Controller\RenovationController.cs" />
     <Compile Include="Controller\ReservedItemController.cs" />
+    <Compile Include="Controller\ReviewController.cs" />
     <Compile Include="Controller\RoleController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\StateController.cs" />
@@ -103,6 +105,8 @@
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WorkHoursController.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
+    <Compile Include="Model\PatientLogs.cs" />
+    <Compile Include="Model\Review.cs" />
     <Compile Include="Model\TimeSlot.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
@@ -118,6 +122,7 @@
     <Compile Include="Repository\InventoryItemRepository.cs" />
     <Compile Include="Repository\ItemInRoomRepository.cs" />
     <Compile Include="Repository\MedicalTreatment.cs" />
+    <Compile Include="Repository\PatientLogsRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\PerscriptionRepository.cs" />
     <Compile Include="Repository\ReferralForClinicalTreatmentRepository.cs" />
@@ -125,6 +130,7 @@
     <Compile Include="Repository\ReminderRepository.cs" />
     <Compile Include="Repository\RenovationRepository.cs" />
     <Compile Include="Repository\ReservedItemRepository.cs" />
+    <Compile Include="Repository\ReviewRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\StateRepository.cs" />
@@ -145,6 +151,7 @@
     <Compile Include="Service\InventoryItemService.cs" />
     <Compile Include="Service\ItemInRoomService.cs" />
     <Compile Include="Service\MedicalTreatmentService.cs" />
+    <Compile Include="Service\PatientLogsService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\PerscriptionService.cs" />
     <Compile Include="Service\ReferralForClinicalTreatmentService.cs" />
@@ -152,6 +159,7 @@
     <Compile Include="Service\ReminderService.cs" />
     <Compile Include="Service\RenovationService.cs" />
     <Compile Include="Service\ReservedItemService.cs" />
+    <Compile Include="Service\ReviewService.cs" />
     <Compile Include="Service\RoleService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\StateService.cs" />
