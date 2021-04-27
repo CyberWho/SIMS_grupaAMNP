@@ -33,15 +33,16 @@ namespace Hospital.Repository
         public Hospital.Model.City GetCityById(int id)
         {
             setConnection();
+            City city = new City();
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM CITY WHERE ID = :id";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
-            City city = new City();
+            reader.Read();
             city.Id = id;
             city.Name = reader.GetString(1);
             city.PostalCode = reader.GetString(2);
-            city.State.Id = reader.GetInt32(3);
+            city.State = new StateRepository().GetStateById(reader.GetInt32(3));
             con.Close();
             return city;
         }

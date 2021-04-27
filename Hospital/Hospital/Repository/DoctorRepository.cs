@@ -131,7 +131,7 @@ namespace Hospital.Repository
             role.RoleType = "DOCTOR";
             Doctor doctor = new Doctor(dId, salary, yearsOfService, docUser, role);
             doctor.Id = id;
-
+            doctor.User = docUser;
             int roomdoc = a.GetInt32(14);
             int specId = a.GetInt32(15);
             con.Close();

@@ -80,6 +80,7 @@
         <TextBox x:Name="room_id_txt" Grid.Column="2" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" Height="23" Margin="166,176,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
         <Button x:Name="Predlozi" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikazi predloge termina" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="117.6,323,0,0" VerticalAlignment="Top" Width="200" Click="Predlozi_Click" RenderTransformOrigin="0.631,1.255"/>
+        
         <xctk:DateTimePicker x:Name="date_txt" Grid.Column="2" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="166,208,0,0" VerticalAlignment="Top" Width="144" Height="24"/>
 
 

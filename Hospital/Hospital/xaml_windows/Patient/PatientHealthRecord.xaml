@@ -64,13 +64,15 @@
         <Button Content="Moje anamneze" x:Name="MojeAnamneze" Click="MojeAnamneze_Click" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="557.6,222,0,0" VerticalAlignment="Top" Width="175" Height="38"/>
         <Button Content="Moje terapije" x:Name="MojeTerapije" Click="MojeTerapije_Click" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="557.6,295,0,0" VerticalAlignment="Top" Width="175" Height="38"/>
         <Button Content="Moji recepti" x:Name="MojiRecepti" Click="MojiRecepti_Click" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="557.6,366,0,0" VerticalAlignment="Top" Width="175" Height="40"/>
-        <Label Content="Osnovne informacije:" FontSize="24" Foreground="DeepSkyBlue" Grid.Column="1" Margin="11.6,48,600.6,375.4" />
+        <Label Content="Osnovne informacije:" FontSize="24" Foreground="DeepSkyBlue" Grid.Column="1" Margin="11.6,48,575.6,375.4" />
         <Label Content="Oznaka:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="11.6,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
-        <TextBox HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,97,0,0"/>
-        <TextBox HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,129,0,0"/>
-        <TextBox HorizontalAlignment="Left"  Style="{StaticResource RoundedTextBox}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,161,0,0"/>
-        
+        <Label Content="Pol:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Bracni status:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Mesto rodjenja:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,193,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Text="{Binding Path=HealthRecordId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,97,0,0"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Text="{Binding Path=Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,129,0,0"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=MaritalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,161,0,0"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=PlaceOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,193,0,0"/>
+
     </Grid>
 </Window>

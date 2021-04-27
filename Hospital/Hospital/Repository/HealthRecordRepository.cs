@@ -91,15 +91,15 @@ namespace Hospital.Repository
                     break;
             }
 
-            /*healthRecord.gender_id = int.Parse(reader.GetString(2));
-            healthRecord.marital_status_id = int.Parse(reader.GetString(3));
-            healthRecord.birth_place_id = int.Parse(reader.GetString(4));   */
+           
             healthRecord = new HealthRecord(int.Parse(reader.GetString(0)), gender,
                                                          maritalStatus, int.Parse(reader.GetString(4)));
             healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(reader.GetInt32(0));
             healthRecord.patient_id = id;
             healthRecord.Patient = patient;
             healthRecord.PlaceOfBirth = new CityRepository().GetCityById(reader.GetInt32(4));
+            healthRecord.Gender = gender;
+            healthRecord.MaritalStatus = maritalStatus;
             connection.Close();
             
 

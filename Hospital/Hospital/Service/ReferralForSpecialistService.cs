@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -22,12 +24,17 @@ namespace Hospital.Service
          return null;
       }
       
-      public System.Collections.ArrayList GetAllReferralsByPatientId(int patientId)
+      public ObservableCollection<ReferralForSpecialist> GetAllReferralsByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            //TODO: implement
+            return null;
       }
-      
+        public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
+        {
+            return referralForSpecialistRepository.GetReferralForSpecialistsByHealthRecordId(healthRecordId);
+        }
+
+
       public System.Collections.ArrayList GetAllReferralsByDoctorId(int doctorId)
       {
          // TODO: implement
@@ -70,7 +77,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.ReferralForSpecialistRepository referralForSpecialistRepository;
+      public Hospital.Repository.ReferralForSpecialistRepository referralForSpecialistRepository = new Repository.ReferralForSpecialistRepository();
       public System.Collections.ArrayList referralForSpecialistServiceB;
       
       /// <pdGenerated>default getter</pdGenerated>

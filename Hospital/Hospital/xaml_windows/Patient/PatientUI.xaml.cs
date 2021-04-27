@@ -100,7 +100,9 @@ namespace Hospital.xaml_windows.Patient
 
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-
+            var s = new PatientHealthRecord(userId);
+            s.Show();
+            this.Close();
         }
 
         private void Doktori_Click(object sender, RoutedEventArgs e)

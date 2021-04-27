@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using Hospital.Model;
+using Hospital.Controller;
+using System.Data;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -21,11 +25,14 @@ namespace Hospital.xaml_windows.Patient
     {
         private int userId;
         private int healthRecordId;
+        ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
+
         public PatientReferrals(int userId,int healthRecordId)
         {
             InitializeComponent();
             this.userId = userId;
             this.healthRecordId = healthRecordId;
+            updateDataGrid();
         }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
@@ -53,13 +60,57 @@ namespace Hospital.xaml_windows.Patient
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-
+            var s = new PatientHealthRecord(userId);
+            s.Show();
+            this.Close();
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
             var s = new PatientReminders(userId);
             s.Show();
             this.Close();
+        }
+        private void Predlozi_Click(object sender, RoutedEventArgs e)
+        {
+            /*int doctorId = int.Parse(doc_id_txt.Text);
+            DateTime startDate = DateTime.Parse(date_txt.Text);
+            DateTime endDate = DateTime.Parse(date_end_txt.Text);
+            if (endDate <= startDate)
+            {
+                MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!");
+            }
+            else
+            {
+                var dayDifference = (endDate - startDate).TotalDays;
+                if (dayDifference > 5)
+                {
+                    MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
+                }
+                else
+                {
+                    //var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId);
+                   // s.Show();
+                  //  this.Close();
+                }
+            }*/
+        }
+        private void updateDataGrid()
+        {
+
+            this.DataContext = this;
+            ReferralForSpecialists = new RefferalForSpecialistController().GetReferralForSpecialistsByHealthRecordId(healthRecordId);
+            DataTable dt = new DataTable();
+            myDataGrid.DataContext = dt;
+            myDataGrid.ItemsSource = ReferralForSpecialists;
+
+
+
+        }
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+
+
         }
     }
 }
