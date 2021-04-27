@@ -23,16 +23,16 @@ namespace Hospital.xaml_windows.Patient
     /// </summary>
     public partial class PatientReminders : Window
     {
-        int id;
+        private int userId;
         ReminderController reminderController = new ReminderController();
         ObservableCollection<Reminder> Reminders = new ObservableCollection<Reminder>();
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
-        public PatientReminders(int id)
+        public PatientReminders(int userId)
         {
             InitializeComponent();
-            this.id = id;
+            this.userId = userId;
             updateDataGrid();
         }
 
@@ -40,7 +40,7 @@ namespace Hospital.xaml_windows.Patient
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
             Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
             now = now.AddMilliseconds(-now.Millisecond);
@@ -55,34 +55,34 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientReminders(id);
+            var s = new PatientReminders(userId);
             s.Show();
             this.Close();
         }
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(id);
+            var s = new PatientUI(userId);
             s.Show();
             this.Close();
         }
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientInfo(id);
+            var s = new PatientInfo(userId);
             s.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientAppointments(id);
+            var s = new PatientAppointments(userId);
             s.Show();
             this.Close();
         }
         private void updateDataGrid()
         {
             this.DataContext = this;
-            Hospital.Model.Patient patient = patientController.GetPatientByUserId(id);
+            Hospital.Model.Patient patient = patientController.GetPatientByUserId(userId);
             Reminders = reminderController.GetAllPastRemindersByPatientId(patient.Id);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;

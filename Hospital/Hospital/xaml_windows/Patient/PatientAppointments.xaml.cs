@@ -26,7 +26,7 @@ namespace Hospital.xaml_windows.Patient
     /// </summary>
     public partial class PatientAppointments : Window
     {
-        int id;
+        private int userId;
         AppointmentController appointmentController = new AppointmentController();
         PatientController patientController = new PatientController();
         ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
@@ -35,11 +35,11 @@ namespace Hospital.xaml_windows.Patient
         Appointment app = new Appointment();
         Appointment Appointment = new Appointment();
 
-        public PatientAppointments(int id)
+        public PatientAppointments(int userId)
         {
             
             InitializeComponent();
-            this.id = id;
+            this.userId = userId;
             this.DataContext = this;
             updateDataGrid();
         }
@@ -48,7 +48,7 @@ namespace Hospital.xaml_windows.Patient
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
             Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
             now = now.AddMilliseconds(-now.Millisecond);
@@ -65,7 +65,7 @@ namespace Hospital.xaml_windows.Patient
         {
 
             Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            patient = patientController.GetPatientByUserId(userId);
             return patient.Id;
         }
 
@@ -85,32 +85,29 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientInfo(id);
+            var s = new PatientInfo(userId);
             s.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientAppointments(id);
+            var s = new PatientAppointments(userId);
             s.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(id);
+            var s = new PatientUI(userId);
             s.Show();
             this.Close();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-           
-        }
+       
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientReminders(id);
+            var s = new PatientReminders(userId);
             s.Show();
             this.Close();
         }
@@ -163,7 +160,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientNewAppointment(id);
+            var s = new PatientNewAppointment(userId);
             s.Show();
             this.Close();
         }

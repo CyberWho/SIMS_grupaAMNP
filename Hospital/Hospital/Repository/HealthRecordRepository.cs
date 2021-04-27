@@ -48,16 +48,16 @@ namespace Hospital.Repository
 
             HealthRecord healthRecord = new HealthRecord();
 
-            PatientRepository pr = new PatientRepository();
-            UserRepository ur = new UserRepository();
+            PatientRepository patientRepository = new PatientRepository();
+            UserRepository userRepository = new UserRepository();
 
-            Patient p = pr.GetPatientById(id);
-            User u = ur.GetUserById(p.user_id);
-
+            Patient patient = patientRepository.GetPatientById(id);
+            User user = userRepository.GetUserById(patient.user_id);
+            patient.User = user;
             healthRecord.Id = int.Parse(reader.GetString(0));
             healthRecord.patient_id = int.Parse(reader.GetString(1));
 
-            if (u.Username.Contains("guestUser"))
+            if (user.Username.Contains("guestUser"))
             {
                 return healthRecord;
             }
@@ -98,7 +98,11 @@ namespace Hospital.Repository
                                                          maritalStatus, int.Parse(reader.GetString(4)));
             healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(reader.GetInt32(0));
             healthRecord.patient_id = id;
+            healthRecord.Patient = patient;
+            healthRecord.PlaceOfBirth = new CityRepository().GetCityById(reader.GetInt32(4));
             connection.Close();
+            
+
 
             return healthRecord;
         }

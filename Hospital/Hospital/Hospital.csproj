@@ -206,6 +206,9 @@
     <Compile Include="xaml_windows\Patient\PatientAppointments.xaml.cs">
       <DependentUpon>PatientAppointments.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\PatientHealthRecord.xaml.cs">
+      <DependentUpon>PatientHealthRecord.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\PatientInfo.xaml.cs">
       <DependentUpon>PatientInfo.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,9 @@
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml.cs">
       <DependentUpon>PatientNewAppointmentRecommendations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PatientReferrals.xaml.cs">
+      <DependentUpon>PatientReferrals.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientReminders.xaml.cs">
       <DependentUpon>PatientReminders.xaml</DependentUpon>
@@ -312,6 +318,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="xaml_windows\Patient\PatientHealthRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Patient\PatientInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -321,6 +331,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientReferrals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

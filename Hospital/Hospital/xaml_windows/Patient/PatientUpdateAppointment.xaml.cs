@@ -167,7 +167,7 @@ namespace Hospital.xaml_windows.Patient
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
-        int id;
+        private int userId;
         int appointmentId;
         ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
         AppointmentController appointmentController = new AppointmentController();
@@ -177,10 +177,10 @@ namespace Hospital.xaml_windows.Patient
         ReminderController reminderController = new ReminderController();
         PatientController patientController = new PatientController();
 
-        public PatientUpdateAppointment(int id,int appointmentId)
+        public PatientUpdateAppointment(int userId,int appointmentId)
         {
             InitializeComponent();
-            this.id = id;
+            this.userId = userId;
             this.appointmentId = appointmentId;
             
             appointment = appointmentController.GetAppointmentById(appointmentId);
@@ -199,7 +199,7 @@ namespace Hospital.xaml_windows.Patient
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
             Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
             now = now.AddMilliseconds(-now.Millisecond);
@@ -214,28 +214,28 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientReminders(id);
+            var s = new PatientReminders(userId);
             s.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(id);
+            var s = new PatientUI(userId);
             s.Show();
             this.Close();
         }
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientInfo(id);
+            var s = new PatientInfo(userId);
             s.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientAppointments(id);
+            var s = new PatientAppointments(userId);
             s.Show();
             this.Close();
         }
@@ -248,7 +248,7 @@ namespace Hospital.xaml_windows.Patient
             int timeSlotId = int.Parse(timeslot_id_txt.Text);
             timeSlot = timeSlotController.GetTimeSlotById(timeSlotId);
             appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
-            var s = new PatientAppointments(id);
+            var s = new PatientAppointments(userId);
             s.Show();
             this.Close();
         }
