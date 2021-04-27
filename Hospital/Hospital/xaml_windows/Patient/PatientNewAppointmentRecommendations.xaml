@@ -11,7 +11,7 @@
         Title="PatientNewAppointmentRecommendations" Height="500" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="55" />
 
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>

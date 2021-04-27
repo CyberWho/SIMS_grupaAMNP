@@ -8,7 +8,7 @@
         Title="PatientInfo" Height="500" Width="900" Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="55" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
@@ -16,8 +16,8 @@
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="45" Height="45" Source="/Resources/Icons/icons8-home-96.png"/>
-
                     </StackPanel>
+
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MojProfil"  HorizontalAlignment="Left" Background="White" Click="MojProfil_Click" Height="45">
@@ -27,10 +27,10 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" Height="45" Background="White">
+            <MenuItem x:Name="MojiPregledi" Width="65" Height="45"  HorizontalAlignment="Left" Click="MojiPregledi_Click"  Background="White">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-calendar-52.png"/>
+                        <Image Width="45" Height="45" HorizontalAlignment="Left" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>

@@ -9,7 +9,7 @@
         Title="PatientAppointments" Height="500" Width="900"  Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"  />
+            <ColumnDefinition Width="55"  />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">

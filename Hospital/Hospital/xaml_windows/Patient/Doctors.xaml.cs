@@ -90,5 +90,11 @@ namespace Hospital.xaml_windows.Patient
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
         }
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+
+
+        }
     }
 }
