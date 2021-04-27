@@ -43,8 +43,8 @@ namespace Hospital.Service
       
       public Boolean DeleteReferralById(int id)
       {
-         // TODO: implement
-         return false;
+        
+         return referralForSpecialistRepository.DeleteReferralForSpecialistById(id);
       }
       
       public Boolean DeleteReferralByPatientId(int patientId)

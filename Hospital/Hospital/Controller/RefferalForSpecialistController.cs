@@ -42,8 +42,8 @@ namespace Hospital.Controller
       
       public Boolean DeleteReferralById(int id)
       {
-         // TODO: implement
-         return false;
+
+            return referralForSpecialistService.DeleteReferralById(id);
       }
       
       public Boolean DeleteReferralByPatientId(int patientId)

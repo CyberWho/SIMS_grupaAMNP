@@ -29,14 +29,16 @@ namespace Hospital.xaml_windows.Patient
         DateTime endTime;
         int doctorId;
         int priority = 0;
+        int referralForSpecialistId;
         TimeSlotController timeSlotController = new TimeSlotController();
         PatientController patientController = new PatientController();
         AppointmentController appointmentController = new AppointmentController();
         ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
         DoctorController doctorController = new DoctorController();
         ReminderController reminderController = new ReminderController();
+        RefferalForSpecialistController refferalForSpecialistController = new RefferalForSpecialistController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        public PatientNewAppointmentRecommendations(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority)
+        public PatientNewAppointmentRecommendations(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority,int referralForSpecialistId)
         {
             InitializeComponent();
             this.userId = userId;
@@ -44,6 +46,7 @@ namespace Hospital.xaml_windows.Patient
             this.endTime = endTime;
             this.doctorId = doctorId;
             this.priority = priority;
+            this.referralForSpecialistId = referralForSpecialistId;
             updateDataGrid();
         }
         private void updateDataGrid()
@@ -119,6 +122,10 @@ namespace Hospital.xaml_windows.Patient
             appointment.room = room;
             appointment.room.Id = int.Parse(room_id_txt.Text);
             appointmentController.ReserveAppointment(appointment);
+            if(referralForSpecialistId != 0)
+            {
+                refferalForSpecialistController.DeleteReferralById(referralForSpecialistId);
+            }
             var s = new PatientAppointments(userId);
             s.Show();
             this.Close();

@@ -137,7 +137,7 @@ namespace Hospital.xaml_windows.Patient
                     MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
                 } else
                 {
-                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId,priority);
+                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId,priority,0);
                     s.Show();
                     this.Close();
                 }

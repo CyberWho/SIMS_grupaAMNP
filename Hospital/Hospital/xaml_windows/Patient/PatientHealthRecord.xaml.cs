@@ -15,6 +15,7 @@ using Hospital.Model;
 using Hospital.Controller;
 using System.ComponentModel;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -122,6 +123,22 @@ namespace Hospital.xaml_windows.Patient
             MaritalStatus = healthRecord.MaritalStatus;
             PlaceOfBirth = healthRecord.PlaceOfBirth.Name;
         }
+        private void dispatherTimer_Tick(object sender, EventArgs e)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            Hospital.Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(userId);
+            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
+            DateTime now = DateTime.Now;
+            now = now.AddMilliseconds(-now.Millisecond);
+            foreach (Reminder reminder in reminders)
+            {
+                if ((reminder.AlarmTime - now).Minutes == 0)
+                {
+                    MessageBox.Show(reminder.Description);
+                }
+            }
+        }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var s = new PatientInfo(userId);
@@ -196,6 +213,13 @@ namespace Hospital.xaml_windows.Patient
         private void MojiRecepti_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
         }
     }
 }

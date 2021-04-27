@@ -26,6 +26,9 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private int healthRecordId;
         ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
+        ReminderController reminderController = new ReminderController();
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        PatientController patientController = new PatientController();
 
         public PatientReferrals(int userId,int healthRecordId)
         {
@@ -33,6 +36,22 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.healthRecordId = healthRecordId;
             updateDataGrid();
+        }
+        private void dispatherTimer_Tick(object sender, EventArgs e)
+        {
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            Hospital.Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(userId);
+            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
+            DateTime now = DateTime.Now;
+            now = now.AddMilliseconds(-now.Millisecond);
+            foreach (Reminder reminder in reminders)
+            {
+                if ((reminder.AlarmTime - now).Minutes == 0)
+                {
+                    MessageBox.Show(reminder.Description);
+                }
+            }
         }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
@@ -72,7 +91,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Predlozi_Click(object sender, RoutedEventArgs e)
         {
-            /*int doctorId = int.Parse(doc_id_txt.Text);
+            int doctorId = int.Parse(doc_id_txt.Text);
             DateTime startDate = DateTime.Parse(date_txt.Text);
             DateTime endDate = DateTime.Parse(date_end_txt.Text);
             if (endDate <= startDate)
@@ -88,11 +107,11 @@ namespace Hospital.xaml_windows.Patient
                 }
                 else
                 {
-                    //var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId);
-                   // s.Show();
-                  //  this.Close();
+                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId,0,int.Parse(ref_id_txt.Text));
+                    s.Show();
+                    this.Close();
                 }
-            }*/
+            }
         }
         private void updateDataGrid()
         {
@@ -111,6 +130,13 @@ namespace Hospital.xaml_windows.Patient
 
 
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
         }
     }
 }

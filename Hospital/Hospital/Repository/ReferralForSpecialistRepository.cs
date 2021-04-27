@@ -72,8 +72,13 @@ namespace Hospital.Repository
       
       public Boolean DeleteReferralForSpecialistById(int id)
       {
-         // TODO: implement
-         return false;
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "DELETE FROM REFERRAL_FOR_SPECIALIST WHERE ID = :id";
+            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            int a = cmd.ExecuteNonQuery();
+            con.Close();
+            return true;
       }
       
       public Boolean DeleteReferralForSpecialistByPatientId(int patientId)
