@@ -77,6 +77,12 @@ namespace Hospital.xaml_windows.Patient
         {
 
         }
+        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new PatientReminders(userId);
+            s.Show();
+            this.Close();
+        }
 
         private void MojiRecepti_Click(object sender, RoutedEventArgs e)
         {
