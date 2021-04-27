@@ -11,16 +11,16 @@ namespace Hospital.Model
    public class ReferralForSpecialist
    {
       public int Id { get; set; }
-      public Boolean IsActive { get; set; }
+      public string Description { get; set; }
       
       public Doctor Doctor { get; set; }
       public HealthRecord HealthRecord { get; set; }
       public Appointment Appointment { get; set; }
 
-        public ReferralForSpecialist(int id, bool isActive, Doctor doctor, HealthRecord healthRecord, Appointment appointment)
+        public ReferralForSpecialist(int id, string description, Doctor doctor, HealthRecord healthRecord, Appointment appointment)
         {
             Id = id;
-            IsActive = isActive;
+            Description = description;
             Doctor = doctor;
             HealthRecord = healthRecord;
             Appointment = appointment;
