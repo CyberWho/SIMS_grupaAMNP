@@ -74,6 +74,10 @@ namespace Hospital.Controller
             return null;
         }
 
+        public Boolean CheckForAppointmentsByPatientIdAndDoctorId(int patientId, int doctorId)
+        {
+            return appointmentService.CheckForAppointmentsByPatientIdAndDoctorId(patientId, doctorId);
+        }
         public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
         {
             appointmentService.ChangeStartTime(appointment, newStartTime);

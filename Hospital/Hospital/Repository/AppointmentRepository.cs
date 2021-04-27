@@ -55,46 +55,41 @@ namespace Hospital.Repository
             int doctorId = reader.GetInt32(5);
             int apptypeid = reader.GetInt32(6);
             int appstatid = reader.GetInt32(7);
-            if (apptypeid == 0)
+            
+            switch(apptypeid)
             {
-                appointment.Type = AppointmentType.EXAMINATION;
-            }
-            else
-            {
-                if (apptypeid == 1)
-                {
+                case 0:
+                    appointment.Type = AppointmentType.EXAMINATION;
+                    break;
+                case 1:
                     appointment.Type = AppointmentType.OPERATION;
-                }
-                else
-                {
+                    break;
+                case 2:
                     appointment.Type = AppointmentType.REFERRAL;
-                }
+                    break;
             }
-            if (appstatid == 0)
+            
+            switch(appstatid)
             {
-                appointment.Status = AppointmentStatus.FINISHED;
-            }
-            else
-            {
-                if (appstatid == 1)
-                {
+                case 0:
+                    appointment.Status = AppointmentStatus.FINISHED;
+                    break;
+                case 1:
                     appointment.Status = AppointmentStatus.RESERVED;
-                }
-                else
-                {
+                    break;
+                case 2:
                     appointment.Status = AppointmentStatus.DIDNTCOME;
-                }
+                    break;
             }
-            Room room = new Room();
-            room = roomRepository.GetAppointmentRoomById(roomId);
+           
+            Room room = roomRepository.GetAppointmentRoomById(roomId);
 
             appointment.room = room;
-            Patient patient = new Patient();
-            patient = patientRepository.GetPatientById(patId);
+            
+            Patient patient = patientRepository.GetPatientById(patId);
             appointment.patient = patient;
 
-            Doctor doctor = new Doctor();
-            doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
+            Doctor doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
             appointment.doctor = doctor;
             con.Close();
             return appointment;
@@ -310,7 +305,7 @@ namespace Hospital.Repository
             cmd.CommandText = "UPDATE APPOINTMENT SET ROOOM_ID = :ROOM_ID WHERE ID = :ID";
             cmd.Parameters.Add("ROOM_ID", OracleDbType.Date).Value = room.Id.ToString();
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
-            // int a = cmd.ExecuteNonQuery();
+            
 
             if (cmd.ExecuteNonQuery() > 0)
             {
@@ -323,6 +318,22 @@ namespace Hospital.Repository
             con.Close();
             return appointment;
            
+        }
+
+        public Boolean CheckForAppointmentsByPatientIdAndDoctorId(int patientId,int doctorId)
+        {
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM APPOINTMENT WHERE PATIENT_ID = :patient_id AND DOCTOR_ID = :doctor_id AND APPSTAT_ID != 2";
+            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            if(reader.GetInt32(0) != 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public Hospital.Model.Appointment UpdateAppointmentStatus(Hospital.Model.Appointment appointment, Hospital.Model.AppointmentStatus appointmentStatus)

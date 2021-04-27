@@ -87,6 +87,10 @@ namespace Hospital.Service
             //TODO: implement
             return null;
         }
+        public Boolean CheckForAppointmentsByPatientIdAndDoctorId(int patientId, int doctorId)
+        {
+            return appointmentRepository.CheckForAppointmentsByPatientIdAndDoctorId(patientId, doctorId);
+        }
 
         public System.Collections.ArrayList GetAllFreeAppointmentsByDoctorId(int doctorId)
         {

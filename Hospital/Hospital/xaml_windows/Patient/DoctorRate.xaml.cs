@@ -14,28 +14,26 @@ using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
-using System.Data;
 
 namespace Hospital.xaml_windows.Patient
 {
     /// <summary>
-    /// Interaction logic for Doctors.xaml
+    /// Interaction logic for DoctorRate.xaml
     /// </summary>
-    public partial class Doctors : Window
+    public partial class DoctorRate : Window
     {
         private int userId;
+        private int doctorId;
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         ReminderController reminderController = new ReminderController();
-        DoctorController doctorController = new DoctorController();
-        ObservableCollection<Hospital.Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
-        AppointmentController appointmentController = new AppointmentController();
-        public Doctors(int userId)
+        public DoctorRate(int userId,int doctorId)
         {
             InitializeComponent();
             this.userId = userId;
-            myDataGrid_Update();
+            this.doctorId = doctorId;
         }
+
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
@@ -51,14 +49,6 @@ namespace Hospital.xaml_windows.Patient
                     MessageBox.Show(reminder.Description);
                 }
             }
-        }
-        private void myDataGrid_Update()
-        {
-            this.DataContext = this;
-            doctors = doctorController.GetAllDoctors();
-            DataTable dt = new DataTable();
-            myDataGrid.DataContext = dt;
-            myDataGrid.ItemsSource = doctors;
         }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
@@ -105,21 +95,10 @@ namespace Hospital.xaml_windows.Patient
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
         }
-        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OceniDoktora_Click(object sender, RoutedEventArgs e)
         {
-
-
 
         }
 
-        private void Oceni_Click(object sender, RoutedEventArgs e)
-        {
-            if(appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id,int.Parse(doc_id_txt.Text)) == false) {
-                MessageBox.Show("Ne mozete oceniti doktora kod kog niste bili na pregledu!");
-            } else
-            {
-
-            }
-        }
     }
 }
