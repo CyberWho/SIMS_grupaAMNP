@@ -55,38 +55,40 @@ namespace Hospital.xaml_windows.Patient
         }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientInfo(userId);
-            s.Show();
+            var window = new PatientInfo(userId);
+            window.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientAppointments(userId);
-            s.Show();
+            var window = new PatientAppointments(userId);
+            window.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(userId);
-            s.Show();
+            var window = new PatientUI(userId);
+            window.Show();
             this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new Doctors(userId);
+            window.Show();
+            this.Close();
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientHealthRecord(userId);
-            s.Show();
+            var window = new PatientHealthRecord(userId);
+            window.Show();
             this.Close();
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientReminders(userId);
-            s.Show();
+            var window = new PatientReminders(userId);
+            window.Show();
             this.Close();
         }
         private void Predlozi_Click(object sender, RoutedEventArgs e)
@@ -107,8 +109,8 @@ namespace Hospital.xaml_windows.Patient
                 }
                 else
                 {
-                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId,0,int.Parse(ref_id_txt.Text));
-                    s.Show();
+                    var window = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, 0, int.Parse(ref_id_txt.Text));
+                    window.Show();
                     this.Close();
                 }
             }

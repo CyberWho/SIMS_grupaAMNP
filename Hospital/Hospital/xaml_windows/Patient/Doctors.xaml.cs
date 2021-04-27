@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -26,10 +27,13 @@ namespace Hospital.xaml_windows.Patient
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         ReminderController reminderController = new ReminderController();
+        DoctorController doctorController = new DoctorController();
+        ObservableCollection<Hospital.Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
         public Doctors(int userId)
         {
             InitializeComponent();
             this.userId = userId;
+            myDataGrid_Update();
         }
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
@@ -47,40 +51,50 @@ namespace Hospital.xaml_windows.Patient
                 }
             }
         }
+        private void myDataGrid_Update()
+        {
+            this.DataContext = this;
+            doctors = doctorController.GetAllDoctors();
+            DataTable dt = new DataTable();
+            myDataGrid.DataContext = dt;
+            myDataGrid.ItemsSource = doctors;
+        }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientInfo(userId);
-            s.Show();
+            var window = new PatientInfo(userId);
+            window.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientAppointments(userId);
-            s.Show();
+            var window = new PatientAppointments(userId);
+            window.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(userId);
-            s.Show();
+            var window = new PatientUI(userId);
+            window.Show();
             this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new Doctors(userId);
+            window.Show();
+            this.Close();
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientHealthRecord(userId);
-            s.Show();
+            var window = new PatientHealthRecord(userId);
+            window.Show();
             this.Close();
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientReminders(userId);
-            s.Show();
+            var window = new PatientReminders(userId);
+            window.Show();
             this.Close();
         }
 

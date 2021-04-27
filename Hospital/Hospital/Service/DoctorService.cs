@@ -24,10 +24,9 @@ namespace Hospital.Service
             doctor = doctorRepository.GetWorkHoursDoctorById(id);
             return doctor;
         }
-        public System.Collections.ArrayList GetAllDoctors()
+        public ObservableCollection<Doctor> GetAllDoctors()
         {
-            // TODO: implement
-            return null;
+            return doctorRepository.GetAllDoctors();
         }
 
         public System.Collections.ArrayList GetAllDoctorsBySpecializationId(int specializationId)

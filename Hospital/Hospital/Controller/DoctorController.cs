@@ -27,8 +27,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<Doctor> GetAllDoctors()
         {
-            // TODO: implement
-            return null;
+            return doctorService.GetAllDoctors();
         }
 
         public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)

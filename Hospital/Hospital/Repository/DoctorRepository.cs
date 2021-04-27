@@ -28,8 +28,39 @@ namespace Hospital.Repository
         }
         public Hospital.Model.Doctor GetDoctorById(int id)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR,SPECIALIZATION WHERE DOCTOR.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID AND DOCTOR.SPEC_ID = SPECIALIZATION.ID";
+            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            User docUser = new User();
+            docUser.Id = int.Parse(reader.GetString(0));
+            docUser.Username = reader.GetString(1);
+            docUser.Password = reader.GetString(2);
+            docUser.Name = reader.GetString(3);
+            docUser.Surname = reader.GetString(4);
+            docUser.PhoneNumber = reader.GetString(5);
+            docUser.EMail = reader.GetString(6);
+            int dId = reader.GetInt32(7);
+            int salary = reader.GetInt32(8);
+            int yearsOfService = reader.GetInt32(9);
+            int roleId = reader.GetInt32(11);
+            Role role = new Role();
+            role.Id = roleId;
+            role.RoleType = "DOCTOR";
+            Doctor doctor = new Doctor(dId, salary, yearsOfService, docUser, role);
+            doctor.Id = reader.GetInt32(12);
+            Room room = new Room();
+            doctor.room = room;
+            doctor.room.Id = reader.GetInt32(14);
+            Specialization specialization = new Specialization();
+            doctor.specialization = specialization;
+            doctor.specialization.Type = reader.GetString(17);
+            con.Close();
+            return doctor;
+
+            
         }
 
         public Doctor GetWorkHoursDoctorById(int id)
@@ -138,10 +169,19 @@ namespace Hospital.Repository
             return doctor;
         }
 
-        public System.Collections.ArrayList GetAllDoctors()
+        public ObservableCollection<Doctor> GetAllDoctors()
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM DOCTOR";
+            OracleDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                Doctor doctor = GetDoctorById(reader.GetInt32(0));
+                doctors.Add(doctor);
+            }
+            return doctors;
         }
 
         public System.Collections.ArrayList GetAllDoctorsBySpecializationId(int specializationId)
