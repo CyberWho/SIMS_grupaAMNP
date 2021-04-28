@@ -127,7 +127,15 @@ namespace Hospital.xaml_windows.Patient
             {
                 refferalForSpecialistController.DeleteReferralById(referralForSpecialistId);
             }
-            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
+            if(patientLogsController.IncrementLogCounterByPatientId(patient.Id) == false)
+            {
+                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
+                appointmentController.DeleteAppointmentByPatientId(patient.Id);
+                var windowLogOut = new MainWindow();
+                windowLogOut.Show();
+                this.Close();
+                return;
+            }
             var window = new PatientAppointments(userId);
             window.Show();
             this.Close();

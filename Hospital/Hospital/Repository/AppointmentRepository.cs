@@ -267,8 +267,21 @@ namespace Hospital.Repository
 
         public Boolean DeleteAppointmentByPatientId(int patientId)
         {
-            // TODO: implement
+            setConnection();
+            
+            ObservableCollection<Appointment> appointments = GetAllByAppointmentsPatientId(patientId);
+            foreach(Appointment appointment in appointments)
+            {
+                TimeSlot timeSlot = new TimeSlot();
+                timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
+                timeSlotRepository.FreeTimeSlot(timeSlot);
+                DeleteAppointmentById(appointment.Id);
+            }
+            
+            
+            con.Close();
             return false;
+           
         }
 
         public Hospital.Model.Appointment UpdateAppointmentStartTime(Hospital.Model.Appointment appointment, DateTime startTime)
@@ -284,7 +297,7 @@ namespace Hospital.Repository
             cmd.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
             cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
-            // int a = cmd.ExecuteNonQuery();
+            
 
             if (cmd.ExecuteNonQuery() > 0)
             {

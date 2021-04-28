@@ -52,8 +52,8 @@ namespace Hospital.Controller
 
         public Boolean DeleteAppointmentByPatientId(int patientId)
         {
-            // TODO: implement
-            return false;
+
+            return appointmentService.DeleteAppointmentByPatientId(patientId);
         }
 
         public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)

@@ -86,6 +86,10 @@ namespace Hospital.Repository
             PatientLogs patientLogs = GetPatientLogsByPatientId(patientId);
             int nextLogCounter = patientLogs.LogCounter;
             nextLogCounter += 1;
+            if(nextLogCounter == 11)
+            {
+                return false;
+            }
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = :log_counter WHERE PATIENT_ID = :patient_id";

@@ -160,7 +160,15 @@ namespace Hospital.xaml_windows.Patient
             appointmentController.CancelAppointmentById(appointmentId);
             Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientByUserId(userId);
-            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
+            if(patientLogsController.IncrementLogCounterByPatientId(patient.Id) == false)
+            {
+                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
+                appointmentController.DeleteAppointmentByPatientId(patient.Id);
+                var windowLogOut = new MainWindow();
+                windowLogOut.Show();
+                this.Close();
+                return;
+            }
             updateDataGrid();
         }
 

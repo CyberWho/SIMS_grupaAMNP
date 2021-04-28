@@ -62,7 +62,7 @@ namespace Hospital.Repository
                 return healthRecord;
             }
 
-            MaritalStatus maritalStatus = MaritalStatus.MARRIED;
+            MaritalStatus maritalStatus = new MaritalStatus();
 
             switch (int.Parse(reader.GetString(3)))
             {
