@@ -57,8 +57,12 @@ namespace Hospital.Service
             // TODO: implement
             return null;
         }
+        public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
+        {
+            return patientLogsRepository.CheckIfPatientIsBlockedByPatientId(patientId);
+        }
 
-        
+
 
         public Hospital.Repository.PatientLogsRepository patientLogsRepository = new Repository.PatientLogsRepository();
 

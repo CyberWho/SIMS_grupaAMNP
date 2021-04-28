@@ -51,6 +51,10 @@ namespace Hospital.Controller
             // TODO: implement
             return false;
         }
+        public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
+        {
+            return patientLogsService.CheckIfPatientIsBlockedByPatientId(patientId);
+        }
 
         public Hospital.Model.PatientLogs AddPatientLogs()
         {
@@ -60,7 +64,7 @@ namespace Hospital.Controller
 
        
 
-        public Hospital.Service.PatientLogsService patientLogsService;
+        public Hospital.Service.PatientLogsService patientLogsService = new Service.PatientLogsService();
 
     }
 }
