@@ -14,14 +14,93 @@ using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Hospital.xaml_windows.Patient
 {
     /// <summary>
     /// Interaction logic for DoctorRate.xaml
     /// </summary>
-    public partial class DoctorRate : Window
+    public partial class DoctorRate : Window, INotifyPropertyChanged
     {
+        #region NotifyProperties
+        private int _doctorId;
+        private string _name;
+        private string _surname;
+        private string _specialization;
+        public int Id
+        {
+            get
+            {
+                return _doctorId;
+            }
+            set
+            {
+                if (value != _doctorId)
+                {
+                    _doctorId= value;
+                    OnPropertyChanged("Id");
+                }
+            }
+        }
+        public string NName
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged("NName");
+                }
+            }
+        }
+        public string Surname
+        {
+            get
+            {
+                return _surname;
+            }
+            set
+            {
+                if (value != _surname)
+                {
+                    _surname = value;
+                    OnPropertyChanged("Surname");
+                }
+            }
+        }
+        public string Specialization
+        {
+            get
+            {
+                return _specialization;
+            }
+            set
+            {
+                if (value != _specialization)
+                {
+                    _specialization = value;
+                    OnPropertyChanged("Specialization");
+                }
+            }
+        }
+
+        #endregion
+        #region PropertyChangedNotifier
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
         private int userId;
         private int doctorId;
         PatientController patientController = new PatientController();
@@ -32,6 +111,11 @@ namespace Hospital.xaml_windows.Patient
             InitializeComponent();
             this.userId = userId;
             this.doctorId = doctorId;
+            Model.Doctor doctor = new DoctorController().GetDoctorById(doctorId);
+            Id = doctor.Id;
+            NName = doctor.User.Name;
+            Surname = doctor.User.Surname;
+            Specialization = doctor.specialization.Type;
         }
 
         private void dispatherTimer_Tick(object sender, EventArgs e)

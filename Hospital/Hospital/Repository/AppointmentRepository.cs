@@ -324,7 +324,7 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT COUNT(*) FROM APPOINTMENT WHERE PATIENT_ID = :patient_id AND DOCTOR_ID = :doctor_id AND APPSTAT_ID != 2";
+            cmd.CommandText = "SELECT COUNT(*) FROM APPOINTMENT WHERE PATIENT_ID = :patient_id AND DOCTOR_ID = :doctor_id AND APPSTAT_ID != 1";
             cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
             OracleDataReader reader = cmd.ExecuteReader();

@@ -118,7 +118,9 @@ namespace Hospital.xaml_windows.Patient
                 MessageBox.Show("Ne mozete oceniti doktora kod kog niste bili na pregledu!");
             } else
             {
-
+                var window = new DoctorRate(userId, int.Parse(doc_id_txt.Text));
+                window.Show();
+                this.Close();
             }
         }
     }
