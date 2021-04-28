@@ -115,10 +115,16 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.PatientLogs NewPatientLogs()
+        public Boolean NewPatientLogs(int patientId)
         {
-            
-            return null;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO PATIENT_LOGS (PATIENT_ID,LOG_COUNTER,LAST_COUNTER_RESET) VALUES (:patient_id,0,:last_counter_reset)";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            command.Parameters.Add("last_counter_reset", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
+            command.ExecuteNonQuery();
+            connection.Close();
+            return true;
         }
 
        

@@ -380,7 +380,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("ROOM_ID", OracleDbType.Int32).Value = appointment.room.Id.ToString();
             cmd.Parameters.Add("PATIENT_ID", OracleDbType.Int32).Value = appointment.patient.Id.ToString();
             cmd.Parameters.Add("DOCTOR_ID", OracleDbType.Int32).Value = appointment.doctor.Id.ToString();
-            int a = cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
             con.Close();
             return appointment;
         }
