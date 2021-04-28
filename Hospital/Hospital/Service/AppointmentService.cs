@@ -91,6 +91,10 @@ namespace Hospital.Service
         {
             return appointmentRepository.CheckForAppointmentsByPatientIdAndDoctorId(patientId, doctorId);
         }
+        public Boolean CheckForAnyAppointmentsByPatientId(int patientId)
+        {
+            return appointmentRepository.CheckForAnyAppointmentsByPatientId(patientId);
+        }
 
         public System.Collections.ArrayList GetAllFreeAppointmentsByDoctorId(int doctorId)
         {

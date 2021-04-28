@@ -123,5 +123,6 @@ namespace Hospital.xaml_windows.Patient
                 this.Close();
             }
         }
+
     }
 }

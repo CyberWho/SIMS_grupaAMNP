@@ -111,5 +111,10 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+
+        private void OceniBolnicu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

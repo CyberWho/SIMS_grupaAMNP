@@ -335,6 +335,20 @@ namespace Hospital.Repository
             }
             return false;
         }
+        public Boolean CheckForAnyAppointmentsByPatientId(int patientId)
+        {
+            setConnection();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM APPOINTMENT WHERE PATIENT_ID = :patient_id AND APPSTAT_ID != 1";
+            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            if (reader.GetInt32(0) != 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public Hospital.Model.Appointment UpdateAppointmentStatus(Hospital.Model.Appointment appointment, Hospital.Model.AppointmentStatus appointmentStatus)
         {
