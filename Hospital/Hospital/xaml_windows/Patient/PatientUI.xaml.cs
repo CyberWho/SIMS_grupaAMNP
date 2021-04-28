@@ -27,7 +27,7 @@ namespace Hospital.xaml_windows.Patient
         ReminderController reminderController = new ReminderController();
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-
+        AppointmentController appointmentController = new AppointmentController();
 
         public PatientUI(int userId)
         {
@@ -114,7 +114,15 @@ namespace Hospital.xaml_windows.Patient
 
         private void OceniBolnicu_Click(object sender, RoutedEventArgs e)
         {
-
+            if(appointmentController.CheckForAnyAppointmentsByPatientId(patientController.GetPatientByUserId(userId).Id) == false)
+            {
+                MessageBox.Show("Nazalost nije moguce da ocenite bolnicu jer nikada niste bili na pregledu!");
+            } else
+            {
+                var window = new HospitalRate(userId);
+                window.Show();
+            }
+           
         }
     }
 }
