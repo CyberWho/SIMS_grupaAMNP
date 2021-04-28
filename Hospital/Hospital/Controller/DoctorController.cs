@@ -14,8 +14,7 @@ namespace Hospital.Controller
     {
         public Hospital.Model.Doctor GetDoctorById(int id)
         {
-            // TODO: implement
-            return null;
+            return doctorService.GetDoctorById(id);
         }
         public Doctor GetWorkHoursDoctorById(int id)
         {

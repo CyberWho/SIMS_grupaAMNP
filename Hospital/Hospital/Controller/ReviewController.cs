@@ -30,8 +30,7 @@ namespace Hospital.Controller
 
         public Hospital.Model.Review AddReview(Hospital.Model.Review review)
         {
-            // TODO: implement
-            return null;
+            return reviewService.AddReview(review);
         }
 
         public Boolean DeleteReviewById(int reviewId)
