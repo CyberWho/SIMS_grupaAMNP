@@ -28,11 +28,12 @@ namespace Hospital.xaml_windows.Patient
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         AppointmentController appointmentController = new AppointmentController();
-
+        PatientLogsController patientLogsController = new PatientLogsController();
         public PatientUI(int userId)
         {
             InitializeComponent();
             this.userId = userId;
+            ResetPatientLogsCounter();
             
         }
 
@@ -52,7 +53,14 @@ namespace Hospital.xaml_windows.Patient
                 }
             }
         }
-
+        private void ResetPatientLogsCounter()
+        {
+            PatientLogs patientLogs = patientLogsController.GetPatientLogsByPatientId(patientController.GetPatientByUserId(userId).Id);
+            if((DateTime.Now - patientLogs.LastCounterReset).TotalDays >= 7)
+            {
+                patientLogsController.ResetPatientLogCounterByPatientId(patientController.GetPatientByUserId(userId).Id);
+            }
+        }
        
 
         

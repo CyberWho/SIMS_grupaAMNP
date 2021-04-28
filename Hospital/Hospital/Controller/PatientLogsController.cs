@@ -24,8 +24,8 @@ namespace Hospital.Controller
 
         public Hospital.Model.PatientLogs GetPatientLogsByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+          
+            return patientLogsService.GetPatientLogsByPatientId(patientId);
         }
 
         public Hospital.Model.PatientLogs UpdatePatientLogs(Hospital.Model.PatientLogs patientLogs)
@@ -38,6 +38,10 @@ namespace Hospital.Controller
         {
             // TODO: implement
             return false;
+        }
+        public Boolean ResetPatientLogCounterByPatientId(int patientId)
+        {
+            return patientLogsService.ResetPatientLogCounterByPatientId(patientId);
         }
 
         public Boolean DeletePatientLogsByPatientId(int patientId)
