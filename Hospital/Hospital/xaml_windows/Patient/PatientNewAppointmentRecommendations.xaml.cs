@@ -38,6 +38,7 @@ namespace Hospital.xaml_windows.Patient
         ReminderController reminderController = new ReminderController();
         RefferalForSpecialistController refferalForSpecialistController = new RefferalForSpecialistController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        PatientLogsController patientLogsController = new PatientLogsController();
         public PatientNewAppointmentRecommendations(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority,int referralForSpecialistId)
         {
             InitializeComponent();
@@ -126,6 +127,7 @@ namespace Hospital.xaml_windows.Patient
             {
                 refferalForSpecialistController.DeleteReferralById(referralForSpecialistId);
             }
+            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             var window = new PatientAppointments(userId);
             window.Show();
             this.Close();

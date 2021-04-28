@@ -55,6 +55,10 @@ namespace Hospital.Controller
             // TODO: implement
             return false;
         }
+        public Boolean IncrementLogCounterByPatientId(int patientId)
+        {
+            return patientLogsService.IncrementLogCounterByPatientId(patientId);
+        }
         public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
         {
             return patientLogsService.CheckIfPatientIsBlockedByPatientId(patientId);

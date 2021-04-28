@@ -55,6 +55,10 @@ namespace Hospital.Service
             // TODO: implement
             return false;
         }
+        public Boolean IncrementLogCounterByPatientId(int patientId)
+        {
+            return patientLogsRepository.IncrementLogCounterByPatientId(patientId);
+        }
 
         public Boolean AddPatientLogs(int patientId)
         {

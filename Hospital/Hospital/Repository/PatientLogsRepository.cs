@@ -81,6 +81,21 @@ namespace Hospital.Repository
             // TODO: implement
             return null;
         }
+        public Boolean IncrementLogCounterByPatientId(int patientId)
+        {
+            PatientLogs patientLogs = GetPatientLogsByPatientId(patientId);
+            int nextLogCounter = patientLogs.LogCounter;
+            nextLogCounter += 1;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = :log_counter WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("log_counter", OracleDbType.Int32).Value = nextLogCounter.ToString();
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return true;
+        }
+
 
         public Boolean ResetAllPatientLogs()
         {

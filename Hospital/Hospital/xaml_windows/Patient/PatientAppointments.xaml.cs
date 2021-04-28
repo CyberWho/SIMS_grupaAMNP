@@ -32,8 +32,7 @@ namespace Hospital.xaml_windows.Patient
         ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         ReminderController reminderController = new ReminderController();
-        Appointment app = new Appointment();
-        Appointment Appointment = new Appointment();
+        PatientLogsController patientLogsController = new PatientLogsController();
 
         public PatientAppointments(int userId)
         {
@@ -159,6 +158,9 @@ namespace Hospital.xaml_windows.Patient
         {
             int appointmentId = int.Parse(app_id_txt.Text);
             appointmentController.CancelAppointmentById(appointmentId);
+            Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(userId);
+            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             updateDataGrid();
         }
 
