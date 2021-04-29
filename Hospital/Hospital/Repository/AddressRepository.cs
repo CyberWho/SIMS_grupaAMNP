@@ -16,7 +16,8 @@ namespace Hospital.Repository
 {
     public class AddressRepository
     {
-        PatientRepository patientRepository = new PatientRepository();
+        
+        CityRepository cityRepository = new CityRepository();
 
         OracleConnection connection = null;
         private void setConnection()
@@ -60,7 +61,8 @@ namespace Hospital.Repository
             {
                 Id = int.Parse(reader.GetString(0)),
                 Name = reader.GetString(1),
-                city_id = int.Parse(reader.GetString(2))
+                city_id = int.Parse(reader.GetString(2)),
+                City = cityRepository.GetCityById(reader.GetInt32(2))
             };
 
             return address;

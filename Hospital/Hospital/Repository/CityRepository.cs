@@ -34,10 +34,10 @@ namespace Hospital.Repository
         {
             setConnection();
             City city = new City();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM CITY WHERE ID = :id";
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = con.CreateCommand();
+            command.CommandText = "SELECT * FROM CITY WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             city.Id = id;
             city.Name = reader.GetString(1);

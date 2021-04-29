@@ -10,9 +10,9 @@
     <Grid>
 
 
-        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,2,448.6,423.4"/>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Margin="0,2,448.6,428.4"/>
 
-        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="50,2,178.6,325.4" Height="Auto"/>
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="50,2,178.6,423.4" Height="Auto"/>
         <Label Content="Oceni doktora:" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="34,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
 
         <Label Content="Oznaka doktora:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="33,109,0,0" VerticalAlignment="Top"/>
