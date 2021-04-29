@@ -11,42 +11,35 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using Hospital.Model;
 using Hospital.Controller;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Hospital.xaml_windows.Patient
 {
     /// <summary>
-    /// Interaction logic for PatientInfo.xaml
+    /// Interaction logic for DoctorRate.xaml
     /// </summary>
-    public partial class PatientInfo : Window, INotifyPropertyChanged
+    public partial class DoctorRate : Window, INotifyPropertyChanged
     {
         #region NotifyProperties
-        private Hospital.Model.User user;
-        private Hospital.Model.Patient patient;
-        private string _username;
+        private int _doctorId;
         private string _name;
         private string _surname;
-        private string _phonenumber;
-        private string _email;
-        public string Username
+        private string _specialization;
+        public int Id
         {
             get
             {
-                return _username;
+                return _doctorId;
             }
             set
             {
-                if (value != _username)
+                if (value != _doctorId)
                 {
-                    _username = value;
-                    OnPropertyChanged("Username");
+                    _doctorId= value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -80,36 +73,22 @@ namespace Hospital.xaml_windows.Patient
                 }
             }
         }
-        public string PhoneNumber
+        public string Specialization
         {
             get
             {
-                return _phonenumber;
+                return _specialization;
             }
             set
             {
-                if (value != _phonenumber)
+                if (value != _specialization)
                 {
-                    _phonenumber = value;
-                    OnPropertyChanged("PhoneNumber");
+                    _specialization = value;
+                    OnPropertyChanged("Specialization");
                 }
             }
         }
-        public string Email
-        {
-            get
-            {
-                return _email;
-            }
-            set
-            {
-                if (value != _email)
-                {
-                    _email = value;
-                    OnPropertyChanged("Email");
-                }
-            }
-        }
+
         #endregion
         #region PropertyChangedNotifier
         protected virtual void OnPropertyChanged(string name)
@@ -123,22 +102,22 @@ namespace Hospital.xaml_windows.Patient
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         private int userId;
+        private int doctorId;
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         ReminderController reminderController = new ReminderController();
-
-        public PatientInfo(int userId)
+        public DoctorRate(int userId,int doctorId)
         {
-            
             InitializeComponent();
             this.userId = userId;
-            patient = patientController.GetPatientByUserId(userId);
+            this.doctorId = doctorId;
             this.DataContext = this;
-            Username = patient.User.Username;
-            NName = patient.User.Name;
-            Surname = patient.User.Surname;
-            PhoneNumber = patient.User.PhoneNumber;
-            Email = patient.User.EMail;
+            Model.Doctor doctor = new Model.Doctor();
+            doctor = new DoctorController().GetDoctorById(doctorId);
+            Id = doctor.Id;
+            NName = doctor.User.Name;
+            Surname = doctor.User.Surname;
+            Specialization = doctor.specialization.Type;
         }
 
         private void dispatherTimer_Tick(object sender, EventArgs e)
@@ -157,26 +136,9 @@ namespace Hospital.xaml_windows.Patient
                 }
             }
         }
-
-
-
-
-        private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PatientUI(userId);
-            window.Show();
-            this.Close();
-        }
-
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientInfo(userId);
-            window.Show();
-            this.Close();
-        }
-        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PatientReminders(userId);
             window.Show();
             this.Close();
         }
@@ -188,16 +150,11 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+            var window = new PatientUI(userId);
+            window.Show();
+            this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
@@ -210,19 +167,34 @@ namespace Hospital.xaml_windows.Patient
             var window = new PatientHealthRecord(userId);
             window.Show();
             this.Close();
+        }
+        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new PatientReminders(userId);
+            window.Show();
+            this.Close();
+        }
 
-        }
-        private void LogOut_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var window = new MainWindow();
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
+        }
+        private void OceniDoktora_Click(object sender, RoutedEventArgs e)
+        {
+            Review review = new Review();
+            review.Rate = int.Parse(rate_txt.Text);
+            review.Description = description_txt.Text;
+            review.patient = patientController.GetPatientByUserId(userId);
+            Model.Doctor doctor = new DoctorController().GetDoctorById(doctorId);
+            review.doctor = doctor;
+            new ReviewController().AddReview(review);
+            MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname);
+            var window = new Doctors(userId);
             window.Show();
             this.Close();
         }
-        private void Notifications_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new Notifications(userId);
-            window.Show();
-            this.Close();
-        }
+
     }
 }

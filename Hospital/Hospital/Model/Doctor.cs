@@ -97,7 +97,7 @@ namespace Hospital.Model
                 tmpWorkHours.Clear();
             }
         }
-        public Specialization specialization;
+        public Specialization specialization { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Specialization GetSpecialization()

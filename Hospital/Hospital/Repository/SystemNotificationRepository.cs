@@ -7,19 +7,20 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Repository
 {
     public class SystemNotificationRepository
     {
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -34,10 +35,23 @@ namespace Hospital.Repository
             return null;
         }
 
-        public System.Collections.ArrayList GetAllSystemNotificationsByUserId(int userId)
+        public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM SYSTEM_NOTIFICATION WHERE USER_ID = :user_id OR GLOBAL = 1";
+            command.Parameters.Add("user_id", OracleDbType.Int32).Value = userId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                SystemNotification systemNotification = new SystemNotification();
+                systemNotification.Id = reader.GetInt32(0);
+                systemNotification.Name = reader.GetString(1);
+                systemNotification.Description = reader.GetString(2);
+                systemNotifications.Add(systemNotification);
+            }
+            return systemNotifications;
         }
 
         public Boolean DeleteSystemNotificationById(int id)
@@ -61,7 +75,7 @@ namespace Hospital.Repository
         public SystemNotification NewSystemNotification(SystemNotification systemNotification)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
 
             cmd.CommandText = "INSERT INTO system_notification (name, description, user_id, viewed) VALUES (:name, :description, :user_id, 0)";
             cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
@@ -69,7 +83,7 @@ namespace Hospital.Repository
             cmd.Parameters.Add("user_id", OracleDbType.Int32).Value = systemNotification.user_id.ToString();
 
             int a = cmd.ExecuteNonQuery();
-            con.Close();
+            connection.Close();
 
             return systemNotification;
         }
@@ -78,13 +92,13 @@ namespace Hospital.Repository
         {
             setConnection();
             int id = 0;
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT MAX(ID) FROM APPOINTMENT";
             OracleDataReader reader = cmd.ExecuteReader();
             reader = cmd.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
-            con.Close();
+            connection.Close();
             return id;
         }
 

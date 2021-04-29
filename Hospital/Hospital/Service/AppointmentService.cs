@@ -54,8 +54,8 @@ namespace Hospital.Service
 
         public Boolean DeleteAppointmentByPatientId(int patientId)
         {
-            // TODO: implement
-            return false;
+
+            return appointmentRepository.DeleteAppointmentByPatientId(patientId); 
         }
 
         public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
@@ -86,6 +86,14 @@ namespace Hospital.Service
         {
             //TODO: implement
             return null;
+        }
+        public Boolean CheckForAppointmentsByPatientIdAndDoctorId(int patientId, int doctorId)
+        {
+            return appointmentRepository.CheckForAppointmentsByPatientIdAndDoctorId(patientId, doctorId);
+        }
+        public Boolean CheckForAnyAppointmentsByPatientId(int patientId)
+        {
+            return appointmentRepository.CheckForAnyAppointmentsByPatientId(patientId);
         }
 
         public System.Collections.ArrayList GetAllFreeAppointmentsByDoctorId(int doctorId)

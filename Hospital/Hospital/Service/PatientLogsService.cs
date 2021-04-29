@@ -24,8 +24,8 @@ namespace Hospital.Service
 
         public Hospital.Model.PatientLogs GetPatientLogsByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+            
+            return patientLogsRepository.GetPatientLogsByPatientId(patientId);
         }
 
         public Hospital.Model.PatientLogs UpdatePatientLogs(Hospital.Model.PatientLogs patientLogs)
@@ -39,6 +39,10 @@ namespace Hospital.Service
             // TODO: implement
             return false;
         }
+        public Boolean ResetPatientLogCounterByPatientId(int patientId)
+        {
+            return patientLogsRepository.ResetPatientLogCounterByPatientId(patientId);
+        }
 
         public Boolean DeletePatientLogsByPatientId(int patientId)
         {
@@ -51,14 +55,21 @@ namespace Hospital.Service
             // TODO: implement
             return false;
         }
-
-        public Hospital.Model.PatientLogs AddPatientLogs()
+        public Boolean IncrementLogCounterByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+            return patientLogsRepository.IncrementLogCounterByPatientId(patientId);
         }
 
-        
+        public Boolean AddPatientLogs(int patientId)
+        {
+            return patientLogsRepository.NewPatientLogs(patientId);
+        }
+        public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
+        {
+            return patientLogsRepository.CheckIfPatientIsBlockedByPatientId(patientId);
+        }
+
+
 
         public Hospital.Repository.PatientLogsRepository patientLogsRepository = new Repository.PatientLogsRepository();
 

@@ -21,7 +21,8 @@ namespace Hospital.Controller
     public class UserController
     {
         public UserService userService = new UserService();
-
+        PatientController patientController = new PatientController();
+        PatientLogsController patientLogsController = new PatientLogsController();
         public bool LoginUser(String username, String password)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -55,13 +56,21 @@ namespace Hospital.Controller
             con.Close();
             con.Dispose();
 
-            //paljenje drugih prozora
+            
             Window s;
             switch (uloga)
             {
                 case "":
-                    s = new PatientUI(id);
-                    s.Show();
+                    Patient patient = patientController.GetPatientByUserId(id);
+                    if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patient.Id) == true)
+                    {
+                        MessageBox.Show("Blokirani ste i nije moguce da se ulogujete!");
+                    }
+                    else
+                    {
+                        s = new PatientUI(id);
+                        s.Show();
+                    }
                     break;
                 case "Doctor":
                     s = new DoctorUI(id);

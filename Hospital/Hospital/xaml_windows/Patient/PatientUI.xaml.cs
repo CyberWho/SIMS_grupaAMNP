@@ -23,16 +23,17 @@ namespace Hospital.xaml_windows.Patient
     /// </summary>
     public partial class PatientUI : Window
     {
-        int id;
+        private int userId;
         ReminderController reminderController = new ReminderController();
         PatientController patientController = new PatientController();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-
-
-        public PatientUI(int id)
+        AppointmentController appointmentController = new AppointmentController();
+        PatientLogsController patientLogsController = new PatientLogsController();
+        public PatientUI(int userId)
         {
             InitializeComponent();
-            this.id = id;
+            this.userId = userId;
+            ResetPatientLogsCounter();
             
         }
 
@@ -40,7 +41,7 @@ namespace Hospital.xaml_windows.Patient
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
             Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
             now = now.AddMilliseconds(-now.Millisecond);
@@ -52,34 +53,41 @@ namespace Hospital.xaml_windows.Patient
                 }
             }
         }
-
+        private void ResetPatientLogsCounter()
+        {
+            PatientLogs patientLogs = patientLogsController.GetPatientLogsByPatientId(patientController.GetPatientByUserId(userId).Id);
+            if((DateTime.Now - patientLogs.LastCounterReset).TotalDays >= 7)
+            {
+                patientLogsController.ResetPatientLogCounterByPatientId(patientController.GetPatientByUserId(userId).Id);
+            }
+        }
        
 
         
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientReminders(id);
-            s.Show();
+            var window = new PatientReminders(userId);
+            window.Show();
             this.Close();
         }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientInfo(id);
-            s.Show();
+            var window = new PatientInfo(userId);
+            window.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientAppointments(id);
-            s.Show();
+            var window = new PatientAppointments(userId);
+            window.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(id);
-            s.Show();
+            var window = new PatientUI(userId);
+            window.Show();
             this.Close();
         }
 
@@ -93,19 +101,43 @@ namespace Hospital.xaml_windows.Patient
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            var s = new MainWindow();
-            s.Show();
+            var window = new MainWindow();
+            window.Show();
             this.Close();
         }
 
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new PatientHealthRecord(userId);
+            window.Show();
+            this.Close();
         }
 
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
+            var window = new Doctors(userId);
+            window.Show();
+            this.Close();
+        }
 
+        private void OceniBolnicu_Click(object sender, RoutedEventArgs e)
+        {
+            if(appointmentController.CheckForAnyAppointmentsByPatientId(patientController.GetPatientByUserId(userId).Id) == false)
+            {
+                MessageBox.Show("Nazalost nije moguce da ocenite bolnicu jer nikada niste bili na pregledu!");
+            } else
+            {
+                var window = new HospitalRate(userId);
+                window.Show();
+            }
+           
+        }
+
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Notifications(userId);
+            window.Show();
+            this.Close();
         }
     }
 }

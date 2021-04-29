@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -16,10 +18,9 @@ namespace Hospital.Service
          return null;
       }
       
-      public System.Collections.ArrayList GetAllSystemNotificationsByUserId(int userId)
+      public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
       {
-         // TODO: implement
-         return null;
+            return systemNotificationRepository.GetAllSystemNotificationsByUserId(userId);
       }
       
       public Boolean DeleteSystemNotificationById(int id)
@@ -46,7 +47,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.SystemNotificationRepository systemNotificationRepository;
+      public Hospital.Repository.SystemNotificationRepository systemNotificationRepository = new Repository.SystemNotificationRepository();
    
    }
 }

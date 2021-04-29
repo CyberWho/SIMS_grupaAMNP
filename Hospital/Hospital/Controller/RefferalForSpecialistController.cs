@@ -26,11 +26,15 @@ namespace Hospital.Controller
       
       public ObservableCollection<ReferralForSpecialist> GetAllReferralsByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            //TODO: implement
+            return null;
       }
-      
-      public ObservableCollection<ReferralForSpecialist> GetAllReferralsByDoctorId(int doctorId)
+        public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
+        {
+            return referralForSpecialistService.GetReferralForSpecialistsByHealthRecordId(healthRecordId);
+        }
+
+        public ObservableCollection<ReferralForSpecialist> GetAllReferralsByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
@@ -38,8 +42,8 @@ namespace Hospital.Controller
       
       public Boolean DeleteReferralById(int id)
       {
-         // TODO: implement
-         return false;
+
+            return referralForSpecialistService.DeleteReferralById(id);
       }
       
       public Boolean DeleteReferralByPatientId(int patientId)
@@ -72,7 +76,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.ReferralForSpecialistService referralForSpecialistService;
+      public Hospital.Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService();
    
    }
 }

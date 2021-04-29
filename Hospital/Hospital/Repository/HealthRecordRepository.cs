@@ -48,21 +48,21 @@ namespace Hospital.Repository
 
             HealthRecord healthRecord = new HealthRecord();
 
-            PatientRepository pr = new PatientRepository();
-            UserRepository ur = new UserRepository();
+            PatientRepository patientRepository = new PatientRepository();
+            UserRepository userRepository = new UserRepository();
 
-            Patient p = pr.GetPatientById(id);
-            User u = ur.GetUserById(p.user_id);
-
+            Patient patient = patientRepository.GetPatientById(id);
+            User user = userRepository.GetUserById(patient.user_id);
+            patient.User = user;
             healthRecord.Id = int.Parse(reader.GetString(0));
             healthRecord.patient_id = int.Parse(reader.GetString(1));
 
-            if (u.Username.Contains("guestUser"))
+            if (user.Username.Contains("guestUser"))
             {
                 return healthRecord;
             }
 
-            MaritalStatus maritalStatus = MaritalStatus.MARRIED;
+            MaritalStatus maritalStatus = new MaritalStatus();
 
             switch (int.Parse(reader.GetString(3)))
             {
@@ -91,14 +91,18 @@ namespace Hospital.Repository
                     break;
             }
 
-            /*healthRecord.gender_id = int.Parse(reader.GetString(2));
-            healthRecord.marital_status_id = int.Parse(reader.GetString(3));
-            healthRecord.birth_place_id = int.Parse(reader.GetString(4));   */
+           
             healthRecord = new HealthRecord(int.Parse(reader.GetString(0)), gender,
                                                          maritalStatus, int.Parse(reader.GetString(4)));
             healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(reader.GetInt32(0));
             healthRecord.patient_id = id;
+            healthRecord.Patient = patient;
+            healthRecord.PlaceOfBirth = new CityRepository().GetCityById(reader.GetInt32(4));
+            healthRecord.Gender = gender;
+            healthRecord.MaritalStatus = maritalStatus;
             connection.Close();
+            
+
 
             return healthRecord;
         }

@@ -24,8 +24,8 @@ namespace Hospital.Controller
 
         public Hospital.Model.PatientLogs GetPatientLogsByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+          
+            return patientLogsService.GetPatientLogsByPatientId(patientId);
         }
 
         public Hospital.Model.PatientLogs UpdatePatientLogs(Hospital.Model.PatientLogs patientLogs)
@@ -39,6 +39,10 @@ namespace Hospital.Controller
             // TODO: implement
             return false;
         }
+        public Boolean ResetPatientLogCounterByPatientId(int patientId)
+        {
+            return patientLogsService.ResetPatientLogCounterByPatientId(patientId);
+        }
 
         public Boolean DeletePatientLogsByPatientId(int patientId)
         {
@@ -51,16 +55,23 @@ namespace Hospital.Controller
             // TODO: implement
             return false;
         }
-
-        public Hospital.Model.PatientLogs AddPatientLogs()
+        public Boolean IncrementLogCounterByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+            return patientLogsService.IncrementLogCounterByPatientId(patientId);
+        }
+        public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
+        {
+            return patientLogsService.CheckIfPatientIsBlockedByPatientId(patientId);
+        }
+
+        public Boolean AddPatientLogs(int patientId)
+        {
+            return patientLogsService.AddPatientLogs(patientId);
         }
 
        
 
-        public Hospital.Service.PatientLogsService patientLogsService;
+        public Hospital.Service.PatientLogsService patientLogsService = new Service.PatientLogsService();
 
     }
 }

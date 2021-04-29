@@ -32,7 +32,7 @@ namespace Hospital.xaml_windows.Secretary
         UserController userController = new UserController();
         PatientController patientController = new PatientController();
         HealthRecordController healthRecordController = new HealthRecordController();
-
+        
         public System.Collections.IEnumerable Patients { get; set; }
 
         User secretary { get; set; }
@@ -248,7 +248,7 @@ namespace Hospital.xaml_windows.Secretary
 
             connection.Close();
             connection.Dispose();
-
+           
             this.Close();
         }
         // TODO: ispraviti

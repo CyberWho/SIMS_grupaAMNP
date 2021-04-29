@@ -11,37 +11,37 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace Hospital.xaml_windows.Patient
 {
     /// <summary>
-    /// Interaction logic for PatientNewAppointment.xaml
+    /// Interaction logic for Notifications.xaml
     /// </summary>
-    public partial class PatientNewAppointment : Window
+    public partial class Notifications : Window
     {
         private int userId;
-        ObservableCollection<Hospital.Model.Doctor> Doctors = new ObservableCollection<Hospital.Model.Doctor>();
-        DoctorController doctorController = new DoctorController();
-        int priority = 0;
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        ReminderController reminderController = new ReminderController();
+        SystemNotificationsController SystemNotificationsController = new SystemNotificationsController();
+        ObservableCollection<SystemNotification> SystemNotifications = new ObservableCollection<SystemNotification>();
         PatientController patientController = new PatientController();
-        public PatientNewAppointment(int userId)
+        ReminderController reminderController = new ReminderController();
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        public Notifications(int userId)
         {
-            
             InitializeComponent();
             this.userId = userId;
-            this.DataContext = this;
             updateDataGrid();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
+        }
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
@@ -58,18 +58,15 @@ namespace Hospital.xaml_windows.Patient
                 }
             }
         }
-
-
-
         private void updateDataGrid()
         {
 
             this.DataContext = this;
 
-            Doctors = doctorController.GetAllGeneralPurposeDoctors();
+            SystemNotifications = SystemNotificationsController.GetAllSystemNotificationsByUserId(userId);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
-            myDataGrid.ItemsSource = Doctors;
+            myDataGrid.ItemsSource = SystemNotifications;
 
 
 
@@ -94,66 +91,11 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
-
-
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientReminders(userId);
             window.Show();
             this.Close();
-        }
-
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
-        }
-
-        private void myDataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-        private void Predlozi_Click(object sender, RoutedEventArgs e)
-        {
-            int doctorId = int.Parse(doc_id_txt.Text);
-            DateTime startDate = DateTime.Parse(date_txt.Text);
-            DateTime endDate = DateTime.Parse(date_end_txt.Text);
-            if(endDate <= startDate)
-            {
-                MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!");
-            } else
-            {
-                var dayDifference = (endDate - startDate).TotalDays;
-                if(dayDifference > 5)
-                {
-                    MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
-                } else
-                {
-                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId,priority,0);
-                    s.Show();
-                    this.Close();
-                }
-            }
-        }
-
-       
-
-        private void DoktorPrioritet_Checked(object sender, RoutedEventArgs e)
-        {
-            this.priority = 0;
-        }
-
-        private void VremePrioritet_Checked(object sender, RoutedEventArgs e)
-        {
-            this.priority = 1;
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
@@ -166,6 +108,12 @@ namespace Hospital.xaml_windows.Patient
             var window = new PatientHealthRecord(userId);
             window.Show();
             this.Close();
+        }
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+
+
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
@@ -180,5 +128,4 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
     }
-
 }

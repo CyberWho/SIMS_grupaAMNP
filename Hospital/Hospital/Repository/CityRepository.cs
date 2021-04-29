@@ -5,16 +5,47 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Model;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
+using System.Configuration;
 
 namespace Hospital.Repository
 {
    public class CityRepository
    {
-      public Hospital.Model.City GetCityById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
+        OracleConnection con = null;
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            con = new OracleConnection(conString);
+            try
+            {
+                con.Open();
+
+            }
+            catch (Exception exp)
+            {
+
+            }
+        }
+
+        public Hospital.Model.City GetCityById(int id)
+        {
+            setConnection();
+            City city = new City();
+            OracleCommand command = con.CreateCommand();
+            command.CommandText = "SELECT * FROM CITY WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            city.Id = id;
+            city.Name = reader.GetString(1);
+            city.PostalCode = reader.GetString(2);
+            city.State = new StateRepository().GetStateById(reader.GetInt32(3));
+            con.Close();
+            return city;
+        }
       
       public Hospital.Model.City GetCityByName(String name)
       {
