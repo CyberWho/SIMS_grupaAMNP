@@ -188,5 +188,11 @@ namespace Hospital.xaml_windows.Patient
             
             
         }
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
     }
 }

@@ -70,6 +70,11 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
         <Label Content="Oznaka uputa:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
         <Label Content="Oznaka doktora:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top"/>
         <Label Content="Ime doktora:" Grid.Column="2" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.492,-0.6"/>

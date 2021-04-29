@@ -90,6 +90,10 @@
         <RadioButton x:Name="VremePrioritet" GroupName="priority" Foreground="DeepSkyBlue" FontSize="16" Content="Vreme" VerticalAlignment="Top" Margin="223.6,278,465.6,0" Grid.Column="1" Height="26" Checked="VremePrioritet_Checked"/>
         <Label Content="Odabrani lekar:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Doktori opste prakse:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="378,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.68"/>
-
+        <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
