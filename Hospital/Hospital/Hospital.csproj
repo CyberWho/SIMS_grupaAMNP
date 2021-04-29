@@ -224,6 +224,9 @@
     <Compile Include="xaml_windows\Patient\PatientUpdateAppointment.xaml.cs">
       <DependentUpon>PatientUpdateAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
+      <DependentUpon>CreateNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\PatientAppointment.xaml.cs">
       <DependentUpon>PatientAppointment.xaml</DependentUpon>
     </Compile>
@@ -333,6 +336,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Patient\PatientUpdateAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\CreateNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

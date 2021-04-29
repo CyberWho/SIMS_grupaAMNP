@@ -169,7 +169,7 @@ namespace Hospital.xaml_windows.Secretary
             connection.Dispose();
         }
         // TODO: ispraviti
-        private void Obrisi_korisnika(object sender, RoutedEventArgs e)
+        private void Delete_user(object sender, RoutedEventArgs e)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection connection = new OracleConnection(conString);
@@ -189,7 +189,7 @@ namespace Hospital.xaml_windows.Secretary
             this.Refresh(sender, e);
         }
         // ispravljeno
-        private void Izmeni_korisnika(object sender, RoutedEventArgs e)
+        private void Update_user(object sender, RoutedEventArgs e)
         {
             User uUser = new User();
 
@@ -204,7 +204,7 @@ namespace Hospital.xaml_windows.Secretary
             // KADA SE KORISTI LISTVIEW NE KREIRA SE NPR NEW ROOM OBJEKAT NEGO SAMO OBJEKAT NEW {} I TO JE TO
         }
         // TODO: ispraviti
-        private void Dodaj_korisnika(object sender, RoutedEventArgs e)
+        private void Add_user(object sender, RoutedEventArgs e)
         {
             Window s = new PatientCreate(current_user_id);
             s.Show();
@@ -333,7 +333,7 @@ namespace Hospital.xaml_windows.Secretary
                 }
             }
         }
-        private void Karton_korisnika(object sender, RoutedEventArgs e)
+        private void User_record(object sender, RoutedEventArgs e)
         {
             User user = this.userController.GetUserById(current_user_id);
             Model.Patient patient = this.patientController.GetPatientByUserId(current_user_id);
@@ -344,13 +344,13 @@ namespace Hospital.xaml_windows.Secretary
 
 
         }
-        private void Zakazi_termin(object sender, RoutedEventArgs e)
+        private void Add_appointment(object sender, RoutedEventArgs e)
         {
             Window s = new PatientAppointment(this.patientController.GetPatientByUserId(current_user_id).Id);
             s.Show();
         }
 
-        private void Guest_nalog(object sender, RoutedEventArgs e)
+        private void Guest_user(object sender, RoutedEventArgs e)
         {
             _ = this.userController.GuestUser();
             this.Refresh(sender, e);
@@ -363,6 +363,13 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Pregled_termina(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void Notification(object sender, RoutedEventArgs e)
+        {
+            Window s = new CreateNotification(this.id);
+            s.Show();
 
         }
     }

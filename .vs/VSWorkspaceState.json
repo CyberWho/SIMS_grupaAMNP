@@ -3,6 +3,7 @@
     "",
     "\\Hospital",
     "\\Hospital\\Hospital",
+    "\\Hospital\\Hospital\\Controller",
     "\\Hospital\\Hospital\\Model",
     "\\Hospital\\Hospital\\Repository",
     "\\Hospital\\Hospital\\xaml_windows",
