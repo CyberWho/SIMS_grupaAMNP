@@ -176,7 +176,7 @@ namespace Hospital.xaml_windows.Patient
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         ReminderController reminderController = new ReminderController();
         PatientController patientController = new PatientController();
-
+        PatientLogsController patientLogsController = new PatientLogsController();
         public PatientUpdateAppointment(int userId,int appointmentId)
         {
             InitializeComponent();
@@ -248,8 +248,20 @@ namespace Hospital.xaml_windows.Patient
             int timeSlotId = int.Parse(timeslot_id_txt.Text);
             timeSlot = timeSlotController.GetTimeSlotById(timeSlotId);
             appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
-            var s = new PatientAppointments(userId);
-            s.Show();
+            Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(userId);
+            if (patientLogsController.IncrementLogCounterByPatientId(patient.Id) == false)
+            {
+                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
+                appointmentController.DeleteAppointmentByPatientId(patient.Id);
+                var windowLogOut = new MainWindow();
+                windowLogOut.Show();
+                this.Close();
+                return;
+            }
+            
+            var window = new PatientAppointments(userId);
+            window.Show();
             this.Close();
         }
 
