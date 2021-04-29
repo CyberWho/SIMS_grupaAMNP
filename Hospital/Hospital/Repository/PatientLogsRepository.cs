@@ -108,20 +108,31 @@ namespace Hospital.Repository
         }
         public Boolean ResetPatientLogCounterByPatientId(int patientId)
         {
+            UpdateLogCounterByPatientId(patientId);
+            UpdateLastCounterResetByPatientId(patientId);
+            return true;
+        }
+        public Boolean UpdateLogCounterByPatientId(int patientId)
+        {
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = 0 WHERE PATIENT_ID = :patient_id";
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             int executer = command.ExecuteNonQuery();
-            OracleCommand command1 = connection.CreateCommand();
-            command1.CommandText = "UPDATE PATIENT_LOGS SET LAST_COUNTER_RESET = :last_counter_reset WHERE PATIENT_ID = :patient_id";
-            command1.Parameters.Add("last_counter_reset", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
-            command1.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
-            int executer1 = command1.ExecuteNonQuery();
             connection.Close();
             return true;
         }
-
+        public Boolean UpdateLastCounterResetByPatientId(int patientId)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE PATIENT_LOGS SET LAST_COUNTER_RESET = :last_counter_reset WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("last_counter_reset", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            int executer = command.ExecuteNonQuery();
+            connection.Close();
+            return true;
+        }
         public Boolean DeletePatientLogsByPatientId(int patientId)
         {
             // TODO: implement
