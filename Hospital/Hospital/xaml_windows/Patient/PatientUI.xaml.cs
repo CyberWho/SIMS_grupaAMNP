@@ -132,5 +132,12 @@ namespace Hospital.xaml_windows.Patient
             }
            
         }
+
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Notifications(userId);
+            window.Show();
+            this.Close();
+        }
     }
 }

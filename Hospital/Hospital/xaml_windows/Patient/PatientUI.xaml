@@ -69,6 +69,11 @@
                 <Image Source="/Resources/Icons/icons8-exit-52.png" Height="30" Margin="0,0,48.6,0" RenderTransformOrigin="0.213,0.54"/>
             </StackPanel>
         </Button>
+        <Button x:Name="Notifications" Margin="10.2,0,56.6,428.4" Grid.Column="3" Background="White" Click="Notifications_Click" BorderBrush="White" Grid.ColumnSpan="2">
+            <StackPanel Height="60" Width="88">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" Height="30" Margin="0,0,48.6,0" RenderTransformOrigin="0.213,0.54"/>
+            </StackPanel>
+        </Button>
         <Button Content="Oceni bolnicu" x:Name="OceniBolnicu" Click="OceniBolnicu_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="282,340,0,0" VerticalAlignment="Top" Width="278" Height="37" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

@@ -504,5 +504,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-home-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-read-message-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
