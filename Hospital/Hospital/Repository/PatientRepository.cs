@@ -42,7 +42,8 @@ namespace Hospital.Repository
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM patient WHERE user_id = " + id;
+            command.CommandText = "SELECT * FROM patient WHERE user_id = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 

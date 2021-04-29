@@ -86,7 +86,7 @@ namespace Hospital.Repository
             PatientLogs patientLogs = GetPatientLogsByPatientId(patientId);
             int nextLogCounter = patientLogs.LogCounter;
             nextLogCounter += 1;
-            if(nextLogCounter == 11)
+            if(nextLogCounter == 10)
             {
                 return false;
             }

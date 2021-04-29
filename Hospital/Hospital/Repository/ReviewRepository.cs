@@ -14,14 +14,14 @@ namespace Hospital.Repository
 {
     class ReviewRepository
     {
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -50,14 +50,14 @@ namespace Hospital.Repository
         public Hospital.Model.Review NewReview(Hospital.Model.Review review)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "INSERT INTO REVIEW (RATE,DESCRIPTION,PATIENT_ID,DOCTOR_ID) VALUES (:rate,:description,:patient_id,:doctor_id)";
-            cmd.Parameters.Add("rate", OracleDbType.Int32).Value = review.Rate.ToString();
-            cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = review.Description;
-            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = review.patient.Id;
-            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = review.doctor.Id;
-            int executer = cmd.ExecuteNonQuery();
-            con.Close();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO REVIEW (RATE,DESCRIPTION,PATIENT_ID,DOCTOR_ID) VALUES (:rate,:description,:patient_id,:doctor_id)";
+            command.Parameters.Add("rate", OracleDbType.Int32).Value = review.Rate.ToString();
+            command.Parameters.Add("description", OracleDbType.Varchar2).Value = review.Description;
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = review.patient.Id;
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = review.doctor.Id;
+            int executer = command.ExecuteNonQuery();
+            connection.Close();
             return review;
         }
 
