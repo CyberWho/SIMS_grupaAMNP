@@ -13,6 +13,10 @@ namespace Hospital.Model
     {
         public Room room { get; set; }
 
+        private int employee_id { get; set; }
+        private int room_id { get; set; }
+        private int specialization_id { get; set; }
+
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
         {
@@ -182,6 +186,15 @@ namespace Hospital.Model
                     oldAppointment.SetDoctor((Doctor)null);
                 tmpAppointment.Clear();
             }
+        }
+
+        public Doctor(int id, int employee_id, int room_id, int specialization_id)
+        {
+            this.Id = id;
+            this.employee_id = employee_id;
+            this.room_id = room_id;
+            this.specialization_id = specialization_id;
+            
         }
 
         public Doctor(Room room, ArrayList workHours, Specialization specialization, ArrayList appointment)

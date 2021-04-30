@@ -4,27 +4,28 @@
  * Purpose: Definition of the Class Specialization
  ***********************************************************************/
 
-using System;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace Hospital.Model
 {
     public class Specialization
     {
+        public int id { get; set; }
         public string Type { get; set; }
 
-        public System.Collections.ArrayList doctor;
+        public ArrayList doctor;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetDoctor()
+        public ArrayList GetDoctor()
         {
             if (doctor == null)
-                doctor = new System.Collections.ArrayList();
+                doctor = new ArrayList();
             return doctor;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetDoctor(System.Collections.ArrayList newDoctor)
+        public void SetDoctor(ArrayList newDoctor)
         {
             RemoveAllDoctor();
             foreach (Doctor oDoctor in newDoctor)
@@ -37,7 +38,7 @@ namespace Hospital.Model
             if (newDoctor == null)
                 return;
             if (this.doctor == null)
-                this.doctor = new System.Collections.ArrayList();
+                this.doctor = new ArrayList();
             if (!this.doctor.Contains(newDoctor))
             {
                 this.doctor.Add(newDoctor);
@@ -63,7 +64,7 @@ namespace Hospital.Model
         {
             if (doctor != null)
             {
-                System.Collections.ArrayList tmpDoctor = new System.Collections.ArrayList();
+                ArrayList tmpDoctor = new ArrayList();
                 foreach (Doctor oldDoctor in doctor)
                     tmpDoctor.Add(oldDoctor);
                 doctor.Clear();
@@ -77,6 +78,12 @@ namespace Hospital.Model
         {
             Type = type;
             this.doctor = doctor;
+        }
+
+        public Specialization(int id, string type)
+        {
+            this.id = id;
+            this.Type = type;
         }
 
         public Specialization()

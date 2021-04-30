@@ -10,23 +10,25 @@ namespace Hospital.Repository
 {
     public class DoctorRepository
     {
-        OracleConnection con = null;
+        OracleConnection connection = null;
+        private OracleCommand command;
+        private OracleDataReader reader;
         RoomRepository roomRepository = new RoomRepository();
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
-
+                connection.Open();
+                command = connection.CreateCommand();
             }
             catch (Exception exp)
             {
 
             }
         }
-        public Hospital.Model.Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(int id)
         {
             // TODO: implement
             return null;
@@ -35,10 +37,9 @@ namespace Hospital.Repository
         public Doctor GetWorkHoursDoctorById(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            command.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            reader = command.ExecuteReader();
             reader.Read();
             User docUser = new User();
             docUser.Id = int.Parse(reader.GetString(0));
@@ -60,7 +61,7 @@ namespace Hospital.Repository
             Room room = new Room();
             doctor.room = room;
             doctor.room.Id = reader.GetInt32(14);
-            con.Close();
+            connection.Close();
             return doctor;
         }
 
@@ -68,7 +69,7 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.SPEC_ID = 1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -101,7 +102,7 @@ namespace Hospital.Repository
                 doctors.Add(doctor);
 
             }
-            con.Close();
+            connection.Close();
             return doctors;
         }
 
@@ -109,7 +110,7 @@ namespace Hospital.Repository
         {
             setConnection();
             User docUser = new User();
-            OracleCommand cmd1 = con.CreateCommand();
+            OracleCommand cmd1 = connection.CreateCommand();
             cmd1.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID =" + id + "AND USERS.ID = EMPLOYEE.USER_ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID";
 
 
@@ -134,7 +135,7 @@ namespace Hospital.Repository
 
             int roomdoc = a.GetInt32(14);
             int specId = a.GetInt32(15);
-            con.Close();
+            connection.Close();
             return doctor;
         }
 
@@ -144,10 +145,32 @@ namespace Hospital.Repository
             return null;
         }
 
-        public System.Collections.ArrayList GetAllDoctorsBySpecializationId(int specializationId)
+        public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            command.CommandText = "SELECT * FROM doctor WHERE spec_id = " + specializationId;
+            reader = command.ExecuteReader();
+
+            ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+
+            while (reader.Read())
+            {
+                int id = int.Parse(reader.GetString(0));
+                int employee_id = int.Parse(reader.GetString(1));
+                int room_id = int.Parse(reader.GetString(2));
+                
+                Doctor doctor = new
+                    Doctor(
+                        id, 
+                        employee_id, 
+                        room_id,
+                        specializationId
+                    );
+
+                doctors.Add(doctor);
+            }
+
+            return doctors;
         }
 
         public Boolean DeleteDoctorById(int doctorId)
@@ -156,13 +179,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+        public Doctor UpdateDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Doctor NewDoctor(Hospital.Model.Doctor doctor)
+        public Doctor NewDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;

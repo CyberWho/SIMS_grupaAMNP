@@ -356,9 +356,10 @@ namespace Hospital.xaml_windows.Secretary
             this.Refresh(sender, e);
         }
 
-        private void Hitan_termin(object sender, RoutedEventArgs e)
+        private void Urgent_Appointment(object sender, RoutedEventArgs e)
         {
-
+            Window s = new UrgentAppointment(current_user_id);
+            s.Show();
         }
 
         private void Pregled_termina(object sender, RoutedEventArgs e)

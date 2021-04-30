@@ -95,7 +95,7 @@ namespace Hospital.xaml_windows.Secretary
                 this.user_id = current_user_id;
                 this.patient_id = this.patientController.GetPatientByUserId(user_id).Id;
                 this.health_record_id = this.healthRecordController.GetHealthRecordByPatientId(patient_id).Id;
-                /////////////////////////////////////// ovde
+                /////////////////////////////////////// ovde ???????????????????????????
 
                 User user = this.userController.GetUserById(this.user_id);
                 if (!user.Username.Contains("guestUser"))
