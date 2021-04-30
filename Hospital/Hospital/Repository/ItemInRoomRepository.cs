@@ -84,7 +84,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.ItemInRoom UpdateItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        public ItemInRoom UpdateItemInRoom(ItemInRoom itemInRoom)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -127,6 +127,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
+                Trace.WriteLine(exp.ToString());
                 con.Close();
                 return null;
             }
