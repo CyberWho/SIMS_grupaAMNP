@@ -13,18 +13,17 @@ namespace Hospital.Repository
 {
     public class SystemNotificationRepository
     {
-        OracleConnection con = null;
-        private OracleCommand cmd;
+        OracleConnection connection = null;
+        private OracleCommand command;
         private OracleDataReader reader;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
-                cmd = con.CreateCommand();
-
+                connection.Open();
+                command = connection.CreateCommand();
             }
             catch (Exception exp)
             {
@@ -36,17 +35,30 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            cmd.CommandText =
+            command.CommandText =
                 "SELECT id, name, description, creation_date, expiration_date FROM system_notification WHERE viewed = 0 AND global = 1";
 
-            reader = cmd.ExecuteReader();
+            reader = command.ExecuteReader();
             ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
 
             while (reader.Read())
             {
-                SystemNotification systemNotification;
-                systemNotification = new SystemNotification(int.Parse(reader.GetString(0)), 
-                    reader.GetDateTime(3), reader.GetDateTime(4), reader.GetString(1), reader.GetString(2), true);
+                int id = int.Parse(reader.GetString(0));
+                string name = reader.GetString(1);
+                string description = reader.GetString(2);
+                DateTime creationDateTime = reader.GetDateTime(3);
+                DateTime expirationDateTime = reader.GetDateTime(4);
+                bool applicationWideNotification = true;
+
+                SystemNotification systemNotification = new 
+                    SystemNotification(
+                        id,
+                        creationDateTime,
+                        expirationDateTime,
+                        name,
+                        description,
+                        applicationWideNotification
+                    );
 
                 systemNotifications.Add(systemNotification);
             }
@@ -57,55 +69,88 @@ namespace Hospital.Repository
         public SystemNotification GetSystemNotificationById(int id)
         {
             setConnection();
-            cmd.CommandText = "SELECT * FROM system_notification WHERE id = " + id;
-            reader = cmd.ExecuteReader();
+            command.CommandText = "SELECT * FROM system_notification WHERE id = " + id;
+            reader = command.ExecuteReader();
             reader.Read();
 
             SystemNotification systemNotification;
+            
+            int intApplicationWideNotification = int.Parse(reader.GetString(5));
+            bool applicationWideNotification = intApplicationWideNotification == 1 ?  true : false;
 
-            if (int.Parse(reader.GetString(5)) == 1)
+            string name = reader.GetString(1);
+            string description = reader.GetString(2);
+            
+            if (applicationWideNotification)
             {
-                systemNotification = new SystemNotification(
-                    int.Parse(reader.GetString(0)),
-                    reader.GetDateTime(6),
-                    reader.GetDateTime(7),
-                    reader.GetString(1),
-                    reader.GetString(2),
-                    true
-                );
+                DateTime creationDateTime = reader.GetDateTime(6);
+                DateTime expirationDateTime = reader.GetDateTime(7);
+
+                systemNotification = new
+                    SystemNotification(
+                        id,
+                        creationDateTime,
+                        expirationDateTime,
+                        name,
+                        description,
+                        applicationWideNotification
+                    );
             }
+            // TODO: add enums for fields in the db so that they are known in model classes
             else
             {
-                systemNotification = new SystemNotification(
-                    int.Parse(reader.GetString(0)),
-                    reader.GetString(1),
-                    reader.GetString(2),
-                    int.Parse(reader.GetString(3))
-                );
+                int userId = int.Parse(reader.GetString(3));
+
+                systemNotification = new 
+                    SystemNotification(
+                        id,
+                        name, 
+                        description,
+                        userId
+                    );
             }
 
-            con.Close();
+            connection.Close();
             return systemNotification;
         }
 
         public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
+
+            command.CommandText = "SELECT * FROM SYSTEM_NOTIFICATION WHERE USER_ID = :user_id";
+            command.Parameters.Add("user_id", OracleDbType.Int32).Value = userId.ToString();
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                SystemNotification systemNotification = new SystemNotification();
+
+                // TODO: add id's as well, not sure how patient gets this data, there might be some difficulty with it
+
+                systemNotification.Id = reader.GetInt32(0);
+                systemNotification.Name = reader.GetString(1);
+                systemNotification.Description = reader.GetString(2);
+
+                systemNotifications.Add(systemNotification);
+            }
+
+            return systemNotifications;
         }
 
         public Boolean DeleteSystemNotificationById(int id)
         {
             setConnection();
-            cmd.CommandText = "DELETE FROM system_notification WHERE id = " + id;
+            command.CommandText = "DELETE FROM system_notification WHERE id = " + id;
 
-            if (cmd.ExecuteNonQuery() > 0)
+            if (command.ExecuteNonQuery() > 0)
             {
-                con.Close();
+                connection.Close();
                 return true;
             }
 
-            con.Close();
+            connection.Close();
             return false;
         }
 
@@ -117,32 +162,31 @@ namespace Hospital.Repository
 
         public SystemNotification UpdateSystemNotification(SystemNotification systemNotification)
         {
-            // systemNotification = this.GetSystemNotificationById(systemNotification.Id);
             setConnection();
             // maybe this is where were having issues, opening a connection while another one is open
 
-            cmd.CommandText =
+            command.CommandText =
                 "UPDATE system_notification SET name = :name, description = :description, creation_date = :creation_date, expiration_date = :expiration_date WHERE id = :id";
-            cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
-            cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
-            cmd.Parameters.Add("creation_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
-            cmd.Parameters.Add("expiration_date", OracleDbType.Date).Value = systemNotification.expirationDateTime;
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = systemNotification.Id;
+            command.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
+            command.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
+            command.Parameters.Add("creation_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
+            command.Parameters.Add("expiration_date", OracleDbType.Date).Value = systemNotification.expirationDateTime;
+            command.Parameters.Add("id", OracleDbType.Int32).Value = systemNotification.Id;
 
-            if (cmd.ExecuteNonQuery() > 0)
+            if (command.ExecuteNonQuery() > 0)
             {
-                con.Close();
+                connection.Close();
                 return systemNotification;
             }
 
-            con.Close();
+            connection.Close();
             return null;
         }
 
         public SystemNotification NewSystemNotification(SystemNotification systemNotification)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            command = connection.CreateCommand();
             int viewed = 0;
 
             // thinking about using the viewed field when creating system wide notifications to say that the notification expiration date has gone by, and so using this field, when generating the notification board im making sure the expired ones don't get pulled
@@ -152,30 +196,31 @@ namespace Hospital.Repository
 
             if (!systemNotification.applicationWideNotification)
             {
-                cmd.CommandText = "INSERT INTO system_notification (name, description, user_id, viewed, global, creation_date) VALUES (:name, :description, :user_id, :viewed, 0, :c_date)";
-                cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
-                cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
-                cmd.Parameters.Add("user_id", OracleDbType.Int32).Value = systemNotification.user_id.ToString();
-                cmd.Parameters.Add("viewed", OracleDbType.Int32).Value = viewed.ToString();
-                //cmd.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
-                cmd.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
+                command.CommandText = "INSERT INTO system_notification (name, description, user_id, viewed, global, creation_date) VALUES (:name, :description, :user_id, :viewed, 0, :c_date)";
+                command.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
+                command.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
+                command.Parameters.Add("user_id", OracleDbType.Int32).Value = systemNotification.user_id.ToString();
+                command.Parameters.Add("viewed", OracleDbType.Int32).Value = viewed.ToString();
+                //command.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
+                command.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
             }
             else
             {
-                cmd.CommandText = "INSERT INTO system_notification (name, description, viewed, global, creation_date, expiration_date) VALUES (:name, :description, 0, 1, :c_date, :e_date)";
-                cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
-                cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
-                //cmd.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
-                cmd.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
-                cmd.Parameters.Add("e_date", OracleDbType.Date).Value = systemNotification.expirationDateTime;
+                command.CommandText = "INSERT INTO system_notification (name, description, viewed, global, creation_date, expiration_date) VALUES (:name, :description, 0, 1, :c_date, :e_date)";
+                command.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
+                command.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
+                //command.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
+                command.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
+                command.Parameters.Add("e_date", OracleDbType.Date).Value = systemNotification.expirationDateTime;
             }
 
-            if (cmd.ExecuteNonQuery() > 0)
+            if (command.ExecuteNonQuery() > 0)
             {
-                con.Close();
+                connection.Close();
                 return systemNotification;
             }
 
+            connection.Close();
             return null;
         }
 
@@ -183,13 +228,13 @@ namespace Hospital.Repository
         {
             setConnection();
             int id = 0;
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT MAX(ID) FROM APPOINTMENT";
             OracleDataReader reader = cmd.ExecuteReader();
             reader = cmd.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
-            con.Close();
+            connection.Close();
             return id;
         }
 
