@@ -78,6 +78,13 @@ namespace Hospital.Model
             Description = description;
             this.users = users;
         }
+        public SystemNotification(int id, string name, string description, int userId)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            user_id = userId;
+        }
 
         public SystemNotification(int id, string name, string description)
         {
@@ -89,6 +96,7 @@ namespace Hospital.Model
         public SystemNotification(int id, DateTime creationDateTime, DateTime expirationDateTime, string notificationName,
             string notificationDescription, bool applicationWideNotification)
         {
+            this.Id = id;
             this.creationDateTime = creationDateTime;
             this.expirationDateTime = expirationDateTime;
             this.Name = notificationName;

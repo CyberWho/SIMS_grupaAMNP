@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 using Hospital.Repository;
 
 namespace Hospital.Service
@@ -12,10 +14,17 @@ namespace Hospital.Service
     public class SystemNotificationService
     {
         public SystemNotificationRepository systemNotificationRepository = new SystemNotificationRepository();
-        public Hospital.Model.SystemNotification GetSystemNotificationById(int id)
+
+        public ObservableCollection<SystemNotification> GetAllSystemWideSystemNotifications()
         {
-            // TODO: implement
-            return null;
+            return this.systemNotificationRepository.GetAllSystemWideSystemNotifications();
+        }
+
+
+
+        public SystemNotification GetSystemNotificationById(int id)
+        {
+            return this.systemNotificationRepository.GetSystemNotificationById(id);
         }
 
         public System.Collections.ArrayList GetAllSystemNotificationsByUserId(int userId)
@@ -26,8 +35,7 @@ namespace Hospital.Service
 
         public Boolean DeleteSystemNotificationById(int id)
         {
-            // TODO: implement
-            return false;
+            return this.systemNotificationRepository.DeleteSystemNotificationById(id);
         }
 
         public Boolean DeleteAllSystemNotificationsByUserId(int userId)
@@ -36,13 +44,12 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.SystemNotification UpdateSystemNotification(Hospital.Model.SystemNotification systemNotification)
+        public SystemNotification UpdateSystemNotification(SystemNotification systemNotification)
         {
-            // TODO: implement
-            return null;
+            return this.systemNotificationRepository.UpdateSystemNotification(systemNotification);
         }
 
-        public Hospital.Model.SystemNotification AddSystemNotification(Hospital.Model.SystemNotification systemNotification)
+        public SystemNotification AddSystemNotification(SystemNotification systemNotification)
         {
             return this.systemNotificationRepository.NewSystemNotification(systemNotification);
         }

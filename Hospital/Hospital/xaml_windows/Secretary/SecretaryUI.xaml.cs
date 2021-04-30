@@ -365,12 +365,11 @@ namespace Hospital.xaml_windows.Secretary
         {
 
         }
-
-        private void Notification(object sender, RoutedEventArgs e)
+        
+        private void Notifications(object sender, RoutedEventArgs e)
         {
-            Window s = new CreateNotification(this.id);
+            Window s = new Notifications(this.id);
             s.Show();
-
         }
     }
 }

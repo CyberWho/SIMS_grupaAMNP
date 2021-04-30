@@ -25,16 +25,19 @@ namespace Hospital.xaml_windows.Secretary
         public SystemNotification systemNotification;
         public SystemNotificationsController systemNotificationsController = new SystemNotificationsController();
 
-       public CreateNotification(int id)
+        public CreateNotification(int id)
         {
             InitializeComponent();
             this.id = id;
         }
 
-        private void Make_notification(object sender, RoutedEventArgs e)
+        private void Make_Notification(object sender, RoutedEventArgs e)
         {
             DateTime startDate;
             DateTime endDate;
+
+            // date handling, i don't wanna have to input dates at any point in my life
+            // dates suck
 
             if (start_date.Text.Equals(""))
             {
@@ -54,9 +57,6 @@ namespace Hospital.xaml_windows.Secretary
                 endDate = DateTime.Parse(end_date.Text);
             }
 
-            //MessageBox.Show(startDate.ToString());
-            //MessageBox.Show(endDate.ToString());
-
             String notificationTitle = not_title.Text;
             String notificationDescription = not_desc.Text;
 
@@ -67,6 +67,7 @@ namespace Hospital.xaml_windows.Secretary
                 new SystemNotification(0, startDate, endDate, notificationTitle, notificationDescription, true);
 
             this.systemNotificationsController.AddSystemNotification(systemNotification);
+            this.Close();
         }
     }
 }

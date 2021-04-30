@@ -7,12 +7,15 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Repository
 {
     public class SystemNotificationRepository
     {
         OracleConnection con = null;
+        private OracleCommand cmd;
+        private OracleDataReader reader;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -20,6 +23,7 @@ namespace Hospital.Repository
             try
             {
                 con.Open();
+                cmd = con.CreateCommand();
 
             }
             catch (Exception exp)
@@ -28,13 +32,63 @@ namespace Hospital.Repository
             }
         }
 
-        public Hospital.Model.SystemNotification GetSystemNotificationById(int id)
+        public ObservableCollection<SystemNotification> GetAllSystemWideSystemNotifications()
         {
-            // TODO: implement
-            return null;
+            setConnection();
+
+            cmd.CommandText =
+                "SELECT id, name, description, creation_date, expiration_date FROM system_notification WHERE viewed = 0 AND global = 1";
+
+            reader = cmd.ExecuteReader();
+            ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
+
+            while (reader.Read())
+            {
+                SystemNotification systemNotification;
+                systemNotification = new SystemNotification(int.Parse(reader.GetString(0)), 
+                    reader.GetDateTime(3), reader.GetDateTime(4), reader.GetString(1), reader.GetString(2), true);
+
+                systemNotifications.Add(systemNotification);
+            }
+
+            return systemNotifications;
         }
 
-        public System.Collections.ArrayList GetAllSystemNotificationsByUserId(int userId)
+        public SystemNotification GetSystemNotificationById(int id)
+        {
+            setConnection();
+            cmd.CommandText = "SELECT * FROM system_notification WHERE id = " + id;
+            reader = cmd.ExecuteReader();
+            reader.Read();
+
+            SystemNotification systemNotification;
+
+            if (int.Parse(reader.GetString(5)) == 1)
+            {
+                systemNotification = new SystemNotification(
+                    int.Parse(reader.GetString(0)),
+                    reader.GetDateTime(6),
+                    reader.GetDateTime(7),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    true
+                );
+            }
+            else
+            {
+                systemNotification = new SystemNotification(
+                    int.Parse(reader.GetString(0)),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    int.Parse(reader.GetString(3))
+                );
+            }
+
+            con.Close();
+            return systemNotification;
+        }
+
+        public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
         {
             // TODO: implement
             return null;
@@ -42,7 +96,16 @@ namespace Hospital.Repository
 
         public Boolean DeleteSystemNotificationById(int id)
         {
-            // TODO: implement
+            setConnection();
+            cmd.CommandText = "DELETE FROM system_notification WHERE id = " + id;
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                con.Close();
+                return true;
+            }
+
+            con.Close();
             return false;
         }
 
@@ -54,9 +117,25 @@ namespace Hospital.Repository
 
         public SystemNotification UpdateSystemNotification(SystemNotification systemNotification)
         {
+            // systemNotification = this.GetSystemNotificationById(systemNotification.Id);
+            setConnection();
+            // maybe this is where were having issues, opening a connection while another one is open
 
+            cmd.CommandText =
+                "UPDATE system_notification SET name = :name, description = :description, creation_date = :creation_date, expiration_date = :expiration_date WHERE id = :id";
+            cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
+            cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
+            cmd.Parameters.Add("creation_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
+            cmd.Parameters.Add("expiration_date", OracleDbType.Date).Value = systemNotification.expirationDateTime;
+            cmd.Parameters.Add("id", OracleDbType.Int32).Value = systemNotification.Id;
 
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                con.Close();
+                return systemNotification;
+            }
 
+            con.Close();
             return null;
         }
 
