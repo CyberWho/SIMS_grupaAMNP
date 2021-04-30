@@ -7,10 +7,6 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
-using Hospital.Model;
 
 namespace Hospital.Repository
 {
@@ -47,8 +43,6 @@ namespace Hospital.Repository
 
             return this.GetAddressById(int.Parse(reader.GetString(0)));
         }
-
-
 
         public Address GetAddressById(int id)
         {

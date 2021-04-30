@@ -20,14 +20,13 @@ namespace Hospital.Repository
             try
             {
                 connection.Open();
-
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
-        public Hospital.Model.Room GetRoomById(int id)
+        public Room GetRoomById(int id)
       {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -175,7 +174,7 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.Room UpdateRoom(Hospital.Model.Room room)
+      public Room UpdateRoom(Room room)
       {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
