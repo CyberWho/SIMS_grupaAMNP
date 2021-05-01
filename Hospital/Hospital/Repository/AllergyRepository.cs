@@ -46,7 +46,9 @@ namespace Hospital.Repository
             reader = command.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
+            
             connection.Close();
+            connection.Dispose();
 
             return id;
         }
@@ -117,18 +119,28 @@ namespace Hospital.Repository
 
             int allergyId = int.Parse(reader.GetString(0));
 
+            connection.Close();
+            connection.Dispose();
+
             return this.DeleteAllergyById(allergyId);
         }
 
         public Boolean DeleteAllergyById(int id)
         {
+            
+
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "DELETE FROM allergy WHERE id = " + id;
 
             if (cmd.ExecuteNonQuery() > 0)
             {
+                connection.Close();
+                connection.Dispose();
                 return true;
             }
+
+            connection.Close();
+            connection.Dispose();
 
             return false;
         }
@@ -158,10 +170,13 @@ namespace Hospital.Repository
             if (command.ExecuteNonQuery() > 0)
             {
                 connection.Close();
+                connection.Dispose();
                 return allergy;
             }
-
+            
             connection.Close();
+            connection.Dispose();
+
             return null;
         }
 

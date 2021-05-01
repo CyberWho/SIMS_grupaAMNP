@@ -14,14 +14,14 @@ namespace Hospital.Repository
     public class DrugRepository
     {
 
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -39,7 +39,7 @@ namespace Hospital.Repository
         {
             ObservableCollection<Drug> drugs = new ObservableCollection<Drug>();
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from drug, inventory_item where drug.INVNTORY_ITEM_ID = inventory_item.ID";
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())

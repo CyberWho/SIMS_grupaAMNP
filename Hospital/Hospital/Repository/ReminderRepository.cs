@@ -13,16 +13,16 @@ using System.Configuration;
 
 namespace Hospital.Repository
 {
-   public class ReminderRepository
-   {
-        OracleConnection con = null;
+    public class ReminderRepository
+    {
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -31,43 +31,47 @@ namespace Hospital.Repository
             }
         }
         public Hospital.Model.Reminder GetReminderById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
-      {
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
+        {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
             cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
+            while (reader.Read())
             {
                 Reminder reminder = new Reminder();
                 reminder.Id = reader.GetInt32(0);
                 reminder.Name = reader.GetString(1);
                 reminder.Description = reader.GetString(2);
                 reminder.AlarmTime = reader.GetDateTime(3);
-                if(reminder.AlarmTime >= DateTime.Now)
+                if (reminder.AlarmTime >= DateTime.Now)
                 {
                     continue;
-                } else
+                }
+                else
                 {
                     reminders.Add(reminder);
                 }
-                
+
             }
-            con.Close();
-         return reminders;
-      }
-        public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime,int patientId)
+
+            connection.Close();
+            connection.Dispose();
+
+            return reminders;
+        }
+        public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
         {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
             cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
@@ -88,7 +92,10 @@ namespace Hospital.Repository
                 }
 
             }
-            con.Close();
+
+            connection.Close();
+            connection.Dispose();
+
             return reminders;
         }
 
@@ -96,7 +103,7 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
             cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
@@ -117,48 +124,54 @@ namespace Hospital.Repository
                 }
 
             }
-            con.Close();
+
+            connection.Close();
+            connection.Dispose();
+
             return reminders;
         }
-      
-      public Boolean DeleteReminderById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteAllRemindersByPatientId(int patientId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Reminder NewReminder(Hospital.Model.Reminder reminder)
-      {
+
+        public Boolean DeleteReminderById(int id)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Boolean DeleteAllRemindersByPatientId(int patientId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.Reminder NewReminder(Hospital.Model.Reminder reminder)
+        {
             setConnection();
             OracleCommand cmd = new OracleCommand();
-            cmd = con.CreateCommand();
+            cmd = connection.CreateCommand();
             cmd.CommandText = "INSERT INTO REMINDER (NAME,DESCRIPTION,ALARM_TIME,PATIENT_ID) VALUES (:name,:description,:alarm_time,:patient_id)";
             cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = reminder.Name;
             cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = reminder.Description;
             cmd.Parameters.Add("alarm_time", OracleDbType.Date).Value = reminder.AlarmTime;
             cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = reminder.Patient.Id;
             int a = cmd.ExecuteNonQuery();
-            con.Close();
+
+            connection.Close();
+            connection.Dispose();
+
             return reminder;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
-   
-   }
+        }
+
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
+
+    }
 }

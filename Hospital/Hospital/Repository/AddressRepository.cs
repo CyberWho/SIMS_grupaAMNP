@@ -19,8 +19,6 @@ namespace Hospital.Repository
         PatientRepository patientRepository = new PatientRepository();
 
         OracleConnection connection = null;
-        private OracleCommand command;
-        private OracleDataReader reader;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -40,11 +38,13 @@ namespace Hospital.Repository
         public Address GetAddressByPatientId(int id)
         {
             setConnection();
-
-            command = connection.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT address_id FROM patient WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
+
+            connection.Close();
+            connection.Dispose();
 
             return this.GetAddressById(int.Parse(reader.GetString(0)));
         }
@@ -55,9 +55,9 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            command = connection.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM address WHERE id = " + id;
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
             Address address = new Address
@@ -66,6 +66,9 @@ namespace Hospital.Repository
                 Name = reader.GetString(1),
                 city_id = int.Parse(reader.GetString(2))
             };
+
+            connection.Close();
+            connection.Dispose();
 
             return address;
         }

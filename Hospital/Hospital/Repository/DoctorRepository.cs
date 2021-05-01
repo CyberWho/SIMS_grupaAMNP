@@ -11,8 +11,6 @@ namespace Hospital.Repository
     public class DoctorRepository
     {
         OracleConnection connection = null;
-        private OracleCommand command;
-        private OracleDataReader reader;
         RoomRepository roomRepository = new RoomRepository();
         private void setConnection()
         {
@@ -21,7 +19,6 @@ namespace Hospital.Repository
             try
             {
                 connection.Open();
-                command = connection.CreateCommand();
             }
             catch (Exception exp)
             {
@@ -37,9 +34,10 @@ namespace Hospital.Repository
         public Doctor GetWorkHoursDoctorById(int id)
         {
             setConnection();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             User docUser = new User();
             docUser.Id = int.Parse(reader.GetString(0));
@@ -61,7 +59,10 @@ namespace Hospital.Repository
             Room room = new Room();
             doctor.room = room;
             doctor.room.Id = reader.GetInt32(14);
+
             connection.Close();
+            connection.Dispose();
+            
             return doctor;
         }
 
@@ -102,7 +103,10 @@ namespace Hospital.Repository
                 doctors.Add(doctor);
 
             }
+
             connection.Close();
+            connection.Dispose();
+            
             return doctors;
         }
 
@@ -135,7 +139,10 @@ namespace Hospital.Repository
 
             int roomdoc = a.GetInt32(14);
             int specId = a.GetInt32(15);
+
             connection.Close();
+            connection.Dispose();
+            
             return doctor;
         }
 
@@ -148,8 +155,9 @@ namespace Hospital.Repository
         public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
         {
             setConnection();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM doctor WHERE spec_id = " + specializationId;
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
 
             ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
 
@@ -169,6 +177,9 @@ namespace Hospital.Repository
 
                 doctors.Add(doctor);
             }
+
+            connection.Close();
+            connection.Dispose();
 
             return doctors;
         }

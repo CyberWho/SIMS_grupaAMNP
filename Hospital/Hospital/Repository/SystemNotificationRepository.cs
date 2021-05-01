@@ -14,8 +14,6 @@ namespace Hospital.Repository
     public class SystemNotificationRepository
     {
         OracleConnection connection = null;
-        private OracleCommand command;
-        private OracleDataReader reader;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -23,7 +21,7 @@ namespace Hospital.Repository
             try
             {
                 connection.Open();
-                command = connection.CreateCommand();
+                //command = connection.CreateCommand();
             }
             catch (Exception exp)
             {
@@ -35,10 +33,11 @@ namespace Hospital.Repository
         {
             setConnection();
 
+            OracleCommand command = connection.CreateCommand();
             command.CommandText =
                 "SELECT id, name, description, creation_date, expiration_date FROM system_notification WHERE viewed = 0 AND global = 1";
 
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
             ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
 
             while (reader.Read())
@@ -63,14 +62,18 @@ namespace Hospital.Repository
                 systemNotifications.Add(systemNotification);
             }
 
+            connection.Close();
+            connection.Dispose();
+
             return systemNotifications;
         }
 
         public SystemNotification GetSystemNotificationById(int id)
         {
             setConnection();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM system_notification WHERE id = " + id;
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
             SystemNotification systemNotification;
@@ -111,6 +114,8 @@ namespace Hospital.Repository
             }
 
             connection.Close();
+            connection.Dispose();
+
             return systemNotification;
         }
 
@@ -119,9 +124,10 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
 
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM SYSTEM_NOTIFICATION WHERE USER_ID = :user_id";
             command.Parameters.Add("user_id", OracleDbType.Int32).Value = userId.ToString();
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
@@ -136,21 +142,30 @@ namespace Hospital.Repository
                 systemNotifications.Add(systemNotification);
             }
 
+            connection.Close();
+            connection.Dispose();
+
             return systemNotifications;
         }
 
         public Boolean DeleteSystemNotificationById(int id)
         {
             setConnection();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "DELETE FROM system_notification WHERE id = " + id;
 
             if (command.ExecuteNonQuery() > 0)
             {
+
                 connection.Close();
+                connection.Dispose();
+
                 return true;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return false;
         }
 
@@ -165,6 +180,7 @@ namespace Hospital.Repository
             setConnection();
             // maybe this is where were having issues, opening a connection while another one is open
 
+            OracleCommand command = connection.CreateCommand();
             command.CommandText =
                 "UPDATE system_notification SET name = :name, description = :description, creation_date = :creation_date, expiration_date = :expiration_date WHERE id = :id";
             command.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
@@ -176,17 +192,21 @@ namespace Hospital.Repository
             if (command.ExecuteNonQuery() > 0)
             {
                 connection.Close();
+                connection.Dispose();
+
                 return systemNotification;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
         public SystemNotification NewSystemNotification(SystemNotification systemNotification)
         {
             setConnection();
-            command = connection.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             int viewed = 0;
 
             // thinking about using the viewed field when creating system wide notifications to say that the notification expiration date has gone by, and so using this field, when generating the notification board im making sure the expired ones don't get pulled
@@ -217,10 +237,14 @@ namespace Hospital.Repository
             if (command.ExecuteNonQuery() > 0)
             {
                 connection.Close();
+                connection.Dispose();
+
                 return systemNotification;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return null;
         }
 

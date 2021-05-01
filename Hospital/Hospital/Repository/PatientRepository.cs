@@ -18,13 +18,13 @@ namespace Hospital.Repository
     public class PatientRepository
     {
 
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try { 
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -40,7 +40,7 @@ namespace Hospital.Repository
             UserRepository userRepository = new UserRepository();
             setConnection();
 
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM patient WHERE user_id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -68,7 +68,9 @@ namespace Hospital.Repository
                 patient.User = user;
             }
             
-            con.Close();
+            connection.Close();
+            connection.Dispose();
+
             return patient;
         }
 
@@ -76,7 +78,7 @@ namespace Hospital.Repository
         public Patient GetPatientById(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE patient.ID = :id AND USERS.ID = PATIENT.USER_ID";
             cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
@@ -111,14 +113,17 @@ namespace Hospital.Repository
 
             //Address address = addressRepository.GetAddressById(addressId);
             //patient.Address = address;
-            con.Close();
+
+            connection.Close();
+            connection.Dispose(); 
+            
             return patient;
         }
 
         public Hospital.Model.Patient GetPatientByPatientId(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID and PATIENT.ID = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
@@ -166,7 +171,10 @@ namespace Hospital.Repository
                 City = city
             };
             patient.Address = address;
-            con.Close();
+
+            connection.Close();
+            connection.Dispose(); 
+
             return patient;
         }
 
@@ -175,7 +183,7 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
 
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID";
 
             OracleDataReader reader = cmd.ExecuteReader();
@@ -201,7 +209,9 @@ namespace Hospital.Repository
                 patients.Add(patient);
             }
 
-            con.Close();
+            connection.Close();
+            connection.Dispose();
+
             return patients;
         }
 
@@ -226,7 +236,7 @@ namespace Hospital.Repository
         public Patient NewPatient(Patient patient, int guest = 0)
         {
             setConnection();
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
 
             int last_id = this.GetLastId() + 1;
             patient.Id = last_id;
@@ -240,7 +250,9 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
-                    con.Close();
+                    connection.Close();
+                    connection.Dispose();
+
                     return patient;
                 }
             }
@@ -249,6 +261,9 @@ namespace Hospital.Repository
 
             }
 
+            connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
@@ -256,13 +271,14 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT MAX(id) FROM patient";
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
 
-            con.Close();
+            connection.Close();
+            connection.Dispose();
 
             return last_id;
         }

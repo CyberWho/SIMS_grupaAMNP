@@ -36,7 +36,7 @@ namespace Hospital.Repository
 
             }
         }
-       
+
 
         public Appointment GetAppointmentById(int id)
         {
@@ -96,7 +96,10 @@ namespace Hospital.Repository
             Doctor doctor = new Doctor();
             doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
             appointment.doctor = doctor;
+
             connection.Close();
+            connection.Dispose();
+
             return appointment;
         }
 
@@ -104,13 +107,14 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            int id = (int) AppointmentStatus.RESERVED;
+            int id = (int)AppointmentStatus.RESERVED;
 
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM appointment WHERE appstat_id = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
 
-
+            connection.Close();
+            connection.Dispose();
 
             return null;
         }
@@ -169,6 +173,10 @@ namespace Hospital.Repository
                    appointmentStatus, doctor_id, patient_id, room_id);
                 appointmnets.Add(ap);
             }
+
+            connection.Close();
+            connection.Dispose();
+
             return appointmnets;
         }
 
@@ -222,7 +230,10 @@ namespace Hospital.Repository
                 appointments.Add(appointment);
 
             }
+
             connection.Close();
+            connection.Dispose();
+
             return appointments;
         }
 
@@ -247,6 +258,8 @@ namespace Hospital.Repository
             }
 
             connection.Close();
+            connection.Dispose();
+
             return false;
         }
         private void ObavestiPacijenta(Appointment app, String Name)
@@ -295,15 +308,19 @@ namespace Hospital.Repository
             {
                 ObavestiPacijenta(appointment, "Izmenjen termin");
                 ObavestiLekara(appointment, "Izmenjen termin");
+
                 connection.Close();
+                connection.Dispose();
                 return appointment;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return appointment;
-      }
-      
-       public Appointment UpdateAppointmentRoom(Appointment appointment, Room room)
+        }
+
+        public Appointment UpdateAppointmentRoom(Appointment appointment, Room room)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
@@ -316,13 +333,18 @@ namespace Hospital.Repository
             {
                 ObavestiPacijenta(appointment, "Izmenjen termin");
                 ObavestiLekara(appointment, "Izmenjen termin");
+
                 connection.Close();
+                connection.Dispose();
+
                 return appointment;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return appointment;
-           
+
         }
 
         public Appointment UpdateAppointmentStatus(Appointment appointment, AppointmentStatus appointmentStatus)
@@ -333,7 +355,10 @@ namespace Hospital.Repository
             cmd.Parameters.Add("APPOINTMENT_STATUS", OracleDbType.Date).Value = appointmentStatus.ToString();
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
             int a = cmd.ExecuteNonQuery();
+
             connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
@@ -359,10 +384,14 @@ namespace Hospital.Repository
             if (command.ExecuteNonQuery() > 0)
             {
                 connection.Close();
+                connection.Dispose();
+
                 return appointment;
-            } 
+            }
 
             connection.Close();
+            connection.Dispose();
+
             return appointment;
 
         }
@@ -377,9 +406,12 @@ namespace Hospital.Repository
             reader = cmd.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
+
             connection.Close();
+            connection.Dispose();
+
             return id;
-      }
-   
-   }
+        }
+
+    }
 }

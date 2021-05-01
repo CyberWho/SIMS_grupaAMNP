@@ -53,6 +53,9 @@ namespace Hospital.Repository
             HealthRecord healthRecord = new HealthRecord();
             healthRecord.patient_id = patient.Id;
             healthRecord = this.healthRecordRepository.NewHealthRecord(healthRecord, 1);
+            
+            connection.Close();
+            connection.Dispose();
 
             return user;
         }
@@ -83,6 +86,7 @@ namespace Hospital.Repository
             user.EMail = reader.GetString(6);
 
             connection.Close();
+            connection.Dispose();
 
             return user;
         }
@@ -133,6 +137,9 @@ namespace Hospital.Repository
                 users.Add(nUser);
             }
 
+            connection.Close();
+            connection.Dispose();
+
             return users;
         }
 
@@ -171,6 +178,8 @@ namespace Hospital.Repository
                 if (command.ExecuteNonQuery() > 0)
                 {
                     connection.Close();
+                    connection.Dispose();
+
                     return user;
                 }
             }
@@ -180,8 +189,9 @@ namespace Hospital.Repository
 
             }
 
-
             connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
@@ -194,9 +204,10 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
-
+            
             connection.Close();
-
+            connection.Dispose();
+            
             return last_id;
         }
 

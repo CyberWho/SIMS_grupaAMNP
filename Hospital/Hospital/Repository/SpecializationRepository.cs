@@ -13,8 +13,6 @@ namespace Hospital.Repository
     {
 
         OracleConnection connection = null;
-        private OracleCommand command;
-        private OracleDataReader reader;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -22,7 +20,6 @@ namespace Hospital.Repository
             try
             {
                 connection.Open();
-                command = connection.CreateCommand();
             }
             catch (Exception exp)
             {
@@ -40,8 +37,9 @@ namespace Hospital.Repository
             // id of general specialization is 1, and for urgent appointments it is not necessary to pull that data among other
             int generalSpecialization = 1;
 
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM specialization WHERE id != " + generalSpecialization;
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
@@ -57,6 +55,9 @@ namespace Hospital.Repository
                 specializations.Add(specialization);
             }
 
+            connection.Close();
+            connection.Dispose();
+
             return specializations;
         }
 
@@ -64,11 +65,15 @@ namespace Hospital.Repository
         {
             setConnection();
 
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM specialization WHERE spectype LIKE '" + type + "'";
-            reader = command.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
             int id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
 
             return id;
         }

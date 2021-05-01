@@ -98,7 +98,9 @@ namespace Hospital.Repository
                                                          maritalStatus, int.Parse(reader.GetString(4)));
             healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(reader.GetInt32(0));
             healthRecord.patient_id = id;
+
             connection.Close();
+            connection.Dispose();
 
             return healthRecord;
         }
@@ -145,6 +147,8 @@ namespace Hospital.Repository
                 if (command.ExecuteNonQuery() > 0)
                 {
                     connection.Close();
+                    connection.Dispose();
+
                     return healthRecord;
                 }
             }
@@ -152,6 +156,9 @@ namespace Hospital.Repository
             {
 
             }
+
+            connection.Close();
+            connection.Dispose();
 
             return null;
         }

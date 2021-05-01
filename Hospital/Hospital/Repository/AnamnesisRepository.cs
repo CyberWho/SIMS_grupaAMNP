@@ -13,15 +13,15 @@ namespace Hospital.Repository
 {
     public class AnamnesisRepository
     {
-        OracleConnection con = null;
+        OracleConnection connection = null;
 
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -34,7 +34,7 @@ namespace Hospital.Repository
 
             //health record repo dopunjava jos anamnezu
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from anamnesis where id = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
@@ -44,6 +44,10 @@ namespace Hospital.Repository
             anamnesis.Description = reader.GetString(1);
             anamnesis.MedicalTreatments = new Repository.MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(id);
             anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(id);
+
+            connection.Close();
+            connection.Dispose();
+
             return anamnesis;
         }
 
@@ -51,7 +55,7 @@ namespace Hospital.Repository
         {
 
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "select * from anamnesis where health_record_id = " + healthRecordId;
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -69,6 +73,9 @@ namespace Hospital.Repository
                 anamnesis.appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(3));
                 anamneses.Add(anamnesis);
             }
+
+            connection.Close();
+            connection.Dispose();
 
             return anamneses;
         }
@@ -88,9 +95,13 @@ namespace Hospital.Repository
         public Hospital.Model.Anamnesis UpdateAnamnesis(Hospital.Model.Anamnesis anamnesis)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "UPDATE anamnesis SET Description = '" + anamnesis.Description +"' WHERE ID = " + anamnesis.Id;
             cmd.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
@@ -98,9 +109,13 @@ namespace Hospital.Repository
         {
           
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "insert into anamnesis(description, health_record_id, appointment_id) values('" + anamnesis.Description + "'," +  anamnesis.healthRecord.Id + "," + anamnesis.appointment.Id + ")";
             cmd.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
             return null;
         }
 

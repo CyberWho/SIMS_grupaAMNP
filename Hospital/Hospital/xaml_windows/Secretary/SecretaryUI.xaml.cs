@@ -292,8 +292,8 @@ namespace Hospital.xaml_windows.Secretary
 
                     string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
                     OracleConnection connection = new OracleConnection(conString);
-                    OracleCommand cmd = connection.CreateCommand();
                     connection.Open();
+                    OracleCommand cmd = connection.CreateCommand();
                     cmd.CommandText = "SELECT * FROM users WHERE id = " + current_user_id;
                     OracleDataReader reader = cmd.ExecuteReader();
                     reader.Read();

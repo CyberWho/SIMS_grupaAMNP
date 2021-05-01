@@ -12,16 +12,16 @@ namespace Hospital.Repository
 {
    public class EmployeesRepository
    {
-        OracleConnection con = null;
+        OracleConnection connection = null;
 
 
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
             }
             catch (Exception exp)
             {
@@ -31,7 +31,7 @@ namespace Hospital.Repository
         public Hospital.Model.Employee GetEmployeeByUserId(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.id LEFT OUTER JOIN role on role.id = employee.role_id WHERE users.id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
@@ -52,6 +52,9 @@ namespace Hospital.Repository
             employee.User = user;
             employee.Salary = reader.GetInt32(1);
             employee.YearsOfService = reader.GetInt32(2);
+
+            connection.Close();
+            connection.Dispose();
 
             return employee;
       }

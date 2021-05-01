@@ -11,14 +11,14 @@ namespace Hospital.Repository
 {
    public class InventoryItemRepository
    {
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
             }
             catch (Exception exp)
             {
@@ -28,7 +28,7 @@ namespace Hospital.Repository
         public Hospital.Model.InventoryItem GetInventoryItemById(int id)
       {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM inventory_item WHERE id = " + id.ToString();
             Model.InventoryItem item = new Model.InventoryItem();
             OracleDataReader reader = cmd.ExecuteReader();
@@ -40,6 +40,9 @@ namespace Hospital.Repository
             item.Unit = reader.GetString(3);
             item.Type = (Model.ItemType)reader.GetInt32(4);
 
+            connection.Close();
+            connection.Dispose();
+            
             return item;
       }
       
