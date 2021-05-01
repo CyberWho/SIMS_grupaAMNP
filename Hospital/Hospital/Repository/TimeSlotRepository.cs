@@ -8,6 +8,7 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 /***********************************************************************
  * Module:  TimeSlotRepository.cs
@@ -172,6 +173,8 @@ namespace Hospital.Repository
             OracleCommand command = connection.CreateCommand();
             command.CommandText =
                 "SELECT * FROM time_slot, work_hours, doctor WHERE time_slot.free = 1 AND time_slot.work_hours_id = work_hours.id AND work_hours.doctor_id = doctor.id AND doctor.spec_id = :specialization_id";
+            command.Parameters.Add("specialization_id", OracleDbType.Int32).Value = specializationId;
+            
             OracleDataReader reader = command.ExecuteReader();
 
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
@@ -179,25 +182,26 @@ namespace Hospital.Repository
             while (reader.Read())
             {
                 int time_slot_id = int.Parse(reader.GetString(0));
-                DateTime start_time = DateTime.Parse(reader.GetString(2));
+                DateTime start_time = reader.GetDateTime(2);
                 int doctor_id = int.Parse(reader.GetString(8));
+                int workHours_id = int.Parse(reader.GetString(3));
 
 
                 TimeSlot ts = new TimeSlot();
                 ts.Id = time_slot_id;
                 ts.StartTime = start_time;
+                ts.workHours_id = workHours_id;
 
                 timeSlots.Add(ts);
             }
 
             ObservableCollection<TimeSlot> sortedTimeSlots =
-                new ObservableCollection<TimeSlot>(timeSlots.OrderBy(ts => ts));
+                new ObservableCollection<TimeSlot>(from i in timeSlots orderby i.StartTime select i);
 
             connection.Close();
             connection.Dispose();
 
             return sortedTimeSlots;
-
         }
 
         public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)

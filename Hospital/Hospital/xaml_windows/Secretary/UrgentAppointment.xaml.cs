@@ -31,6 +31,7 @@ namespace Hospital.xaml_windows.Secretary
         private string selectedSpecialization;
         private User user;
         private ObservableCollection<Model.Doctor> doctors;
+        private ObservableCollection<TimeSlot> timeSlots;
         private UserController userController = new UserController();
         private PatientController patientController = new PatientController();
         private HealthRecordController healthRecordController = new HealthRecordController();
@@ -89,10 +90,10 @@ namespace Hospital.xaml_windows.Secretary
                 Model.Patient patient = this.patientController.GetPatientByUserId(id);
                 HealthRecord healthRecord = this.healthRecordController.GetHealthRecordByPatientId(patient.Id);
                 int specialization_id = this.specializationContoller.GetSpecializationByType(selectedSpecialization); 
-                doctors = this.doctorController.GetAllDoctorsBySpecializationId(specialization_id); 
+                doctors = this.doctorController.GetAllDoctorsBySpecializationId(specialization_id);
                 // up to this point everything is ok
 
-                ObservableCollection<TimeSlot> ts = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id);
+                timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id);
 
 
                 /*  patient_id + specialization_id + datetime_now => 1. v 2. 
@@ -110,8 +111,8 @@ namespace Hospital.xaml_windows.Secretary
 
                 // this is what i don't need, the datatable should be filled with timeslots and not by doctors
                 DataTable dt = new DataTable();
-                doctors_by_spec.DataContext = dt;
-                doctors_by_spec.ItemsSource = doctors;
+                available_timeslots.DataContext = timeSlots;
+                available_timeslots.ItemsSource = timeSlots;
             }
         }
 

@@ -15,6 +15,8 @@ namespace Hospital.Model
     public class TimeSlot : IComparable 
     {
         public int Id { get; set; }
+
+        public int workHours_id { get; set; }
         public Boolean Free { get; set; }
         public DateTime StartTime { get; set; }
 

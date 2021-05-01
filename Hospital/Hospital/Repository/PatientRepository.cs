@@ -38,6 +38,8 @@ namespace Hospital.Repository
         public Patient GetPatientByUserId(int id)
         {
             UserRepository userRepository = new UserRepository();
+            User user = userRepository.GetUserById(id);
+
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
@@ -45,10 +47,10 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            int user_id = int.Parse(reader.GetString(4));
+            //int user_id = int.Parse(reader.GetString(4));
 
             Patient patient = new Patient();
-            User user = userRepository.GetUserById(user_id);
+
             
             if (user.Username.Contains("guestUser"))
             {
@@ -67,7 +69,7 @@ namespace Hospital.Repository
                 };
                 patient.User = user;
             }
-            
+
             connection.Close();
             connection.Dispose();
 
