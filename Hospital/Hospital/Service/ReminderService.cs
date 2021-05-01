@@ -67,7 +67,7 @@ namespace Hospital.Service
                 DateTime alarmTime = start.AddHours(-1);
                 reminder.AlarmTime = alarmTime;
                 reminder.Name = "Konzumacija leka";
-                reminder.Description = "Za sat vremena popijte lek " + medicalTreatment.Drug.InventoryItem.Name;
+                reminder.Description = "Za sat vremena popijte lek " + medicalTreatment.Drug.Name;
                 reminder.Patient = medicalTreatment.anamnesis.healthRecord.Patient;
                 start = start.AddHours(medicalTreatment.Period);
                 reminderRepository.NewReminder(reminder);
