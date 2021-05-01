@@ -60,6 +60,19 @@ namespace Hospital.Repository
             return specializations;
         }
 
+        public int GetSpecializationByType(string type)
+        {
+            setConnection();
+
+            command.CommandText = "SELECT * FROM specialization WHERE spectype LIKE '" + type + "'";
+            reader = command.ExecuteReader();
+            reader.Read();
+
+            int id = int.Parse(reader.GetString(0));
+
+            return id;
+        }
+
 
     }
 }

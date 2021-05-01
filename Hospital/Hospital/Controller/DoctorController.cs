@@ -33,8 +33,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
         {
-            // TODO: implement
-            return null;
+            return this.doctorService.GetAllDoctorsBySpecializationId(specializationId);
         }
 
         public ObservableCollection<Doctor> GetAllGeneralPurposeDoctors()

@@ -30,10 +30,9 @@ namespace Hospital.Service
             return null;
         }
 
-        public System.Collections.ArrayList GetAllDoctorsBySpecializationId(int specializationId)
+        public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
         {
-            // TODO: implement
-            return null;
+            return this.doctorRepository.GetAllDoctorsBySpecializationId(specializationId);
         }
 
         public ObservableCollection<Doctor> GetAllGeneralPurposeDoctors()

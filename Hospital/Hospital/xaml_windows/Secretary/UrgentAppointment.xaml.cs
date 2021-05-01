@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Hospital.Controller;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.xaml_windows.Secretary
 {
@@ -27,10 +30,14 @@ namespace Hospital.xaml_windows.Secretary
         private int id;
         private string selectedSpecialization;
         private User user;
+        private ObservableCollection<Model.Doctor> doctors;
         private UserController userController = new UserController();
+        private PatientController patientController = new PatientController();
+        private HealthRecordController healthRecordController = new HealthRecordController();
         private DoctorController doctorController = new DoctorController();        
         private SpecializationContoller specializationContoller = new SpecializationContoller();
         private AppointmentController appointmentController = new AppointmentController();
+        private TimeSlotController timeSlotController = new TimeSlotController();
 
         public UrgentAppointment(int id)
         {
@@ -76,7 +83,35 @@ namespace Hospital.xaml_windows.Secretary
         {
             if (selection.SelectedItem != null)
             {
+                // id = current_user_id
                 selectedSpecialization = selection.SelectedItem.ToString();
+                User user = this.userController.GetUserById(id);
+                Model.Patient patient = this.patientController.GetPatientByUserId(id);
+                HealthRecord healthRecord = this.healthRecordController.GetHealthRecordByPatientId(patient.Id);
+                int specialization_id = this.specializationContoller.GetSpecializationByType(selectedSpecialization); 
+                doctors = this.doctorController.GetAllDoctorsBySpecializationId(specialization_id); 
+                // up to this point everything is ok
+
+                ObservableCollection<TimeSlot> ts = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id);
+
+
+                /*  patient_id + specialization_id + datetime_now => 1. v 2. 
+                 *  1. found at least one doctor within that specialization, free right now 
+                 *  => return successfully reserved appointment for first free doctor and for the timeslot that is right now 
+                 *  2. ok so found no free doctors with timeslots that are available right now 
+                 *  -> take in all the doctors by that specialization 
+                 *  -> look at all their timeslots and sort them by next available timeslot 
+                 *  -> secretary chooses which timeslot to occupy, since the urgent appointment needs to be right now 
+                 *  -> both the patient and the doctor need to be notified about this change 
+                 *  
+                 */
+
+
+
+                // this is what i don't need, the datatable should be filled with timeslots and not by doctors
+                DataTable dt = new DataTable();
+                doctors_by_spec.DataContext = dt;
+                doctors_by_spec.ItemsSource = doctors;
             }
         }
 
@@ -85,41 +120,44 @@ namespace Hospital.xaml_windows.Secretary
             Appointment appointment = new Appointment();
 
             DateTime time = fix_time();
+
+
             
             appointment = this.appointmentController.ReserveAppointment(appointment);
         }
 
         private DateTime fix_time()
         {
+            // TODO: fix this jumbo mess 
+
             DateTime now = DateTime.Now;
             string time = now.ToString();
             string[] split1 = time.Split(' ');
             string[] split2 = split1[1].Split(':');
             int minutes = int.Parse(split2[1]);
             int seconds = int.Parse(split2[2]);
-            
-            if (now.Minute <= 15)
+
+            TimeSpan ts;
+
+            // if the time right now is less than :30, then add up to :30
+            if (now.Minute <= 30)
             {
-                TimeSpan ts = new TimeSpan(0, minutes, seconds);
-                now = now.Subtract(ts);
+                ts = new TimeSpan(0, 30 - minutes, -seconds);
             }
-            else if (now.Minute <= 45 && now.Minute >= 30)
-            {
-                TimeSpan ts = new TimeSpan(0, minutes - 30, seconds);
-                now = now.Subtract(ts);
-            }
-            else if (now.Minute > 45)
-            {
-                TimeSpan ts = new TimeSpan(0, 60 - minutes, -seconds);
-                now = now.Add(ts);
-            }
+            // else, time is between :30 and :00, and so appointment must be reserved in hour+1:00 slot
             else
             {
-                TimeSpan ts = new TimeSpan(0, 30 - minutes, -seconds);
-                now = now.Add(ts);
+                ts = new TimeSpan(0, 60 - minutes, -seconds);
             }
 
+            now = now.Add(ts);
+
             return now;
+        }
+
+        private void myDataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -17,5 +17,10 @@ namespace Hospital.Controller
         {
             return this.specializationService.GetAllSpecializations();
         }
+
+        public int GetSpecializationByType(string selectedSpecialization)
+        {
+            return this.specializationService.GetSpecializationByType(selectedSpecialization);
+        }
     }
 }

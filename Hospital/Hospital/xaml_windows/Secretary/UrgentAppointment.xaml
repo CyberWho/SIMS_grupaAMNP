@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="UrgentAppointment" Height="750" Width="430">
     <Grid>
-        <Button Content="Kreiraj hitni termin" Margin="141,0,143,183" VerticalAlignment="Bottom" Height="30" Click="Create_Urgent_Appointment"/>
+        <Button Content="Kreiraj hitan termin" Margin="141,0,143,10" VerticalAlignment="Bottom" Height="30" Click="Create_Urgent_Appointment"/>
         <Label Content="Odabrani pacijent" Height="26" Margin="141,83,143,0" VerticalAlignment="Top"/>
 
         <TextBlock x:Name="PatName" Margin="141,114,143,0" Text="Ime pacijenta" VerticalAlignment="Top"/>
@@ -18,6 +18,16 @@
 
         <Label Content="Odaberite oblast lekara" Margin="141,250,143,0" VerticalAlignment="Top"/>
         <ComboBox Name ="selection" Loaded="selection_loaded" Margin="141,290,143,0" VerticalAlignment="Top" SelectionChanged="selection_SelectionChanged"/>
+
+
+        <DataGrid x:Name="doctors_by_spec" ItemsSource="{Binding doctors}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,317,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="myDataGrid_SelectionChanged_1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding User.Name}" Width="*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding User.Surname}" Width="*"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding room_id}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
 
     </Grid>

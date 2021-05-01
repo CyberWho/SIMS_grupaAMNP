@@ -56,9 +56,6 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            // trazim pacijenta sa user id-em userId, 
-            // trazim karton sa pacijent id-em koji sam dobio gore
-            // trazim sve alergije iz kartona na osnovu karton id-a koji sam dobio gore
             ObservableCollection<Allergy> allergies = new ObservableCollection<Allergy>();
 
             OracleCommand command = connection.CreateCommand();

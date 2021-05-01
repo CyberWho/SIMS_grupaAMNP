@@ -17,5 +17,9 @@ namespace Hospital.Service
         {
             return this.specializationRepository.GetAllSpecializations();
         }
+        public int GetSpecializationByType(string selectedSpecialization)
+        {
+            return this.specializationRepository.GetSpecializationByType(selectedSpecialization);
+        }
     }
 }

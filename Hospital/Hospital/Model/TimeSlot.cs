@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
  ***********************************************************************/
 namespace Hospital.Model
 {
-    public class TimeSlot
+    public class TimeSlot : IComparable 
     {
         public int Id { get; set; }
         public Boolean Free { get; set; }
@@ -29,5 +30,16 @@ namespace Hospital.Model
             this.StartTime = startTime;
         }
 
+        public int CompareTo(object obj)
+        {
+            TimeSlot timeSlot = obj as TimeSlot;
+
+            if (timeSlot == null)
+            {
+                throw new ArgumentException("Object is not TimeSlot");
+            }
+
+            return this.StartTime.CompareTo(timeSlot.StartTime);
+        }
     }
 }

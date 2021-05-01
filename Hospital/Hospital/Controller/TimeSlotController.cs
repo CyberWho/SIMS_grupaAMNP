@@ -24,6 +24,11 @@ namespace Hospital.Controller
             return timeSlot;
         }
 
+        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId)
+        {
+            return this.timeSlotService.GetlAllFreeTimeSlotsBySpecializationId(specializationId);
+        }
+
         public System.Array GetAllByDateAndDoctorId(DateTime date, int doctorId)
         {
             // TODO: implement

@@ -19,15 +19,18 @@ namespace Hospital.Repository
 {
     public class TimeSlotRepository
     {
-        OracleConnection con = null;
+        OracleConnection connection = null;
+        private OracleCommand command;
+        private OracleDataReader reader;
         DoctorRepository doctorRepository = new DoctorRepository();
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
+                command = connection.CreateCommand();
 
             }
             catch (Exception exp)
@@ -35,13 +38,12 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.TimeSlot GetTimeSlotById(int id)
+        public TimeSlot GetTimeSlotById(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM TIME_SLOT WHERE ID = :id";
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            command.CommandText = "SELECT * FROM TIME_SLOT WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            reader = command.ExecuteReader();
             reader.Read();
             TimeSlot timeSlot = new TimeSlot();
             timeSlot.Id = reader.GetInt32(0);
@@ -55,11 +57,11 @@ namespace Hospital.Repository
                 timeSlot.Free = true;
             }
             timeSlot.StartTime = reader.GetDateTime(2);
-            con.Close();
+            connection.Close();
             return timeSlot;
         }
 
-        public System.Array GetAllByDateAndDoctorId(DateTime date, int doctorId)
+        public ObservableCollection<TimeSlot> GetAllByDateAndDoctorId(DateTime date, int doctorId)
         {
             // TODO: implement
             return null;
@@ -69,13 +71,13 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
             
-            cmd.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
-            cmd.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
-            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            command.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
+            command.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+            reader = command.ExecuteReader();
             while(reader.Read())
             {
 
@@ -111,7 +113,7 @@ namespace Hospital.Repository
                 timeSlots.Add(timeSlot);
                 
             }
-            con.Close();
+            connection.Close();
             return timeSlots;
         }
 
@@ -119,11 +121,11 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.SPEC_ID=1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
-            cmd.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
-            cmd.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
-            OracleDataReader reader = cmd.ExecuteReader();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.SPEC_ID=1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            command.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
+            command.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
+            reader = command.ExecuteReader();
             while (reader.Read())
             {
                 TimeSlot timeSlot = new TimeSlot();
@@ -153,15 +155,45 @@ namespace Hospital.Repository
 
         }
 
+        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId)
+        {
+            setConnection();
+            command.CommandText =
+                "SELECT * FROM time_slot, work_hours, doctor WHERE time_slot.free = 1 AND time_slot.work_hours_id = work_hours.id AND work_hours.doctor_id = doctor.id AND doctor.spec_id = :specialization_id";
+            reader = command.ExecuteReader();
+
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+
+            while (reader.Read())
+            {
+                int time_slot_id = int.Parse(reader.GetString(0));
+                DateTime start_time = DateTime.Parse(reader.GetString(2));
+                int doctor_id = int.Parse(reader.GetString(8));
+
+
+                TimeSlot ts = new TimeSlot();
+                ts.Id = time_slot_id;
+                ts.StartTime = start_time;
+                
+                timeSlots.Add(ts);
+            }
+
+            ObservableCollection<TimeSlot> sortedTimeSlots =
+                new ObservableCollection<TimeSlot>(timeSlots.OrderBy(ts => ts));
+
+            return sortedTimeSlots;
+
+        }
+
         public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
         {
             setConnection();
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
-            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
            
-            OracleDataReader reader = cmd.ExecuteReader();
+            reader = command.ExecuteReader();
             while(reader.Read())
             {
                 TimeSlot timeSlot = new TimeSlot();
@@ -187,7 +219,7 @@ namespace Hospital.Repository
                 timeSlot.WorkHours = workHours;
                 timeSlots.Add(timeSlot);
             }
-            con.Close();
+            connection.Close();
             return timeSlots;
         }
 
@@ -196,12 +228,12 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
             DateTime lastDate = date.AddHours(48);
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME BETWEEN :start_date AND :last_date";
-            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
-            cmd.Parameters.Add("start_date", OracleDbType.Date).Value = date;
-            cmd.Parameters.Add("last_date", OracleDbType.Date).Value = lastDate;
-            OracleDataReader reader = cmd.ExecuteReader();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME BETWEEN :start_date AND :last_date";
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+            command.Parameters.Add("start_date", OracleDbType.Date).Value = date;
+            command.Parameters.Add("last_date", OracleDbType.Date).Value = lastDate;
+            reader = command.ExecuteReader();
             while(reader.Read())
             {
                 TimeSlot timeSlot = new TimeSlot();
@@ -209,7 +241,7 @@ namespace Hospital.Repository
                 timeSlot.StartTime = reader.GetDateTime(7);
                 timeSlots.Add(timeSlot);
             }
-            con.Close();
+            connection.Close();
             return timeSlots;
         }
 
@@ -217,11 +249,11 @@ namespace Hospital.Repository
         {
             setConnection();
             TimeSlot timeSlot = new TimeSlot();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME = :start_time";
-            cmd.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
-            cmd.Parameters.Add("start_time", OracleDbType.Date).Value = date;
-            OracleDataReader reader = cmd.ExecuteReader();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME = :start_time";
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
+            command.Parameters.Add("start_time", OracleDbType.Date).Value = date;
+            reader = command.ExecuteReader();
             reader.Read();
             timeSlot.Id = reader.GetInt32(5);
             int free = reader.GetInt32(6);
@@ -233,11 +265,11 @@ namespace Hospital.Repository
                 timeSlot.Free = true;
             }
             timeSlot.StartTime = reader.GetDateTime(7);
-            con.Close();
+            connection.Close();
              return timeSlot;
         }
 
-        public System.Array GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
+        public ObservableCollection<TimeSlot> GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
         {
             // TODO: implement
             return null;
@@ -255,24 +287,36 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Boolean TakeTimeSlot(Hospital.Model.TimeSlot timeSlot)
+        public Boolean TakeTimeSlot(TimeSlot timeSlot)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "UPDATE TIME_SLOT SET FREE = 0 WHERE ID = " + timeSlot.Id;
-            int a = cmd.ExecuteNonQuery();
-            con.Close();
-            return true;
+            command = connection.CreateCommand();
+            command.CommandText = "UPDATE TIME_SLOT SET FREE = 0 WHERE ID = " + timeSlot.Id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                return true;
+            }
+
+            connection.Close();
+            return false;
         }
 
-        public Boolean FreeTimeSlot(Hospital.Model.TimeSlot timeSlot)
+        public Boolean FreeTimeSlot(TimeSlot timeSlot)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "UPDATE TIME_SLOT SET FREE = 1 WHERE ID = " + timeSlot.Id;
-            int a = cmd.ExecuteNonQuery();
-            con.Close();
-            return true;
+            command = connection.CreateCommand();
+            command.CommandText = "UPDATE TIME_SLOT SET FREE = 1 WHERE ID = " + timeSlot.Id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                return true;
+            }
+
+            connection.Close();
+            return false;
         }
 
     }
