@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.Repository;
 
 
 /***********************************************************************
@@ -18,6 +19,10 @@ namespace Hospital.Service
 {
     public class TimeSlotService
     {
+        private AppointmentRepository appointmentRepository = new AppointmentRepository();
+        private WorkHoursRepository workHoursRepository = new WorkHoursRepository();
+
+
         public TimeSlot GetTimeSlotById(int id)
         {
             TimeSlot timeSlot = new TimeSlot();
@@ -25,10 +30,71 @@ namespace Hospital.Service
             return timeSlot;
         }
 
-        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId)
+        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId, int patient_id)
         {
-            return this.timeSlotRepository.GetlAllFreeTimeSlotsBySpecializationId(specializationId);
+            ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetlAllFreeTimeSlotsBySpecializationId(specializationId);
+            DateTime now = fix_time();
+
+            TimeSlot first;
+
+            first = timeSlots.First();
+            now = new DateTime(2021, 4, 20, 8, 0, 0);
+
+            foreach (TimeSlot ts in timeSlots) 
+            {
+                if (ts.StartTime.Equals(now))
+                {
+                    WorkHours workHours = this.workHoursRepository.GetWorkHoursById(ts.workHours_id);
+                    Doctor doctor = workHours.doctor;
+                    
+                    Appointment appointment = new Appointment();
+                    appointment.StartTime = now;
+                    appointment.doctor = doctor;
+                    appointment.Room_Id = doctor.room_id;
+                    appointment.Doctor_Id = doctor.Id;
+                    appointment.Patient_Id = patient_id;
+
+                    this.appointmentRepository.NewAppointment(appointment); 
+
+                    // reserve appointment
+                    // return;
+                    return null;
+                }
+
+            }
+
+            return timeSlots;
         }
+        private DateTime fix_time()
+        {
+            // TODO: fix this jumbo mess 
+
+            DateTime now = DateTime.Now;
+            string time = now.ToString();
+            string[] split1 = time.Split(' ');
+            string[] split2 = split1[1].Split(':');
+            int minutes = int.Parse(split2[1]);
+            int seconds = int.Parse(split2[2]);
+
+            TimeSpan ts;
+
+            // if the time right now is less than :30, then add up to :30
+            if (now.Minute <= 30)
+            {
+                ts = new TimeSpan(0, 30 - minutes, -seconds);
+            }
+            // else, time is between :30 and :00, and so appointment must be reserved in hour+1:00 slot
+            else
+            {
+                ts = new TimeSpan(0, 60 - minutes, -seconds);
+            }
+
+            now = now.Add(ts);
+
+            return now;
+        }
+
+
 
         public System.Array GetAllByDateAndDoctorId(DateTime date, int doctorId)
         {

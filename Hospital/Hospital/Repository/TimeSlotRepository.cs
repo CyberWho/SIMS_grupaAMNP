@@ -20,8 +20,8 @@ namespace Hospital.Repository
 {
     public class TimeSlotRepository
     {
-        OracleConnection connection = null;
         DoctorRepository doctorRepository = new DoctorRepository();
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -174,7 +174,7 @@ namespace Hospital.Repository
             command.CommandText =
                 "SELECT * FROM time_slot, work_hours, doctor WHERE time_slot.free = 1 AND time_slot.work_hours_id = work_hours.id AND work_hours.doctor_id = doctor.id AND doctor.spec_id = :specialization_id";
             command.Parameters.Add("specialization_id", OracleDbType.Int32).Value = specializationId;
-            
+
             OracleDataReader reader = command.ExecuteReader();
 
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();

@@ -10,8 +10,8 @@ using System;
 
 namespace Hospital.Repository
 {
-   public class EmployeesRepository
-   {
+    public class EmployeesRepository
+    {
         OracleConnection connection = null;
 
 
@@ -37,13 +37,13 @@ namespace Hospital.Repository
             reader.Read();
 
             User user = new User();
-            user.Id          = reader.GetInt32(3);
-            user.Username    = reader.GetString(6);
-            user.Password    = reader.GetString(7);
-            user.Name        = reader.GetString(8);
-            user.Surname     = reader.GetString(9);
+            user.Id = reader.GetInt32(3);
+            user.Username = reader.GetString(6);
+            user.Password = reader.GetString(7);
+            user.Name = reader.GetString(8);
+            user.Surname = reader.GetString(9);
             user.PhoneNumber = reader.GetString(10);
-            user.EMail       = reader.GetString(11);
+            user.EMail = reader.GetString(11);
 
             Role role = new Role(reader.GetInt32(12), reader.GetString(13), null);
 
@@ -57,43 +57,59 @@ namespace Hospital.Repository
             connection.Dispose();
 
             return employee;
-      }
-      
-      public System.Collections.ArrayList GetAllEmployees()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllEmployeesByRoleId(int roleId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteEmployeeById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.Employee UpdateEmployee(Hospital.Model.Employee employee)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.Employee NewEmployee(Hospital.Model.Employee employee)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
-   
-   }
+        }
+
+        public int GetUserIdByEmployeeId(int employee_id)
+        {
+            setConnection();
+
+            int user_id;
+
+            OracleCommand commannd = connection.CreateCommand();
+            commannd.CommandText = "SELECT user_id FROM employee WHERE id = " + employee_id;
+            OracleDataReader reader = commannd.ExecuteReader();
+            reader.Read();
+
+            user_id = int.Parse(reader.GetString(0));
+
+            return user_id;
+        }
+
+        public System.Collections.ArrayList GetAllEmployees()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllEmployeesByRoleId(int roleId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean DeleteEmployeeById(int id)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Hospital.Model.Employee UpdateEmployee(Hospital.Model.Employee employee)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.Employee NewEmployee(Hospital.Model.Employee employee)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
+
+    }
 }

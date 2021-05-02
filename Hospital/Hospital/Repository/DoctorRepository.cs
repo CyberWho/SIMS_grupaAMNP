@@ -27,8 +27,28 @@ namespace Hospital.Repository
         }
         public Doctor GetDoctorById(int id)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM doctor WHERE id = " + id;
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+
+            int doctor_id = int.Parse(reader.GetString(0));
+            int employee_id = int.Parse(reader.GetString(1));
+            int room_id = int.Parse(reader.GetString(2));
+            int specialization_id = int.Parse(reader.GetString(3));
+
+            Doctor doctor = new Doctor();
+            doctor.Id = doctor_id;
+            doctor.employee_id = employee_id;
+            doctor.room_id = room_id;
+            doctor.specialization_id = specialization_id;
+
+            connection.Close();
+            connection.Dispose();
+            return doctor;
         }
 
         public Doctor GetWorkHoursDoctorById(int id)

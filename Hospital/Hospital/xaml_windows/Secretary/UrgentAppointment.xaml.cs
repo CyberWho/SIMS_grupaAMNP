@@ -93,7 +93,10 @@ namespace Hospital.xaml_windows.Secretary
                 doctors = this.doctorController.GetAllDoctorsBySpecializationId(specialization_id);
                 // up to this point everything is ok
 
-                timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id);
+                
+
+                // i don't need to call this 
+                timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id, patient.Id);
 
 
                 /*  patient_id + specialization_id + datetime_now => 1. v 2. 

@@ -13,9 +13,9 @@ namespace Hospital.Model
     {
         public Room room { get; set; }
 
-        private int employee_id { get; set; }
-        private int room_id { get; set; }
-        private int specialization_id { get; set; }
+        public int employee_id { get; set; }
+        public int room_id { get; set; }
+        public int specialization_id { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
