@@ -20,7 +20,7 @@
         <ComboBox Name ="selection" Loaded="selection_loaded" Margin="141,290,143,0" VerticalAlignment="Top" SelectionChanged="selection_SelectionChanged"/>
 
 
-        <DataGrid x:Name="available_timeslots" ItemsSource="{Binding timeSlots}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,317,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="myDataGrid_SelectionChanged_1">
+        <DataGrid x:Name="available_timeslots" ItemsSource="{Binding timeSlots}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,317,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="Selected_TimeSlot_In_Which_To_Move_Appointment">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Pocetak" Binding="{Binding StartTime}" Width="*"/>

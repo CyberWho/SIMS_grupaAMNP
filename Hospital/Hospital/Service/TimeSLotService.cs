@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Hospital.Repository;
 
 
@@ -19,8 +20,11 @@ namespace Hospital.Service
 {
     public class TimeSlotService
     {
+        // edge case time is :30 maybe
+
         private AppointmentRepository appointmentRepository = new AppointmentRepository();
         private WorkHoursRepository workHoursRepository = new WorkHoursRepository();
+        private DoctorRepository doctorRepository = new DoctorRepository();
 
 
         public TimeSlot GetTimeSlotById(int id)
@@ -30,14 +34,35 @@ namespace Hospital.Service
             return timeSlot;
         }
 
+        public Boolean MoveReservedAppointment(int timeSlot_id)
+        {
+            DateTime now = fix_time();
+            TimeSlot timeSlot = this.timeSlotRepository.GetTimeSlotById(timeSlot_id);
+            int workHours_id = timeSlot.workHours_id;
+            WorkHours workHours = this.workHoursRepository.GetWorkHoursById(workHours_id);
+            int doctor_id = workHours.doctor.Id;
+            Doctor doctor = this.doctorRepository.GetDoctorById(doctor_id);
+
+            Appointment appointment = this.appointmentRepository.GetAppointmentByDoctorIdAndTime(doctor, now);
+
+
+
+
+
+
+
+            return false;
+        }
+
+
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId, int patient_id)
         {
             ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetlAllFreeTimeSlotsBySpecializationId(specializationId);
+            // special case, if the time slot isn't taken, return type will be the same, only it will contain only one element
+            ObservableCollection<TimeSlot> timeSlot = new ObservableCollection<TimeSlot>();
             DateTime now = fix_time();
-
-            TimeSlot first;
-
-            first = timeSlots.First();
+            
+            // testing purposes
             now = new DateTime(2021, 4, 20, 8, 0, 0);
 
             foreach (TimeSlot ts in timeSlots) 
@@ -55,10 +80,10 @@ namespace Hospital.Service
                     appointment.Patient_Id = patient_id;
 
                     this.appointmentRepository.NewAppointment(appointment); 
+                    
+                    timeSlot.Add(ts);
 
-                    // reserve appointment
-                    // return;
-                    return null;
+                    return timeSlot;
                 }
 
             }

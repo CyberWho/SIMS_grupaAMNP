@@ -13,6 +13,11 @@ namespace Hospital.Controller
 {
     public class AppointmentController
     {
+
+        public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time)
+        {
+            return this.appointmentService.GetAppointmentByDoctorIdAndTime(doctor, time);
+        }
         public Appointment GetAppointmentById(int id)
         {
             Appointment appointment = new Appointment();

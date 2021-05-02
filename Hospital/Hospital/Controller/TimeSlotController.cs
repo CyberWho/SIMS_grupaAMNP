@@ -24,6 +24,11 @@ namespace Hospital.Controller
             return timeSlot;
         }
 
+        public Boolean MoveReservedAppointment(int timeSlot_id)
+        {
+            return this.timeSlotService.MoveReservedAppointment(timeSlot_id);
+        }
+
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId, int patientId)
         {
             return this.timeSlotService.GetlAllFreeTimeSlotsBySpecializationId(specializationId, patientId);

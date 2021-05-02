@@ -28,6 +28,7 @@ namespace Hospital.xaml_windows.Secretary
     public partial class UrgentAppointment : Window
     {
         private int id;
+        private int selected_time_slot_id;
         private string selectedSpecialization;
         private User user;
         private ObservableCollection<Model.Doctor> doctors;
@@ -35,7 +36,7 @@ namespace Hospital.xaml_windows.Secretary
         private UserController userController = new UserController();
         private PatientController patientController = new PatientController();
         private HealthRecordController healthRecordController = new HealthRecordController();
-        private DoctorController doctorController = new DoctorController();        
+        private DoctorController doctorController = new DoctorController();
         private SpecializationContoller specializationContoller = new SpecializationContoller();
         private AppointmentController appointmentController = new AppointmentController();
         private TimeSlotController timeSlotController = new TimeSlotController();
@@ -53,7 +54,7 @@ namespace Hospital.xaml_windows.Secretary
             if (id > 0)
             {
                 user = this.userController.GetUserById(id);
-                
+
                 PatName.Text = user.Name;
                 Surname.Text = user.Surname;
                 Username.Text = user.Username;
@@ -89,14 +90,15 @@ namespace Hospital.xaml_windows.Secretary
                 User user = this.userController.GetUserById(id);
                 Model.Patient patient = this.patientController.GetPatientByUserId(id);
                 HealthRecord healthRecord = this.healthRecordController.GetHealthRecordByPatientId(patient.Id);
-                int specialization_id = this.specializationContoller.GetSpecializationByType(selectedSpecialization); 
+                int specialization_id = this.specializationContoller.GetSpecializationByType(selectedSpecialization);
                 doctors = this.doctorController.GetAllDoctorsBySpecializationId(specialization_id);
                 // up to this point everything is ok
 
-                
+
 
                 // i don't need to call this 
-                timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id, patient.Id);
+                timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id,
+                    patient.Id);
 
 
                 /*  patient_id + specialization_id + datetime_now => 1. v 2. 
@@ -126,7 +128,7 @@ namespace Hospital.xaml_windows.Secretary
             DateTime time = fix_time();
 
 
-            
+
             appointment = this.appointmentController.ReserveAppointment(appointment);
         }
 
@@ -159,9 +161,28 @@ namespace Hospital.xaml_windows.Secretary
             return now;
         }
 
-        private void myDataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void Selected_TimeSlot_In_Which_To_Move_Appointment(object sender, SelectionChangedEventArgs e)
         {
+            if (available_timeslots.SelectedCells[0] != null)
+            {
+                var info = available_timeslots.SelectedCells[0];
+                if (info.Column.GetCellContent(info.Item) != null)
+                {
+                    var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
+                    selected_time_slot_id = int.Parse(content);
 
+                    /*
+                     *  i have to get the timeslot that is already reserved, but the timeslot of the doctor which timeslot i selected to move the already made appointment
+                     *  from the selected timeslot i get workhours and then the doctor, from that doctor and from the current time i can get said appointment and move it
+                     */
+
+                    TimeSlot currentTimeSlot = this.timeSlotController.GetTimeSlotById(selected_time_slot_id);
+                    //int workHours_id = currentTimeSlot.workHours_id;
+
+                    this.timeSlotController.MoveReservedAppointment(selected_time_slot_id);
+
+                }
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Hospital.Repository
         private EmployeesRepository employeesRepository = new EmployeesRepository();
         private UserRepository userRepository = new UserRepository();
 
+
         OracleConnection connection = null;
         private void setConnection()
         {
@@ -39,6 +40,21 @@ namespace Hospital.Repository
             }
         }
 
+
+        public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time) 
+        {
+            setConnection();
+            time = new DateTime(2021, 4, 27, 10, 0, 0);
+            int doctor_id = 1;
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM appointment WHERE doctor_id = " + doctor_id + " AND date_time LIKE '" + time + "'";
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            return null;
+
+
+        }
 
         public Appointment GetAppointmentById(int id)
         {
@@ -294,7 +310,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Appointment UpdateAppointmentStartTime(Hospital.Model.Appointment appointment, DateTime startTime)
+        public Appointment UpdateAppointmentStartTime(Appointment appointment, DateTime startTime)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();

@@ -15,6 +15,12 @@ namespace Hospital.Service
 {
     public class AppointmentService
     {
+
+        public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time)
+        {
+            return this.appointmentRepository.GetAppointmentByDoctorIdAndTime(doctor, time);
+        }
+
         public Hospital.Model.Appointment GetAppointmentById(int id)
         {
             Appointment appointment = new Appointment();
