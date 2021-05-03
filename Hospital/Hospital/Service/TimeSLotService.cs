@@ -34,7 +34,7 @@ namespace Hospital.Service
             return timeSlot;
         }
 
-        public Boolean MoveReservedAppointment(int timeSlot_id)
+        public Appointment MoveReservedAppointment(int timeSlot_id)
         {
             DateTime now = fix_time();
             TimeSlot timeSlot = this.timeSlotRepository.GetTimeSlotById(timeSlot_id);
@@ -45,13 +45,14 @@ namespace Hospital.Service
 
             Appointment appointment = this.appointmentRepository.GetAppointmentByDoctorIdAndTime(doctor, now);
 
+            appointment = this.appointmentRepository.UpdateAppointmentStartTime(appointment, timeSlot.StartTime);
 
+            if (appointment != null)
+            {
+                return appointment;
+            }
 
-
-
-
-
-            return false;
+            return null;
         }
 
 
@@ -63,7 +64,7 @@ namespace Hospital.Service
             DateTime now = fix_time();
             
             // testing purposes
-            now = new DateTime(2021, 4, 20, 8, 0, 0);
+            //now = new DateTime(2021, 4, 21, 9, 0, 0);
 
             foreach (TimeSlot ts in timeSlots) 
             {

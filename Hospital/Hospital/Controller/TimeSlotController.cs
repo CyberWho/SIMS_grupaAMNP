@@ -24,7 +24,7 @@ namespace Hospital.Controller
             return timeSlot;
         }
 
-        public Boolean MoveReservedAppointment(int timeSlot_id)
+        public Appointment MoveReservedAppointment(int timeSlot_id)
         {
             return this.timeSlotService.MoveReservedAppointment(timeSlot_id);
         }

@@ -44,16 +44,22 @@ namespace Hospital.Repository
         public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time) 
         {
             setConnection();
-            time = new DateTime(2021, 4, 27, 10, 0, 0);
-            int doctor_id = 1;
+
+            int doctor_id = doctor.Id;
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM appointment WHERE doctor_id = " + doctor_id + " AND date_time LIKE '" + time + "'";
+            command.CommandText = "SELECT * FROM appointment WHERE doctor_id = :doctor_id AND date_time = :date_time";
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctor_id;
+            command.Parameters.Add("date_time", OracleDbType.Date).Value = time;
+
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            return null;
+            int appointment_id = int.Parse(reader.GetString(0));
 
+            connection.Close();
+            connection.Dispose();
 
+            return this.GetAppointmentById(appointment_id);
         }
 
         public Appointment GetAppointmentById(int id)
@@ -323,7 +329,6 @@ namespace Hospital.Repository
             cmd.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
             cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
-            // int a = cmd.ExecuteNonQuery();
 
             if (cmd.ExecuteNonQuery() > 0)
             {
@@ -332,6 +337,7 @@ namespace Hospital.Repository
 
                 connection.Close();
                 connection.Dispose();
+
                 return appointment;
             }
 

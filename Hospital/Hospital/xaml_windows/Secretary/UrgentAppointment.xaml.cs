@@ -85,51 +85,42 @@ namespace Hospital.xaml_windows.Secretary
         {
             if (selection.SelectedItem != null)
             {
-                // id = current_user_id
                 selectedSpecialization = selection.SelectedItem.ToString();
                 User user = this.userController.GetUserById(id);
                 Model.Patient patient = this.patientController.GetPatientByUserId(id);
                 HealthRecord healthRecord = this.healthRecordController.GetHealthRecordByPatientId(patient.Id);
                 int specialization_id = this.specializationContoller.GetSpecializationByType(selectedSpecialization);
-                doctors = this.doctorController.GetAllDoctorsBySpecializationId(specialization_id);
-                // up to this point everything is ok
 
-
-
-                // i don't need to call this 
                 timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id,
                     patient.Id);
 
-
-                /*  patient_id + specialization_id + datetime_now => 1. v 2. 
-                 *  1. found at least one doctor within that specialization, free right now 
-                 *  => return successfully reserved appointment for first free doctor and for the timeslot that is right now 
-                 *  2. ok so found no free doctors with timeslots that are available right now 
-                 *  -> take in all the doctors by that specialization 
-                 *  -> look at all their timeslots and sort them by next available timeslot 
-                 *  -> secretary chooses which timeslot to occupy, since the urgent appointment needs to be right now 
-                 *  -> both the patient and the doctor need to be notified about this change 
-                 *  
-                 */
-
-
-
-                // this is what i don't need, the datatable should be filled with timeslots and not by doctors
-                DataTable dt = new DataTable();
-                available_timeslots.DataContext = timeSlots;
-                available_timeslots.ItemsSource = timeSlots;
+                if (timeSlots.Count == 1)
+                {
+                    MessageBox.Show(
+                        "Hitan termin je uspesno zakazan, i to bez ikakvog pomeranja prethodno zakazanih termina");
+                }
+                else
+                {
+                    DataTable dt = new DataTable();
+                    available_timeslots.DataContext = timeSlots;
+                    available_timeslots.ItemsSource = timeSlots;
+                }
             }
         }
 
-        private void Create_Urgent_Appointment(object sender, RoutedEventArgs e)
+        private void Move_Reserved_Appointment(object sender, RoutedEventArgs e)
         {
-            Appointment appointment = new Appointment();
+            TimeSlot currentTimeSlot = this.timeSlotController.GetTimeSlotById(selected_time_slot_id);
 
-            DateTime time = fix_time();
+            Appointment appointment = this.timeSlotController.MoveReservedAppointment(selected_time_slot_id);
 
+            appointment.patient = this.patientController.GetPatientByUserId(id);
+            appointment.Patient_Id = appointment.patient.Id;
 
+            this.appointmentController.ReserveAppointment(appointment);
 
-            appointment = this.appointmentController.ReserveAppointment(appointment);
+            MessageBox.Show(
+                "Hitan termin je zakazan u odabrani termin, a lekar i pacijent prethodno zakazanog termina su obavesteni");
         }
 
         private DateTime fix_time()
@@ -170,17 +161,6 @@ namespace Hospital.xaml_windows.Secretary
                 {
                     var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
                     selected_time_slot_id = int.Parse(content);
-
-                    /*
-                     *  i have to get the timeslot that is already reserved, but the timeslot of the doctor which timeslot i selected to move the already made appointment
-                     *  from the selected timeslot i get workhours and then the doctor, from that doctor and from the current time i can get said appointment and move it
-                     */
-
-                    TimeSlot currentTimeSlot = this.timeSlotController.GetTimeSlotById(selected_time_slot_id);
-                    //int workHours_id = currentTimeSlot.workHours_id;
-
-                    this.timeSlotController.MoveReservedAppointment(selected_time_slot_id);
-
                 }
             }
         }

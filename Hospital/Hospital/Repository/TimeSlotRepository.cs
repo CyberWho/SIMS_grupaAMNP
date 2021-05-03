@@ -56,6 +56,7 @@ namespace Hospital.Repository
                 timeSlot.Free = true;
             }
             timeSlot.StartTime = reader.GetDateTime(2);
+            timeSlot.workHours_id = int.Parse(reader.GetString(3));
 
             connection.Close();
             connection.Dispose();
