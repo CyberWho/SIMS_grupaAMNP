@@ -35,9 +35,15 @@ namespace Hospital.Repository
             cmd.CommandText = "SELECT * FROM item_in_room WHERE id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            ItemInRoom newItemInRoom = ParseFromReader(reader);
-
+            ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), null, null);
+            newItemInRoom.room_id = reader.GetInt32(3);
+            newItemInRoom.inventoryItem_id = reader.GetInt32(1);
             con.Close();
+            con.Dispose();
+
+            newItemInRoom.room = roomRepository.GetRoomById(newItemInRoom.room_id);
+            newItemInRoom.inventoryItem = inventoryItemRepository.GetInventoryItemById(newItemInRoom.inventoryItem_id);
+
             return newItemInRoom;
         }
 
@@ -50,11 +56,22 @@ namespace Hospital.Repository
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                ItemInRoom newItemInRoom = ParseFromReader(reader);
+                ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), null, null);
+                newItemInRoom.room_id = reader.GetInt32(3);
+                newItemInRoom.inventoryItem_id = reader.GetInt32(1);
                 itemsInRoom.Add(newItemInRoom);
+
+            }
+            con.Close();
+            con.Dispose();
+
+            foreach (ItemInRoom itemInRoom in itemsInRoom)
+            {
+                itemInRoom.room = roomRepository.GetRoomById(itemInRoom.room_id);
+                itemInRoom.inventoryItem = inventoryItemRepository.GetInventoryItemById(itemInRoom.inventoryItem_id);
             }
 
-            con.Close();
+
             return itemsInRoom;
         }
 

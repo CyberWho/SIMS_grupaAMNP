@@ -8,15 +8,13 @@
         Title="Doctor_crud_appointments" Height="450" Width="800">
     <Grid>
         <TextBlock Name="more_info" Margin="319,98,279.6,111"/>
-        <ListBox Name="lb_appointments" SelectionChanged="PrintText"  SelectionMode="Single" Margin="519,98,-0.4,111">
+        <ListBox Name="lb_appointments" SelectionChanged="appointmentFokus"  SelectionMode="Single" Margin="519,98,-0.4,111">
         </ListBox>
         <Button Content="Brisi selektovano" HorizontalAlignment="Center" Margin="145,339,518.6,0" VerticalAlignment="Top" Height="71" Width="130" Click="DelateAppointment" />
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="519,339,0,0" VerticalAlignment="Top" Width="130"  Height="71" Click="ReturnOption"/>
         <Button Content="Azuriraj" HorizontalAlignment="Center" Margin="10,339,653.6,0" VerticalAlignment="Top" Height="71" Width="130" Click="UpdateAppointment" />
-        <ListBox Name ="lb_rooms" SelectionChanged="SelekcijaSobe" SelectionMode="Single" Margin="10,211,508.6,111" >
+        <ListBox Name ="lb_time_slots" SelectionChanged="timeSlotFokus" SelectionMode="Single" Margin="10,211,508.6,111" >
         </ListBox>
-        <DatePicker Name ="date_for_update" HorizontalAlignment="Left" Margin="183,167,0,0" VerticalAlignment="Top"/>
-        <TextBox Name ="time_for_update"  HorizontalAlignment="Left" Height="23" Margin="10,167,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

@@ -25,8 +25,7 @@ namespace Hospital.Controller
       
       public Hospital.Model.Room GetRoomByDoctorId(int doctorId)
       {
-         // TODO: implement
-         return null;
+         return roomService.GetRoomByDoctorId(doctorId);
       }
       
       public ObservableCollection<Room> GetAllRooms()
@@ -102,6 +101,18 @@ namespace Hospital.Controller
         public RoomType GetRoomTypeByType(string Type)
         {
             return roomService.GetRoomTypeByType(Type);
+        }
+
+        public ObservableCollection<Room> findSuitableRoomsForOperation(DateTime fromFuture, DateTime toFuture,
+            ObservableCollection<InventoryItem> items_needed)
+        {
+            return roomService.findSuitableRoomsForOperation(fromFuture, toFuture,
+                items_needed);
+        }
+
+        public ObservableCollection<TimeSlot> findSuitableTimeSlotsForOperation(int id_room, int id_doc, int id_patient, DateTime startTime)
+        {
+            return roomService.findSuitableTimeSlotsForOperation(id_room, id_doc, id_patient, startTime);
         }
 
         public Hospital.Service.RoomService roomService = new Service.RoomService();

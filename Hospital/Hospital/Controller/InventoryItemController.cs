@@ -26,8 +26,7 @@ namespace Hospital.Controller
       
       public ObservableCollection<InventoryItem> GetAllInvenotryItemsByItemTypeId(int itemTypeId)
       {
-         // TODO: implement
-         return null;
+         return inventoryItemService.GetAllInvenotryItemsByItemTypeId(itemTypeId);
       }
       
       public Boolean DeleteInventoryItemById(int id)

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Oracle.ManagedDataAccess.Client;
+using Hospital.Controller;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -23,30 +24,21 @@ namespace Hospital.xaml_windows.Doctor
     {
         private int id { set; get; } //ID kao radnik
         private int id_doc { set; get; } //ID kao doktor
-        private OracleConnection con = null;
+        private DoctorController doctorController = new DoctorController();
+
         public DoctorUI(int id)
         {
             InitializeComponent();
             this.id = id;
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
-            //MessageBox.Show(id.ToString());
-            OracleCommand cmd = con.CreateCommand();
-            con.Open();
-            cmd.CommandText = "select doctor.id from employee, doctor where user_id = "+ id.ToString() + " and doctor.EMPLOYEE_ID =  employee.ID";// RIGHT JOIN employees ON users.ID == employees.USER_ID";
-            OracleDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            id_doc = int.Parse(reader.GetString(0));
-            //MessageBox.Show("id je: " + id + " id_doc je: " + id_doc);
-
+            this.id_doc = doctorController.GetDoctorByUserId(id).Id;
+            MessageBox.Show("id: " + id + " id_doc" + id_doc);
         }
 
-        private void ReturnOption (object sender, RoutedEventArgs e)
+        private void ReturnOption(object sender, RoutedEventArgs e)
         {
             //logout
             Window s = new MainWindow();
             s.Show();
-            con.Close();
             this.Close();
         }
 
@@ -74,6 +66,13 @@ namespace Hospital.xaml_windows.Doctor
         private void GoToPatientSearch(object sender, RoutedEventArgs e)
         {
             Window s = new SearchPatient(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToDrugOperation(object sender, RoutedEventArgs e)
+        {
+            Window s = new DrugOperations(id, id_doc);
             s.Show();
             this.Close();
         }

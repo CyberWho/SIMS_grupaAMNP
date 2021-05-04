@@ -63,6 +63,43 @@ namespace Hospital.Repository
             
         }
 
+        public Hospital.Model.Doctor GetDoctorByUserId(int id)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR,SPECIALIZATION WHERE USERS.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID AND DOCTOR.SPEC_ID = SPECIALIZATION.ID";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            User doctorUser = new User();
+            doctorUser.Id = int.Parse(reader.GetString(0));
+            doctorUser.Username = reader.GetString(1);
+            doctorUser.Password = reader.GetString(2);
+            doctorUser.Name = reader.GetString(3);
+            doctorUser.Surname = reader.GetString(4);
+            doctorUser.PhoneNumber = reader.GetString(5);
+            doctorUser.EMail = reader.GetString(6);
+            int dId = reader.GetInt32(7);
+            int salary = reader.GetInt32(8);
+            int yearsOfService = reader.GetInt32(9);
+            int roleId = reader.GetInt32(11);
+            Role role = new Role();
+            role.Id = roleId;
+            role.RoleType = "DOCTOR";
+            Doctor doctor = new Doctor(dId, salary, yearsOfService, doctorUser, role);
+            doctor.Id = reader.GetInt32(12);
+            Room room = new Room();
+            doctor.room = room;
+            doctor.room.Id = reader.GetInt32(14);
+            Specialization specialization = new Specialization();
+            doctor.specialization = specialization;
+            doctor.specialization.Type = reader.GetString(17);
+            connection.Close();
+            return doctor;
+
+
+        }
+
         public Doctor GetWorkHoursDoctorById(int id)
         {
             setConnection();
@@ -175,8 +212,16 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
-                Doctor doctor = GetDoctorById(reader.GetInt32(0));
+                Doctor doctor = new Doctor();
+                
+                doctor.Id =   reader.GetInt32(0);
                 doctors.Add(doctor);
+            }
+            connection.Close();
+            connection.Dispose();
+            for (int i = 0; i < doctors.Count; i++)
+            {
+                doctors[i] = GetDoctorById(doctors[i].Id);
             }
             return doctors;
         }

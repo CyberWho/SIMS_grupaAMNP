@@ -5,6 +5,9 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
@@ -14,6 +17,11 @@ namespace Hospital.Service
       {
          // TODO: implement
          return null;
+      }
+
+      public ObservableCollection<ReservedItem> GetAllReservedItems()
+      {
+          return new ReservedItemRepository().GetAllReservedItems();
       }
       
       public System.Collections.ArrayList GetAllReservedItemsByRoomId(int roomId)

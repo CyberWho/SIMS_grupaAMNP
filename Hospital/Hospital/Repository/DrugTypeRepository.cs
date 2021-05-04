@@ -7,7 +7,9 @@
 using Hospital.Model;
 using System;
 using System.Collections.ObjectModel;
-using System.Data.OracleClient;
+//using System.Data.OracleClient;
+using Oracle.ManagedDataAccess.Client;
+
 
 namespace Hospital.Repository
 {
@@ -30,7 +32,10 @@ namespace Hospital.Repository
         }
         public DrugType GetDrugTypeById(int id)
         {
-            setConnection();
+            //setConnection();
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            con = new OracleConnection(conString);
+            con.Open();
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "SELECT * FROM drug_type WHERE id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();

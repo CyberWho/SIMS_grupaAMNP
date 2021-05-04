@@ -14,7 +14,7 @@ namespace Hospital.Model
         public uint Quantity { get; set; }
 
         public Room room { get; set; }
-
+        public int room_id { get; set; }
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
         {
@@ -41,7 +41,7 @@ namespace Hospital.Model
             }
         }
         public InventoryItem inventoryItem { get; set; }
-
+        public int inventoryItem_id { get; set; }
         public ItemInRoom(int id, uint quantity, Room room, InventoryItem inventoryItem)
         {
             Id = id;

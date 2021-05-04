@@ -5,9 +5,7 @@
  ***********************************************************************/
 
 using Hospital.Model;
-using Oracle.ManagedDataAccess.Client;
 using System;
-using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
@@ -24,7 +22,8 @@ namespace Hospital.Repository
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             connection = new OracleConnection(conString);
-            try { 
+            try
+            {
                 connection.Open();
 
             }
@@ -34,7 +33,7 @@ namespace Hospital.Repository
             }
         }
 
-        
+
 
         public Patient GetPatientByUserId(int id)
         {
@@ -51,7 +50,7 @@ namespace Hospital.Repository
 
             Patient patient = new Patient();
             User user = userRepository.GetUserById(user_id);
-            
+
             if (user.Username.Contains("guestUser"))
             {
                 patient.Id = int.Parse(reader.GetString(0));
@@ -65,11 +64,11 @@ namespace Hospital.Repository
                     JMBG = reader.GetString(1),
                     DateOfBirth = DateTime.Parse(reader.GetString(2)),
                     addres_id = int.Parse(reader.GetString(3)),
-                    user_id = int.Parse(reader.GetString(4))                
+                    user_id = int.Parse(reader.GetString(4))
                 };
                 patient.User = user;
             }
-            
+
             connection.Close();
             return patient;
         }
@@ -88,19 +87,19 @@ namespace Hospital.Repository
 
             user.Id = int.Parse(reader.GetString(0));
             user.Username = reader.GetString(1);
-            
+
             if (user.Username.Contains("guestUser"))
             {
 
             }
             else
             {
-                
+
                 user.Name = reader.GetString(3);
                 user.Surname = reader.GetString(4);
                 user.PhoneNumber = reader.GetString(5);
                 user.EMail = reader.GetString(6);
-                
+
                 patient.JMBG = reader.GetString(8);
                 patient.DateOfBirth = reader.GetDateTime(9);
                 int addressId = reader.GetInt32(10);
@@ -110,8 +109,8 @@ namespace Hospital.Repository
             patient.User = user;
             patient.user_id = int.Parse(reader.GetString(11));
 
-           // Address address = addressRepository.GetAddressById(addressId);
-           // patient.Address = address;
+            // Address address = addressRepository.GetAddressById(addressId);
+            // patient.Address = address;
             connection.Close();
             return patient;
         }
@@ -159,12 +158,21 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-
                 User user = new User();
+
+                try
+                {
+                    user.Name = reader.GetString(3);
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+
                 user.Id = int.Parse(reader.GetString(0));
                 user.Username = reader.GetString(1);
                 user.Password = reader.GetString(2);
-                user.Name = reader.GetString(3);
+
                 user.Surname = reader.GetString(4);
                 user.PhoneNumber = reader.GetString(5);
                 user.EMail = reader.GetString(6);
@@ -180,6 +188,7 @@ namespace Hospital.Repository
             }
 
             connection.Close();
+            connection.Dispose();
             return patients;
         }
 

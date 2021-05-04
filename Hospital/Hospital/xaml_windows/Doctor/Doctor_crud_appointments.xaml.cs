@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital.Controller;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -24,81 +25,84 @@ namespace Hospital.xaml_windows.Doctor
         private int id { set; get; }
         private int id_doc { set; get; }
 
-        ListBoxItem selected = null;
-        ListBoxItem room_for_update = null;
+        ListBoxItem selected_appointment = null;
+        ListBoxItem time_slot_for_update = null;
 
+        private Model.Doctor doctor;
+        private Appointment selectedAppointment;
+        private Model.Patient selectePatientFromAppointment;
+
+        //controllers
+        private AppointmentController appointmentController = new AppointmentController();
+        private PatientController patientController = new PatientController();
+        private TimeSlotController timeSlotController = new TimeSlotController();
+        private DoctorController doctorController = new DoctorController();
         public Doctor_crud_appointments(int id, int id_doc)
         {
             InitializeComponent();
             this.id = id;
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection con = new OracleConnection(conString);
-            OracleCommand cmd = con.CreateCommand();
-            //MessageBox.Show(id.ToString());
-            con.Open();
-            cmd.CommandText = "select * from appointment, enum_appointment_type where appointment.APPTYPE_ID = enum_appointment_type.id  and doctor_id =" + id_doc.ToString();// RIGHT JOIN employees ON users.ID == employees.USER_ID";
-            OracleDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())//prebaciti u appointments pa videti dalje
-            {
+            this.id_doc = id_doc;
+            this.doctor = doctorController.GetDoctorById(id_doc);
 
-                cmd.CommandText = "select surname from patient, users where users.ID = patient.USER_ID and patient.ID = " + reader.GetString(4);
-                OracleDataReader reader_info = cmd.ExecuteReader();
-                reader_info.Read();
 
-                ListBoxItem itm = new ListBoxItem();
-                itm.Content = reader.GetDateTime(2).ToString() + " " + reader_info.GetString(0) + "\nsoba: " + reader.GetString(3) + " id_pregleda =" + reader.GetString(0) + " " + reader.GetString(9);
+            FillAppointmentsToUi();
+            FillTimeSlotsToUi();
 
-                lb_appointments.Items.Add(itm);
-            }
-            cmd.CommandText = "select * from room where room.DESCRIPTION like 'Examination room' or room.DESCRIPTION = 'Operating room'";
-            reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                ListBoxItem itm = new ListBoxItem();
-                itm.Content = "soba: " + reader.GetString(0) + " " + reader.GetString(3);
-                lb_rooms.Items.Add(itm);
-            }
-
-            con.Close();
-            con.Dispose();
         }
 
+        void FillTimeSlotsToUi()
+        {
+            foreach (TimeSlot timeSlot in timeSlotController.GetAllFreeTimeSlotsByDoctorId(doctor.Id))
+            {
+                if (timeSlot.Free)
+                {
+                    ListBoxItem item = new ListBoxItem();
+                    item.Content = timeSlot.Id + "|" + timeSlot.StartTime;
+                    lb_time_slots.Items.Add(item);
+                }
+            }
 
+        }
+        void FillAppointmentsToUi()
+        {
+            MessageBox.Show(id_doc.ToString());
+            foreach (Appointment appointment in appointmentController.GetAllAppointmentsByDoctorId(id_doc))
+            {
+                Model.Patient patien = patientController.GetPatientById(appointment.Patient_Id);
+                ListBoxItem item = new ListBoxItem();
+                item.Content = appointment.StartTime + " " + patien.User.Surname + " " + "\nsoba:" +
+                               appointment.Room_Id + " id_pregleda =" +
+                               appointment.Id + " " + appointment.Type;
 
-        
+                lb_appointments.Items.Add(item);
+            }
 
-        void PrintText(object sender, SelectionChangedEventArgs args)
+        }
+
+        void fetchAppointmentAndPatient()
+        {
+            string[] split = (selected_appointment.Content.ToString().Split('='))[1].Split(' ');
+            selectedAppointment = appointmentController.GetAppointmentById(int.Parse(split[0]));
+            selectePatientFromAppointment = patientController.GetPatientById(selectedAppointment.patient.Id);
+        }
+        void updateMoreInfoOnPatient()
+        {
+            fetchAppointmentAndPatient();
+            more_info.Text =
+                selectePatientFromAppointment.User.Name + " " + selectePatientFromAppointment.User.Surname + "\nrođen: " +
+                selectePatientFromAppointment.DateOfBirth + "\nJMBG: " + selectePatientFromAppointment.JMBG + "\ntermin: " +
+                selectedAppointment.StartTime + "\ntrajanje: " + selectedAppointment.DurationInMinutes + " minuta\n\ntelefon: " +
+                selectePatientFromAppointment.User.PhoneNumber + "\nemail: " + selectePatientFromAppointment.User.EMail;
+        }
+
+        void appointmentFokus(object sender, SelectionChangedEventArgs args)
         {
             more_info.Text = "";
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             if (lbi != null)
             {
-
-                string[] split = (lbi.Content.ToString().Split('='))[1].Split(' ');
-                int id_app = int.Parse(split[0]);
-                string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-                OracleConnection con = new OracleConnection(conString);
-                OracleCommand cmd = con.CreateCommand();
-                //MessageBox.Show(id.ToString());
-                con.Open();
-                //MessageBox.Show(id_app.ToString());
-                cmd.CommandText = "select * from appointment where appointment.id = " + id_app.ToString();
-                OracleDataReader reader = cmd.ExecuteReader();
-                reader.Read();
-                string trajanje = reader.GetString(1);
-                string datum = reader.GetDateTime(2).ToString();
-
-
-                cmd.CommandText = "select JMBG, date_of_birth, name, surname, phone_number, email  from patient, users where users.ID = patient.USER_ID and patient.ID = " + reader.GetString(4);
-                OracleDataReader reader_info = cmd.ExecuteReader();
-                reader_info.Read();
-
-                more_info.Text += reader_info.GetString(2) + " " + reader_info.GetString(3) + "\nrodjen: " + reader_info.GetString(1)
-                                + "\nJMBG " + reader_info.GetString(0) + "\ntermin " + datum + "\ntrajanja " + trajanje
-                                + "minuta\n\ntelefon:" + reader_info.GetString(4) + "\nemail: " + reader_info.GetString(5);
-                con.Close();
-                con.Dispose();
-                selected = lbi;
+                selected_appointment = lbi;
+                updateMoreInfoOnPatient();
             }
             else
             {
@@ -106,54 +110,56 @@ namespace Hospital.xaml_windows.Doctor
             }
 
         }
-        void SelekcijaSobe(object sender, SelectionChangedEventArgs args)
+
+
+        private TimeSlot getTimeSlotFromUi()
+        {
+            string[] split1 = time_slot_for_update.Content.ToString().Split('|');
+            return timeSlotController.GetTimeSlotById(int.Parse(split1[0]));
+
+        }
+
+        void timeSlotFokus(object sender, SelectionChangedEventArgs args)
         {
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             if (lbi != null)
             {
-                room_for_update = lbi;
+                time_slot_for_update = lbi;
             }
 
         }
 
         private void UpdateAppointment(object sender, RoutedEventArgs e)
         {
-            if (selected != null)
+            if (selected_appointment != null && time_slot_for_update != null)
             {
-                string[] split = room_for_update.Content.ToString().Split(':');
-                int id_sobe = int.Parse(split[1]); //id za novu sobu
-                string[] split1 = selected.Content.ToString().Split('=');
-                int id_app = int.Parse(split1[1]); //id app koji menjamo
-                string[] split2 = time_for_update.Text.Split(':');
-                string[] split3 = (date_for_update.SelectedDate.ToString().Split(' '))[0].Split('/');
-                // MessageBox.Show(split3[0]); // mesec
-                // MessageBox.Show(split3[1]); // dan
-                // MessageBox.Show(split3[2]); // godina
-                DateTime dt = new DateTime(int.Parse(split3[2]), int.Parse(split3[0]), int.Parse(split3[1]), int.Parse(split2[0]), int.Parse(split2[1]), 0);
-                //DateTime dt = new DateTime(int.Parse(split3[1]), int.Parse(split3[0]), int.Parse(split3[2]), int.Parse(split2[0]), int.Parse(split2[1]), 0);
-                string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-                OracleConnection con = new OracleConnection(conString);
-                OracleCommand cmd = con.CreateCommand();
-                con.Open();
+                TimeSlot toFree = timeSlotController.GetAppointmentTimeSlotByDateAndDoctorId(selectedAppointment.StartTime, doctor.Id);
+                timeSlotController.FreeTimeSlot(toFree);
+                TimeSlot newTimeSlot = getTimeSlotFromUi();
+                timeSlotController.TakeTimeSlot(newTimeSlot);
 
-                string[] niz = dt.ToString().Split(' ');
-                string dat = niz[0] + " " + niz[1];
+                appointmentController.ChangeStartTime(selectedAppointment, newTimeSlot.StartTime);
+                selectedAppointment.StartTime = newTimeSlot.StartTime;
+                updateUi(toFree);
 
-                cmd.CommandText = "update appointment set room_id = " + id_sobe.ToString()
-                                  + ", date_time = to_date('" + dat + "', 'MM/DD/YYYY HH24:MI:SS') where id =" + id_app.ToString();
-
-
-                int a = cmd.ExecuteNonQuery();
-                //MessageBox.Show(a.ToString());
-                con.Close();
-                con.Dispose();
-                string[] split4 = selected.Content.ToString().Split(' ');
-                selected.Content = dt.ToString() + " " + split4[2] + " " + id_sobe + " " + split4[4] + " " + split4[5];
 
             }
         }
 
+        void updateUi(TimeSlot toFree)
+        {
 
+                time_slot_for_update.Content = toFree.Id + "|" + toFree.StartTime;
+                selected_appointment.Content = selectedAppointment.StartTime + " " + selectePatientFromAppointment.User.Surname + " " + "\nsoba:" +
+                                               selectedAppointment.Room_Id + " id_pregleda =" +
+                                               selectedAppointment.Id + " " + selectedAppointment.Type;
+                more_info.Text =
+                    selectePatientFromAppointment.User.Name + " " + selectePatientFromAppointment.User.Surname + "\nrođen: " +
+                    selectePatientFromAppointment.DateOfBirth + "\nJMBG: " + selectePatientFromAppointment.JMBG + "\ntermin: " +
+                    selectedAppointment.StartTime + "\ntrajanje: " + selectedAppointment.DurationInMinutes + " minuta\n\ntelefon: " +
+                    selectePatientFromAppointment.User.PhoneNumber + "\nemail: " + selectePatientFromAppointment.User.EMail;
+
+        }
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
             Window s = new DoctorUI(this.id);
@@ -163,21 +169,12 @@ namespace Hospital.xaml_windows.Doctor
 
         private void DelateAppointment(object sender, RoutedEventArgs e)
         {
-            string[] split1 = selected.Content.ToString().Split('=');
-            int id_app = int.Parse(split1[1].Split(' ')[0]); //id app koji menjamo
-
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            OracleConnection con = new OracleConnection(conString);
-            OracleCommand cmd = con.CreateCommand();
-            con.Open();
-
-            cmd.CommandText = "delete from appointment where id = " + id_app;
-
-            int a = cmd.ExecuteNonQuery();
-            lb_appointments.Items.Remove(selected);
-            //MessageBox.Show(a.ToString());
+            
+            appointmentController.DeleteAppointmentById(selectedAppointment.Id);
+            lb_appointments.Items.Remove(selected_appointment);
             more_info.Text = "";
-            selected = null;
+            selected_appointment = null;
+           
         }
     }
 }

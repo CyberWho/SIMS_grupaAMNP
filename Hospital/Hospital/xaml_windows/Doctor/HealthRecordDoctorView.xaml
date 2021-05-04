@@ -12,6 +12,8 @@
         <Button Content="Potvrdi promenu anamneze" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Width="178" Click="ChangeAnamnesis" Height="48"/>
         <Button Content="Izdaj recept(e) za izabranu anamnezu" HorizontalAlignment="Left" Margin="193,314,0,0" VerticalAlignment="Top" Width="207" Click="GoToPerscriptionGiving" Height="48"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="425,314,0,0" VerticalAlignment="Top" Width="113"  Height="48" Click="ReturnOption"/>
+        <Button Content="Zakazi operaciju" HorizontalAlignment="Left" Margin="360,367,0,0" VerticalAlignment="Top" Width="178" Height="48" Click="GoToCreateOperation" />
+        <Button Content="Izdavanje uput na osnovu termina" HorizontalAlignment="Left" Margin="148,367,0,0" VerticalAlignment="Top" Width="207" Click="GoToReferralGiving" Height="48"/>
 
     </Grid>
 </Window>

@@ -67,8 +67,8 @@ namespace Hospital.Service
       
       public Hospital.Model.ReferralForSpecialist AddReferral(Hospital.Model.ReferralForSpecialist referral)
       {
-         // TODO: implement
-         return null;
+         
+         return referralForSpecialistRepository.NewReferralForSpecialist(referral) ;
       }
       
       public Hospital.Model.ReferralForSpecialist DeactivateReferral(Hospital.Model.ReferralForSpecialist referral)

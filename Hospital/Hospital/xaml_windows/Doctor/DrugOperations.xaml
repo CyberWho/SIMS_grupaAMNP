@@ -1,0 +1,19 @@
+﻿<Window x:Class="Hospital.xaml_windows.Doctor.DrugOperations"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Doctor"
+        mc:Ignorable="d"
+        Title="DrugOperations" Height="450" Width="800">
+    <Grid>
+        <ListBox Name="lb_unconfirmed" SelectionChanged="SelectedPendingDrugFocusChange" HorizontalAlignment="Left" Height="215" Margin="201,90,0,0" VerticalAlignment="Top" Width="289"/>
+        <ListBox Name="lb_confirmed" SelectionChanged="SelectedApprovedDrugFocusChange" HorizontalAlignment="Left" Height="215" Margin="495,90,0,0" VerticalAlignment="Top" Width="289"/>
+        <TextBox Name="tb_rejection" HorizontalAlignment="Left" Height="86" Margin="10,219,0,0" TextWrapping="Wrap" Text="Razlog odbijanja leka." VerticalAlignment="Top" Width="178"/>
+        <Button Content="Odbi lek" HorizontalAlignment="Left" Margin="113,310,0,0" VerticalAlignment="Top" Width="75" Click="RejectDrug"/>
+        <Button Content="Potvrdi lek" HorizontalAlignment="Left" Margin="201,310,0,0" VerticalAlignment="Top" Width="75" Click="ApproveDrug"/>
+        <Button Content="Promeni potrebu za receptom" HorizontalAlignment="Left" Margin="495,310,0,0" VerticalAlignment="Top" Width="187" Click="NeedForRecipeChange"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="75" Click="ReturnOption"/>
+
+    </Grid>
+</Window>

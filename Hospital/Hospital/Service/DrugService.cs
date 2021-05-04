@@ -43,7 +43,11 @@ namespace Hospital.Service
         { 
             return drugRepository.UpdateDrug(drug);
         }
-
+        
+        public Drug UpdateDrugNoInventoryPart(Drug drug)
+        {
+            return drugRepository.UpdateDrugNoInventoryPart(drug);
+        }
         public Drug AddDrug(Drug drug)
         {
             return drugRepository.NewDrug(drug);
@@ -59,6 +63,11 @@ namespace Hospital.Service
         {
             // TODO: implement
             return null;
+        }
+
+        public void RejectDrug(int id_drug, int id_doctor, String description)
+        {
+            drugRepository.RejectDrug(id_drug, id_doctor, description);
         }
 
         public DrugRepository drugRepository = new DrugRepository();

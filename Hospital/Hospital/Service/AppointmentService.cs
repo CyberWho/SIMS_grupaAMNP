@@ -8,8 +8,6 @@ using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 using Hospital.Repository;
-using System.Collections.ObjectModel;
-using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -106,6 +104,15 @@ namespace Hospital.Service
         {
             // TODO: implement
             return null;
+        }
+
+        public Boolean DeleteAppointmentById(int id)
+        {
+            return appointmentRepository.DeleteAppointmentById(id);
+        }
+        public int GetLastId()
+        {
+            return appointmentRepository.GetLastId();
         }
 
         public Hospital.Repository.AppointmentRepository appointmentRepository = new Repository.AppointmentRepository();

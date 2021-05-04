@@ -46,6 +46,7 @@ namespace Hospital.Repository
 
         public Address GetAddressById(int id)
         {
+            setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM address WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
@@ -55,8 +56,8 @@ namespace Hospital.Repository
             {
                 Id = int.Parse(reader.GetString(0)),
                 Name = reader.GetString(1),
-                city_id = int.Parse(reader.GetString(2)),
-                City = cityRepository.GetCityById(reader.GetInt32(2))
+                city_id = int.Parse(reader.GetString(3)),
+                City = cityRepository.GetCityById(reader.GetInt32(3))
             };
 
             return address;

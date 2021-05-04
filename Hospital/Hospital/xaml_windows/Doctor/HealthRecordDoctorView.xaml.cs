@@ -22,8 +22,8 @@ namespace Hospital.xaml_windows.Doctor
     /// </summary>
     public partial class HealthRecordDoctorView : Window
     {
-        private int id;
-        private int id_doc_as_emoloyee;
+        private int id_doc;
+        private int id_doc_as_user;
         private int id_patient;
         private HealthRecord healthRecord = null;
         private ObservableCollection<Appointment> appointments = null;
@@ -33,11 +33,11 @@ namespace Hospital.xaml_windows.Doctor
         private Model.Patient patient = null;
         private int selected_appointment_id = -1;
         private Anamnesis selected_anamensis = null;
-        public HealthRecordDoctorView(int id_doc_as_emoloyee, int id_doc, int id_patient)
+        public HealthRecordDoctorView(int idDocAsUser, int id_doc, int id_patient)
         {
             InitializeComponent();
-            this.id = id_doc;
-            this.id_doc_as_emoloyee = id_doc_as_emoloyee;
+            this.id_doc = id_doc;
+            this.id_doc_as_user = idDocAsUser;
             this.id_patient = id_patient;
             healthRecord = healthRecordControleller.GetHealthRecordByPatientId(id_patient);
             //MessageBox.Show(id_patient.ToString());
@@ -106,7 +106,7 @@ namespace Hospital.xaml_windows.Doctor
         {
             if (selected_anamensis != null)
             {
-                Window s = new PerscriptionGiving(healthRecord, id_doc_as_emoloyee, id, id_patient, selected_anamensis);
+                Window s = new PerscriptionGiving(healthRecord, id_doc_as_user, id_doc, id_patient, selected_anamensis);
                 s.Show();
                 this.Close();
             }
@@ -114,9 +114,26 @@ namespace Hospital.xaml_windows.Doctor
 
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new SearchPatient(id_doc_as_emoloyee, id);
+            Window s = new SearchPatient(id_doc_as_user, id_doc);
             s.Show();
             this.Close();
+        }
+
+        private void GoToCreateOperation(object sender, RoutedEventArgs e)
+        {
+            Window s = new Create_operation(id_doc_as_user, id_doc, id_patient);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToReferralGiving(object sender, RoutedEventArgs e)
+        {
+            if (selected_appointment_id != -1)
+            {
+                Window s = new SpecialistReferal(healthRecord, id_doc_as_user, id_doc, id_patient, selected_appointment_id);
+                s.Show();
+                this.Close();
+            }
         }
     }
 }

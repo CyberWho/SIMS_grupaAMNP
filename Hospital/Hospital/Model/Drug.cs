@@ -17,6 +17,7 @@ namespace Hospital.Model
         public Boolean NeedsPerscription { get; set; }
 
         public DrugType drugType;
+        public int drugType_id { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public DrugType GetDrugType()

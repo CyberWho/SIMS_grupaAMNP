@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
@@ -114,13 +115,13 @@ namespace Hospital.Model
                 }
             }
         }
-        public System.Collections.ArrayList itemInRoom;
+        public ObservableCollection<ItemInRoom> itemInRoom;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetItemInRoom()
+        public ObservableCollection<ItemInRoom> GetItemInRoom()
         {
             if (itemInRoom == null)
-                itemInRoom = new System.Collections.ArrayList();
+                itemInRoom = new ObservableCollection<ItemInRoom>();
             return itemInRoom;
         }
 
@@ -138,7 +139,7 @@ namespace Hospital.Model
             if (newItemInRoom == null)
                 return;
             if (this.itemInRoom == null)
-                this.itemInRoom = new System.Collections.ArrayList();
+                this.itemInRoom = new ObservableCollection<ItemInRoom>();
             if (!this.itemInRoom.Contains(newItemInRoom))
             {
                 this.itemInRoom.Add(newItemInRoom);
@@ -233,7 +234,7 @@ namespace Hospital.Model
             }
         }
 
-        public Room(int id, int floor, double area, string description, Renovation renovation, ArrayList appointment, RoomType roomType, ArrayList itemInRoom, ArrayList doctor)
+        public Room(int id, int floor, double area, string description, Renovation renovation, ArrayList appointment, RoomType roomType, ObservableCollection<ItemInRoom> itemInRoom, ArrayList doctor)
         {
             Id = id;
             Floor = floor;

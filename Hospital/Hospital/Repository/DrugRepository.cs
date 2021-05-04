@@ -37,7 +37,7 @@ namespace Hospital.Repository
             OracleCommand command = connection.CreateCommand();
             command.CommandText = SelectAllCommandText + "and id = " + id.ToString();
             OracleDataReader reader = command.ExecuteReader();
-            
+
             reader.Read();
             Drug newDrug = ParseFromReader(reader);
 
@@ -54,8 +54,27 @@ namespace Hospital.Repository
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                drugs.Add(ParseFromReader(reader));
+                Drug drug = new Drug();
+                drug.Id = reader.GetInt16(0);
+                drug.Name = reader.GetString(7);
+                drug.Price = (uint)reader.GetInt32(8);
+                drug.Unit = reader.GetString(9);
+                drug.Type = (ItemType)reader.GetInt32(10);
+                drug.Grams = reader.GetInt32(2);
+                drug.NeedsPerscription = reader.GetInt32(3) == 1 ? true : false;
+                drug.Status = (DrugStatus)reader.GetInt32(4);
+                drug.drugType_id = reader.GetInt32(5);
+                drugs.Add(drug);
+                
             }
+            connection.Close();
+            connection.Dispose();
+
+            foreach (Drug drug in drugs)
+            {
+                drug.drugType = drugTypeRepository.GetDrugTypeById(drug.drugType_id);
+            }
+
             return drugs;
         }
 
@@ -97,30 +116,57 @@ namespace Hospital.Repository
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "DELETE FROM drug WHERE id = " + id.ToString();
 
-            try{
+            try
+            {
                 command.ExecuteNonQuery();
                 return true;
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 Trace.WriteLine(exp.ToString());
                 return false;
             }
         }
 
+        public Drug UpdateDrugNoInventoryPart(Drug drug)
+        {
+            int needsPerscription = drug.NeedsPerscription ? 1 : 0;
+            setConnection();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText =
+                "UPDATE drug " +
+                "SET grams = " + drug.Grams.ToString() + ", " +
+                "needs_perscription = " + needsPerscription.ToString() + ", " +
+                "drug_status = '" + ((int)drug.Status).ToString() + "', " +
+                "drug_type_id = " + drug.drugType.Id.ToString() + " " +
+                "WHERE id = " + drug.Id.ToString();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+                connection.Close();
+                return null;
+            }
+
+            return drug;
+        }
         public Drug UpdateDrug(Drug drug)
         {
             int needsPerscription = drug.NeedsPerscription ? 1 : 0;
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText =
-                "UPDATE drug "              +
-                "SET grams = "              + drug.Grams.ToString()         + ", " +
-                "needs_perscription = "     + needsPerscription.ToString()  + ", " +
-                "drug_status = '"           + ((int)drug.Status).ToString() + "', " +
-                "drug_type_id = "           + drug.drugType.Id.ToString()   + " " +
+                "UPDATE drug " +
+                "SET grams = " + drug.Grams.ToString() + ", " +
+                "needs_perscription = " + needsPerscription.ToString() + ", " +
+                "drug_status = '" + ((int)drug.Status).ToString() + "', " +
+                "drug_type_id = " + drug.drugType.Id.ToString() + " " +
                 "WHERE invetory_item_id = " + drug.Id.ToString();
-            
+
             try
             {
                 cmd.ExecuteNonQuery();
@@ -134,11 +180,11 @@ namespace Hospital.Repository
 
             cmd.CommandText =
                 "UPDATE inventory_item" +
-                "SET name = '"          + drug.Name                     + "', " +
-                "price = "              + drug.Price.ToString()         + ", " +
-                "unit = "               + drug.Unit.ToString()          + ", " +
-                "item_type"             + ((int)drug.Type).ToString()   + ", " +
-                "WHERE id = "           + drug.Id.ToString();
+                "SET name = '" + drug.Name + "', " +
+                "price = " + drug.Price.ToString() + ", " +
+                "unit = " + drug.Unit.ToString() + ", " +
+                "item_type" + ((int)drug.Type).ToString() + ", " +
+                "WHERE id = " + drug.Id.ToString();
 
             try
             {
@@ -163,11 +209,11 @@ namespace Hospital.Repository
             InventoryItem inventoryItem = inventoryItemRepository.NewInventoryItem(new InventoryItem(-1, drug.Name, drug.Price, drug.Unit, drug.Type));
 
             command.CommandText = "INSERT INTO drug (inventory_item_id, grams, needs_perscription, drug_status, drug_type_id) VALUES (:inventory_item_id, :grams, :needs_perscription, :drug_status, :drug_type_id)";
-            command.Parameters.Add("inventory_item_id",  OracleDbType.Int32).Value  = inventoryItem.Id;
-            command.Parameters.Add("grams",              OracleDbType.Int32).Value  = drug.Grams;
-            command.Parameters.Add("needs_perscription", OracleDbType.Int32).Value  = drug.NeedsPerscription ? 1 : 0;
-            command.Parameters.Add("drug_status",        OracleDbType.Int32).Value  = drug.Status;
-            command.Parameters.Add("drug_type_id",       OracleDbType.Int32).Value  = drug.drugType.Id;
+            command.Parameters.Add("inventory_item_id", OracleDbType.Int32).Value = inventoryItem.Id;
+            command.Parameters.Add("grams", OracleDbType.Int32).Value = drug.Grams;
+            command.Parameters.Add("needs_perscription", OracleDbType.Int32).Value = drug.NeedsPerscription ? 1 : 0;
+            command.Parameters.Add("drug_status", OracleDbType.Int32).Value = drug.Status;
+            command.Parameters.Add("drug_type_id", OracleDbType.Int32).Value = drug.drugType.Id;
 
             try
             {
@@ -179,7 +225,7 @@ namespace Hospital.Repository
                 Trace.WriteLine(exp.ToString());
                 return null;
             }
-            
+
         }
 
         public int GetLastId()
@@ -214,8 +260,19 @@ namespace Hospital.Repository
             drug.NeedsPerscription = reader.GetInt32(3) == 1 ? true : false;
             drug.Status = (DrugStatus)reader.GetInt32(4);
             drug.drugType = drugTypeRepository.GetDrugTypeById(reader.GetInt32(5));
-            
+
             return drug;
+        }
+
+        public void RejectDrug(int id_drug, int id_doctor, String description)
+        {
+            setConnection();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "insert into drug_rejection (drug_id, doctor_id, description) values (" + id_drug + "," +
+                              id_doctor + ",'" + description + "')";
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            connection.Dispose();
         }
 
         InventoryItemRepository inventoryItemRepository = new InventoryItemRepository();

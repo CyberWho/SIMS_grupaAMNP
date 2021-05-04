@@ -6,12 +6,19 @@
 
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Repository
 {
-   public class ReservedItemRepository
-   {
+    public class ReservedItemRepository
+    {
+        private ItemInRoomRepository itemInRoomRepository = new ItemInRoomRepository();
+        private RoomRepository roomRepository = new RoomRepository();
+
         OracleConnection con = null;
         private void setConnection()
         {
@@ -30,6 +37,38 @@ namespace Hospital.Repository
         {
             // TODO: implement
             return null;
+        }
+
+        public ObservableCollection<ReservedItem> GetAllReservedItems()
+        {
+            setConnection();
+            OracleCommand command = con.CreateCommand();
+            ObservableCollection<ReservedItem> reservedItems = new ObservableCollection<ReservedItem>();
+            command.CommandText = "select * from reserved_item";
+            OracleDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                ReservedItem reservedItem = new ReservedItem();
+                reservedItem.Id = reader.GetInt32(0);
+                reservedItem.ReservedDate = reader.GetDateTime(1);
+
+                reservedItem.room_id = reader.GetInt32(2);
+
+                reservedItem.item_in_room_id = reader.GetInt32(3);
+
+                reservedItems.Add(reservedItem);
+            }
+            con.Close();
+            con.Dispose();
+
+            /*foreach (ReservedItem reservedItem in reservedItems)
+            {
+                reservedItem.Room = roomRepository.GetRoomById(reservedItem.room_id);
+                reservedItem.ItemInRoom = itemInRoomRepository.GetItemInRoomById(reservedItem.item_in_room_id);
+            }*/
+
+            return reservedItems;
         }
 
         public System.Collections.ArrayList GetAllReservedItemsByRoomId(int roomId)
@@ -72,12 +111,12 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
-            
-            if(reservedItem.ReservedDate == null)
+
+            if (reservedItem.ReservedDate == null)
             {
                 Trace.WriteLine("ReservedDate je null");
             }
-            if (reservedItem.Room== null)
+            if (reservedItem.Room == null)
             {
                 Trace.WriteLine("Room je null");
             }
@@ -88,8 +127,8 @@ namespace Hospital.Repository
 
 
             cmd.CommandText = "INSERT INTO reserved_item (reserved_date, room_id, item_in_room_id) VALUES (to_date('" +
-               reservedItem.ReservedDate.ToString()  + "','DD-MON-YY HH:MI:SS PM')," +
-               reservedItem.Room.Id.ToString()       + ", " +
+               reservedItem.ReservedDate.ToString() + "','DD-MON-YY HH:MI:SS PM')," +
+               reservedItem.Room.Id.ToString() + ", " +
                reservedItem.ItemInRoom.Id.ToString() + ")";
 
             Trace.WriteLine(cmd.CommandText);
@@ -111,6 +150,6 @@ namespace Hospital.Repository
             // TODO: implement
             return 0;
         }
-   
-   }
+
+    }
 }

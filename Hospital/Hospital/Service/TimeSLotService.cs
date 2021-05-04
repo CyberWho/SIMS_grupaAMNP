@@ -43,6 +43,10 @@ namespace Hospital.Service
             return null;
         }
 
+        public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
+        {
+            return timeSlotRepository.GetAllFreeTimeSlotsByDoctorId(doctorId);
+        }
         public ObservableCollection<TimeSlot> GetTimeSlotRecomendationsByDatesAndDoctorIdAndPriority(DateTime startTime,DateTime endTime,int doctorId,int priority)
         {
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();

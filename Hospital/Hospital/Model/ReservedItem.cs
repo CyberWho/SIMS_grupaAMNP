@@ -14,8 +14,9 @@ namespace Hospital.Model
         public DateTime? ReservedDate { get; set; }
 
         public Room Room { get; set; }
+        public int room_id { get; set; }
         public ItemInRoom ItemInRoom { get; set; }
-
+        public int item_in_room_id { get; set; }
         public ReservedItem(int id, DateTime? reservedDate, Room room, ItemInRoom itemInRoom)
         {
             Id = id;

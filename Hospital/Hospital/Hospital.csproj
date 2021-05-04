@@ -170,11 +170,17 @@
     <Compile Include="xaml_windows\Doctor\Create_appointment.xaml.cs">
       <DependentUpon>Create_appointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Doctor\Create_operation.xaml.cs">
+      <DependentUpon>Create_operation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Doctor\DoctorUI.xaml.cs">
       <DependentUpon>DoctorUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml.cs">
       <DependentUpon>Doctor_crud_appointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Doctor\DrugOperations.xaml.cs">
+      <DependentUpon>DrugOperations.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Doctor\HealthRecordDoctorView.xaml.cs">
       <DependentUpon>HealthRecordDoctorView.xaml</DependentUpon>
@@ -187,6 +193,9 @@
     </Compile>
     <Compile Include="xaml_windows\Doctor\SearchPatient.xaml.cs">
       <DependentUpon>SearchPatient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Doctor\SpecialistReferal.xaml.cs">
+      <DependentUpon>SpecialistReferal.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Manager\ManagerRoomInventory.xaml.cs">
       <DependentUpon>ManagerRoomInventory.xaml</DependentUpon>
@@ -282,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="xaml_windows\Doctor\Create_operation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Doctor\DoctorUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -289,6 +302,14 @@
     <Page Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Doctor\DrugOperations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Doctor\SpecialistReferal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Manager\ManagerRoomInventory.xaml">
       <SubType>Designer</SubType>

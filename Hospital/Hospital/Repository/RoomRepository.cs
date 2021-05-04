@@ -50,7 +50,8 @@ namespace Hospital.Repository
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM ROOM WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader reader = command.ExecuteReader();
+            OracleDataReader reader = null; //prvo inicijalizacija na null resava operation on closed object
+            reader = command.ExecuteReader();
             reader.Read();
             Room room = new Room();
             room.Id = reader.GetInt32(0);
@@ -69,8 +70,15 @@ namespace Hospital.Repository
       
       public Hospital.Model.Room GetRoomByDoctorId(int doctorId)
       {
-         // TODO: implement
-         return null;
+            //select room_id from doctor where id = 1;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "select room_id from doctor where id = " + doctorId;
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int room_id = reader.GetInt32(0);
+            connection.Close();
+            return GetAppointmentRoomById(room_id);
       }
       
       public ObservableCollection<Room> GetAllRooms()
@@ -89,6 +97,7 @@ namespace Hospital.Repository
             }
 
             connection.Close();
+            connection.Dispose();
             return rooms;
       }
       

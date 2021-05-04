@@ -55,6 +55,11 @@ namespace Hospital.Controller
             return false;
         }
 
+        public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
+        {
+            return timeSlotService.GetAllFreeTimeSlotsByDoctorId(doctorId);
+        }
+
         public ObservableCollection<TimeSlot> GetTimeSlotRecomendationsByDatesAndDoctorIdAndPriority(DateTime startTime, DateTime endTime, int doctorId, int priority)
         {
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();

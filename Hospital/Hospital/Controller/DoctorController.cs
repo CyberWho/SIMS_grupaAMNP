@@ -16,6 +16,12 @@ namespace Hospital.Controller
         {
             return doctorService.GetDoctorById(id);
         }
+
+        public Hospital.Model.Doctor GetDoctorByUserId(int id)
+        {
+            return doctorService.GetDoctorByUserId(id);
+        }
+
         public Doctor GetWorkHoursDoctorById(int id)
         {
             Doctor doctor = new Doctor();

@@ -100,6 +100,16 @@ namespace Hospital.Controller
             return null;
         }
 
+        public Boolean DeleteAppointmentById(int id)
+        {
+            return appointmentService.DeleteAppointmentById(id);
+        }
+
+        public int GetLastId()
+        {
+            return appointmentService.GetLastId();
+        }
+
         public Hospital.Service.AppointmentService appointmentService = new Service.AppointmentService();
 
     }

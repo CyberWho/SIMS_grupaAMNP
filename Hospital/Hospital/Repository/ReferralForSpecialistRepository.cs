@@ -13,8 +13,8 @@ using System.Collections.ObjectModel;
 
 namespace Hospital.Repository
 {
-   public class ReferralForSpecialistRepository
-   {
+    public class ReferralForSpecialistRepository
+    {
         OracleConnection con = null;
         private void setConnection()
         {
@@ -32,16 +32,16 @@ namespace Hospital.Repository
         }
 
         public System.Collections.ArrayList GetAllReferralsForSpecialist()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public ObservableCollection<ReferralForSpecialist> GetAllReferralsForSpecialistByPatientId(int patientId)
-      {
-        //TODO: implement
-         return null;
-      }
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public ObservableCollection<ReferralForSpecialist> GetAllReferralsForSpecialistByPatientId(int patientId)
+        {
+            //TODO: implement
+            return null;
+        }
 
         public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
         {
@@ -63,15 +63,15 @@ namespace Hospital.Repository
             }
             return referralForSpecialists;
         }
-      
-      public System.Collections.ArrayList GetAllReferralsForSpecialistByDoctorId(int doctorId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteReferralForSpecialistById(int id)
-      {
+
+        public System.Collections.ArrayList GetAllReferralsForSpecialistByDoctorId(int doctorId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean DeleteReferralForSpecialistById(int id)
+        {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = "DELETE FROM REFERRAL_FOR_SPECIALIST WHERE ID = :id";
@@ -79,49 +79,58 @@ namespace Hospital.Repository
             int a = cmd.ExecuteNonQuery();
             con.Close();
             return true;
-      }
-      
-      public Boolean DeleteReferralForSpecialistByPatientId(int patientId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteReferralForSpecialistByDoctorId(int doctorId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.ReferralForSpecialist UpdateReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.ReferralForSpecialist NewReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllActiveReferralsForSpecialistByPatientId(int patientId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
-   
-   }
+        }
+
+        public Boolean DeleteReferralForSpecialistByPatientId(int patientId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Boolean DeleteReferralForSpecialistByDoctorId(int doctorId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Hospital.Model.ReferralForSpecialist UpdateReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.ReferralForSpecialist NewReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
+        {
+            setConnection();
+
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "insert into  REFERRAL_FOR_SPECIALIST (description, doctor_id, health_record_id, appointment_id) values " +
+                              "('" + referralForSpecialist.Description + "'," + referralForSpecialist.doctor_id + "," + referralForSpecialist.doctor_id
+                              + ", " + referralForSpecialist.appointment_id + ")";
+            cmd.ExecuteReader();
+            con.Close();
+            con.Dispose();
+            return referralForSpecialist;
+
+        }
+
+        public System.Collections.ArrayList GetAllActiveReferralsForSpecialistByPatientId(int patientId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
+
+    }
 }

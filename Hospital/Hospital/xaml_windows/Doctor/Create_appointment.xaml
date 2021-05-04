@@ -7,16 +7,12 @@
         mc:Ignorable="d"
         Title="Create_appointment" Height="450" Width="800">
     <Grid>
-        <ListBox Name="lb_rooms" SelectionChanged="SelectListBox1" SelectionMode="Single" Margin="100,98,409.6,105">
+        <ListBox Name="lb_patients" SelectionChanged="PatientFocusSwitch" SelectionMode="Single" Margin="422,98,99.6,133" >
         </ListBox>
-        <ListBox Name="lb_patients" SelectionChanged="SelectListBox2" SelectionMode="Single" Margin="422,98,99.6,133" >
-        </ListBox>
+        <ListBox x:Name="lb_time_slots" SelectionChanged="TimeSlotFocusSwitch" SelectionMode="Single" Margin="112,98,409.6,133" />
         <DatePicker Name ="date_for_create" HorizontalAlignment="Left" Margin="422,292,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,0.526"/>
-        <TextBox Name ="time_for_create" HorizontalAlignment="Left" Height="23" Margin="574,292,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.673,0.391"/>
         <Button Content="Dodaj novi pregled" HorizontalAlignment="Left" Margin="254,339,0,0" VerticalAlignment="Top" Height="71" Width="130" Click="AddAppointment"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="422,339,0,0" VerticalAlignment="Top" Width="130"  Height="71" Click="ReturnOption"/>
-        <RadioButton x:Name="Radio1" Content="Pregled" Checked="TypeChecked" GroupName="Type" HorizontalAlignment="Left" Margin="119,339,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="Radio2" Content="Operacija" Checked="TypeChecked"  GroupName="Type" HorizontalAlignment="Left" Margin="119,359,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
