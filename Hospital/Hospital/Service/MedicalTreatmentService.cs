@@ -10,7 +10,7 @@ namespace Hospital.Service
 {
    public class MedicalTreatmentService
    {
-      public Hospital.Model.MedicalTreatment GetMedicalTreatmentById(int id)
+      public Model.MedicalTreatment GetMedicalTreatmentById(int id)
       {
          // TODO: implement
          return null;
@@ -34,31 +34,31 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.MedicalTreatment UpdateMedicalTreatment(Hospital.Model.MedicalTreatment medicalTreatment)
+      public Model.MedicalTreatment UpdateMedicalTreatment(Model.MedicalTreatment medicalTreatment)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.MedicalTreatment AddMedicalTreatment(Hospital.Model.MedicalTreatment medicalTreatment)
+      public Model.MedicalTreatment AddMedicalTreatment(Model.MedicalTreatment medicalTreatment)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.MedicalTreatment ChangeMedicalTreatmentEndTime(Hospital.Model.MedicalService medicalTreatment, DateTime newEndTime)
+      public Model.MedicalTreatment ChangeMedicalTreatmentEndTime(Model.MedicalService medicalTreatment, DateTime newEndTime)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.MedicalTreatment ChangeMedicalTreatmentPeriod(Hospital.Model.MedicalTreatment medicalTreatment, int newPeriod)
+      public Model.MedicalTreatment ChangeMedicalTreatmentPeriod(Model.MedicalTreatment medicalTreatment, int newPeriod)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.MedicalTreatment medicalTreatment;
+      public Repository.MedicalTreatment medicalTreatment;
    
    }
 }

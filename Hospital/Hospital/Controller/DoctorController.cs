@@ -12,7 +12,7 @@ namespace Hospital.Controller
 {
     public class DoctorController
     {
-        public Hospital.Model.Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(int id)
         {
             return doctorService.GetDoctorById(id);
         }
@@ -47,19 +47,19 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+        public Doctor UpdateDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Doctor AddDoctor(Hospital.Model.Doctor doctor)
+        public Doctor AddDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Service.DoctorService doctorService = new Service.DoctorService();
+        public Service.DoctorService doctorService = new Service.DoctorService();
 
     }
 }

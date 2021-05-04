@@ -5,15 +5,13 @@
  ***********************************************************************/
 
 using System;
-using System.Configuration;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 
 namespace Hospital.Repository
 {
-   public class ReferralForSpecialistRepository
+    public class ReferralForSpecialistRepository
    {
         OracleConnection con = null;
         private void setConnection()
@@ -93,13 +91,13 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.ReferralForSpecialist UpdateReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
+      public ReferralForSpecialist UpdateReferralForSpecialist(ReferralForSpecialist referralForSpecialist)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist NewReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
+      public ReferralForSpecialist NewReferralForSpecialist(ReferralForSpecialist referralForSpecialist)
       {
          // TODO: implement
          return null;
@@ -111,7 +109,7 @@ namespace Hospital.Repository
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
+      public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
          // TODO: implement
          return null;

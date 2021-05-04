@@ -6,14 +6,12 @@
 
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 using Hospital.Model;
 using System.Collections.ObjectModel;
-using System.Configuration;
 
 namespace Hospital.Repository
 {
-   public class ReminderRepository
+    public class ReminderRepository
    {
         OracleConnection connection = null;
         private void setConnection()
@@ -30,7 +28,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.Reminder GetReminderById(int id)
+        public Reminder GetReminderById(int id)
       {
          // TODO: implement
          return null;
@@ -133,13 +131,13 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
+      public Reminder UpdateReminder(Reminder reminder)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Reminder NewReminder(Hospital.Model.Reminder reminder)
+      public Reminder NewReminder(Reminder reminder)
       {
             setConnection();
             OracleCommand command = new OracleCommand();

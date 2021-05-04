@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Specialization
  ***********************************************************************/
 
-using System;
 using System.Collections;
 
 namespace Hospital.Model
@@ -13,18 +12,18 @@ namespace Hospital.Model
     {
         public string Type { get; set; }
 
-        public System.Collections.ArrayList doctor;
+        public ArrayList doctor;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetDoctor()
+        public ArrayList GetDoctor()
         {
             if (doctor == null)
-                doctor = new System.Collections.ArrayList();
+                doctor = new ArrayList();
             return doctor;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetDoctor(System.Collections.ArrayList newDoctor)
+        public void SetDoctor(ArrayList newDoctor)
         {
             RemoveAllDoctor();
             foreach (Doctor oDoctor in newDoctor)
@@ -37,7 +36,7 @@ namespace Hospital.Model
             if (newDoctor == null)
                 return;
             if (this.doctor == null)
-                this.doctor = new System.Collections.ArrayList();
+                this.doctor = new ArrayList();
             if (!this.doctor.Contains(newDoctor))
             {
                 this.doctor.Add(newDoctor);
@@ -63,7 +62,7 @@ namespace Hospital.Model
         {
             if (doctor != null)
             {
-                System.Collections.ArrayList tmpDoctor = new System.Collections.ArrayList();
+                ArrayList tmpDoctor = new ArrayList();
                 foreach (Doctor oldDoctor in doctor)
                     tmpDoctor.Add(oldDoctor);
                 doctor.Clear();

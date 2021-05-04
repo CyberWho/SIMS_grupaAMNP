@@ -7,6 +7,7 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -27,7 +28,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
 
@@ -68,13 +69,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Address UpdateAddress(Hospital.Model.Address address)
+        public Address UpdateAddress(Address address)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Address NewAddress(Hospital.Model.Address address)
+        public Address NewAddress(Address address)
         {
             // TODO: implement
             return null;

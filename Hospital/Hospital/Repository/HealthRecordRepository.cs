@@ -7,8 +7,6 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Hospital.Repository
 {

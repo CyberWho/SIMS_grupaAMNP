@@ -1,10 +1,8 @@
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using Hospital.Model;
 using System.Collections.ObjectModel;
-using Hospital.Repository;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -19,14 +17,13 @@ namespace Hospital.Repository
             try
             {
                 connection.Open();
-
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
-        public Hospital.Model.Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -193,13 +190,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+        public Doctor UpdateDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Doctor NewDoctor(Hospital.Model.Doctor doctor)
+        public Doctor NewDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;

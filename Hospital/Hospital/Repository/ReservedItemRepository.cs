@@ -26,7 +26,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.ReservedItem GetReservedItemById(int id)
+        public Model.ReservedItem GetReservedItemById(int id)
         {
             // TODO: implement
             return null;
@@ -62,13 +62,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.ReservedItem UpdateReservedItem(Hospital.Model.ReservedItem reservedItem)
+        public Model.ReservedItem UpdateReservedItem(Model.ReservedItem reservedItem)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.ReservedItem NewReservedItem(Hospital.Model.ReservedItem reservedItem)
+        public Model.ReservedItem NewReservedItem(Model.ReservedItem reservedItem)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();

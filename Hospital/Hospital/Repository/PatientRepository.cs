@@ -112,7 +112,7 @@ namespace Hospital.Repository
             return patient;
         }
 
-        public Hospital.Model.Patient GetPatientByPatientId(int id)
+        public Patient GetPatientByPatientId(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();

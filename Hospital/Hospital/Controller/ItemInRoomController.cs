@@ -12,7 +12,7 @@ namespace Hospital.Controller
 {
    public class ItemInRoomController
    {
-        public Hospital.Model.ItemInRoom GetItemInRoomById(int id)
+        public ItemInRoom GetItemInRoomById(int id)
         {
             return itemInRoomService.GetItemInRoomById(id);
         }
@@ -34,13 +34,13 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Model.ItemInRoom UpdateQuantity(Hospital.Model.ItemInRoom itemInRoom, uint newQuantity)
+        public ItemInRoom UpdateQuantity(ItemInRoom itemInRoom, uint newQuantity)
         {
             // TODO: implement
             return null;
         }
       
-        public Hospital.Model.ItemInRoom AddItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        public ItemInRoom AddItemInRoom(ItemInRoom itemInRoom)
         {
            // TODO: implement
            return null;
@@ -51,7 +51,7 @@ namespace Hospital.Controller
             return itemInRoomService.MoveItem(itemInRoomID, destinationRoomID, quantity, dateTime);
         } 
 
-      public Hospital.Service.ItemInRoomService itemInRoomService = new Service.ItemInRoomService();
+      public Service.ItemInRoomService itemInRoomService = new Service.ItemInRoomService();
    
    }
 }

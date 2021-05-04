@@ -4,11 +4,9 @@
  * Purpose: Definition of the Class Hospital.Model.AppointmentType
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
-   public enum AppointmentType
+    public enum AppointmentType
    {
       OPERATION,
       EXAMINATION,

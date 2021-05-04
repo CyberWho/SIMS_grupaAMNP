@@ -6,10 +6,9 @@
 
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -33,12 +32,12 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
        
 
-        public Hospital.Model.Appointment GetAppointmentById(int id)
+        public Appointment GetAppointmentById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -168,7 +167,7 @@ namespace Hospital.Repository
             return appointmnets;
         }
 
-        public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
+        public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
         {
             ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
             setConnection();
@@ -270,22 +269,16 @@ namespace Hospital.Repository
         {
             setConnection();
             
-            ObservableCollection<Appointment> appointments = GetAllByAppointmentsPatientId(patientId);
+            ObservableCollection<Appointment> appointments = GetAllReservedAppointmentsByPatientId(patientId);
             foreach(Appointment appointment in appointments)
             {
-                TimeSlot timeSlot = new TimeSlot();
-                timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
-                timeSlotRepository.FreeTimeSlot(timeSlot);
                 DeleteAppointmentById(appointment.Id);
             }
-            
-            
             connection.Close();
             return false;
-           
         }
 
-        public Hospital.Model.Appointment UpdateAppointmentStartTime(Hospital.Model.Appointment appointment, DateTime startTime)
+        public Appointment UpdateAppointmentStartTime(Appointment appointment, DateTime startTime)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -312,7 +305,7 @@ namespace Hospital.Repository
             return appointment;
       }
       
-       public Hospital.Model.Appointment UpdateAppointmentRoom(Hospital.Model.Appointment appointment,Hospital.Model.Room room)
+       public Appointment UpdateAppointmentRoom(Appointment appointment, Room room)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -366,7 +359,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Appointment UpdateAppointmentStatus(Hospital.Model.Appointment appointment, Hospital.Model.AppointmentStatus appointmentStatus)
+        public Appointment UpdateAppointmentStatus(Appointment appointment, AppointmentStatus appointmentStatus)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -378,7 +371,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Hospital.Model.Appointment NewAppointment(Hospital.Model.Appointment appointment)
+        public Appointment NewAppointment(Appointment appointment)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();

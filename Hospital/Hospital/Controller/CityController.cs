@@ -5,32 +5,30 @@
  ***********************************************************************/
 
 using System;
-using System.Collections.ObjectModel;
-using Hospital.Model;
 
 namespace Hospital.Controller
 {
-   public class CityController
+    public class CityController
    {
-      public Hospital.Model.City GetCityById(int id)
+      public Model.City GetCityById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.City GetCityByName(String name)
+      public Model.City GetCityByName(String name)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.City AddCity(Hospital.Model.City city)
+      public Model.City AddCity(Model.City city)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.CityService cityService;
+      public Service.CityService cityService;
    
    }
 }

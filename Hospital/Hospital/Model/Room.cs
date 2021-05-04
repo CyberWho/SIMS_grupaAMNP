@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Room
  ***********************************************************************/
 
-using System;
 using System.Collections;
 
 namespace Hospital.Model
@@ -19,7 +18,7 @@ namespace Hospital.Model
         public string Description { get; set; }
 
         public Renovation Renovation { get; set; }
-        public System.Collections.ArrayList appointment;
+        public ArrayList appointment;
 
         public Room(int id, int floor, double area, string description, RoomType newRoomType)
         {
@@ -31,15 +30,15 @@ namespace Hospital.Model
         }
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetAppointment()
+        public ArrayList GetAppointment()
         {
             if (appointment == null)
-                appointment = new System.Collections.ArrayList();
+                appointment = new ArrayList();
             return appointment;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetAppointment(System.Collections.ArrayList newAppointment)
+        public void SetAppointment(ArrayList newAppointment)
         {
             RemoveAllAppointment();
             foreach (Appointment oAppointment in newAppointment)
@@ -52,7 +51,7 @@ namespace Hospital.Model
             if (newAppointment == null)
                 return;
             if (this.appointment == null)
-                this.appointment = new System.Collections.ArrayList();
+                this.appointment = new ArrayList();
             if (!this.appointment.Contains(newAppointment))
             {
                 this.appointment.Add(newAppointment);
@@ -78,7 +77,7 @@ namespace Hospital.Model
         {
             if (appointment != null)
             {
-                System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
+                ArrayList tmpAppointment = new ArrayList();
                 foreach (Appointment oldAppointment in appointment)
                     tmpAppointment.Add(oldAppointment);
                 appointment.Clear();
@@ -114,18 +113,18 @@ namespace Hospital.Model
                 }
             }
         }
-        public System.Collections.ArrayList itemInRoom;
+        public ArrayList itemInRoom;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetItemInRoom()
+        public ArrayList GetItemInRoom()
         {
             if (itemInRoom == null)
-                itemInRoom = new System.Collections.ArrayList();
+                itemInRoom = new ArrayList();
             return itemInRoom;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetItemInRoom(System.Collections.ArrayList newItemInRoom)
+        public void SetItemInRoom(ArrayList newItemInRoom)
         {
             RemoveAllItemInRoom();
             foreach (ItemInRoom oItemInRoom in newItemInRoom)
@@ -138,7 +137,7 @@ namespace Hospital.Model
             if (newItemInRoom == null)
                 return;
             if (this.itemInRoom == null)
-                this.itemInRoom = new System.Collections.ArrayList();
+                this.itemInRoom = new ArrayList();
             if (!this.itemInRoom.Contains(newItemInRoom))
             {
                 this.itemInRoom.Add(newItemInRoom);
@@ -164,7 +163,7 @@ namespace Hospital.Model
         {
             if (itemInRoom != null)
             {
-                System.Collections.ArrayList tmpItemInRoom = new System.Collections.ArrayList();
+                ArrayList tmpItemInRoom = new ArrayList();
                 foreach (ItemInRoom oldItemInRoom in itemInRoom)
                     tmpItemInRoom.Add(oldItemInRoom);
                 itemInRoom.Clear();
@@ -173,18 +172,18 @@ namespace Hospital.Model
                 tmpItemInRoom.Clear();
             }
         }
-        public System.Collections.ArrayList doctor;
+        public ArrayList doctor;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetDoctor()
+        public ArrayList GetDoctor()
         {
             if (doctor == null)
-                doctor = new System.Collections.ArrayList();
+                doctor = new ArrayList();
             return doctor;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetDoctor(System.Collections.ArrayList newDoctor)
+        public void SetDoctor(ArrayList newDoctor)
         {
             RemoveAllDoctor();
             foreach (Doctor oDoctor in newDoctor)
@@ -197,7 +196,7 @@ namespace Hospital.Model
             if (newDoctor == null)
                 return;
             if (this.doctor == null)
-                this.doctor = new System.Collections.ArrayList();
+                this.doctor = new ArrayList();
             if (!this.doctor.Contains(newDoctor))
             {
                 this.doctor.Add(newDoctor);
@@ -223,7 +222,7 @@ namespace Hospital.Model
         {
             if (doctor != null)
             {
-                System.Collections.ArrayList tmpDoctor = new System.Collections.ArrayList();
+                ArrayList tmpDoctor = new ArrayList();
                 foreach (Doctor oldDoctor in doctor)
                     tmpDoctor.Add(oldDoctor);
                 doctor.Clear();

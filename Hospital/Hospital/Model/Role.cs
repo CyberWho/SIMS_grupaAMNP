@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Hospital.Model.Role
  ***********************************************************************/
 
-using System;
 using System.Collections;
 
 namespace Hospital.Model
@@ -14,18 +13,18 @@ namespace Hospital.Model
         public int Id { get; set; }
         public string RoleType { get; set; }
 
-        public System.Collections.ArrayList employee;
+        public ArrayList employee;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetEmployee()
+        public ArrayList GetEmployee()
         {
             if (employee == null)
-                employee = new System.Collections.ArrayList();
+                employee = new ArrayList();
             return employee;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetEmployee(System.Collections.ArrayList newEmployee)
+        public void SetEmployee(ArrayList newEmployee)
         {
             RemoveAllEmployee();
             foreach (Employee oEmployee in newEmployee)
@@ -38,7 +37,7 @@ namespace Hospital.Model
             if (newEmployee == null)
                 return;
             if (this.employee == null)
-                this.employee = new System.Collections.ArrayList();
+                this.employee = new ArrayList();
             if (!this.employee.Contains(newEmployee))
             {
                 this.employee.Add(newEmployee);
@@ -64,7 +63,7 @@ namespace Hospital.Model
         {
             if (employee != null)
             {
-                System.Collections.ArrayList tmpEmployee = new System.Collections.ArrayList();
+                ArrayList tmpEmployee = new ArrayList();
                 foreach (Employee oldEmployee in employee)
                     tmpEmployee.Add(oldEmployee);
                 employee.Clear();

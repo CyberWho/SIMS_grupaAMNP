@@ -13,7 +13,7 @@ namespace Hospital.Service
 {
     public class AllergyTypeService
     {
-        public Hospital.Repository.AllergyTypeRepository allergyTypeRepository = new Repository.AllergyTypeRepository();
+        public Repository.AllergyTypeRepository allergyTypeRepository = new Repository.AllergyTypeRepository();
 
 
 
@@ -29,13 +29,13 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.AllergyType UpdateAllergyType(int allergyType)
+        public AllergyType UpdateAllergyType(int allergyType)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.AllergyType AddAllergyType(Hospital.Model.AllergyType allergyType)
+        public AllergyType AddAllergyType(AllergyType allergyType)
         {
             // TODO: implement
             return null;
@@ -53,7 +53,7 @@ namespace Hospital.Service
         {
             return this.allergyTypeRepository.GetAllTypesByHealthRecordId(id);
         }
-        public Hospital.Model.AllergyType GetAllergyTypeById(int id)
+        public AllergyType GetAllergyTypeById(int id)
         {
             return this.allergyTypeRepository.GetAllergyTypeById(id);
         }

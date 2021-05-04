@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
-using System.Windows.Data;
-using System.Windows;
 
 namespace Hospital.Repository
 {
@@ -27,7 +20,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
         public ObservableCollection<PatientLogs> GetAllPatientLogs()
@@ -36,13 +29,13 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsById(int id)
+        public PatientLogs GetPatientLogsById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsByPatientId(int patientId)
+        public PatientLogs GetPatientLogsByPatientId(int patientId)
         {
             setConnection();
             PatientLogs patientLogs = new PatientLogs();
@@ -76,7 +69,7 @@ namespace Hospital.Repository
             
         }
 
-        public Hospital.Model.PatientLogs UpdatePatientLogs(Hospital.Model.PatientLogs patientLogs)
+        public PatientLogs UpdatePatientLogs(PatientLogs patientLogs)
         {
             // TODO: implement
             return null;
@@ -86,10 +79,6 @@ namespace Hospital.Repository
             PatientLogs patientLogs = GetPatientLogsByPatientId(patientId);
             int nextLogCounter = patientLogs.LogCounter;
             nextLogCounter += 1;
-            if(nextLogCounter == 10)
-            {
-                return false;
-            }
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = :log_counter WHERE PATIENT_ID = :patient_id";

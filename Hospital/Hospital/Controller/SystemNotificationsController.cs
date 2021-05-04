@@ -12,7 +12,7 @@ namespace Hospital.Controller
 {
    public class SystemNotificationsController
    {
-      public Hospital.Model.SystemNotification GetSystemNotificationById(int id)
+      public SystemNotification GetSystemNotificationById(int id)
       {
          // TODO: implement
          return null;
@@ -36,19 +36,19 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.SystemNotification UpdateSystemNotification(Hospital.Model.SystemNotification systemNotification)
+      public SystemNotification UpdateSystemNotification(SystemNotification systemNotification)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.SystemNotification AddSystemNotification(Hospital.Model.SystemNotification systemNotification)
+      public SystemNotification AddSystemNotification(SystemNotification systemNotification)
       {
          // TODO: implement
          return null;
       }
 
-        public Hospital.Service.SystemNotificationService systemNotificationService = new Service.SystemNotificationService();
+        public Service.SystemNotificationService systemNotificationService = new Service.SystemNotificationService();
    
    }
 }

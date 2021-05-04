@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 
@@ -28,7 +24,7 @@ namespace Hospital.Service
             return null;
         }
 
-        public Hospital.Model.Review AddReview(Hospital.Model.Review review)
+        public Review AddReview(Review review)
         {
             return reviewRepository.NewReview(review);
         }
@@ -39,6 +35,6 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Repository.ReviewRepository reviewRepository = new Repository.ReviewRepository();
+        public Repository.ReviewRepository reviewRepository = new Repository.ReviewRepository();
     }
 }

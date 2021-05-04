@@ -5,13 +5,12 @@
  ***********************************************************************/
 
 using System;
-using System.Collections.ObjectModel;
 using Hospital.Repository;
 namespace Hospital.Service
 {
-   public class PerscriptionService
+    public class PerscriptionService
    {
-      public Hospital.Model.Perscription GetPerscriptionById(int id)
+      public Model.Perscription GetPerscriptionById(int id)
       {
          // TODO: implement
          return null;
@@ -47,24 +46,24 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.Perscription UpdatePerscription(Hospital.Model.Perscription perscription)
+      public Model.Perscription UpdatePerscription(Model.Perscription perscription)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Perscription AddPerscription(Hospital.Model.Perscription perscription)
+      public Model.Perscription AddPerscription(Model.Perscription perscription)
       {
          return new PerscriptionRepository().NewPerscription(perscription);
       }
       
-      public Hospital.Model.Perscription DeactivatePerscription(Hospital.Model.Perscription perscription)
+      public Model.Perscription DeactivatePerscription(Model.Perscription perscription)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.PerscriptionRepository perscriptionRepository;
+      public PerscriptionRepository perscriptionRepository;
    
    }
 }

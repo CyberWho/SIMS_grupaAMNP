@@ -1,14 +1,12 @@
 using System;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace Hospital.Repository
 {
-   public class RoomRepository
+    public class RoomRepository
    {
 
         OracleConnection connection = null;
@@ -61,13 +59,13 @@ namespace Hospital.Repository
             return room;
         }
       
-      public Hospital.Model.Room GetRoomByAppointmentId(int appointmentId)
+      public Room GetRoomByAppointmentId(int appointmentId)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Room GetRoomByDoctorId(int doctorId)
+      public Room GetRoomByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
@@ -98,7 +96,7 @@ namespace Hospital.Repository
          return null;
       }
       
-      public System.Collections.ArrayList GetAllRoomsByRoomType(Hospital.Model.RoomType roomType)
+      public System.Collections.ArrayList GetAllRoomsByRoomType(RoomType roomType)
       {
          // TODO: implement
          return null;
@@ -199,7 +197,7 @@ namespace Hospital.Repository
             }
       }
       
-      public Hospital.Model.Room NewRoom(Hospital.Model.Room room)
+      public Room NewRoom(Room room)
       {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();

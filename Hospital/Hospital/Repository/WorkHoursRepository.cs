@@ -10,7 +10,7 @@ namespace Hospital.Repository
 {
    public class WorkHoursRepository
    {
-      public Hospital.Model.WorkHours GetWorkHoursById(int id)
+      public Model.WorkHours GetWorkHoursById(int id)
       {
          // TODO: implement
          return null;
@@ -40,13 +40,13 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.WorkHours UpdateWorkHours(Hospital.Model.WorkHours workHours)
+      public Model.WorkHours UpdateWorkHours(Model.WorkHours workHours)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.WorkHours NewWorkHours(Hospital.Model.WorkHours workHours)
+      public Model.WorkHours NewWorkHours(Model.WorkHours workHours)
       {
          // TODO: implement
          return null;

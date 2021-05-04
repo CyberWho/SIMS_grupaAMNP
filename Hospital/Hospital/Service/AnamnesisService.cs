@@ -11,13 +11,13 @@ namespace Hospital.Service
 {
     public class AnamnesisService
     {
-        public Hospital.Model.Anamnesis AddAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Model.Anamnesis AddAnamnesis(Model.Anamnesis anamnesis)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Anamnesis GetAnamnesisById(int id)
+        public Model.Anamnesis GetAnamnesisById(int id)
         {
             // TODO: implement
             return null;
@@ -41,29 +41,29 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.Anamnesis UpdateAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Model.Anamnesis UpdateAnamnesis(Model.Anamnesis anamnesis)
         {
             return new AnamnesisRepository().UpdateAnamnesis(anamnesis);
         }
 
-        public Hospital.Model.Anamnesis NewAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Model.Anamnesis NewAnamnesis(Model.Anamnesis anamnesis)
         {
             return new AnamnesisRepository().NewAnamnesis(anamnesis);
         }
 
-        public Hospital.Model.Anamnesis AddMedicalTreatmentToAnamnesis(Hospital.Model.Anamnesis anamnesis, Hospital.Model.MedicalTreatment medicalTreatment)
+        public Model.Anamnesis AddMedicalTreatmentToAnamnesis(Model.Anamnesis anamnesis, Model.MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Anamnesis AddPerscriptionToAnamnesis(Hospital.Model.Anamnesis anamnesis, Hospital.Model.Perscription perscription)
+        public Model.Anamnesis AddPerscriptionToAnamnesis(Model.Anamnesis anamnesis, Model.Perscription perscription)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Repository.AnamnesisRepository anamnesisRepository;
+        public AnamnesisRepository anamnesisRepository;
 
     }
 }

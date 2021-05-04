@@ -13,7 +13,7 @@ namespace Hospital.Controller
 {
    public class PerscriptionController
    {
-      public Hospital.Model.Perscription GetPerscriptionById(int id)
+      public Perscription GetPerscriptionById(int id)
       {
          // TODO: implement
          return null;
@@ -49,24 +49,24 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.Perscription UpdatePerscription(Hospital.Model.Perscription perscription)
+      public Perscription UpdatePerscription(Perscription perscription)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Perscription AddPerscription(Hospital.Model.Perscription perscription)
+      public Perscription AddPerscription(Perscription perscription)
       {
          return new PerscriptionService().AddPerscription(perscription);
       }
       
-      public Hospital.Model.Perscription DeactivatePerscription(Hospital.Model.Perscription perscription)
+      public Perscription DeactivatePerscription(Perscription perscription)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.PerscriptionService perscriptionService;
+      public PerscriptionService perscriptionService;
    
    }
 }

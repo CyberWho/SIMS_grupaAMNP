@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Hospital.Controller;
 using Hospital.Model;
 using System.Collections.ObjectModel;
@@ -39,7 +28,7 @@ namespace Hospital.xaml_windows.Patient
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Hospital.Model.Patient patient = new Model.Patient();
+            Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
@@ -82,7 +71,7 @@ namespace Hospital.xaml_windows.Patient
         private void updateDataGrid()
         {
             this.DataContext = this;
-            Hospital.Model.Patient patient = patientController.GetPatientByUserId(userId);
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
             Reminders = reminderController.GetAllPastRemindersByPatientId(patient.Id);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;

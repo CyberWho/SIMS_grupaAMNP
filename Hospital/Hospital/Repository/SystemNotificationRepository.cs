@@ -29,7 +29,7 @@ namespace Hospital.Repository
             }
         }
 
-        public Hospital.Model.SystemNotification GetSystemNotificationById(int id)
+        public SystemNotification GetSystemNotificationById(int id)
         {
             // TODO: implement
             return null;
@@ -66,7 +66,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.SystemNotification UpdateSystemNotification(Hospital.Model.SystemNotification systemNotification)
+        public SystemNotification UpdateSystemNotification(SystemNotification systemNotification)
         {
             // TODO: implement
             return null;

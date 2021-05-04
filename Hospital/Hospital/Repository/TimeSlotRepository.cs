@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using System.Collections.ObjectModel;
 
 /***********************************************************************
@@ -35,7 +29,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.TimeSlot GetTimeSlotById(int id)
+        public TimeSlot GetTimeSlotById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -59,7 +53,7 @@ namespace Hospital.Repository
             return timeSlot;
         }
 
-        public System.Array GetAllByDateAndDoctorId(DateTime date, int doctorId)
+        public Array GetAllByDateAndDoctorId(DateTime date, int doctorId)
         {
             // TODO: implement
             return null;
@@ -237,7 +231,7 @@ namespace Hospital.Repository
              return timeSlot;
         }
 
-        public System.Array GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
+        public Array GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
         {
             // TODO: implement
             return null;
@@ -249,13 +243,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public System.Array NewTimeSlots(int workHoursId)
+        public Array NewTimeSlots(int workHoursId)
         {
             // TODO: implement
             return null;
         }
 
-        public Boolean TakeTimeSlot(Hospital.Model.TimeSlot timeSlot)
+        public Boolean TakeTimeSlot(TimeSlot timeSlot)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -265,7 +259,7 @@ namespace Hospital.Repository
             return true;
         }
 
-        public Boolean FreeTimeSlot(Hospital.Model.TimeSlot timeSlot)
+        public Boolean FreeTimeSlot(TimeSlot timeSlot)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();

@@ -5,14 +5,12 @@
  ***********************************************************************/
 
 using System;
-
-using System.Collections.ObjectModel;
 using Hospital.Model;
 using Hospital.Service;
 
 namespace Hospital.Controller
 {
-   public class AddressController
+    public class AddressController
     {
         public AddressService addressService = new AddressService();
        
@@ -21,13 +19,13 @@ namespace Hospital.Controller
             return this.addressService.GetAddressByPatientId(id);
         }
 
-        public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
+        public Address AddAddress(Address address)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Address GetAddressById(int id)
+      public Address GetAddressById(int id)
       {
          // TODO: implement
          return null;
@@ -39,7 +37,7 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.Address UpdateAddress(Hospital.Model.Address address)
+      public Address UpdateAddress(Address address)
       {
          // TODO: implement
          return null;

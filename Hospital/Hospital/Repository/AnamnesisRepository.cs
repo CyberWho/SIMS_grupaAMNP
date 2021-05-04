@@ -8,6 +8,7 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -26,10 +27,10 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
-        public Hospital.Model.Anamnesis GetAnamnesisById(int id)
+        public Anamnesis GetAnamnesisById(int id)
         {
 
             //health record repo dopunjava jos anamnezu
@@ -42,7 +43,7 @@ namespace Hospital.Repository
             //anamnesis.appointment =
             anamnesis.Id = reader.GetInt32(0);
             anamnesis.Description = reader.GetString(1);
-            anamnesis.MedicalTreatments = new Repository.MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(id);
+            anamnesis.MedicalTreatments = new MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(id);
             anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(id);
             return anamnesis;
         }
@@ -64,7 +65,7 @@ namespace Hospital.Repository
                 //anamnesis.appointment =
                 anamnesis.Id = reader.GetInt32(0);
                 anamnesis.Description = reader.GetString(1);
-                anamnesis.MedicalTreatments = new Repository.MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(reader.GetInt32(0));
+                anamnesis.MedicalTreatments = new MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(reader.GetInt32(0));
                 anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(reader.GetInt32(0));
                 anamnesis.appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(3));
                 anamneses.Add(anamnesis);
@@ -85,7 +86,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Anamnesis UpdateAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Anamnesis UpdateAnamnesis(Anamnesis anamnesis)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -94,7 +95,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Hospital.Model.Anamnesis NewAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Anamnesis NewAnamnesis(Anamnesis anamnesis)
         {
           
             setConnection();

@@ -8,8 +8,7 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Windows;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -32,7 +31,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
         public int GetLastId()

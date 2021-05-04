@@ -14,7 +14,7 @@ namespace Hospital.Service
     {
         public HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
 
-        public Hospital.Model.HealthRecord GetHealthRecordById(int id)
+        public HealthRecord GetHealthRecordById(int id)
         {
             // TODO: implement
             return null;
@@ -43,19 +43,19 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.HealthRecord UpdateHealthRecord(Hospital.Model.HealthRecord healthRecord)
+        public HealthRecord UpdateHealthRecord(HealthRecord healthRecord)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.HealthRecord AddHealthRecord(Hospital.Model.HealthRecord healthRecord)
+        public HealthRecord AddHealthRecord(HealthRecord healthRecord)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.HealthRecord AddAllergiesToHealthRecord(Hospital.Model.HealthRecord healthRecord, Hospital.Model.Allergy allergy)
+        public HealthRecord AddAllergiesToHealthRecord(HealthRecord healthRecord, Allergy allergy)
         {
             // TODO: implement
             return null;

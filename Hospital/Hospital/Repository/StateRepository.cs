@@ -5,14 +5,12 @@
  ***********************************************************************/
 
 using System;
-using System.Configuration;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 using Hospital.Model;
 
 namespace Hospital.Repository
 {
-   public class StateRepository
+    public class StateRepository
    {
         OracleConnection con = null;
         private void setConnection()
@@ -29,7 +27,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.State GetStateById(int id)
+        public State GetStateById(int id)
       {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -44,13 +42,13 @@ namespace Hospital.Repository
          return state;
       }
       
-      public Hospital.Model.State GetStateByName(String name)
+      public State GetStateByName(String name)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.State NewState(Hospital.Model.State state)
+      public State NewState(State state)
       {
          // TODO: implement
          return null;

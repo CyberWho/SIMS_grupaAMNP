@@ -16,7 +16,7 @@ namespace Hospital.Service
          return null;
       }
       
-      public Hospital.Model.Renovation GetRenovationById(int id)
+      public Model.Renovation GetRenovationById(int id)
       {
          // TODO: implement
          return null;
@@ -40,25 +40,25 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.Renovation UpdateRenovation(Hospital.Model.Renovation renovation)
+      public Model.Renovation UpdateRenovation(Model.Renovation renovation)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Renovation AddRenovation(Hospital.Model.Renovation renovation)
+      public Model.Renovation AddRenovation(Model.Renovation renovation)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Renovation ChangeStartDate(Hospital.Model.Renovation renovation, DateTime newStartDate)
+      public Model.Renovation ChangeStartDate(Model.Renovation renovation, DateTime newStartDate)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.RenovationRepository renovationRepository;
+      public Repository.RenovationRepository renovationRepository;
    
    }
 }

@@ -14,18 +14,18 @@ namespace Hospital.Model
         public int Id { get; set; }
         public String Type { get; set; }
 
-        public System.Collections.ArrayList drug;
+        public ArrayList drug;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetDrug()
+        public ArrayList GetDrug()
         {
             if (drug == null)
-                drug = new System.Collections.ArrayList();
+                drug = new ArrayList();
             return drug;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetDrug(System.Collections.ArrayList newDrug)
+        public void SetDrug(ArrayList newDrug)
         {
             RemoveAllDrug();
             foreach (Drug oDrug in newDrug)
@@ -38,7 +38,7 @@ namespace Hospital.Model
             if (newDrug == null)
                 return;
             if (this.drug == null)
-                this.drug = new System.Collections.ArrayList();
+                this.drug = new ArrayList();
             if (!this.drug.Contains(newDrug))
             {
                 this.drug.Add(newDrug);
@@ -64,7 +64,7 @@ namespace Hospital.Model
         {
             if (drug != null)
             {
-                System.Collections.ArrayList tmpDrug = new System.Collections.ArrayList();
+                ArrayList tmpDrug = new ArrayList();
                 foreach (Drug oldDrug in drug)
                     tmpDrug.Add(oldDrug);
                 drug.Clear();

@@ -4,11 +4,9 @@
  * Purpose: Definition of the Class Hospital.Model.AppointmentStatus
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
-   public enum AppointmentStatus
+    public enum AppointmentStatus
    {
       FINISHED,
       RESERVED,

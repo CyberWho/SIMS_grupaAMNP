@@ -42,7 +42,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public Model.InventoryItem AddInventoryItem(InventoryItem inventoryItem)
+      public InventoryItem AddInventoryItem(InventoryItem inventoryItem)
       {
          return inventoryItemService.AddInventoryItem(inventoryItem);
       }

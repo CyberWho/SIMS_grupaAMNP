@@ -28,7 +28,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.ItemInRoom GetItemInRoomById(int id)
+        public ItemInRoom GetItemInRoomById(int id)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -111,7 +111,7 @@ namespace Hospital.Repository
 
         }
 
-        public Hospital.Model.ItemInRoom NewItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        public ItemInRoom NewItemInRoom(ItemInRoom itemInRoom)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();

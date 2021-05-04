@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Hospital.Model;
-using Hospital.xaml_windows;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -59,14 +47,11 @@ namespace Hospital.xaml_windows.Patient
             DataTable dt = new DataTable();
             myGrid.DataContext = dt;
             myGrid.ItemsSource = TimeSlots;
-
-
-
         }
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Hospital.Model.Patient patient = new Model.Patient();
+            Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
@@ -110,13 +95,13 @@ namespace Hospital.xaml_windows.Patient
         private void Zakazi_Click(object sender, RoutedEventArgs e)
         {
             Appointment appointment = new Appointment();
-            Hospital.Model.Patient patient = new Model.Patient();
+            Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientByUserId(userId);
             appointment.patient = patient;
             TimeSlot timeSlot = new TimeSlot();
             timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));
             appointment.StartTime = timeSlot.StartTime;
-            Hospital.Model.Doctor doctor = new Model.Doctor();
+            Model.Doctor doctor = new Model.Doctor();
             doctor = doctorController.GetWorkHoursDoctorById(int.Parse(doctor_id_txt.Text));
             appointment.doctor = doctor;
             Room room = new Room();
@@ -127,7 +112,8 @@ namespace Hospital.xaml_windows.Patient
             {
                 refferalForSpecialistController.DeleteReferralById(referralForSpecialistId);
             }
-            if(patientLogsController.IncrementLogCounterByPatientId(patient.Id) == false)
+            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
+            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patient.Id))
             {
                 MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
                 appointmentController.DeleteAppointmentByPatientId(patient.Id);

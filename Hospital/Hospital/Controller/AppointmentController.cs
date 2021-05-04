@@ -13,7 +13,7 @@ namespace Hospital.Controller
 {
     public class AppointmentController
     {
-        public Hospital.Model.Appointment GetAppointmentById(int id)
+        public Appointment GetAppointmentById(int id)
         {
             Appointment appointment = new Appointment();
             appointment = appointmentService.GetAppointmentById(id);
@@ -37,10 +37,10 @@ namespace Hospital.Controller
             return new AppointmentService().GetAllAppointmentsByDoctorId(doctorId);
         }
 
-        public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
+        public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
         {
             ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
-            appointments = appointmentService.GetAllByAppointmentsPatientId(patientId);
+            appointments = appointmentService.GetAllReservedAppointmentsByPatientId(patientId);
             return appointments;
         }
 
@@ -56,19 +56,19 @@ namespace Hospital.Controller
             return appointmentService.DeleteAppointmentByPatientId(patientId);
         }
 
-        public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
+        public Appointment ReserveAppointment(Appointment appointment)
         {
             appointmentService.ReserveAppointment(appointment);
             return appointment;
         }
 
-        public Hospital.Model.Appointment ChangeAppointmentStatus(Hospital.Model.Appointment appointment)
+        public Appointment ChangeAppointmentStatus(Appointment appointment)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Appointment ChangeRoom(Hospital.Model.Appointment appointment, int roomId)
+        public Appointment ChangeRoom(Appointment appointment, int roomId)
         {
             // TODO: implement
             return null;
@@ -82,7 +82,7 @@ namespace Hospital.Controller
         {
             return appointmentService.CheckForAnyAppointmentsByPatientId(patientId);
         }
-        public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
+        public Appointment ChangeStartTime(Appointment appointment, DateTime newStartTime)
         {
             appointmentService.ChangeStartTime(appointment, newStartTime);
             return appointment;
@@ -100,7 +100,7 @@ namespace Hospital.Controller
             return null;
         }
 
-        public Hospital.Service.AppointmentService appointmentService = new Service.AppointmentService();
+        public AppointmentService appointmentService = new AppointmentService();
 
     }
 }

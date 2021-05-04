@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 
@@ -16,19 +12,19 @@ namespace Hospital.Service
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsById(int id)
+        public PatientLogs GetPatientLogsById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsByPatientId(int patientId)
+        public PatientLogs GetPatientLogsByPatientId(int patientId)
         {
             
             return patientLogsRepository.GetPatientLogsByPatientId(patientId);
         }
 
-        public Hospital.Model.PatientLogs UpdatePatientLogs(Hospital.Model.PatientLogs patientLogs)
+        public PatientLogs UpdatePatientLogs(PatientLogs patientLogs)
         {
             // TODO: implement
             return null;
@@ -71,7 +67,7 @@ namespace Hospital.Service
 
 
 
-        public Hospital.Repository.PatientLogsRepository patientLogsRepository = new Repository.PatientLogsRepository();
+        public Repository.PatientLogsRepository patientLogsRepository = new Repository.PatientLogsRepository();
 
     }
 }

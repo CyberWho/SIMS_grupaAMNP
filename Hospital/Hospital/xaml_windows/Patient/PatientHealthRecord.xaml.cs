@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
 using System.ComponentModel;
-using System.Data;
 using System.Collections.ObjectModel;
 
 namespace Hospital.xaml_windows.Patient
@@ -115,7 +103,7 @@ namespace Hospital.xaml_windows.Patient
             
             this.userId = userId;
             InitializeComponent();
-            Hospital.Model.Patient patient = GetPatientByUserId(userId);
+            Model.Patient patient = GetPatientByUserId(userId);
             HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
             this.DataContext = this;
             HealthRecordId = healthRecord.Id;
@@ -126,7 +114,7 @@ namespace Hospital.xaml_windows.Patient
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Hospital.Model.Patient patient = new Model.Patient();
+            Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
@@ -172,7 +160,7 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
-        private Hospital.Model.Patient GetPatientByUserId(int userId)
+        private Model.Patient GetPatientByUserId(int userId)
         {
             return patientController.GetPatientByUserId(userId);
         }
@@ -184,7 +172,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiUputi_Click(object sender, RoutedEventArgs e)
         {
-            Hospital.Model.Patient patient = GetPatientByUserId(userId);
+            Model.Patient patient = GetPatientByUserId(userId);
             HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
             var window = new PatientReferrals(userId,healthRecord.Id);
             window.Show();

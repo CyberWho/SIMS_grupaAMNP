@@ -8,14 +8,12 @@ using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 using Hospital.Repository;
-using System.Collections.ObjectModel;
-using Hospital.Model;
 
 namespace Hospital.Service
 {
     public class AppointmentService
     {
-        public Hospital.Model.Appointment GetAppointmentById(int id)
+        public Appointment GetAppointmentById(int id)
         {
             Appointment appointment = new Appointment();
             appointment = appointmentRepository.GetAppointmentById(id);
@@ -39,10 +37,10 @@ namespace Hospital.Service
             return new AppointmentRepository().GetAllAppointmentsByDoctorId(doctorId);
         }
 
-        public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
+        public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
         {
             ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
-            appointments = appointmentRepository.GetAllByAppointmentsPatientId(patientId);
+            appointments = appointmentRepository.GetAllReservedAppointmentsByPatientId(patientId);
             return appointments;
         }
 
@@ -58,31 +56,31 @@ namespace Hospital.Service
             return appointmentRepository.DeleteAppointmentByPatientId(patientId); 
         }
 
-        public Hospital.Model.Appointment ReserveAppointment(Hospital.Model.Appointment appointment)
+        public Appointment ReserveAppointment(Appointment appointment)
         {
             appointmentRepository.NewAppointment(appointment);
             return appointment;
         }
 
-        public Hospital.Model.Appointment ChangeAppointmentStatus(Hospital.Model.Appointment appointment)
+        public Appointment ChangeAppointmentStatus(Appointment appointment)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Appointment ChangeRoom(Hospital.Model.Appointment appointment, int roomId)
+        public Appointment ChangeRoom(Appointment appointment, int roomId)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Appointment ChangeStartTime(Hospital.Model.Appointment appointment, DateTime newStartTime)
+        public Appointment ChangeStartTime(Appointment appointment, DateTime newStartTime)
         {
             appointmentRepository.UpdateAppointmentStartTime(appointment, newStartTime);
             return appointment;
         }
 
-        public Hospital.Model.Appointment ChangeStartTimePatient(Hospital.Model.Appointment appointment, DateTime newStartTime)
+        public Appointment ChangeStartTimePatient(Appointment appointment, DateTime newStartTime)
         {
             //TODO: implement
             return null;
@@ -108,7 +106,7 @@ namespace Hospital.Service
             return null;
         }
 
-        public Hospital.Repository.AppointmentRepository appointmentRepository = new Repository.AppointmentRepository();
+        public AppointmentRepository appointmentRepository = new AppointmentRepository();
 
     }
 }

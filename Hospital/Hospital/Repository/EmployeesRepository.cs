@@ -28,7 +28,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.Employee GetEmployeeByUserId(int id)
+        public Employee GetEmployeeByUserId(int id)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -74,13 +74,13 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.Employee UpdateEmployee(Hospital.Model.Employee employee)
+      public Employee UpdateEmployee(Employee employee)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Employee NewEmployee(Hospital.Model.Employee employee)
+      public Employee NewEmployee(Employee employee)
       {
          // TODO: implement
          return null;

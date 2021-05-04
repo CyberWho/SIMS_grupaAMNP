@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class Bolnica.Model.Patient.Allergies
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
     public class Allergy
