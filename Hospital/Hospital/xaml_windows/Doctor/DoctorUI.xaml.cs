@@ -31,7 +31,7 @@ namespace Hospital.xaml_windows.Doctor
             InitializeComponent();
             this.id = id;
             this.id_doc = doctorController.GetDoctorByUserId(id).Id;
-            MessageBox.Show("id: " + id + " id_doc" + id_doc);
+            //MessageBox.Show("id: " + id + " id_doc" + id_doc);
         }
 
         private void ReturnOption(object sender, RoutedEventArgs e)
