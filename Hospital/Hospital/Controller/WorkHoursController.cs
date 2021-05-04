@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -14,7 +15,7 @@ namespace Hospital.Controller
    {
       public Hospital.Model.WorkHours AddWorkHours(Hospital.Model.WorkHours workHours)
       {
-         // TODO: implement
+          this.workHoursService.AddWorkHours(workHours);
          return null;
       }
       
@@ -72,7 +73,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.WorkHoursService workHoursService;
+      public Hospital.Service.WorkHoursService workHoursService = new WorkHoursService();
    
    }
 }

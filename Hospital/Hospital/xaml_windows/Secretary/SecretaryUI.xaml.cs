@@ -32,6 +32,8 @@ namespace Hospital.xaml_windows.Secretary
         UserController userController = new UserController();
         PatientController patientController = new PatientController();
         HealthRecordController healthRecordController = new HealthRecordController();
+        private WorkHoursController workHoursController = new WorkHoursController();
+        private TimeSlotController timeSlotController = new TimeSlotController();
 
         public System.Collections.IEnumerable Patients { get; set; }
 
@@ -137,6 +139,10 @@ namespace Hospital.xaml_windows.Secretary
             this.DataContext = this;
 
             this.id = id;
+
+
+            //this.workHoursController.AddWorkHours(workHours: new WorkHours());
+            //this.timeSlotController.generateTimeSlots();
 
             ObservableCollection<User> users = this.userController.GetAllUsers();
             dataGridPatients.ItemsSource = users;

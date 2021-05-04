@@ -45,6 +45,8 @@ namespace Hospital.Repository
         {
             setConnection();
 
+            // 4/21/2021 9:00:00 AM 2
+
             int doctor_id = doctor.Id;
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM appointment WHERE doctor_id = :doctor_id AND date_time = :date_time";
@@ -326,6 +328,9 @@ namespace Hospital.Repository
             TimeSlot newTimeSlot = new TimeSlot();
             newTimeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(startTime, appointment.doctor.Id);
             timeSlotRepository.TakeTimeSlot(newTimeSlot);
+
+            appointment.doctor = this.doctorRepository.GetDoctorById(appointment.doctor.Id);
+
             cmd.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
             cmd.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             cmd.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();

@@ -205,6 +205,45 @@ namespace Hospital.Repository
             return sortedTimeSlots;
         }
 
+        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(int specializationId, DateTime now)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText =
+                "SELECT * FROM time_slot, work_hours, doctor WHERE time_slot.free = 1 AND time_slot.work_hours_id = work_hours.id AND work_hours.doctor_id = doctor.id AND doctor.spec_id = :specialization_id AND time_slot.start_time >= :start_time";
+            command.Parameters.Add("specialization_id", OracleDbType.Int32).Value = specializationId;
+            command.Parameters.Add("start_time", OracleDbType.Date).Value = now;
+
+            OracleDataReader reader = command.ExecuteReader();
+
+            ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
+            
+            while (reader.Read())
+            {
+                int time_slot_id = int.Parse(reader.GetString(0));
+                DateTime start_time = reader.GetDateTime(2);
+                int doctor_id = int.Parse(reader.GetString(8));
+                int workHours_id = int.Parse(reader.GetString(3));
+
+
+                TimeSlot ts = new TimeSlot();
+                ts.Id = time_slot_id;
+                ts.StartTime = start_time;
+                ts.workHours_id = workHours_id;
+
+                timeSlots.Add(ts);
+            }
+
+            ObservableCollection<TimeSlot> sortedTimeSlots =
+                new ObservableCollection<TimeSlot>(from i in timeSlots orderby i.StartTime select i);
+
+            connection.Close();
+            connection.Dispose();
+
+            return sortedTimeSlots;
+        }
+
+
         public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
         {
             setConnection();
@@ -308,11 +347,68 @@ namespace Hospital.Repository
             return null;
         }
 
+
+        // not necessary 
         public Boolean DeleteSlotByWorkhoursId(int workHoursId)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            workHoursId = 56;
+            command.CommandText = "DELETE FROM time_slot WHERE work_hours_id = " + workHoursId;
+
+
             return false;
         }
+
+        public void generateTimeSlots()
+        {
+            //TimeSlot timeSlot = new TimeSlot();
+            //timeSlot.StartTime = new DateTime(2021, 5, 4, 21, 0, 0);
+            //timeSlot.workHours_id = 57;
+            //timeSlot.Free = true;
+            //AddTimeSlot(timeSlot);
+
+            //TimeSlot timeSlot = new TimeSlot();
+
+            //DateTime dateTime = new DateTime(2021, 5, 4, 8, 0, 0);
+            //TimeSpan timeSpan = new TimeSpan(0, 30, 0);
+
+            //for (int j = 0; j < 17; j++)
+            //{
+            //    timeSlot.Free = true;
+            //    timeSlot.StartTime = dateTime;
+            //    timeSlot.workHours_id = 57;
+
+            //    AddTimeSlot(timeSlot);
+
+            //    dateTime = dateTime.Add(timeSpan);
+            //}
+
+
+        }
+
+        public TimeSlot AddTimeSlot(TimeSlot timeSlot)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO time_slot (free, start_time, work_hours_id) VALUES (:free, :start_time, :work_hours_id)";
+
+            Boolean free = timeSlot.Free;
+            DateTime start_time = timeSlot.StartTime;
+            int work_hours_id = timeSlot.workHours_id;
+
+            command.Parameters.Add("free", OracleDbType.Int32).Value = free;
+            command.Parameters.Add("start_time", OracleDbType.Date).Value = start_time;
+            command.Parameters.Add("work_hours_id", OracleDbType.Int32).Value = work_hours_id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                return timeSlot;
+            }
+
+            return null;
+        }
+
 
         public System.Array NewTimeSlots(int workHoursId)
         {

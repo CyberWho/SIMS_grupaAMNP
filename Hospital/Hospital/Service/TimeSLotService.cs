@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Navigation;
 using Hospital.Repository;
 
 
@@ -27,6 +28,11 @@ namespace Hospital.Service
         private DoctorRepository doctorRepository = new DoctorRepository();
 
 
+        public void generateTimeSlots()
+        {
+            timeSlotRepository.generateTimeSlots();
+        }
+
         public TimeSlot GetTimeSlotById(int id)
         {
             TimeSlot timeSlot = new TimeSlot();
@@ -43,18 +49,20 @@ namespace Hospital.Service
             int doctor_id = workHours.doctor.Id;
             Doctor doctor = this.doctorRepository.GetDoctorById(doctor_id);
 
+            // now = new DateTime(2021, 4, 20, 9, 0, 0);
+
             Appointment appointment = this.appointmentRepository.GetAppointmentByDoctorIdAndTime(doctor, now);
 
             appointment = this.appointmentRepository.UpdateAppointmentStartTime(appointment, timeSlot.StartTime);
 
             if (appointment != null)
             {
+                appointment.StartTime = now;
                 return appointment;
             }
 
             return null;
         }
-
 
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId, int patient_id)
         {
@@ -64,7 +72,11 @@ namespace Hospital.Service
             DateTime now = fix_time();
             
             // testing purposes
-            //now = new DateTime(2021, 4, 21, 9, 0, 0);
+            // this time is used when there is a free timeslot that that is right now
+            // now = new DateTime(2021, 4, 20, 9, 0, 0);
+
+            // this time is used when the current timeslot is occupied
+            // now = new DateTime();
 
             foreach (TimeSlot ts in timeSlots) 
             {
@@ -91,6 +103,42 @@ namespace Hospital.Service
 
             return timeSlots;
         }
+
+        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(
+            int specializationId, int patientId)
+        {
+            DateTime now = fix_time();
+
+            ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(specializationId, now);
+            // special case, if the time slot isn't taken, return type will be the same, only it will contain only one element
+            ObservableCollection<TimeSlot> timeSlot = new ObservableCollection<TimeSlot>();
+
+            foreach (TimeSlot ts in timeSlots)
+            {
+                if (ts.StartTime.Equals(now))
+                {
+                    WorkHours workHours = this.workHoursRepository.GetWorkHoursById(ts.workHours_id);
+                    Doctor doctor = workHours.doctor;
+
+                    Appointment appointment = new Appointment();
+                    appointment.StartTime = now;
+                    appointment.doctor = doctor;
+                    appointment.Room_Id = doctor.room_id;
+                    appointment.Doctor_Id = doctor.Id;
+                    appointment.Patient_Id = patientId;
+
+                    this.appointmentRepository.NewAppointment(appointment);
+
+                    timeSlot.Add(ts);
+
+                    return timeSlot;
+                }
+
+            }
+
+            return timeSlots;
+        }
+
         private DateTime fix_time()
         {
             // TODO: fix this jumbo mess 

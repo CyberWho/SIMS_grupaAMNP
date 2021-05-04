@@ -94,7 +94,25 @@ namespace Hospital.Repository
 
         public Hospital.Model.WorkHours NewWorkHours(Hospital.Model.WorkHours workHours)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText =
+                "INSERT INTO work_hours (shift_start, shift_end, approved, doctor_id) VALUES (:shift_start, :shift_end, :approved, :doctor_id)";
+
+            DateTime start = new DateTime(2021, 5, 4, 8, 0, 0);
+            DateTime end = new DateTime(2021, 5, 4, 16, 0, 0);
+
+            command.Parameters.Add(":shift_start", OracleDbType.Date).Value = start;
+            command.Parameters.Add("shift_end", OracleDbType.Date).Value = end;
+            command.Parameters.Add("approved", OracleDbType.Int32).Value = 1;
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = 2;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                return null;
+            }
+
+
             return null;
         }
 

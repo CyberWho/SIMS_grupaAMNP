@@ -17,6 +17,19 @@ namespace Hospital.Controller
 {
     public class TimeSlotController
     {
+        public void generateTimeSlots()
+        {
+            timeSlotService.generateTimeSlots();
+        }
+
+
+        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(
+            int specializationId, int patientId)
+        {
+            return this.timeSlotService
+                .GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(specializationId, patientId);
+        }
+
         public TimeSlot GetTimeSlotById(int id)
         {
             TimeSlot timeSlot = new TimeSlot();

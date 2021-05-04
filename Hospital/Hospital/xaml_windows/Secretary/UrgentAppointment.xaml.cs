@@ -91,7 +91,7 @@ namespace Hospital.xaml_windows.Secretary
                 HealthRecord healthRecord = this.healthRecordController.GetHealthRecordByPatientId(patient.Id);
                 int specialization_id = this.specializationContoller.GetSpecializationByType(selectedSpecialization);
 
-                timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationId(specialization_id,
+                timeSlots = this.timeSlotController.GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(specialization_id,
                     patient.Id);
 
                 if (timeSlots.Count == 1)
