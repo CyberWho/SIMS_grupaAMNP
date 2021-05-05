@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital.Controller;
+using Hospital.Model;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -60,7 +61,7 @@ namespace Hospital.xaml_windows.Doctor
         }
         void FillAppointmentsToUi()
         {
-            MessageBox.Show(id_doc.ToString());
+            // MessageBox.Show(id_doc.ToString());
             foreach (Appointment appointment in appointmentController.GetAllAppointmentsByDoctorId(id_doc))
             {
                 Model.Patient patien = patientController.GetPatientById(appointment.Patient_Id);
@@ -164,7 +165,8 @@ namespace Hospital.xaml_windows.Doctor
 
         private void DelateAppointment(object sender, RoutedEventArgs e)
         {
-            
+
+            selectedAppointment.doctor = this.doctor;
             appointmentController.DeleteAppointmentById(selectedAppointment.Id);
             lb_appointments.Items.Remove(selected_appointment);
             more_info.Text = "";

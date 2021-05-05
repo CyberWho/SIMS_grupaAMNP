@@ -100,6 +100,8 @@ namespace Hospital.Repository
 
             int record_id = int.Parse(reader.GetString(0));
 
+            int city_id = int.Parse(reader.GetString(4));
+
             connection.Close();
             connection.Dispose();
 
@@ -107,7 +109,7 @@ namespace Hospital.Repository
             healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
             healthRecord.patient_id = id;
             healthRecord.Patient = patient;
-            healthRecord.PlaceOfBirth = new CityRepository().GetCityById(reader.GetInt32(4));
+            healthRecord.PlaceOfBirth = new CityRepository().GetCityById(city_id);
             healthRecord.Gender = gender;
             healthRecord.MaritalStatus = maritalStatus;
             connection.Close();

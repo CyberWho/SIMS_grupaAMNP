@@ -73,12 +73,12 @@ namespace Hospital.xaml_windows.Doctor
                     if (drug.Id == selected_drug_approved)
                     {
                         int needsPerscription = drug.NeedsPerscription ? 1 : 0;
-                        MessageBox.Show(needsPerscription.ToString());
+                        // MessageBox.Show(needsPerscription.ToString());
                         drug.NeedsPerscription = !drug.NeedsPerscription;
 
                         needsPerscription = drug.NeedsPerscription ? 1 : 0;
 
-                        MessageBox.Show(needsPerscription.ToString());
+                        // MessageBox.Show(needsPerscription.ToString());
 
                         lbi_selected_drug_approved.Content = drug.Id + "|" + drug.Name + " " + drug.drugType.Type + " " + drug.Grams +
                                                              (drug.NeedsPerscription ? " potreban recept" : "");

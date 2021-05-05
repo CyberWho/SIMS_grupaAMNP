@@ -19,7 +19,7 @@ namespace Hospital.Repository
         private ItemInRoomRepository itemInRoomRepository = new ItemInRoomRepository();
         private RoomRepository roomRepository = new RoomRepository();
 
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -42,7 +42,7 @@ namespace Hospital.Repository
         public ObservableCollection<ReservedItem> GetAllReservedItems()
         {
             setConnection();
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             ObservableCollection<ReservedItem> reservedItems = new ObservableCollection<ReservedItem>();
             command.CommandText = "select * from reserved_item";
             OracleDataReader reader = command.ExecuteReader();
@@ -59,8 +59,8 @@ namespace Hospital.Repository
 
                 reservedItems.Add(reservedItem);
             }
-            con.Close();
-            con.Dispose();
+            connection.Close();
+            connection.Dispose();
 
             /*foreach (ReservedItem reservedItem in reservedItems)
             {
@@ -110,7 +110,7 @@ namespace Hospital.Repository
         public Model.ReservedItem NewReservedItem(Model.ReservedItem reservedItem)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
 
             if (reservedItem.ReservedDate == null)
             {

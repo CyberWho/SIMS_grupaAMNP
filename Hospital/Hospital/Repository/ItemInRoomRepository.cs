@@ -38,8 +38,8 @@ namespace Hospital.Repository
             ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), null, null);
             newItemInRoom.room_id = reader.GetInt32(3);
             newItemInRoom.inventoryItem_id = reader.GetInt32(1);
-            con.Close();
-            con.Dispose();
+            connection.Close();
+            connection.Dispose();
 
             newItemInRoom.room = roomRepository.GetRoomById(newItemInRoom.room_id);
             newItemInRoom.inventoryItem = inventoryItemRepository.GetInventoryItemById(newItemInRoom.inventoryItem_id);
@@ -62,8 +62,8 @@ namespace Hospital.Repository
                 itemsInRoom.Add(newItemInRoom);
 
             }
-            con.Close();
-            con.Dispose();
+            connection.Close();
+            connection.Dispose();
 
             foreach (ItemInRoom itemInRoom in itemsInRoom)
             {

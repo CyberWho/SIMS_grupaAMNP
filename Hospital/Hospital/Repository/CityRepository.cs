@@ -41,8 +41,11 @@ namespace Hospital.Repository
             city.Id = id;
             city.Name = reader.GetString(1);
             city.PostalCode = reader.GetString(2);
-            city.State = new StateRepository().GetStateById(reader.GetInt32(3));
+
+            int state_id = int.Parse(reader.GetString(3));
+
             con.Close();
+            city.State = new StateRepository().GetStateById(state_id);
             return city;
         }
       

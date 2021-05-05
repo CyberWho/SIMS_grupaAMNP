@@ -259,11 +259,13 @@ namespace Hospital.Repository
 
         public Boolean DeleteAppointmentById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
             Appointment appointment = new Appointment();
             appointment = GetAppointmentById(id);
 
+            appointment.doctor.employee_id = employeesRepository.GetEmployeeByUserId(appointment.doctor.User.Id).Id;
+
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
 
             for (int i = 0; i < appointment.DurationInMinutes / 30; i++)
             {
@@ -296,7 +298,10 @@ namespace Hospital.Repository
             SystemNotification systemNotification = new SystemNotification();
             systemNotification.user_id = app.patient.user_id;
             systemNotification.Name = Name;
-            int doctor_user_id = this.employeesRepository.GetUserIdByEmployeeId(app.doctor.employee_id);
+
+            Employee employee = this.employeesRepository.GetEmployeeByUserId(app.doctor.User.Id);
+
+            int doctor_user_id = this.employeesRepository.GetUserIdByEmployeeId(employee.Id);
             User doctorUser = this.userRepository.GetUserById(doctor_user_id);
             String desc = Name + " zakazan za: " + app.StartTime + " kod lekara " + doctorUser.Name + " " + doctorUser.Surname;
             systemNotification.Description = desc;

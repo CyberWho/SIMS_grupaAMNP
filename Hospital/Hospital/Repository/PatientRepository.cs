@@ -51,7 +51,7 @@ namespace Hospital.Repository
             //int user_id = int.Parse(reader.GetString(4));
 
             Patient patient = new Patient();
-            User user = userRepository.GetUserById(user_id);
+            // User user = userRepository.GetUserById(user_id);
 
             if (user.Username.Contains("guestUser"))
             {

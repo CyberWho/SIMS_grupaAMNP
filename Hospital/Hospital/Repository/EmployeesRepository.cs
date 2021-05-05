@@ -48,6 +48,7 @@ namespace Hospital.Repository
             Role role = new Role(reader.GetInt32(12), reader.GetString(13), null);
 
             Employee employee = new Employee();
+            employee.Id = int.Parse(reader.GetString(0));
             employee.SetRole(role);
             employee.User = user;
             employee.Salary = reader.GetInt32(1);

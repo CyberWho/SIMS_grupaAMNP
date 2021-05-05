@@ -27,7 +27,7 @@ namespace Hospital.Service
             return this.systemNotificationRepository.GetSystemNotificationById(id);
         }
 
-        public System.Collections.ArrayList GetAllSystemNotificationsByUserId(int userId)
+        public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
         {
             return systemNotificationRepository.GetAllSystemNotificationsByUserId(userId);
         }
