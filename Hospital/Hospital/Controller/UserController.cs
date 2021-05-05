@@ -142,6 +142,10 @@ namespace Hospital.Controller
             return null;
         }
 
+        public void makeDoctorUser()
+        {
+            this.userService.makeDoctorUser();
+        }
 
     }
 }

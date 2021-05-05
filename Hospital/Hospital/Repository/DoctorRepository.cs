@@ -218,7 +218,18 @@ namespace Hospital.Repository
 
         public Doctor NewDoctor(Doctor doctor)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO doctor (id, employee_id, room_id, spec_id)  VALUES (:id, :employee_id, :room_id, :spec_id)";
+
+            command.Parameters.Add("id", OracleDbType.Int32).Value = 5;
+            command.Parameters.Add("employee_id", OracleDbType.Int32).Value = doctor.employee_id;
+            command.Parameters.Add("room_id", OracleDbType.Int32).Value = doctor.room_id;
+            command.Parameters.Add("spec_id", OracleDbType.Int32).Value = doctor.specialization_id;
+
+            command.ExecuteNonQuery();
+
+
             return null;
         }
 

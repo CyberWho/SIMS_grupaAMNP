@@ -368,21 +368,21 @@ namespace Hospital.Repository
             //timeSlot.Free = true;
             //AddTimeSlot(timeSlot);
 
-            //TimeSlot timeSlot = new TimeSlot();
+            TimeSlot timeSlot = new TimeSlot();
 
-            //DateTime dateTime = new DateTime(2021, 5, 4, 8, 0, 0);
-            //TimeSpan timeSpan = new TimeSpan(0, 30, 0);
+            DateTime dateTime = new DateTime(2021, 5, 7, 8, 0, 0);
+            TimeSpan timeSpan = new TimeSpan(0, 30, 0);
 
-            //for (int j = 0; j < 17; j++)
-            //{
-            //    timeSlot.Free = true;
-            //    timeSlot.StartTime = dateTime;
-            //    timeSlot.workHours_id = 57;
+            for (int j = 0; j < 17; j++)
+            {
+                timeSlot.Free = true;
+                timeSlot.StartTime = dateTime;
+                timeSlot.workHours_id = 81;
 
-            //    AddTimeSlot(timeSlot);
+                AddTimeSlot(timeSlot);
 
-            //    dateTime = dateTime.Add(timeSpan);
-            //}
+                dateTime = dateTime.Add(timeSpan);
+            }
 
 
         }

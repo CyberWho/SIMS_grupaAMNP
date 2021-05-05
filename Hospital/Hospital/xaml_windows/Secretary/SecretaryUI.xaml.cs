@@ -141,8 +141,9 @@ namespace Hospital.xaml_windows.Secretary
             this.id = id;
 
 
-            //this.workHoursController.AddWorkHours(workHours: new WorkHours());
-            //this.timeSlotController.generateTimeSlots();
+            // this.workHoursController.AddWorkHours(workHours: new WorkHours());
+            // this.timeSlotController.generateTimeSlots();
+            // this.userController.makeDoctorUser();
 
             ObservableCollection<User> users = this.userController.GetAllUsers();
             dataGridPatients.ItemsSource = users;

@@ -81,6 +81,13 @@ namespace Hospital.Model
             this.employee = employee;
         }
 
+        public Role(int id, string roleType)
+        {
+            Id = id;
+            RoleType = roleType;
+            this.employee = null;
+        }
+
         public Role()
         {
         }

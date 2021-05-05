@@ -41,7 +41,7 @@ namespace Hospital.Repository
         }
 
 
-        public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time) 
+        public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time)
         {
             setConnection();
 
@@ -409,7 +409,18 @@ namespace Hospital.Repository
             int next_id = id + 1;
             command.Parameters.Add("ID", OracleDbType.Int32).Value = next_id.ToString();
             command.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = appointment.StartTime;
-            command.Parameters.Add("ROOM_ID", OracleDbType.Int32).Value = appointment.Room_Id.ToString();
+
+            appointment.Doctor_Id = appointment.doctor.Id;
+
+            if (appointment.room == null)
+            {
+                command.Parameters.Add("room_id", OracleDbType.Int32).Value = appointment.Room_Id.ToString();
+            }
+            else
+            {
+                command.Parameters.Add("ROOM_ID", OracleDbType.Int32).Value = appointment.room.Id.ToString();
+            }
+
             command.Parameters.Add("PATIENT_ID", OracleDbType.Int32).Value = appointment.Patient_Id.ToString();
             command.Parameters.Add("DOCTOR_ID", OracleDbType.Int32).Value = appointment.Doctor_Id.ToString();
 

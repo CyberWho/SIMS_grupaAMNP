@@ -101,9 +101,35 @@ namespace Hospital.Repository
 
         public Hospital.Model.Employee NewEmployee(Hospital.Model.Employee employee)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO employee (id, salary, years_of_service, user_id, role_id) VALUES (:id, :salary, :years_of_service, :user_id, :role_id)";
+
+            command.Parameters.Add("id", OracleDbType.Int32).Value = 7;
+            command.Parameters.Add("salary", OracleDbType.Int32).Value = employee.Salary;
+            command.Parameters.Add("years_of_service", OracleDbType.Int32).Value = employee.YearsOfService;
+            command.Parameters.Add("user_id", OracleDbType.Int32).Value = employee.User.Id;
+            command.Parameters.Add("role_id", OracleDbType.Int32).Value = employee.role.Id;
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+            Doctor doctor = new
+                Doctor(
+                    id: 0,
+                    employee_id: employee.Id,
+                    room_id: 10,
+                    specialization_id: 2
+                );
+
+            this.doctorRepository.NewDoctor(doctor);
+
             return null;
         }
+
+        private DoctorRepository doctorRepository = new DoctorRepository();
 
         public int GetLastId()
         {

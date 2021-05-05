@@ -43,6 +43,10 @@ namespace Hospital.Service
         public Appointment MoveReservedAppointment(int timeSlot_id)
         {
             DateTime now = fix_time();
+            
+            // testing
+            // now = new DateTime(2021, 5, 4, 12, 0, 0);
+            
             TimeSlot timeSlot = this.timeSlotRepository.GetTimeSlotById(timeSlot_id);
             int workHours_id = timeSlot.workHours_id;
             WorkHours workHours = this.workHoursRepository.GetWorkHoursById(workHours_id);
@@ -70,7 +74,11 @@ namespace Hospital.Service
             // special case, if the time slot isn't taken, return type will be the same, only it will contain only one element
             ObservableCollection<TimeSlot> timeSlot = new ObservableCollection<TimeSlot>();
             DateTime now = fix_time();
-            
+
+
+            // testing
+            // now = new DateTime(2021, 5, 4, 12, 0, 0);
+
             // testing purposes
             // this time is used when there is a free timeslot that that is right now
             // now = new DateTime(2021, 4, 20, 9, 0, 0);
@@ -108,6 +116,9 @@ namespace Hospital.Service
             int specializationId, int patientId)
         {
             DateTime now = fix_time();
+
+            // testing
+            // now = new DateTime(2021, 5, 4, 12, 0, 0);
 
             ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(specializationId, now);
             // special case, if the time slot isn't taken, return type will be the same, only it will contain only one element
