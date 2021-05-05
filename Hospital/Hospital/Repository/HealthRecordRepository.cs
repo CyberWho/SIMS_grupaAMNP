@@ -7,8 +7,6 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Hospital.Repository
 {
@@ -39,6 +37,11 @@ namespace Hospital.Repository
 
         public HealthRecord GetHealthRecordByPatientId(int id)
         {
+            PatientRepository pr = new PatientRepository();
+            UserRepository ur = new UserRepository();
+            Patient p = pr.GetPatientById(id);
+            User u = ur.GetUserById(p.user_id);
+
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
@@ -94,7 +97,14 @@ namespace Hospital.Repository
            
             healthRecord = new HealthRecord(int.Parse(reader.GetString(0)), gender,
                                                          maritalStatus, int.Parse(reader.GetString(4)));
-            healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(reader.GetInt32(0));
+
+            int record_id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
+
+
+            healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
             healthRecord.patient_id = id;
             healthRecord.Patient = patient;
             healthRecord.PlaceOfBirth = new CityRepository().GetCityById(reader.GetInt32(4));
@@ -149,6 +159,8 @@ namespace Hospital.Repository
                 if (command.ExecuteNonQuery() > 0)
                 {
                     connection.Close();
+                    connection.Dispose();
+
                     return healthRecord;
                 }
             }
@@ -156,6 +168,9 @@ namespace Hospital.Repository
             {
 
             }
+
+            connection.Close();
+            connection.Dispose();
 
             return null;
         }

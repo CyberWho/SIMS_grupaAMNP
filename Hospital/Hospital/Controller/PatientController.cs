@@ -19,12 +19,12 @@ namespace Hospital.Controller
         {
             return this.patientService.GetPatientByUserId(id);
         }
-        public Hospital.Model.Patient GetPatientById(int id)
+        public Patient GetPatientById(int id)
         {
             return this.patientService.GetPatientById(id);
         }
 
-        public Hospital.Model.Patient GetPatientByPatientId(int id)
+        public Patient GetPatientByPatientId(int id)
         {
             Patient patient = this.patientService.GetPatientByPatientId(id);
             return patient;
@@ -47,13 +47,13 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Model.Patient UpdatePatient(Hospital.Model.Patient patient)
+        public Patient UpdatePatient(Patient patient)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Patient RegisterPatient(Hospital.Model.Patient patient)
+        public Patient RegisterPatient(Patient patient)
         {
             // TODO: implement
             return null;

@@ -7,9 +7,7 @@
 using Hospital.Model;
 using Hospital.Repository;
 using System;
-using Hospital.Model;
 using System.Collections.ObjectModel;
-using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -27,7 +25,7 @@ namespace Hospital.Service
             return this.patientRepository.GetPatientById(id);
         }
 
-        public Hospital.Model.Patient GetPatientByPatientId(int id)
+        public Patient GetPatientByPatientId(int id)
         {
             Patient patient = this.patientRepository.GetPatientByPatientId(id);
             return patient;

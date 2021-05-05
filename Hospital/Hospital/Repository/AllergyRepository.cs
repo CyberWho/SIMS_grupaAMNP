@@ -8,8 +8,7 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Windows;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -32,7 +31,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
         public int GetLastId()
@@ -46,7 +45,9 @@ namespace Hospital.Repository
             reader = command.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
+            
             connection.Close();
+            connection.Dispose();
 
             return id;
         }
@@ -56,9 +57,6 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            // trazim pacijenta sa user id-em userId, 
-            // trazim karton sa pacijent id-em koji sam dobio gore
-            // trazim sve alergije iz kartona na osnovu karton id-a koji sam dobio gore
             ObservableCollection<Allergy> allergies = new ObservableCollection<Allergy>();
 
             OracleCommand command = connection.CreateCommand();
@@ -120,18 +118,28 @@ namespace Hospital.Repository
 
             int allergyId = int.Parse(reader.GetString(0));
 
+            connection.Close();
+            connection.Dispose();
+
             return this.DeleteAllergyById(allergyId);
         }
 
         public Boolean DeleteAllergyById(int id)
         {
+            
+
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "DELETE FROM allergy WHERE id = " + id;
 
             if (cmd.ExecuteNonQuery() > 0)
             {
+                connection.Close();
+                connection.Dispose();
                 return true;
             }
+
+            connection.Close();
+            connection.Dispose();
 
             return false;
         }
@@ -161,10 +169,13 @@ namespace Hospital.Repository
             if (command.ExecuteNonQuery() > 0)
             {
                 connection.Close();
+                connection.Dispose();
                 return allergy;
             }
-
+            
             connection.Close();
+            connection.Dispose();
+
             return null;
         }
 

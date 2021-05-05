@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 
 
 namespace Hospital.Repository
@@ -47,7 +41,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Hospital.Model.Review NewReview(Hospital.Model.Review review)
+        public Review NewReview(Review review)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();

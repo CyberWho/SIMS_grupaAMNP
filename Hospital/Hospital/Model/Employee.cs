@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class Employees
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
     public class Employee
@@ -16,7 +14,7 @@ namespace Hospital.Model
         public int YearsOfService { get; set; }
 
         public User User { get; set; }
-        public Role role;
+        public Role role { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Role GetRole()

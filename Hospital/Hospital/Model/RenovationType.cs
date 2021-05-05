@@ -4,11 +4,9 @@
  * Purpose: Definition of the Class Hospital.Model.RenovationType
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
-   public enum RenovationType
+    public enum RenovationType
    {
       REGULAR,
       MERGE,

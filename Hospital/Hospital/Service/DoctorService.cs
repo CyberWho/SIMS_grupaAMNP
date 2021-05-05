@@ -12,7 +12,7 @@ namespace Hospital.Service
 {
     public class DoctorService
     {
-        public Hospital.Model.Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(int id)
         {
             return doctorRepository.GetDoctorById(id);
         }
@@ -33,10 +33,9 @@ namespace Hospital.Service
             return doctorRepository.GetAllDoctors();
         }
 
-        public System.Collections.ArrayList GetAllDoctorsBySpecializationId(int specializationId)
+        public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
         {
-            // TODO: implement
-            return null;
+            return this.doctorRepository.GetAllDoctorsBySpecializationId(specializationId);
         }
 
         public ObservableCollection<Doctor> GetAllGeneralPurposeDoctors()
@@ -51,19 +50,19 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+        public Doctor UpdateDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Doctor AddDoctor(Hospital.Model.Doctor doctor)
+        public Doctor AddDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Repository.DoctorRepository doctorRepository = new Repository.DoctorRepository();
+        public Repository.DoctorRepository doctorRepository = new Repository.DoctorRepository();
 
     }
 }

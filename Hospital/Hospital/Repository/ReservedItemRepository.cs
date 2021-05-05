@@ -23,17 +23,17 @@ namespace Hospital.Repository
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
             }
             catch (Exception exp)
             {
 
             }
         }
-        public Hospital.Model.ReservedItem GetReservedItemById(int id)
+        public Model.ReservedItem GetReservedItemById(int id)
         {
             // TODO: implement
             return null;
@@ -101,13 +101,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.ReservedItem UpdateReservedItem(Hospital.Model.ReservedItem reservedItem)
+        public Model.ReservedItem UpdateReservedItem(Model.ReservedItem reservedItem)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.ReservedItem NewReservedItem(Hospital.Model.ReservedItem reservedItem)
+        public Model.ReservedItem NewReservedItem(Model.ReservedItem reservedItem)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -135,12 +135,18 @@ namespace Hospital.Repository
             try
             {
                 cmd.ExecuteNonQuery();
-                con.Close();
+
+                connection.Close();
+                connection.Dispose();
+
                 return reservedItem;
             }
             catch (Exception exp)
             {
-                con.Close();
+
+                connection.Close();
+                connection.Dispose();
+
                 return null;
             }
         }

@@ -1,23 +1,11 @@
 ﻿using Hospital.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Oracle.ManagedDataAccess.Client;
 using System.Collections.ObjectModel;
 using System.Data;
 using Hospital.Controller;
-using Hospital.Repository;
 
 namespace Hospital.xaml_windows.Secretary
 {
@@ -95,7 +83,7 @@ namespace Hospital.xaml_windows.Secretary
                 this.user_id = current_user_id;
                 this.patient_id = this.patientController.GetPatientByUserId(user_id).Id;
                 this.health_record_id = this.healthRecordController.GetHealthRecordByPatientId(patient_id).Id;
-                /////////////////////////////////////// ovde
+                /////////////////////////////////////// ovde ???????????????????????????
 
                 User user = this.userController.GetUserById(this.user_id);
                 if (!user.Username.Contains("guestUser"))

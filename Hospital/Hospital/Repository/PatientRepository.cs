@@ -38,6 +38,8 @@ namespace Hospital.Repository
         public Patient GetPatientByUserId(int id)
         {
             UserRepository userRepository = new UserRepository();
+            User user = userRepository.GetUserById(id);
+
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
@@ -46,7 +48,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            int user_id = int.Parse(reader.GetString(4));
+            //int user_id = int.Parse(reader.GetString(4));
 
             Patient patient = new Patient();
             User user = userRepository.GetUserById(user_id);
@@ -70,6 +72,8 @@ namespace Hospital.Repository
             }
 
             connection.Close();
+            connection.Dispose();
+
             return patient;
         }
 
@@ -112,10 +116,12 @@ namespace Hospital.Repository
             // Address address = addressRepository.GetAddressById(addressId);
             // patient.Address = address;
             connection.Close();
+            connection.Dispose(); 
+            
             return patient;
         }
 
-        public Hospital.Model.Patient GetPatientByPatientId(int id)
+        public Patient GetPatientByPatientId(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -143,7 +149,10 @@ namespace Hospital.Repository
             int addressId = reader.GetInt32(10);
             Address address = addressRepository.GetAddressById(addressId);
             patient.Address = address;
+
             connection.Close();
+            connection.Dispose(); 
+
             return patient;
         }
 
@@ -189,6 +198,7 @@ namespace Hospital.Repository
 
             connection.Close();
             connection.Dispose();
+
             return patients;
         }
 
@@ -228,6 +238,8 @@ namespace Hospital.Repository
                 if (command.ExecuteNonQuery() > 0)
                 {
                     connection.Close();
+                    connection.Dispose();
+
                     return patient;
                 }
             }
@@ -235,6 +247,9 @@ namespace Hospital.Repository
             {
 
             }
+
+            connection.Close();
+            connection.Dispose();
 
             return null;
         }
@@ -250,6 +265,7 @@ namespace Hospital.Repository
             int last_id = int.Parse(reader.GetString(0));
 
             connection.Close();
+            connection.Dispose();
 
             return last_id;
         }

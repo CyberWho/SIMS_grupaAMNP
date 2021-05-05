@@ -81,5 +81,10 @@ namespace Hospital.Service
             return null;
         }
 
+        public void makeDoctorUser()
+        {
+            this.userRepository.makeDoctorUser();
+        }
+
     }
 }

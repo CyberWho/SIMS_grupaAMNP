@@ -12,15 +12,15 @@ namespace Hospital.Repository
 {
     public class MedicalTreatment
     {
-        OracleConnection con = null;
+        OracleConnection connection = null;
 
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -28,10 +28,10 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.MedicalTreatment GetMedicalTreatmentById(int id)
+        public Model.MedicalTreatment GetMedicalTreatmentById(int id)
         {
             setConnection();
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM medical_treatment WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -46,13 +46,16 @@ namespace Hospital.Repository
             medicalTreatment.Drug_id = reader.GetInt32(5);
             medicalTreatment.Description = reader.GetString(6);
 
+            connection.Close();
+            connection.Dispose();
+
             return medicalTreatment;
         }
 
         public ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
         {
             setConnection();
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "select * from medical_treatment where anamnesis_id = " + anamnesisId;
             OracleDataReader reader = command.ExecuteReader();
             ObservableCollection<Model.MedicalTreatment> medicalTreatments = new ObservableCollection<Model.MedicalTreatment>();
@@ -69,7 +72,10 @@ namespace Hospital.Repository
                 medicalTreatment.Description = reader.GetString(6);
                 medicalTreatments.Add(medicalTreatment);
             }
-            con.Close();
+
+            connection.Close();
+            connection.Dispose();
+            
             return medicalTreatments;
         }
 
@@ -85,13 +91,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.MedicalTreatment UpdateMedicalTreatment(Hospital.Model.MedicalTreatment medicalTreatment)
+        public Model.MedicalTreatment UpdateMedicalTreatment(Model.MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.MedicalTreatment NewMedicalTreatment(Hospital.Model.MedicalTreatment medicalTreatment)
+        public Model.MedicalTreatment NewMedicalTreatment(Model.MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;

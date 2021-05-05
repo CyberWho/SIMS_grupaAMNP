@@ -15,18 +15,18 @@ namespace Hospital.Model
 
 
         public User User { get; set; }
-        public System.Collections.ArrayList Appointments;
+        public ArrayList Appointments;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetAppointments()
+        public ArrayList GetAppointments()
         {
             if (Appointments == null)
-                Appointments = new System.Collections.ArrayList();
+                Appointments = new ArrayList();
             return Appointments;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetAppointments(System.Collections.ArrayList newAppointments)
+        public void SetAppointments(ArrayList newAppointments)
         {
             RemoveAllAppointments();
             foreach (Appointment oAppointment in newAppointments)
@@ -39,7 +39,7 @@ namespace Hospital.Model
             if (newAppointment == null)
                 return;
             if (this.Appointments == null)
-                this.Appointments = new System.Collections.ArrayList();
+                this.Appointments = new ArrayList();
             if (!this.Appointments.Contains(newAppointment))
             {
                 this.Appointments.Add(newAppointment);
@@ -65,7 +65,7 @@ namespace Hospital.Model
         {
             if (Appointments != null)
             {
-                System.Collections.ArrayList tmpAppointments = new System.Collections.ArrayList();
+                ArrayList tmpAppointments = new ArrayList();
                 foreach (Appointment oldAppointment in Appointments)
                     tmpAppointments.Add(oldAppointment);
                 Appointments.Clear();

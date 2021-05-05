@@ -6,15 +6,13 @@
 
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 using Hospital.Model;
 using System.Collections.ObjectModel;
-using System.Configuration;
 
 namespace Hospital.Repository
 {
-   public class ReminderRepository
-   {
+    public class ReminderRepository
+    {
         OracleConnection connection = null;
         private void setConnection()
         {
@@ -30,7 +28,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.Reminder GetReminderById(int id)
+        public Reminder GetReminderById(int id)
       {
          // TODO: implement
          return null;
@@ -51,19 +49,23 @@ namespace Hospital.Repository
                 reminder.Name = reader.GetString(1);
                 reminder.Description = reader.GetString(2);
                 reminder.AlarmTime = reader.GetDateTime(3);
-                if(reminder.AlarmTime >= DateTime.Now)
+                if (reminder.AlarmTime >= DateTime.Now)
                 {
                     continue;
-                } else
+                }
+                else
                 {
                     reminders.Add(reminder);
                 }
-                
+
             }
+
             connection.Close();
-         return reminders;
-      }
-        public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime,int patientId)
+            connection.Dispose();
+
+            return reminders;
+        }
+        public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
         {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
@@ -88,7 +90,10 @@ namespace Hospital.Repository
                 }
 
             }
+
             connection.Close();
+            connection.Dispose();
+
             return reminders;
         }
 
@@ -117,7 +122,10 @@ namespace Hospital.Repository
                 }
 
             }
+
             connection.Close();
+            connection.Dispose();
+
             return reminders;
         }
       
@@ -133,13 +141,13 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
+      public Reminder UpdateReminder(Reminder reminder)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Reminder NewReminder(Hospital.Model.Reminder reminder)
+      public Reminder NewReminder(Reminder reminder)
       {
             setConnection();
             OracleCommand command = new OracleCommand();
@@ -151,14 +159,15 @@ namespace Hospital.Repository
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = reminder.Patient.Id;
             int executer = command.ExecuteNonQuery();
             connection.Close();
+            connection.Dispose();
             return reminder;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
-   
-   }
+        }
+
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
+
+    }
 }

@@ -12,7 +12,7 @@ namespace Hospital.Controller
 {
    public class RefferalForSpecialistController
    {
-      public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
+      public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
          // TODO: implement
          return null;
@@ -58,24 +58,24 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.ReferralForSpecialist UpdateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist UpdateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist AddReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist AddReferral(ReferralForSpecialist referral)
       {
             return referralForSpecialistService.AddReferral(referral);
       }
       
-      public Hospital.Model.ReferralForSpecialist DeactivateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist DeactivateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService();
+      public Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService();
    
    }
 }

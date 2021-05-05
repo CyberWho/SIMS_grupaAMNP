@@ -7,48 +7,50 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
-   public class SystemNotificationsController
-   {
-      public Hospital.Model.SystemNotification GetSystemNotificationById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
-      {
+    public class SystemNotificationsController
+    {
+        public SystemNotificationService systemNotificationService = new SystemNotificationService();
 
+        public ObservableCollection<SystemNotification> GetAllSystemWideSystemNotifications()
+        {
+            return this.systemNotificationService.GetAllSystemWideSystemNotifications();
+        }
+
+        public SystemNotification GetSystemNotificationById(int id)
+        {
+            return this.systemNotificationService.GetSystemNotificationById(id);
+        }
+
+        public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
+        {
             return systemNotificationService.GetAllSystemNotificationsByUserId(userId);
-      }
-      
-      public Boolean DeleteSystemNotificationById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteAllSystemNotificationsByUserId(int userId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.SystemNotification UpdateSystemNotification(Hospital.Model.SystemNotification systemNotification)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Hospital.Model.SystemNotification AddSystemNotification(Hospital.Model.SystemNotification systemNotification)
-      {
-         // TODO: implement
-         return null;
-      }
+        }
 
-        public Hospital.Service.SystemNotificationService systemNotificationService = new Service.SystemNotificationService();
-   
-   }
+        public Boolean DeleteSystemNotificationById(int id)
+        {
+            return this.systemNotificationService.DeleteSystemNotificationById(id);
+        }
+
+        public Boolean DeleteAllSystemNotificationsByUserId(int userId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public SystemNotification UpdateSystemNotification(SystemNotification systemNotification)
+        {
+            return this.systemNotificationService.UpdateSystemNotification(systemNotification);
+        }
+
+        public SystemNotification AddSystemNotification(SystemNotification systemNotification)
+        {
+            return this.systemNotificationService.AddSystemNotification(systemNotification);
+        }
+
+
+    }
 }

@@ -6,10 +6,9 @@
 
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -20,6 +19,9 @@ namespace Hospital.Repository
         DoctorRepository doctorRepository = new DoctorRepository();
         TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
         SystemNotificationRepository systemNotificationRepository = new SystemNotificationRepository();
+        private EmployeesRepository employeesRepository = new EmployeesRepository();
+        private UserRepository userRepository = new UserRepository();
+
 
         OracleConnection connection = null;
         private void setConnection()
@@ -33,12 +35,35 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
 
+        public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time)
+        {
+            setConnection();
 
-        public Hospital.Model.Appointment GetAppointmentById(int id)
+            // 4/21/2021 9:00:00 AM 2
+
+            int doctor_id = doctor.Id;
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM appointment WHERE doctor_id = :doctor_id AND date_time = :date_time";
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctor_id;
+            command.Parameters.Add("date_time", OracleDbType.Date).Value = time;
+
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            int appointment_id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
+
+            return this.GetAppointmentById(appointment_id);
+        }
+
+
+        public Appointment GetAppointmentById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -91,7 +116,10 @@ namespace Hospital.Repository
 
             Doctor doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
             appointment.doctor = doctor;
+
             connection.Close();
+            connection.Dispose();
+
             return appointment;
         }
 
@@ -105,7 +133,8 @@ namespace Hospital.Repository
             command.CommandText = "SELECT * FROM appointment WHERE appstat_id = " + id;
             OracleDataReader reader = command.ExecuteReader();
 
-
+            connection.Close();
+            connection.Dispose();
 
             return null;
         }
@@ -164,11 +193,14 @@ namespace Hospital.Repository
                    appointmentStatus, doctor_id, patient_id, room_id);
                 appointmnets.Add(ap);
             }
+
             connection.Close();
+            connection.Dispose();
+
             return appointmnets;
         }
 
-        public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
+        public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
         {
             ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
             setConnection();
@@ -218,7 +250,10 @@ namespace Hospital.Repository
                 appointments.Add(appointment);
 
             }
+
             connection.Close();
+            connection.Dispose();
+
             return appointments;
         }
 
@@ -244,56 +279,60 @@ namespace Hospital.Repository
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             if (command.ExecuteNonQuery() > 0)
             {
-                ObavestiPacijenta(appointment, "Obrisan termin");
-                ObavestiLekara(appointment, "Obrisan termin");
+                NotifyPatient(appointment, "Obrisan termin");
+                NotifyDoctor(appointment, "Obrisan termin");
                 connection.Close();
+                connection.Dispose();
                 return true;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return false;
         }
-        private void ObavestiPacijenta(Appointment app, String Name)
+        private void NotifyPatient(Appointment app, String Name)
         {
             SystemNotification systemNotification = new SystemNotification();
             systemNotification.user_id = app.patient.user_id;
             systemNotification.Name = Name;
-            String desc = Name + " zakazan za: " + app.StartTime.ToString() + " kod lekara " + app.doctor.User.Name + " " + app.doctor.User.Surname;
+            int doctor_user_id = this.employeesRepository.GetUserIdByEmployeeId(app.doctor.employee_id);
+            User doctorUser = this.userRepository.GetUserById(doctor_user_id);
+            String desc = Name + " zakazan za: " + app.StartTime + " kod lekara " + doctorUser.Name + " " + doctorUser.Surname;
             systemNotification.Description = desc;
 
             this.systemNotificationRepository.NewSystemNotification(systemNotification);
         }
-        private void ObavestiLekara(Appointment app, String Name)
+        private void NotifyDoctor(Appointment app, String Name)
         {
             SystemNotification systemNotification = new SystemNotification();
-            systemNotification.user_id = app.doctor.User.Id;
+            int user_id = this.employeesRepository.GetUserIdByEmployeeId(app.doctor.employee_id);
+            systemNotification.user_id = user_id;
             systemNotification.Name = Name;
-            String desc = Name + " zakazan za: " + app.StartTime.ToString() + " za pacijenta " + app.patient.User.Name + " " + app.patient.User.Surname;
+            String desc = Name + " zakazan za: " + app.StartTime + " za pacijenta " + app.patient.User.Name + " " + app.patient.User.Surname;
             systemNotification.Description = desc;
 
             this.systemNotificationRepository.NewSystemNotification(systemNotification);
         }
 
-        public Boolean DeleteAppointmentByPatientId(int patientId)
+        public Boolean DeleteAllReservedAppointmentsByPatientId(int patientId)
         {
             setConnection();
-
-            ObservableCollection<Appointment> appointments = GetAllByAppointmentsPatientId(patientId);
-            foreach (Appointment appointment in appointments)
+            
+            ObservableCollection<Appointment> appointments = GetAllReservedAppointmentsByPatientId(patientId);
+            foreach(Appointment appointment in appointments)
             {
-                TimeSlot timeSlot = new TimeSlot();
-                timeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(appointment.StartTime, appointment.doctor.Id);
-                timeSlotRepository.FreeTimeSlot(timeSlot);
+                if(appointment.Type == AppointmentType.OPERATION)
+                {
+                    continue;
+                }
                 DeleteAppointmentById(appointment.Id);
             }
-
-
             connection.Close();
-            return false;
-
+            return true;
         }
 
-        public Hospital.Model.Appointment UpdateAppointmentStartTime(Hospital.Model.Appointment appointment, DateTime startTime)
+        public Appointment UpdateAppointmentStartTime(Appointment appointment, DateTime startTime)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -303,6 +342,7 @@ namespace Hospital.Repository
             TimeSlot newTimeSlot = new TimeSlot();
             newTimeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(startTime, appointment.doctor.Id);
             timeSlotRepository.TakeTimeSlot(newTimeSlot);
+            appointment.doctor = this.doctorRepository.GetDoctorById(appointment.doctor.Id);
             command.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
             command.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             command.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
@@ -310,17 +350,22 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                ObavestiPacijenta(appointment, "Izmenjen termin");
-                ObavestiLekara(appointment, "Izmenjen termin");
+                NotifyPatient(appointment, "Izmenjen termin");
+                NotifyDoctor(appointment, "Izmenjen termin");
+
                 connection.Close();
+                connection.Dispose();
+
                 return appointment;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return appointment;
         }
 
-        public Hospital.Model.Appointment UpdateAppointmentRoom(Hospital.Model.Appointment appointment, Hospital.Model.Room room)
+        public Appointment UpdateAppointmentRoom(Appointment appointment, Room room)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -331,13 +376,18 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                ObavestiPacijenta(appointment, "Izmenjen termin");
-                ObavestiLekara(appointment, "Izmenjen termin");
+                NotifyPatient(appointment, "Izmenjen termin");
+                NotifyDoctor(appointment, "Izmenjen termin");
+
                 connection.Close();
+                connection.Dispose();
+
                 return appointment;
             }
 
             connection.Close();
+            connection.Dispose();
+
             return appointment;
 
         }
@@ -368,13 +418,16 @@ namespace Hospital.Repository
             reader.Read();
             if (reader.GetInt32(0) != 0)
             {
+                connection.Close();
+                connection.Dispose();
                 return true;
             }
             connection.Close();
+            connection.Dispose();
             return false;
         }
 
-        public Hospital.Model.Appointment UpdateAppointmentStatus(Hospital.Model.Appointment appointment, Hospital.Model.AppointmentStatus appointmentStatus)
+        public Appointment UpdateAppointmentStatus(Appointment appointment, AppointmentStatus appointmentStatus)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -383,10 +436,11 @@ namespace Hospital.Repository
             command.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
             int a = command.ExecuteNonQuery();
             connection.Close();
+            connection.Dispose();
             return null;
         }
 
-        public Hospital.Model.Appointment NewAppointment(Hospital.Model.Appointment appointment)
+        public Appointment NewAppointment(Appointment appointment)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -417,12 +471,41 @@ namespace Hospital.Repository
             int next_id = id + 1;
             command.Parameters.Add("ID", OracleDbType.Int32).Value = next_id.ToString();
             command.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = appointment.StartTime;
-            command.Parameters.Add("ROOM_ID", OracleDbType.Int32).Value = appointment.room.Id.ToString();
-            command.Parameters.Add("PATIENT_ID", OracleDbType.Int32).Value = appointment.patient.Id.ToString();
-            command.Parameters.Add("DOCTOR_ID", OracleDbType.Int32).Value = appointment.doctor.Id.ToString();
-            command.ExecuteNonQuery();
+
+            appointment.Doctor_Id = appointment.doctor.Id;
+
+            if (appointment.room == null)
+            {
+                command.Parameters.Add("room_id", OracleDbType.Int32).Value = appointment.Room_Id.ToString();
+            }
+            else
+            {
+                command.Parameters.Add("ROOM_ID", OracleDbType.Int32).Value = appointment.room.Id.ToString();
+            }
+
+            command.Parameters.Add("PATIENT_ID", OracleDbType.Int32).Value = appointment.Patient_Id.ToString();
+            command.Parameters.Add("DOCTOR_ID", OracleDbType.Int32).Value = appointment.Doctor_Id.ToString();
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                appointment.Id = next_id;
+                appointment.doctor = this.doctorRepository.GetDoctorById(appointment.Doctor_Id);
+                appointment.patient = this.patientRepository.GetPatientById(appointment.Patient_Id);
+
+                NotifyDoctor(appointment, "Kreiran termin");
+                NotifyPatient(appointment, "Kreiran termin");
+
+                return appointment;
+            }
+
             connection.Close();
+            connection.Dispose();
+
             return appointment;
+
         }
 
         public int GetLastId()
@@ -435,7 +518,10 @@ namespace Hospital.Repository
             reader = command.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
+
             connection.Close();
+            connection.Dispose();
+
             return id;
         }
 

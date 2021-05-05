@@ -8,7 +8,6 @@ using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 using Hospital.xaml_windows.Doctor;
 using Hospital.xaml_windows.Manager;
 using Hospital.xaml_windows.Patient;
@@ -151,6 +150,10 @@ namespace Hospital.Controller
             return null;
         }
 
+        public void makeDoctorUser()
+        {
+            this.userService.makeDoctorUser();
+        }
 
     }
 }

@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
-using System.Threading;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -40,7 +28,7 @@ namespace Hospital.xaml_windows.Patient
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Hospital.Model.Patient patient = new Model.Patient();
+            Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;

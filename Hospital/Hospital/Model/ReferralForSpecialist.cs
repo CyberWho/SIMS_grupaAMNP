@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class Hospital.Model.ReferralForSpecialist
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
     public class ReferralForSpecialist

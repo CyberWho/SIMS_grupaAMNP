@@ -1,10 +1,8 @@
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using Hospital.Model;
 using System.Collections.ObjectModel;
-using Hospital.Repository;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -19,14 +17,13 @@ namespace Hospital.Repository
             try
             {
                 connection.Open();
-
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
-        public Hospital.Model.Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -58,6 +55,15 @@ namespace Hospital.Repository
             doctor.specialization = specialization;
             doctor.specialization.Type = reader.GetString(17);
             connection.Close();
+            
+            int employee_id = dId;
+            int room_id = doctor.room.Id;
+            int specialization_id = specialization.id;
+            
+            doctor.employee_id = employee_id;
+            doctor.room_id = room_id;
+            doctor.specialization_id = specialization_id;
+
             return doctor;
 
             
@@ -103,10 +109,10 @@ namespace Hospital.Repository
         public Doctor GetWorkHoursDoctorById(int id)
         {
             setConnection();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             User docUser = new User();
             docUser.Id = int.Parse(reader.GetString(0));
@@ -128,7 +134,10 @@ namespace Hospital.Repository
             Room room = new Room();
             doctor.room = room;
             doctor.room.Id = reader.GetInt32(14);
+
             connection.Close();
+            connection.Dispose();
+            
             return doctor;
         }
 
@@ -166,7 +175,10 @@ namespace Hospital.Repository
                 doctors.Add(doctor);
 
             }
+
             connection.Close();
+            connection.Dispose();
+            
             return doctors;
         }
 
@@ -200,6 +212,7 @@ namespace Hospital.Repository
             int roomdoc = reader.GetInt32(14);
             int specializationcId = reader.GetInt32(15);
             connection.Close();
+            connection.Dispose();
             return doctor;
         }
 
@@ -226,10 +239,36 @@ namespace Hospital.Repository
             return doctors;
         }
 
-        public System.Collections.ArrayList GetAllDoctorsBySpecializationId(int specializationId)
+        public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM doctor WHERE spec_id = " + specializationId;
+            OracleDataReader reader = command.ExecuteReader();
+
+            ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+
+            while (reader.Read())
+            {
+                int id = int.Parse(reader.GetString(0));
+                int employee_id = int.Parse(reader.GetString(1));
+                int room_id = int.Parse(reader.GetString(2));
+                
+                Doctor doctor = new
+                    Doctor(
+                        id, 
+                        employee_id, 
+                        room_id,
+                        specializationId
+                    );
+
+                doctors.Add(doctor);
+            }
+
+            connection.Close();
+            connection.Dispose();
+
+            return doctors;
         }
 
         public Boolean DeleteDoctorById(int doctorId)
@@ -238,15 +277,26 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+        public Doctor UpdateDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Doctor NewDoctor(Hospital.Model.Doctor doctor)
+        public Doctor NewDoctor(Doctor doctor)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO doctor (id, employee_id, room_id, spec_id)  VALUES (:id, :employee_id, :room_id, :spec_id)";
+
+            command.Parameters.Add("id", OracleDbType.Int32).Value = 5;
+            command.Parameters.Add("employee_id", OracleDbType.Int32).Value = doctor.employee_id;
+            command.Parameters.Add("room_id", OracleDbType.Int32).Value = doctor.room_id;
+            command.Parameters.Add("spec_id", OracleDbType.Int32).Value = doctor.specialization_id;
+
+            command.ExecuteNonQuery();
+
+
             return null;
         }
 

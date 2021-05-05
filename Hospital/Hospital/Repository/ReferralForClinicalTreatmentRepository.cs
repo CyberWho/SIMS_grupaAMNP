@@ -34,7 +34,7 @@ namespace Hospital.Repository
          return null;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment GetReferralForClinicalTreatmentById()
+      public Model.ReferralForClinicalTreatment GetReferralForClinicalTreatmentById()
       {
          // TODO: implement
          return null;
@@ -58,13 +58,13 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment UpdateReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment)
+      public Model.ReferralForClinicalTreatment UpdateReferralForClinicalTreatment(Model.ReferralForClinicalTreatment referralForClinicalTreatment)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment NewReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment)
+      public Model.ReferralForClinicalTreatment NewReferralForClinicalTreatment(Model.ReferralForClinicalTreatment referralForClinicalTreatment)
       {
          // TODO: implement
          return null;

@@ -8,6 +8,7 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -29,7 +30,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
         public System.Collections.ArrayList GetAllAllergyTypes()
@@ -75,6 +76,9 @@ namespace Hospital.Repository
 
             at.Id = int.Parse(reader.GetString(0));
             at.Type = reader.GetString(1);
+
+            connection.Close();
+            connection.Dispose();
 
             return at;
         }

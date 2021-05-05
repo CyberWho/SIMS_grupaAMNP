@@ -12,13 +12,13 @@ namespace Hospital.Controller
 {
    public class RoleController
    {
-      public Hospital.Model.Role GetRoleById(int id)
+      public Role GetRoleById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Role GetRoleByRole(String role)
+      public Role GetRoleByRole(String role)
       {
          // TODO: implement
          return null;
@@ -36,19 +36,19 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.Role UpdateRole(Hospital.Model.Role role)
+      public Role UpdateRole(Role role)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Role AddRole(Hospital.Model.Role role)
+      public Role AddRole(Role role)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.RoleService roleService;
+      public Service.RoleService roleService;
    
    }
 }

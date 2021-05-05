@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class ItemInRoom
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
     public class ItemInRoom

@@ -13,7 +13,7 @@ namespace Hospital.Controller
 {
    public class ReservedItemController
    {
-      public Hospital.Model.ReservedItem GetReservedItemById(int id)
+      public ReservedItem GetReservedItemById(int id)
       {
          // TODO: implement
          return null;
@@ -54,24 +54,24 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.ReservedItem UpdateReservedItem(Hospital.Model.ReservedItem reservedItem)
+      public ReservedItem UpdateReservedItem(ReservedItem reservedItem)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReservedItem AddReservedItem(Hospital.Model.ReservedItem reservedItem)
+      public ReservedItem AddReservedItem(ReservedItem reservedItem)
       {
          return reservedItemService.AddReservedItem(reservedItem);
       }
       
-      public Hospital.Model.ReservedItem ChangeReservedDate(Hospital.Model.ReservedItem reservedItem, DateTime newReservedDate)
+      public ReservedItem ChangeReservedDate(ReservedItem reservedItem, DateTime newReservedDate)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.ReservedItemService reservedItemService = new Service.ReservedItemService();
+      public Service.ReservedItemService reservedItemService = new Service.ReservedItemService();
    
    }
 }

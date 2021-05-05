@@ -36,7 +36,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment GetReferralForClinicalTreatmentById()
+      public ReferralForClinicalTreatment GetReferralForClinicalTreatmentById()
       {
          // TODO: implement
          return null;
@@ -60,13 +60,13 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment UpdateReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment)
+      public ReferralForClinicalTreatment UpdateReferralForClinicalTreatment(ReferralForClinicalTreatment referralForClinicalTreatment)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment AddReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment)
+      public ReferralForClinicalTreatment AddReferralForClinicalTreatment(ReferralForClinicalTreatment referralForClinicalTreatment)
       {
          // TODO: implement
          return null;
@@ -84,25 +84,25 @@ namespace Hospital.Controller
          return null;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment DeactivateReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment)
+      public ReferralForClinicalTreatment DeactivateReferralForClinicalTreatment(ReferralForClinicalTreatment referralForClinicalTreatment)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment ProlongReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment, DateTime newEndDate)
+      public ReferralForClinicalTreatment ProlongReferralForClinicalTreatment(ReferralForClinicalTreatment referralForClinicalTreatment, DateTime newEndDate)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForClinicalTreatment ChangeRoomReferralForClinicalTreatment(Hospital.Model.ReferralForClinicalTreatment referralForClinicalTreatment, Hospital.Model.Room newRoom)
+      public ReferralForClinicalTreatment ChangeRoomReferralForClinicalTreatment(ReferralForClinicalTreatment referralForClinicalTreatment, Room newRoom)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService;
+      public Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService;
    
    }
 }

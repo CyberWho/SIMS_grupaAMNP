@@ -52,7 +52,7 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.Allergy UpdateAllergy(Hospital.Model.Allergy allergy)
+        public Allergy UpdateAllergy(Allergy allergy)
         {
             // TODO: implement
             return null;

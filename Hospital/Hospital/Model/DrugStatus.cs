@@ -4,12 +4,10 @@
  * Purpose: Definition of the Class Hospital.Model.DrugStatus
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
-   /// Pending - upravnik je uneo lek i poslat je zahtev lekaru za approval
-   public enum DrugStatus
+    /// Pending - upravnik je uneo lek i poslat je zahtev lekaru za approval
+    public enum DrugStatus
    {
       APPROVED,
       REJECTED,

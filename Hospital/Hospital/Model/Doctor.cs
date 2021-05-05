@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Doctor
  ***********************************************************************/
 
-using System;
 using System.Collections;
 
 namespace Hospital.Model
@@ -12,6 +11,10 @@ namespace Hospital.Model
     public class Doctor : Employee
     {
         public Room room { get; set; }
+
+        public int employee_id { get; set; }
+        public int room_id { get; set; }
+        public int specialization_id { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
@@ -38,18 +41,18 @@ namespace Hospital.Model
                 }
             }
         }
-        public System.Collections.ArrayList workHours;
+        public ArrayList workHours;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetWorkHours()
+        public ArrayList GetWorkHours()
         {
             if (workHours == null)
-                workHours = new System.Collections.ArrayList();
+                workHours = new ArrayList();
             return workHours;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetWorkHours(System.Collections.ArrayList newWorkHours)
+        public void SetWorkHours(ArrayList newWorkHours)
         {
             RemoveAllWorkHours();
             foreach (WorkHours oWorkHours in newWorkHours)
@@ -62,7 +65,7 @@ namespace Hospital.Model
             if (newWorkHours == null)
                 return;
             if (this.workHours == null)
-                this.workHours = new System.Collections.ArrayList();
+                this.workHours = new ArrayList();
             if (!this.workHours.Contains(newWorkHours))
             {
                 this.workHours.Add(newWorkHours);
@@ -88,7 +91,7 @@ namespace Hospital.Model
         {
             if (workHours != null)
             {
-                System.Collections.ArrayList tmpWorkHours = new System.Collections.ArrayList();
+                ArrayList tmpWorkHours = new ArrayList();
                 foreach (WorkHours oldWorkHours in workHours)
                     tmpWorkHours.Add(oldWorkHours);
                 workHours.Clear();
@@ -124,18 +127,18 @@ namespace Hospital.Model
                 }
             }
         }
-        public System.Collections.ArrayList appointment;
+        public ArrayList appointment;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetAppointment()
+        public ArrayList GetAppointment()
         {
             if (appointment == null)
-                appointment = new System.Collections.ArrayList();
+                appointment = new ArrayList();
             return appointment;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetAppointment(System.Collections.ArrayList newAppointment)
+        public void SetAppointment(ArrayList newAppointment)
         {
             RemoveAllAppointment();
             foreach (Appointment oAppointment in newAppointment)
@@ -148,7 +151,7 @@ namespace Hospital.Model
             if (newAppointment == null)
                 return;
             if (this.appointment == null)
-                this.appointment = new System.Collections.ArrayList();
+                this.appointment = new ArrayList();
             if (!this.appointment.Contains(newAppointment))
             {
                 this.appointment.Add(newAppointment);
@@ -174,7 +177,7 @@ namespace Hospital.Model
         {
             if (appointment != null)
             {
-                System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
+                ArrayList tmpAppointment = new ArrayList();
                 foreach (Appointment oldAppointment in appointment)
                     tmpAppointment.Add(oldAppointment);
                 appointment.Clear();
@@ -182,6 +185,15 @@ namespace Hospital.Model
                     oldAppointment.SetDoctor((Doctor)null);
                 tmpAppointment.Clear();
             }
+        }
+
+        public Doctor(int id, int employee_id, int room_id, int specialization_id)
+        {
+            this.Id = id;
+            this.employee_id = employee_id;
+            this.room_id = room_id;
+            this.specialization_id = specialization_id;
+            
         }
 
         public Doctor(Room room, ArrayList workHours, Specialization specialization, ArrayList appointment)

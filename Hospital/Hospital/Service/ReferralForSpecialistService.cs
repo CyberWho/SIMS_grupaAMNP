@@ -12,7 +12,7 @@ namespace Hospital.Service
 {
    public class ReferralForSpecialistService
    {
-      public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
+      public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
          // TODO: implement
          return null;
@@ -59,25 +59,25 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.ReferralForSpecialist UpdateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist UpdateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist AddReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist AddReferral(ReferralForSpecialist referral)
       {
          
          return referralForSpecialistRepository.NewReferralForSpecialist(referral) ;
       }
       
-      public Hospital.Model.ReferralForSpecialist DeactivateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist DeactivateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.ReferralForSpecialistRepository referralForSpecialistRepository = new Repository.ReferralForSpecialistRepository();
+      public Repository.ReferralForSpecialistRepository referralForSpecialistRepository = new Repository.ReferralForSpecialistRepository();
       public System.Collections.ArrayList referralForSpecialistServiceB;
       
       /// <pdGenerated>default getter</pdGenerated>

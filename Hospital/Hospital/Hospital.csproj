@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="system.windows.controls.ribbon" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -51,6 +52,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -81,6 +84,7 @@
     <Compile Include="Controller\AnamnesisController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Controller\CityController.cs" />
+    <Compile Include="Controller\SpecializationContoller.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\DrugController.cs" />
     <Compile Include="Controller\EmployeeController.cs" />
@@ -133,6 +137,7 @@
     <Compile Include="Repository\ReviewRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Repository\SpecializationRepository.cs" />
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\SystemNotificationRepository.cs" />
     <Compile Include="Repository\TimeSlotRepository.cs" />
@@ -162,6 +167,7 @@
     <Compile Include="Service\ReviewService.cs" />
     <Compile Include="Service\RoleService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\SpecializationService.cs" />
     <Compile Include="Service\StateService.cs" />
     <Compile Include="Service\SystemNotificationService.cs" />
     <Compile Include="Service\TimeSlotService.cs" />
@@ -251,6 +257,12 @@
     <Compile Include="xaml_windows\Patient\PatientUpdateAppointment.xaml.cs">
       <DependentUpon>PatientUpdateAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
+      <DependentUpon>CreateNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\PatientAppointment.xaml.cs">
       <DependentUpon>PatientAppointment.xaml</DependentUpon>
     </Compile>
@@ -274,6 +286,12 @@
     </Compile>
     <Compile Include="xaml_windows\Secretary\SecretaryUI.xaml.cs">
       <DependentUpon>SecretaryUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\UpdateNotification.xaml.cs">
+      <DependentUpon>UpdateNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\UrgentAppointment.xaml.cs">
+      <DependentUpon>UrgentAppointment.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -399,6 +417,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="xaml_windows\Secretary\CreateNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Secretary\PatientAppointment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -430,6 +456,14 @@
     <Page Include="xaml_windows\Secretary\SecretaryUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Secretary\UpdateNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\UrgentAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

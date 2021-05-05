@@ -53,6 +53,9 @@ namespace Hospital.Repository
             HealthRecord healthRecord = new HealthRecord();
             healthRecord.patient_id = patient.Id;
             healthRecord = this.healthRecordRepository.NewHealthRecord(healthRecord, 1);
+            
+            connection.Close();
+            connection.Dispose();
 
             return user;
         }
@@ -84,6 +87,7 @@ namespace Hospital.Repository
             user.EMail = reader.GetString(6);
 
             connection.Close();
+            connection.Dispose();
 
             return user;
         }
@@ -134,6 +138,9 @@ namespace Hospital.Repository
                 users.Add(nUser);
             }
 
+            connection.Close();
+            connection.Dispose();
+
             return users;
         }
 
@@ -172,6 +179,8 @@ namespace Hospital.Repository
                 if (command.ExecuteNonQuery() > 0)
                 {
                     connection.Close();
+                    connection.Dispose();
+
                     return user;
                 }
             }
@@ -181,8 +190,9 @@ namespace Hospital.Repository
 
             }
 
-
             connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
@@ -195,11 +205,64 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
-
+            
             connection.Close();
-
+            connection.Dispose();
+            
             return last_id;
         }
+
+        public void makeDoctorUser()
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+
+            User user = new 
+                User(
+                    id: 44,
+                    username: "card1",
+                    password: "card1",
+                    name: "markocard1",
+                    surname: "cardiolovic",
+                    phoneNumber: "6128376178",
+                    eMail: "fahsi@gmahdfias"
+                    );
+
+            command.CommandText =
+                "INSERT INTO users (id, username, password, name, surname, phone_number, email) VALUES (:id, :username, :password, :name, :surname, :phone_number, :email)";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = 44;
+            command.Parameters.Add("username", OracleDbType.Varchar2).Value = user.Username;
+            command.Parameters.Add("password", OracleDbType.Varchar2).Value = user.Password;
+            command.Parameters.Add("name", OracleDbType.Varchar2).Value = user.Name;
+            command.Parameters.Add("surname", OracleDbType.Varchar2).Value = user.Surname;
+            command.Parameters.Add("phone_number", OracleDbType.Varchar2).Value = user.PhoneNumber;
+            command.Parameters.Add("email", OracleDbType.Varchar2).Value = user.EMail;
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+            Role role = new
+                Role(
+                    id: 1,
+                    roleType: "Doctor"
+                    );
+
+            Employee employee = new 
+                Employee(
+                        id: 0,
+                        salary: 95000,
+                        yearsOfService: 5,
+                        user: user,
+                        role: role
+                    );
+
+            this.employeesRepository.NewEmployee(employee);
+
+        }
+
+        private EmployeesRepository employeesRepository = new EmployeesRepository();
 
     }
 }

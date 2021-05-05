@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Hospital.Controller;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
@@ -32,7 +20,9 @@ namespace Hospital.xaml_windows.Secretary
         UserController userController = new UserController();
         PatientController patientController = new PatientController();
         HealthRecordController healthRecordController = new HealthRecordController();
-        
+        private WorkHoursController workHoursController = new WorkHoursController();
+        private TimeSlotController timeSlotController = new TimeSlotController();
+
         public System.Collections.IEnumerable Patients { get; set; }
 
         User secretary { get; set; }
@@ -138,6 +128,11 @@ namespace Hospital.xaml_windows.Secretary
 
             this.id = id;
 
+
+            // this.workHoursController.AddWorkHours(workHours: new WorkHours());
+            // this.timeSlotController.generateTimeSlots();
+            // this.userController.makeDoctorUser();
+
             ObservableCollection<User> users = this.userController.GetAllUsers();
             dataGridPatients.ItemsSource = users;
         }
@@ -169,7 +164,7 @@ namespace Hospital.xaml_windows.Secretary
             connection.Dispose();
         }
         // TODO: ispraviti
-        private void Obrisi_korisnika(object sender, RoutedEventArgs e)
+        private void Delete_user(object sender, RoutedEventArgs e)
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection connection = new OracleConnection(conString);
@@ -189,7 +184,7 @@ namespace Hospital.xaml_windows.Secretary
             this.Refresh(sender, e);
         }
         // ispravljeno
-        private void Izmeni_korisnika(object sender, RoutedEventArgs e)
+        private void Update_user(object sender, RoutedEventArgs e)
         {
             User uUser = new User();
 
@@ -204,7 +199,7 @@ namespace Hospital.xaml_windows.Secretary
             // KADA SE KORISTI LISTVIEW NE KREIRA SE NPR NEW ROOM OBJEKAT NEGO SAMO OBJEKAT NEW {} I TO JE TO
         }
         // TODO: ispraviti
-        private void Dodaj_korisnika(object sender, RoutedEventArgs e)
+        private void Add_user(object sender, RoutedEventArgs e)
         {
             Window s = new PatientCreate(current_user_id);
             s.Show();
@@ -292,8 +287,8 @@ namespace Hospital.xaml_windows.Secretary
 
                     string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
                     OracleConnection connection = new OracleConnection(conString);
-                    OracleCommand cmd = connection.CreateCommand();
                     connection.Open();
+                    OracleCommand cmd = connection.CreateCommand();
                     cmd.CommandText = "SELECT * FROM users WHERE id = " + current_user_id;
                     OracleDataReader reader = cmd.ExecuteReader();
                     reader.Read();
@@ -333,7 +328,7 @@ namespace Hospital.xaml_windows.Secretary
                 }
             }
         }
-        private void Karton_korisnika(object sender, RoutedEventArgs e)
+        private void User_record(object sender, RoutedEventArgs e)
         {
             User user = this.userController.GetUserById(current_user_id);
             Model.Patient patient = this.patientController.GetPatientByUserId(current_user_id);
@@ -344,26 +339,33 @@ namespace Hospital.xaml_windows.Secretary
 
 
         }
-        private void Zakazi_termin(object sender, RoutedEventArgs e)
+        private void Add_appointment(object sender, RoutedEventArgs e)
         {
             Window s = new PatientAppointment(this.patientController.GetPatientByUserId(current_user_id).Id);
             s.Show();
         }
 
-        private void Guest_nalog(object sender, RoutedEventArgs e)
+        private void Guest_user(object sender, RoutedEventArgs e)
         {
             _ = this.userController.GuestUser();
             this.Refresh(sender, e);
         }
 
-        private void Hitan_termin(object sender, RoutedEventArgs e)
+        private void Urgent_Appointment(object sender, RoutedEventArgs e)
         {
-
+            Window s = new UrgentAppointment(current_user_id);
+            s.Show();
         }
 
         private void Pregled_termina(object sender, RoutedEventArgs e)
         {
 
+        }
+        
+        private void Notifications(object sender, RoutedEventArgs e)
+        {
+            Window s = new Notifications(this.id);
+            s.Show();
         }
     }
 }

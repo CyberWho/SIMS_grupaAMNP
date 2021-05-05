@@ -5,7 +5,6 @@
  ***********************************************************************/
 
 using System;
-using System.Collections;
 using System.Collections.ObjectModel;
 
 namespace Hospital.Model
@@ -17,6 +16,13 @@ namespace Hospital.Model
         public String Description { get; set; }
         public User user { get; set; }
         public int user_id { get; set; }
+
+        // is false if the notification is created for only one user
+        // otherwise its set to true, and then all users will get this notification
+        public bool applicationWideNotification { get; set; }
+        public DateTime creationDateTime { get; set; }
+        public DateTime expirationDateTime { get; set; }
+
 
         public ObservableCollection<User> users;
 
@@ -71,6 +77,13 @@ namespace Hospital.Model
             Description = description;
             this.users = users;
         }
+        public SystemNotification(int id, string name, string description, int userId)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            user_id = userId;
+        }
 
         public SystemNotification(int id, string name, string description)
         {
@@ -79,8 +92,22 @@ namespace Hospital.Model
             Description = description;
         }
 
+        public SystemNotification(int id, DateTime creationDateTime, DateTime expirationDateTime, string notificationName,
+            string notificationDescription, bool applicationWideNotification)
+        {
+            this.Id = id;
+            this.creationDateTime = creationDateTime;
+            this.expirationDateTime = expirationDateTime;
+            this.Name = notificationName;
+            this.Description = notificationDescription;
+            this.applicationWideNotification = applicationWideNotification;
+        }
+
+
         public SystemNotification()
         {
         }
+
+
     }
 }

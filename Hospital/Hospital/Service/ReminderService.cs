@@ -12,7 +12,7 @@ namespace Hospital.Service
 {
    public class ReminderService
    {
-      public Hospital.Model.Reminder GetReminderById(int id)
+      public Reminder GetReminderById(int id)
       {
          // TODO: implement
          return null;
@@ -76,25 +76,25 @@ namespace Hospital.Service
             return true;
         }
       
-      public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
+      public Reminder UpdateReminder(Reminder reminder)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Reminder AddReminder(Hospital.Model.Reminder reminder)
+      public Reminder AddReminder(Reminder reminder)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Reminder ChangeAlarmTime(Hospital.Model.Reminder reminder, DateTime newAlarmTime)
+      public Reminder ChangeAlarmTime(Reminder reminder, DateTime newAlarmTime)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.ReminderRepository reminderRepository = new Repository.ReminderRepository();
+      public Repository.ReminderRepository reminderRepository = new Repository.ReminderRepository();
    
    }
 }

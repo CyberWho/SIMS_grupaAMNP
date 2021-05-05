@@ -5,14 +5,13 @@
  ***********************************************************************/
 
 using System;
+using System.Diagnostics;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 
 namespace Hospital.Repository
 {
-   public class CityRepository
+    public class CityRepository
    {
         OracleConnection con = null;
         private void setConnection()
@@ -26,11 +25,11 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
 
-        public Hospital.Model.City GetCityById(int id)
+        public City GetCityById(int id)
         {
             setConnection();
             City city = new City();
@@ -47,13 +46,13 @@ namespace Hospital.Repository
             return city;
         }
       
-      public Hospital.Model.City GetCityByName(String name)
+      public City GetCityByName(String name)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.City NewCity(Hospital.Model.City city)
+      public City NewCity(City city)
       {
          // TODO: implement
          return null;

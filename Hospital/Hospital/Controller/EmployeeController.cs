@@ -12,7 +12,7 @@ namespace Hospital.Controller
 {
    public class EmployeeController
    {
-      public Hospital.Model.Employee GetEmployeeByUserId(int id)
+      public Employee GetEmployeeByUserId(int id)
       {
         return employeeService.GetEmployeeByUserId(id);
       }
@@ -35,19 +35,19 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.Employee UpdateEmployee(Hospital.Model.Employee employee)
+      public Employee UpdateEmployee(Employee employee)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Employee AddEmployee(Hospital.Model.Employee employee)
+      public Employee AddEmployee(Employee employee)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.EmployeeService employeeService = new Service.EmployeeService();
+      public Service.EmployeeService employeeService = new Service.EmployeeService();
    
    }
 }

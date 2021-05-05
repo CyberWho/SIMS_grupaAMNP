@@ -13,15 +13,15 @@ namespace Hospital.Repository
     public class PerscriptionRepository
     {
 
-        OracleConnection con = null;
+        OracleConnection connection = null;
 
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -29,10 +29,10 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.Perscription GetPerscriptionById(int id)
+        public Model.Perscription GetPerscriptionById(int id)
         {
             setConnection();
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM perscription WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -42,7 +42,10 @@ namespace Hospital.Repository
             perscription.Id = reader.GetInt32(0);
             perscription.IsActive = reader.GetInt32(1) == 0 ? false : true;
             perscription.Description = reader.GetString(2);
-            perscription.Drug_id = reader.GetInt32(3);            
+            perscription.Drug_id = reader.GetInt32(3);
+
+            connection.Close();
+            connection.Dispose();
 
             return perscription;
         }
@@ -50,7 +53,7 @@ namespace Hospital.Repository
         public ObservableCollection<Model.Perscription> GetAllPerscriptionsByAnamnesisId(int anamnesisId)
         {
             setConnection();
-            OracleCommand command = con.CreateCommand();
+            OracleCommand command = connection.CreateCommand();
             command.CommandText = "select * from perscription where anamnesis_id = " + anamnesisId;
             OracleDataReader reader = command.ExecuteReader();
             ObservableCollection<Model.Perscription> perscriptions = new ObservableCollection<Model.Perscription>();
@@ -66,7 +69,10 @@ namespace Hospital.Repository
                 //Console.WriteLine(reader.GetString(3));
                 perscriptions.Add(perscription);
             }
-            con.Close();
+            
+            connection.Close();
+            connection.Dispose();
+
             return perscriptions;
         }
 
@@ -94,19 +100,23 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Perscription UpdatePerscription(Hospital.Model.Perscription perscription)
+        public Model.Perscription UpdatePerscription(Model.Perscription perscription)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Perscription NewPerscription(Hospital.Model.Perscription perscription)
+        public Model.Perscription NewPerscription(Model.Perscription perscription)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "INSERT INTO perscription (is_active,description ,drug_id ,anamnesis_id) VALUES (1,'" + perscription.Description + "',"+ perscription.Drug.Id+ ","+perscription.anamnesis.Id+")";
             int a = cmd.ExecuteNonQuery();
-            return null; ;
+
+            connection.Close();
+            connection.Dispose();
+
+            return null;
         }
 
         public int GetLastId()

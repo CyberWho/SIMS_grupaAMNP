@@ -12,18 +12,18 @@ namespace Hospital.Controller
 {
    public class RoomController
    {
-      public Hospital.Model.Room GetRoomById(int id)
+      public Room GetRoomById(int id)
       {
          return roomService.GetRoomById(id);
       }
       
-      public Hospital.Model.Room GetRoomByAppointmentId(int appointmentId)
+      public Room GetRoomByAppointmentId(int appointmentId)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Room GetRoomByDoctorId(int doctorId)
+      public Room GetRoomByDoctorId(int doctorId)
       {
          return roomService.GetRoomByDoctorId(doctorId);
       }
@@ -39,7 +39,7 @@ namespace Hospital.Controller
          return null;
       }
       
-      public ObservableCollection<ReservedItem> GetAllRoomsByRoomType(Hospital.Model.RoomType roomType)
+      public ObservableCollection<ReservedItem> GetAllRoomsByRoomType(RoomType roomType)
       {
          // TODO: implement
          return null;
@@ -77,18 +77,18 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.Room ChangeRoomArea(Hospital.Model.Room room, double newArea)
+      public Room ChangeRoomArea(Room room, double newArea)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Room AddRoom(Hospital.Model.Room room)
+      public Room AddRoom(Room room)
       {
          return roomService.AddRoom(room);
       }
       
-      public Hospital.Model.Room UpdateRoom(Hospital.Model.Room room)
+      public Room UpdateRoom(Room room)
       {
          return roomService.UpdateRoom(room);
       }

@@ -4,11 +4,9 @@
  * Purpose: Definition of the Class Hospital.Model.Gender
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
-   public enum Gender
+    public enum Gender
    {
       MALE,
       FEMALE

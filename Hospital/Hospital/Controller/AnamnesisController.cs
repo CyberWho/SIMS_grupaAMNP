@@ -13,13 +13,13 @@ namespace Hospital.Controller
 {
     public class AnamnesisController
     {
-        public Hospital.Model.Anamnesis AddAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Anamnesis AddAnamnesis(Anamnesis anamnesis)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Anamnesis GetAnamnesisById(int id)
+        public Anamnesis GetAnamnesisById(int id)
         {
             // TODO: implement
             return null;
@@ -43,28 +43,28 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Model.Anamnesis UpdateAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Anamnesis UpdateAnamnesis(Anamnesis anamnesis)
         {
             return new AnamnesisService().UpdateAnamnesis(anamnesis);
         }
 
-        public Hospital.Model.Anamnesis NewAnamnesis(Hospital.Model.Anamnesis anamnesis)
+        public Anamnesis NewAnamnesis(Anamnesis anamnesis)
         {
             return new AnamnesisService().NewAnamnesis(anamnesis);
         }
-        public Hospital.Model.Anamnesis AddMedicalTreatmentToAnamnesis(Hospital.Model.Anamnesis anamnesis, Hospital.Model.MedicalTreatment medicalTreatment)
+        public Anamnesis AddMedicalTreatmentToAnamnesis(Anamnesis anamnesis, MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Anamnesis AddPerscriptionToAnamnesis(Hospital.Model.Anamnesis anamnesis, Hospital.Model.Perscription perscription)
+        public Anamnesis AddPerscriptionToAnamnesis(Anamnesis anamnesis, Perscription perscription)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Service.AnamnesisService anamnesisService;
+        public AnamnesisService anamnesisService;
 
     }
 }

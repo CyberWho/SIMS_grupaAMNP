@@ -14,24 +14,24 @@ namespace Hospital.Repository
 {
    public class ItemInRoomRepository
    {
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
             }
             catch (Exception exp)
             {
 
             }
         }
-        public Hospital.Model.ItemInRoom GetItemInRoomById(int id)
+        public ItemInRoom GetItemInRoomById(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM item_in_room WHERE id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
@@ -51,7 +51,7 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT* FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID WHERE room_ID = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -78,19 +78,25 @@ namespace Hospital.Repository
         public Boolean DeleteItemInRoomById(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "DELETE FROM item_in_room WHERE id = " + id.ToString();
 
             try
             {
                 cmd.ExecuteNonQuery();
-                con.Close();
+
+                connection.Close();
+                connection.Dispose();
+
                 Trace.WriteLine("DeleteItemInRoomById");
+
                 return true;
             }
             catch (Exception e)
             {
-                con.Close();
+                connection.Close();
+                connection.Dispose();
+                
                 return false;
             }
         }
@@ -104,7 +110,7 @@ namespace Hospital.Repository
         public ItemInRoom UpdateItemInRoom(ItemInRoom itemInRoom)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText =
                 "UPDATE item_in_room "     +
                 "SET inventory_item_id = " + itemInRoom.inventoryItem.Id.ToString() + ", " +
@@ -116,22 +122,27 @@ namespace Hospital.Repository
             try
             {
                 cmd.ExecuteNonQuery();
-                con.Close();
+
+                connection.Close();
+                connection.Dispose();
+                
                 Trace.WriteLine("Prosao UpdateItemInRoom");
                 return itemInRoom;  
             }
             catch (Exception e)
             {
-                con.Close();
+                connection.Close();
+                connection.Dispose();
+
                 return null;
             }
 
         }
 
-        public Hospital.Model.ItemInRoom NewItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        public ItemInRoom NewItemInRoom(ItemInRoom itemInRoom)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "INSERT INTO item_in_room (inventory_item_id, quantity, room_id) VALUES (" +
                 itemInRoom.inventoryItem.Id.ToString() + ", " +
                 itemInRoom.Quantity.ToString()         + ", " +
@@ -139,13 +150,17 @@ namespace Hospital.Repository
             try
             {
                 cmd.ExecuteNonQuery();
-                con.Close();
+                
+                connection.Close();
+                connection.Dispose();
+
                 return itemInRoom;
             }
             catch (Exception exp)
             {
-                Trace.WriteLine(exp.ToString());
-                con.Close();
+                connection.Close();
+                connection.Dispose();
+
                 return null;
             }
 

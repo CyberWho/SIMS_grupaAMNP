@@ -77,13 +77,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.DrugType UpdateDrugType(Hospital.Model.DrugType drugType)
+        public DrugType UpdateDrugType(DrugType drugType)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.DrugType NewDrugType(Hospital.Model.DrugType drugType)
+        public DrugType NewDrugType(DrugType drugType)
         {
             // TODO: implement
             return null;
