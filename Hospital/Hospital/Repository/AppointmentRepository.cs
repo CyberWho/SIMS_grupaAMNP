@@ -265,17 +265,21 @@ namespace Hospital.Repository
             this.systemNotificationRepository.NewSystemNotification(systemNotification);
         }
 
-        public Boolean DeleteAppointmentByPatientId(int patientId)
+        public Boolean DeleteAllReservedAppointmentsByPatientId(int patientId)
         {
             setConnection();
             
             ObservableCollection<Appointment> appointments = GetAllReservedAppointmentsByPatientId(patientId);
             foreach(Appointment appointment in appointments)
             {
+                if(appointment.Type == AppointmentType.OPERATION)
+                {
+                    continue;
+                }
                 DeleteAppointmentById(appointment.Id);
             }
             connection.Close();
-            return false;
+            return true;
         }
 
         public Appointment UpdateAppointmentStartTime(Appointment appointment, DateTime startTime)

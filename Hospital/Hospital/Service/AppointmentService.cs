@@ -39,9 +39,7 @@ namespace Hospital.Service
 
         public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
         {
-            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
-            appointments = appointmentRepository.GetAllReservedAppointmentsByPatientId(patientId);
-            return appointments;
+            return appointmentRepository.GetAllReservedAppointmentsByPatientId(patientId);
         }
 
         public Boolean CancelAppointmentById(int id)
@@ -50,10 +48,10 @@ namespace Hospital.Service
             return true;
         }
 
-        public Boolean DeleteAppointmentByPatientId(int patientId)
+        public Boolean DeleteAllReservedAppointmentsByPatientId(int patientId)
         {
 
-            return appointmentRepository.DeleteAppointmentByPatientId(patientId); 
+            return appointmentRepository.DeleteAllReservedAppointmentsByPatientId(patientId); 
         }
 
         public Appointment ReserveAppointment(Appointment appointment)
