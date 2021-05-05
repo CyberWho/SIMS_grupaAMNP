@@ -13,60 +13,52 @@ namespace Hospital.Controller
 {
    public class DrugController
    {
-      public Hospital.Model.Drug GetDrugById(int id)
+      public Drug GetDrugById(int id)
       {
-         // TODO: implement
-         return null;
+         return drugService.GetDrugById(id);
       }
       
       public ObservableCollection<Drug> GetAllDrugs()
       {
-         return new DrugService().GetAllDrugs();
+         return drugService.GetAllDrugs();
       }
       
       public ObservableCollection<Drug> GetAllDrugsByDrugTypeId(int drugTypeId)
       {
-         // TODO: implement
-         return null;
+         return drugService.GetAllDrugsByDrugTypeId(drugTypeId);
       }
       
       public ObservableCollection<Drug> GetAllDrugsPending()
       {
-         // TODO: implement
-         return null;
+         return drugService.GetAllDrugsPending();
       }
       
       public Boolean DeleteDrugById(int id)
       {
-         // TODO: implement
-         return false;
+         return drugService.DeleteDrugById(id);
       }
       
-      public Hospital.Model.Drug UpdateDrug(Hospital.Model.Drug drug)
+      public Drug UpdateDrug(Drug drug)
       {
-         // TODO: implement
-         return null;
+         return drugService.UpdateDrug(drug);
       }
       
-      public Hospital.Model.Drug AddDrug(Hospital.Model.Drug drug)
+      public Drug AddDrug(Drug drug)
       {
-         // TODO: implement
-         return null;
+         return drugService.AddDrug(drug);
       }
       
-      public Hospital.Model.Drug ApproveDrug(Hospital.Model.Drug drug)
+      public Drug ApproveDrug(Drug drug)
       {
-         // TODO: implement
-         return null;
+         return drugService.ApproveDrug(drug);
       }
       
-      public Hospital.Model.Drug RejectDrug(Hospital.Model.Drug drug)
+      public Drug RejectDrug(Drug drug)
       {
-         // TODO: implement
-         return null;
+         return drugService.RejectDrug(drug);
       }
    
-      public Hospital.Service.DrugService drugService;
+      public DrugService drugService = new DrugService();
    
    }
 }

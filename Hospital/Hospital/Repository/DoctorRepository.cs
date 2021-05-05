@@ -1,10 +1,8 @@
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using Hospital.Model;
 using System.Collections.ObjectModel;
-using Hospital.Repository;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -22,33 +20,53 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
         public Doctor GetDoctorById(int id)
         {
             setConnection();
-
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM doctor WHERE id = " + id;
+            command.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR,SPECIALIZATION WHERE DOCTOR.ID = :id AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID AND DOCTOR.SPEC_ID = SPECIALIZATION.ID";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-
-
-            int doctor_id = int.Parse(reader.GetString(0));
-            int employee_id = int.Parse(reader.GetString(1));
-            int room_id = int.Parse(reader.GetString(2));
-            int specialization_id = int.Parse(reader.GetString(3));
-
-            Doctor doctor = new Doctor();
-            doctor.Id = doctor_id;
+            User doctorUser = new User();
+            doctorUser.Id = int.Parse(reader.GetString(0));
+            doctorUser.Username = reader.GetString(1);
+            doctorUser.Password = reader.GetString(2);
+            doctorUser.Name = reader.GetString(3);
+            doctorUser.Surname = reader.GetString(4);
+            doctorUser.PhoneNumber = reader.GetString(5);
+            doctorUser.EMail = reader.GetString(6);
+            int dId = reader.GetInt32(7);
+            int salary = reader.GetInt32(8);
+            int yearsOfService = reader.GetInt32(9);
+            int roleId = reader.GetInt32(11);
+            Role role = new Role();
+            role.Id = roleId;
+            role.RoleType = "DOCTOR";
+            Doctor doctor = new Doctor(dId, salary, yearsOfService, doctorUser, role);
+            doctor.Id = reader.GetInt32(12);
+            Room room = new Room();
+            doctor.room = room;
+            doctor.room.Id = reader.GetInt32(14);
+            Specialization specialization = new Specialization();
+            doctor.specialization = specialization;
+            doctor.specialization.Type = reader.GetString(17);
+            connection.Close();
+            
+            int employee_id = dId;
+            int room_id = doctor.room.Id;
+            int specialization_id = specialization.id;
+            
             doctor.employee_id = employee_id;
             doctor.room_id = room_id;
             doctor.specialization_id = specialization_id;
 
-            connection.Close();
-            connection.Dispose();
             return doctor;
+
+            
         }
 
         public Doctor GetWorkHoursDoctorById(int id)
@@ -67,14 +85,14 @@ namespace Hospital.Repository
             docUser.Surname = reader.GetString(4);
             docUser.PhoneNumber = reader.GetString(5);
             docUser.EMail = reader.GetString(6);
-            int dId = reader.GetInt32(7);
+            int doctorId = reader.GetInt32(7);
             int salary = reader.GetInt32(8);
             int yearsOfService = reader.GetInt32(9);
             int roleId = reader.GetInt32(11);
             Role role = new Role();
             role.Id = roleId;
             role.RoleType = "DOCTOR";
-            Doctor doctor = new Doctor(dId, salary, yearsOfService, docUser, role);
+            Doctor doctor = new Doctor(doctorId, salary, yearsOfService, docUser, role);
             doctor.Id = reader.GetInt32(12);
             Room room = new Room();
             doctor.room = room;
@@ -90,36 +108,33 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.SPEC_ID = 1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.SPEC_ID = 1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
+            OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                User docUser = new User();
-                docUser.Id = int.Parse(reader.GetString(0));
-                docUser.Username = reader.GetString(1);
-                docUser.Password = reader.GetString(2);
-                docUser.Name = reader.GetString(3);
-                docUser.Surname = reader.GetString(4);
-                docUser.PhoneNumber = reader.GetString(5);
-                docUser.EMail = reader.GetString(6);
-                int dId = reader.GetInt32(7);
+                User doctorUser = new User();
+                doctorUser.Id = int.Parse(reader.GetString(0));
+                doctorUser.Username = reader.GetString(1);
+                doctorUser.Password = reader.GetString(2);
+                doctorUser.Name = reader.GetString(3);
+                doctorUser.Surname = reader.GetString(4);
+                doctorUser.PhoneNumber = reader.GetString(5);
+                doctorUser.EMail = reader.GetString(6);
+                int doctorId = reader.GetInt32(7);
                 int salary = reader.GetInt32(8);
                 int yearsOfService = reader.GetInt32(9);
                 int roleId = reader.GetInt32(11);
                 Role role = new Role();
                 role.Id = roleId;
                 role.RoleType = "DOCTOR";
-                Doctor doctor = new Doctor(dId, salary, yearsOfService, docUser, role);
+                Doctor doctor = new Doctor(doctorId, salary, yearsOfService, doctorUser, role);
                 doctor.Id = reader.GetInt32(12);
                 Room room = new Room();
                 doctor.room = room;
                 doctor.room.Id = reader.GetInt32(14);
-                /*int roomdoc = reader.GetInt32(14);
-                Room room = new Room();
-                room = roomRepository.GetRoomById(roomdoc);
-                doctor.room = room;*/
-                int specId = reader.GetInt32(15);
+                
+                int specializationId = reader.GetInt32(15);
                 doctors.Add(doctor);
 
             }
@@ -133,43 +148,50 @@ namespace Hospital.Repository
         public Doctor GetAppointmentDoctorById(int id)
         {
             setConnection();
-            User docUser = new User();
-            OracleCommand cmd1 = connection.CreateCommand();
-            cmd1.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID =" + id + "AND USERS.ID = EMPLOYEE.USER_ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID";
+            User doctorUser = new User();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,EMPLOYEE,DOCTOR WHERE DOCTOR.ID =" + id + "AND USERS.ID = EMPLOYEE.USER_ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID";
 
 
-            OracleDataReader a = cmd1.ExecuteReader();
-            a.Read();
-            docUser.Id = int.Parse(a.GetString(0));
-            docUser.Username = a.GetString(1);
-            docUser.Password = a.GetString(2);
-            docUser.Name = a.GetString(3);
-            docUser.Surname = a.GetString(4);
-            docUser.PhoneNumber = a.GetString(5);
-            docUser.EMail = a.GetString(6);
-            int dId = a.GetInt32(7);
-            int salary = a.GetInt32(8);
-            int yearsOfService = a.GetInt32(9);
-            int roleId = a.GetInt32(10);
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            doctorUser.Id = int.Parse(reader.GetString(0));
+            doctorUser.Username = reader.GetString(1);
+            doctorUser.Password = reader.GetString(2);
+            doctorUser.Name = reader.GetString(3);
+            doctorUser.Surname = reader.GetString(4);
+            doctorUser.PhoneNumber = reader.GetString(5);
+            doctorUser.EMail = reader.GetString(6);
+            int doctorId = reader.GetInt32(7);
+            int salary = reader.GetInt32(8);
+            int yearsOfService = reader.GetInt32(9);
+            int roleId = reader.GetInt32(10);
             Role role = new Role();
             role.Id = roleId;
             role.RoleType = "DOCTOR";
-            Doctor doctor = new Doctor(dId, salary, yearsOfService, docUser, role);
+            Doctor doctor = new Doctor(doctorId, salary, yearsOfService, doctorUser, role);
             doctor.Id = id;
-
-            int roomdoc = a.GetInt32(14);
-            int specId = a.GetInt32(15);
-
+            doctor.User = doctorUser;
+            int roomdoc = reader.GetInt32(14);
+            int specializationcId = reader.GetInt32(15);
             connection.Close();
             connection.Dispose();
-            
             return doctor;
         }
 
-        public System.Collections.ArrayList GetAllDoctors()
+        public ObservableCollection<Doctor> GetAllDoctors()
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM DOCTOR";
+            OracleDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                Doctor doctor = GetDoctorById(reader.GetInt32(0));
+                doctors.Add(doctor);
+            }
+            return doctors;
         }
 
         public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)

@@ -12,18 +12,18 @@ namespace Hospital.Service
 {
     public class RoomService
     {
-        public Hospital.Model.Room GetRoomById(int id)
+        public Room GetRoomById(int id)
         {
             return roomRepository.GetRoomById(id);
         }
 
-        public Hospital.Model.Room GetRoomByAppointmentId(int appointmentId)
+        public Room GetRoomByAppointmentId(int appointmentId)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Room GetRoomByDoctorId(int doctorId)
+        public Room GetRoomByDoctorId(int doctorId)
         {
             // TODO: implement
             return null;
@@ -40,7 +40,7 @@ namespace Hospital.Service
             return null;
         }
 
-        public System.Collections.ArrayList GetAllRoomsByRoomType(Hospital.Model.RoomType roomType)
+        public System.Collections.ArrayList GetAllRoomsByRoomType(RoomType roomType)
         {
             // TODO: implement
             return null;
@@ -77,18 +77,18 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.Room ChangeRoomArea(Hospital.Model.Room room, double newArea)
+        public Room ChangeRoomArea(Room room, double newArea)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Room AddRoom(Hospital.Model.Room room)
+        public Room AddRoom(Room room)
         { 
          return roomRepository.NewRoom(room);
         }
       
-        public Hospital.Model.Room UpdateRoom(Hospital.Model.Room room)
+        public Room UpdateRoom(Room room)
         { 
             return roomRepository.UpdateRoom(room);
         }
@@ -103,7 +103,7 @@ namespace Hospital.Service
             return roomRepository.GetRoomTypeByType(Type);
         }
 
-        public Hospital.Repository.RoomRepository roomRepository = new Repository.RoomRepository();
+        public Repository.RoomRepository roomRepository = new Repository.RoomRepository();
    
    }
 }

@@ -7,10 +7,6 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
-using Hospital.Model;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using System.Collections.ObjectModel;
 
 namespace Hospital.Repository
@@ -19,6 +15,7 @@ namespace Hospital.Repository
     {
 
         OracleConnection connection = null;
+        AddressRepository addressRepository = new AddressRepository();
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
@@ -43,7 +40,8 @@ namespace Hospital.Repository
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM patient WHERE user_id = " + id;
+            command.CommandText = "SELECT * FROM patient WHERE user_id = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
@@ -80,10 +78,10 @@ namespace Hospital.Repository
         public Patient GetPatientById(int id)
         {
             setConnection();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE patient.ID = :id AND USERS.ID = PATIENT.USER_ID";
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,PATIENT WHERE patient.ID = :id AND USERS.ID = PATIENT.USER_ID";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             User user = new User();
             Patient patient = new Patient();
@@ -97,8 +95,7 @@ namespace Hospital.Repository
             }
             else
             {
-                // password ne treba da se getuje?
-                // user.Password = reader.GetString(2);
+                
                 user.Name = reader.GetString(3);
                 user.Surname = reader.GetString(4);
                 user.PhoneNumber = reader.GetString(5);
@@ -122,24 +119,25 @@ namespace Hospital.Repository
             return patient;
         }
 
-        public Hospital.Model.Patient GetPatientByPatientId(int id)
+        public Patient GetPatientByPatientId(int id)
         {
             setConnection();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID and PATIENT.ID = " + id;
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID and PATIENT.ID = " + id;
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             User user = new User();
-            int new_id = reader.GetInt32(0);
+            user = new UserRepository().GetUserById(reader.GetInt32(0));
+            /*int userId = reader.GetInt32(0);
 
 
-            user.Id = new_id;
+            user.Id = userId;
             user.Username = reader.GetString(1);
             user.Password = reader.GetString(2);
             user.Name = reader.GetString(3);
             user.Surname = reader.GetString(4);
             user.PhoneNumber = reader.GetString(5);
-            user.EMail = reader.GetString(6);
+            user.EMail = reader.GetString(6);*/
 
             Patient patient = new Patient();
             patient.User = user;
@@ -147,31 +145,7 @@ namespace Hospital.Repository
             patient.JMBG = reader.GetString(8);
             patient.DateOfBirth = reader.GetDateTime(9);
             int addressId = reader.GetInt32(10);
-            cmd.CommandText = "SELECT * FROM address, city, state WHERE address.id = " + addressId + " AND address.CITY_ID = city.ID AND city.STATE_ID = state.ID";
-            reader = cmd.ExecuteReader();
-            reader.Read();
-
-            State state = new State
-            {
-                Id = int.Parse(reader.GetString(8)),
-                Name = reader.GetString(9)
-            };
-
-            City city = new City
-            {
-                Id = int.Parse(reader.GetString(4)),
-                Name = reader.GetString(5),
-                PostalCode = reader.GetString(6),
-                State = state
-            };
-
-            Address address = new Address
-            {
-                Id = int.Parse(reader.GetString(0)),
-                Name = reader.GetString(1),
-
-                City = city
-            };
+            Address address = addressRepository.GetAddressById(addressId);
             patient.Address = address;
 
             connection.Close();
@@ -185,10 +159,10 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
 
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID";
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID";
 
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
 

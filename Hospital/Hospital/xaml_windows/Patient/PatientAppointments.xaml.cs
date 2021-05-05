@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Data;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
@@ -26,20 +13,19 @@ namespace Hospital.xaml_windows.Patient
     /// </summary>
     public partial class PatientAppointments : Window
     {
-        int id;
+        private int userId;
         AppointmentController appointmentController = new AppointmentController();
         PatientController patientController = new PatientController();
         ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         ReminderController reminderController = new ReminderController();
-        Appointment app = new Appointment();
-        Appointment Appointment = new Appointment();
+        PatientLogsController patientLogsController = new PatientLogsController();
 
-        public PatientAppointments(int id)
+        public PatientAppointments(int userId)
         {
             
             InitializeComponent();
-            this.id = id;
+            this.userId = userId;
             this.DataContext = this;
             updateDataGrid();
         }
@@ -47,8 +33,8 @@ namespace Hospital.xaml_windows.Patient
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(userId);
             reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
             DateTime now = DateTime.Now;
             now = now.AddMilliseconds(-now.Millisecond);
@@ -64,8 +50,8 @@ namespace Hospital.xaml_windows.Patient
         private int getPatientId()
         {
 
-            Hospital.Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(id);
+            Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(userId);
             return patient.Id;
         }
 
@@ -74,7 +60,7 @@ namespace Hospital.xaml_windows.Patient
 
             this.DataContext = this;
             int patientId = getPatientId();
-            Appointments = appointmentController.GetAllByAppointmentsPatientId(patientId);
+            Appointments = appointmentController.GetAllReservedAppointmentsByPatientId(patientId);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
             myDataGrid.ItemsSource = Appointments;
@@ -85,33 +71,30 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientInfo(id);
-            s.Show();
+            var window = new PatientInfo(userId);
+            window.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientAppointments(id);
-            s.Show();
+            var window = new PatientAppointments(userId);
+            window.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientUI(id);
-            s.Show();
+            var window = new PatientUI(userId);
+            window.Show();
             this.Close();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-           
-        }
+       
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientReminders(id);
-            s.Show();
+            var window = new PatientReminders(userId);
+            window.Show();
             this.Close();
         }
 
@@ -145,26 +128,41 @@ namespace Hospital.xaml_windows.Patient
             
            
         }
-
         private void Doktori_Click(object sender,RoutedEventArgs e)
         {
-
+            var window = new Doctors(userId);
+            window.Show();
+            this.Close();
         }
         private void ZdravstveniKarton_Click(object sender,RoutedEventArgs e)
         {
-
+            var window = new PatientHealthRecord(userId);
+            window.Show();
+            this.Close();
         }
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
             int appointmentId = int.Parse(app_id_txt.Text);
             appointmentController.CancelAppointmentById(appointmentId);
+            Model.Patient patient = new Model.Patient();
+            patient = patientController.GetPatientByUserId(userId);
+            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
+            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patient.Id)) 
+            { 
+                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
+                appointmentController.DeleteAllReservedAppointmentsByPatientId(patient.Id);
+                var windowLogOut = new MainWindow();
+                windowLogOut.Show();
+                this.Close();
+                return;
+            }
             updateDataGrid();
         }
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)
         {
-            var s = new PatientNewAppointment(id);
-            s.Show();
+            var window = new PatientNewAppointment(userId);
+            window.Show();
             this.Close();
         }
 
@@ -176,6 +174,18 @@ namespace Hospital.xaml_windows.Patient
 
             
             
+        }
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Notifications(userId);
+            window.Show();
+            this.Close();
         }
     }
 }

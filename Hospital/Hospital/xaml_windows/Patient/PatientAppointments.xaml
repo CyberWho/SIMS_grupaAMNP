@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientAppointments"
         mc:Ignorable="d"
-        Title="PatientAppointments" Height="500" Width="900" Closed="Window_Closed" Loaded="Window_Loaded">
+        Title="PatientAppointments" Height="500" Width="900"  Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"  />
+            <ColumnDefinition Width="55"  />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
@@ -60,7 +60,16 @@
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
        
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        
+        <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
+        <Button x:Name="Notifications" HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
         <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Appointments}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="315.6,82,0,0" VerticalAlignment="Top" Width="468" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
@@ -82,7 +91,7 @@
         <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.8,336,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
         <Button x:Name="Izmeni" FontSize="16" Content="Izmeni termin" Grid.Column="1" Background="RoyalBlue" Foreground="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="4.8,379,0,0" VerticalAlignment="Top" Width="144" Click="Izmeni_Click" Height="25"/>
-        <Button x:Name="Obrisi" FontSize="16" Content="Obrisi termin" Grid.Column="1" Background="red" Foreground="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="176.8,379,0,0" VerticalAlignment="Top" Width="144" Click="Obrisi_Click" Height="25"/>
+        <Button x:Name="Obrisi" FontSize="16" Content="Otkazi termin" Grid.Column="1" Background="red" Foreground="White" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="176.8,379,0,0" VerticalAlignment="Top" Width="144" Click="Obrisi_Click" Height="25"/>
         <Button x:Name="ZakaziNoviTermin" FontSize="16" Content="Zakazi novi termin" Background="DeepSkyBlue" Foreground="White" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="87.8,409,0,0" VerticalAlignment="Top" Width="144" Click="ZakaziNoviTermin_Click" Height="27"/>
         <Label Content="Trajanje:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.575,1.734" Height="32" Width="67"/>
         <Label Content="Vreme:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="16.8,208,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,1.774" Height="32" Width="59"/>

@@ -1,45 +1,127 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Hospital.Model;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
     class PatientLogsRepository
     {
+        OracleConnection connection = null;
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            connection = new OracleConnection(conString);
+            try
+            {
+                connection.Open();
+
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+            }
+        }
         public ObservableCollection<PatientLogs> GetAllPatientLogs()
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsById(int id)
+        public PatientLogs GetPatientLogsById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsByPatientId(int patientId)
+        public PatientLogs GetPatientLogsByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            PatientLogs patientLogs = new PatientLogs();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM PATIENT_LOGS WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            patientLogs.Id = reader.GetInt32(0);
+            patientLogs.patient = new PatientRepository().GetPatientById(patientId);
+            patientLogs.LogCounter = reader.GetInt32(2);
+            patientLogs.LastCounterReset = reader.GetDateTime(3);
+            return patientLogs;
+        }
+        public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM PATIENT_LOGS WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int logCounter = reader.GetInt32(2);
+           
+            if(logCounter >= 10)
+            {
+                return true;
+            }
+            connection.Close();
+            return false;
+            
         }
 
-        public Hospital.Model.PatientLogs UpdatePatientLogs(Hospital.Model.PatientLogs patientLogs)
+        public PatientLogs UpdatePatientLogs(PatientLogs patientLogs)
         {
             // TODO: implement
             return null;
         }
+        public Boolean IncrementLogCounterByPatientId(int patientId)
+        {
+            PatientLogs patientLogs = GetPatientLogsByPatientId(patientId);
+            int nextLogCounter = patientLogs.LogCounter;
+            nextLogCounter += 1;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = :log_counter WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("log_counter", OracleDbType.Int32).Value = nextLogCounter.ToString();
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return true;
+        }
+
 
         public Boolean ResetAllPatientLogs()
         {
-            // TODO: implement
+            
             return false;
         }
-
+        public Boolean ResetPatientLogCounterByPatientId(int patientId)
+        {
+            UpdateLogCounterByPatientId(patientId);
+            UpdateLastCounterResetByPatientId(patientId);
+            return true;
+        }
+        public Boolean UpdateLogCounterByPatientId(int patientId)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = 0 WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            int executer = command.ExecuteNonQuery();
+            connection.Close();
+            return true;
+        }
+        public Boolean UpdateLastCounterResetByPatientId(int patientId)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE PATIENT_LOGS SET LAST_COUNTER_RESET = :last_counter_reset WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("last_counter_reset", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            int executer = command.ExecuteNonQuery();
+            connection.Close();
+            return true;
+        }
         public Boolean DeletePatientLogsByPatientId(int patientId)
         {
             // TODO: implement
@@ -52,10 +134,16 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.PatientLogs NewPatientLogs()
+        public Boolean NewPatientLogs(int patientId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO PATIENT_LOGS (PATIENT_ID,LOG_COUNTER,LAST_COUNTER_RESET) VALUES (:patient_id,0,:last_counter_reset)";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            command.Parameters.Add("last_counter_reset", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
+            command.ExecuteNonQuery();
+            connection.Close();
+            return true;
         }
 
        

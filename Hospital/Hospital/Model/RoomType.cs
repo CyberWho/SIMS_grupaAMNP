@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class RoomType
  ***********************************************************************/
 
-using System;
 using System.Collections;
 
 namespace Hospital.Model
@@ -15,18 +14,18 @@ namespace Hospital.Model
         public int Id { get; set; }
         public string Type { get; set; }
 
-        public System.Collections.ArrayList room;
+        public ArrayList room;
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetRoom()
+        public ArrayList GetRoom()
         {
             if (room == null)
-                room = new System.Collections.ArrayList();
+                room = new ArrayList();
             return room;
         }
 
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetRoom(System.Collections.ArrayList newRoom)
+        public void SetRoom(ArrayList newRoom)
         {
             RemoveAllRoom();
             foreach (Room oRoom in newRoom)
@@ -39,7 +38,7 @@ namespace Hospital.Model
             if (newRoom == null)
                 return;
             if (this.room == null)
-                this.room = new System.Collections.ArrayList();
+                this.room = new ArrayList();
             if (!this.room.Contains(newRoom))
             {
                 this.room.Add(newRoom);
@@ -65,7 +64,7 @@ namespace Hospital.Model
         {
             if (room != null)
             {
-                System.Collections.ArrayList tmpRoom = new System.Collections.ArrayList();
+                ArrayList tmpRoom = new ArrayList();
                 foreach (Room oldRoom in room)
                     tmpRoom.Add(oldRoom);
                 room.Clear();

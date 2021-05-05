@@ -4,14 +4,13 @@
  * Purpose: Definition of the Class Hospital.Service.EmployeeService
  ***********************************************************************/
 
-using Hospital.Model;
 using System;
 
 namespace Hospital.Service
 {
-   public class EmployeeService
+    public class EmployeeService
    {
-      public Hospital.Model.Employee GetEmployeeByUserId(int id)
+      public Model.Employee GetEmployeeByUserId(int id)
       {
          return employeesRepository.GetEmployeeByUserId(id);
       }
@@ -34,19 +33,19 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.Employee UpdateEmployee(Hospital.Model.Employee employee)
+      public Model.Employee UpdateEmployee(Model.Employee employee)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Employee AddEmployee(Hospital.Model.Employee employee)
+      public Model.Employee AddEmployee(Model.Employee employee)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.EmployeesRepository employeesRepository = new Repository.EmployeesRepository();
+      public Repository.EmployeesRepository employeesRepository = new Repository.EmployeesRepository();
    
    }
 }

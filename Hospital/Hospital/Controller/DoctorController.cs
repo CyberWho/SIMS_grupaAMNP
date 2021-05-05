@@ -12,10 +12,9 @@ namespace Hospital.Controller
 {
     public class DoctorController
     {
-        public Hospital.Model.Doctor GetDoctorById(int id)
+        public Doctor GetDoctorById(int id)
         {
-            // TODO: implement
-            return null;
+            return doctorService.GetDoctorById(id);
         }
         public Doctor GetWorkHoursDoctorById(int id)
         {
@@ -27,8 +26,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<Doctor> GetAllDoctors()
         {
-            // TODO: implement
-            return null;
+            return doctorService.GetAllDoctors();
         }
 
         public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
@@ -48,19 +46,19 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Model.Doctor UpdateDoctor(Hospital.Model.Doctor doctor)
+        public Doctor UpdateDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Doctor AddDoctor(Hospital.Model.Doctor doctor)
+        public Doctor AddDoctor(Doctor doctor)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Service.DoctorService doctorService = new Service.DoctorService();
+        public Service.DoctorService doctorService = new Service.DoctorService();
 
     }
 }

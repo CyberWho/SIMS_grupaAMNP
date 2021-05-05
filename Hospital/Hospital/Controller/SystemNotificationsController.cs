@@ -27,8 +27,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
         {
-            // TODO: implement
-            return null;
+            return systemNotificationService.GetAllSystemNotificationsByUserId(userId);
         }
 
         public Boolean DeleteSystemNotificationById(int id)

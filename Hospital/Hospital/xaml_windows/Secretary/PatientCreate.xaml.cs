@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
+using Hospital.Controller;
 
 namespace Hospital.xaml_windows.Secretary
 {
@@ -25,7 +15,7 @@ namespace Hospital.xaml_windows.Secretary
 
         int user_id;
         int patient_id;
-
+        PatientLogsController patientLogsController = new PatientLogsController();
         #region NotifyProperties
         private string _dob;
         private string _jmbg;
@@ -175,7 +165,8 @@ namespace Hospital.xaml_windows.Secretary
 
             connection.Close();
             connection.Dispose();
-
+            //ovo je dodato
+            patientLogsController.AddPatientLogs(patient_id);
             this.Close();
 
         }

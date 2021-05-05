@@ -7,16 +7,14 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
-using Hospital.Model;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
     public class AddressRepository
     {
-        PatientRepository patientRepository = new PatientRepository();
+        
+        CityRepository cityRepository = new CityRepository();
 
         OracleConnection connection = null;
         private void setConnection()
@@ -30,7 +28,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
 
@@ -49,8 +47,6 @@ namespace Hospital.Repository
             return this.GetAddressById(int.Parse(reader.GetString(0)));
         }
 
-
-
         public Address GetAddressById(int id)
         {
             setConnection();
@@ -64,7 +60,8 @@ namespace Hospital.Repository
             {
                 Id = int.Parse(reader.GetString(0)),
                 Name = reader.GetString(1),
-                city_id = int.Parse(reader.GetString(2))
+                city_id = int.Parse(reader.GetString(2)),
+                City = cityRepository.GetCityById(reader.GetInt32(2))
             };
 
             connection.Close();
@@ -79,13 +76,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Address UpdateAddress(Hospital.Model.Address address)
+        public Address UpdateAddress(Address address)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Address NewAddress(Hospital.Model.Address address)
+        public Address NewAddress(Address address)
         {
             // TODO: implement
             return null;

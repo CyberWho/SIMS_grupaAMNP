@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class Employees
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
     public class Employee

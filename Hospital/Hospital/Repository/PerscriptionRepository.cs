@@ -29,7 +29,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.Perscription GetPerscriptionById(int id)
+        public Model.Perscription GetPerscriptionById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -100,13 +100,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Perscription UpdatePerscription(Hospital.Model.Perscription perscription)
+        public Model.Perscription UpdatePerscription(Model.Perscription perscription)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Perscription NewPerscription(Hospital.Model.Perscription perscription)
+        public Model.Perscription NewPerscription(Model.Perscription perscription)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();

@@ -4,10 +4,10 @@
  * Purpose: Definition of the Class Hospital.Controller.AppointmentController
  ***********************************************************************/
 
-using System;
-using System.Collections.ObjectModel;
 using Hospital.Model;
 using Hospital.Service;
+using System;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Controller
 {
@@ -42,29 +42,25 @@ namespace Hospital.Controller
             return new AppointmentService().GetAllAppointmentsByDoctorId(doctorId);
         }
 
-        public ObservableCollection<Appointment> GetAllByAppointmentsPatientId(int patientId)
+        public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
         {
-            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
-            appointments = appointmentService.GetAllByAppointmentsPatientId(patientId);
-            return appointments;
+            return appointmentService.GetAllReservedAppointmentsByPatientId(patientId);
         }
 
         public Boolean CancelAppointmentById(int id)
         {
-            appointmentService.CancelAppointmentById(id);
-            return true;
+            return appointmentService.CancelAppointmentById(id);
         }
 
-        public Boolean DeleteAppointmentByPatientId(int patientId)
+        public Boolean DeleteAllReservedAppointmentsByPatientId(int patientId)
         {
-            // TODO: implement
-            return false;
+
+            return appointmentService.DeleteAllReservedAppointmentsByPatientId(patientId);
         }
 
         public Appointment ReserveAppointment(Appointment appointment)
         {
-            appointmentService.ReserveAppointment(appointment);
-            return appointment;
+            return appointmentService.ReserveAppointment(appointment);
         }
 
         public Appointment ChangeAppointmentStatus(Appointment appointment)
@@ -79,6 +75,14 @@ namespace Hospital.Controller
             return null;
         }
 
+        public Boolean CheckForAppointmentsByPatientIdAndDoctorId(int patientId, int doctorId)
+        {
+            return appointmentService.CheckForAppointmentsByPatientIdAndDoctorId(patientId, doctorId);
+        }
+        public Boolean CheckForAnyAppointmentsByPatientId(int patientId)
+        {
+            return appointmentService.CheckForAnyAppointmentsByPatientId(patientId);
+        }
         public Appointment ChangeStartTime(Appointment appointment, DateTime newStartTime)
         {
             appointmentService.ChangeStartTime(appointment, newStartTime);

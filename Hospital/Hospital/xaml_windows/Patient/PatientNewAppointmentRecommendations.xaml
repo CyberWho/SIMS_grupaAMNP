@@ -11,7 +11,7 @@
         Title="PatientNewAppointmentRecommendations" Height="500" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="55" />
 
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -90,7 +90,16 @@
         <xctk:DateTimePicker x:Name="datepicker_txt" Grid.Column="2" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,112,0,0" Value="{Binding SelectedItem.StartTime,ElementName=myGrid}"  VerticalAlignment="Top"  Width="144" RenderTransformOrigin="0.507,-1.51"/>
         <Label Content="Odabrani termin:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Predlozi termina:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="348,42,0,0" VerticalAlignment="Top"/>
-
+        <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
+        <Button x:Name="Notifications" HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Window>

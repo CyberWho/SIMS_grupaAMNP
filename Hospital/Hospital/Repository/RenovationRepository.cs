@@ -10,7 +10,7 @@ namespace Hospital.Repository
 {
    public class RenovationRepository
    {
-      public Hospital.Model.Renovation GetRenovationById(int id)
+      public Model.Renovation GetRenovationById(int id)
       {
          // TODO: implement
          return null;
@@ -34,13 +34,13 @@ namespace Hospital.Repository
          return false;
       }
       
-      public Hospital.Model.Renovation UpdateRenovation(Hospital.Model.Renovation renovation)
+      public Model.Renovation UpdateRenovation(Model.Renovation renovation)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Renovation NewRenovation(Hospital.Model.Renovation renovation)
+      public Model.Renovation NewRenovation(Model.Renovation renovation)
       {
          // TODO: implement
          return null;

@@ -6,6 +6,7 @@
 
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
@@ -25,13 +26,13 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.InventoryItem GetInventoryItemById(int id)
-      {
+        public Model.InventoryItem GetInventoryItemById(int id)
+        {
             setConnection();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM inventory_item WHERE id = " + id.ToString();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM inventory_item WHERE id = " + id.ToString();
             Model.InventoryItem item = new Model.InventoryItem();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
             item.Id = reader.GetInt32(0);
@@ -44,43 +45,74 @@ namespace Hospital.Repository
             connection.Dispose();
             
             return item;
-      }
-      
-      public System.Collections.ArrayList GetAllInventoryItems()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllInvenotryItemsByItemTypeId(int itemTypeId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteInventoryItemById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Hospital.Model.InventoryItem UpdateInventoryItem(Hospital.Model.InventoryItem inventoryItem)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public InventoryItemRepository NewInventoryItem(Hospital.Model.InventoryItem inventoryItem)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
+        }
+
+        public System.Collections.ArrayList GetAllInventoryItems()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public System.Collections.ArrayList GetAllInvenotryItemsByItemTypeId(int itemTypeId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean DeleteInventoryItemById(int id)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Model.InventoryItem UpdateInventoryItem(Model.InventoryItem inventoryItem)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Model.InventoryItem NewInventoryItem(Model.InventoryItem inventoryItem)
+        {
+            setConnection();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO inventory_item VALUES (:name, :price, :unit, :item_type)";
+            cmd.Parameters.Add("name",      OracleDbType.Varchar2).Value = inventoryItem.Name;
+            cmd.Parameters.Add("price",     OracleDbType.Int32).Value    = inventoryItem.Price;
+            cmd.Parameters.Add("unit",      OracleDbType.Varchar2).Value = inventoryItem.Unit;
+            cmd.Parameters.Add("item_type", OracleDbType.Int32).Value    = inventoryItem.Type;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                inventoryItem.Id = GetLastId();
+                return inventoryItem;
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+                return null;
+            }
+
+        }
+
+        public int GetLastId()
+        {
+            setConnection();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT max(id) FROM inventory_item";
+            OracleDataReader reader = null;
+            try
+            {
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                return reader.GetInt32(0);
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+                return -1;
+            }
+        }
    
    }
 }

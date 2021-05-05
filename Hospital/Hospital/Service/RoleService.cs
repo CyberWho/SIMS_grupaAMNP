@@ -10,13 +10,13 @@ namespace Hospital.Service
 {
    public class RoleService
    {
-      public Hospital.Model.Role GetRoleById(int id)
+      public Model.Role GetRoleById(int id)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Role GetRoleByRole(String role)
+      public Model.Role GetRoleByRole(String role)
       {
          // TODO: implement
          return null;
@@ -34,19 +34,19 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.Role UpdateRole(Hospital.Model.Role role)
+      public Model.Role UpdateRole(Model.Role role)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Role AddRole(Hospital.Model.Role role)
+      public Model.Role AddRole(Model.Role role)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.RoleRepository roleRepository;
+      public Repository.RoleRepository roleRepository;
    
    }
 }

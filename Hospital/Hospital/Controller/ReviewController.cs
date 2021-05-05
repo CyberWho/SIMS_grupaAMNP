@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 
@@ -28,10 +24,9 @@ namespace Hospital.Controller
             return null;
         }
 
-        public Hospital.Model.Review AddReview(Hospital.Model.Review review)
+        public Review AddReview(Review review)
         {
-            // TODO: implement
-            return null;
+            return reviewService.AddReview(review);
         }
 
         public Boolean DeleteReviewById(int reviewId)
@@ -40,7 +35,7 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Hospital.Service.ReviewService reviewService = new Service.ReviewService();
+        public Service.ReviewService reviewService = new Service.ReviewService();
 
     }
 }

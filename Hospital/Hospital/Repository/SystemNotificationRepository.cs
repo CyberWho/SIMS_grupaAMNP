@@ -125,7 +125,7 @@ namespace Hospital.Repository
             ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
 
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM SYSTEM_NOTIFICATION WHERE USER_ID = :user_id";
+            command.CommandText = "SELECT * FROM SYSTEM_NOTIFICATION WHERE USER_ID = :user_id OR GLOBAL = 1";
             command.Parameters.Add("user_id", OracleDbType.Int32).Value = userId.ToString();
             OracleDataReader reader = command.ExecuteReader();
 

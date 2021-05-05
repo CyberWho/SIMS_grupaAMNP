@@ -8,7 +8,7 @@
         Title="PatientInfo" Height="500" Width="900" Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="55" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
@@ -16,8 +16,8 @@
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="45" Height="45" Source="/Resources/Icons/icons8-home-96.png"/>
-
                     </StackPanel>
+
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MojProfil"  HorizontalAlignment="Left" Background="White" Click="MojProfil_Click" Height="45">
@@ -27,10 +27,10 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" Height="45" Background="White">
+            <MenuItem x:Name="MojiPregledi" Width="65" Height="45"  HorizontalAlignment="Left" Click="MojiPregledi_Click"  Background="White">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-calendar-52.png"/>
+                        <Image Width="45" Height="45" HorizontalAlignment="Left" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
@@ -57,6 +57,16 @@
             </MenuItem>
         </Menu>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
+        <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
+        <Button x:Name="Notifications" HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
         <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="323,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
 

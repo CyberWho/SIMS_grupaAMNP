@@ -8,7 +8,7 @@
         Title="PatientUpdateAppointment" Height="500" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="55" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
@@ -93,8 +93,18 @@
         <TextBox x:Name="timeslot_id_txt" Grid.Column="1" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
         <Label Content="Pregled izmenjenog termina:" FontSize="22" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="10,42,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Predlozi termina:" FontSize="22" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="354,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.706,-0.804"/>
+        <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
 
 
+        <Button x:Name="Notifications" HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Window>

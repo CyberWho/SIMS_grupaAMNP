@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Bolnica.Model.Patient.HealthRecord
  ***********************************************************************/
 
-using System;
 using System.Collections.ObjectModel;
 
 namespace Hospital.Model
@@ -20,7 +19,7 @@ namespace Hospital.Model
         public MaritalStatus MaritalStatus { get; set; }
 
         public Patient Patient { get; set; }
-        public ObservableCollection<Model.Allergy> allergy;
+        public ObservableCollection<Allergy> allergy;
         public City PlaceOfBirth { get; set; }
         public ObservableCollection<Anamnesis> anamnesis;
 

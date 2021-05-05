@@ -13,13 +13,13 @@ namespace Hospital.Controller
 {
    public class WorkHoursController
    {
-      public Hospital.Model.WorkHours AddWorkHours(Hospital.Model.WorkHours workHours)
+      public WorkHours AddWorkHours(WorkHours workHours)
       {
           this.workHoursService.AddWorkHours(workHours);
          return null;
       }
       
-      public Hospital.Model.WorkHours UpdateWorkHours(Hospital.Model.WorkHours workHours)
+      public WorkHours UpdateWorkHours(WorkHours workHours)
       {
          // TODO: implement
          return null;
@@ -37,13 +37,13 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.WorkHours ApproveWorkHours(Hospital.Model.WorkHours workHours)
+      public WorkHours ApproveWorkHours(WorkHours workHours)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.WorkHours DisapproveWorkHours(Hospital.Model.WorkHours workHours)
+      public WorkHours DisapproveWorkHours(WorkHours workHours)
       {
          // TODO: implement
          return null;

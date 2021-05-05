@@ -29,8 +29,7 @@ namespace Hospital.Service
 
         public System.Collections.ArrayList GetAllSystemNotificationsByUserId(int userId)
         {
-            // TODO: implement
-            return null;
+            return systemNotificationRepository.GetAllSystemNotificationsByUserId(userId);
         }
 
         public Boolean DeleteSystemNotificationById(int id)

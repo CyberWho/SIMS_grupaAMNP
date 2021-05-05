@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class User
  ***********************************************************************/
 
-using System;
-
 namespace Hospital.Model
 {
     public class User

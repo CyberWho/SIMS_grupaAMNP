@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 
@@ -16,19 +12,19 @@ namespace Hospital.Controller
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsById(int id)
+        public PatientLogs GetPatientLogsById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.PatientLogs GetPatientLogsByPatientId(int patientId)
+        public PatientLogs GetPatientLogsByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+          
+            return patientLogsService.GetPatientLogsByPatientId(patientId);
         }
 
-        public Hospital.Model.PatientLogs UpdatePatientLogs(Hospital.Model.PatientLogs patientLogs)
+        public PatientLogs UpdatePatientLogs(PatientLogs patientLogs)
         {
             // TODO: implement
             return null;
@@ -38,6 +34,10 @@ namespace Hospital.Controller
         {
             // TODO: implement
             return false;
+        }
+        public Boolean ResetPatientLogCounterByPatientId(int patientId)
+        {
+            return patientLogsService.ResetPatientLogCounterByPatientId(patientId);
         }
 
         public Boolean DeletePatientLogsByPatientId(int patientId)
@@ -51,16 +51,23 @@ namespace Hospital.Controller
             // TODO: implement
             return false;
         }
-
-        public Hospital.Model.PatientLogs AddPatientLogs()
+        public Boolean IncrementLogCounterByPatientId(int patientId)
         {
-            // TODO: implement
-            return null;
+            return patientLogsService.IncrementLogCounterByPatientId(patientId);
+        }
+        public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
+        {
+            return patientLogsService.CheckIfPatientIsBlockedByPatientId(patientId);
+        }
+
+        public Boolean AddPatientLogs(int patientId)
+        {
+            return patientLogsService.AddPatientLogs(patientId);
         }
 
        
 
-        public Hospital.Service.PatientLogsService patientLogsService;
+        public Service.PatientLogsService patientLogsService = new Service.PatientLogsService();
 
     }
 }

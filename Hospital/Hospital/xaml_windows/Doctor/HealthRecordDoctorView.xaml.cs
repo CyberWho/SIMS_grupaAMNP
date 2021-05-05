@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Hospital.Controller;
 using Hospital.Model;
 using System.Collections.ObjectModel;
@@ -41,7 +31,7 @@ namespace Hospital.xaml_windows.Doctor
             this.id_patient = id_patient;
             healthRecord = healthRecordControleller.GetHealthRecordByPatientId(id_patient);
             //MessageBox.Show(id_patient.ToString());
-            appointments = appointmentController.GetAllByAppointmentsPatientId(id_patient);
+            appointments = appointmentController.GetAllReservedAppointmentsByPatientId(id_patient);
             patient = patientController.GetPatientByPatientId(id_patient);
 
             foreach (Appointment appointment in appointments)

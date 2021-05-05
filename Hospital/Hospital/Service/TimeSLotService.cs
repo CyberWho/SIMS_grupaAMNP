@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -193,7 +189,7 @@ namespace Hospital.Service
             return timeSlots;
         }
 
-        public System.Array GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
+        public Array GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
         {
             // TODO: implement
             return null;
@@ -228,7 +224,7 @@ namespace Hospital.Service
             return false;
         }
 
-        public System.Array NewTimeSlots(int workHoursId)
+        public Array NewTimeSlots(int workHoursId)
         {
             // TODO: implement
             return null;
@@ -246,7 +242,7 @@ namespace Hospital.Service
             return true;
         }
 
-        public Hospital.Repository.TimeSlotRepository timeSlotRepository = new Repository.TimeSlotRepository();
+        public Repository.TimeSlotRepository timeSlotRepository = new Repository.TimeSlotRepository();
 
     }
 }

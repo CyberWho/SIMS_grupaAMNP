@@ -209,8 +209,23 @@
     <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\DoctorRate.xaml.cs">
+      <DependentUpon>DoctorRate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\Doctors.xaml.cs">
+      <DependentUpon>Doctors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\HospitalRate.xaml.cs">
+      <DependentUpon>HospitalRate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\PatientAppointments.xaml.cs">
       <DependentUpon>PatientAppointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PatientHealthRecord.xaml.cs">
+      <DependentUpon>PatientHealthRecord.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientInfo.xaml.cs">
       <DependentUpon>PatientInfo.xaml</DependentUpon>
@@ -220,6 +235,9 @@
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml.cs">
       <DependentUpon>PatientNewAppointmentRecommendations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PatientReferrals.xaml.cs">
+      <DependentUpon>PatientReferrals.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientReminders.xaml.cs">
       <DependentUpon>PatientReminders.xaml</DependentUpon>
@@ -326,9 +344,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="xaml_windows\Patient\DoctorRate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\Doctors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\HospitalRate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Patient\PatientAppointments.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientHealthRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\PatientInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -339,6 +377,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientReferrals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -495,6 +537,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-home-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\icons8-read-message-96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

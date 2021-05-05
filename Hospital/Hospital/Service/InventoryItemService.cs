@@ -10,7 +10,7 @@ namespace Hospital.Service
 {
    public class InventoryItemService
    {
-      public Hospital.Model.InventoryItem GetInventoryItemById(int id)
+      public Model.InventoryItem GetInventoryItemById(int id)
       {
          // TODO: implement
          return null;
@@ -34,19 +34,18 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.InventoryItem UpdateInventoryItem(Hospital.Model.InventoryItem inventoryItem)
+      public Model.InventoryItem UpdateInventoryItem(Model.InventoryItem inventoryItem)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Repository.InventoryItemRepository AddInventoryItem(Hospital.Model.InventoryItem inventoryItem)
+      public Model.InventoryItem AddInventoryItem(Model.InventoryItem inventoryItem)
       {
-         // TODO: implement
-         return null;
+         return inventoryItemRepository.NewInventoryItem(inventoryItem);
       }
    
-      public Hospital.Repository.InventoryItemRepository inventoryItemRepository;
+      public Repository.InventoryItemRepository inventoryItemRepository = new Repository.InventoryItemRepository();
    
    }
 }

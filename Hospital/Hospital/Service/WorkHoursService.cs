@@ -19,7 +19,7 @@ namespace Hospital.Service
          return null;
       }
       
-      public Hospital.Model.WorkHours UpdateWorkHours(Hospital.Model.WorkHours workHours)
+      public Model.WorkHours UpdateWorkHours(Model.WorkHours workHours)
       {
          // TODO: implement
          return null;
@@ -37,13 +37,13 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.WorkHours ApproveWorkHours(Hospital.Model.WorkHours workHours)
+      public Model.WorkHours ApproveWorkHours(Model.WorkHours workHours)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.WorkHours DisapproveWorkHours(Hospital.Model.WorkHours workHours)
+      public Model.WorkHours DisapproveWorkHours(Model.WorkHours workHours)
       {
          // TODO: implement
          return null;

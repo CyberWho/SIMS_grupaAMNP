@@ -28,7 +28,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.ItemInRoom GetItemInRoomById(int id)
+        public ItemInRoom GetItemInRoomById(int id)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
@@ -94,7 +94,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.ItemInRoom UpdateItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        public ItemInRoom UpdateItemInRoom(ItemInRoom itemInRoom)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
@@ -126,7 +126,7 @@ namespace Hospital.Repository
 
         }
 
-        public Hospital.Model.ItemInRoom NewItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        public ItemInRoom NewItemInRoom(ItemInRoom itemInRoom)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();

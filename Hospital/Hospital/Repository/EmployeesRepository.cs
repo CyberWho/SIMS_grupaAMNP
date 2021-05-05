@@ -28,7 +28,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.Employee GetEmployeeByUserId(int id)
+        public Employee GetEmployeeByUserId(int id)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();

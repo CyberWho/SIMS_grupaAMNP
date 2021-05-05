@@ -28,7 +28,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.MedicalTreatment GetMedicalTreatmentById(int id)
+        public Model.MedicalTreatment GetMedicalTreatmentById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -91,13 +91,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.MedicalTreatment UpdateMedicalTreatment(Hospital.Model.MedicalTreatment medicalTreatment)
+        public Model.MedicalTreatment UpdateMedicalTreatment(Model.MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.MedicalTreatment NewMedicalTreatment(Hospital.Model.MedicalTreatment medicalTreatment)
+        public Model.MedicalTreatment NewMedicalTreatment(Model.MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;

@@ -18,13 +18,13 @@ namespace Hospital.Service
         {
             return this.addressRepository.GetAddressByPatientId(id);
         }
-        public Hospital.Model.Address AddAddress(Hospital.Model.Address address)
+        public Address AddAddress(Address address)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.Address GetAddressById(int id)
+      public Address GetAddressById(int id)
       {
          // TODO: implement
          return null;
@@ -36,7 +36,7 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.Address UpdateAddress(Hospital.Model.Address address)
+      public Address UpdateAddress(Address address)
       {
          // TODO: implement
          return null;

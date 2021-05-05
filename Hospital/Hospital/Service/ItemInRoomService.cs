@@ -13,7 +13,7 @@ namespace Hospital.Service
 {
    public class ItemInRoomService
    {
-        public Hospital.Model.ItemInRoom GetItemInRoomById(int id) { 
+        public ItemInRoom GetItemInRoomById(int id) { 
             return itemInRoomRepository.GetItemInRoomById(id);
         }
 
@@ -34,13 +34,13 @@ namespace Hospital.Service
             return false;
         }
 
-        public Hospital.Model.ItemInRoom UpdateQuantity(Hospital.Model.ItemInRoom itemInRoom, uint newQuantity)
+        public ItemInRoom UpdateQuantity(ItemInRoom itemInRoom, uint newQuantity)
         {
             itemInRoom.Quantity = newQuantity;
             return itemInRoomRepository.UpdateItemInRoom(itemInRoom);
         }
 
-        public Hospital.Model.ItemInRoom AddItemInRoom(Hospital.Model.ItemInRoom itemInRoom)
+        public ItemInRoom AddItemInRoom(ItemInRoom itemInRoom)
         {
             return itemInRoomRepository.NewItemInRoom(itemInRoom);
         }
@@ -110,8 +110,8 @@ namespace Hospital.Service
             return dateTime == null;
         }
 
-        public Hospital.Repository.ItemInRoomRepository itemInRoomRepository = new Repository.ItemInRoomRepository();
-        public Hospital.Repository.RoomRepository roomRepository = new Repository.RoomRepository();
+        public Repository.ItemInRoomRepository itemInRoomRepository = new Repository.ItemInRoomRepository();
+        public Repository.RoomRepository roomRepository = new Repository.RoomRepository();
    
    }
 }

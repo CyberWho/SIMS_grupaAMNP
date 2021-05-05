@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -130,7 +124,6 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
             OracleCommand command = connection.CreateCommand();
-            command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.SPEC_ID=1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
             command.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
             command.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
@@ -317,7 +310,6 @@ namespace Hospital.Repository
             setConnection();
             TimeSlot timeSlot = new TimeSlot();
             OracleCommand command = connection.CreateCommand();
-            command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME = :start_time";
             command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
             command.Parameters.Add("start_time", OracleDbType.Date).Value = date;
@@ -420,7 +412,6 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
-            command = connection.CreateCommand();
             command.CommandText = "UPDATE TIME_SLOT SET FREE = 0 WHERE ID = " + timeSlot.Id;
 
             if (command.ExecuteNonQuery() > 0)

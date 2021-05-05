@@ -1,8 +1,6 @@
 using System;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
-using System.Configuration;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -24,15 +22,15 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
         public Hospital.Model.Room GetRoomById(int id)
         {
             setConnection();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM room WHERE id = " + id.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM room WHERE id = " + id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             Room room = new Room();
             room.Id = reader.GetInt32(0);
@@ -49,38 +47,36 @@ namespace Hospital.Repository
         public Room GetAppointmentRoomById(int id)
         {
             setConnection();
-
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM ROOM WHERE ID = :id";
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader a = cmd.ExecuteReader();
-            a.Read();
+            
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM ROOM WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
             Room room = new Room();
-            room.Id = a.GetInt32(0);
-            room.Floor = a.GetInt32(1);
-            room.Area = a.GetDouble(2);
-            room.Description = a.GetString(3);
-
+            room.Id = reader.GetInt32(0);
+            room.Floor = reader.GetInt32(1);
+            room.Area = reader.GetDouble(2);
+            room.Description = reader.GetString(3);
             connection.Close();
             connection.Dispose();
-
             return room;
         }
-
-        public Hospital.Model.Room GetRoomByAppointmentId(int appointmentId)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public Hospital.Model.Room GetRoomByDoctorId(int doctorId)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public ObservableCollection<Room> GetAllRooms()
-        {
+      
+      public Room GetRoomByAppointmentId(int appointmentId)
+      {
+         // TODO: implement
+         return null;
+      }
+      
+      public Room GetRoomByDoctorId(int doctorId)
+      {
+         // TODO: implement
+         return null;
+      }
+      
+      public ObservableCollection<Room> GetAllRooms()
+      {
             setConnection();
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
             OracleCommand cmd = connection.CreateCommand();
@@ -178,22 +174,22 @@ namespace Hospital.Repository
 
                 return false;
             }
-        }
-
-        public Boolean DeleteRoomByAppointmentId(int appointmentId)
-        {
-            // TODO: implement
-            return false;
-        }
-
-        public Boolean DeleteRoomByDoctorId(int doctorId)
-        {
-            // TODO: implement
-            return false;
-        }
-
-        public Hospital.Model.Room UpdateRoom(Hospital.Model.Room room)
-        {
+      }
+      
+      public Boolean DeleteRoomByAppointmentId(int appointmentId)
+      {
+         // TODO: implement
+         return false;
+      }
+      
+      public Boolean DeleteRoomByDoctorId(int doctorId)
+      {
+         // TODO: implement
+         return false;
+      }
+      
+      public Room UpdateRoom(Room room)
+      {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText =
@@ -221,10 +217,10 @@ namespace Hospital.Repository
 
                 return null;
             }
-        }
-
-        public Hospital.Model.Room NewRoom(Hospital.Model.Room room)
-        {
+      }
+      
+      public Room NewRoom(Room room)
+      {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT max(id) FROM room";

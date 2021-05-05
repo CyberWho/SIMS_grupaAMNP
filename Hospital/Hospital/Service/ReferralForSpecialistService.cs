@@ -5,12 +5,14 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
    public class ReferralForSpecialistService
    {
-      public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
+      public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
          // TODO: implement
          return null;
@@ -22,12 +24,17 @@ namespace Hospital.Service
          return null;
       }
       
-      public System.Collections.ArrayList GetAllReferralsByPatientId(int patientId)
+      public ObservableCollection<ReferralForSpecialist> GetAllReferralsByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            //TODO: implement
+            return null;
       }
-      
+        public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
+        {
+            return referralForSpecialistRepository.GetReferralForSpecialistsByHealthRecordId(healthRecordId);
+        }
+
+
       public System.Collections.ArrayList GetAllReferralsByDoctorId(int doctorId)
       {
          // TODO: implement
@@ -36,8 +43,8 @@ namespace Hospital.Service
       
       public Boolean DeleteReferralById(int id)
       {
-         // TODO: implement
-         return false;
+        
+         return referralForSpecialistRepository.DeleteReferralForSpecialistById(id);
       }
       
       public Boolean DeleteReferralByPatientId(int patientId)
@@ -52,25 +59,25 @@ namespace Hospital.Service
          return false;
       }
       
-      public Hospital.Model.ReferralForSpecialist UpdateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist UpdateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist AddReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist AddReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist DeactivateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist DeactivateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Repository.ReferralForSpecialistRepository referralForSpecialistRepository;
+      public Repository.ReferralForSpecialistRepository referralForSpecialistRepository = new Repository.ReferralForSpecialistRepository();
       public System.Collections.ArrayList referralForSpecialistServiceB;
       
       /// <pdGenerated>default getter</pdGenerated>

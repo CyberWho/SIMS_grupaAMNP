@@ -11,12 +11,12 @@ using Hospital.Repository;
 
 namespace Hospital.Service
 {
+
     public class DrugService
     {
-        public Hospital.Model.Drug GetDrugById(int id)
+        public Drug GetDrugById(int id)
         {
-            // TODO: implement
-            return null;
+            return drugRepository.GetDrugById(id);
         }
 
         public ObservableCollection<Drug> GetAllDrugs()
@@ -24,49 +24,44 @@ namespace Hospital.Service
             return new DrugRepository().GetAllDrugs();
         }
 
-        public System.Collections.ArrayList GetAllDrugsByDrugTypeId(int drugTypeId)
-        {
-            // TODO: implement
-            return null;
+        public ObservableCollection<Drug> GetAllDrugsByDrugTypeId(int drugTypeId)
+        { 
+            return drugRepository.GetAllDrugsByDrugTypeId(drugTypeId);
         }
 
-        public System.Collections.ArrayList GetAllDrugsPending()
+        public ObservableCollection<Drug> GetAllDrugsPending()
         {
-            // TODO: implement
-            return null;
+            return drugRepository.GetAllDrugsPending();
         }
 
         public Boolean DeleteDrugById(int id)
         {
-            // TODO: implement
-            return false;
+            return drugRepository.DeleteDrugById(id);
         }
 
-        public Hospital.Model.Drug UpdateDrug(Hospital.Model.Drug drug)
+        public Drug UpdateDrug(Drug drug)
+        { 
+            return drugRepository.UpdateDrug(drug);
+        }
+
+        public Drug AddDrug(Drug drug)
+        {
+            return drugRepository.NewDrug(drug);
+        }
+
+        public Drug ApproveDrug(Drug drug)
+        {
+            // TODO
+            return null;
+        }
+
+        public Drug RejectDrug(Drug drug)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Drug AddDrug(Hospital.Model.Drug drug)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public Hospital.Model.Drug ApproveDrug(Hospital.Model.Drug drug)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public Hospital.Model.Drug RejectDrug(Hospital.Model.Drug drug)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public Hospital.Repository.DrugRepository drugRepository;
+        public DrugRepository drugRepository = new DrugRepository();
 
     }
 }

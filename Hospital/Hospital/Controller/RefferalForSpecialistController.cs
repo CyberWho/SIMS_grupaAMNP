@@ -12,7 +12,7 @@ namespace Hospital.Controller
 {
    public class RefferalForSpecialistController
    {
-      public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
+      public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
          // TODO: implement
          return null;
@@ -26,11 +26,15 @@ namespace Hospital.Controller
       
       public ObservableCollection<ReferralForSpecialist> GetAllReferralsByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            //TODO: implement
+            return null;
       }
-      
-      public ObservableCollection<ReferralForSpecialist> GetAllReferralsByDoctorId(int doctorId)
+        public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
+        {
+            return referralForSpecialistService.GetReferralForSpecialistsByHealthRecordId(healthRecordId);
+        }
+
+        public ObservableCollection<ReferralForSpecialist> GetAllReferralsByDoctorId(int doctorId)
       {
          // TODO: implement
          return null;
@@ -38,8 +42,8 @@ namespace Hospital.Controller
       
       public Boolean DeleteReferralById(int id)
       {
-         // TODO: implement
-         return false;
+
+            return referralForSpecialistService.DeleteReferralById(id);
       }
       
       public Boolean DeleteReferralByPatientId(int patientId)
@@ -54,25 +58,25 @@ namespace Hospital.Controller
          return false;
       }
       
-      public Hospital.Model.ReferralForSpecialist UpdateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist UpdateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist AddReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist AddReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
       
-      public Hospital.Model.ReferralForSpecialist DeactivateReferral(Hospital.Model.ReferralForSpecialist referral)
+      public ReferralForSpecialist DeactivateReferral(ReferralForSpecialist referral)
       {
          // TODO: implement
          return null;
       }
    
-      public Hospital.Service.ReferralForSpecialistService referralForSpecialistService;
+      public Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService();
    
    }
 }

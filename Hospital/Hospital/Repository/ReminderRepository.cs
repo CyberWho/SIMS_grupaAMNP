@@ -6,10 +6,8 @@
 
 using System;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 using Hospital.Model;
 using System.Collections.ObjectModel;
-using System.Configuration;
 
 namespace Hospital.Repository
 {
@@ -30,21 +28,21 @@ namespace Hospital.Repository
 
             }
         }
-        public Hospital.Model.Reminder GetReminderById(int id)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
-        {
+        public Reminder GetReminderById(int id)
+      {
+         // TODO: implement
+         return null;
+      }
+      
+      public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
+      {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
-            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            while(reader.Read())
             {
                 Reminder reminder = new Reminder();
                 reminder.Id = reader.GetInt32(0);
@@ -71,10 +69,10 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
-            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 Reminder reminder = new Reminder();
@@ -103,10 +101,10 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
-            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 Reminder reminder = new Reminder();
@@ -130,40 +128,38 @@ namespace Hospital.Repository
 
             return reminders;
         }
-
-        public Boolean DeleteReminderById(int id)
-        {
-            // TODO: implement
-            return false;
-        }
-
-        public Boolean DeleteAllRemindersByPatientId(int patientId)
-        {
-            // TODO: implement
-            return false;
-        }
-
-        public Hospital.Model.Reminder UpdateReminder(Hospital.Model.Reminder reminder)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public Hospital.Model.Reminder NewReminder(Hospital.Model.Reminder reminder)
-        {
+      
+      public Boolean DeleteReminderById(int id)
+      {
+         // TODO: implement
+         return false;
+      }
+      
+      public Boolean DeleteAllRemindersByPatientId(int patientId)
+      {
+         // TODO: implement
+         return false;
+      }
+      
+      public Reminder UpdateReminder(Reminder reminder)
+      {
+         // TODO: implement
+         return null;
+      }
+      
+      public Reminder NewReminder(Reminder reminder)
+      {
             setConnection();
-            OracleCommand cmd = new OracleCommand();
-            cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO REMINDER (NAME,DESCRIPTION,ALARM_TIME,PATIENT_ID) VALUES (:name,:description,:alarm_time,:patient_id)";
-            cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = reminder.Name;
-            cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = reminder.Description;
-            cmd.Parameters.Add("alarm_time", OracleDbType.Date).Value = reminder.AlarmTime;
-            cmd.Parameters.Add("patient_id", OracleDbType.Int32).Value = reminder.Patient.Id;
-            int a = cmd.ExecuteNonQuery();
-
+            OracleCommand command = new OracleCommand();
+            command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO REMINDER (NAME,DESCRIPTION,ALARM_TIME,PATIENT_ID) VALUES (:name,:description,:alarm_time,:patient_id)";
+            command.Parameters.Add("name", OracleDbType.Varchar2).Value = reminder.Name;
+            command.Parameters.Add("description", OracleDbType.Varchar2).Value = reminder.Description;
+            command.Parameters.Add("alarm_time", OracleDbType.Date).Value = reminder.AlarmTime;
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = reminder.Patient.Id;
+            int executer = command.ExecuteNonQuery();
             connection.Close();
             connection.Dispose();
-
             return reminder;
         }
 

@@ -9,7 +9,7 @@
         Title="PatientNewAppointment" Height="500" Width="900" Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="55" />
 
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -80,6 +80,7 @@
         <TextBox x:Name="room_id_txt" Grid.Column="2" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" Height="23" Margin="166,176,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
         <Button x:Name="Predlozi" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikazi predloge termina" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="117.6,323,0,0" VerticalAlignment="Top" Width="200" Click="Predlozi_Click" RenderTransformOrigin="0.631,1.255"/>
+        
         <xctk:DateTimePicker x:Name="date_txt" Grid.Column="2" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="166,208,0,0" VerticalAlignment="Top" Width="144" Height="24"/>
 
 
@@ -89,6 +90,15 @@
         <RadioButton x:Name="VremePrioritet" GroupName="priority" Foreground="DeepSkyBlue" FontSize="16" Content="Vreme" VerticalAlignment="Top" Margin="223.6,278,465.6,0" Grid.Column="1" Height="26" Checked="VremePrioritet_Checked"/>
         <Label Content="Odabrani lekar:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Doktori opste prakse:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="378,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.68"/>
-
+        <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
+        <Button x:Name="Notifications" HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
