@@ -1,4 +1,6 @@
-﻿namespace Hospital.Model
+﻿using System;
+
+namespace Hospital.Model
 {
     class Review
     {
@@ -9,6 +11,7 @@
         public Patient patient { get; set; }
         public Doctor doctor { get; set; }
 
+        public DateTime ReviewDate { get; set; }
         public Review()
         {
 
