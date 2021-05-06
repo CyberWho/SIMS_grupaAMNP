@@ -107,6 +107,10 @@ namespace Hospital.xaml_windows.Patient
             Room room = new Room();
             appointment.room = room;
             appointment.room.Id = int.Parse(room_id_txt.Text);
+
+            appointment.Doctor_Id = appointment.doctor.Id;
+            appointment.Patient_Id = appointment.patient.Id;
+
             appointmentController.ReserveAppointment(appointment);
             if(referralForSpecialistId != 0)
             {

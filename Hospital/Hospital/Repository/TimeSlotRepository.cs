@@ -362,6 +362,7 @@ namespace Hospital.Repository
 
             TimeSlot timeSlot = new TimeSlot();
 
+            // month i day se menjaju
             DateTime dateTime = new DateTime(2021, 5, 7, 8, 0, 0);
             TimeSpan timeSpan = new TimeSpan(0, 30, 0);
 
@@ -369,6 +370,8 @@ namespace Hospital.Repository
             {
                 timeSlot.Free = true;
                 timeSlot.StartTime = dateTime;
+
+                // work_hours_id se menja
                 timeSlot.workHours_id = 81;
 
                 AddTimeSlot(timeSlot);

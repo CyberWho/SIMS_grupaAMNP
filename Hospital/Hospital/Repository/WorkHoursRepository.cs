@@ -99,6 +99,7 @@ namespace Hospital.Repository
             command.CommandText =
                 "INSERT INTO work_hours (shift_start, shift_end, approved, doctor_id) VALUES (:shift_start, :shift_end, :approved, :doctor_id)";
 
+            // samo se menjaju dan i mesec
             DateTime start = new DateTime(2021, 5, 7, 8, 0, 0);
             DateTime end = new DateTime(2021, 5, 7, 16, 0, 0);
 
