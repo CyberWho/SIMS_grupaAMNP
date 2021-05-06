@@ -16,30 +16,30 @@ namespace Hospital.Model
         public DrugStatus Status { get; set; }
         public Boolean NeedsPerscription { get; set; }
 
-        public DrugType drugType;
+        public DrugType DrugType { get; set;  }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public DrugType GetDrugType()
         {
-            return drugType;
+            return DrugType;
         }
 
         /// <pdGenerated>default parent setter</pdGenerated>
         /// <param>newDrugType</param>
         public void SetDrugType(DrugType newDrugType)
         {
-            if (this.drugType != newDrugType)
+            if (this.DrugType != newDrugType)
             {
-                if (this.drugType != null)
+                if (this.DrugType != null)
                 {
-                    DrugType oldDrugType = this.drugType;
-                    this.drugType = null;
+                    DrugType oldDrugType = this.DrugType;
+                    this.DrugType = null;
                     oldDrugType.RemoveDrug(this);
                 }
                 if (newDrugType != null)
                 {
-                    this.drugType = newDrugType;
-                    this.drugType.AddDrug(this);
+                    this.DrugType = newDrugType;
+                    this.DrugType.AddDrug(this);
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace Hospital.Model
             Grams = grams;
             Status = status;
             NeedsPerscription = needsPerscription;
-            this.drugType = drugType;
+            this.DrugType = drugType;
         }
 
         public Drug()

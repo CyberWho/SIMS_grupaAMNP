@@ -7,31 +7,33 @@
 using Hospital.Model;
 using System;
 using System.Collections.ObjectModel;
-using System.Data.OracleClient;
+using Oracle.ManagedDataAccess.Client;
+using System.Diagnostics;
 
 namespace Hospital.Repository
 {
    public class DrugTypeRepository
    {
-        OracleConnection con = null;
+        OracleConnection connection = null;
+
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
-
+                connection.Open();
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine("****** Exception in DrugTypeRepository:  ******");
+                Trace.WriteLine(exp.ToString());
             }
         }
         public DrugType GetDrugTypeById(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM drug_type WHERE id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
@@ -40,7 +42,23 @@ namespace Hospital.Repository
             newDrugType.Id = reader.GetInt32(0);
             newDrugType.Type = reader.GetString(1);
 
-            con.Close();
+            connection.Close();
+            return newDrugType;
+        }
+
+        public DrugType GetDrugTypeByType(string type)
+        {
+            setConnection();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT * FROM drug_type WHERE type = '" + type + "'";
+            OracleDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            DrugType newDrugType = new DrugType();
+            newDrugType.Id = reader.GetInt32(0);
+            newDrugType.Type = reader.GetString(1);
+
+            connection.Close();
             return newDrugType;
         }
 
@@ -50,7 +68,7 @@ namespace Hospital.Repository
             ObservableCollection<DrugType> drugTypes = new ObservableCollection<DrugType>();
 
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM drug_type";
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -62,7 +80,7 @@ namespace Hospital.Repository
                 drugTypes.Add(newDrugType);
             }
 
-            con.Close();
+            connection.Close();
             return drugTypes;
         }
 

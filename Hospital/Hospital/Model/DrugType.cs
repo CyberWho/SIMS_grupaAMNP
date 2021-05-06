@@ -42,7 +42,7 @@ namespace Hospital.Model
             if (!this.drug.Contains(newDrug))
             {
                 this.drug.Add(newDrug);
-                newDrug.SetDrugType(this);
+                newDrug.DrugType = this;
             }
         }
 
@@ -55,7 +55,7 @@ namespace Hospital.Model
                 if (this.drug.Contains(oldDrug))
                 {
                     this.drug.Remove(oldDrug);
-                    oldDrug.SetDrugType((DrugType)null);
+                    oldDrug.DrugType = ((DrugType)null);
                 }
         }
 
@@ -69,7 +69,7 @@ namespace Hospital.Model
                     tmpDrug.Add(oldDrug);
                 drug.Clear();
                 foreach (Drug oldDrug in tmpDrug)
-                    oldDrug.SetDrugType((DrugType)null);
+                    oldDrug.DrugType = ((DrugType)null);
                 tmpDrug.Clear();
             }
         }

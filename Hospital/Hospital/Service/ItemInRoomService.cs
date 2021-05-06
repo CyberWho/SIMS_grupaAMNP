@@ -22,6 +22,11 @@ namespace Hospital.Service
             return itemInRoomRepository.GetAllItemsInRoomByRoomId(id);
         }
 
+        public ObservableCollection<ItemInRoom> GetAllItemsInRoom()
+        {
+            return itemInRoomRepository.GetAllItemsInRoom();
+        }
+
         public Boolean DeleteItemInRoomById(int id)
         {
             // TODO: implement
@@ -109,6 +114,41 @@ namespace Hospital.Service
         {
             return dateTime == null;
         }
+
+        public ObservableCollection<ItemInRoom> LoadAllItems()
+        {
+            /*ObservableCollection<ItemInRoom> allItems = itemInRoomRepository.GetAllItemsInRoom();
+            ObservableCollection<ItemInRoom> mergedItems = new ObservableCollection<ItemInRoom>();
+            mergedItems.Add(allItems[0]);
+
+            foreach (ItemInRoom item in allItems)
+            {
+                int count = 0;
+                do
+                { 
+                    if (mergedItems[count].inventoryItem.Name.Equals(item.inventoryItem.Name))
+                    {
+                        mergedItems[count].Quantity += item.Quantity;
+                        break;
+                    }
+                    else
+                    {
+                        mergedItems.Add(item);
+                    }
+                    count++;
+                } while (count != mergedItems.Count);
+            }
+
+            Trace.WriteLine("Retval count in Service class: " + mergedItems.Count.ToString());*/
+
+            return itemInRoomRepository.GetAllItemsInRoom();
+        }
+
+        public ObservableCollection<ItemInRoom> SearchByName(string name)
+        {
+            return itemInRoomRepository.SearchByName(name);
+        }
+
 
         public Repository.ItemInRoomRepository itemInRoomRepository = new Repository.ItemInRoomRepository();
         public Repository.RoomRepository roomRepository = new Repository.RoomRepository();

@@ -188,6 +188,15 @@
     <Compile Include="xaml_windows\Doctor\SearchPatient.xaml.cs">
       <DependentUpon>SearchPatient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Manager\ManagerDrugsCRUD.xaml.cs">
+      <DependentUpon>ManagerDrugsCRUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\ManagerInventorySearch.xaml.cs">
+      <DependentUpon>ManagerInventorySearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\ManagerRenovations.xaml.cs">
+      <DependentUpon>ManagerRenovations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Manager\ManagerRoomInventory.xaml.cs">
       <DependentUpon>ManagerRoomInventory.xaml</DependentUpon>
     </Compile>
@@ -289,6 +298,18 @@
     <Page Include="xaml_windows\Doctor\Doctor_crud_appointments.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Manager\ManagerDrugsCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\ManagerInventorySearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\ManagerRenovations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Manager\ManagerRoomInventory.xaml">
       <SubType>Designer</SubType>

@@ -25,7 +25,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
         public ItemInRoom GetItemInRoomById(int id)
@@ -58,7 +58,25 @@ namespace Hospital.Repository
             return itemsInRoom;
         }
 
-        public Boolean DeleteItemInRoomById(int id)
+        public ObservableCollection<ItemInRoom> GetAllItemsInRoom()
+        {
+            setConnection();
+            ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID";
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                InventoryItem newItem = inventoryItemRepository.GetInventoryItemById(reader.GetInt32(1));
+                ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), null, newItem);
+                itemsInRoom.Add(newItemInRoom);
+            }
+
+            con.Close();
+            return itemsInRoom;
+        }
+
+        public bool DeleteItemInRoomById(int id)
         {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -71,8 +89,9 @@ namespace Hospital.Repository
                 Trace.WriteLine("DeleteItemInRoomById");
                 return true;
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
+                Trace.WriteLine(exp.ToString());
                 con.Close();
                 return false;
             }
@@ -132,6 +151,22 @@ namespace Hospital.Repository
                 return null;
             }
 
+        }
+
+        public ObservableCollection<ItemInRoom> SearchByName(string name)
+        {
+            setConnection();
+            ObservableCollection<ItemInRoom> searchResults = new ObservableCollection<ItemInRoom>();
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID WHERE name like '%" + name + "%'";
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                searchResults.Add(ParseFromReader(reader));
+            }
+
+            return searchResults;
         }
 
         public int GetLastId()

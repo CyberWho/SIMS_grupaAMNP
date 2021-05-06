@@ -114,12 +114,12 @@ namespace Hospital.Repository
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText =
-                "UPDATE drug "              +
-                "SET grams = "              + drug.Grams.ToString()         + ", " +
-                "needs_perscription = "     + needsPerscription.ToString()  + ", " +
-                "drug_status = '"           + ((int)drug.Status).ToString() + "', " +
-                "drug_type_id = "           + drug.drugType.Id.ToString()   + " " +
-                "WHERE invetory_item_id = " + drug.Id.ToString();
+                "UPDATE drug "               +  
+                "SET grams = "               + drug.Grams.ToString()         + ", " +
+                "needs_perscription = "      + needsPerscription.ToString()  + ", " +
+                "drug_status = '"            + ((int)drug.Status).ToString() + "', " +
+                "drug_type_id = "            + drug.DrugType.Id.ToString()   + " " +
+                "WHERE inventory_item_id = " + drug.Id.ToString();
             
             try
             {
@@ -133,12 +133,12 @@ namespace Hospital.Repository
             }
 
             cmd.CommandText =
-                "UPDATE inventory_item" +
-                "SET name = '"          + drug.Name                     + "', " +
-                "price = "              + drug.Price.ToString()         + ", " +
-                "unit = "               + drug.Unit.ToString()          + ", " +
-                "item_type"             + ((int)drug.Type).ToString()   + ", " +
-                "WHERE id = "           + drug.Id.ToString();
+                "UPDATE inventory_item " +
+                "SET name = '"           + drug.Name                     + "', " +
+                "price = "               + drug.Price.ToString()         + ", "  +
+                "unit = '"               + drug.Unit.ToString()          + "', " +
+                "item_type = "           + ((int)drug.Type).ToString()   + " "   +
+                "WHERE id = "            + drug.Id.ToString();
 
             try
             {
@@ -162,12 +162,16 @@ namespace Hospital.Repository
 
             InventoryItem inventoryItem = inventoryItemRepository.NewInventoryItem(new InventoryItem(-1, drug.Name, drug.Price, drug.Unit, drug.Type));
 
-            command.CommandText = "INSERT INTO drug (inventory_item_id, grams, needs_perscription, drug_status, drug_type_id) VALUES (:inventory_item_id, :grams, :needs_perscription, :drug_status, :drug_type_id)";
-            command.Parameters.Add("inventory_item_id",  OracleDbType.Int32).Value  = inventoryItem.Id;
-            command.Parameters.Add("grams",              OracleDbType.Int32).Value  = drug.Grams;
-            command.Parameters.Add("needs_perscription", OracleDbType.Int32).Value  = drug.NeedsPerscription ? 1 : 0;
-            command.Parameters.Add("drug_status",        OracleDbType.Int32).Value  = drug.Status;
-            command.Parameters.Add("drug_type_id",       OracleDbType.Int32).Value  = drug.drugType.Id;
+            string needsPrescription = drug.NeedsPerscription ? "1" : "0";
+
+            command.CommandText = "INSERT INTO drug (inventory_item_id, grams, needs_perscription, drug_status, drug_type_id) VALUES (" +
+                inventoryItem.Id.ToString()   + ", " +
+                drug.Grams.ToString()         + ", " +
+                needsPrescription             + ", " +
+                ((int)drug.Status).ToString() + ", " +
+                drug.DrugType.Id              + ")";
+            
+    
 
             try
             {
@@ -213,7 +217,7 @@ namespace Hospital.Repository
             drug.Grams = reader.GetInt32(2);
             drug.NeedsPerscription = reader.GetInt32(3) == 1 ? true : false;
             drug.Status = (DrugStatus)reader.GetInt32(4);
-            drug.drugType = drugTypeRepository.GetDrugTypeById(reader.GetInt32(5));
+            drug.DrugType = drugTypeRepository.GetDrugTypeById(reader.GetInt32(5));
             
             return drug;
         }
