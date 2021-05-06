@@ -79,7 +79,7 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID";
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -89,7 +89,7 @@ namespace Hospital.Repository
                 itemsInRoom.Add(newItemInRoom);
             }
 
-            con.Close();
+            connection.Close();
             return itemsInRoom;
         }
 
@@ -190,7 +190,7 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<ItemInRoom> searchResults = new ObservableCollection<ItemInRoom>();
-            OracleCommand cmd = con.CreateCommand();
+            OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID WHERE name like '%" + name + "%'";
             OracleDataReader reader = cmd.ExecuteReader();
 

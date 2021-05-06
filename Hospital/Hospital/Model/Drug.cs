@@ -22,25 +22,25 @@ namespace Hospital.Model
         /// <pdGenerated>default parent getter</pdGenerated>
         public DrugType GetDrugType()
         {
-            return DrugType;
+            return drugType;
         }
 
         /// <pdGenerated>default parent setter</pdGenerated>
         /// <param>newDrugType</param>
         public void SetDrugType(DrugType newDrugType)
         {
-            if (this.DrugType != newDrugType)
+            if (this.drugType != newDrugType)
             {
-                if (this.DrugType != null)
+                if (this.drugType != null)
                 {
-                    DrugType oldDrugType = this.DrugType;
-                    this.DrugType = null;
+                    DrugType oldDrugType = this.drugType;
+                    this.drugType = null;
                     oldDrugType.RemoveDrug(this);
                 }
                 if (newDrugType != null)
                 {
-                    this.DrugType = newDrugType;
-                    this.DrugType.AddDrug(this);
+                    this.drugType = newDrugType;
+                    this.drugType.AddDrug(this);
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace Hospital.Model
             Grams = grams;
             Status = status;
             NeedsPerscription = needsPerscription;
-            this.DrugType = drugType;
+            this.drugType = drugType;
         }
 
         public Drug()
