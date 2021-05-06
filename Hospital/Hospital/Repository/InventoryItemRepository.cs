@@ -98,11 +98,14 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "INSERT INTO inventory_item VALUES (:name, :price, :unit, :item_type)";
-            cmd.Parameters.Add("name",      OracleDbType.Varchar2).Value = inventoryItem.Name;
-            cmd.Parameters.Add("price",     OracleDbType.Int32).Value    = inventoryItem.Price;
-            cmd.Parameters.Add("unit",      OracleDbType.Varchar2).Value = inventoryItem.Unit;
-            cmd.Parameters.Add("item_type", OracleDbType.Int32).Value    = inventoryItem.Type;
+            cmd.CommandText = "INSERT INTO inventory_item (name, price, unit, item_type) VALUES ('" +
+                inventoryItem.Name                   + "', " +
+                inventoryItem.Price.ToString()       + ", '" +
+                inventoryItem.Unit                   + "'   , " +
+                ((int)inventoryItem.Type).ToString() + ")";
+            
+            
+            Trace.WriteLine("----- SQL COMMAND: " + cmd.CommandText);
 
             try
             {

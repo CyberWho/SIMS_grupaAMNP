@@ -15,15 +15,12 @@ namespace Hospital.xaml_windows.Manager
         int id;
         ObservableCollection<Room> Rooms;
 
-        //Controller.EmployeeController employeeController = new Controller.EmployeeController();
         Controller.RoomController roomController = new Controller.RoomController();
         public ManagerRoomsCRUD(int id)
         {
 
             InitializeComponent();
             this.id = id;
-            //Employee manager = employeeController.GetEmployeeByUserId(id);
-
         }
 
         public void updateDataGrid()
@@ -48,11 +45,6 @@ namespace Hospital.xaml_windows.Manager
             this.updateDataGrid();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-
-        }
-
         private void add_btn_Click(object sender, RoutedEventArgs e)
         {
             this.CUD(0);
@@ -69,8 +61,6 @@ namespace Hospital.xaml_windows.Manager
         }
         private void CUD(int state)
         {
-            int lastRoomId = roomController.GetLastId();
-
             switch (state)
             {
                 case 0:
@@ -140,7 +130,6 @@ namespace Hospital.xaml_windows.Manager
            add_btn.IsEnabled = false;
            update_btn.IsEnabled = true;
            delete_btn.IsEnabled = true;
-           
         }
 
         private void clear_btn_Click(object sender, RoutedEventArgs e)

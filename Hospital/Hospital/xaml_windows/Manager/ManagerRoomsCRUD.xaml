@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
         mc:Ignorable="d"
-        Title="Prostorije" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Prostorije" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="399" Margin="311,10,0,0" VerticalAlignment="Top" Width="467" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="399" Margin="311,10,0,0" VerticalAlignment="Top" Width="467" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Sprat" Binding="{Binding Floor}" Width="*" IsReadOnly="True"/>
