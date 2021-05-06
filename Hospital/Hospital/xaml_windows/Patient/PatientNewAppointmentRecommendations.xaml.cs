@@ -110,7 +110,7 @@ namespace Hospital.xaml_windows.Patient
 
             appointment.Doctor_Id = appointment.doctor.Id;
             appointment.Patient_Id = appointment.patient.Id;
-
+            appointment.Type = AppointmentType.EXAMINATION;
             appointmentController.ReserveAppointment(appointment);
             if(referralForSpecialistId != 0)
             {
