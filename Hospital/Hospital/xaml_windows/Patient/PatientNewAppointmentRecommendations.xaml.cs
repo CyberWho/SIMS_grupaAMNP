@@ -13,20 +13,20 @@ namespace Hospital.xaml_windows.Patient
     public partial class PatientNewAppointmentRecommendations : Window
     {
         private int userId;
-        DateTime startTime;
-        DateTime endTime;
-        int doctorId;
-        int priority = 0;
-        int referralForSpecialistId;
-        TimeSlotController timeSlotController = new TimeSlotController();
-        PatientController patientController = new PatientController();
-        AppointmentController appointmentController = new AppointmentController();
-        ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
-        DoctorController doctorController = new DoctorController();
-        ReminderController reminderController = new ReminderController();
-        RefferalForSpecialistController refferalForSpecialistController = new RefferalForSpecialistController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        PatientLogsController patientLogsController = new PatientLogsController();
+        private DateTime startTime;
+        private DateTime endTime;
+        private int doctorId;
+        private int priority = 0;
+        private int referralForSpecialistId;
+        private TimeSlotController timeSlotController = new TimeSlotController();
+        private PatientController patientController = new PatientController();
+        private AppointmentController appointmentController = new AppointmentController();
+        private ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
+        private DoctorController doctorController = new DoctorController();
+        private ReminderController reminderController = new ReminderController();
+        private RefferalForSpecialistController refferalForSpecialistController = new RefferalForSpecialistController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private PatientLogsController patientLogsController = new PatientLogsController();
         public PatientNewAppointmentRecommendations(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority,int referralForSpecialistId)
         {
             InitializeComponent();

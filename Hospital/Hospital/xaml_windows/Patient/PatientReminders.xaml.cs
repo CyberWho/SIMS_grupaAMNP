@@ -13,10 +13,10 @@ namespace Hospital.xaml_windows.Patient
     public partial class PatientReminders : Window
     {
         private int userId;
-        ReminderController reminderController = new ReminderController();
-        ObservableCollection<Reminder> Reminders = new ObservableCollection<Reminder>();
-        PatientController patientController = new PatientController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private ReminderController reminderController = new ReminderController();
+        private ObservableCollection<Reminder> Reminders = new ObservableCollection<Reminder>();
+        private PatientController patientController = new PatientController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
         public PatientReminders(int userId)
         {

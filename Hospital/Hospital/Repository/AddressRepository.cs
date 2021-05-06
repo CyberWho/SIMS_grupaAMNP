@@ -14,7 +14,7 @@ namespace Hospital.Repository
     public class AddressRepository
     {
         
-        CityRepository cityRepository = new CityRepository();
+        private CityRepository cityRepository = new CityRepository();
 
         OracleConnection connection = null;
         private void setConnection()

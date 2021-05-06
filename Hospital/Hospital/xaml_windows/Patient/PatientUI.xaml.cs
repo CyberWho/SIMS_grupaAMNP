@@ -12,11 +12,11 @@ namespace Hospital.xaml_windows.Patient
     public partial class PatientUI : Window
     {
         private int userId;
-        ReminderController reminderController = new ReminderController();
-        PatientController patientController = new PatientController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        AppointmentController appointmentController = new AppointmentController();
-        PatientLogsController patientLogsController = new PatientLogsController();
+        private ReminderController reminderController = new ReminderController();
+        private PatientController patientController = new PatientController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private AppointmentController appointmentController = new AppointmentController();
+        private PatientLogsController patientLogsController = new PatientLogsController();
         public PatientUI(int userId)
         {
             InitializeComponent();

@@ -108,9 +108,9 @@ namespace Hospital.xaml_windows.Patient
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         private int userId;
-        PatientController patientController = new PatientController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        ReminderController reminderController = new ReminderController();
+        private PatientController patientController = new PatientController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private ReminderController reminderController = new ReminderController();
 
         public PatientInfo(int userId)
         {

@@ -17,7 +17,7 @@ namespace Hospital.Repository
     {
 
         OracleConnection connection = null;
-        AddressRepository addressRepository = new AddressRepository();
+        private AddressRepository addressRepository = new AddressRepository();
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";

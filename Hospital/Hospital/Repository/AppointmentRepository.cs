@@ -14,11 +14,11 @@ namespace Hospital.Repository
 {
     public class AppointmentRepository
     {
-        RoomRepository roomRepository = new RoomRepository();
-        PatientRepository patientRepository = new PatientRepository();
-        DoctorRepository doctorRepository = new DoctorRepository();
-        TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
-        SystemNotificationRepository systemNotificationRepository = new SystemNotificationRepository();
+        private RoomRepository roomRepository = new RoomRepository();
+        private PatientRepository patientRepository = new PatientRepository();
+        private DoctorRepository doctorRepository = new DoctorRepository();
+        private TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
+        private SystemNotificationRepository systemNotificationRepository = new SystemNotificationRepository();
         private EmployeesRepository employeesRepository = new EmployeesRepository();
         private UserRepository userRepository = new UserRepository();
 

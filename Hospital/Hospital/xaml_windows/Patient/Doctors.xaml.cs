@@ -14,12 +14,12 @@ namespace Hospital.xaml_windows.Patient
     public partial class Doctors : Window
     {
         private int userId;
-        PatientController patientController = new PatientController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        ReminderController reminderController = new ReminderController();
-        DoctorController doctorController = new DoctorController();
-        ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
-        AppointmentController appointmentController = new AppointmentController();
+        private PatientController patientController = new PatientController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private ReminderController reminderController = new ReminderController();
+        private DoctorController doctorController = new DoctorController();
+        private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
+        private AppointmentController appointmentController = new AppointmentController();
         public Doctors(int userId)
         {
             InitializeComponent();

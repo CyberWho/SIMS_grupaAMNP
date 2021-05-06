@@ -9,7 +9,7 @@ namespace Hospital.Repository
     public class DoctorRepository
     {
         OracleConnection connection = null;
-        RoomRepository roomRepository = new RoomRepository();
+        private RoomRepository roomRepository = new RoomRepository();
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";

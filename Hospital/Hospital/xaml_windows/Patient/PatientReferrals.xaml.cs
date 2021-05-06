@@ -15,10 +15,10 @@ namespace Hospital.xaml_windows.Patient
     {
         private int userId;
         private int healthRecordId;
-        ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
-        ReminderController reminderController = new ReminderController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        PatientController patientController = new PatientController();
+        private ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
+        private ReminderController reminderController = new ReminderController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private PatientController patientController = new PatientController();
 
         public PatientReferrals(int userId,int healthRecordId)
         {

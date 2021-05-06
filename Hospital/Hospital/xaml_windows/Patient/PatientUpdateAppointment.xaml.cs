@@ -156,15 +156,15 @@ namespace Hospital.xaml_windows.Patient
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         private int userId;
-        int appointmentId;
-        ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
-        AppointmentController appointmentController = new AppointmentController();
-        TimeSlotController timeSlotController = new TimeSlotController();
-        Appointment appointment = new Appointment();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        ReminderController reminderController = new ReminderController();
-        PatientController patientController = new PatientController();
-        PatientLogsController patientLogsController = new PatientLogsController();
+        private int appointmentId;
+        private ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
+        private AppointmentController appointmentController = new AppointmentController();
+        private TimeSlotController timeSlotController = new TimeSlotController();
+        private Appointment appointment = new Appointment();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private ReminderController reminderController = new ReminderController();
+        private PatientController patientController = new PatientController();
+        private PatientLogsController patientLogsController = new PatientLogsController();
         public PatientUpdateAppointment(int userId,int appointmentId)
         {
             InitializeComponent();

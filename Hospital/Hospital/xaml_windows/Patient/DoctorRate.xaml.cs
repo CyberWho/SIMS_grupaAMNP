@@ -92,9 +92,9 @@ namespace Hospital.xaml_windows.Patient
         #endregion
         private int userId;
         private int doctorId;
-        PatientController patientController = new PatientController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        ReminderController reminderController = new ReminderController();
+        private PatientController patientController = new PatientController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private ReminderController reminderController = new ReminderController();
         public DoctorRate(int userId,int doctorId)
         {
             InitializeComponent();

@@ -14,7 +14,7 @@ namespace Hospital.Repository
 {
     public class TimeSlotRepository
     {
-        DoctorRepository doctorRepository = new DoctorRepository();
+        private DoctorRepository doctorRepository = new DoctorRepository();
         OracleConnection connection = null;
         private void setConnection()
         {

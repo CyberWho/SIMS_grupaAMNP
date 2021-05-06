@@ -94,10 +94,10 @@ namespace Hospital.xaml_windows.Patient
         #endregion
         
         private int userId;
-        HealthRecordController healthRecordController = new HealthRecordController();
-        PatientController patientController = new PatientController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        ReminderController reminderController = new ReminderController();
+        private HealthRecordController healthRecordController = new HealthRecordController();
+        private PatientController patientController = new PatientController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private ReminderController reminderController = new ReminderController();
         public PatientHealthRecord(int userId)
         {
             

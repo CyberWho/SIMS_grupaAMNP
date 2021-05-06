@@ -10,7 +10,7 @@ namespace Hospital.xaml_windows.Patient
     public partial class HospitalRate : Window
     {
         private int userId;
-        PatientController patientController = new PatientController();
+        private PatientController patientController = new PatientController();
         public HospitalRate(int userId)
         {
             InitializeComponent();

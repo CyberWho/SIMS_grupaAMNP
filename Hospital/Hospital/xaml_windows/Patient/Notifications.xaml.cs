@@ -14,11 +14,11 @@ namespace Hospital.xaml_windows.Patient
     public partial class Notifications : Window
     {
         private int userId;
-        SystemNotificationsController SystemNotificationsController = new SystemNotificationsController();
-        ObservableCollection<SystemNotification> SystemNotifications = new ObservableCollection<SystemNotification>();
-        PatientController patientController = new PatientController();
-        ReminderController reminderController = new ReminderController();
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private SystemNotificationsController SystemNotificationsController = new SystemNotificationsController();
+        private ObservableCollection<SystemNotification> SystemNotifications = new ObservableCollection<SystemNotification>();
+        private PatientController patientController = new PatientController();
+        private ReminderController reminderController = new ReminderController();
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         public Notifications(int userId)
         {
             InitializeComponent();
