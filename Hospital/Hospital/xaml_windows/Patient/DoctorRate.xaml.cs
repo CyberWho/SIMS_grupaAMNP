@@ -172,12 +172,10 @@ namespace Hospital.xaml_windows.Patient
         }
         private void OceniDoktora_Click(object sender, RoutedEventArgs e)
         {
-            Review review = new Review();
-            review.Rate = int.Parse(rate_txt.Text);
-            review.Description = description_txt.Text;
-            review.patient = patientController.GetPatientByUserId(userId);
+            
+            Model.Patient patient= patientController.GetPatientByUserId(userId);
             Model.Doctor doctor = new DoctorController().GetDoctorById(doctorId);
-            review.doctor = doctor;
+            Review review = new Review(int.Parse(rate_txt.Text), description_txt.Text, patient, doctor);
             new ReviewController().AddReview(review);
             MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname);
             var window = new Doctors(userId);

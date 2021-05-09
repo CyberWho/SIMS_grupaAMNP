@@ -64,6 +64,11 @@ namespace Hospital.Controller
         { 
             return roomService.DeleteRoomById(id);
         }
+
+        public Room GetAppointmentRoomById(int roomId)
+        {
+            return roomService.GetAppointmentRoomById(roomId);
+        }
         
       public Boolean DeleteRoomByAppointmentId(int appointmentId)
       {

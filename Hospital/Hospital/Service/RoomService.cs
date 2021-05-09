@@ -31,6 +31,10 @@ namespace Hospital.Service
             return roomRepository.GetRoomByDoctorId(doctorId);
         }
 
+        public Room GetAppointmentRoomById(int roomId)
+        {
+            return roomRepository.GetAppointmentRoomById(roomId);
+        }
         public ObservableCollection<Room> GetAllRooms()
         {
             return roomRepository.GetAllRooms();

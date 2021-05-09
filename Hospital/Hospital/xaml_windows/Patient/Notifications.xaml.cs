@@ -117,5 +117,7 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+
+        
     }
 }

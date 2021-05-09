@@ -15,7 +15,7 @@
             <MenuItem x:Name="PocetnaStranica"  HorizontalAlignment="Left" Click="PocetnaStranica_Click" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-home-96.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
                     </StackPanel>
 
                 </MenuItem.Header>
@@ -23,35 +23,35 @@
             <MenuItem x:Name="MojProfil"  HorizontalAlignment="Left" Background="White" Click="MojProfil_Click" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-male-user-96.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" Width="65" Height="45"  HorizontalAlignment="Left" Click="MojiPregledi_Click"  Background="White">
+            <MenuItem x:Name="MojiPregledi" Height="45"  HorizontalAlignment="Left" Click="MojiPregledi_Click"  Background="White">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" HorizontalAlignment="Left" Source="/Resources/Icons/icons8-calendar-52.png"/>
+                        <Image Width="41" Height="43" HorizontalAlignment="Left" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="ZdravstveniKarton" HorizontalAlignment="Left" Click="ZdravstveniKarton_Click" Background="White" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="43" Source="/Resources/Icons/icons8-doctors-bag-64.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="Doktori" Background="White" Height="45" HorizontalAlignment="Left" Click="Doktori_Click">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Height="45" Width="45" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
+                        <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MojiPodsetnici" Background="White" Height="45" HorizontalAlignment="Left" Click="MojiPodsetnici_Click">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-notification-96.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
@@ -70,16 +70,16 @@
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
         <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="323,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
 
-        <Label Content="Korisnicko ime:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="98,107,0,0" VerticalAlignment="Top"/>
+        <Label Content="Korisničko ime:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="98,107,0,0" VerticalAlignment="Top"/>
         <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.185,0.324"/>
         <Label Content="Prezime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
         <Label Content="Email:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
         <Label Content="Telefon:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,203,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="267,116,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox Grid.Column="1" Text="{Binding Path=NName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,148,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,180,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,212,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=Email, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,244,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="267,116,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox Grid.Column="1" Text="{Binding Path=NName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,148,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,180,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,212,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=Email, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,244,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
         
     </Grid>
 </Window>

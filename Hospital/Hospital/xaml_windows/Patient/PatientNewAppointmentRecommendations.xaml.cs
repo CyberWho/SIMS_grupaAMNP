@@ -21,6 +21,7 @@ namespace Hospital.xaml_windows.Patient
         private TimeSlotController timeSlotController = new TimeSlotController();
         private PatientController patientController = new PatientController();
         private AppointmentController appointmentController = new AppointmentController();
+        private RoomController roomController = new RoomController();
         private ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
         private DoctorController doctorController = new DoctorController();
         private ReminderController reminderController = new ReminderController();
@@ -94,33 +95,26 @@ namespace Hospital.xaml_windows.Patient
         
         private void Zakazi_Click(object sender, RoutedEventArgs e)
         {
-            Appointment appointment = new Appointment();
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
-            appointment.patient = patient;
-            TimeSlot timeSlot = new TimeSlot();
-            timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));
-            appointment.StartTime = timeSlot.StartTime;
-            Model.Doctor doctor = new Model.Doctor();
-            doctor = doctorController.GetWorkHoursDoctorById(int.Parse(doctor_id_txt.Text));
-            appointment.doctor = doctor;
-            Room room = new Room();
-            appointment.room = room;
-            appointment.room.Id = int.Parse(room_id_txt.Text);
-
-            appointment.Doctor_Id = appointment.doctor.Id;
-            appointment.Patient_Id = appointment.patient.Id;
-            appointment.Type = AppointmentType.EXAMINATION;
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
+            Room room = roomController.GetAppointmentRoomById(int.Parse(room_id_txt.Text));
+            Model.Doctor doctor = doctorController.GetWorkHoursDoctorById(int.Parse(doctor_id_txt.Text));
+            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));
+            Appointment appointment = new Appointment(30, timeSlot.StartTime, AppointmentType.EXAMINATION, AppointmentStatus.RESERVED, doctor, patient, room);
             appointmentController.ReserveAppointment(appointment);
             if(referralForSpecialistId != 0)
             {
                 refferalForSpecialistController.DeleteReferralById(referralForSpecialistId);
             }
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
-            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patient.Id))
+            CheckIfPatientIsBlocked(patient.Id);
+        }
+
+        private void CheckIfPatientIsBlocked(int patientId)
+        {
+            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
             {
                 MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
-                appointmentController.DeleteAllReservedAppointmentsByPatientId(patient.Id);
+                appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
                 var windowLogOut = new MainWindow();
                 windowLogOut.Show();
                 this.Close();

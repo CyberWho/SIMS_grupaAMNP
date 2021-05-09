@@ -142,21 +142,25 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = int.Parse(app_id_txt.Text);
-            appointmentController.CancelAppointmentById(appointmentId);
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
+            
+            appointmentController.CancelAppointmentById(int.Parse(app_id_txt.Text));
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
-            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patient.Id)) 
-            { 
+            CheckIfPatientIsBlocked(patient.Id);
+            updateDataGrid();
+        }
+
+        private void CheckIfPatientIsBlocked(int patientId)
+        {
+            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
+            {
                 MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
-                appointmentController.DeleteAllReservedAppointmentsByPatientId(patient.Id);
+                appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
                 var windowLogOut = new MainWindow();
                 windowLogOut.Show();
                 this.Close();
                 return;
             }
-            updateDataGrid();
         }
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)

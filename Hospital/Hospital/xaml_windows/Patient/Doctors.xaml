@@ -15,7 +15,7 @@
             <MenuItem x:Name="PocetnaStranica"  HorizontalAlignment="Left" Click="PocetnaStranica_Click" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-home-96.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
 
                     </StackPanel>
                 </MenuItem.Header>
@@ -23,35 +23,35 @@
             <MenuItem x:Name="MojProfil"  HorizontalAlignment="Left" Background="White" Click="MojProfil_Click" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-male-user-96.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MojiPregledi" HorizontalAlignment="Left" Click="MojiPregledi_Click" Height="45" Background="White">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-calendar-52.png"/>
+                        <Image Width="41" Height="43" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="ZdravstveniKarton" HorizontalAlignment="Left" Click="ZdravstveniKarton_Click" Background="White" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="43" Source="/Resources/Icons/icons8-doctors-bag-64.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="Doktori" Background="White" Height="45" HorizontalAlignment="Left" Click="Doktori_Click">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Height="45" Width="45" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
+                        <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem x:Name="MojiPodsetnici" Background="White" Height="45" HorizontalAlignment="Left" Click="MojiPodsetnici_Click">
                 <MenuItem.Header>
                     <StackPanel>
-                        <Image Width="45" Height="45" Source="/Resources/Icons/icons8-notification-96.png"/>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
@@ -69,7 +69,7 @@
             </StackPanel>
         </Button>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding doctors}"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="365.6,80,0,0" VerticalAlignment="Top" Width="468" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding doctors}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="365.6,80,0,0" VerticalAlignment="Top" Width="468" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding User.Name}" Width="*"/>
