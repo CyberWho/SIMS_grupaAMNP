@@ -15,9 +15,9 @@
             <Label Content="Prijava" Foreground="DeepSkyBlue" FontSize="40" HorizontalAlignment="Center" Margin="294,0,294.6,0"/>
             
             <Label Content="Korisnicko ime" FontSize="16" HorizontalAlignment ="Center" Foreground="DeepSkyBlue"/>
-            <TextBox x:Name="Username" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" HorizontalAlignment="Center" Width="400" Background="White" FontSize="16"/>
+            <TextBox x:Name="Username" BorderBrush="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" HorizontalAlignment="Center" Width="400" Background="White" FontSize="16"/>
             <Label Content="Lozinka" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Center"/>
-            <PasswordBox x:Name="Password" Style="{StaticResource RoundedPasswordBox}" Background="White" HorizontalAlignment="Center" Width ="400" Foreground="DeepSkyBlue" FontSize="16"/>
+            <PasswordBox x:Name="Password" Template="{StaticResource PasswordBox}" Background="White" HorizontalAlignment="Center" Width ="400" Foreground="DeepSkyBlue" FontSize="16"/>
             <Button x:Name="Potvrda" FontSize="16" Style="{StaticResource RoundedButton}" Foreground="White" HorizontalAlignment="Center" Width="200"  Click="Potvrda_Click" Content="Potvrda" Margin="00 10" Background="DeepSkyBlue"/>
         </StackPanel>
 

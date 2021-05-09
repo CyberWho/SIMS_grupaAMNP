@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.DoctorRate"
         mc:Ignorable="d"
-        Title="DoctorRate" Height="500" Width="500" Loaded="Window_Loaded">
+        Title="DoctorRate" Height="500" Width="500" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
 
 
-        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Margin="0,2,448.6,428.4"/>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="0,2,443.6,428.4"/>
 
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="50,2,178.6,423.4" Height="Auto"/>
         <Label Content="Oceni doktora:" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="34,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
@@ -29,7 +29,7 @@
         <Button x:Name="OceniDoktora" Click="OceniDoktora_Click" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="175,396,84.6,38.4" RenderTransformOrigin="0.729,0.431"/>
 
 
-        <xctk:IntegerUpDown x:Name="rate_txt" Foreground="DeepSkyBlue" FontSize="16" DefaultValue="1" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="180,237,0,0" VerticalAlignment="Top" Width="229" Height="27"/>
+        <xctk:IntegerUpDown x:Name="rate_txt" Style="{StaticResource RoundedIntegerUpDown}" Foreground="DeepSkyBlue" FontSize="16" DefaultValue="1" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="180,237,0,0" VerticalAlignment="Top" Width="229" Height="27"/>
 
 
     </Grid>

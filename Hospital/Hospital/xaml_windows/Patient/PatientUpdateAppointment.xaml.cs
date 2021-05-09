@@ -231,24 +231,25 @@ namespace Hospital.xaml_windows.Patient
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             
-           
-            TimeSlot timeSlot = new TimeSlot();
-            int timeSlotId = int.Parse(timeslot_id_txt.Text);
-            timeSlot = timeSlotController.GetTimeSlotById(timeSlotId);
+            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));
             appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
-            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patient.Id))
+            CheckIfPatientIsBlocked(patient.Id);
+        }
+
+        private void CheckIfPatientIsBlocked(int patientId)
+        {
+            if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
             {
                 MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
-                appointmentController.DeleteAllReservedAppointmentsByPatientId(patient.Id);
+                appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
                 var windowLogOut = new MainWindow();
                 windowLogOut.Show();
                 this.Close();
                 return;
             }
-            
+
             var window = new PatientAppointments(userId);
             window.Show();
             this.Close();

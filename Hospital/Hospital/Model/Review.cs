@@ -24,5 +24,13 @@ namespace Hospital.Model
             this.patient = patient;
             this.doctor = doctor;
         }
+        public Review(int rate, string description, Patient patient, Doctor doctor)
+        {
+           
+            this.Rate = rate;
+            this.Description = description;
+            this.patient = patient;
+            this.doctor = doctor;
+        }
     }
 }
