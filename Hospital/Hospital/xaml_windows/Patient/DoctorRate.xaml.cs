@@ -178,8 +178,7 @@ namespace Hospital.xaml_windows.Patient
             Review review = new Review(int.Parse(rate_txt.Text), description_txt.Text, patient, doctor);
             new ReviewController().AddReview(review);
             MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname);
-            var window = new Doctors(userId);
-            window.Show();
+           
             this.Close();
         }
 

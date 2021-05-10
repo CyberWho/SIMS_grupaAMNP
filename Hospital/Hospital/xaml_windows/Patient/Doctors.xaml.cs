@@ -110,7 +110,7 @@ namespace Hospital.xaml_windows.Patient
             {
                 var window = new DoctorRate(userId, int.Parse(doc_id_txt.Text));
                 window.Show();
-                this.Close();
+                
             }
         }
 
