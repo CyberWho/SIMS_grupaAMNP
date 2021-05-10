@@ -27,9 +27,10 @@
         <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="292,585,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" HorizontalAlignment="Left" Height="25" Margin="292,614,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.doctor.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
 
-        <Button x:Name="Izmeni" Content="Izmeni termin" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click" Height="30"/>
-        <Button x:Name="Obrisi" Content="Obrisi termin" HorizontalAlignment="Left" Margin="10,410,0,0" VerticalAlignment="Top" Width="86" Click="Obrisi_Click" Height="30"/>
-        <Button x:Name="ZakaziNoviTermin" Content="Zakazi novi termin" HorizontalAlignment="Left" Margin="10,445,0,0" VerticalAlignment="Top" Width="111" Click="ZakaziNoviTermin_Click" Height="30"/>
+        <Button ToolTip="Klikom na dugme moci cete da izmenite podatke o selektovanom terminu" x:Name="Izmeni" Content="Izmeni termin" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click" Height="30"/>
+        <Button ToolTip="Klikom na dugme obrisacete selektovani termin" x:Name="Obrisi" Content="Obrisi termin" HorizontalAlignment="Left" Margin="10,410,0,0" VerticalAlignment="Top" Width="86" Click="Obrisi_Click" Height="30"/>
+        <Button ToolTip="Klikom na dugme moci cete da unesete podatke potrebne da bi ste zakazali termin" x:Name="ZakaziNoviTermin" Content="Zakazi novi termin" HorizontalAlignment="Left" Margin="10,445,0,0" VerticalAlignment="Top" Width="111" Click="ZakaziNoviTermin_Click" Height="30"/>
+        
         <Label Content="Trajanje" HorizontalAlignment="Left" Margin="236,460,0,0" VerticalAlignment="Top" Height="29"/>
         <Label Content="Vreme" HorizontalAlignment="Left" Margin="243,491,0,0" VerticalAlignment="Top" Height="28"/>
         <Label Content="Soba" HorizontalAlignment="Left" Margin="250,520,0,0" VerticalAlignment="Top" Height="28"/>

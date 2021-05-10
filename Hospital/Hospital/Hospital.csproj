@@ -296,6 +296,9 @@
     <Compile Include="xaml_windows\Secretary\SecretaryUI.xaml.cs">
       <DependentUpon>SecretaryUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\test.xaml.cs">
+      <DependentUpon>test.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\UpdateNotification.xaml.cs">
       <DependentUpon>UpdateNotification.xaml</DependentUpon>
     </Compile>
@@ -477,6 +480,10 @@
     <Page Include="xaml_windows\Secretary\SecretaryUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Secretary\test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Secretary\UpdateNotification.xaml">
       <SubType>Designer</SubType>

@@ -20,7 +20,7 @@
         <TextBox Grid.Column ="1" Grid.Row="4" HorizontalAlignment="Left" Height="23" Margin="272,283,0,0" TextWrapping="Wrap" Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
 
 
-        <Button Content="Sacuvaj nove podatke" HorizontalAlignment="Left" Margin="272,360,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_nove_podatke"/>
+        <Button Content="Sacuvaj nove podatke" HorizontalAlignment="Left" Margin="272,360,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_nove_podatke" Height="30"/>
 
     </Grid>
 </Window>

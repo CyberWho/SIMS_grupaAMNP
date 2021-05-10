@@ -128,6 +128,8 @@ namespace Hospital.xaml_windows.Secretary
 
             this.id = id;
 
+            //Window t = new test();
+            //t.Show();
 
             // this.workHoursController.AddWorkHours(workHours: new WorkHours());
             // this.timeSlotController.generateTimeSlots();

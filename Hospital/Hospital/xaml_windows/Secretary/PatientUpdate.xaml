@@ -14,13 +14,6 @@
 
         <Label Content="Upravljanje kartonom pacijenta&#xD;&#xA;" HorizontalAlignment="Left" Margin="83,9,0,0" VerticalAlignment="Top" Height="31"/>
 
-        <Expander Header="Meni" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="68">
-            <Grid Background="#FFE5E5E5"/>
-        </Expander>
-        <Expander Header="Akcije" HorizontalAlignment="Left" Height="100" Margin="345,10,0,0" VerticalAlignment="Top" Width="65">
-            <Grid Background="#FFE5E5E5"/>
-        </Expander>
-
         <DataGrid x:Name="dataGridAllergies" IsReadOnly="True" ItemsSource="{Binding Allergies}"
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
                   Height="664" Margin="10,45,0,0" VerticalAlignment="Top" Width="137" SelectionChanged="dataGridPatients_SelectionChanged">
@@ -31,10 +24,10 @@
         </DataGrid>
 
         <!--<TextBox Grid.Row="0" HorizontalAlignment="Left" Text ="{Binding Path=Nova_alergija, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="160,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
-        <ComboBox Name ="selection" Loaded="selection_loaded" HorizontalAlignment="Left" Margin="164,88,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="selection_SelectionChanged"/>
+        <ComboBox ToolTip="Odabrati alergiju koju zelite da dodate kod pacijenta" Name ="selection" Loaded="selection_loaded" HorizontalAlignment="Left" Margin="164,88,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="selection_SelectionChanged"/>
 
-        <Button Content="Obrisi selektovani alergen" HorizontalAlignment="Left" Margin="220,186,0,0" VerticalAlignment="Top" Width="150" Click="Obrisi_alergen"/>
-        <Button Content="Dodaj alergiju" HorizontalAlignment="Left" Margin="314,88,0,0" VerticalAlignment="Top" Width="100" Click="Dodaj_alergiju"/>
+        <Button ToolTip="Klikom na dugme pacijentu se u listu alergija dodaje i prethodno odabrana alergija" Content="Dodaj alergiju" HorizontalAlignment="Left" Margin="302,88,0,0" VerticalAlignment="Top" Width="98" Click="Dodaj_alergiju" Height="30"/>
+        <Button ToolTip="Klikom na dugme se pacijentu iz liste alergija brise selektovana alergija" Content="Obrisi selektovani alergen" HorizontalAlignment="Left" Margin="215,245,0,0" VerticalAlignment="Top" Width="150" Click="Obrisi_alergen" Height="30"/>
         <!--<Button Content="Izmeni adresu" HorizontalAlignment="Left" Margin="310,69,0,0" VerticalAlignment="Top" Width="100" Click="Izmeni_adresu"/>-->
         <!--<Button Content="Sacuvajte pacijenta" HorizontalAlignment="Left" Margin="233,340,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_pacijenta" Height="30"/>-->
 

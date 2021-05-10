@@ -8,16 +8,19 @@
         Title="CreateNotification" Height="750" Width="430">
     <Grid>
         <Menu Margin="0,0,0,679"/>
+
         <Label Content="Naziv obavestenja" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top"/>
         <Label Content="Prvi dan vazenja" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
         <Label Content="Opis" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top"/>
         <Label Content="Poslednji dan vazenja" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
+
         <DatePicker x:Name="start_date" Margin="158,60,162,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
         <DatePicker x:Name="end_date" Margin="158,91,162,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+
         <TextBox x:Name="not_title"  Height="23" Margin="158,122,10,0" TextWrapping="Wrap" Text="Unesite naziv obavestenja" VerticalAlignment="Top"/>
         <TextBox x:Name="not_desc" Height="150" Margin="158,153,10,0" TextWrapping="Wrap" Text="Unesite opis obavestenja" VerticalAlignment="Top"/>
 
-        <Button Content="Kreiraj obavestenje" HorizontalAlignment="Left" Margin="10,0,0,272" VerticalAlignment="Bottom" Width="123" Height="30" Click="Make_Notification"/>
+        <Button ToolTip="Obavestenje ce biti kreirano klikom na ovo dugme" Content="Kreiraj obavestenje" HorizontalAlignment="Right" Margin="0,308,10,0" VerticalAlignment="Top" Width="123" Height="30" Click="Make_Notification"/>
 
     </Grid>
 </Window>

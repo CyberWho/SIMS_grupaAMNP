@@ -25,7 +25,7 @@
         <TextBox x:Name="doc_surname_txt" HorizontalAlignment="Left" Height="23" Margin="292,431,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="room_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,459,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="120"/>
 
-        <Button x:Name="Predlozi" Content="Prikazi predloge termina" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="137" Click="Predlozi_Click" RenderTransformOrigin="0.631,1.255" Height="30"/>
+        <Button ToolTip="Klikom na dugme bice vam izlistani dostupni termin radi kreiranja istih" x:Name="Predlozi" Content="Prikazi predloge termina" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="137" Click="Predlozi_Click" RenderTransformOrigin="0.631,1.255" Height="30"/>
         
         <Label Content="Prioritet" HorizontalAlignment="Left" Margin="232,542,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="date_txt" HorizontalAlignment="Left" Margin="292,487,0,0" VerticalAlignment="Top" SelectedDate="{Binding SelectedItem.StartTime,ElementName=myDataGrid}" Width="120"/>

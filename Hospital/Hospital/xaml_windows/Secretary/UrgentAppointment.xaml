@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="UrgentAppointment" Height="750" Width="430">
     <Grid>
-        <Button Content="Kreiraj hitan termin" Margin="141,0,143,10" VerticalAlignment="Bottom" Height="30" Click="Move_Reserved_Appointment"/>
+        <Button Content="Kreiraj hitan termin" Margin="141,0,143,9.8" VerticalAlignment="Bottom" Height="30" Click="Move_Reserved_Appointment"/>
         <Label Content="Odabrani pacijent" Height="26" Margin="141,83,143,0" VerticalAlignment="Top"/>
 
         <TextBlock x:Name="PatName" Margin="141,114,143,0" Text="Ime pacijenta" VerticalAlignment="Top"/>
@@ -17,10 +17,10 @@
         <TextBlock x:Name="Email" Margin="141,177,143,0" Text="Email adresa pacijenta" VerticalAlignment="Top"/>
 
         <Label Content="Odaberite oblast lekara" Margin="141,250,143,0" VerticalAlignment="Top"/>
-        <ComboBox Name ="selection" Loaded="selection_loaded" Margin="141,290,143,0" VerticalAlignment="Top" SelectionChanged="selection_SelectionChanged"/>
+        <ComboBox ToolTip="Selektovati specijalizaciju koja vam je potrebna" Name ="selection" Loaded="selection_loaded" Margin="141,290,143,0" VerticalAlignment="Top" SelectionChanged="selection_SelectionChanged"/>
 
 
-        <DataGrid x:Name="available_timeslots" ItemsSource="{Binding timeSlots}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,317,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="Selected_TimeSlot_In_Which_To_Move_Appointment">
+        <DataGrid ToolTip="Odaberite vreme u koje zelite da pomerite prethodno zakazan termin" x:Name="available_timeslots" ItemsSource="{Binding timeSlots}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,317,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="Selected_TimeSlot_In_Which_To_Move_Appointment">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Pocetak" Binding="{Binding StartTime}" Width="*"/>

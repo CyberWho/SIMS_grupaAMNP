@@ -32,7 +32,7 @@
         <TextBox x:Name="doctor_name_txt" HorizontalAlignment="Left" Height="23" Margin="292,460,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="doctor_surname_txt" HorizontalAlignment="Left" Height="23" Margin="292,488,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="room_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,516,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Zakazi" x:Name="Zakazi" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="75" Click="Zakazi_Click" Height="30"/>
+        <Button Content="Zakazi termin" x:Name="Zakazi" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="95" Click="Zakazi_Click" Height="30"/>
 
         <DatePicker x:Name="datepicker_txt" HorizontalAlignment="Left" Margin="292,403,0,0" VerticalAlignment="Top" SelectedDate="{Binding SelectedItem.StartTime,ElementName=myGrid}" Width="120"/>
 
