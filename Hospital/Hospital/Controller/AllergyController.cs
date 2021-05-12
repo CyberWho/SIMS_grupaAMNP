@@ -37,8 +37,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
         {
-            // TODO: implement
-            return null;
+            return allergyService.GetAllAllergiesByHealthRecordId(healthRecordId);
         }
 
         public Boolean DeleteAllergyById(int id)
