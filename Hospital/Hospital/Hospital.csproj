@@ -227,6 +227,12 @@
     <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\Allergies.xaml.cs">
+      <DependentUpon>Allergies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\ClinicalTreatmentReferrals.xaml.cs">
+      <DependentUpon>ClinicalTreatmentReferrals.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\DoctorRate.xaml.cs">
       <DependentUpon>DoctorRate.xaml</DependentUpon>
     </Compile>
@@ -238,6 +244,9 @@
     </Compile>
     <Compile Include="xaml_windows\Patient\Notifications.xaml.cs">
       <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PatientAnamnesis.xaml.cs">
+      <DependentUpon>PatientAnamnesis.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientAppointments.xaml.cs">
       <DependentUpon>PatientAppointments.xaml</DependentUpon>
@@ -253,6 +262,9 @@
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml.cs">
       <DependentUpon>PatientNewAppointmentRecommendations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PatientPerscriptions.xaml.cs">
+      <DependentUpon>PatientPerscriptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientReferrals.xaml.cs">
       <DependentUpon>PatientReferrals.xaml</DependentUpon>
@@ -389,6 +401,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="xaml_windows\Patient\Allergies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\ClinicalTreatmentReferrals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Patient\DoctorRate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -402,6 +422,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientAnamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -422,6 +446,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Patient\PatientNewAppointmentRecommendations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientPerscriptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

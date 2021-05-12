@@ -7,6 +7,7 @@
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Repository
 {
@@ -82,10 +83,29 @@ namespace Hospital.Repository
             return null;
         }
 
-        public System.Collections.ArrayList GetAllActivePerscriptionsByAnamnesisId(int anamnesisId)
+        public ObservableCollection<Perscription> GetAllActivePerscriptionsByAnamnesisId(int anamnesisId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "select * from perscription where anamnesis_id = :anamnesis_id and is_active = 1";
+            command.Parameters.Add("anamnesis_id", OracleDbType.Int32).Value = anamnesisId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            ObservableCollection<Model.Perscription> perscriptions = new ObservableCollection<Model.Perscription>();
+
+            while (reader.Read())
+            {
+                Model.Perscription perscription = new Model.Perscription();
+                perscription.Id = reader.GetInt32(0);
+                perscription.IsActive = reader.GetInt32(1) == 0 ? false : true;
+                perscription.Description = reader.GetString(2);
+                perscription.Drug_id = reader.GetInt32(3);
+                perscription.Drug = new DrugRepository().GetDrugById(reader.GetInt32(3));
+                perscriptions.Add(perscription);
+            }
+
+            connection.Close();
+            
+            return perscriptions;
         }
 
         public Boolean DeletePerscriptionById(int id)

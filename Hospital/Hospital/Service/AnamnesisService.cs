@@ -6,6 +6,8 @@
 
 using Hospital.Repository;
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
@@ -23,11 +25,25 @@ namespace Hospital.Service
             return null;
         }
 
-        public System.Collections.ArrayList GetAllAnamnesesByHealthRecordId(int healthRecordId)
+        public ObservableCollection<Anamnesis> GetAllAnamnesesByHealthRecordId(int healthRecordId)
         {
-            // TODO: implement
-            return null;
+            return anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
         }
+
+        public ObservableCollection<Perscription> GetAllActivePerscriptionsByHealthRecordId(int healthRecordId)
+        {
+            ObservableCollection<Anamnesis> anamneses = anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
+            ObservableCollection<Perscription> perscriptions = new ObservableCollection<Perscription>();
+            foreach(Anamnesis anamnesis in anamneses)
+            {
+                ObservableCollection<Perscription> perscriptionInAnamnesis = perscriptionRepository.GetAllActivePerscriptionsByAnamnesisId(anamnesis.Id);
+                foreach(Perscription perscription in perscriptionInAnamnesis)
+                {
+                    perscriptions.Add(perscription);
+                }
+            }
+            return perscriptions;
+        } 
 
         public Boolean DeleteAnamnesisById(int id)
         {
@@ -63,7 +79,8 @@ namespace Hospital.Service
             return null;
         }
 
-        public AnamnesisRepository anamnesisRepository;
+        public AnamnesisRepository anamnesisRepository = new AnamnesisRepository();
+        public PerscriptionRepository perscriptionRepository = new PerscriptionRepository();
 
     }
 }

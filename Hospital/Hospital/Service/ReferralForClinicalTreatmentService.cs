@@ -5,9 +5,13 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
+
    public class ReferralForClinicalTreatmentService
    {
       public System.Collections.ArrayList GetAllReferralsForClinicalTreatment()
@@ -27,7 +31,12 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-      
+        public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(int healthRecordId)
+        {
+            return referralForClinicalTreatmentRepository.GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(healthRecordId);
+        }
+
+
       public System.Collections.ArrayList GetAllReferralsForClinicalTreatmentByRoomId(int roomId)
       {
          // TODO: implement
@@ -100,7 +109,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Repository.ReferralForClinicalTreatmentRepository referralForClinicalTreatmentRepository;
+      public Repository.ReferralForClinicalTreatmentRepository referralForClinicalTreatmentRepository = new ReferralForClinicalTreatmentRepository();
    
    }
 }

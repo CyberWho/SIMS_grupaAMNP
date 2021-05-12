@@ -181,18 +181,23 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojeAlergije_Click(object sender, RoutedEventArgs e)
         {
-
+            Model.Patient patient = GetPatientByUserId(userId);
+            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var window = new Allergies(userId, healthRecord.Id);
+            window.Show();
+            this.Close();
         }
 
         private void MojeAnamneze_Click(object sender, RoutedEventArgs e)
         {
-
+            Model.Patient patient = GetPatientByUserId(userId);
+            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var window = new PatientAnamnesis(userId, healthRecord.Id);
+            window.Show();
+            this.Close();
         }
 
-        private void MojeTerapije_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientReminders(userId);
@@ -202,7 +207,11 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiRecepti_Click(object sender, RoutedEventArgs e)
         {
-
+            Model.Patient patient = GetPatientByUserId(userId);
+            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var window = new PatientPerscriptions(userId, healthRecord.Id);
+            window.Show();
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -220,6 +229,15 @@ namespace Hospital.xaml_windows.Patient
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
             var window = new Notifications(userId);
+            window.Show();
+            this.Close();
+        }
+
+        private void BolnickoLecenje_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Patient patient = GetPatientByUserId(userId);
+            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var window = new ClinicalTreatmentReferrals(userId, healthRecord.Id);
             window.Show();
             this.Close();
         }

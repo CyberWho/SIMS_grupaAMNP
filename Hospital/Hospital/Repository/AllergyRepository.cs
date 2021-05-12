@@ -98,10 +98,23 @@ namespace Hospital.Repository
             return null;
         }
 
-        public System.Collections.ArrayList GetAllAllergiesByHealthRecordId(int healthRecordId)
+        public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
         {
-            // TODO: implement
-            return null;
+            setConnection();
+            ObservableCollection<Allergy> allergies = new ObservableCollection<Allergy>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM ALLERGY WHERE HEALTH_RECORD_ID = :health_record_id";
+            command.Parameters.Add("health_record_id", OracleDbType.Int32).Value = healthRecordId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                Allergy allergy = new Allergy();
+                allergy.Id = reader.GetInt32(0);
+                allergy.allergyType = new AllergyTypeRepository().GetAllergyTypeById(reader.GetInt32(1));
+                allergies.Add(allergy);
+            }
+            connection.Close();
+            return allergies;
         }
         public Boolean DeleteAllergyByUserIdAndAllergyTypeId(int userId, int atId)
         {

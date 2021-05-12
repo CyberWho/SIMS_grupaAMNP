@@ -62,8 +62,9 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
-      public PerscriptionRepository perscriptionRepository;
+
+        public PerscriptionRepository perscriptionRepository = new PerscriptionRepository();
+       
    
    }
 }

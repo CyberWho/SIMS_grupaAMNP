@@ -34,10 +34,9 @@ namespace Hospital.Service
             return null;
         }
 
-        public System.Collections.ArrayList GetAllAllergiesByHealthRecordId(int healthRecordId)
+        public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
         {
-            // TODO: implement
-            return null;
+            return allergyRepository.GetAllAllergiesByHealthRecordId(healthRecordId);
         }
 
         public Boolean DeleteAllergyById(int id)

@@ -74,7 +74,7 @@ namespace Hospital.Model
                 tmpPerscriptions.Clear();
             }
         }
-        public Appointment appointment;
+        public Appointment appointment { get; set; }
         public ObservableCollection<MedicalTreatment> MedicalTreatments;
 
         /// <pdGenerated>default getter</pdGenerated>
