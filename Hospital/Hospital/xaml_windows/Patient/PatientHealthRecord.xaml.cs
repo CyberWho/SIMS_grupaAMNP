@@ -197,10 +197,7 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
-        private void MojeTerapije_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientReminders(userId);
@@ -210,7 +207,11 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiRecepti_Click(object sender, RoutedEventArgs e)
         {
-
+            Model.Patient patient = GetPatientByUserId(userId);
+            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var window = new PatientPerscriptions(userId, healthRecord.Id);
+            window.Show();
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

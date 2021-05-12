@@ -30,6 +30,21 @@ namespace Hospital.Service
             return anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
         }
 
+        public ObservableCollection<Perscription> GetAllActivePerscriptionsByHealthRecordId(int healthRecordId)
+        {
+            ObservableCollection<Anamnesis> anamneses = anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
+            ObservableCollection<Perscription> perscriptions = new ObservableCollection<Perscription>();
+            foreach(Anamnesis anamnesis in anamneses)
+            {
+                ObservableCollection<Perscription> perscriptionInAnamnesis = perscriptionRepository.GetAllActivePerscriptionsByAnamnesisId(anamnesis.Id);
+                foreach(Perscription perscription in perscriptionInAnamnesis)
+                {
+                    perscriptions.Add(perscription);
+                }
+            }
+            return perscriptions;
+        } 
+
         public Boolean DeleteAnamnesisById(int id)
         {
             // TODO: implement
@@ -65,6 +80,7 @@ namespace Hospital.Service
         }
 
         public AnamnesisRepository anamnesisRepository = new AnamnesisRepository();
+        public PerscriptionRepository perscriptionRepository = new PerscriptionRepository();
 
     }
 }

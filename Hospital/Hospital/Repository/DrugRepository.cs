@@ -35,7 +35,8 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = SelectAllCommandText + "and id = " + id.ToString();
+            command.CommandText = "SELECT * FROM DRUG,INVENTORY_ITEM WHERE DRUG.ID = :id AND DRUG.INVENTORY_ITEM_ID = INVENTORY_ITEM.ID";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
 
             reader.Read();
