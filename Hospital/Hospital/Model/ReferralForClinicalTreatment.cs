@@ -19,6 +19,10 @@ namespace Hospital.Model
       public Appointment Appointment { get; set; }
       public HealthRecord HealthRecord { get; set; }
 
+      public int appointmentId { get; set; }
+      
+        public int healthRecordId { get; set; }
+
         public ReferralForClinicalTreatment(int id, bool isActive, string description, DateTime startTime, DateTime endTime, Appointment appointment, HealthRecord healthRecord)
         {
             Id = id;
@@ -28,6 +32,8 @@ namespace Hospital.Model
             EndTime = endTime;
             Appointment = appointment;
             HealthRecord = healthRecord;
+            appointmentId = appointment.Id;
+            healthRecordId = healthRecord.Id;
         }
 
         public ReferralForClinicalTreatment()

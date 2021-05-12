@@ -5,12 +5,31 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Oracle.ManagedDataAccess.Client;
+using System.Diagnostics;
+using Hospital.Model;
 
 namespace Hospital.Repository
 {
    public class ReferralForClinicalTreatmentRepository
    {
-      public System.Collections.ArrayList GetAllReferralsForClinicalTreatment()
+        OracleConnection connection = null;
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            connection = new OracleConnection(conString);
+            try
+            {
+                connection.Open();
+
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+            }
+        }
+        public System.Collections.ArrayList GetAllReferralsForClinicalTreatment()
       {
          // TODO: implement
          return null;
@@ -33,6 +52,31 @@ namespace Hospital.Repository
          // TODO: implement
          return null;
       }
+
+      public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(int healthRecordId)
+        {
+            setConnection();
+            ObservableCollection<ReferralForClinicalTreatment> referralForClinicalTreatments = new ObservableCollection<ReferralForClinicalTreatment>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REFERRAL_FOR_CLINICAL_TREATMENT WHERE HEALTH_RECORD_ID = :health_record_id AND ACTIVE = 1";
+            command.Parameters.Add("health_record_id", OracleDbType.Int32).Value = healthRecordId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                ReferralForClinicalTreatment referralForClinicalTreatment = new ReferralForClinicalTreatment();
+                referralForClinicalTreatment.Id = reader.GetInt32(0);
+                referralForClinicalTreatment.IsActive = true;
+                referralForClinicalTreatment.StartTime = reader.GetDateTime(2);
+                referralForClinicalTreatment.EndTime = reader.GetDateTime(3);
+                referralForClinicalTreatment.appointmentId = reader.GetInt32(4);
+                referralForClinicalTreatment.healthRecordId = reader.GetInt32(5);
+                referralForClinicalTreatment.Description = reader.GetString(6);
+                referralForClinicalTreatments.Add(referralForClinicalTreatment);
+            }
+
+            connection.Close();
+            return referralForClinicalTreatments;
+        }
       
       public Model.ReferralForClinicalTreatment GetReferralForClinicalTreatmentById()
       {

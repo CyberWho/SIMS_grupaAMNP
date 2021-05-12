@@ -227,6 +227,9 @@
     <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\ClinicalTreatmentReferrals.xaml.cs">
+      <DependentUpon>ClinicalTreatmentReferrals.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\DoctorRate.xaml.cs">
       <DependentUpon>DoctorRate.xaml</DependentUpon>
     </Compile>
@@ -386,6 +389,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Manager\ManagerUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\ClinicalTreatmentReferrals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

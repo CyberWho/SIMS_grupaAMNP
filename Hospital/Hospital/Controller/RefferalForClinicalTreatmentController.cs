@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -29,7 +30,11 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-      
+
+        public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(int healthRecordId)
+        {
+            return referralForClinicalTreatmentService.GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(healthRecordId);
+        }
       public ObservableCollection<ReferralForClinicalTreatment> GetAllReferralsForClinicalTreatmentByRoomId(int roomId)
       {
          // TODO: implement
@@ -102,7 +107,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService;
+      public Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService = new ReferralForClinicalTreatmentService();
    
    }
 }

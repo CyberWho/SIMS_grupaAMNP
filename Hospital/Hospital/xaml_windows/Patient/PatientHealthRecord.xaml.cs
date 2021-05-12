@@ -223,5 +223,14 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+
+        private void BolnickoLecenje_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Patient patient = GetPatientByUserId(userId);
+            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var window = new ClinicalTreatmentReferrals(userId, healthRecord.Id);
+            window.Show();
+            this.Close();
+        }
     }
 }
