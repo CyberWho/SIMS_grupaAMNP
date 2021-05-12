@@ -190,7 +190,11 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojeAnamneze_Click(object sender, RoutedEventArgs e)
         {
-
+            Model.Patient patient = GetPatientByUserId(userId);
+            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var window = new PatientAnamnesis(userId, healthRecord.Id);
+            window.Show();
+            this.Close();
         }
 
         private void MojeTerapije_Click(object sender, RoutedEventArgs e)

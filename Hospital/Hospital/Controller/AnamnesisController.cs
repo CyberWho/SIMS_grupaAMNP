@@ -27,8 +27,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<Anamnesis> GetAllAnamnesesByHealthRecordId(int healthRecordId)
         {
-            // TODO: implement
-            return null;
+            return anamnesisService.GetAllAnamnesesByHealthRecordId(healthRecordId);
         }
 
         public Boolean DeleteAnamnesisById(int id)
@@ -64,7 +63,7 @@ namespace Hospital.Controller
             return null;
         }
 
-        public AnamnesisService anamnesisService;
+        public AnamnesisService anamnesisService = new AnamnesisService();
 
     }
 }

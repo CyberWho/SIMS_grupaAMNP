@@ -245,6 +245,9 @@
     <Compile Include="xaml_windows\Patient\Notifications.xaml.cs">
       <DependentUpon>Notifications.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\PatientAnamnesis.xaml.cs">
+      <DependentUpon>PatientAnamnesis.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\PatientAppointments.xaml.cs">
       <DependentUpon>PatientAppointments.xaml</DependentUpon>
     </Compile>
@@ -416,6 +419,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PatientAnamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
