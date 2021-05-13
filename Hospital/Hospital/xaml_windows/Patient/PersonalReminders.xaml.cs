@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -24,13 +25,16 @@ namespace Hospital.xaml_windows.Patient
     {
         int userId;
         private ReminderController reminderController = new ReminderController();
-        private ObservableCollection<Reminder> Reminders = new ObservableCollection<Reminder>();
+        
         private PatientController patientController = new PatientController();
+        private PersonalReminderController personalReminderController = new PersonalReminderController();
+        private ObservableCollection<PersonalReminder> personalReminders = new ObservableCollection<PersonalReminder>();
         private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         public PersonalReminders(int userId)
         {
             this.userId = userId;
             InitializeComponent();
+            updateDataGrid();
         }
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {
@@ -67,6 +71,16 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+        private void updateDataGrid()
+        {
+            this.DataContext = this;
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
+            personalReminders = personalReminderController.GetAllPersonalRemindersByPatientId(patient.Id);
+            DataTable dt = new DataTable();
+            myDataGrid.DataContext = dt;
+            myDataGrid.ItemsSource = personalReminders;
+        }
+
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {

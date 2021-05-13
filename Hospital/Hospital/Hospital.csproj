@@ -84,6 +84,7 @@
     <Compile Include="Controller\AnamnesisController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Controller\CityController.cs" />
+    <Compile Include="Controller\PersonalReminderController.cs" />
     <Compile Include="Controller\SpecializationContoller.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\DrugController.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Repository\PatientLogsRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\PerscriptionRepository.cs" />
+    <Compile Include="Repository\PersonalReminderRepository.cs" />
     <Compile Include="Repository\ReferralForClinicalTreatmentRepository.cs" />
     <Compile Include="Repository\ReferralForSpecialistRepository.cs" />
     <Compile Include="Repository\ReminderRepository.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="Service\PatientLogsService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\PerscriptionService.cs" />
+    <Compile Include="Service\PersonalReminderService.cs" />
     <Compile Include="Service\ReferralForClinicalTreatmentService.cs" />
     <Compile Include="Service\ReferralForSpecialistService.cs" />
     <Compile Include="Service\ReminderService.cs" />

@@ -30,8 +30,18 @@ namespace Hospital.Repository
         }
         public Reminder GetReminderById(int id)
       {
-         // TODO: implement
-         return null;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REMINDER WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            Reminder reminder = new Reminder();
+            reminder.Id = reader.GetInt32(0);
+            reminder.Name = reader.GetString(1);
+            reminder.Description = reader.GetString(2);
+            reminder.AlarmTime = reader.GetDateTime(3);
+            connection.Close();
+            return reminder;
       }
       
       public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)

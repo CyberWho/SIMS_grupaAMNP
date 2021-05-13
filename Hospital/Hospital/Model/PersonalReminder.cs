@@ -12,6 +12,7 @@ namespace Hospital.Model
 
         public PersonalReminderFrequency PersonalReminderFrequency { get; set; }
 
+        public int reminderId { get; set; }
         public PersonalReminder()
         {
 
