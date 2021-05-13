@@ -51,7 +51,60 @@ namespace Hospital.xaml_windows.Patient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            dispatcherTimer.Tick += dispatherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
         }
+        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Reminders(userId);
+            window.Show();
+            this.Close();
+        }
+        private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new PatientUI(userId);
+            window.Show();
+            this.Close();
+        }
+
+        private void MojProfil_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new PatientInfo(userId);
+            window.Show();
+            this.Close();
+        }
+        private void MojiPregledi_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new PatientAppointments(userId);
+            window.Show();
+            this.Close();
+        }
+        private void Doktori_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Doctors(userId);
+            window.Show();
+            this.Close();
+        }
+        private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new PatientHealthRecord(userId);
+            window.Show();
+            this.Close();
+        }
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Notifications(userId);
+            window.Show();
+            this.Close();
+        }
+
+
     }
 }

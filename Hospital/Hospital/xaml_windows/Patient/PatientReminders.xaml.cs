@@ -44,7 +44,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientReminders(userId);
+            var window = new Reminders(userId);
             window.Show();
             this.Close();
         }
@@ -109,19 +109,6 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
-        private void ObrisiPodsetnik_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void IzmeniPodsetnik_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void KreirajPodsetnik_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

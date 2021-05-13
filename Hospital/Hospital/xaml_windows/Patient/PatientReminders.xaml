@@ -89,9 +89,6 @@
         <xctk:DateTimePicker x:Name="datepicker_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,144,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
         <Label Content="Odabrani podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Moji podsetnici:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="344,42,0,0" VerticalAlignment="Top"/>
-        <Button Content="Obriši podsetnik" x:Name="ObrisiPodsetnik" Click="ObrisiPodsetnik_Click" FontSize="16" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="190.8,319,0,0" VerticalAlignment="Top" Width="144" Height="25"/>
-        <Button Content="Izmeni podsetnik" x:Name="IzmeniPodsetnik" Click="IzmeniPodsetnik_Click" FontSize="16" Foreground="White" Background="RoyalBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,319,0,0" VerticalAlignment="Top" Width="144" Height="25"/>
-        <Button Content="Kreiraj novi podsetnik" x:Name="KreirajPodsetnik" Click="KreirajPodsetnik_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="100.8,349,0,0" VerticalAlignment="Top" Width="164" Height="25"/>
 
     </Grid>
 </Window>
