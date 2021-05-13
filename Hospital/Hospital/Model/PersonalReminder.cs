@@ -12,6 +12,13 @@ namespace Hospital.Model
 
         public PersonalReminderFrequency PersonalReminderFrequency { get; set; }
 
+        public IList<PersonalReminderFrequency> personalReminderFrequencies
+        {
+            get
+            {
+                return Enum.GetValues(typeof(PersonalReminderFrequency)).Cast<PersonalReminderFrequency>().ToList<PersonalReminderFrequency>();
+            }
+        }
         public int reminderId { get; set; }
         public PersonalReminder()
         {

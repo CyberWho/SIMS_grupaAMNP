@@ -30,6 +30,7 @@ namespace Hospital.xaml_windows.Patient
         private PersonalReminderController personalReminderController = new PersonalReminderController();
         private ObservableCollection<PersonalReminder> personalReminders = new ObservableCollection<PersonalReminder>();
         private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+       
         public PersonalReminders(int userId)
         {
             this.userId = userId;
