@@ -129,6 +129,30 @@ namespace Hospital.Repository
             return reminders;
         }
       
+        public ObservableCollection<Reminder> GetAllRemindersByPatientId(int patientId)
+        {
+            setConnection();
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Reminder reminder = new Reminder();
+                reminder.Id = reader.GetInt32(0);
+                reminder.Name = reader.GetString(1);
+                reminder.Description = reader.GetString(2);
+                reminder.AlarmTime = reader.GetDateTime(3);
+                reminders.Add(reminder);
+            }
+
+            connection.Close();
+            connection.Dispose();
+
+            return reminders;
+        }
+
       public Boolean DeleteReminderById(int id)
       {
          // TODO: implement

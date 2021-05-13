@@ -20,30 +20,24 @@ namespace Hospital.Service
 
         public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
         {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            reminders = reminderRepository.GetReminderByAlarmTimeAndPatientId(alarmTime, patientId);
-            return reminders;
+            return reminderRepository.GetReminderByAlarmTimeAndPatientId(alarmTime, patientId);
         }
 
 
-      public System.Collections.ArrayList GetAllRemindersByPatientId(int patientId)
+      public ObservableCollection<Reminder> GetAllRemindersByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            return reminderRepository.GetAllRemindersByPatientId(patientId);
       }
         public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
         {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            reminders = reminderRepository.GetAllPastRemindersByPatientId(patientId);
-            return reminders;
+            return reminderRepository.GetAllPastRemindersByPatientId(patientId);
         }
 
        public ObservableCollection<Reminder> GetAllFutureRemindersByPatientId(int patientId)
         {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            reminders = reminderRepository.GetAllFutureRemindersByPatientId(patientId);
-            return reminders;
+            return reminderRepository.GetAllFutureRemindersByPatientId(patientId);
         }
+      
 
       public Boolean DeleteReminderById(int id)
       {

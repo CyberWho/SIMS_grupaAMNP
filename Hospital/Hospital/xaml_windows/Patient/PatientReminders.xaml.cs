@@ -72,7 +72,7 @@ namespace Hospital.xaml_windows.Patient
         {
             this.DataContext = this;
             Model.Patient patient = patientController.GetPatientByUserId(userId);
-            Reminders = reminderController.GetAllPastRemindersByPatientId(patient.Id);
+            Reminders = reminderController.GetAllRemindersByPatientId(patient.Id);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
             myDataGrid.ItemsSource = Reminders;
@@ -107,6 +107,21 @@ namespace Hospital.xaml_windows.Patient
             var window = new Notifications(userId);
             window.Show();
             this.Close();
+        }
+
+        private void ObrisiPodsetnik_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void IzmeniPodsetnik_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void KreirajPodsetnik_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -110,6 +110,8 @@
     <Compile Include="Controller\WorkHoursController.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
     <Compile Include="Model\PatientLogs.cs" />
+    <Compile Include="Model\PersonalReminder.cs" />
+    <Compile Include="Model\PersonalReminderFrequency.cs" />
     <Compile Include="Model\Review.cs" />
     <Compile Include="Model\TimeSlot.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
@@ -277,6 +279,12 @@
     </Compile>
     <Compile Include="xaml_windows\Patient\PatientUpdateAppointment.xaml.cs">
       <DependentUpon>PatientUpdateAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\PersonalReminders.xaml.cs">
+      <DependentUpon>PersonalReminders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\Reminders.xaml.cs">
+      <DependentUpon>Reminders.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
       <DependentUpon>CreateNotification.xaml</DependentUpon>
@@ -466,6 +474,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Patient\PatientUpdateAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\PersonalReminders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\Reminders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
