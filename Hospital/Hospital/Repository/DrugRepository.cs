@@ -60,13 +60,6 @@ namespace Hospital.Repository
             }
             connection.Close();
             connection.Dispose();
-
-            /*foreach (Drug drug in drugs)
-            {
-                Trace.WriteLine("DRUG ID: " + drug.Id.ToString());
-                drug.drugType = drugTypeRepository.GetDrugTypeById(drug.drugType_id);
-            }*/
-
             return drugs;
         }
 
@@ -82,7 +75,6 @@ namespace Hospital.Repository
             {
                 drugs.Add(ParseFromReader(reader));
             }
-
             return drugs;
         }
 
@@ -102,8 +94,7 @@ namespace Hospital.Repository
             return pendingDrugs;
         }
 
-        // DODAJ I ID OD INVENTORY ITEMA ZA BRISANJE
-        public bool DeleteDrugById(int id)
+        public bool DeleteDrugById(int id, int invID)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -118,7 +109,7 @@ namespace Hospital.Repository
                 Trace.WriteLine(exp.ToString());
             }
 
-            command.CommandText = "DELETE FROM inventory_item WHERE id"
+            command.CommandText = "DELETE FROM inventory_item WHERE id = " + invID.ToString();
 
             try
             {
@@ -131,7 +122,6 @@ namespace Hospital.Repository
                 return false;
             }
         }
-
         public Drug UpdateDrugNoInventoryPart(Drug drug)
         {
             int needsPerscription = drug.NeedsPerscription ? 1 : 0;

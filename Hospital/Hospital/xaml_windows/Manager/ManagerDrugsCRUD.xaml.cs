@@ -106,7 +106,7 @@ namespace Hospital.xaml_windows.Manager
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            drugController.DeleteDrugById(((Drug)myDataGrid.SelectedItem).Id);
+            drugController.DeleteDrugById(((Drug)myDataGrid.SelectedItem).Id, ((Drug)myDataGrid.SelectedItem).InventoryItemID);
             updateDataGrid();
         }
 

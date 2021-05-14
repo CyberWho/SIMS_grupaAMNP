@@ -52,7 +52,6 @@ namespace Hospital.Model
             NeedsPerscription = needsPerscription;
             this.drugType = drugType;
         }
-
         public Drug()
         {
         }

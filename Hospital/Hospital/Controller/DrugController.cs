@@ -33,9 +33,9 @@ namespace Hospital.Controller
             return drugService.GetAllDrugsPending();
         }
 
-        public Boolean DeleteDrugById(int id)
+        public Boolean DeleteDrugById(int id, int invID)
         {
-            return drugService.DeleteDrugById(id);
+            return drugService.DeleteDrugById(id, invID);
         }
 
         public Drug UpdateDrug(Drug drug)
