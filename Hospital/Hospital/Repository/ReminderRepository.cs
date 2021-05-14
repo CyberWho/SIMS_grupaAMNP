@@ -8,6 +8,7 @@ using System;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Hospital.Repository
 {
@@ -206,14 +207,17 @@ namespace Hospital.Repository
       public Reminder UpdateReminder(Reminder reminder)
       {
             setConnection();
-            OracleCommand command = new OracleCommand();
-            command.CommandText = "UPDATE REMINDER SET NAME=" + reminder.Name +
-                                    "DESCRIPTION = " + reminder.Description +
-                                    "ALARM_TIME = " + reminder.AlarmTime +
-                                    "WHERE ID = " + reminder.Id;
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE REMINDER SET NAME= :name, DESCRIPTION = :description, ALARM_TIME = :alarm_time WHERE ID = :id";
+            command.Parameters.Add("name", OracleDbType.Varchar2).Value = reminder.Name;
+            command.Parameters.Add("description", OracleDbType.Varchar2).Value = reminder.Description;
+            command.Parameters.Add("alarm_time", OracleDbType.Date).Value = reminder.AlarmTime;
+            command.Parameters.Add("id", OracleDbType.Int32).Value = reminder.Id;
             
             command.ExecuteNonQuery();
+            
             connection.Close();
+            connection.Dispose();
             return reminder;
       }
       

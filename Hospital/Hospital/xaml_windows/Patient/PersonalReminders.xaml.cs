@@ -131,10 +131,19 @@ namespace Hospital.xaml_windows.Patient
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(int.Parse(id_txt.Text));
-            PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.Text);
-            if(personalReminder.PersonalReminderFrequency != frequency)
+            
+            
+            PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
+            MessageBox.Show(frequency.ToString());
+            MessageBox.Show(personalReminder.PersonalReminderFrequency.ToString());
+            if(personalReminder.PersonalReminderFrequency == frequency)
             {
-                Reminder reminder = new Reminder(personalReminder.reminderId, name_txt.Text, description_txt.Text,DateTime.Parse(alarm_time_txt.Text), patientController.GetPatientByUserId(userId));
+                
+                Reminder reminder = new Reminder();
+                reminder.Id = personalReminder.Id;
+                reminder.Name = name_txt.Text;
+                reminder.Description = description_txt.Text;
+                reminder.AlarmTime = DateTime.Parse(alarm_time_txt.Text);
                 reminderController.UpdateReminder(reminder);
             }
             updateDataGrid();
