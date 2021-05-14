@@ -91,7 +91,12 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
+        public int GetLastId()
+        {
+            return reminderRepository.GetLastId();
+        }
+
+
       public Repository.ReminderRepository reminderRepository = new Repository.ReminderRepository();
    
    }

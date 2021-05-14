@@ -25,7 +25,7 @@ namespace Hospital.Controller
         }
         public PersonalReminder AddPersonalReminder(PersonalReminder personalReminder)
         {
-            return null;
+            return personalReminderService.AddPersonalReminder(personalReminder);
         }
         public Boolean GenerateOnlyOnceReminder(PersonalReminder personalReminder)
         {
@@ -39,6 +39,18 @@ namespace Hospital.Controller
         {
             return personalReminderService.GenerateWeeklyReminder(personalReminder);
         }
+        public Boolean NewOnlyOnceReminder(PersonalReminder personalReminder)
+        {
+            return personalReminderService.NewOnlyOnceReminder(personalReminder);
+        }
+        public Boolean NewWeeklyReminder(PersonalReminder personalReminder)
+        {
+            return personalReminderService.NewWeeklyReminder(personalReminder);
+        }
+        public Boolean NewDailyReminder(PersonalReminder personalReminder)
+        {
+            return personalReminderService.NewDailyReminder(personalReminder);
+        }
         public Boolean DeletePersonalReminderById(int id)
         {
             return personalReminderService.DeletePersonalReminderById(id);
@@ -46,6 +58,10 @@ namespace Hospital.Controller
         public Boolean DeleteAllPersonalRemindersByPatientId(int patientId)
         {
             return false;
+        }
+        public int GetLastId()
+        {
+            return personalReminderService.GetLastId();
         }
         public PersonalReminderService personalReminderService = new PersonalReminderService();
     }

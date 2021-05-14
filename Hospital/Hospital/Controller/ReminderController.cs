@@ -66,7 +66,12 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-   
+        public int GetLastId()
+        {
+            return reminderService.GetLastId();
+        }
+
+
       public Service.ReminderService reminderService = new Service.ReminderService();
    
    }

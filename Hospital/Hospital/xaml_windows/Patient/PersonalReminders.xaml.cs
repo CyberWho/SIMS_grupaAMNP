@@ -138,28 +138,13 @@ namespace Hospital.xaml_windows.Patient
             } else 
             {
                 SimpleReminderUpdate(personalReminder);
-                switch(frequency)
-                {
-                    case PersonalReminderFrequency.ONLY_ONCE:
-                        personalReminderController.GenerateOnlyOnceReminder(personalReminder);
-                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.ONLY_ONCE;
-                        personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
-                        break;
-                    case PersonalReminderFrequency.DAILY:
-                        personalReminderController.GenerateDailyReminder(personalReminder);
-                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
-                        personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
-                        break;
-                    case PersonalReminderFrequency.WEEKLY:
-                        personalReminderController.GenerateWeeklyReminder(personalReminder);
-                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
-                        personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
-                        break;
-                }
+                PersonalReminderFrequencyUpdate(personalReminder, frequency);
+                
             }
             updateDataGrid();
 
         }
+
         private void SimpleReminderUpdate(PersonalReminder personalReminder)
         {
             Reminder reminder = new Reminder();
@@ -168,6 +153,34 @@ namespace Hospital.xaml_windows.Patient
             reminder.AlarmTime = DateTime.Parse(alarm_time_txt.Text);
             reminder.personalReminderId = personalReminder.Id;
             reminderController.UpdateReminder(reminder);
+        }
+        private void PersonalReminderFrequencyUpdate(PersonalReminder personalReminder,PersonalReminderFrequency frequency)
+        {
+            switch (frequency)
+            {
+                case PersonalReminderFrequency.ONLY_ONCE:
+                    personalReminderController.GenerateOnlyOnceReminder(personalReminder);
+                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.ONLY_ONCE;
+                    personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                    break;
+                case PersonalReminderFrequency.DAILY:
+                    personalReminderController.GenerateDailyReminder(personalReminder);
+                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
+                    personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                    break;
+                case PersonalReminderFrequency.WEEKLY:
+                    personalReminderController.GenerateWeeklyReminder(personalReminder);
+                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
+                    personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                    break;
+            }
+        }
+
+        private void Kreiraj_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new NewPersonalReminder(userId);
+            window.Show();
+            this.Close();
         }
     }
 }

@@ -50,19 +50,23 @@ namespace Hospital.Service
         public Boolean GenerateDailyReminder(PersonalReminder personalReminder)
         {
             DeleteAllRemindersExceptFirstReminder(personalReminder);
-            DateTime endTime = personalReminder.AlarmTime.AddDays(7);
-            DateTime alarmTime = personalReminder.AlarmTime;
-            while(alarmTime <= endTime)
-            {
-                Reminder reminder = new Reminder(personalReminder.Name, personalReminder.Description, alarmTime, personalReminder.Patient, personalReminder.Id);
-                alarmTime = alarmTime.AddDays(1);
-                reminderRepository.NewReminder(reminder);
-            }
+            NewDailyReminder(personalReminder);
             return true;
         }
         public Boolean GenerateWeeklyReminder(PersonalReminder personalReminder)
         {
             DeleteAllRemindersExceptFirstReminder(personalReminder);
+            NewWeeklyReminder(personalReminder);
+            return true;
+        }
+        public Boolean NewOnlyOnceReminder(PersonalReminder personalReminder)
+        {
+            Reminder reminder = new Reminder(personalReminder.Name, personalReminder.Description, personalReminder.AlarmTime, personalReminder.Patient, personalReminder.Id);
+            reminderRepository.NewReminder(reminder);
+            return true;
+        }
+        public Boolean NewWeeklyReminder(PersonalReminder personalReminder)
+        {
             DateTime endTime = personalReminder.AlarmTime.AddDays(31);
             DateTime alarmTime = personalReminder.AlarmTime;
             while (alarmTime <= endTime)
@@ -72,6 +76,19 @@ namespace Hospital.Service
                 reminderRepository.NewReminder(reminder);
             }
             return true;
+        }
+        public Boolean NewDailyReminder(PersonalReminder personalReminder)
+        {
+            DateTime endTime = personalReminder.AlarmTime.AddDays(7);
+            DateTime alarmTime = personalReminder.AlarmTime;
+            while (alarmTime <= endTime)
+            {
+                Reminder reminder = new Reminder(personalReminder.Name, personalReminder.Description, alarmTime, personalReminder.Patient, personalReminder.Id);
+                alarmTime = alarmTime.AddDays(1);
+                reminderRepository.NewReminder(reminder);
+            }
+            return true;
+
         }
         public Boolean DeleteAllRemindersExceptFirstReminder(PersonalReminder personalReminder)
         {
@@ -87,6 +104,10 @@ namespace Hospital.Service
         public Boolean DeleteAllPersonalRemindersByPatientId(int patientId)
         {
             return false;
+        }
+        public int GetLastId()
+        {
+            return personalReminderRepository.GetLastId();
         }
         public PersonalReminderRepository personalReminderRepository = new PersonalReminderRepository();
         public ReminderRepository reminderRepository = new ReminderRepository();

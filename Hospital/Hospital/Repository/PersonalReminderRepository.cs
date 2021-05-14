@@ -110,7 +110,21 @@ namespace Hospital.Repository
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "INSERT INTO PERSONAL_REMINDER(REMINDER_ID,FREQUENCY_ID) VALUES (:reminder_id,:frequency_id)";
             command.Parameters.Add("reminder_id", OracleDbType.Int32).Value = personalReminder.reminderId.ToString();
-            command.Parameters.Add("frequency_id", OracleDbType.Int32).Value = Convert.ToInt32(personalReminder.personalReminderFrequencies).ToString();
+            int frequencyId = 0;
+            switch(personalReminder.PersonalReminderFrequency)
+            {
+                case PersonalReminderFrequency.ONLY_ONCE:
+                    frequencyId = 0;
+                    break;
+                case PersonalReminderFrequency.DAILY:
+                    frequencyId = 1;
+                    break;
+                case PersonalReminderFrequency.WEEKLY:
+                    frequencyId = 2;
+                    break;
+
+            }
+            command.Parameters.Add("frequency_id", OracleDbType.Int32).Value = frequencyId;
             command.ExecuteNonQuery();
             connection.Close();
             return personalReminder;
