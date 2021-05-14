@@ -19,13 +19,25 @@ namespace Hospital.Controller
         {
             return personalReminderService.GetAllPersonalRemindersByPatientId(patientId);
         }
-        public PersonalReminder UpdatePersonalReminder(PersonalReminder personalReminder)
+        public PersonalReminder UpdatePersonalReminderFrequency(PersonalReminder personalReminder)
         {
-            return null;
+            return personalReminderService.UpdatePersonalReminderFrequency(personalReminder);
         }
         public PersonalReminder AddPersonalReminder(PersonalReminder personalReminder)
         {
             return null;
+        }
+        public Boolean GenerateOnlyOnceReminder(PersonalReminder personalReminder)
+        {
+            return personalReminderService.GenerateOnlyOnceReminder(personalReminder);
+        }
+        public Boolean GenerateDailyReminder(PersonalReminder personalReminder)
+        {
+            return personalReminderService.GenerateDailyReminder(personalReminder);
+        }
+        public Boolean GenerateWeeklyReminder(PersonalReminder personalReminder)
+        {
+            return personalReminderService.GenerateWeeklyReminder(personalReminder);
         }
         public Boolean DeletePersonalReminderById(int id)
         {

@@ -208,11 +208,11 @@ namespace Hospital.Repository
       {
             setConnection();
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE REMINDER SET NAME= :name, DESCRIPTION = :description, ALARM_TIME = :alarm_time WHERE ID = :id";
+            command.CommandText = "UPDATE REMINDER SET NAME= :name, DESCRIPTION = :description, ALARM_TIME = :alarm_time WHERE PERSONAL_REMINDER_ID = :id";
             command.Parameters.Add("name", OracleDbType.Varchar2).Value = reminder.Name;
             command.Parameters.Add("description", OracleDbType.Varchar2).Value = reminder.Description;
             command.Parameters.Add("alarm_time", OracleDbType.Date).Value = reminder.AlarmTime;
-            command.Parameters.Add("id", OracleDbType.Int32).Value = reminder.Id;
+            command.Parameters.Add("id", OracleDbType.Int32).Value = reminder.personalReminderId.ToString();
             
             command.ExecuteNonQuery();
             
@@ -226,11 +226,12 @@ namespace Hospital.Repository
             setConnection();
             OracleCommand command = new OracleCommand();
             command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO REMINDER (NAME,DESCRIPTION,ALARM_TIME,PATIENT_ID) VALUES (:name,:description,:alarm_time,:patient_id)";
+            command.CommandText = "INSERT INTO REMINDER (NAME,DESCRIPTION,ALARM_TIME,PATIENT_ID,PERSONAL_REMINDER_ID) VALUES (:name,:description,:alarm_time,:patient_id,:personal_reminder_id)";
             command.Parameters.Add("name", OracleDbType.Varchar2).Value = reminder.Name;
             command.Parameters.Add("description", OracleDbType.Varchar2).Value = reminder.Description;
             command.Parameters.Add("alarm_time", OracleDbType.Date).Value = reminder.AlarmTime;
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = reminder.Patient.Id;
+            command.Parameters.Add("personal_reminder_id", OracleDbType.Int32).Value = reminder.personalReminderId;
             int executer = command.ExecuteNonQuery();
             connection.Close();
             connection.Dispose();

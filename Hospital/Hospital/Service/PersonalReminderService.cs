@@ -19,9 +19,9 @@ namespace Hospital.Service
         {
             return personalReminderRepository.GetAllPersonalRemindersByPatientId(patientId);
         }
-        public PersonalReminder UpdatePersonalReminder(PersonalReminder personalReminder)
+        public PersonalReminder UpdatePersonalReminderFrequency(PersonalReminder personalReminder)
         {
-            return null;
+            return personalReminderRepository.UpdatePersonalReminderFrequency(personalReminder);
         }
         public PersonalReminder AddPersonalReminder(PersonalReminder personalReminder)
         {
@@ -42,6 +42,48 @@ namespace Hospital.Service
             }
             return true;
         }
+        public Boolean GenerateOnlyOnceReminder(PersonalReminder personalReminder)
+        {
+            DeleteAllRemindersExceptFirstReminder(personalReminder);
+            return true;
+        }
+        public Boolean GenerateDailyReminder(PersonalReminder personalReminder)
+        {
+            DeleteAllRemindersExceptFirstReminder(personalReminder);
+            DateTime endTime = personalReminder.AlarmTime.AddDays(7);
+            DateTime alarmTime = personalReminder.AlarmTime;
+            while(alarmTime <= endTime)
+            {
+                Reminder reminder = new Reminder(personalReminder.Name, personalReminder.Description, alarmTime, personalReminder.Patient, personalReminder.Id);
+                alarmTime = alarmTime.AddDays(1);
+                reminderRepository.NewReminder(reminder);
+            }
+            return true;
+        }
+        public Boolean GenerateWeeklyReminder(PersonalReminder personalReminder)
+        {
+            DeleteAllRemindersExceptFirstReminder(personalReminder);
+            DateTime endTime = personalReminder.AlarmTime.AddDays(31);
+            DateTime alarmTime = personalReminder.AlarmTime;
+            while (alarmTime <= endTime)
+            {
+                Reminder reminder = new Reminder(personalReminder.Name, personalReminder.Description, alarmTime, personalReminder.Patient, personalReminder.Id);
+                alarmTime = alarmTime.AddDays(7);
+                reminderRepository.NewReminder(reminder);
+            }
+            return true;
+        }
+        public Boolean DeleteAllRemindersExceptFirstReminder(PersonalReminder personalReminder)
+        {
+            ObservableCollection<Reminder> reminders = reminderRepository.GetAllRemindersByPersonalReminderId(personalReminder.Id);
+            foreach (Reminder reminder in reminders)
+            {
+                if (reminder.Id == personalReminder.reminderId) continue;
+                reminderRepository.DeleteReminderById(reminder.Id);
+            }
+            return true;
+        }
+
         public Boolean DeleteAllPersonalRemindersByPatientId(int patientId)
         {
             return false;

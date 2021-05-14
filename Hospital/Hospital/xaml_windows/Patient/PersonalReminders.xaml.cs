@@ -131,23 +131,43 @@ namespace Hospital.xaml_windows.Patient
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(int.Parse(id_txt.Text));
-            
-            
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
-            MessageBox.Show(frequency.ToString());
-            MessageBox.Show(personalReminder.PersonalReminderFrequency.ToString());
             if(personalReminder.PersonalReminderFrequency == frequency)
             {
-                
-                Reminder reminder = new Reminder();
-                reminder.Id = personalReminder.Id;
-                reminder.Name = name_txt.Text;
-                reminder.Description = description_txt.Text;
-                reminder.AlarmTime = DateTime.Parse(alarm_time_txt.Text);
-                reminderController.UpdateReminder(reminder);
+                SimpleReminderUpdate(personalReminder);
+            } else 
+            {
+                SimpleReminderUpdate(personalReminder);
+                switch(frequency)
+                {
+                    case PersonalReminderFrequency.ONLY_ONCE:
+                        personalReminderController.GenerateOnlyOnceReminder(personalReminder);
+                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.ONLY_ONCE;
+                        personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                        break;
+                    case PersonalReminderFrequency.DAILY:
+                        personalReminderController.GenerateDailyReminder(personalReminder);
+                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
+                        personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                        break;
+                    case PersonalReminderFrequency.WEEKLY:
+                        personalReminderController.GenerateWeeklyReminder(personalReminder);
+                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
+                        personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                        break;
+                }
             }
             updateDataGrid();
 
+        }
+        private void SimpleReminderUpdate(PersonalReminder personalReminder)
+        {
+            Reminder reminder = new Reminder();
+            reminder.Name = name_txt.Text;
+            reminder.Description = description_txt.Text;
+            reminder.AlarmTime = DateTime.Parse(alarm_time_txt.Text);
+            reminder.personalReminderId = personalReminder.Id;
+            reminderController.UpdateReminder(reminder);
         }
     }
 }

@@ -74,7 +74,7 @@ namespace Hospital.Service
          
             return true;
         }
-      
+       
       public Reminder UpdateReminder(Reminder reminder)
       {
             return reminderRepository.UpdateReminder(reminder);

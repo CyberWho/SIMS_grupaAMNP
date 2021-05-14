@@ -54,6 +54,7 @@ namespace Hospital.Repository
             personalReminder.Name = reader.GetString(4);
             personalReminder.Description = reader.GetString(5);
             personalReminder.AlarmTime = reader.GetDateTime(6);
+            personalReminder.Patient = new PatientRepository().GetPatientById(reader.GetInt32(7));
             connection.Close();
             return personalReminder;
         }
@@ -92,9 +93,16 @@ namespace Hospital.Repository
             connection.Close();
             return personalReminders;
         }
-        public PersonalReminder UpdatePersonalReminder(PersonalReminder personalReminder)
+        public PersonalReminder UpdatePersonalReminderFrequency(PersonalReminder personalReminder)
         {
-            return null;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE PERSONAL_REMINDER SET FREQUENCY_ID = :frequency_id WHERE ID = :id";
+            command.Parameters.Add("frequency_id", OracleDbType.Int32).Value = Convert.ToInt32(personalReminder.PersonalReminderFrequency);
+            command.Parameters.Add("id", OracleDbType.Int32).Value = personalReminder.Id.ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return personalReminder;
         }
         public PersonalReminder AddPersonalReminder(PersonalReminder personalReminder)
         {
