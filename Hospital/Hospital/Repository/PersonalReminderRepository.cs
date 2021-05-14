@@ -148,7 +148,7 @@ namespace Hospital.Repository
             setConnection();
             int id = 0;
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT MAX(ID) FROM APPOINTMENT";
+            command.CommandText = "SELECT MAX(ID) FROM PERSONAL_REMINDER";
             OracleDataReader reader = command.ExecuteReader();
             reader = command.ExecuteReader();
             reader.Read();
