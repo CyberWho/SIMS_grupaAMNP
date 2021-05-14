@@ -30,12 +30,14 @@ namespace Hospital.xaml_windows.Patient
         private PersonalReminderController personalReminderController = new PersonalReminderController();
         private ObservableCollection<PersonalReminder> personalReminders = new ObservableCollection<PersonalReminder>();
         private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-       
+
         public PersonalReminders(int userId)
         {
             this.userId = userId;
             InitializeComponent();
             updateDataGrid();
+            frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
+            
         }
         private void dispatherTimer_Tick(object sender, EventArgs e)
         {

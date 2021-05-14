@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         xmlns:sys ="clr-namespace:System;assembly=mscorlib"
+    
+        
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PersonalReminders"
         mc:Ignorable="d"
         Title="PersonalReminders" Height="500" Width="900" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
