@@ -24,6 +24,7 @@ namespace Hospital.xaml_windows.Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            fillComboBox();
             this.updateDataGrid();
         }
 
@@ -31,7 +32,6 @@ namespace Hospital.xaml_windows.Manager
         {
             this.DataContext = this;
             Drugs = drugController.GetAllDrugs();
-            fillComboBox();
             fillTable();
             add_btn.IsEnabled = true;
             update_btn.IsEnabled = false;
@@ -68,7 +68,7 @@ namespace Hospital.xaml_windows.Manager
             myDataGrid.ItemsSource = Drugs;
         }
 
-        private void myDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             add_btn.IsEnabled = false;
             update_btn.IsEnabled = true;
@@ -95,13 +95,18 @@ namespace Hospital.xaml_windows.Manager
 
         private void update_btn_Click(object sender, RoutedEventArgs e)
         {
+            Drug drug = (Drug)myDataGrid.SelectedItem;
             drugController.UpdateDrug((Drug)myDataGrid.SelectedItem);
+            Trace.WriteLine("DRUG TO UPDATE:");
+            Trace.WriteLine("\tID: " + drug.Id);
+            Trace.WriteLine("\tINV_ID: " + drug.InventoryItemID);
+            Trace.WriteLine("\tName: " + drug.Name);
             updateDataGrid();
         }
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            drugController.DeleteDrugById(int.Parse(id_txtbx.Text));
+            drugController.DeleteDrugById(((Drug)myDataGrid.SelectedItem).Id);
             updateDataGrid();
         }
 

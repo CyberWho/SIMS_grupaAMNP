@@ -29,7 +29,7 @@ namespace Hospital.Repository
                 Trace.WriteLine(exp.ToString());
             }
         }
-        public Model.InventoryItem GetInventoryItemById(int id)
+        public InventoryItem GetInventoryItemById(int id)
         {
             
             //connection.Close();
@@ -40,7 +40,7 @@ namespace Hospital.Repository
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM inventory_item WHERE id = " + id.ToString();
-            Model.InventoryItem item = new Model.InventoryItem();
+            InventoryItem item = new InventoryItem();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
@@ -48,7 +48,7 @@ namespace Hospital.Repository
             item.Name = reader.GetString(1);
             item.Price = Convert.ToUInt32(reader.GetInt32(2));
             item.Unit = reader.GetString(3);
-            item.Type = (Model.ItemType)reader.GetInt32(4);
+            item.Type = (ItemType)reader.GetInt32(4);
 
             connection.Close();
             connection.Dispose();
@@ -67,11 +67,11 @@ namespace Hospital.Repository
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "select * from inventory_item where item_type = " + itemTypeId;
-            ObservableCollection<Model.InventoryItem> items = new ObservableCollection<InventoryItem>();
+            ObservableCollection<InventoryItem> items = new ObservableCollection<InventoryItem>();
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Model.InventoryItem item = new InventoryItem();
+                InventoryItem item = new InventoryItem();
                 item.Id = reader.GetInt32(0);
                 item.Name = reader.GetString(1);
                 item.Price = uint.Parse(reader.GetString(2));
@@ -88,24 +88,22 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Model.InventoryItem UpdateInventoryItem(Model.InventoryItem inventoryItem)
+        public InventoryItem UpdateInventoryItem(InventoryItem inventoryItem)
         {
             // TODO: implement
             return null;
         }
 
-        public Model.InventoryItem NewInventoryItem(Model.InventoryItem inventoryItem)
+        public InventoryItem NewInventoryItem(InventoryItem inventoryItem)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "INSERT INTO inventory_item (name, price, unit, item_type) VALUES ('" +
                 inventoryItem.Name                   + "', " +
                 inventoryItem.Price.ToString()       + ", '" +
-                inventoryItem.Unit                   + "'   , " +
+                inventoryItem.Unit                   + "', " +
                 ((int)inventoryItem.Type).ToString() + ")";
             
-            
-            Trace.WriteLine("----- SQL COMMAND: " + cmd.CommandText);
 
             try
             {

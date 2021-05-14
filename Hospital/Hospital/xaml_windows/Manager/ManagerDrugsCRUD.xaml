@@ -9,11 +9,12 @@
     <Grid>
         <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Drugs}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="399" Margin="262,10,0,0" VerticalAlignment="Top" Width="516" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>    
+                <DataGridTextColumn Header="InventoryItemID" Binding="{Binding InventoryItemID}" Width="*" Visibility="Hidden" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Cena" Binding="{Binding Price}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Jedinica" Binding="{Binding Unit}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Tip" Binding="{Binding DrugType.Type}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding drugType.Type}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Gramaza" Binding="{Binding Grams}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Recept" Binding="{Binding NeedsPerscription}" Width="*" IsReadOnly="True"/>
@@ -30,7 +31,7 @@
         <TextBox x:Name="price_txtbx" Text="{Binding SelectedItem.Price, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="115,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="unit_txtbx" Text="{Binding SelectedItem.Unit, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="115,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="115,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="LightGray"/>
-        <ComboBox x:Name="dtype_cmbbx" SelectedValue="{Binding SelectedItem.DrugType.Id, ElementName=myDataGrid}" HorizontalAlignment="Left" Margin="115,196,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
+        <ComboBox x:Name="dtype_cmbbx" SelectedValue="{Binding SelectedItem.drugType.Id, ElementName=myDataGrid}" HorizontalAlignment="Left" Margin="115,196,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
         <TextBox x:Name="grams_txtbx" Text="{Binding SelectedItem.Grams, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="115,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="needsPrescription_cmbbx" SelectedValue="{Binding SelectedItem.NeedsPerscription, ElementName=myDataGrid}"  HorizontalAlignment="Left" Margin="115,256,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
         
