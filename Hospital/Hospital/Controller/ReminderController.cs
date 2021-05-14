@@ -52,8 +52,7 @@ namespace Hospital.Controller
       
       public Reminder UpdateReminder(Reminder reminder)
       {
-         // TODO: implement
-         return null;
+            return reminderService.UpdateReminder(reminder);
       }
       
       public Reminder AddReminder(Reminder reminder)

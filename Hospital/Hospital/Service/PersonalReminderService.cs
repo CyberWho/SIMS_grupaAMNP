@@ -13,7 +13,7 @@ namespace Hospital.Service
     {
         public PersonalReminder GetPersonalReminderById(int id)
         {
-            return null;
+            return personalReminderRepository.GetPersonalReminderById(id);
         }
         public ObservableCollection<PersonalReminder> GetAllPersonalRemindersByPatientId(int patientId)
         {

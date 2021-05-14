@@ -77,8 +77,7 @@ namespace Hospital.Service
       
       public Reminder UpdateReminder(Reminder reminder)
       {
-         // TODO: implement
-         return null;
+            return reminderRepository.UpdateReminder(reminder);
       }
       
       public Reminder AddReminder(Reminder reminder)

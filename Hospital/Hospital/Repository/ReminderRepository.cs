@@ -144,7 +144,7 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id";
+            command.CommandText = "SELECT * FROM REMINDER WHERE PATIENT_ID = :patient_id AND PERSONAL_REMINDER_ID = 0";
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -205,8 +205,16 @@ namespace Hospital.Repository
       
       public Reminder UpdateReminder(Reminder reminder)
       {
-         // TODO: implement
-         return null;
+            setConnection();
+            OracleCommand command = new OracleCommand();
+            command.CommandText = "UPDATE REMINDER SET NAME=" + reminder.Name +
+                                    "DESCRIPTION = " + reminder.Description +
+                                    "ALARM_TIME = " + reminder.AlarmTime +
+                                    "WHERE ID = " + reminder.Id;
+            
+            command.ExecuteNonQuery();
+            connection.Close();
+            return reminder;
       }
       
       public Reminder NewReminder(Reminder reminder)

@@ -28,7 +28,34 @@ namespace Hospital.Repository
         }
         public PersonalReminder GetPersonalReminderById(int id)
         {
-            return null;
+            setConnection();
+           
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM PERSONAL_REMINDER,REMINDER WHERE PERSONAL_REMINDER.ID = :id AND PERSONAL_REMINDER.REMINDER_ID = REMINDER.ID";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            PersonalReminder personalReminder = new PersonalReminder();
+            personalReminder.Id = reader.GetInt32(0);
+            personalReminder.reminderId = reader.GetInt32(1);
+            int personalReminderFrequencyId = reader.GetInt32(2);
+            switch (personalReminderFrequencyId)
+            {
+                case 0:
+                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.ONLY_ONCE;
+                    break;
+                case 1:
+                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
+                    break;
+                case 2:
+                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
+                    break;
+            }
+            personalReminder.Name = reader.GetString(4);
+            personalReminder.Description = reader.GetString(5);
+            personalReminder.AlarmTime = reader.GetDateTime(6);
+            connection.Close();
+            return personalReminder;
         }
         public ObservableCollection<PersonalReminder> GetAllPersonalRemindersByPatientId(int patientId)
         {

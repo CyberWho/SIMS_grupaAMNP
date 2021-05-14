@@ -127,5 +127,18 @@ namespace Hospital.xaml_windows.Patient
             personalReminderController.DeletePersonalReminderById(int.Parse(id_txt.Text));
             updateDataGrid();
         }
+
+        private void Izmeni_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(int.Parse(id_txt.Text));
+            PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.Text);
+            if(personalReminder.PersonalReminderFrequency != frequency)
+            {
+                Reminder reminder = new Reminder(personalReminder.reminderId, name_txt.Text, description_txt.Text,DateTime.Parse(alarm_time_txt.Text), patientController.GetPatientByUserId(userId));
+                reminderController.UpdateReminder(reminder);
+            }
+            updateDataGrid();
+
+        }
     }
 }
