@@ -71,15 +71,44 @@ namespace Hospital.Repository
         }
         public PersonalReminder AddPersonalReminder(PersonalReminder personalReminder)
         {
-            return null;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO PERSONAL_REMINDER(REMINDER_ID,FREQUENCY_ID) VALUES (:reminder_id,:frequency_id)";
+            command.Parameters.Add("reminder_id", OracleDbType.Int32).Value = personalReminder.reminderId.ToString();
+            command.Parameters.Add("frequency_id", OracleDbType.Int32).Value = Convert.ToInt32(personalReminder.personalReminderFrequencies).ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return personalReminder;
         }
         public Boolean DeletePersonalReminderById(int id)
         {
-            return false;
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM PERSONAL_REMINDER WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return true;
         }
         public Boolean DeleteAllPersonalRemindersByPatientId(int patientId)
         {
             return false;
-        } 
+        }
+        public int GetLastId()
+        {
+            setConnection();
+            int id = 0;
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT MAX(ID) FROM APPOINTMENT";
+            OracleDataReader reader = command.ExecuteReader();
+            reader = command.ExecuteReader();
+            reader.Read();
+            id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
+
+            return id;
+        }
     }
 }

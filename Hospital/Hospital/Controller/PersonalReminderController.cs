@@ -29,7 +29,7 @@ namespace Hospital.Controller
         }
         public Boolean DeletePersonalReminderById(int id)
         {
-            return false;
+            return personalReminderService.DeletePersonalReminderById(id);
         }
         public Boolean DeleteAllPersonalRemindersByPatientId(int patientId)
         {

@@ -37,7 +37,11 @@ namespace Hospital.Service
         {
             return reminderRepository.GetAllFutureRemindersByPatientId(patientId);
         }
-      
+
+        public ObservableCollection<Reminder> GetAllRemindersByPersonalReminderId(int personalReminderId)
+        {
+            return reminderRepository.GetAllRemindersByPersonalReminderId(personalReminderId);
+        }
 
       public Boolean DeleteReminderById(int id)
       {
@@ -64,6 +68,7 @@ namespace Hospital.Service
                 reminder.Description = "Za sat vremena popijte lek " + medicalTreatment.Drug.Name;
                 reminder.Patient = medicalTreatment.anamnesis.healthRecord.Patient;
                 start = start.AddHours(medicalTreatment.Period);
+                reminder.personalReminderId = 0;
                 reminderRepository.NewReminder(reminder);
             }
          

@@ -17,6 +17,8 @@ namespace Hospital.Model
 
         public Patient Patient { get; set; }
 
+        public int personalReminderId { get; set; }
+
         public Reminder(int id, string name, string description, DateTime alarmTime, Patient patient)
         {
             Id = id;

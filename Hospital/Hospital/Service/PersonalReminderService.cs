@@ -25,16 +25,28 @@ namespace Hospital.Service
         }
         public PersonalReminder AddPersonalReminder(PersonalReminder personalReminder)
         {
-            return null;
+            return personalReminderRepository.AddPersonalReminder(personalReminder);
         }
         public Boolean DeletePersonalReminderById(int id)
         {
+            personalReminderRepository.DeletePersonalReminderById(id);
+            DeleteAllRemindersByPersonalReminderId(id);
             return false;
+        }
+        public Boolean DeleteAllRemindersByPersonalReminderId(int personalReminderId)
+        {
+            ObservableCollection<Reminder> reminders = reminderRepository.GetAllRemindersByPersonalReminderId(personalReminderId);
+            foreach(Reminder reminder in reminders)
+            {
+                reminderRepository.DeleteReminderById(reminder.Id);
+            }
+            return true;
         }
         public Boolean DeleteAllPersonalRemindersByPatientId(int patientId)
         {
             return false;
         }
         public PersonalReminderRepository personalReminderRepository = new PersonalReminderRepository();
+        public ReminderRepository reminderRepository = new ReminderRepository();
     }
 }

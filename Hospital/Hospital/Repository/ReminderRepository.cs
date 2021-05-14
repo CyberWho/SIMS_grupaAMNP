@@ -162,12 +162,40 @@ namespace Hospital.Repository
 
             return reminders;
         }
+        public ObservableCollection<Reminder> GetAllRemindersByPersonalReminderId(int personalReminderId)
+        {
+            setConnection();
+            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REMINDER WHERE PERSONAL_REMINDER_ID = :personal_reminder_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = personalReminderId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Reminder reminder = new Reminder();
+                reminder.Id = reader.GetInt32(0);
+                reminder.Name = reader.GetString(1);
+                reminder.Description = reader.GetString(2);
+                reminder.AlarmTime = reader.GetDateTime(3);
+                reminders.Add(reminder);
+            }
 
-      public Boolean DeleteReminderById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
+            connection.Close();
+            connection.Dispose();
+
+            return reminders;
+        }
+
+        public Boolean DeleteReminderById(int id)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM REMINDER WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return true;
+        }
       
       public Boolean DeleteAllRemindersByPatientId(int patientId)
       {
@@ -199,8 +227,19 @@ namespace Hospital.Repository
 
         public int GetLastId()
         {
-            // TODO: implement
-            return 0;
+            setConnection();
+            int id = 0;
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT MAX(ID) FROM APPOINTMENT";
+            OracleDataReader reader = command.ExecuteReader();
+            reader = command.ExecuteReader();
+            reader.Read();
+            id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
+
+            return id;
         }
 
     }

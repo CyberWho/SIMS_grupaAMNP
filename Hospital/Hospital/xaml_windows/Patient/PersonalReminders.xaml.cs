@@ -122,6 +122,10 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
-
+        private void Obrisi_Click(object sender, RoutedEventArgs e)
+        {
+            personalReminderController.DeletePersonalReminderById(int.Parse(id_txt.Text));
+            updateDataGrid();
+        }
     }
 }
