@@ -31,25 +31,44 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
         }
+        private int GetNextReminderId()
+        {
+            int reminderId = reminderController.GetLastId();
+            reminderId++;
+            return reminderId;
+        }
+        private int GetNextPersonalReminderId()
+        {
+            int personalReminderId = reminderController.GetLastId();
+            personalReminderId++;
+            return personalReminderId;
+        }
 
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
-            int newReminderId = reminderController.GetLastId();
-            int newPersonalReminderId = personalReminderController.GetLastId();
-            newReminderId++;
-            newPersonalReminderId++;
+            int newPersonalReminderId = GetNextPersonalReminderId();
+            int newReminderId = GetNextReminderId();
             PersonalReminder personalReminder = new PersonalReminder();
+            
+            PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
             personalReminder.Id = newPersonalReminderId;
             personalReminder.Name = name_txt.Text;
             personalReminder.Description = description_txt.Text;
             personalReminder.AlarmTime = DateTime.Parse(alarm_time_txt.Text);
             personalReminder.reminderId = newReminderId;
             personalReminder.Patient = patientController.GetPatientByUserId(userId);
-            PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
-            MessageBox.Show(frequency.ToString());
             personalReminder.PersonalReminderFrequency = frequency;
             personalReminderController.AddPersonalReminder(personalReminder);
-            switch(frequency)
+            CreateNewPersonalReminder(personalReminder, frequency);
+            MessageBox.Show("Uspesno ste kreirali novi podsetnik!");
+            var window = new PersonalReminders(userId);
+            window.Show();
+            this.Close();
+        }
+
+        private void CreateNewPersonalReminder(PersonalReminder personalReminder, PersonalReminderFrequency frequency)
+        {
+            switch (frequency)
             {
                 case PersonalReminderFrequency.ONLY_ONCE:
                     personalReminderController.NewOnlyOnceReminder(personalReminder);
@@ -61,10 +80,7 @@ namespace Hospital.xaml_windows.Patient
                     personalReminderController.NewWeeklyReminder(personalReminder);
                     break;
             }
-            MessageBox.Show("Uspesno ste kreirali novi podsetnik!");
-            var window = new PersonalReminders(userId);
-            window.Show();
-            this.Close();
         }
     }
+
 }
