@@ -1,12 +1,11 @@
-﻿<Window
+﻿<Window x:Class="Hospital.xaml_windows.Patient.Reminders"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientReminders"
         mc:Ignorable="d"
-        Title="PatientReminders" Height="500" Width="900" Loaded="Window_Loaded">
+        Title="Reminders" Height="500" Width="900" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="55" />
@@ -57,14 +56,6 @@
                 </MenuItem.Header>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="205" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*"/>
-                <DataGridTextColumn Header="Vreme oglašavanja" Binding="{Binding AlarmTime}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
         <Button x:Name="LogOut" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
@@ -77,20 +68,8 @@
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <Label Content="Oznaka:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,219,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
-
-
-        <Label Content="Vreme oglašavanja:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="9,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,80,0,0"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,112,0,0"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="111" Style="{StaticResource RoundedTextBox}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.8,219,0,0"/>
-        <xctk:DateTimePicker x:Name="datepicker_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,144,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
-        <Label Content="Odabrani podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
-        <Label Content="Moji podsetnici:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="344,42,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Moji podsetnici" x:Name="MojiPodsetnici1" Click="MojiPodsetnici_Click_1" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="212.8,113,0,0" VerticalAlignment="Top" Width="320"/>
+        <Button Content="Moji podsetnici za terapije" x:Name="TerapijskiPodsetnici" Click="TerapijskiPodsetnici_Click" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="212.8,184,0,0" VerticalAlignment="Top" Width="320"/>
 
     </Grid>
 </Window>

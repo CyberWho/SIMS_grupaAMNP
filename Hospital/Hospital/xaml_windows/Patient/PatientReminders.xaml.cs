@@ -44,7 +44,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientReminders(userId);
+            var window = new Reminders(userId);
             window.Show();
             this.Close();
         }
@@ -72,7 +72,7 @@ namespace Hospital.xaml_windows.Patient
         {
             this.DataContext = this;
             Model.Patient patient = patientController.GetPatientByUserId(userId);
-            Reminders = reminderController.GetAllPastRemindersByPatientId(patient.Id);
+            Reminders = reminderController.GetAllRemindersByPatientId(patient.Id);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
             myDataGrid.ItemsSource = Reminders;
@@ -108,5 +108,7 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+
+        
     }
 }

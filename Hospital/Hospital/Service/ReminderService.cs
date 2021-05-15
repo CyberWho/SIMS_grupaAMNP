@@ -20,29 +20,27 @@ namespace Hospital.Service
 
         public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
         {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            reminders = reminderRepository.GetReminderByAlarmTimeAndPatientId(alarmTime, patientId);
-            return reminders;
+            return reminderRepository.GetReminderByAlarmTimeAndPatientId(alarmTime, patientId);
         }
 
 
-      public System.Collections.ArrayList GetAllRemindersByPatientId(int patientId)
+      public ObservableCollection<Reminder> GetAllRemindersByPatientId(int patientId)
       {
-         // TODO: implement
-         return null;
+            return reminderRepository.GetAllRemindersByPatientId(patientId);
       }
         public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
         {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            reminders = reminderRepository.GetAllPastRemindersByPatientId(patientId);
-            return reminders;
+            return reminderRepository.GetAllPastRemindersByPatientId(patientId);
         }
 
        public ObservableCollection<Reminder> GetAllFutureRemindersByPatientId(int patientId)
         {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            reminders = reminderRepository.GetAllFutureRemindersByPatientId(patientId);
-            return reminders;
+            return reminderRepository.GetAllFutureRemindersByPatientId(patientId);
+        }
+
+        public ObservableCollection<Reminder> GetAllRemindersByPersonalReminderId(int personalReminderId)
+        {
+            return reminderRepository.GetAllRemindersByPersonalReminderId(personalReminderId);
         }
 
       public Boolean DeleteReminderById(int id)
@@ -70,16 +68,16 @@ namespace Hospital.Service
                 reminder.Description = "Za sat vremena popijte lek " + medicalTreatment.Drug.Name;
                 reminder.Patient = medicalTreatment.anamnesis.healthRecord.Patient;
                 start = start.AddHours(medicalTreatment.Period);
+                reminder.personalReminderId = 0;
                 reminderRepository.NewReminder(reminder);
             }
          
             return true;
         }
-      
+       
       public Reminder UpdateReminder(Reminder reminder)
       {
-         // TODO: implement
-         return null;
+            return reminderRepository.UpdateReminder(reminder);
       }
       
       public Reminder AddReminder(Reminder reminder)
@@ -93,7 +91,12 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
+        public int GetLastId()
+        {
+            return reminderRepository.GetLastId();
+        }
+
+
       public Repository.ReminderRepository reminderRepository = new Repository.ReminderRepository();
    
    }
