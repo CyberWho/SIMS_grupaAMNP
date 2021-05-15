@@ -130,17 +130,7 @@ namespace Hospital.Repository
             reader.Read();
             User user = new User();
             user = new UserRepository().GetUserById(reader.GetInt32(0));
-            /*int userId = reader.GetInt32(0);
-
-
-            user.Id = userId;
-            user.Username = reader.GetString(1);
-            user.Password = reader.GetString(2);
-            user.Name = reader.GetString(3);
-            user.Surname = reader.GetString(4);
-            user.PhoneNumber = reader.GetString(5);
-            user.EMail = reader.GetString(6);*/
-
+           
             Patient patient = new Patient();
             patient.User = user;
             patient.Id = int.Parse(reader.GetString(7));
