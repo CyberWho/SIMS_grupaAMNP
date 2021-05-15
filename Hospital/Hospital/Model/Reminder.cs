@@ -35,6 +35,14 @@ namespace Hospital.Model
             Patient = patient;
             this.personalReminderId = personalReminderId;
         }
+        public Reminder(string name, string description, DateTime alarmTime,int personalReminderId)
+        {
+            Name = name;
+            Description = description;
+            AlarmTime = alarmTime;
+            
+            this.personalReminderId = personalReminderId;
+        }
 
         public Reminder()
         {

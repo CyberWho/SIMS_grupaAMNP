@@ -55,6 +55,10 @@ namespace Hospital.Controller
         {
             return personalReminderService.DeletePersonalReminderById(id);
         }
+        public Boolean DeleteAllRemindersExceptFirstReminder(PersonalReminder personalReminder)
+        {
+            return personalReminderService.DeleteAllRemindersExceptFirstReminder(personalReminder);
+        }
         public Boolean DeleteAllPersonalRemindersByPatientId(int patientId)
         {
             return false;

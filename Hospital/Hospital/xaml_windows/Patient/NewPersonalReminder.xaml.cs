@@ -39,7 +39,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private int GetNextPersonalReminderId()
         {
-            int personalReminderId = reminderController.GetLastId();
+            int personalReminderId = personalReminderController.GetLastId();
             personalReminderId++;
             return personalReminderId;
         }
@@ -48,21 +48,13 @@ namespace Hospital.xaml_windows.Patient
         {
             int newPersonalReminderId = GetNextPersonalReminderId();
             int newReminderId = GetNextReminderId();
-            PersonalReminder personalReminder = new PersonalReminder();
-            
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
-            personalReminder.Id = newPersonalReminderId;
-            personalReminder.Name = name_txt.Text;
-            personalReminder.Description = description_txt.Text;
-            personalReminder.AlarmTime = DateTime.Parse(alarm_time_txt.Text);
-            personalReminder.reminderId = newReminderId;
+            PersonalReminder personalReminder = new PersonalReminder(newPersonalReminderId, name_txt.Text, description_txt.Text, DateTime.Parse(alarm_time_txt.Text), frequency, newReminderId);
             personalReminder.Patient = patientController.GetPatientByUserId(userId);
-            personalReminder.PersonalReminderFrequency = frequency;
             personalReminderController.AddPersonalReminder(personalReminder);
             CreateNewPersonalReminder(personalReminder, frequency);
             MessageBox.Show("Uspesno ste kreirali novi podsetnik!");
-            var window = new PersonalReminders(userId);
-            window.Show();
+            
             this.Close();
         }
 
