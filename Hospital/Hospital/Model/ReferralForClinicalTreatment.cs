@@ -13,9 +13,8 @@ namespace Hospital.Model
       public int Id { get; set; }
       public Boolean IsActive { get; set; }
       public String Description { get; set; }
-      public DateTime StartTime { get; set; }
-      public DateTime EndTime { get; set; }
       
+      public DateRange dateRange { get; set; }
       public Appointment Appointment { get; set; }
       public HealthRecord HealthRecord { get; set; }
 
@@ -28,8 +27,7 @@ namespace Hospital.Model
             Id = id;
             IsActive = isActive;
             Description = description;
-            StartTime = startTime;
-            EndTime = endTime;
+            dateRange = new DateRange(startTime, endTime);
             Appointment = appointment;
             HealthRecord = healthRecord;
             appointmentId = appointment.Id;
@@ -38,6 +36,7 @@ namespace Hospital.Model
 
         public ReferralForClinicalTreatment()
         {
+            dateRange = new DateRange();
         }
     }
 }

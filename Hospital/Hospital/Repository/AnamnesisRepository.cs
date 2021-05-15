@@ -39,13 +39,7 @@ namespace Hospital.Repository
             cmd.CommandText = "select * from anamnesis where id = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            Anamnesis anamnesis = new Anamnesis();
-            //anamnesis.appointment =
-            anamnesis.Id = reader.GetInt32(0);
-            anamnesis.Description = reader.GetString(1);
-            anamnesis.MedicalTreatments = new MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(id);
-            anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(id);
-
+            var anamnesis = ParseAnamnesis(reader);
             connection.Close();
             connection.Dispose();
 
@@ -64,14 +58,7 @@ namespace Hospital.Repository
 
             while (reader.Read())
             {
-
-                Anamnesis anamnesis = new Anamnesis();
-                //anamnesis.appointment =
-                anamnesis.Id = reader.GetInt32(0);
-                anamnesis.Description = reader.GetString(1);
-                anamnesis.MedicalTreatments = new MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(reader.GetInt32(0));
-                anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(reader.GetInt32(0));
-                anamnesis.appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(3));
+                var anamnesis = ParseAnamnesis(reader);
                 anamneses.Add(anamnesis);
             }
 
@@ -79,6 +66,18 @@ namespace Hospital.Repository
             connection.Dispose();
 
             return anamneses;
+        }
+
+        private static Anamnesis ParseAnamnesis(OracleDataReader reader)
+        {
+            Anamnesis anamnesis = new Anamnesis();
+           
+            anamnesis.Id = reader.GetInt32(0);
+            anamnesis.Description = reader.GetString(1);
+            anamnesis.MedicalTreatments = new MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(reader.GetInt32(0));
+            anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(reader.GetInt32(0));
+            anamnesis.appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(3));
+            return anamnesis;
         }
 
         public Boolean DeleteAnamnesisById(int id)

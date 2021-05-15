@@ -109,6 +109,7 @@
     <Compile Include="Controller\TimeSlotController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WorkHoursController.cs" />
+    <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
     <Compile Include="Model\PatientLogs.cs" />
     <Compile Include="Model\PersonalReminder.cs" />

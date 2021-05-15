@@ -38,12 +38,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            Model.Perscription perscription = new Model.Perscription();
-            //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
-            perscription.Id = reader.GetInt32(0);
-            perscription.IsActive = reader.GetInt32(1) == 0 ? false : true;
-            perscription.Description = reader.GetString(2);
-            perscription.Drug_id = reader.GetInt32(3);
+            var perscription = ParsePerscription(reader);
 
             connection.Close();
             connection.Dispose();
@@ -62,12 +57,7 @@ namespace Hospital.Repository
             //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
             while (reader.Read())
             {
-                Model.Perscription perscription = new Model.Perscription();
-                perscription.Id = reader.GetInt32(0);
-                perscription.IsActive = reader.GetInt32(1) == 0 ? false : true;
-                perscription.Description = reader.GetString(2);
-                perscription.Drug_id = int.Parse(reader.GetString(3));
-                //Console.WriteLine(reader.GetString(3));
+                var perscription = ParsePerscription(reader);
                 perscriptions.Add(perscription);
             }
             
@@ -94,18 +84,24 @@ namespace Hospital.Repository
 
             while (reader.Read())
             {
-                Model.Perscription perscription = new Model.Perscription();
-                perscription.Id = reader.GetInt32(0);
-                perscription.IsActive = reader.GetInt32(1) == 0 ? false : true;
-                perscription.Description = reader.GetString(2);
-                perscription.Drug_id = reader.GetInt32(3);
-                perscription.Drug = new DrugRepository().GetDrugById(reader.GetInt32(3));
+                var perscription = ParsePerscription(reader);
                 perscriptions.Add(perscription);
             }
 
             connection.Close();
             
             return perscriptions;
+        }
+
+        private static Perscription ParsePerscription(OracleDataReader reader)
+        {
+            Model.Perscription perscription = new Model.Perscription();
+            perscription.Id = reader.GetInt32(0);
+            perscription.IsActive = reader.GetInt32(1) == 0 ? false : true;
+            perscription.Description = reader.GetString(2);
+            perscription.Drug_id = reader.GetInt32(3);
+            perscription.Drug = new DrugRepository().GetDrugById(reader.GetInt32(3));
+            return perscription;
         }
 
         public Boolean DeletePerscriptionById(int id)

@@ -57,8 +57,8 @@ namespace Hospital.Service
 
       public Boolean AddNewReminderByMedicalTreatment(MedicalTreatment medicalTreatment)
         {
-            DateTime start = medicalTreatment.StartTime;
-           while(start <= medicalTreatment.EndTime)
+            DateTime start = medicalTreatment.dateRange.StartTime;
+           while(start <= medicalTreatment.dateRange.EndTime)
             {
                 Reminder reminder = new Reminder();
                 DateTime startTime = start;

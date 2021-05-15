@@ -66,8 +66,8 @@ namespace Hospital.Repository
                 ReferralForClinicalTreatment referralForClinicalTreatment = new ReferralForClinicalTreatment();
                 referralForClinicalTreatment.Id = reader.GetInt32(0);
                 referralForClinicalTreatment.IsActive = true;
-                referralForClinicalTreatment.StartTime = reader.GetDateTime(2);
-                referralForClinicalTreatment.EndTime = reader.GetDateTime(3);
+                referralForClinicalTreatment.dateRange.StartTime = reader.GetDateTime(2);
+                referralForClinicalTreatment.dateRange.EndTime = reader.GetDateTime(3);
                 referralForClinicalTreatment.appointmentId = reader.GetInt32(4);
                 referralForClinicalTreatment.healthRecordId = reader.GetInt32(5);
                 referralForClinicalTreatment.Description = reader.GetString(6);

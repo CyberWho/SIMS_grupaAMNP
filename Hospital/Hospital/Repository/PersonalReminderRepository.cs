@@ -35,6 +35,13 @@ namespace Hospital.Repository
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
+            var personalReminder = ParsePersonalReminder(reader);
+            connection.Close();
+            return personalReminder;
+        }
+
+        private static PersonalReminder ParsePersonalReminder(OracleDataReader reader)
+        {
             PersonalReminder personalReminder = new PersonalReminder();
             personalReminder.Id = reader.GetInt32(0);
             personalReminder.reminderId = reader.GetInt32(1);
@@ -51,13 +58,14 @@ namespace Hospital.Repository
                     personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
                     break;
             }
+
             personalReminder.Name = reader.GetString(4);
             personalReminder.Description = reader.GetString(5);
             personalReminder.AlarmTime = reader.GetDateTime(6);
             personalReminder.Patient = new PatientRepository().GetPatientById(reader.GetInt32(7));
-            connection.Close();
             return personalReminder;
         }
+
         public ObservableCollection<PersonalReminder> GetAllPersonalRemindersByPatientId(int patientId)
         {
             setConnection();
@@ -68,26 +76,8 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
-                PersonalReminder personalReminder = new PersonalReminder();
-                personalReminder.Id = reader.GetInt32(0);
-                personalReminder.reminderId = reader.GetInt32(1);
-                int personalReminderFrequencyId = reader.GetInt32(2);
+                PersonalReminder personalReminder = ParsePersonalReminder(reader);
                 
-                switch (personalReminderFrequencyId)
-                {
-                    case 0:
-                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.ONLY_ONCE;
-                        break;
-                    case 1:
-                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
-                        break;
-                    case 2:
-                        personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
-                        break;
-                }
-                personalReminder.Name = reader.GetString(4);
-                personalReminder.Description = reader.GetString(5);
-                personalReminder.AlarmTime = reader.GetDateTime(6);
                 personalReminders.Add(personalReminder);
             }
             connection.Close();

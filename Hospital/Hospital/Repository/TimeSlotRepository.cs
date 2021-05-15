@@ -79,36 +79,8 @@ namespace Hospital.Repository
             while (reader.Read())
             {
 
-                TimeSlot timeSlot = new TimeSlot();
-                timeSlot.Id = reader.GetInt32(0);
-                int free = reader.GetInt32(1);
-                if (free == 0)
-                {
-                    timeSlot.Free = false;
-                }
-                else
-                {
-                    timeSlot.Free = true;
-                }
-                timeSlot.StartTime = reader.GetDateTime(2);
-                WorkHours workHours = new WorkHours();
-                workHours.Id = reader.GetInt32(4);
-                workHours.ShiftStart = reader.GetDateTime(5);
-                workHours.ShiftEnd = reader.GetDateTime(6);
-                int approved = reader.GetInt32(7);
-                if (approved == 0)
-                {
-                    workHours.Approved = false;
-                }
-                else
-                {
-                    workHours.Approved = true;
-                }
-
-                Doctor doctor = new Doctor();
-                doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
-                workHours.doctor = doctor;
-                timeSlot.WorkHours = workHours;
+                TimeSlot timeSlot = ParseTimeSlot(reader);
+                
                 timeSlots.Add(timeSlot);
 
             }
@@ -130,27 +102,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                TimeSlot timeSlot = new TimeSlot();
-                int timeSlotId = reader.GetInt32(0);
-                timeSlot = GetTimeSlotById(timeSlotId);
-                WorkHours workHours = new WorkHours();
-                workHours.Id = reader.GetInt32(4);
-                workHours.ShiftStart = reader.GetDateTime(5);
-                workHours.ShiftEnd = reader.GetDateTime(6);
-                int approved = reader.GetInt32(7);
-                if (approved == 0)
-                {
-                    workHours.Approved = false;
-                }
-                else
-                {
-                    workHours.Approved = true;
-                }
-                int doctorId = reader.GetInt32(8);
-                Doctor doctor = new Doctor();
-                doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
-                workHours.doctor = doctor;
-                timeSlot.WorkHours = workHours;
+                var timeSlot = ParseTimeSlot(reader);
                 timeSlots.Add(timeSlot);
             }
 
@@ -159,6 +111,33 @@ namespace Hospital.Repository
 
             return timeSlots;
 
+        }
+
+        private TimeSlot ParseTimeSlot(OracleDataReader reader)
+        {
+            TimeSlot timeSlot = new TimeSlot();
+            int timeSlotId = reader.GetInt32(0);
+            timeSlot = GetTimeSlotById(timeSlotId);
+            WorkHours workHours = new WorkHours();
+            workHours.Id = reader.GetInt32(4);
+            workHours.dateRange.StartTime = reader.GetDateTime(5);
+            workHours.dateRange.EndTime = reader.GetDateTime(6);
+            int approved = reader.GetInt32(7);
+            if (approved == 0)
+            {
+                workHours.Approved = false;
+            }
+            else
+            {
+                workHours.Approved = true;
+            }
+
+            int doctorId = reader.GetInt32(8);
+            Doctor doctor = new Doctor();
+            doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
+            workHours.doctor = doctor;
+            timeSlot.WorkHours = workHours;
+            return timeSlot;
         }
 
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId)
@@ -249,27 +228,8 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                TimeSlot timeSlot = new TimeSlot();
-                int timeSlotId = reader.GetInt32(0);
-                timeSlot = GetTimeSlotById(timeSlotId);
-                WorkHours workHours = new WorkHours();
-                workHours.Id = reader.GetInt32(4);
-                workHours.ShiftStart = reader.GetDateTime(5);
-                workHours.ShiftEnd = reader.GetDateTime(6);
-                int approved = reader.GetInt32(7);
-                if (approved == 0)
-                {
-                    workHours.Approved = false;
-                }
-                else
-                {
-                    workHours.Approved = true;
-                }
-
-                Doctor doctor = new Doctor();
-                doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
-                workHours.doctor = doctor;
-                timeSlot.WorkHours = workHours;
+                TimeSlot timeSlot = ParseTimeSlot(reader);
+                
                 timeSlots.Add(timeSlot);
             }
 

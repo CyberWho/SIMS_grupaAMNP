@@ -71,6 +71,16 @@ namespace Hospital.Repository
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
+            var appointment = ParseAppointment(reader);
+
+            connection.Close();
+            connection.Dispose();
+
+            return appointment;
+        }
+
+        private Appointment ParseAppointment(OracleDataReader reader)
+        {
             Appointment appointment = new Appointment();
             appointment.Id = reader.GetInt32(0);
             appointment.DurationInMinutes = reader.GetInt32(1);
@@ -116,10 +126,6 @@ namespace Hospital.Repository
 
             Doctor doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
             appointment.doctor = doctor;
-
-            connection.Close();
-            connection.Dispose();
-
             return appointment;
         }
 
@@ -210,43 +216,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Appointment appointment = new Appointment();
-                appointment.Id = reader.GetInt32(0);
-                appointment.DurationInMinutes = reader.GetInt32(1);
-                appointment.StartTime = reader.GetDateTime(2);
-                int roomId = reader.GetInt32(3);
-                int patId = reader.GetInt32(4);
-                int doctorId = reader.GetInt32(5);
-                int apptypeid = reader.GetInt32(6);
-                int appstatid = reader.GetInt32(7);
-                if (apptypeid == 0)
-                {
-                    appointment.Type = AppointmentType.OPERATION;
-                }
-                else
-                {
-                    if (apptypeid == 1)
-                    {
-                        appointment.Type = AppointmentType.EXAMINATION;
-                    }
-                    else
-                    {
-                        appointment.Type = AppointmentType.REFERRAL;
-                    }
-                }
-                appointment.Status = AppointmentStatus.RESERVED;
-
-                Room room = new Room();
-                room = roomRepository.GetAppointmentRoomById(roomId);
-
-                appointment.room = room;
-                Patient patient = new Patient();
-                patient = patientRepository.GetPatientById(patientId);
-                appointment.patient = patient;
-
-                Doctor doctor = new Doctor();
-                doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
-                appointment.doctor = doctor;
+                Appointment appointment = ParseAppointment(reader);
                 appointments.Add(appointment);
 
             }

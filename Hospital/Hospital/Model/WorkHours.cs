@@ -13,8 +13,7 @@ namespace Hospital.Model
 
 
         public int Id { get; set; }
-        public DateTime ShiftStart { get; set; }
-        public DateTime ShiftEnd { get; set; }
+        public  DateRange dateRange { get; set; }
         public Boolean Approved { get; set; }
 
         public Doctor doctor { get; set; }
@@ -48,14 +47,14 @@ namespace Hospital.Model
         public WorkHours(int id, DateTime shiftStart, DateTime shiftEnd, bool approved, Doctor doctor)
         {
             Id = id;
-            ShiftStart = shiftStart;
-            ShiftEnd = shiftEnd;
+            dateRange = new DateRange(shiftStart, shiftEnd);
             Approved = approved;
             this.doctor = doctor;
         }
 
         public WorkHours()
         {
+            dateRange = new DateRange();
         }
     }
 }

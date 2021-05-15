@@ -36,19 +36,25 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment();
-            //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
-            medicalTreatment.Id = reader.GetInt32(0);
-            medicalTreatment.Period = reader.GetInt32(1);
-            medicalTreatment.StartTime = reader.GetDateTime(2);
-            medicalTreatment.EndTime = reader.GetDateTime(3);
-            medicalTreatment.Anamnesis_id = reader.GetInt32(4);
-            medicalTreatment.Drug_id = reader.GetInt32(5);
-            medicalTreatment.Description = reader.GetString(6);
+            var medicalTreatment = ParseMedicalTreatment1(reader);
 
             connection.Close();
             connection.Dispose();
 
+            return medicalTreatment;
+        }
+
+        private static Model.MedicalTreatment ParseMedicalTreatment1(OracleDataReader reader)
+        {
+            Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment();
+            //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
+            medicalTreatment.Id = reader.GetInt32(0);
+            medicalTreatment.Period = reader.GetInt32(1);
+            medicalTreatment.dateRange.StartTime = reader.GetDateTime(2);
+            medicalTreatment.dateRange.EndTime = reader.GetDateTime(3);
+            medicalTreatment.Anamnesis_id = reader.GetInt32(4);
+            medicalTreatment.Drug_id = reader.GetInt32(5);
+            medicalTreatment.Description = reader.GetString(6);
             return medicalTreatment;
         }
 
@@ -61,15 +67,9 @@ namespace Hospital.Repository
             ObservableCollection<Model.MedicalTreatment> medicalTreatments = new ObservableCollection<Model.MedicalTreatment>();
 
             //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
-            while (reader.Read()) { 
-                Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment();
-                medicalTreatment.Id = reader.GetInt32(0);
-                medicalTreatment.Period = reader.GetInt32(1);
-                medicalTreatment.StartTime = reader.GetDateTime(2);
-                medicalTreatment.EndTime = reader.GetDateTime(3);
-                medicalTreatment.Anamnesis_id = reader.GetInt32(4);
-                medicalTreatment.Drug_id = reader.GetInt32(5);
-                medicalTreatment.Description = reader.GetString(6);
+            while (reader.Read())
+            {
+                var medicalTreatment = ParseMedicalTreatment1(reader);
                 medicalTreatments.Add(medicalTreatment);
             }
 
