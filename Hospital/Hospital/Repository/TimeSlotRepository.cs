@@ -93,8 +93,8 @@ namespace Hospital.Repository
                 timeSlot.StartTime = reader.GetDateTime(2);
                 WorkHours workHours = new WorkHours();
                 workHours.Id = reader.GetInt32(4);
-                workHours.ShiftStart = reader.GetDateTime(5);
-                workHours.ShiftEnd = reader.GetDateTime(6);
+                workHours.dateRange.StartTime = reader.GetDateTime(5);
+                workHours.dateRange.EndTime = reader.GetDateTime(6);
                 int approved = reader.GetInt32(7);
                 if (approved == 0)
                 {
@@ -135,8 +135,8 @@ namespace Hospital.Repository
                 timeSlot = GetTimeSlotById(timeSlotId);
                 WorkHours workHours = new WorkHours();
                 workHours.Id = reader.GetInt32(4);
-                workHours.ShiftStart = reader.GetDateTime(5);
-                workHours.ShiftEnd = reader.GetDateTime(6);
+                workHours.dateRange.StartTime = reader.GetDateTime(5);
+                workHours.dateRange.EndTime = reader.GetDateTime(6);
                 int approved = reader.GetInt32(7);
                 if (approved == 0)
                 {
@@ -254,8 +254,8 @@ namespace Hospital.Repository
                 timeSlot = GetTimeSlotById(timeSlotId);
                 WorkHours workHours = new WorkHours();
                 workHours.Id = reader.GetInt32(4);
-                workHours.ShiftStart = reader.GetDateTime(5);
-                workHours.ShiftEnd = reader.GetDateTime(6);
+                workHours.dateRange.StartTime = reader.GetDateTime(5);
+                workHours.dateRange.EndTime = reader.GetDateTime(6);
                 int approved = reader.GetInt32(7);
                 if (approved == 0)
                 {

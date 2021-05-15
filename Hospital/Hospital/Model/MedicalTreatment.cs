@@ -13,8 +13,7 @@ namespace Hospital.Model
     {
         public int Id { get; set; }
         public int Period { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateRange dateRange { get; set; }
         public String Description { get; set; }
 
         public Drug Drug { get; set; }
@@ -51,8 +50,7 @@ namespace Hospital.Model
     {
         Id = id;
         Period = period;
-        StartTime = startTime;
-        EndTime = endTime;
+        dateRange = new DateRange(startTime, endTime);
         Description = description;
         Drug = drug;
         this.anamnesis = anamnesis;
@@ -60,6 +58,7 @@ namespace Hospital.Model
 
     public MedicalTreatment()
     {
+        dateRange = new DateRange();
     }
 }
 }

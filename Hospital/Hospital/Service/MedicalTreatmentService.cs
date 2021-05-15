@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
@@ -57,8 +58,8 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
-      public Repository.MedicalTreatment medicalTreatment;
-   
+
+      public Repository.MedicalTreatment medicalTreatment = new MedicalTreatment();
+
    }
 }

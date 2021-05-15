@@ -40,8 +40,8 @@ namespace Hospital.Repository
             //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
             medicalTreatment.Id = reader.GetInt32(0);
             medicalTreatment.Period = reader.GetInt32(1);
-            medicalTreatment.StartTime = reader.GetDateTime(2);
-            medicalTreatment.EndTime = reader.GetDateTime(3);
+            medicalTreatment.dateRange.StartTime = reader.GetDateTime(2);
+            medicalTreatment.dateRange.EndTime = reader.GetDateTime(3);
             medicalTreatment.Anamnesis_id = reader.GetInt32(4);
             medicalTreatment.Drug_id = reader.GetInt32(5);
             medicalTreatment.Description = reader.GetString(6);
@@ -65,8 +65,8 @@ namespace Hospital.Repository
                 Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment();
                 medicalTreatment.Id = reader.GetInt32(0);
                 medicalTreatment.Period = reader.GetInt32(1);
-                medicalTreatment.StartTime = reader.GetDateTime(2);
-                medicalTreatment.EndTime = reader.GetDateTime(3);
+                medicalTreatment.dateRange.StartTime = reader.GetDateTime(2);
+                medicalTreatment.dateRange.EndTime = reader.GetDateTime(3);
                 medicalTreatment.Anamnesis_id = reader.GetInt32(4);
                 medicalTreatment.Drug_id = reader.GetInt32(5);
                 medicalTreatment.Description = reader.GetString(6);
