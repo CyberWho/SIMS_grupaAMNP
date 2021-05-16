@@ -85,13 +85,19 @@ namespace Hospital.xaml_windows.Patient
 
         }
 
+        private int GetDoctorIdFromForm()
+        {
+            Model.Doctor doctor = (Model.Doctor)myDataGrid.SelectedValue;
+            return doctor.Id;
+        }
+
         private void Oceni_Click(object sender, RoutedEventArgs e)
         {
-            if(appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id,int.Parse(doc_id_txt.Text)) == false) {
+            if(appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id,GetDoctorIdFromForm()) == false) {
                 MessageBox.Show("Ne mozete oceniti doktora kod kog niste bili na pregledu!");
             } else
             {
-                var window = new DoctorRate(userId, int.Parse(doc_id_txt.Text));
+                var window = new DoctorRate(userId,GetDoctorIdFromForm());
                 window.Show();
                 
             }
