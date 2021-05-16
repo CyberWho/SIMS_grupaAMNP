@@ -17,7 +17,7 @@ namespace Hospital.xaml_windows.Patient
         private AppointmentController appointmentController = new AppointmentController();
         private PatientController patientController = new PatientController();
         private ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
         private ReminderController reminderController = new ReminderController();
         private PatientLogsController patientLogsController = new PatientLogsController();
 
@@ -30,22 +30,7 @@ namespace Hospital.xaml_windows.Patient
             updateDataGrid();
         }
 
-        private void dispatherTimer_Tick(object sender, EventArgs e)
-        {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
-            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
-            DateTime now = DateTime.Now;
-            now = now.AddMilliseconds(-now.Millisecond);
-            foreach (Reminder reminder in reminders)
-            {
-                if ((reminder.AlarmTime - now).Minutes == 0)
-                {
-                    MessageBox.Show(reminder.Description);
-                }
-            }
-        }
+       
 
         private int getPatientId()
         {
@@ -100,9 +85,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
@@ -112,22 +95,25 @@ namespace Hospital.xaml_windows.Patient
             int patientId = getPatientId();
             appointment = appointmentController.GetAppointmentById(appointmentId);
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
-            
-         
-                if (hours > 24)
-                {
-                    var s = new PatientUpdateAppointment(patientId,appointmentId);
-                    s.Show();
-                    this.Close();
-                }
-                else
-                {
-
-                    MessageBox.Show("Nije moguce promeniti vreme odrzavanja termina jer je ostalo manje od 24h");
-                }
+             DateValidationForUpdate(hours, patientId, appointmentId);
             
            
         }
+
+        private void DateValidationForUpdate(double hours, int patientId, int appointmentId)
+        {
+            if (hours > 24)
+            {
+                var s = new PatientUpdateAppointment(patientId, appointmentId);
+                s.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Nije moguce promeniti vreme odrzavanja termina jer je ostalo manje od 24h");
+            }
+        }
+
         private void Doktori_Click(object sender,RoutedEventArgs e)
         {
             var window = new Doctors(userId);

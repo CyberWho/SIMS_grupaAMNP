@@ -239,6 +239,7 @@
     <Compile Include="xaml_windows\Patient\ClinicalTreatmentReferrals.xaml.cs">
       <DependentUpon>ClinicalTreatmentReferrals.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\DispatcherTimerForReminder.cs" />
     <Compile Include="xaml_windows\Patient\DoctorRate.xaml.cs">
       <DependentUpon>DoctorRate.xaml</DependentUpon>
     </Compile>
