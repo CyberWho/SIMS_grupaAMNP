@@ -101,6 +101,11 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.doctorId = doctorId;
             this.DataContext = this;
+            ShowDoctorInformations(doctorId);
+        }
+
+        private void ShowDoctorInformations(int doctorId)
+        {
             Model.Doctor doctor = new Model.Doctor();
             doctor = new DoctorController().GetDoctorById(doctorId);
             Id = doctor.Id;
@@ -109,7 +114,7 @@ namespace Hospital.xaml_windows.Patient
             Specialization = doctor.specialization.Type;
         }
 
-      
+
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientInfo(userId);

@@ -117,8 +117,13 @@ namespace Hospital.xaml_windows.Patient
             
             InitializeComponent();
             this.userId = userId;
-            patient = patientController.GetPatientByUserId(userId);
             this.DataContext = this;
+            ShowPatientInformations(userId);
+        }
+
+        private void ShowPatientInformations(int userId)
+        {
+            patient = patientController.GetPatientByUserId(userId);
             Username = patient.User.Username;
             NName = patient.User.Name;
             Surname = patient.User.Surname;

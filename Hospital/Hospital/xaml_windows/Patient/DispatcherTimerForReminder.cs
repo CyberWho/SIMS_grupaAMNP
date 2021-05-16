@@ -39,7 +39,7 @@ namespace Hospital.xaml_windows.Patient
                 if ((reminder.AlarmTime - now).Minutes == 0)
                 {
                     MessageBox.Show(reminder.Description);
-                    Thread.Sleep(3000);
+                    Thread.Sleep(60000);
                 }
             }
         }

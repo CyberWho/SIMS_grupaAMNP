@@ -171,6 +171,12 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.appointmentId = appointmentId;
             
+            ShowAppointmentInformations(appointmentId);
+            updateMyGrid();
+        }
+
+        private void ShowAppointmentInformations(int appointmentId)
+        {
             appointment = appointmentController.GetAppointmentById(appointmentId);
             AppointmentStatus = appointment.Status;
             AppointmentType = appointment.Type;
@@ -180,10 +186,9 @@ namespace Hospital.xaml_windows.Patient
             RoomId = appointment.room.Id;
             NName = appointment.doctor.User.Name;
             Surname = appointment.doctor.User.Surname;
-            updateMyGrid();
         }
 
-       
+
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
             var window = new Reminders(userId);
