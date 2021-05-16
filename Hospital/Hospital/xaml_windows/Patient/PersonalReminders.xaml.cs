@@ -104,15 +104,27 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
+        private int GetPersonalReminderId()
+        {
+            PersonalReminder personalReminder = (PersonalReminder) myDataGrid.SelectedValue;
+            return personalReminder.Id;
+        }
+
+        private int GetReminderId()
+        {
+            PersonalReminder personalReminder = (PersonalReminder) myDataGrid.SelectedValue;
+            return personalReminder.reminderId;
+        }
+
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            personalReminderController.DeletePersonalReminderById(int.Parse(id_txt.Text));
+            personalReminderController.DeletePersonalReminderById(GetPersonalReminderId());
             updateDataGrid();
         }
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
-            PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(int.Parse(id_txt.Text));
+            PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(GetPersonalReminderId());
            
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
             UpdatePersonalReminder(personalReminder, frequency);

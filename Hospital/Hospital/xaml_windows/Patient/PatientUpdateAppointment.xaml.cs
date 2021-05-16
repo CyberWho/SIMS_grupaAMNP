@@ -217,10 +217,16 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
+        private int GetTimeSlotId()
+        {
+            TimeSlot timeSlot = (TimeSlot) myGrid.SelectedValue;
+            return timeSlot.Id;
+        }
+
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             
-            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));
+            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(GetTimeSlotId());
             appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);

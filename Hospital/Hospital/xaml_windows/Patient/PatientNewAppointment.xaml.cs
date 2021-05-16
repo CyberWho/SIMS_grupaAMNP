@@ -86,9 +86,15 @@ namespace Hospital.xaml_windows.Patient
             
         }
 
+        private int GetDoctorId()
+        {
+            Model.Doctor doctor = (Model.Doctor)myDataGrid.SelectedValue;
+            return doctor.Id;
+        }
+
         private void Predlozi_Click(object sender, RoutedEventArgs e)
         {
-            int doctorId = int.Parse(doc_id_txt.Text);
+            int doctorId = GetDoctorId();
             DateTime startDate = DateTime.Parse(date_txt.Text);
             DateTime endDate = DateTime.Parse(date_end_txt.Text);
             DateValidationForAppointmentRecommendations(endDate, startDate, doctorId);

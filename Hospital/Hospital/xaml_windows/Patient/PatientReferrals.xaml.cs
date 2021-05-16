@@ -66,12 +66,24 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+
+        private int GetReferralId()
+        {
+            ReferralForSpecialist referralForSpecialist = (ReferralForSpecialist) myDataGrid.SelectedValue;
+            return referralForSpecialist.Id;
+        }
+
+        private int GetDoctorId()
+        {
+            ReferralForSpecialist referralForSpecialist = (ReferralForSpecialist) myDataGrid.SelectedValue;
+            return referralForSpecialist.Doctor.Id;
+        }
         private void Predlozi_Click(object sender, RoutedEventArgs e)
         {
-            int doctorId = int.Parse(doc_id_txt.Text);
+           
             DateTime startDate = DateTime.Parse(date_txt.Text);
             DateTime endDate = DateTime.Parse(date_end_txt.Text);
-            DateValidationForAppointmentRecommendations(endDate, startDate, doctorId);
+            DateValidationForAppointmentRecommendations(endDate, startDate, GetDoctorId());
         }
 
         private void DateValidationForAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
@@ -90,7 +102,7 @@ namespace Hospital.xaml_windows.Patient
                 else
                 {
                     var window = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, 0,
-                        int.Parse(ref_id_txt.Text));
+                        GetReferralId());
                     window.Show();
                     this.Close();
                 }

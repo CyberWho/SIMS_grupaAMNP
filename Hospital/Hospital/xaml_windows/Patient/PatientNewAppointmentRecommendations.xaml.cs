@@ -77,13 +77,18 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
+        private int GetTimeSlotId()
+        {
+            TimeSlot timeSlot = (TimeSlot) myGrid.SelectedValue;
+            return timeSlot.Id;
+        }
         
         private void Zakazi_Click(object sender, RoutedEventArgs e)
         {
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             Room room = roomController.GetAppointmentRoomById(int.Parse(room_id_txt.Text));
-            Model.Doctor doctor = doctorController.GetWorkHoursDoctorById(int.Parse(doctor_id_txt.Text));
-            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));
+            Model.Doctor doctor = doctorController.GetWorkHoursDoctorById(doctorId);
+            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(GetTimeSlotId());
             Appointment appointment = new Appointment(30, timeSlot.StartTime, AppointmentType.EXAMINATION, AppointmentStatus.RESERVED, doctor, patient, room);
             appointmentController.ReserveAppointment(appointment);
             if(referralForSpecialistId != 0)
