@@ -88,14 +88,20 @@ namespace Hospital.xaml_windows.Patient
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
 
+        private int GetAppointmentId()
+        {
+            Appointment appointment = (Appointment) myDataGrid.SelectedValue;
+            return appointment.Id;
+        }
+
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             Appointment appointment = new Appointment();
-            int appointmentId = int.Parse(app_id_txt.Text);
+            
             int patientId = getPatientId();
-            appointment = appointmentController.GetAppointmentById(appointmentId);
+            appointment = appointmentController.GetAppointmentById(GetAppointmentId());
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
-             DateValidationForUpdate(hours, patientId, appointmentId);
+             DateValidationForUpdate(hours, patientId, GetAppointmentId());
             
            
         }
@@ -129,7 +135,7 @@ namespace Hospital.xaml_windows.Patient
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
             
-            appointmentController.CancelAppointmentById(int.Parse(app_id_txt.Text));
+            appointmentController.CancelAppointmentById(GetAppointmentId());
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
