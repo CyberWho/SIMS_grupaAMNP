@@ -63,21 +63,27 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
-                ReferralForClinicalTreatment referralForClinicalTreatment = new ReferralForClinicalTreatment();
-                referralForClinicalTreatment.Id = reader.GetInt32(0);
-                referralForClinicalTreatment.IsActive = true;
-                referralForClinicalTreatment.dateRange.StartTime = reader.GetDateTime(2);
-                referralForClinicalTreatment.dateRange.EndTime = reader.GetDateTime(3);
-                referralForClinicalTreatment.appointmentId = reader.GetInt32(4);
-                referralForClinicalTreatment.healthRecordId = reader.GetInt32(5);
-                referralForClinicalTreatment.Description = reader.GetString(6);
+                var referralForClinicalTreatment = ParseReferralForClinicalTreatment(reader);
                 referralForClinicalTreatments.Add(referralForClinicalTreatment);
             }
 
             connection.Close();
             return referralForClinicalTreatments;
         }
-      
+
+      private static ReferralForClinicalTreatment ParseReferralForClinicalTreatment(OracleDataReader reader)
+      {
+          ReferralForClinicalTreatment referralForClinicalTreatment = new ReferralForClinicalTreatment();
+          referralForClinicalTreatment.Id = reader.GetInt32(0);
+          referralForClinicalTreatment.IsActive = true;
+          referralForClinicalTreatment.dateRange.StartTime = reader.GetDateTime(2);
+          referralForClinicalTreatment.dateRange.EndTime = reader.GetDateTime(3);
+          referralForClinicalTreatment.appointmentId = reader.GetInt32(4);
+          referralForClinicalTreatment.healthRecordId = reader.GetInt32(5);
+          referralForClinicalTreatment.Description = reader.GetString(6);
+          return referralForClinicalTreatment;
+      }
+
       public Model.ReferralForClinicalTreatment GetReferralForClinicalTreatmentById()
       {
          // TODO: implement

@@ -79,8 +79,7 @@ namespace Hospital.Repository
             while (reader.Read())
             {
 
-                TimeSlot timeSlot = ParseTimeSlot(reader);
-                
+                TimeSlot timeSlot = ParseTimeSlot(reader); 
                 timeSlots.Add(timeSlot);
 
             }
@@ -89,6 +88,25 @@ namespace Hospital.Repository
             connection.Dispose();
 
             return timeSlots;
+        }
+
+        private TimeSlot ParseTimeSlot(OracleDataReader reader)
+        {
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot.Id = reader.GetInt32(0);
+            if (reader.GetInt32(1) == 0)
+            {
+                timeSlot.Free = false;
+            }
+            else
+            {
+                timeSlot.Free = true;
+            }
+
+            timeSlot.StartTime = reader.GetDateTime(2);
+            timeSlot.WorkHours = new WorkHoursRepository().GetWorkHoursById(reader.GetInt32(3));
+            timeSlot.workHours_id = timeSlot.WorkHours.Id;
+            return timeSlot;
         }
 
         public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDates(DateTime startTime, DateTime endTime)
@@ -113,32 +131,6 @@ namespace Hospital.Repository
 
         }
 
-        private TimeSlot ParseTimeSlot(OracleDataReader reader)
-        {
-            TimeSlot timeSlot = new TimeSlot();
-            int timeSlotId = reader.GetInt32(0);
-            timeSlot = GetTimeSlotById(timeSlotId);
-            WorkHours workHours = new WorkHours();
-            workHours.Id = reader.GetInt32(4);
-            workHours.dateRange.StartTime = reader.GetDateTime(5);
-            workHours.dateRange.EndTime = reader.GetDateTime(6);
-            int approved = reader.GetInt32(7);
-            if (approved == 0)
-            {
-                workHours.Approved = false;
-            }
-            else
-            {
-                workHours.Approved = true;
-            }
-
-            int doctorId = reader.GetInt32(8);
-            Doctor doctor = new Doctor();
-            doctor = doctorRepository.GetWorkHoursDoctorById(doctorId);
-            workHours.doctor = doctor;
-            timeSlot.WorkHours = workHours;
-            return timeSlot;
-        }
 
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId)
         {

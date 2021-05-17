@@ -13,14 +13,14 @@ namespace Hospital.Repository
 {
     public class ReferralForSpecialistRepository
     {
-        OracleConnection con = null;
+        OracleConnection connection = null;
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            con = new OracleConnection(conString);
+            connection = new OracleConnection(conString);
             try
             {
-                con.Open();
+                connection.Open();
 
             }
             catch (Exception exp)
@@ -45,21 +45,27 @@ namespace Hospital.Repository
         {
             setConnection();
             ObservableCollection<ReferralForSpecialist> referralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM REFERRAL_FOR_SPECIALIST WHERE HEALTH_RECORD_ID = :health_record_id";
-            cmd.Parameters.Add("health_record_id", OracleDbType.Int32).Value = healthRecordId.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM REFERRAL_FOR_SPECIALIST WHERE HEALTH_RECORD_ID = :health_record_id";
+            command.Parameters.Add("health_record_id", OracleDbType.Int32).Value = healthRecordId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                ReferralForSpecialist referralForSpecialist = new ReferralForSpecialist();
-                referralForSpecialist.Id = reader.GetInt32(0);
-                referralForSpecialist.Description = reader.GetString(1);
-                referralForSpecialist.Doctor = new DoctorRepository().GetAppointmentDoctorById(reader.GetInt32(2));
-                referralForSpecialist.HealthRecord = new HealthRecordRepository().GetHealthRecordById(reader.GetInt32(3));
-                referralForSpecialist.Appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(4));
+                var referralForSpecialist = ParseReferralForSpecialist(reader);
                 referralForSpecialists.Add(referralForSpecialist);
             }
             return referralForSpecialists;
+        }
+
+        private static ReferralForSpecialist ParseReferralForSpecialist(OracleDataReader reader)
+        {
+            ReferralForSpecialist referralForSpecialist = new ReferralForSpecialist();
+            referralForSpecialist.Id = reader.GetInt32(0);
+            referralForSpecialist.Description = reader.GetString(1);
+            referralForSpecialist.Doctor = new DoctorRepository().GetAppointmentDoctorById(reader.GetInt32(2));
+            referralForSpecialist.HealthRecord = new HealthRecordRepository().GetHealthRecordById(reader.GetInt32(3));
+            referralForSpecialist.Appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(4));
+            return referralForSpecialist;
         }
 
         public System.Collections.ArrayList GetAllReferralsForSpecialistByDoctorId(int doctorId)
@@ -71,11 +77,11 @@ namespace Hospital.Repository
         public Boolean DeleteReferralForSpecialistById(int id)
         {
             setConnection();
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "DELETE FROM REFERRAL_FOR_SPECIALIST WHERE ID = :id";
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            int a = cmd.ExecuteNonQuery();
-            con.Close();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM REFERRAL_FOR_SPECIALIST WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
             return true;
         }
 
@@ -101,13 +107,13 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "insert into  REFERRAL_FOR_SPECIALIST (description, doctor_id, health_record_id, appointment_id) values " +
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "insert into  REFERRAL_FOR_SPECIALIST (description, doctor_id, health_record_id, appointment_id) values " +
                               "('" + referralForSpecialist.Description + "'," + referralForSpecialist.doctor_id + "," + referralForSpecialist.doctor_id
                               + ", " + referralForSpecialist.appointment_id + ")";
-            cmd.ExecuteReader();
-            con.Close();
-            con.Dispose();
+            command.ExecuteReader();
+            connection.Close();
+            connection.Dispose();
             return referralForSpecialist;
 
         }

@@ -38,18 +38,22 @@ namespace Hospital.Repository
         public PatientLogs GetPatientLogsByPatientId(int patientId)
         {
             setConnection();
-            PatientLogs patientLogs = new PatientLogs();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM PATIENT_LOGS WHERE PATIENT_ID = :patient_id";
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-            patientLogs.Id = reader.GetInt32(0);
-            patientLogs.patient = new PatientRepository().GetPatientById(patientId);
-            patientLogs.LogCounter = reader.GetInt32(2);
-            patientLogs.LastCounterReset = reader.GetDateTime(3);
+            PatientLogs patientLogs = ParsePatientLogs(patientId, reader);
             return patientLogs;
         }
+
+        private PatientLogs ParsePatientLogs(int patientId,OracleDataReader reader)
+        {
+            PatientLogs patientLogs = new PatientLogs(reader.GetInt32(0), reader.GetInt32(2),
+                new PatientRepository().GetPatientById(patientId), reader.GetDateTime(3));
+            return patientLogs;
+        }
+
         public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
         {
             setConnection();
