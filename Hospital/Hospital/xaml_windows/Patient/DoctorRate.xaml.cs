@@ -161,13 +161,15 @@ namespace Hospital.xaml_windows.Patient
 
         private Boolean DataValidation()
         {
-            if (rate_txt.Text == null)
-            {
-                MessageBox.Show("Obavezno je dodeliti ocenu doktoru!");
-                return false;
-                
-            }
+            if (!RateValidation()) return false;
 
+            if (!DescriptionValidation()) return false;
+
+            return true;
+        }
+
+        private bool DescriptionValidation()
+        {
             if (description_txt.Text == "")
             {
                 MessageBox.Show("Obavezno je da date komentar ocene!");
@@ -176,18 +178,31 @@ namespace Hospital.xaml_windows.Patient
 
             return true;
         }
+
+        private bool RateValidation()
+        {
+            if (rate_txt.Text == null)
+            {
+                MessageBox.Show("Obavezno je dodeliti ocenu doktoru!");
+                return false;
+            }
+
+            return true;
+        }
+
         private void OceniDoktora_Click(object sender, RoutedEventArgs e)
         {
-            if (DataValidation() == true)
-            {
-                Model.Patient patient = patientController.GetPatientByUserId(userId);
-                Model.Doctor doctor = new DoctorController().GetDoctorById(doctorId);
-                Review review = new Review(int.Parse(rate_txt.Text), description_txt.Text, patient, doctor);
-                new ReviewController().AddReview(review);
-                MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname);
+            if (DataValidation() == false) return;
+           
+            
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
+            Model.Doctor doctor = new DoctorController().GetDoctorById(doctorId);
+            Review review = new Review(int.Parse(rate_txt.Text), description_txt.Text, patient, doctor);
+            new ReviewController().AddReview(review); 
+            MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname);
 
-                this.Close();
-            }
+            this.Close();
+            
             
         }
 

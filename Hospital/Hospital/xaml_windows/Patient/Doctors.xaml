@@ -88,7 +88,7 @@
         
         <Label Content="Odabrani doktor:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.6,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,-0.8" Width="197"/>
         <Label Content="Doktori:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="365.6,42,0,0" VerticalAlignment="Top"/>
-        <Button Content="Oceni doktora" x:Name="Oceni" Click="Oceni_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="160,194,0,0" VerticalAlignment="Top" Width="134"/>
+        <Button Content="Oceni doktora" ToolTip="Klikom na dugme možete da ocenite odabranog doktora" x:Name="Oceni" Click="Oceni_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="160,194,0,0" VerticalAlignment="Top" Width="134"/>
 
 
 

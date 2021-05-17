@@ -26,6 +26,7 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.healthRecordId = healthRecordId;
             updateDataGrid();
+            Predlozi.IsEnabled = false;
         }
      
         private void MojProfil_Click(object sender, RoutedEventArgs e)
@@ -123,7 +124,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Predlozi.IsEnabled = true;
 
 
         }

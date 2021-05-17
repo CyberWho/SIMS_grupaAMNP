@@ -93,7 +93,7 @@
 
 
         <xctk:DateTimePicker x:Name="date_end_txt"  Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="165.6,260,0,0" VerticalAlignment="Top" Width="144" Height="21"/>
-        <Button x:Name="Predlozi" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikaži predloge termina" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="141.8,310,0,0" VerticalAlignment="Top" Width="200" Click="Predlozi_Click" RenderTransformOrigin="0.631,1.255"/>
+        <Button x:Name="Predlozi" ToolTip="Klikom na dugme prikazaće Vam se predlozi termina kod doktora specijaliste" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikaži predloge termina" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="141.8,310,0,0" VerticalAlignment="Top" Width="200" Click="Predlozi_Click" RenderTransformOrigin="0.631,1.255"/>
 
         <Label Content="Iskoristi odabrani uput:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Moji uputi:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="365.6,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.68"/>

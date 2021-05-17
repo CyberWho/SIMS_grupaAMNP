@@ -68,8 +68,8 @@
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <Button Content="Moji podsetnici" x:Name="MojiPodsetnici1" Click="MojiPodsetnici_Click_1" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="212.8,113,0,0" VerticalAlignment="Top" Width="320"/>
-        <Button Content="Moji podsetnici za terapije" x:Name="TerapijskiPodsetnici" Click="TerapijskiPodsetnici_Click" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="212.8,184,0,0" VerticalAlignment="Top" Width="320"/>
+        <Button Content="Moji podsetnici" ToolTip="Klikom na dugme prikazaće Vam se svi lični podsetnici" x:Name="MojiPodsetnici1" Click="MojiPodsetnici_Click_1" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="212.8,113,0,0" VerticalAlignment="Top" Width="320"/>
+        <Button Content="Moji podsetnici za terapije" ToolTip="Klikom na dugme prikazaće Vam se svi podsetnici za terapije" x:Name="TerapijskiPodsetnici" Click="TerapijskiPodsetnici_Click" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="212.8,184,0,0" VerticalAlignment="Top" Width="320"/>
 
     </Grid>
 </Window>

@@ -15,7 +15,7 @@
         <Label Content="Komentar" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="51,141,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" x:Name="description_txt" Height="81" Margin="148,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="229" />
         <xctk:IntegerUpDown FontSize="16" Foreground="DeepSkyBlue" x:Name="rate_txt" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="146,112,0,0" VerticalAlignment="Top" Width="229"/>
-        <Button x:Name="Potvrda" Click="Potvrda_Click" Content="Potvrda" Foreground="White" FontSize="16" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="160,254,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.459,2.338"/>
+        <Button x:Name="Potvrda" ToolTip="Klikom na dugme potvrdjujete ocenu" Click="Potvrda_Click" Content="Potvrda" Foreground="White" FontSize="16" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="160,254,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.459,2.338"/>
 
     </Grid>
 </Window>

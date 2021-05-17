@@ -173,6 +173,7 @@ namespace Hospital.xaml_windows.Patient
             
             ShowAppointmentInformations(appointmentId);
             updateMyGrid();
+            Izmeni.IsEnabled = false;
         }
 
         private void ShowAppointmentInformations(int appointmentId)
@@ -292,6 +293,11 @@ namespace Hospital.xaml_windows.Patient
             var window = new Notifications(userId);
             window.Show();
             this.Close();
+        }
+
+        private void myGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Izmeni.IsEnabled = true;
         }
     }
 }

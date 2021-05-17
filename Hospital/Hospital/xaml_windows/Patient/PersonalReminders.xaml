@@ -74,7 +74,7 @@
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding personalReminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding personalReminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Id podsetnika" Binding="{Binding reminderId}" Width="*" Visibility="Hidden"/>
@@ -98,9 +98,9 @@
         <Label Content="Odabrani podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Moji podsetnici:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="344,42,0,0" VerticalAlignment="Top"/>
         <ComboBox Grid.Column="1" x:Name="frequency_txt" HorizontalAlignment="Left" Margin="154.8,112,0,0" SelectedValue="{Binding SelectedItem.PersonalReminderFrequency, ElementName=myDataGrid}" ItemsSource="{Binding }" VerticalAlignment="Top" Width="144" FontSize="16" Foreground="DeepSkyBlue"/>
-        <Button Content="Izmeni podsetnik" x:Name="Izmeni" Click="Izmeni_Click" FontSize="16" Foreground="White" Background="RoyalBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="29.8,318,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Obriši podsetnik" x:Name="Obrisi" Click="Obrisi_Click" FontSize="16" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,318,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="1.627,0.417"/>
-        <Button Content="Kreiraj novi podsetnik" x:Name="Kreiraj" Click="Kreiraj_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="93.8,348,0,0" VerticalAlignment="Top" Width="171"/>
+        <Button Content="Izmeni podsetnik" ToolTip="Klikom na dugme izmenićete podsetnik" x:Name="Izmeni" Click="Izmeni_Click" FontSize="16" Foreground="White" Background="RoyalBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="29.8,318,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Obriši podsetnik" ToolTip="Klikom na dugme obrisaćete podsetnik" x:Name="Obrisi" Click="Obrisi_Click" FontSize="16" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,318,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="1.627,0.417"/>
+        <Button Content="Kreiraj novi podsetnik" ToolTip="Klikom na dugme možete kreirati novi podsetnik" x:Name="Kreiraj" Click="Kreiraj_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="93.8,348,0,0" VerticalAlignment="Top" Width="171"/>
 
     </Grid>
 </Window>

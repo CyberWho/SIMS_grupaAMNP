@@ -58,7 +58,7 @@
         </Menu>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-            <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="284" Margin="353.6,82,0,0" VerticalAlignment="Top" Width="411">
+            <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="284" Margin="353.6,82,0,0" VerticalAlignment="Top" Width="411" SelectionChanged="myGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime}" Width="*"/>
@@ -74,7 +74,7 @@
         <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,208,0,0" TextWrapping="Wrap" Text="{Binding Path=NName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="doctor_surname_txtbx" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16"  IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,240,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
 
-        <Button x:Name="Izmeni" Content="Potvrdi izmenu" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="154.8,283,0,0" VerticalAlignment="Top" Width="144" Background="DeepSkyBlue" Foreground="White" Click="Izmeni_Click"/>
+        <Button x:Name="Izmeni" ToolTip="Klikom na dugme promenićete vreme održavanja termina" Content="Potvrdi izmenu" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="154.8,283,0,0" VerticalAlignment="Top" Width="144" Background="DeepSkyBlue" Foreground="White" Click="Izmeni_Click"/>
         <Label Content="Trajanje:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top"/>
         <Label Content="Soba:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.436,1.166"/>
         <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.443,1.435"/>

@@ -37,7 +37,9 @@ namespace Hospital.xaml_windows.Patient
             InitializeComponent();
             updateDataGrid();
             frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
-            
+            Izmeni.IsEnabled = false;
+            Obrisi.IsEnabled = false;
+            Kreiraj.IsEnabled = true;
         }
       
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -122,8 +124,67 @@ namespace Hospital.xaml_windows.Patient
             updateDataGrid();
         }
 
+        private bool DataValidation()
+        {
+            if (!NameValidation()) return false;
+
+            if (!DescriptionValidation()) return false;
+
+            if (!AlarmTimeValidation()) return false;
+
+            if (!FrequencyValidation()) return false;
+
+            return true;
+        }
+
+        private bool FrequencyValidation()
+        {
+            if (frequency_txt.Text == null)
+            {
+                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool AlarmTimeValidation()
+        {
+            if (alarm_time_txt.Text == null)
+            {
+                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool DescriptionValidation()
+        {
+            if (description_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da unesete opis podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool NameValidation()
+        {
+            if (name_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da unesete naziv podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
+            if(!DataValidation()) return;
+            
             PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(GetPersonalReminderId());
            
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
@@ -205,6 +266,13 @@ namespace Hospital.xaml_windows.Patient
             var window = new NewPersonalReminder(userId);
             window.Show();
             
+        }
+
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Izmeni.IsEnabled = true;
+            Obrisi.IsEnabled = true;
+            Kreiraj.IsEnabled = false;
         }
     }
 }

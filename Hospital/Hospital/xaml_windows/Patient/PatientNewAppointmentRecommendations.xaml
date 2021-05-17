@@ -63,7 +63,7 @@
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
 
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="196" Margin="347.8,82,0,0" VerticalAlignment="Top" Width="476">
+        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="196" Margin="347.8,82,0,0" VerticalAlignment="Top" Width="476" SelectionChanged="myGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime}" Width="*"/>
@@ -80,7 +80,7 @@
         <TextBox x:Name="doctor_name_txt" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="155,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="doctor_surname_txt" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="155,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="room_id_txt" IsReadOnly="True" FontSize="16" Grid.Column="2" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Height="23" Margin="155,176,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Zakaži" FontSize="16" Style="{StaticResource RoundedButton}" Background="DeepSkyBlue" Foreground="White" x:Name="Zakazi" Grid.Column="1" HorizontalAlignment="Left" Margin="165,228,0,0" VerticalAlignment="Top" Width="122" Click="Zakazi_Click"/>
+        <Button Content="Zakaži" ToolTip="Klikom na dugme zakazaćete termin" FontSize="16" Style="{StaticResource RoundedButton}" Background="DeepSkyBlue" Foreground="White" x:Name="Zakazi" Grid.Column="1" HorizontalAlignment="Left" Margin="165,228,0,0" VerticalAlignment="Top" Width="122" Click="Zakazi_Click"/>
 
 
         <xctk:DateTimePicker x:Name="datepicker_txt" FontSize="16" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,144,0,0" Value="{Binding SelectedItem.StartTime,ElementName=myGrid}"  VerticalAlignment="Top"  Width="144" RenderTransformOrigin="0.507,-1.51"/>

@@ -28,6 +28,9 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.DataContext = this;
             updateDataGrid();
+            ZakaziNoviTermin.IsEnabled = true;
+            Izmeni.IsEnabled = false;
+            Obrisi.IsEnabled = false;
         }
 
        
@@ -167,9 +170,9 @@ namespace Hospital.xaml_windows.Patient
           
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            
-            
+            ZakaziNoviTermin.IsEnabled = false;
+            Obrisi.IsEnabled = true;
+            Izmeni.IsEnabled = true;
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {

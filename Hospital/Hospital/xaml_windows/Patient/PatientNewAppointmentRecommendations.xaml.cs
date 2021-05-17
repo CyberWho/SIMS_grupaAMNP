@@ -38,6 +38,7 @@ namespace Hospital.xaml_windows.Patient
             this.priority = priority;
             this.referralForSpecialistId = referralForSpecialistId;
             updateDataGrid();
+            Zakazi.IsEnabled = false;
         }
         private void updateDataGrid()
         {
@@ -142,6 +143,11 @@ namespace Hospital.xaml_windows.Patient
             var window = new Notifications(userId);
             window.Show();
             this.Close();
+        }
+
+        private void myGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Zakazi.IsEnabled = true;
         }
     }
 }
