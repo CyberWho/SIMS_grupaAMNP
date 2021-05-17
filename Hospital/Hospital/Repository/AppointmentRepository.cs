@@ -117,8 +117,7 @@ namespace Hospital.Repository
                     break;
             }
 
-            Room room = roomRepository.GetAppointmentRoomById(roomId);
-
+            Room room = roomRepository.GetAppointmentRoomById(roomId); 
             appointment.room = room;
 
             Patient patient = patientRepository.GetPatientById(patientId);
