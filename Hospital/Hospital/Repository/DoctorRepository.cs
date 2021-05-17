@@ -57,31 +57,15 @@ namespace Hospital.Repository
 
         private static Doctor ParseDoctor(OracleDataReader reader)
         {
-            User doctorUser = new User();
-            doctorUser.Id = int.Parse(reader.GetString(0));
-            doctorUser.Username = reader.GetString(1);
-            doctorUser.Password = reader.GetString(2);
-            doctorUser.Name = reader.GetString(3);
-            doctorUser.Surname = reader.GetString(4);
-            doctorUser.PhoneNumber = reader.GetString(5);
-            doctorUser.EMail = reader.GetString(6);
-            int dId = reader.GetInt32(7);
-            int salary = reader.GetInt32(8);
-            int yearsOfService = reader.GetInt32(9);
-            int roleId = reader.GetInt32(11);
-            Role role = new Role();
-            role.Id = roleId;
-            role.RoleType = "DOCTOR";
-            Doctor doctor = new Doctor(dId, salary, yearsOfService, doctorUser, role);
+            User doctorUser = new User(reader.GetInt32(0),reader.GetString(1),reader.GetString(2),reader.GetString(3),reader.GetString(4),reader.GetString(5),reader.GetString(6));
+            Role role = new Role(reader.GetInt32(11),"DOCTOR");
+            Doctor doctor = new Doctor(reader.GetInt32(7), reader.GetInt32(8), reader.GetInt32(9), doctorUser, role);
             doctor.Id = reader.GetInt32(12);
-            Room room = new Room();
+            Room room = new RoomRepository().GetRoomById(reader.GetInt32(14));
             doctor.room = room;
-            doctor.room.Id = reader.GetInt32(14);
-            Specialization specialization = new Specialization();
+            Specialization specialization = new Specialization(reader.GetInt32(15),reader.GetString(17));
             doctor.specialization = specialization;
-            doctor.specialization.id = reader.GetInt32(15);
-            doctor.specialization.Type = reader.GetString(17);
-            doctor.employee_id = dId;
+            doctor.employee_id = reader.GetInt32(7);
             doctor.room_id = doctor.room.Id;
             doctor.specialization_id = doctor.specialization.id;
             return doctor;
