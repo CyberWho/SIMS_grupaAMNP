@@ -160,6 +160,11 @@ namespace Hospital.xaml_windows.Manager
             myDataGrid.ItemsSource = Rooms;
         }
 
-       
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new ManagerUI(2);
+            w.Show();
+            this.Close();
+        }
     }
 }
