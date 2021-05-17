@@ -36,24 +36,7 @@ namespace Hospital.Repository
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
 
-            User user = new User();
-            user.Id = reader.GetInt32(3);
-            user.Username = reader.GetString(6);
-            user.Password = reader.GetString(7);
-            user.Name = reader.GetString(8);
-            user.Surname = reader.GetString(9);
-            user.PhoneNumber = reader.GetString(10);
-            user.EMail = reader.GetString(11);
-
-            Role role = new Role(reader.GetInt32(12), reader.GetString(13), null);
-
-            Employee employee = new Employee();
-            employee.Id = int.Parse(reader.GetString(0));
-            employee.SetRole(role);
-            employee.User = user;
-            employee.Salary = reader.GetInt32(1);
-            employee.YearsOfService = reader.GetInt32(2);
-
+            var employee = ParseEmployee(reader);
             connection.Close();
             connection.Dispose();
 

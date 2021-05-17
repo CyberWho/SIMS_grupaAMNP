@@ -48,7 +48,13 @@ namespace Hospital.Repository
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-            var doctor = ParseDoctor(reader);
+            User doctorUser = new UserRepository().GetUserById(reader.GetInt32(0));
+            Employee employee = new EmployeesRepository().GetEmplyeeById(reader.GetInt32(7));
+            Specialization specialization = new SpecializationRepository().GetSpecializationById(reader.GetInt32(15));
+            Doctor doctor = new Doctor();
+            doctor.User = doctorUser;
+            doctor.role = employee.role;
+            doctor.specialization = specialization;
             connection.Close();
             return doctor;
 

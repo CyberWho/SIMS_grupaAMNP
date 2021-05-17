@@ -156,7 +156,7 @@ namespace Hospital.Repository
 
             setConnection();
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "select * from appointment, patient where appointment.PATIENT_ID = patient.ID and doctor_id =" + doctorId;
+            command.CommandText = "select * from appointment where doctor_id =" + doctorId;
             OracleDataReader reader = command.ExecuteReader();
 
             while (reader.Read())

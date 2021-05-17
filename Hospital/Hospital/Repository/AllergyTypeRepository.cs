@@ -39,6 +39,8 @@ namespace Hospital.Repository
             return null;
         }
 
+        
+
         public Boolean DeleteAllergieTypeById(int id)
         {
             // TODO: implement
@@ -131,16 +133,11 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            AllergyType at = new AllergyType
-            {
-                Id = int.Parse(reader.GetString(0)),
-                Type = reader.GetString(1)
-            };
-
+            AllergyType allergyType = new AllergyType(reader.GetInt32(0), reader.GetString(1));
             connection.Close();
             connection.Dispose();
 
-            return at;
+            return allergyType;
         }
         public ObservableCollection<AllergyType> GetAllTypesByHealthRecordId(int id)
         {

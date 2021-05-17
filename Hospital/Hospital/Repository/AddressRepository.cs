@@ -40,11 +40,11 @@ namespace Hospital.Repository
             command.CommandText = "SELECT address_id FROM patient WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-
+            var address = ParseAddress(reader);
             connection.Close();
             connection.Dispose();
 
-            return this.GetAddressById(int.Parse(reader.GetString(0)));
+            return address;
         }
 
         public Address GetAddressById(int id)
@@ -56,6 +56,16 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
+            var address = ParseAddress(reader);
+
+            connection.Close();
+            connection.Dispose();
+
+            return address;
+        }
+
+        private Address ParseAddress(OracleDataReader reader)
+        {
             Address address = new Address
             {
                 Id = int.Parse(reader.GetString(0)),
@@ -63,10 +73,6 @@ namespace Hospital.Repository
                 city_id = int.Parse(reader.GetString(3)),
                 City = cityRepository.GetCityById(reader.GetInt32(3))
             };
-
-            connection.Close();
-            connection.Dispose();
-
             return address;
         }
 
