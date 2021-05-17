@@ -25,6 +25,7 @@ namespace Hospital.xaml_windows.Patient
             InitializeComponent();
             this.userId = userId;
             myDataGrid_Update();
+            Oceni.IsEnabled = false;
         }
         
         private void myDataGrid_Update()
@@ -81,7 +82,7 @@ namespace Hospital.xaml_windows.Patient
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-
+            Oceni.IsEnabled = true;
 
         }
 

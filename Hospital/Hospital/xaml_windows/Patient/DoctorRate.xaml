@@ -23,7 +23,7 @@
         <TextBox Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="180,141,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
         <TextBox Text="{Binding Specialization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="180,173,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229" RenderTransformOrigin="0.781,0.343"/>
         <TextBox x:Name="description_txt"  Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="94" Margin="180,237,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <Button x:Name="OceniDoktora" Click="OceniDoktora_Click" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="175,356,84.6,78.4" RenderTransformOrigin="0.729,0.431"/>
+        <Button x:Name="OceniDoktora" ToolTip="Klikom na dugme potvrdjujete ocenu za doktora" Click="OceniDoktora_Click" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="175,356,84.6,78.4" RenderTransformOrigin="0.729,0.431"/>
 
 
         <xctk:IntegerUpDown x:Name="rate_txt" Style="{StaticResource RoundedIntegerUpDown}" Foreground="DeepSkyBlue" FontSize="16" DefaultValue="1" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="180,205,0,0" VerticalAlignment="Top" Width="229" Height="27"/>
