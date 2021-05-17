@@ -25,7 +25,7 @@ namespace Hospital.Repository
                 Trace.WriteLine(exp.ToString());
             }
         }
-        public Hospital.Model.Room GetRoomById(int id)
+        public Room GetRoomById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -157,6 +157,29 @@ namespace Hospital.Repository
             connection.Dispose();
 
             return roomTypes;
+        }
+        public ObservableCollection<int> GetAllRoomIDs()
+        {
+            setConnection();
+            ObservableCollection<int> roomIDs = new ObservableCollection<int>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT id FROM room";
+            OracleDataReader reader;
+            try 
+            { 
+                reader = command.ExecuteReader();
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+                return null;
+            }
+            while (reader.Read())
+            {
+                roomIDs.Add(reader.GetInt32(0));
+            }
+
+            return roomIDs;
         }
 
         public Boolean DeleteRoomById(int id)

@@ -1,20 +1,9 @@
 ﻿using Hospital.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.xaml_windows.Manager
 {
@@ -24,6 +13,7 @@ namespace Hospital.xaml_windows.Manager
     public partial class ManagerInventorySearch : Window
     {
         Controller.ItemInRoomController itemInRoomController = new Controller.ItemInRoomController();
+        Controller.RoomController roomController = new Controller.RoomController();
         ObservableCollection<ItemInRoom> ItemsInRoom;
 
 
@@ -34,6 +24,30 @@ namespace Hospital.xaml_windows.Manager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadAllItems();
+            FillComboBoxes();
+        }
+        private void FillComboBoxes()
+        {
+
+            type_cmbbx.Items.Add(new
+            {
+                Value = (int)ItemType.EXPENDABLE,
+                Display = "Potrošna"
+            });
+            type_cmbbx.Items.Add(new
+            {
+                Value = (int)ItemType.PERSISTENT,
+                Display = "Trajna"
+            });
+
+            foreach (int id in roomController.GetAllRoomIDs())
+            {
+                room_cmbbx.Items.Add(new
+                {
+                    Value = id,
+                    Display = "Soba " + id.ToString()
+                });
+            }            
         }
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -45,7 +59,6 @@ namespace Hospital.xaml_windows.Manager
             ItemsInRoom = itemInRoomController.SearchByName(search_txtbx.Text);
             updateDataGrid();
         }
-
         public void updateDataGrid()
         {
             this.DataContext = this;
@@ -53,11 +66,17 @@ namespace Hospital.xaml_windows.Manager
             myDataGrid.DataContext = dt;
             myDataGrid.ItemsSource = ItemsInRoom;
         }
-
-
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            ClearAll();
+        }
+
+        private void ClearAll()
+        {
             btnCancel.IsEnabled = false;
+            search_txtbx.Text = "";
+            room_cmbbx.SelectedItem = null;
+            type_cmbbx.SelectedItem = null;
             LoadAllItems();
         }
 
@@ -72,11 +91,35 @@ namespace Hospital.xaml_windows.Manager
         private void search_txtbx_TextChanged(object sender, TextChangedEventArgs e)
         {
             btnCancel.IsEnabled = true;
+            ItemsInRoom = itemInRoomController.SearchByName(search_txtbx.Text);
+            updateDataGrid();
         }
 
         private void type_cmbbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnCancel.IsEnabled = true;
+            if(type_cmbbx.SelectedItem != null)
+            {
+                ItemsInRoom = itemInRoomController.GetAllItemsInRoomByItemType((ItemType)type_cmbbx.SelectedValue);
+                updateDataGrid();
+            }
         }
+        private void room_cmbbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (room_cmbbx.SelectedItem != null)
+            {
+                ItemsInRoom = itemInRoomController.GetAllItemsInRoomByRoomId(int.Parse(room_cmbbx.SelectedValue.ToString()));
+                updateDataGrid();
+            }
+        }
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            itemInRoomController.ResetGotAllItemsInRoomFlag();
+            Window w = new ManagerUI(2);
+            w.Show();
+            this.Close();
+        }
+
+       
     }
 }

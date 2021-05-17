@@ -66,6 +66,10 @@ namespace Hospital.Service
             return roomRepository.GetAllRoomsExceptSource(id);
         }
 
+        public ObservableCollection<int> GetAllRoomIDs()
+        {
+            return roomRepository.GetAllRoomIDs();
+        }
         public Boolean DeleteRoomById(int id)
         {
             return roomRepository.DeleteRoomById(id);

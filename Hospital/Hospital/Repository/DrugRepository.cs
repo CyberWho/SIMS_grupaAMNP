@@ -134,7 +134,6 @@ namespace Hospital.Repository
                 "drug_status = '" + ((int)drug.Status).ToString() + "', " +
                 "drug_type_id = " + drug.drugType.Id.ToString() + " " +
                 "WHERE id = " + drug.Id.ToString();
-
             try
             {
                 cmd.ExecuteNonQuery();

@@ -23,13 +23,12 @@ namespace Hospital.xaml_windows.Manager
             InitializeComponent();
             ManagerID = mngrID;
             RoomID = roomID;
-            roomNo_txtbx.Text = this.RoomID.ToString();
+            roomNo_txtbx.Text = RoomID.ToString();
         }
 
         private void MoveInventory_Click(object sender, RoutedEventArgs e)
         {
             uint quantity = CreateQuantityInputBox();
-            MessageBox.Show("IIR ID: " + IIRNo_txtbx.Text);
             if (quantity == CANCEL)
             {
                 return;

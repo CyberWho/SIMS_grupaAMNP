@@ -31,12 +31,6 @@ namespace Hospital.Repository
         }
         public InventoryItem GetInventoryItemById(int id)
         {
-            
-            //connection.Close();
-            //connection.Dispose();
-            /*String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            connection.Open();*/
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM inventory_item WHERE id = " + id.ToString();

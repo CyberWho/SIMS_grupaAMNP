@@ -17,10 +17,11 @@
                 <DataGridTextColumn Header="Tip" Binding="{Binding inventoryItem.Type}" Width="*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="btnBack" Content="Nazad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-3.381,0.667" Click="btnBack_Click"/>
         <Button x:Name="btnSearch" Content="Traži" HorizontalAlignment="Left" Margin="660,20,0,0" VerticalAlignment="Top" Width="75" Click="btnSearch_Click" RenderTransformOrigin="0.528,-0.416"/>
         <Button x:Name="btnCancel" IsEnabled="False"  Content="Poništi" HorizontalAlignment="Left" Margin="660,51,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
         <TextBox x:Name="search_txtbx" HorizontalAlignment="Left" Height="23" Margin="33,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" TextChanged="search_txtbx_TextChanged"/>
-        <ComboBox x:Name="type_cmbbx" HorizontalAlignment="Left" Margin="316,47,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="type_cmbbx_SelectionChanged"/>
-        <ComboBox x:Name="room_cmbbx" HorizontalAlignment="Left" Margin="474,47,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="type_cmbbx" HorizontalAlignment="Left" Margin="316,47,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="type_cmbbx_SelectionChanged" DisplayMemberPath="Display" SelectedValuePath="Value"/>
+        <ComboBox x:Name="room_cmbbx" HorizontalAlignment="Left" Margin="474,47,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="room_cmbbx_SelectionChanged" DisplayMemberPath="Display" SelectedValuePath="Value"/>
     </Grid>
 </Window>

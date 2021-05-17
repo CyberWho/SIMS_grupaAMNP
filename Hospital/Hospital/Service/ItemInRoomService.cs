@@ -27,6 +27,16 @@ namespace Hospital.Service
             return itemInRoomRepository.GetAllItemsInRoom();
         }
 
+        public void ResetGotAllItemsInRoomFlag()
+        {
+            itemInRoomRepository.ResetGotAllItemsInRoomFlag();
+        }
+
+        public ObservableCollection<ItemInRoom> GetAllItemsInRoomByItemType(ItemType type) 
+        {
+            return itemInRoomRepository.GetAllItemsInRoomByItemType(type);
+        }
+
         public Boolean DeleteItemInRoomById(int id)
         {
             // TODO: implement

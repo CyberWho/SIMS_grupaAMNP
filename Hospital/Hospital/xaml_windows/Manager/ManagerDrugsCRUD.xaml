@@ -20,6 +20,7 @@
                 <DataGridTextColumn Header="Recept" Binding="{Binding NeedsPerscription}" Width="*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="BackButton" Content="Nazad" HorizontalAlignment="Left" Margin="38,13,0,0" VerticalAlignment="Top" Width="67" Height="21" Click="BackButton_Click"/>
         <Label Content="Naziv" HorizontalAlignment="Left" Margin="38,70,0,0" VerticalAlignment="Top"/>
         <Label Content="Cena" HorizontalAlignment="Left" Margin="38,101,0,0" VerticalAlignment="Top"/>
         <Label Content="Jedinica" HorizontalAlignment="Left" Margin="38,132,0,0" VerticalAlignment="Top"/>
@@ -27,19 +28,18 @@
         <Label Content="Tip" HorizontalAlignment="Left" Margin="38,193,0,0" VerticalAlignment="Top"/>
         <Label Content="Gramaza" HorizontalAlignment="Left" Margin="38,224,0,0" VerticalAlignment="Top"/>
         <Label Content="Recept" HorizontalAlignment="Left" Margin="38,255,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="name_txtbx" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="115,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="price_txtbx" Text="{Binding SelectedItem.Price, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="115,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="unit_txtbx" Text="{Binding SelectedItem.Unit, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="115,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="115,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="LightGray"/>
-        <ComboBox x:Name="dtype_cmbbx" SelectedValue="{Binding SelectedItem.drugType.Id, ElementName=myDataGrid}" HorizontalAlignment="Left" Margin="115,196,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
-        <TextBox x:Name="grams_txtbx" Text="{Binding SelectedItem.Grams, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="115,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="needsPrescription_cmbbx" SelectedValue="{Binding SelectedItem.NeedsPerscription, ElementName=myDataGrid}"  HorizontalAlignment="Left" Margin="115,256,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
+        <TextBox x:Name="name_txtbx" Text="{Binding SelectedItem.Name, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="115,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="price_txtbx" Text="{Binding SelectedItem.Price, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="115,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="unit_txtbx" Text="{Binding SelectedItem.Unit, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="115,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid, Mode=OneWay}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="115,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="LightGray"/>
+        <ComboBox x:Name="dtype_cmbbx" SelectedValue="{Binding SelectedItem.drugType.Id, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Margin="115,196,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
+        <TextBox x:Name="grams_txtbx" Text="{Binding SelectedItem.Grams, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="115,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="needsPrescription_cmbbx" SelectedValue="{Binding SelectedItem.NeedsPerscription, ElementName=myDataGrid, Mode=OneWay}"  HorizontalAlignment="Left" Margin="115,256,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
         
         
         <Button x:Name="add_btn" Content="Dodaj" HorizontalAlignment="Left" Margin="16,310,0,0" VerticalAlignment="Top" Width="75" Click="add_btn_Click"/>
         <Button x:Name="update_btn" Content="Ažuriraj" HorizontalAlignment="Left" Margin="99,310,0,0" VerticalAlignment="Top" Width="75" Click="update_btn_Click" IsEnabled="False"/>
         <Button x:Name="delete_btn" Content="Obriši" HorizontalAlignment="Left" Margin="182,310,0,0" VerticalAlignment="Top" Width="75" Click="delete_btn_Click" IsEnabled="False"/>
         <Button x:Name="clear_btn" Content="Očisti" HorizontalAlignment="Left" Margin="16,346,0,0" VerticalAlignment="Top" Width="75" Click="clear_btn_Click"/>
-
     </Grid>
 </Window>
