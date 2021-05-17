@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System.Collections;
+using System.Windows.Controls;
 
 namespace Hospital.Model
 {
@@ -211,6 +212,13 @@ namespace Hospital.Model
         public Doctor(int id, int salary, int yearsOfService, User user, Role role) : base(id, salary, yearsOfService, user, role)
         {
 
+        }
+        public Doctor(int id, int salary, int yearsOfService, User user,Role role,Specialization specialization,Room room) : base(id, salary, yearsOfService, user, role)
+        {
+            this.User = user;
+            this.role = role;
+            this.specialization = specialization;
+            this.room = room;
         }
     }
 }

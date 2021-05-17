@@ -78,6 +78,20 @@ namespace Hospital.Repository
             return id;
         }
 
+        public Specialization GetSpecializationById(int id)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM SPECIALIZATION WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            Specialization specialization = new Specialization(reader.GetInt32(0), reader.GetString(1));
+            connection.Close();
+            
+            return specialization;
+        }
+
 
     }
 }

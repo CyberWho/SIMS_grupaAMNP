@@ -76,6 +76,31 @@ namespace Hospital.Repository
             return user_id;
         }
 
+        public Employee GetEmplyeeById(int id)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM EMPLOYEE WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            var employee = ParseEmployee(reader);
+            connection.Close();
+            
+            return employee;
+        }
+
+        private static Employee ParseEmployee(OracleDataReader reader)
+        {
+            
+            User user = new UserRepository().GetUserById(reader.GetInt32(3)); 
+            
+            Role role = new RoleRepository().GetRoleById(reader.GetInt32(4));
+            
+            Employee employee = new Employee(reader.GetInt32(0),reader.GetInt32(1),reader.GetInt32(2),user,role);
+            return employee;
+        }
+
         public System.Collections.ArrayList GetAllEmployees()
         {
             // TODO: implement
