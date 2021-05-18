@@ -124,7 +124,10 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                var patient = ParsePatient(reader);
+                User user = new UserRepository().GetUserById(reader.GetInt32(4));
+                if (user.Name == null) continue;
+                var patient = new Patient(reader.GetInt32(0),reader.GetString(1),reader.GetDateTime(2),user,addressRepository.GetAddressById(3));
+                
                 patients.Add(patient);
             }
 

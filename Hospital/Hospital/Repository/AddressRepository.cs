@@ -40,7 +40,8 @@ namespace Hospital.Repository
             command.CommandText = "SELECT address_id FROM patient WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-            var address = ParseAddress(reader);
+            int addressId = reader.GetInt32(0);
+            var address = GetAddressById(addressId);
             connection.Close();
             connection.Dispose();
 

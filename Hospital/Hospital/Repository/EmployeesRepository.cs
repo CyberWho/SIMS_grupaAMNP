@@ -59,7 +59,7 @@ namespace Hospital.Repository
             return user_id;
         }
 
-        public Employee GetEmplyeeById(int id)
+        public Employee GetEmployeeById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();

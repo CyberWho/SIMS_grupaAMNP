@@ -88,6 +88,17 @@ namespace Hospital.Model
             HealthRecord = healthRecord;
         }
 
+        public Patient(int id, string JMBG, DateTime dateOfBirth, User user, Address address)
+        {
+            this.Id = id;
+            this.JMBG = JMBG;
+            this.DateOfBirth = dateOfBirth;
+            this.User = user;
+            this.user_id = user.Id;
+            this.Address = address;
+            this.addres_id = address.Id;
+        } 
+
         public Patient(int id, int addres_id, int user_id, string jMBG, DateTime dateOfBirth, User user, ArrayList appointments, Address address, HealthRecord healthRecord)
         {
             Id = id;

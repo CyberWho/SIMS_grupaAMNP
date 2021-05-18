@@ -219,6 +219,9 @@ namespace Hospital.Model
             this.role = role;
             this.specialization = specialization;
             this.room = room;
+            this.room_id = room.Id;
+            //this.employee_id = id;
+            this.specialization_id = specialization.id;
         }
     }
 }

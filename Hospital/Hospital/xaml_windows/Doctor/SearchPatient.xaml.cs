@@ -35,6 +35,7 @@ namespace Hospital.xaml_windows.Doctor
 
         }
 
+
         private void GoToHealthRecord(object sender, RoutedEventArgs e)
         {
             if (selected_patient_id != -1)
