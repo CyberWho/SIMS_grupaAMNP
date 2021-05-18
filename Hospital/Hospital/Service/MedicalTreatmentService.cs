@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
 using Hospital.Repository;
 
 namespace Hospital.Service
@@ -17,10 +18,9 @@ namespace Hospital.Service
          return null;
       }
       
-      public System.Collections.ArrayList GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
+      public ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
       {
-         // TODO: implement
-         return null;
+          return medicalTreatment.GetAllMedicalTreatmentsByAnamnesisId(anamnesisId);
       }
       
       public Boolean DeleteMedicalTreatmentById(int id)

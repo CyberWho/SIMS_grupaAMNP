@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,32 +13,35 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Hospital.Model;
 using Hospital.Controller;
-using System.Collections.ObjectModel;
-using System.Data;
+using Hospital.Model;
 
 namespace Hospital.xaml_windows.Patient
 {
     /// <summary>
-    /// Interaction logic for ClinicalTreatmentReferrals.xaml
+    /// Interaction logic for MedicalTreatments.xaml
     /// </summary>
-    public partial class ClinicalTreatmentReferrals : Window
+    public partial class MedicalTreatments : Window
     {
         private int userId;
         private int healthRecordId;
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private RefferalForClinicalTreatmentController refferalForClinicalTreatmentController = new RefferalForClinicalTreatmentController();
-        private ObservableCollection<ReferralForClinicalTreatment> referralForClinicalTreatments = new ObservableCollection<ReferralForClinicalTreatment>();
-        public ClinicalTreatmentReferrals(int userId,int healthRecordId)
+        
+        private ObservableCollection<Model.MedicalTreatment> medicalTreatments =
+            new ObservableCollection<MedicalTreatment>();
+        private AnamnesisController anamnesisController = new AnamnesisController();
+        public MedicalTreatments(int userId,int healthRecordId)
         {
             InitializeComponent();
             this.userId = userId;
             this.healthRecordId = healthRecordId;
             myDataGrid_Update();
-            
         }
-        
+
+        private void MedicalTreatments_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
+        }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientInfo(userId);
@@ -74,20 +79,13 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
-
         private void myDataGrid_Update()
         {
             this.DataContext = this;
-            referralForClinicalTreatments = refferalForClinicalTreatmentController.GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(healthRecordId);
+            medicalTreatments = anamnesisController.GetAllMedicalTreatmentsByHealthRecordId(healthRecordId);
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
-            myDataGrid.ItemsSource = referralForClinicalTreatments;
-        }
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
+            myDataGrid.ItemsSource = medicalTreatments;
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
@@ -111,3 +109,4 @@ namespace Hospital.xaml_windows.Patient
     }
 
 }
+

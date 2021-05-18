@@ -20,8 +20,7 @@ namespace Hospital.Controller
       
       public ObservableCollection<MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
       {
-         // TODO: implement
-         return null;
+          return medicalTreatmentService.GetAllMedicalTreatmentsByAnamnesisId(anamnesisId);
       }
       
       public Boolean DeleteMedicalTreatmentById(int id)

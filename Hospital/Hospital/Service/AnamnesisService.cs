@@ -43,7 +43,24 @@ namespace Hospital.Service
                 }
             }
             return perscriptions;
-        } 
+        }
+
+        internal ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByHealthRecordId(int healthRecordId)
+        {
+            ObservableCollection<Anamnesis> anamneses = anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
+            ObservableCollection<Model.MedicalTreatment> medicalTreatments = new ObservableCollection<Model.MedicalTreatment>();
+            foreach (Anamnesis anamnesis in anamneses)
+            {
+                ObservableCollection<Model.MedicalTreatment> medicalTreatmentsInAnamnesis =
+                    new Repository.MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(anamnesis.Id);
+                foreach (Model.MedicalTreatment medicalTreatment in medicalTreatmentsInAnamnesis)
+                {
+                    medicalTreatments.Add(medicalTreatment);
+                }
+            }
+
+            return medicalTreatments;
+        }
 
         public Boolean DeleteAnamnesisById(int id)
         {

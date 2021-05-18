@@ -80,6 +80,7 @@
         <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=MaritalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,132,0,0"/>
         <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=PlaceOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,164,0,0"/>
         <Button Content="Moji uputi za bolničko lečenje" ToolTip="Klikom na dugme prikazaće Vam se svi uputi za bolničko lečenje" x:Name="BolnickoLecenje" Click="BolnickoLecenje_Click" Style="{StaticResource RoundedButton}" Foreground="White" Background="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,132,0,0" VerticalAlignment="Top" Width="347" Height="38" RenderTransformOrigin="0.338,0.645"/>
+        <Button Content="Moje terapije" FontSize="24" ToolTip="Klikom na dugme prikazaće Vam se sve terapije" x:Name="Terapije" Click="Terapije_OnClick" Style="{StaticResource RoundedButton}" Foreground="White" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,332,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
 
     </Grid>
 </Window>

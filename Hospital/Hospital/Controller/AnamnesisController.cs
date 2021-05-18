@@ -33,6 +33,11 @@ namespace Hospital.Controller
         {
             return anamnesisService.GetAllActivePerscriptionsByHealthRecordId(healthRecordId);
         }
+
+        public ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByHealthRecordId(int healthRecordId)
+        {
+            return anamnesisService.GetAllMedicalTreatmentsByHealthRecordId(healthRecordId);
+        }
         public Boolean DeleteAnamnesisById(int id)
         {
             // TODO: implement

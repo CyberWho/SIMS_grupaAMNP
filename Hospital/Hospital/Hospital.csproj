@@ -249,6 +249,9 @@
     <Compile Include="xaml_windows\Patient\HospitalRate.xaml.cs">
       <DependentUpon>HospitalRate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\MedicalTreatments.xaml.cs">
+      <DependentUpon>MedicalTreatments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Patient\NewPersonalReminder.xaml.cs">
       <DependentUpon>NewPersonalReminder.xaml</DependentUpon>
     </Compile>
@@ -434,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Patient\HospitalRate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\MedicalTreatments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

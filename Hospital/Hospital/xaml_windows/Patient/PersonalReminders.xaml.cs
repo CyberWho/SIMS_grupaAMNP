@@ -265,6 +265,7 @@ namespace Hospital.xaml_windows.Patient
         {
             var window = new NewPersonalReminder(userId);
             window.Show();
+            this.Close();
             
         }
 

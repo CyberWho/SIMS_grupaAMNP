@@ -157,17 +157,22 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiUputi_Click(object sender, RoutedEventArgs e)
         {
-            Model.Patient patient = GetPatientByUserId(userId);
-            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var healthRecord = GetHealthRecord();
             var window = new PatientReferrals(userId,healthRecord.Id);
             window.Show();
             this.Close();
         }
 
-        private void MojeAlergije_Click(object sender, RoutedEventArgs e)
+        private HealthRecord GetHealthRecord()
         {
             Model.Patient patient = GetPatientByUserId(userId);
             HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            return healthRecord;
+        }
+
+        private void MojeAlergije_Click(object sender, RoutedEventArgs e)
+        {
+            var healthRecord = GetHealthRecord();
             var window = new Allergies(userId, healthRecord.Id);
             window.Show();
             this.Close();
@@ -175,8 +180,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojeAnamneze_Click(object sender, RoutedEventArgs e)
         {
-            Model.Patient patient = GetPatientByUserId(userId);
-            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var healthRecord = GetHealthRecord();
             var window = new PatientAnamnesis(userId, healthRecord.Id);
             window.Show();
             this.Close();
@@ -192,8 +196,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojiRecepti_Click(object sender, RoutedEventArgs e)
         {
-            Model.Patient patient = GetPatientByUserId(userId);
-            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var healthRecord = GetHealthRecord();
             var window = new PatientPerscriptions(userId, healthRecord.Id);
             window.Show();
             this.Close();
@@ -218,9 +221,16 @@ namespace Hospital.xaml_windows.Patient
 
         private void BolnickoLecenje_Click(object sender, RoutedEventArgs e)
         {
-            Model.Patient patient = GetPatientByUserId(userId);
-            HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
+            var healthRecord = GetHealthRecord();
             var window = new ClinicalTreatmentReferrals(userId, healthRecord.Id);
+            window.Show();
+            this.Close();
+        }
+
+        private void Terapije_OnClick(object sender, RoutedEventArgs e)
+        {
+            var healthRecord = GetHealthRecord();
+            var window = new MedicalTreatments(userId, healthRecord.Id);
             window.Show();
             this.Close();
         }

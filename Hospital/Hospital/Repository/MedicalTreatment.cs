@@ -7,6 +7,7 @@
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.Model;
 
 namespace Hospital.Repository
 {
@@ -36,7 +37,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            var medicalTreatment = ParseMedicalTreatment1(reader);
+            var medicalTreatment = ParseMedicalTreatment(reader);
 
             connection.Close();
             connection.Dispose();
@@ -44,16 +45,19 @@ namespace Hospital.Repository
             return medicalTreatment;
         }
 
-        private static Model.MedicalTreatment ParseMedicalTreatment1(OracleDataReader reader)
+        private static Model.MedicalTreatment ParseMedicalTreatment(OracleDataReader reader)
         {
-            Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment();
+           // Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment(reader.GetInt32(0),reader.GetInt32(1),reader.GetDateTime(2),
+            //    reader.GetDateTime(3),reader.GetString(6),new DrugRepository().GetDrugById(reader.GetInt32(5)),new AnamnesisRepository().GetAnamnesisById(reader.GetInt32(4)));
             //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
+            Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment();
             medicalTreatment.Id = reader.GetInt32(0);
             medicalTreatment.Period = reader.GetInt32(1);
             medicalTreatment.dateRange.StartTime = reader.GetDateTime(2);
             medicalTreatment.dateRange.EndTime = reader.GetDateTime(3);
             medicalTreatment.Anamnesis_id = reader.GetInt32(4);
             medicalTreatment.Drug_id = reader.GetInt32(5);
+            medicalTreatment.Drug = new DrugRepository().GetDrugById(reader.GetInt32(5));
             medicalTreatment.Description = reader.GetString(6);
             return medicalTreatment;
         }
@@ -69,7 +73,7 @@ namespace Hospital.Repository
             //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
             while (reader.Read())
             {
-                var medicalTreatment = ParseMedicalTreatment1(reader);
+                var medicalTreatment = ParseMedicalTreatment(reader);
                 medicalTreatments.Add(medicalTreatment);
             }
 

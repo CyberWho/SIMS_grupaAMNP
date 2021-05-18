@@ -115,7 +115,8 @@ namespace Hospital.xaml_windows.Patient
             personalReminderController.AddPersonalReminder(personalReminder);
             CreateNewPersonalReminder(personalReminder, frequency);
             MessageBox.Show("Uspesno ste kreirali novi podsetnik!");
-            
+            var window = new PersonalReminders(userId);
+            window.Show();
             this.Close();
         }
 
