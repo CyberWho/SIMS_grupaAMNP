@@ -17,8 +17,40 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
         }
 
+        private bool DataValidation()
+        {
+            if (!ValidateRate()) return false;
+
+            if (!ValidateDescription()) return false;
+
+            return true;
+        }
+
+        private bool ValidateDescription()
+        {
+            if (description_txt.Text == "")
+            {
+                MessageBox.Show("Obavezno je da unesete opis ocene!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidateRate()
+        {
+            if (rate_txt.Text == null)
+            {
+                MessageBox.Show("Obaveno je da unesete ocenu!");
+                return false;
+            }
+
+            return true;
+        }
+
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
+            if(DataValidation() == false) return;
             
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             Model.Doctor doctor = new Model.Doctor();
@@ -27,6 +59,7 @@ namespace Hospital.xaml_windows.Patient
             new ReviewController().AddReview(review);
             MessageBox.Show("Hvala Vam sto ste popunili anketu o bolnici!");
             
+           
             this.Close();
         }
     }

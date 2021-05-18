@@ -29,7 +29,7 @@ namespace Hospital.xaml_windows.Patient
         private PatientController patientController = new PatientController();
         private PersonalReminderController personalReminderController = new PersonalReminderController();
         private ObservableCollection<PersonalReminder> personalReminders = new ObservableCollection<PersonalReminder>();
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
 
         public PersonalReminders(int userId)
         {
@@ -37,30 +37,14 @@ namespace Hospital.xaml_windows.Patient
             InitializeComponent();
             updateDataGrid();
             frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
-            
+            Izmeni.IsEnabled = false;
+            Obrisi.IsEnabled = false;
+            Kreiraj.IsEnabled = true;
         }
-        private void dispatherTimer_Tick(object sender, EventArgs e)
-        {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
-            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
-            DateTime now = DateTime.Now;
-            now = now.AddMilliseconds(-now.Millisecond);
-            foreach (Reminder reminder in reminders)
-            {
-                if ((reminder.AlarmTime - now).Minutes == 0)
-                {
-                    MessageBox.Show(reminder.Description);
-                }
-            }
-        }
-
+      
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
@@ -122,15 +106,86 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
+        private int GetPersonalReminderId()
+        {
+            PersonalReminder personalReminder = (PersonalReminder) myDataGrid.SelectedValue;
+            return personalReminder.Id;
+        }
+
+        private int GetReminderId()
+        {
+            PersonalReminder personalReminder = (PersonalReminder) myDataGrid.SelectedValue;
+            return personalReminder.reminderId;
+        }
+
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            personalReminderController.DeletePersonalReminderById(int.Parse(id_txt.Text));
+            personalReminderController.DeletePersonalReminderById(GetPersonalReminderId());
             updateDataGrid();
+        }
+
+        private bool DataValidation()
+        {
+            if (!NameValidation()) return false;
+
+            if (!DescriptionValidation()) return false;
+
+            if (!AlarmTimeValidation()) return false;
+
+            if (!FrequencyValidation()) return false;
+
+            return true;
+        }
+
+        private bool FrequencyValidation()
+        {
+            if (frequency_txt.Text == null)
+            {
+                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool AlarmTimeValidation()
+        {
+            if (alarm_time_txt.Text == null)
+            {
+                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool DescriptionValidation()
+        {
+            if (description_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da unesete opis podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool NameValidation()
+        {
+            if (name_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da unesete naziv podsetnika!");
+                return false;
+            }
+
+            return true;
         }
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
-            PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(int.Parse(id_txt.Text));
+            if(!DataValidation()) return;
+            
+            PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(GetPersonalReminderId());
            
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
             UpdatePersonalReminder(personalReminder, frequency);
@@ -211,6 +266,13 @@ namespace Hospital.xaml_windows.Patient
             var window = new NewPersonalReminder(userId);
             window.Show();
             
+        }
+
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Izmeni.IsEnabled = true;
+            Obrisi.IsEnabled = true;
+            Kreiraj.IsEnabled = false;
         }
     }
 }

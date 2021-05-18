@@ -37,9 +37,7 @@ namespace Hospital.Repository
 
         public Patient GetPatientByUserId(int id)
         {
-            UserRepository userRepository = new UserRepository();
-            User user = userRepository.GetUserById(id);
-
+           
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
@@ -48,11 +46,35 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            //int user_id = int.Parse(reader.GetString(4));
+            var patient = ParsePatient(reader);
+            connection.Close();
+            connection.Dispose();
 
+            return patient;
+        }
+
+
+        public Patient GetPatientById(int id)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM PATIENT WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+           
+            var patient = ParsePatient(reader);
+
+            connection.Close();
+            connection.Dispose(); 
+            
+            return patient;
+        }
+
+        private static Patient ParsePatient(OracleDataReader reader)
+        {
             Patient patient = new Patient();
-            // User user = userRepository.GetUserById(user_id);
-
+            User user = new UserRepository().GetUserById(reader.GetInt32(4));
             if (user.Username.Contains("guestUser"))
             {
                 patient.Id = int.Parse(reader.GetString(0));
@@ -71,53 +93,8 @@ namespace Hospital.Repository
                 patient.User = user;
             }
 
-            connection.Close();
-            connection.Dispose();
+            //patient.Address = new AddressRepository().GetAddressById(patient.addres_id);
 
-            return patient;
-        }
-
-
-        public Patient GetPatientById(int id)
-        {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM USERS,PATIENT WHERE patient.ID = :id AND USERS.ID = PATIENT.USER_ID";
-            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
-            OracleDataReader reader = command.ExecuteReader();
-            reader.Read();
-            User user = new User();
-            Patient patient = new Patient();
-
-            user.Id = int.Parse(reader.GetString(0));
-            user.Username = reader.GetString(1);
-
-            if (user.Username.Contains("guestUser"))
-            {
-
-            }
-            else
-            {
-
-                user.Name = reader.GetString(3);
-                user.Surname = reader.GetString(4);
-                user.PhoneNumber = reader.GetString(5);
-                user.EMail = reader.GetString(6);
-
-                patient.JMBG = reader.GetString(8);
-                patient.DateOfBirth = reader.GetDateTime(9);
-                int addressId = reader.GetInt32(10);
-            }
-
-            patient.Id = int.Parse(reader.GetString(7));
-            patient.User = user;
-            patient.user_id = int.Parse(reader.GetString(11));
-
-            // Address address = addressRepository.GetAddressById(addressId);
-            // patient.Address = address;
-            connection.Close();
-            connection.Dispose(); 
-            
             return patient;
         }
 
@@ -125,21 +102,11 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID and PATIENT.ID = " + id;
+            command.CommandText = "SELECT * FROM PATIENT WHERE ID = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-            User user = new User();
-            user = new UserRepository().GetUserById(reader.GetInt32(0));
-           
-            Patient patient = new Patient();
-            patient.User = user;
-            patient.Id = int.Parse(reader.GetString(7));
-            patient.JMBG = reader.GetString(8);
-            patient.DateOfBirth = reader.GetDateTime(9);
-            int addressId = reader.GetInt32(10);
-            Address address = addressRepository.GetAddressById(addressId);
-            patient.Address = address;
-
+            var patient = ParsePatient(reader);
             connection.Close();
             connection.Dispose(); 
 
@@ -152,37 +119,15 @@ namespace Hospital.Repository
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
 
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID";
+            command.CommandText = "SELECT * FROM PATIENT";
 
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                User user = new User();
-
-                try
-                {
-                    user.Name = reader.GetString(3);
-                }
-                catch (Exception e)
-                {
-                    continue;
-                }
-
-                user.Id = int.Parse(reader.GetString(0));
-                user.Username = reader.GetString(1);
-                user.Password = reader.GetString(2);
-
-                user.Surname = reader.GetString(4);
-                user.PhoneNumber = reader.GetString(5);
-                user.EMail = reader.GetString(6);
-
-                Patient patient = new Patient();
-                patient.User = user;
-                patient.Id = int.Parse(reader.GetString(7));
-                patient.JMBG = reader.GetString(8);
-                patient.DateOfBirth = reader.GetDateTime(9);
-                int addressId = reader.GetInt32(10);
-
+                User user = new UserRepository().GetUserById(reader.GetInt32(4));
+                if (user.Name == null) continue;
+                var patient = new Patient(reader.GetInt32(0),reader.GetString(1),reader.GetDateTime(2),user,addressRepository.GetAddressById(3));
+                
                 patients.Add(patient);
             }
 

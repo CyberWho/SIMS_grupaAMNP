@@ -17,7 +17,7 @@ namespace Hospital.xaml_windows.Patient
         private int healthRecordId;
         private ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
         private ReminderController reminderController = new ReminderController();
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
         private PatientController patientController = new PatientController();
 
         public PatientReferrals(int userId,int healthRecordId)
@@ -26,23 +26,9 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.healthRecordId = healthRecordId;
             updateDataGrid();
+            Predlozi.IsEnabled = false;
         }
-        private void dispatherTimer_Tick(object sender, EventArgs e)
-        {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
-            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
-            DateTime now = DateTime.Now;
-            now = now.AddMilliseconds(-now.Millisecond);
-            foreach (Reminder reminder in reminders)
-            {
-                if ((reminder.AlarmTime - now).Minutes == 0)
-                {
-                    MessageBox.Show(reminder.Description);
-                }
-            }
-        }
+     
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientInfo(userId);
@@ -81,11 +67,28 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+
+        private int GetReferralId()
+        {
+            ReferralForSpecialist referralForSpecialist = (ReferralForSpecialist) myDataGrid.SelectedValue;
+            return referralForSpecialist.Id;
+        }
+
+        private int GetDoctorId()
+        {
+            ReferralForSpecialist referralForSpecialist = (ReferralForSpecialist) myDataGrid.SelectedValue;
+            return referralForSpecialist.Doctor.Id;
+        }
         private void Predlozi_Click(object sender, RoutedEventArgs e)
         {
-            int doctorId = int.Parse(doc_id_txt.Text);
+           
             DateTime startDate = DateTime.Parse(date_txt.Text);
             DateTime endDate = DateTime.Parse(date_end_txt.Text);
+            DateValidationForAppointmentRecommendations(endDate, startDate, GetDoctorId());
+        }
+
+        private void DateValidationForAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
+        {
             if (endDate <= startDate)
             {
                 MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!");
@@ -99,12 +102,14 @@ namespace Hospital.xaml_windows.Patient
                 }
                 else
                 {
-                    var window = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, 0, int.Parse(ref_id_txt.Text));
+                    var window = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, 0,
+                        GetReferralId());
                     window.Show();
                     this.Close();
                 }
             }
         }
+
         private void updateDataGrid()
         {
 
@@ -119,16 +124,14 @@ namespace Hospital.xaml_windows.Patient
         }
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Predlozi.IsEnabled = true;
 
 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {

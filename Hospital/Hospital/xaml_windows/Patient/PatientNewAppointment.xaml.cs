@@ -17,7 +17,7 @@ namespace Hospital.xaml_windows.Patient
         private ObservableCollection<Model.Doctor> Doctors = new ObservableCollection<Model.Doctor>();
         private DoctorController doctorController = new DoctorController();
         private int priority = 0;
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
         private ReminderController reminderController = new ReminderController();
         private PatientController patientController = new PatientController();
         public PatientNewAppointment(int userId)
@@ -27,27 +27,10 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.DataContext = this;
             updateDataGrid();
+            Predlozi.IsEnabled = false;
         }
 
-        private void dispatherTimer_Tick(object sender, EventArgs e)
-        {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
-            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
-            DateTime now = DateTime.Now;
-            now = now.AddMilliseconds(-now.Millisecond);
-            foreach (Reminder reminder in reminders)
-            {
-                if ((reminder.AlarmTime - now).Minutes == 0)
-                {
-                    MessageBox.Show(reminder.Description);
-                }
-            }
-        }
-
-
-
+      
         private void updateDataGrid()
         {
 
@@ -57,8 +40,6 @@ namespace Hospital.xaml_windows.Patient
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
             myDataGrid.ItemsSource = Doctors;
-
-
 
         }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
@@ -98,40 +79,50 @@ namespace Hospital.xaml_windows.Patient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
 
         private void myDataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            
+            Predlozi.IsEnabled = true;
+        }
+
+        private int GetDoctorId()
+        {
+            Model.Doctor doctor = (Model.Doctor)myDataGrid.SelectedValue;
+            return doctor.Id;
         }
 
         private void Predlozi_Click(object sender, RoutedEventArgs e)
         {
-            int doctorId = int.Parse(doc_id_txt.Text);
+            int doctorId = GetDoctorId();
             DateTime startDate = DateTime.Parse(date_txt.Text);
             DateTime endDate = DateTime.Parse(date_end_txt.Text);
-            if(endDate <= startDate)
+            DateValidationForAppointmentRecommendations(endDate, startDate, doctorId);
+        }
+
+        private void DateValidationForAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
+        {
+            if (endDate <= startDate)
             {
                 MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!");
-            } else
+            }
+            else
             {
                 var dayDifference = (endDate - startDate).TotalDays;
-                if(dayDifference > 5)
+                if (dayDifference > 5)
                 {
                     MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
-                } else
+                }
+                else
                 {
-                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId,priority,0);
+                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, priority, 0);
                     s.Show();
                     this.Close();
                 }
             }
         }
 
-       
 
         private void DoktorPrioritet_Checked(object sender, RoutedEventArgs e)
         {

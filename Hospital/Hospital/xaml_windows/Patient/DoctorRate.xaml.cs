@@ -93,7 +93,7 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private int doctorId;
         private PatientController patientController = new PatientController();
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
         private ReminderController reminderController = new ReminderController();
         public DoctorRate(int userId,int doctorId)
         {
@@ -101,6 +101,11 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.doctorId = doctorId;
             this.DataContext = this;
+            ShowDoctorInformations(doctorId);
+        }
+
+        private void ShowDoctorInformations(int doctorId)
+        {
             Model.Doctor doctor = new Model.Doctor();
             doctor = new DoctorController().GetDoctorById(doctorId);
             Id = doctor.Id;
@@ -109,22 +114,7 @@ namespace Hospital.xaml_windows.Patient
             Specialization = doctor.specialization.Type;
         }
 
-        private void dispatherTimer_Tick(object sender, EventArgs e)
-        {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
-            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
-            DateTime now = DateTime.Now;
-            now = now.AddMilliseconds(-now.Millisecond);
-            foreach (Reminder reminder in reminders)
-            {
-                if ((reminder.AlarmTime - now).Minutes == 0)
-                {
-                    MessageBox.Show(reminder.Description);
-                }
-            }
-        }
+
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
             var window = new PatientInfo(userId);
@@ -166,20 +156,54 @@ namespace Hospital.xaml_windows.Patient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
+
+        private Boolean DataValidation()
+        {
+            if (!RateValidation()) return false;
+
+            if (!DescriptionValidation()) return false;
+
+            return true;
+        }
+
+        private bool DescriptionValidation()
+        {
+            if (description_txt.Text == "")
+            {
+                MessageBox.Show("Obavezno je da date komentar ocene!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool RateValidation()
+        {
+            if (rate_txt.Text == null)
+            {
+                MessageBox.Show("Obavezno je dodeliti ocenu doktoru!");
+                return false;
+            }
+
+            return true;
+        }
+
         private void OceniDoktora_Click(object sender, RoutedEventArgs e)
         {
+            if (DataValidation() == false) return;
+           
             
-            Model.Patient patient= patientController.GetPatientByUserId(userId);
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
             Model.Doctor doctor = new DoctorController().GetDoctorById(doctorId);
             Review review = new Review(int.Parse(rate_txt.Text), description_txt.Text, patient, doctor);
-            new ReviewController().AddReview(review);
+            new ReviewController().AddReview(review); 
             MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname);
-           
+
             this.Close();
+            
+            
         }
 
     }

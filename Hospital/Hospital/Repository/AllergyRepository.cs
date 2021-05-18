@@ -78,11 +78,7 @@ namespace Hospital.Repository
 
             while (reader.Read())
             {
-                Allergy allergy = new Allergy();
-                AllergyType allergyType = new AllergyType();
-                allergyType.Type = reader.GetString(0);
-                allergy.allergyType = allergyType;
-
+                var allergy = ParseAllergy(reader);
                 allergies.Add(allergy);
             }
 
@@ -108,14 +104,20 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
-                Allergy allergy = new Allergy();
-                allergy.Id = reader.GetInt32(0);
-                allergy.allergyType = new AllergyTypeRepository().GetAllergyTypeById(reader.GetInt32(1));
+                var allergy = ParseAllergy(reader);
                 allergies.Add(allergy);
             }
             connection.Close();
             return allergies;
         }
+
+        private static Allergy ParseAllergy(OracleDataReader reader)
+        {
+            HealthRecord healthRecord = new HealthRecordRepository().GetHealthRecordById(reader.GetInt32(2));
+            Allergy allergy = new Allergy(reader.GetInt32(0),new AllergyTypeRepository().GetAllergyTypeById(reader.GetInt32(1)),healthRecord);
+            return allergy;
+        }
+
         public Boolean DeleteAllergyByUserIdAndAllergyTypeId(int userId, int atId)
         {
             setConnection();

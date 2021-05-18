@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
+using Xceed.Wpf.Toolkit;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -44,8 +46,67 @@ namespace Hospital.xaml_windows.Patient
             return personalReminderId;
         }
 
+        private bool DataValidation()
+        {
+            if (!NameValidation()) return false;
+
+            if (!DescriptionValidation()) return false;
+
+            if (!AlarmTimeValidation()) return false;
+
+            if (!FrequencyValidation()) return false;
+
+            return true;
+        }
+
+        private bool FrequencyValidation()
+        {
+            if (frequency_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool AlarmTimeValidation()
+        {
+            if (alarm_time_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool DescriptionValidation()
+        {
+            if (description_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da unesete opis podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool NameValidation()
+        {
+            if (name_txt.Text == "")
+            {
+                MessageBox.Show("Potrebno je da unesete naziv podsetnika!");
+                return false;
+            }
+
+            return true;
+        }
+
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
+            if(DataValidation()==false) return;
+            
             int newPersonalReminderId = GetNextPersonalReminderId();
             int newReminderId = GetNextReminderId();
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());

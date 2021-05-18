@@ -21,5 +21,6 @@ namespace Hospital.Model
             this.patient = patient;
             this.LastCounterReset = lastCounterReset;
         }
+       
     }
 }

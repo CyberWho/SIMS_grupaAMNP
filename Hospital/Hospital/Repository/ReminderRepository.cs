@@ -36,16 +36,22 @@ namespace Hospital.Repository
             command.CommandText = "SELECT * FROM REMINDER WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
+            var reminder = ParseReminder(reader);
+            connection.Close();
+            return reminder;
+      }
+
+        private static Reminder ParseReminder(OracleDataReader reader)
+        {
             Reminder reminder = new Reminder();
             reminder.Id = reader.GetInt32(0);
             reminder.Name = reader.GetString(1);
             reminder.Description = reader.GetString(2);
             reminder.AlarmTime = reader.GetDateTime(3);
-            connection.Close();
             return reminder;
-      }
-      
-      public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
+        }
+
+        public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
       {
             setConnection();
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
@@ -55,11 +61,8 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
-                Reminder reminder = new Reminder();
-                reminder.Id = reader.GetInt32(0);
-                reminder.Name = reader.GetString(1);
-                reminder.Description = reader.GetString(2);
-                reminder.AlarmTime = reader.GetDateTime(3);
+                Reminder reminder = ParseReminder(reader);
+                
                 if (reminder.AlarmTime >= DateTime.Now)
                 {
                     continue;
@@ -86,11 +89,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Reminder reminder = new Reminder();
-                reminder.Id = reader.GetInt32(0);
-                reminder.Name = reader.GetString(1);
-                reminder.Description = reader.GetString(2);
-                reminder.AlarmTime = reader.GetDateTime(3);
+                Reminder reminder = ParseReminder(reader);
                 if (reminder.AlarmTime != DateTime.Now)
                 {
                     continue;
@@ -118,11 +117,8 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Reminder reminder = new Reminder();
-                reminder.Id = reader.GetInt32(0);
-                reminder.Name = reader.GetString(1);
-                reminder.Description = reader.GetString(2);
-                reminder.AlarmTime = reader.GetDateTime(3);
+                Reminder reminder = ParseReminder(reader);
+                
                 if (reminder.AlarmTime < DateTime.Now)
                 {
                     continue;
@@ -150,11 +146,8 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Reminder reminder = new Reminder();
-                reminder.Id = reader.GetInt32(0);
-                reminder.Name = reader.GetString(1);
-                reminder.Description = reader.GetString(2);
-                reminder.AlarmTime = reader.GetDateTime(3);
+                Reminder reminder = ParseReminder(reader);
+                
                 reminders.Add(reminder);
             }
 
@@ -173,11 +166,8 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                Reminder reminder = new Reminder();
-                reminder.Id = reader.GetInt32(0);
-                reminder.Name = reader.GetString(1);
-                reminder.Description = reader.GetString(2);
-                reminder.AlarmTime = reader.GetDateTime(3);
+                Reminder reminder = ParseReminder(reader);
+                
                 reminders.Add(reminder);
             }
 

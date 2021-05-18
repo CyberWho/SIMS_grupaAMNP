@@ -161,7 +161,7 @@ namespace Hospital.xaml_windows.Patient
         private AppointmentController appointmentController = new AppointmentController();
         private TimeSlotController timeSlotController = new TimeSlotController();
         private Appointment appointment = new Appointment();
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
         private ReminderController reminderController = new ReminderController();
         private PatientController patientController = new PatientController();
         private PatientLogsController patientLogsController = new PatientLogsController();
@@ -171,6 +171,13 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             this.appointmentId = appointmentId;
             
+            ShowAppointmentInformations(appointmentId);
+            updateMyGrid();
+            Izmeni.IsEnabled = false;
+        }
+
+        private void ShowAppointmentInformations(int appointmentId)
+        {
             appointment = appointmentController.GetAppointmentById(appointmentId);
             AppointmentStatus = appointment.Status;
             AppointmentType = appointment.Type;
@@ -180,25 +187,8 @@ namespace Hospital.xaml_windows.Patient
             RoomId = appointment.room.Id;
             NName = appointment.doctor.User.Name;
             Surname = appointment.doctor.User.Surname;
-            updateMyGrid();
         }
 
-        private void dispatherTimer_Tick(object sender, EventArgs e)
-        {
-            ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
-            Model.Patient patient = new Model.Patient();
-            patient = patientController.GetPatientByUserId(userId);
-            reminders = reminderController.GetAllFutureRemindersByPatientId(patient.Id);
-            DateTime now = DateTime.Now;
-            now = now.AddMilliseconds(-now.Millisecond);
-            foreach (Reminder reminder in reminders)
-            {
-                if ((reminder.AlarmTime - now).Minutes == 0)
-                {
-                    MessageBox.Show(reminder.Description);
-                }
-            }
-        }
 
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
@@ -228,10 +218,16 @@ namespace Hospital.xaml_windows.Patient
             this.Close();
         }
 
+        private int GetTimeSlotId()
+        {
+            TimeSlot timeSlot = (TimeSlot) myGrid.SelectedValue;
+            return timeSlot.Id;
+        }
+
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             
-            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(int.Parse(timeslot_id_txt.Text));
+            TimeSlot timeSlot = timeSlotController.GetTimeSlotById(GetTimeSlotId());
             appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
@@ -272,9 +268,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Tick += dispatherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
@@ -299,6 +293,11 @@ namespace Hospital.xaml_windows.Patient
             var window = new Notifications(userId);
             window.Show();
             this.Close();
+        }
+
+        private void myGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Izmeni.IsEnabled = true;
         }
     }
 }
