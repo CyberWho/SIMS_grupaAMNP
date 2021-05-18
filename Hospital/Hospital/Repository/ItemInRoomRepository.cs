@@ -40,8 +40,7 @@ namespace Hospital.Repository
             cmd.CommandText = "SELECT * FROM item_in_room WHERE id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), null, null);
-            newItemInRoom.room_id = reader.GetInt32(3);
+            ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), uint.Parse(reader.GetInt32(2).ToString()), null, null);
             newItemInRoom.inventoryItem_id = reader.GetInt32(1);
             connection.Close();
             connection.Dispose();
@@ -173,22 +172,18 @@ namespace Hospital.Repository
                 "quantity = "              + itemInRoom.Quantity.ToString()         + ", " +
                 "room_id = "               + itemInRoom.room.Id.ToString()          + " "  +
                 "WHERE id = "              + itemInRoom.Id.ToString();
-
-
             try
             {
                 cmd.ExecuteNonQuery();
-
                 connection.Close();
                 connection.Dispose();
-                
-                Trace.WriteLine("Prosao UpdateItemInRoom");
                 return itemInRoom;  
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
                 connection.Close();
                 connection.Dispose();
+                Trace.WriteLine("UPDATE ITEM IN ROOM ERROR: " + exp.ToString());
 
                 return null;
             }

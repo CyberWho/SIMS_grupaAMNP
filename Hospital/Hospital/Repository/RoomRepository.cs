@@ -27,12 +27,12 @@ namespace Hospital.Repository
         }
         public Room GetRoomById(int id)
         {
+            Room room = new Room();
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM room WHERE id = " + id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-            Room room = new Room();
             room.Id = reader.GetInt32(0);
             room.Floor = reader.GetInt32(1);
             room.Area = reader.GetDouble(2);

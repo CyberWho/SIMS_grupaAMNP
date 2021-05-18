@@ -60,9 +60,9 @@ namespace Hospital.Controller
            return null;
         }
    
-        public Boolean MoveItem(int itemInRoomID, int destinationRoomID, uint quantity, DateTime? dateTime)
+        public Boolean MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity, DateTime? dateTime)
         {
-            return itemInRoomService.MoveItem(itemInRoomID, destinationRoomID, quantity, dateTime);
+            return itemInRoomService.MoveItem(itemInRoom, destinationRoom, quantity, dateTime);
         } 
 
         public ObservableCollection<ItemInRoom> LoadAllItems()

@@ -30,10 +30,10 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-
+                Trace.WriteLine(exp.ToString());
             }
         }
-        public Model.ReservedItem GetReservedItemById(int id)
+        public ReservedItem GetReservedItemById(int id)
         {
             // TODO: implement
             return null;
@@ -101,13 +101,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Model.ReservedItem UpdateReservedItem(Model.ReservedItem reservedItem)
+        public ReservedItem UpdateReservedItem(ReservedItem reservedItem)
         {
             // TODO: implement
             return null;
         }
 
-        public Model.ReservedItem NewReservedItem(Model.ReservedItem reservedItem)
+        public ReservedItem NewReservedItem(ReservedItem reservedItem)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
@@ -146,7 +146,7 @@ namespace Hospital.Repository
 
                 connection.Close();
                 connection.Dispose();
-
+                Trace.WriteLine(exp.ToString());
                 return null;
             }
         }
