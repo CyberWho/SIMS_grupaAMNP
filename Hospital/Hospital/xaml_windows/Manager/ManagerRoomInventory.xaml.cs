@@ -13,28 +13,27 @@ namespace Hospital.xaml_windows.Manager
     public partial class ManagerRoomInventory : Window
     {
         int ManagerID;
-        int RoomID;
         readonly uint CANCEL = 0;
+        Room currentRoom;
         ObservableCollection<ItemInRoom> ItemsInRoom;
         Controller.ItemInRoomController itemInRoomController = new Controller.ItemInRoomController();
 
-        public ManagerRoomInventory(int mngrID, int roomID)
+        public ManagerRoomInventory(int mngrID, Room room)
         {
             InitializeComponent();
             ManagerID = mngrID;
-            RoomID = roomID;
-            roomNo_txtbx.Text = this.RoomID.ToString();
+            currentRoom = room;
+            roomNo_txtbx.Text = currentRoom.Id.ToString();
         }
 
         private void MoveInventory_Click(object sender, RoutedEventArgs e)
         {
             uint quantity = CreateQuantityInputBox();
-            MessageBox.Show("IIR ID: " + IIRNo_txtbx.Text);
             if (quantity == CANCEL)
             {
                 return;
             }
-            else if (quantity > itemInRoomController.GetItemInRoomById(int.Parse(IIRNo_txtbx.Text)).Quantity)
+            else if (quantity > ((ItemInRoom)myDataGrid.SelectedItem).Quantity)
             {
                 MessageBox.Show("Izaberite broj koji je manji ili jednak trenutnoj količini u prostoriji.");
                 return;
@@ -50,15 +49,15 @@ namespace Hospital.xaml_windows.Manager
 
         private void GoToNextWindow(uint quantity)
         {
-            Window newWindow = new ManagerRoomInventorySelectDestinationRoom(ManagerID, RoomID, int.Parse(IIRNo_txtbx.Text), Enum.Parse(typeof(ItemType), IIRType_txtbx.Text), quantity);
+            Window newWindow = new ManagerRoomInventorySelectDestinationRoom(ManagerID, currentRoom.Id, (ItemInRoom)myDataGrid.SelectedItem, quantity);
             newWindow.Show();
         }
 
         private uint CreateQuantityInputBox()
         {
-            String prompt = "Unesite količinu: ";
-            String title = "Premeštanje inventara";
-            String answer = Microsoft.VisualBasic.Interaction.InputBox(prompt, title, "1");
+            string prompt = "Unesite količinu: ";
+            string title = "Premeštanje inventara";
+            string answer = Microsoft.VisualBasic.Interaction.InputBox(prompt, title, "1");
             if (answer.Length == 0 || int.Parse(answer) == 0)
             {
                 return CANCEL;
@@ -83,7 +82,7 @@ namespace Hospital.xaml_windows.Manager
         {
             this.DataContext = this;
             
-            ItemsInRoom = itemInRoomController.GetAllItemsInRoomByRoomId(RoomID);
+            ItemsInRoom = itemInRoomController.GetAllItemsInRoomByRoomId(currentRoom.Id);
             fillTable();
             
         }

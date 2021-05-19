@@ -27,6 +27,16 @@ namespace Hospital.Service
             return itemInRoomRepository.GetAllItemsInRoom();
         }
 
+        public void ResetGotAllItemsInRoomFlag()
+        {
+            itemInRoomRepository.ResetGotAllItemsInRoomFlag();
+        }
+
+        public ObservableCollection<ItemInRoom> GetAllItemsInRoomByItemType(ItemType type) 
+        {
+            return itemInRoomRepository.GetAllItemsInRoomByItemType(type);
+        }
+
         public Boolean DeleteItemInRoomById(int id)
         {
             // TODO: implement
@@ -49,12 +59,11 @@ namespace Hospital.Service
         {
             return itemInRoomRepository.NewItemInRoom(itemInRoom);
         }
-        public Boolean MoveItem(int itemInRoomID, int destinationRoomID, uint quantity, DateTime? dateTime)
+        public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity, DateTime? dateTime)
         {
-            ItemInRoom itemInRoom = itemInRoomRepository.GetItemInRoomById(itemInRoomID);
-            if (IsExpendable(dateTime)) 
+            if (IsExpendable(itemInRoom)) 
             {
-                return MoveExpendable(itemInRoom, destinationRoomID, quantity);
+                return MoveExpendable(itemInRoom, destinationRoom, quantity);
             }
             else
             {
@@ -64,20 +73,28 @@ namespace Hospital.Service
             return false;
         }
 
-        private Boolean MoveExpendable(ItemInRoom itemInRoom, int destinationRoomID, uint quantity)
+        private bool MoveExpendable(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
         {
-            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, destinationRoomID);
+            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, destinationRoom.Id);
             if (itemInDestinationRoom != null)
             {
                 itemInDestinationRoom.Quantity += quantity;
                 itemInRoomRepository.UpdateItemInRoom(itemInDestinationRoom);
-                itemInRoomRepository.DeleteItemInRoomById(itemInRoom.Id);
+                if(itemInRoom.Quantity == quantity)
+                {
+                    itemInRoomRepository.DeleteItemInRoomById(itemInRoom.Id);
+                }
+                else
+                {
+                    itemInRoom.Quantity -= quantity;
+                    itemInRoomRepository.UpdateItemInRoom(itemInRoom);
+                }
             }
             else
             {
                 if (itemInRoom.Quantity == quantity)
                 {
-                    itemInRoom.room = roomRepository.GetRoomById(destinationRoomID);
+                    itemInRoom.room = destinationRoom;
                     itemInRoomRepository.UpdateItemInRoom(itemInRoom);
                 }
                 else if (itemInRoom.Quantity < quantity)
@@ -88,19 +105,21 @@ namespace Hospital.Service
                 {
                     itemInRoom.Quantity -= quantity;
                     itemInRoomRepository.UpdateItemInRoom(itemInRoom);
-                    ItemInRoom newItemInRoom = new ItemInRoom(itemInRoom);
-                    newItemInRoom.Quantity = quantity;
-                    newItemInRoom.room = roomRepository.GetRoomById(destinationRoomID);
+                    ItemInRoom newItemInRoom = new ItemInRoom(itemInRoom)
+                    {
+                        Quantity = quantity,
+                        room = destinationRoom
+                    };
                     itemInRoomRepository.NewItemInRoom(newItemInRoom);
                 }
             }
             return true;
         }
 
+
         private ItemInRoom AlreadyExists(ItemInRoom itemInRoom, int destinationRoomID)
         {
-            ObservableCollection<ItemInRoom> itemsInDestinationRoom = itemInRoomRepository.GetAllItemsInRoomByRoomId(destinationRoomID);
-            foreach (ItemInRoom itemInDestinationRoom in itemsInDestinationRoom)
+            foreach (ItemInRoom itemInDestinationRoom in itemInRoomRepository.GetAllItemsInRoomByRoomId(destinationRoomID))
             {
                 if (itemInRoom.inventoryItem.Id == itemInDestinationRoom.inventoryItem.Id)
                 {
@@ -110,9 +129,9 @@ namespace Hospital.Service
             }
             return null;
         }
-        private Boolean IsExpendable(DateTime? dateTime)
+        private bool IsExpendable(ItemInRoom itemInRoom)
         {
-            return dateTime == null;
+            return itemInRoom.inventoryItem.Type == 0;
         }
 
         public ObservableCollection<ItemInRoom> LoadAllItems()

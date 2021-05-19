@@ -11,17 +11,19 @@ namespace Hospital.xaml_windows.Manager
     {
         int ManagerID;
         int ItemInRoomID;
+        ItemInRoom itemInRoom;
         int DestinationRoomID;
         uint Quantity;
+
         Controller.RoomController roomController = new Controller.RoomController();
         Controller.ItemInRoomController itemInRoomController = new Controller.ItemInRoomController();
         Controller.ReservedItemController reservedItemController = new Controller.ReservedItemController();
 
-        public ManagerRoomsPickDate(int managerID, int itemInRoomID, int destinationRoomID, uint quantity)
+        public ManagerRoomsPickDate(int managerID, ItemInRoom item, int destinationRoomID, uint quantity)
         {
             InitializeComponent();
-            managerID = managerID;
-            ItemInRoomID = itemInRoomID;
+            ManagerID = managerID;
+            itemInRoom = item;
             DestinationRoomID = destinationRoomID;
             Quantity = quantity;
         }

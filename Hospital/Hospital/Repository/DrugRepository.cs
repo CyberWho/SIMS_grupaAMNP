@@ -55,27 +55,11 @@ namespace Hospital.Repository
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Drug drug = new Drug();
-                drug.Id = reader.GetInt16(0);
-                drug.Name = reader.GetString(7);
-                drug.Price = (uint)reader.GetInt32(8);
-                drug.Unit = reader.GetString(9);
-                drug.Type = (ItemType)reader.GetInt32(10);
-                drug.Grams = reader.GetInt32(2);
-                drug.NeedsPerscription = reader.GetInt32(3) == 1 ? true : false;
-                drug.Status = (DrugStatus)reader.GetInt32(4);
-                drug.drugType_id = reader.GetInt32(5);
-                drugs.Add(drug);
+                drugs.Add(ParseFromReader(reader));
                 
             }
             connection.Close();
             connection.Dispose();
-
-            foreach (Drug drug in drugs)
-            {
-                drug.drugType = drugTypeRepository.GetDrugTypeById(drug.drugType_id);
-            }
-
             return drugs;
         }
 
@@ -91,7 +75,6 @@ namespace Hospital.Repository
             {
                 drugs.Add(ParseFromReader(reader));
             }
-
             return drugs;
         }
 
@@ -111,11 +94,22 @@ namespace Hospital.Repository
             return pendingDrugs;
         }
 
-        public Boolean DeleteDrugById(int id)
+        public bool DeleteDrugById(int id, int invID)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "DELETE FROM drug WHERE id = " + id.ToString();
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+            }
+
+            command.CommandText = "DELETE FROM inventory_item WHERE id = " + invID.ToString();
 
             try
             {
@@ -128,7 +122,6 @@ namespace Hospital.Repository
                 return false;
             }
         }
-
         public Drug UpdateDrugNoInventoryPart(Drug drug)
         {
             int needsPerscription = drug.NeedsPerscription ? 1 : 0;
@@ -141,7 +134,6 @@ namespace Hospital.Repository
                 "drug_status = '" + ((int)drug.Status).ToString() + "', " +
                 "drug_type_id = " + drug.drugType.Id.ToString() + " " +
                 "WHERE id = " + drug.Id.ToString();
-
             try
             {
                 cmd.ExecuteNonQuery();
@@ -166,7 +158,7 @@ namespace Hospital.Repository
                 "needs_perscription = " + needsPerscription.ToString() + ", " +
                 "drug_status = '" + ((int)drug.Status).ToString() + "', " +
                 "drug_type_id = " + drug.drugType.Id.ToString() + " " +
-                "WHERE invetory_item_id = " + drug.Id.ToString();
+                "WHERE id = " + drug.Id.ToString();
 
             try
             {
@@ -180,12 +172,14 @@ namespace Hospital.Repository
             }
 
             cmd.CommandText =
-                "UPDATE inventory_item" +
+                "UPDATE inventory_item " +
                 "SET name = '" + drug.Name + "', " +
                 "price = " + drug.Price.ToString() + ", " +
-                "unit = " + drug.Unit.ToString() + ", " +
-                "item_type" + ((int)drug.Type).ToString() + ", " +
-                "WHERE id = " + drug.Id.ToString();
+                "unit = '" + drug.Unit.ToString() + "', " +
+                "item_type = " + ((int)drug.Type).ToString() + " " +
+                "WHERE id = " + drug.InventoryItemID.ToString();
+
+            Trace.WriteLine("--------- SQL COMMAND:\t" + cmd.CommandText);
 
             try
             {
@@ -199,7 +193,6 @@ namespace Hospital.Repository
                 connection.Close();
                 return null;
             }
-
         }
 
         public Drug NewDrug(Drug drug)
@@ -253,14 +246,15 @@ namespace Hospital.Repository
         {
             Drug drug = new Drug();
             drug.Id = reader.GetInt16(0);
-            drug.Name = reader.GetString(7);
-            drug.Price = (uint)reader.GetInt32(8);
-            drug.Unit = reader.GetString(9);
-            drug.Type = (ItemType)reader.GetInt32(10);
+            drug.InventoryItemID = reader.GetInt32(1);
             drug.Grams = reader.GetInt32(2);
             drug.NeedsPerscription = reader.GetInt32(3) == 1 ? true : false;
             drug.Status = (DrugStatus)reader.GetInt32(4);
             drug.drugType = drugTypeRepository.GetDrugTypeById(reader.GetInt32(5));
+            drug.Name = reader.GetString(7);
+            drug.Price = (uint)reader.GetInt32(8);
+            drug.Unit = reader.GetString(9);
+            drug.Type = (ItemType)reader.GetInt32(10);
 
             return drug;
         }

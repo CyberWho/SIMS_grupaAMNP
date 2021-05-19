@@ -34,9 +34,9 @@ namespace Hospital.Service
             return drugRepository.GetAllDrugsPending();
         }
 
-        public Boolean DeleteDrugById(int id)
+        public bool DeleteDrugById(int id, int invID)
         {
-            return drugRepository.DeleteDrugById(id);
+            return drugRepository.DeleteDrugById(id, invID);
         }
 
         public Drug UpdateDrug(Drug drug)
@@ -65,7 +65,7 @@ namespace Hospital.Service
             return null;
         }
 
-        public void RejectDrug(int id_drug, int id_doctor, String description)
+        public void RejectDrug(int id_drug, int id_doctor, string description)
         {
             drugRepository.RejectDrug(id_drug, id_doctor, description);
         }

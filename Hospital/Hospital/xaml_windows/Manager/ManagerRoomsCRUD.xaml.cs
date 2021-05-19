@@ -35,7 +35,7 @@ namespace Hospital.xaml_windows.Manager
         }
         private void ShowInventory_Click(object sender, RoutedEventArgs e)
         {
-            Window newWindow = new ManagerRoomInventory(id, GetIdFromForm());
+            Window newWindow = new ManagerRoomInventory(id, (Room)myDataGrid.SelectedItem);
             newWindow.Show();
             this.Close();
         }
@@ -93,14 +93,8 @@ namespace Hospital.xaml_windows.Manager
 
         private int GetIdFromForm()
         {
-            int formID = 0;
-            if (!id_txtbx.Text.Equals(""))
-            {
-                formID = int.Parse(id_txtbx.Text);
-            }
-            return formID;
+            return int.Parse(id_txtbx.Text);
         }
-
         private Room GetRoomFromForm()
         {
             Room room = new Room();
@@ -160,6 +154,11 @@ namespace Hospital.xaml_windows.Manager
             myDataGrid.ItemsSource = Rooms;
         }
 
-       
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new ManagerUI(2);
+            w.Show();
+            this.Close();
+        }
     }
 }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="ManagerRoomsPickDate" Height="244.421" Width="419.158" WindowStartupLocation="CenterScreen">
     <Grid>
-        <xctk:DateTimePicker x:Name="date_txt" HorizontalAlignment="Left" Margin="107,88,0,0" VerticalAlignment="Top" Value="" Width="195"/>
+        <xctk:DateTimePicker x:Name="date_txt" HorizontalAlignment="Left" Value="{Binding CurrentDate}" Margin="107,88,0,0" VerticalAlignment="Top"  Width="195"/>
         <Label Content="Unesite datum premeštanja:" HorizontalAlignment="Left" Margin="122,57,0,0" VerticalAlignment="Top"/>
         <Button x:Name="potvrdaBtn" Content="Potvrda" HorizontalAlignment="Left" Margin="160,140,0,0" VerticalAlignment="Top" Width="75" Click="potvrdaBtn_Click"/>
 

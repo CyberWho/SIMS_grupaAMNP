@@ -59,9 +59,13 @@ namespace Hospital.Controller
         {
             return roomService.GetAllRoomsExceptSource(id);
         }
+        public ObservableCollection<int> GetAllRoomIDs()
+        {
+            return roomService.GetAllRoomIDs();
+        }
 
-      public Boolean DeleteRoomById(int id)
-        { 
+        public bool DeleteRoomById(int id)
+        {
             return roomService.DeleteRoomById(id);
         }
 
@@ -69,12 +73,12 @@ namespace Hospital.Controller
         {
             return roomService.GetAppointmentRoomById(roomId);
         }
-        
-      public Boolean DeleteRoomByAppointmentId(int appointmentId)
-      {
-         // TODO: implement
-         return false;
-      }
+
+        public Boolean DeleteRoomByAppointmentId(int appointmentId)
+        {
+            // TODO: implement
+            return false;
+        }
       
       public Boolean DeleteRoomByDoctorId(int doctorId)
       {

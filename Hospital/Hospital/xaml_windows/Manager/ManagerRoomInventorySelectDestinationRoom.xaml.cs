@@ -12,22 +12,22 @@ namespace Hospital.xaml_windows.Manager
     public partial class ManagerRoomInventorySelectDestinationRoom : Window
     {
         int ManagerID;
-        int RoomID;
+        int currentRoomId;
         int ItemInRoomID;
+        ItemInRoom itemInRoom;
+        Room destinationRoom;
         uint quantity;
-        ItemType ItemInRoomType;
         ObservableCollection<Room> Rooms;
         Controller.RoomController roomController = new Controller.RoomController();
         Controller.InventoryItemController inventoryItemController = new Controller.InventoryItemController();
         Controller.ItemInRoomController itemInRoomController = new Controller.ItemInRoomController();
 
-        public ManagerRoomInventorySelectDestinationRoom(int mngrID, int roomID, int itemInRoomID, object itemType, uint quantity)
+        public ManagerRoomInventorySelectDestinationRoom(int mngrID, int roomID, ItemInRoom item, uint quantity)
         {
             InitializeComponent();
             ManagerID = mngrID;
-            RoomID = roomID;
-            ItemInRoomID = itemInRoomID;
-            ItemInRoomType = (ItemType) itemType;
+            itemInRoom = item;
+            currentRoomId = roomID;
             this.quantity = quantity;
         }
 
@@ -38,7 +38,7 @@ namespace Hospital.xaml_windows.Manager
         public void updateDataGrid()
         {
             this.DataContext = this;
-            Rooms = roomController.GetAllRoomsExceptSource(RoomID);
+            Rooms = roomController.GetAllRoomsExceptSource(currentRoomId);
             fillTable();
 
         }
@@ -57,10 +57,11 @@ namespace Hospital.xaml_windows.Manager
 
         private void moveBtn_Click(object sender, RoutedEventArgs e)
         {
+            destinationRoom = (Room)myDataGrid.SelectedItem;
             // provera da li je inventar statican ili dinamican
-            if(ItemInRoomType == ItemType.EXPENDABLE)
+            if(itemInRoom.inventoryItem.Type == ItemType.EXPENDABLE)
             {
-                if(itemInRoomController.MoveItem(ItemInRoomID, int.Parse(IIRID_txtbx.Text), quantity, null))
+                if(itemInRoomController.MoveItem(itemInRoom, destinationRoom, quantity, null))
                 {
                     MessageBox.Show("Uspesno premeštanje.");
                 }
@@ -71,7 +72,7 @@ namespace Hospital.xaml_windows.Manager
             }
             else
             {
-                Window pickDateWindow = new ManagerRoomsPickDate(ManagerID, ItemInRoomID, int.Parse(IIRID_txtbx.Text), quantity);
+                Window pickDateWindow = new ManagerRoomsPickDate(ManagerID, itemInRoom, int.Parse(IIRID_txtbx.Text), quantity);
                 pickDateWindow.Show();
                 this.Close();
                 return;

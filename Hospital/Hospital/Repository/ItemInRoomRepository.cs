@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Hospital.Model;
@@ -15,9 +16,13 @@ namespace Hospital.Repository
    public class ItemInRoomRepository
    {
         OracleConnection connection = null;
+        string SelectAllCommandText = "SELECT * FROM item_in_room LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID LEFT OUTER JOIN room ON room_id = room.id LEFT OUTER JOIN room_type ON room.RTYPE_ID = room_type.ID";
+        bool GotAllItemsInRoom = false;
+        ObservableCollection<ItemInRoom> AllItemsInRoom = new ObservableCollection<ItemInRoom>();
+
         private void setConnection()
         {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             connection = new OracleConnection(conString);
             try
             {
@@ -35,8 +40,7 @@ namespace Hospital.Repository
             cmd.CommandText = "SELECT * FROM item_in_room WHERE id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), null, null);
-            newItemInRoom.room_id = reader.GetInt32(3);
+            ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), uint.Parse(reader.GetInt32(2).ToString()), null, null);
             newItemInRoom.inventoryItem_id = reader.GetInt32(1);
             connection.Close();
             connection.Dispose();
@@ -52,7 +56,7 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
             OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT* FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID WHERE room_ID = " + id.ToString();
+            cmd.CommandText = SelectAllCommandText + " WHERE room_ID = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -77,19 +81,50 @@ namespace Hospital.Repository
 
         public ObservableCollection<ItemInRoom> GetAllItemsInRoom()
         {
+            if (!GotAllItemsInRoom)
+            {
+                setConnection();
+                OracleCommand cmd = connection.CreateCommand();
+                cmd.CommandText = SelectAllCommandText;
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    AllItemsInRoom.Add(ParseFromReader(reader));
+                }
+
+                connection.Close();
+                GotAllItemsInRoom = true;
+            }
+            return AllItemsInRoom;
+        }
+
+        public void ResetGotAllItemsInRoomFlag()
+        {
+            GotAllItemsInRoom = false;
+        }
+
+        public ObservableCollection<ItemInRoom> GetAllItemsInRoomByItemType(ItemType type)
+        {
             setConnection();
             ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID";
-            OracleDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = SelectAllCommandText + " WHERE item_type = " + ((int)type).ToString();
+            OracleDataReader reader;
+            try
             {
-                InventoryItem newItem = inventoryItemRepository.GetInventoryItemById(reader.GetInt32(1));
-                ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), null, newItem);
-                itemsInRoom.Add(newItemInRoom);
+                reader = command.ExecuteReader();
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+                return null;
             }
 
-            connection.Close();
+            while (reader.Read())
+            {
+                itemsInRoom.Add(ParseFromReader(reader));
+            }
+
             return itemsInRoom;
         }
 
@@ -137,22 +172,18 @@ namespace Hospital.Repository
                 "quantity = "              + itemInRoom.Quantity.ToString()         + ", " +
                 "room_id = "               + itemInRoom.room.Id.ToString()          + " "  +
                 "WHERE id = "              + itemInRoom.Id.ToString();
-
-
             try
             {
                 cmd.ExecuteNonQuery();
-
                 connection.Close();
                 connection.Dispose();
-                
-                Trace.WriteLine("Prosao UpdateItemInRoom");
                 return itemInRoom;  
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
                 connection.Close();
                 connection.Dispose();
+                Trace.WriteLine("UPDATE ITEM IN ROOM ERROR: " + exp.ToString());
 
                 return null;
             }
@@ -178,12 +209,12 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
+                Trace.WriteLine("NewItemInRoom ERROR: \n" + exp.ToString());
                 connection.Close();
                 connection.Dispose();
 
                 return null;
             }
-
         }
 
         public ObservableCollection<ItemInRoom> SearchByName(string name)
@@ -191,14 +222,13 @@ namespace Hospital.Repository
             setConnection();
             ObservableCollection<ItemInRoom> searchResults = new ObservableCollection<ItemInRoom>();
             OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM ITEM_IN_ROOM LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID WHERE name like '%" + name + "%'";
+            cmd.CommandText = SelectAllCommandText + " WHERE name like '%" + name + "%'";
             OracleDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
                 searchResults.Add(ParseFromReader(reader));
             }
-
             return searchResults;
         }
 
@@ -210,8 +240,9 @@ namespace Hospital.Repository
 
         public ItemInRoom ParseFromReader(OracleDataReader reader)
         {
-            InventoryItem newItem = inventoryItemRepository.GetInventoryItemById(reader.GetInt32(1));
-            Room newRoom = roomRepository.GetRoomById(reader.GetInt32(3));
+            InventoryItem newItem = new InventoryItem(reader.GetInt32(1), reader.GetString(5), (uint)reader.GetInt32(6), reader.GetString(7), (ItemType)reader.GetInt32(8));
+            Room newRoom = new Room(reader.GetInt32(3), reader.GetInt32(10), reader.GetDouble(11), reader.GetString(12), null);
+            RoomType newRoomType = new RoomType(reader.GetInt32(13), reader.GetString(14), null); 
             ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), Convert.ToUInt32(reader.GetInt32(2)), newRoom, newItem);
             return newItemInRoom;
         }

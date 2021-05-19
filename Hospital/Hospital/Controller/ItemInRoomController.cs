@@ -27,6 +27,15 @@ namespace Hospital.Controller
             return itemInRoomService.GetAllItemsInRoom();
         }
 
+        public void ResetGotAllItemsInRoomFlag()
+        {
+            itemInRoomService.ResetGotAllItemsInRoomFlag();
+        }
+        public ObservableCollection<ItemInRoom> GetAllItemsInRoomByItemType(ItemType type)
+        {
+            return itemInRoomService.GetAllItemsInRoomByItemType(type);
+        }
+
         public Boolean DeleteItemInRoomById(int id)
         {
             // TODO: implement
@@ -51,9 +60,9 @@ namespace Hospital.Controller
            return null;
         }
    
-        public Boolean MoveItem(int itemInRoomID, int destinationRoomID, uint quantity, DateTime? dateTime)
+        public Boolean MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity, DateTime? dateTime)
         {
-            return itemInRoomService.MoveItem(itemInRoomID, destinationRoomID, quantity, dateTime);
+            return itemInRoomService.MoveItem(itemInRoom, destinationRoom, quantity, dateTime);
         } 
 
         public ObservableCollection<ItemInRoom> LoadAllItems()

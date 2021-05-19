@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="ManagerRenovations" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Renovations}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="329" Margin="10,80,0,0" VerticalAlignment="Top" Width="768" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding inventoryItem.Name}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Količina" Binding="{Binding Quantity}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cena" Binding="{Binding inventoryItem.Price}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding room.Id}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Jedinica" Binding="{Binding inventoryItem.Unit}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding inventoryItem.Type}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
