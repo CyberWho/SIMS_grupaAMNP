@@ -125,6 +125,8 @@ namespace Hospital.Repository
                 itemsInRoom.Add(ParseFromReader(reader));
             }
 
+            connection.Close();
+            connection.Dispose();
             return itemsInRoom;
         }
 
@@ -137,21 +139,15 @@ namespace Hospital.Repository
             try
             {
                 cmd.ExecuteNonQuery();
-
                 connection.Close();
                 connection.Dispose();
-
-                Trace.WriteLine("DeleteItemInRoomById");
-
                 return true;
             }
             catch (Exception exp)
             {
                 Trace.WriteLine(exp.ToString());
-
                 connection.Close();
                 connection.Dispose();
-                
                 return false;
             }
         }
@@ -223,7 +219,19 @@ namespace Hospital.Repository
             ObservableCollection<ItemInRoom> searchResults = new ObservableCollection<ItemInRoom>();
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = SelectAllCommandText + " WHERE name like '%" + name + "%'";
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleDataReader reader;
+
+            try
+            {
+                reader = cmd.ExecuteReader();
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine("SEARCH BY NAME ERROR: " + exp.ToString());
+                connection.Close();
+                connection.Dispose();
+                return null;
+            }
 
             while (reader.Read())
             {

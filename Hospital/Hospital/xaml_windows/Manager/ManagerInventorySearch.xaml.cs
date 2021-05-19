@@ -83,16 +83,20 @@ namespace Hospital.xaml_windows.Manager
         private void LoadAllItems()
         {
             ItemsInRoom = itemInRoomController.LoadAllItems();
-            Trace.WriteLine("ItemsInRoomLength: " + ItemsInRoom.Count.ToString());
             updateDataGrid();
         }
 
 
         private void search_txtbx_TextChanged(object sender, TextChangedEventArgs e)
         {
-            btnCancel.IsEnabled = true;
-            ItemsInRoom = itemInRoomController.SearchByName(search_txtbx.Text);
-            updateDataGrid();
+            if (!search_txtbx.Text.Equals(""))
+            {
+                btnCancel.IsEnabled = true;
+                type_cmbbx.SelectedItem = null;
+                room_cmbbx.SelectedItem = null;
+                ItemsInRoom = itemInRoomController.SearchByName(search_txtbx.Text);
+                updateDataGrid();
+            }
         }
 
         private void type_cmbbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -100,6 +104,8 @@ namespace Hospital.xaml_windows.Manager
             btnCancel.IsEnabled = true;
             if(type_cmbbx.SelectedItem != null)
             {
+                search_txtbx.Text = "";
+                room_cmbbx.SelectedItem = null;
                 ItemsInRoom = itemInRoomController.GetAllItemsInRoomByItemType((ItemType)type_cmbbx.SelectedValue);
                 updateDataGrid();
             }
@@ -108,6 +114,8 @@ namespace Hospital.xaml_windows.Manager
         {
             if (room_cmbbx.SelectedItem != null)
             {
+                search_txtbx.Text = "";
+                type_cmbbx.SelectedItem = null;
                 ItemsInRoom = itemInRoomController.GetAllItemsInRoomByRoomId(int.Parse(room_cmbbx.SelectedValue.ToString()));
                 updateDataGrid();
             }
