@@ -52,16 +52,17 @@ namespace Hospital.xaml_windows.Patient
         {
             int personalReminderId = personalReminderController.GetLastId();
             personalReminderId++;
-            if (nextPersonalReminderId == personalReminderId) return true;
+            while (nextPersonalReminderId == personalReminderId) return true;
             return false;
         }
 
         private int GetCorrectNextReminderId()
         {
             int reminderId = GetNextReminderId();
-            if (!CheckIfNextReminderIdIsCorrect(reminderId))
+            while (!CheckIfNextReminderIdIsCorrect(reminderId))
             {
-                return GetNextReminderId();
+                reminderId = GetNextReminderId();
+                
             }
 
             return reminderId;
@@ -69,9 +70,10 @@ namespace Hospital.xaml_windows.Patient
         private int GetCorrectNextPersonalReminderId()
         {
             int personalReminderId = GetNextPersonalReminderId();
-            if (!CheckIfNextPersonalReminderIdIsCorrect(personalReminderId))
+            while (!CheckIfNextPersonalReminderIdIsCorrect(personalReminderId))
             {
-                return GetNextPersonalReminderId();
+                personalReminderId =  GetNextPersonalReminderId();
+                
             }
 
             return personalReminderId;
