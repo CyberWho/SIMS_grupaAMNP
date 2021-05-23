@@ -12,7 +12,6 @@ namespace Hospital.xaml_windows.Patient
     public partial class PatientUI : Window
     {
         private int userId;
-        private ReminderController reminderController = new ReminderController();
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         private AppointmentController appointmentController = new AppointmentController();

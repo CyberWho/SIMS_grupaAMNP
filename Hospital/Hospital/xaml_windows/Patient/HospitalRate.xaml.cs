@@ -11,6 +11,7 @@ namespace Hospital.xaml_windows.Patient
     {
         private int userId;
         private PatientController patientController = new PatientController();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
         public HospitalRate(int userId)
         {
             InitializeComponent();
@@ -61,6 +62,11 @@ namespace Hospital.xaml_windows.Patient
             
            
             this.Close();
+        }
+
+        private void HospitalRate_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
     }
 }

@@ -110,8 +110,7 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
-
+        
         public PatientInfo(int userId)
         {
             

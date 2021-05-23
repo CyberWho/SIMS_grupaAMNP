@@ -16,10 +16,8 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private int healthRecordId;
         private ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
-        private ReminderController reminderController = new ReminderController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private PatientController patientController = new PatientController();
-
+        
         public PatientReferrals(int userId,int healthRecordId)
         {
             InitializeComponent();

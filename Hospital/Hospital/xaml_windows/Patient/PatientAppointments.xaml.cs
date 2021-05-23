@@ -18,7 +18,6 @@ namespace Hospital.xaml_windows.Patient
         private PatientController patientController = new PatientController();
         private ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
         private PatientLogsController patientLogsController = new PatientLogsController();
 
         public PatientAppointments(int userId)

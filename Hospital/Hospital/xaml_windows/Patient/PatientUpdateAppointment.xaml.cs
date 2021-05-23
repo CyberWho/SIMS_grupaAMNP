@@ -162,7 +162,6 @@ namespace Hospital.xaml_windows.Patient
         private TimeSlotController timeSlotController = new TimeSlotController();
         private Appointment appointment = new Appointment();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
         private PatientController patientController = new PatientController();
         private PatientLogsController patientLogsController = new PatientLogsController();
         public PatientUpdateAppointment(int userId,int appointmentId)

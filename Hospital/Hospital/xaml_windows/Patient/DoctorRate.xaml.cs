@@ -94,7 +94,7 @@ namespace Hospital.xaml_windows.Patient
         private int doctorId;
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
+        
         public DoctorRate(int userId,int doctorId)
         {
             InitializeComponent();

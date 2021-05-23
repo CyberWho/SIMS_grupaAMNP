@@ -24,7 +24,6 @@ namespace Hospital.xaml_windows.Patient
         private RoomController roomController = new RoomController();
         private ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
         private DoctorController doctorController = new DoctorController();
-        private ReminderController reminderController = new ReminderController();
         private RefferalForSpecialistController refferalForSpecialistController = new RefferalForSpecialistController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         private PatientLogsController patientLogsController = new PatientLogsController();

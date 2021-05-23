@@ -39,6 +39,45 @@ namespace Hospital.xaml_windows.Patient
             reminderId++;
             return reminderId;
         }
+
+        private bool CheckIfNextReminderIdIsCorrect(int nextReminderId)
+        {
+            int reminderId = reminderController.GetLastId();
+            reminderId++;
+            if (nextReminderId == reminderId) return true;
+            return false;
+        }
+
+        private bool CheckIfNextPersonalReminderIdIsCorrect(int nextPersonalReminderId)
+        {
+            int personalReminderId = personalReminderController.GetLastId();
+            personalReminderId++;
+            if (nextPersonalReminderId == personalReminderId) return true;
+            return false;
+        }
+
+        private int GetCorrectNextReminderId()
+        {
+            int reminderId = GetNextReminderId();
+            if (!CheckIfNextReminderIdIsCorrect(reminderId))
+            {
+                return GetNextReminderId();
+            }
+
+            return reminderId;
+        }
+        private int GetCorrectNextPersonalReminderId()
+        {
+            int personalReminderId = GetNextPersonalReminderId();
+            if (!CheckIfNextPersonalReminderIdIsCorrect(personalReminderId))
+            {
+                return GetNextPersonalReminderId();
+            }
+
+            return personalReminderId;
+        }
+
+
         private int GetNextPersonalReminderId()
         {
             int personalReminderId = personalReminderController.GetLastId();
@@ -106,9 +145,9 @@ namespace Hospital.xaml_windows.Patient
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
             if(DataValidation()==false) return;
-            
-            int newPersonalReminderId = GetNextPersonalReminderId();
-            int newReminderId = GetNextReminderId();
+
+            int newPersonalReminderId = GetCorrectNextPersonalReminderId();
+            int newReminderId = GetCorrectNextReminderId();
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
             PersonalReminder personalReminder = new PersonalReminder(newPersonalReminderId, name_txt.Text, description_txt.Text, DateTime.Parse(alarm_time_txt.Text), frequency, newReminderId);
             personalReminder.Patient = patientController.GetPatientByUserId(userId);

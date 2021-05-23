@@ -16,7 +16,6 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
         private DoctorController doctorController = new DoctorController();
         private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
         private AppointmentController appointmentController = new AppointmentController();

@@ -26,8 +26,6 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private int healthRecordId;
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
-        private PatientController patientController = new PatientController();
         private AnamnesisController anamnesisController = new AnamnesisController();
         private ObservableCollection<Perscription> perscriptions = new ObservableCollection<Perscription>();
         public PatientPerscriptions(int userId,int healthRecordId)
