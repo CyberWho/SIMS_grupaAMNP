@@ -273,7 +273,7 @@ namespace Hospital.xaml_windows.Patient
         {
             Izmeni.IsEnabled = true;
             Obrisi.IsEnabled = true;
-            Kreiraj.IsEnabled = false;
+            
         }
     }
 }
