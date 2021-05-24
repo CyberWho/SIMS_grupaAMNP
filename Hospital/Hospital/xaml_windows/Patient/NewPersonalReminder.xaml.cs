@@ -104,7 +104,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (frequency_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!");
+                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -115,7 +115,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (alarm_time_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!");
+                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -126,7 +126,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (description_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete opis podsetnika!");
+                MessageBox.Show("Potrebno je da unesete opis podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -137,7 +137,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (name_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete naziv podsetnika!");
+                MessageBox.Show("Potrebno je da unesete naziv podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -155,7 +155,12 @@ namespace Hospital.xaml_windows.Patient
             personalReminder.Patient = patientController.GetPatientByUserId(userId);
             personalReminderController.AddPersonalReminder(personalReminder);
             CreateNewPersonalReminder(personalReminder, frequency);
-            MessageBox.Show("Uspesno ste kreirali novi podsetnik!");
+            MessageBox.Show("Uspesno ste kreirali novi podsetnik!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
+            ShowPersonalReminders();
+        }
+
+        private void ShowPersonalReminders()
+        {
             var window = new PersonalReminders(userId);
             window.Show();
             this.Close();

@@ -104,22 +104,27 @@ namespace Hospital.xaml_windows.Patient
         {
             if (endDate <= startDate)
             {
-                MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!");
+                MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
             }
             else
             {
                 var dayDifference = (endDate - startDate).TotalDays;
                 if (dayDifference > 5)
                 {
-                    MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
+                    MessageBox.Show("Interval ne sme biti duzi od 5 dana!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
                 else
                 {
-                    var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, priority, 0);
-                    s.Show();
-                    this.Close();
+                    ShowNewAppointmentRecommendations(endDate, startDate, doctorId);
                 }
             }
+        }
+
+        private void ShowNewAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
+        {
+            var s = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, priority, 0);
+            s.Show();
+            this.Close();
         }
 
 

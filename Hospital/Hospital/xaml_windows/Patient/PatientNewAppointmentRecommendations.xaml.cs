@@ -103,7 +103,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
             {
-                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
+                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
                 var windowLogOut = new MainWindow();
                 windowLogOut.Show();

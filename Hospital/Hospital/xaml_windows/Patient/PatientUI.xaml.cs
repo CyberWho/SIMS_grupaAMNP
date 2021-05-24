@@ -94,13 +94,18 @@ namespace Hospital.xaml_windows.Patient
         {
             if(appointmentController.CheckForAnyAppointmentsByPatientId(patientController.GetPatientByUserId(userId).Id) == false)
             {
-                MessageBox.Show("Nazalost nije moguce da ocenite bolnicu jer nikada niste bili na pregledu!");
+                MessageBox.Show("Nazalost nije moguce da ocenite bolnicu jer nikada niste bili na pregledu!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
             } else
             {
-                var window = new HospitalRate(userId);
-                window.Show();
+                ShowHospitalRate();
             }
            
+        }
+
+        private void ShowHospitalRate()
+        {
+            var window = new HospitalRate(userId);
+            window.Show();
         }
 
         private void Notifications_Click(object sender, RoutedEventArgs e)

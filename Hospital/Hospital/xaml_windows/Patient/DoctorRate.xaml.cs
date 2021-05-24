@@ -172,7 +172,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (description_txt.Text == "")
             {
-                MessageBox.Show("Obavezno je da date komentar ocene!");
+                MessageBox.Show("Obavezno je da date komentar ocene!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return false;
             }
 
@@ -183,7 +183,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (rate_txt.Text == null)
             {
-                MessageBox.Show("Obavezno je dodeliti ocenu doktoru!");
+                MessageBox.Show("Obavezno je dodeliti ocenu doktoru!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return false;
             }
 
@@ -199,7 +199,7 @@ namespace Hospital.xaml_windows.Patient
             Model.Doctor doctor = new DoctorController().GetDoctorById(doctorId);
             Review review = new Review(int.Parse(rate_txt.Text), description_txt.Text, patient, doctor);
             new ReviewController().AddReview(review); 
-            MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname);
+            MessageBox.Show("Uspesno ste ocenili doktora " + doctor.User.Name + " " + doctor.User.Surname,"Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
 
             this.Close();
             

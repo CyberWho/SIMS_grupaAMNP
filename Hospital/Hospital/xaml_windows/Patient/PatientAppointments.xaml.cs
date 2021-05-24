@@ -118,7 +118,7 @@ namespace Hospital.xaml_windows.Patient
             }
             else
             {
-                MessageBox.Show("Nije moguce promeniti vreme odrzavanja termina jer je ostalo manje od 24h");
+                MessageBox.Show("Nije moguce promeniti vreme odrzavanja termina jer je ostalo manje od 24h","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
 
