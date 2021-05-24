@@ -237,17 +237,29 @@ namespace Hospital.xaml_windows.Patient
         {
             if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
             {
-                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
-                appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
-                var windowLogOut = new MainWindow();
-                windowLogOut.Show();
-                this.Close();
+                PatientIsBlocked(patientId);
                 return;
             }
 
+            ShowPatientAppointments();
+        }
+
+        private void ShowPatientAppointments()
+        {
             var window = new PatientAppointments(userId);
             window.Show();
             this.Close();
+        }
+
+        private void PatientIsBlocked(int patientId)
+        {
+            MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!", "Zdravo korporacija",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+            appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
+            var windowLogOut = new MainWindow();
+            windowLogOut.Show();
+            this.Close();
+            
         }
 
         private void updateMyGrid()
