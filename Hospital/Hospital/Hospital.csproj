@@ -336,6 +336,9 @@
     <Compile Include="xaml_windows\Secretary\UrgentAppointment.xaml.cs">
       <DependentUpon>UrgentAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\ViewDoctors.xaml.cs">
+      <DependentUpon>ViewDoctors.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -553,6 +556,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Secretary\UrgentAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\ViewDoctors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

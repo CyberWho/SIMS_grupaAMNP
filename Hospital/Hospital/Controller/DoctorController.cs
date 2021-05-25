@@ -58,10 +58,9 @@ namespace Hospital.Controller
             return null;
         }
 
-        public Doctor AddDoctor(Doctor doctor)
+        public Doctor AddDoctor(Doctor doctor, string specialization)
         {
-            // TODO: implement
-            return null;
+            return this.doctorService.AddDoctor(doctor, specialization);
         }
 
         public Service.DoctorService doctorService = new Service.DoctorService();

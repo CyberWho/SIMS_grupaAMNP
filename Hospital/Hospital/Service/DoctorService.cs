@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
@@ -56,13 +57,26 @@ namespace Hospital.Service
             return null;
         }
 
-        public Doctor AddDoctor(Doctor doctor)
+        #region marko_kt5
+        private Doctor setSpecialization(Doctor doctor, string specialization)
         {
-            // TODO: implement
-            return null;
+            if (doctor.specialization_id == 0)
+            {
+                doctor.specialization_id = this.specializationRepository.GetSpecializationByType(specialization);
+            }
+
+            return doctor;
         }
+        public Doctor AddDoctor(Doctor doctor, string specialization)
+        {
+            doctor = setSpecialization(doctor, specialization);
 
-        public Repository.DoctorRepository doctorRepository = new Repository.DoctorRepository();
+            return this.doctorRepository.NewDoctor(doctor);
+        }
+        #endregion
 
+        public SpecializationRepository specializationRepository = new SpecializationRepository();
+
+        public DoctorRepository doctorRepository = new DoctorRepository();
     }
 }

@@ -41,8 +41,7 @@ namespace Hospital.Service
       
       public Model.Employee AddEmployee(Model.Employee employee)
       {
-         // TODO: implement
-         return null;
+         return this.employeesRepository.NewEmployee(employee);
       }
    
       public Repository.EmployeesRepository employeesRepository = new Repository.EmployeesRepository();

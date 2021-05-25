@@ -7,6 +7,7 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using OracleInternal.SqlAndPlsqlParser.LocalParsing;
 
 namespace Hospital.Repository
 {
@@ -34,7 +35,6 @@ namespace Hospital.Repository
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.id LEFT OUTER JOIN role on role.id = employee.role_id WHERE users.id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
-            reader.Read();
 
             var employee = ParseEmployee(reader);
             connection.Close();
@@ -65,18 +65,31 @@ namespace Hospital.Repository
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM EMPLOYEE WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+
             OracleDataReader reader = command.ExecuteReader();
-            reader.Read();
             var employee = ParseEmployee(reader);
             connection.Close();
+            connection.Dispose();
             
             return employee;
         }
 
         private static Employee ParseEmployee(OracleDataReader reader)
         {
-            
-            User user = new UserRepository().GetUserById(reader.GetInt32(3)); 
+            reader.Read();
+            int id = int.Parse(reader.GetString(3));
+
+            if (id == 0)
+            {
+                int id_emp = int.Parse(reader.GetString(0));
+                int salary = int.Parse(reader.GetString(1));
+                int yearso = int.Parse(reader.GetString(2));
+                int userid = int.Parse(reader.GetString(3));
+                int roleid = int.Parse(reader.GetString(4));
+
+            }
+
+            User user = new UserRepository().GetUserById(id); 
             
             Role role = new RoleRepository().GetRoleById(reader.GetInt32(4));
             
@@ -102,48 +115,59 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Hospital.Model.Employee UpdateEmployee(Hospital.Model.Employee employee)
+        public Employee UpdateEmployee(Employee employee)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.Employee NewEmployee(Hospital.Model.Employee employee)
+        #region marko_kt5
+        public Employee NewEmployee(Employee employee)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
+            
             command.CommandText = "INSERT INTO employee (id, salary, years_of_service, user_id, role_id) VALUES (:id, :salary, :years_of_service, :user_id, :role_id)";
 
-            command.Parameters.Add("id", OracleDbType.Int32).Value = 7;
+            int id = GetLastId() + 1;
+            employee.Id = id;
+
+            command.Parameters.Add("id", OracleDbType.Int32).Value = employee.Id;
             command.Parameters.Add("salary", OracleDbType.Int32).Value = employee.Salary;
             command.Parameters.Add("years_of_service", OracleDbType.Int32).Value = employee.YearsOfService;
             command.Parameters.Add("user_id", OracleDbType.Int32).Value = employee.User.Id;
             command.Parameters.Add("role_id", OracleDbType.Int32).Value = employee.role.Id;
+            
 
-            command.ExecuteNonQuery();
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return employee;
+            }
 
             connection.Close();
             connection.Dispose();
 
-            Doctor doctor = new
-                Doctor(
-                    id: 0,
-                    employee_id: employee.Id,
-                    room_id: 10,
-                    specialization_id: 2
-                );
-
-            this.doctorRepository.NewDoctor(doctor);
-
             return null;
         }
-
-        private DoctorRepository doctorRepository = new DoctorRepository();
+        #endregion
 
         public int GetLastId()
-        {
-            // TODO: implement
-            return 0;
+        {   
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+
+            command.CommandText = "SELECT MAX(id) FROM employee";
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
+
+            return id;
         }
 
     }

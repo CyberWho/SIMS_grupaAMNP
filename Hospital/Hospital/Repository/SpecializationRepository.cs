@@ -9,7 +9,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
-    class SpecializationRepository
+    public class SpecializationRepository
     {
 
         OracleConnection connection = null;

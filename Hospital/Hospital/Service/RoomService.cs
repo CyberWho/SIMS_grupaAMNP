@@ -6,9 +6,11 @@
 
 using Hospital.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Packaging;
 using System.Linq;
+using System.Windows.Documents;
 using Hospital.Repository;
 
 namespace Hospital.Service
@@ -46,11 +48,38 @@ namespace Hospital.Service
             return null;
         }
 
-        public System.Collections.ArrayList GetAllRoomsByRoomType(RoomType roomType)
+        #region marko_kt5
+        public ObservableCollection<Room> GetAllRoomsByRoomType(RoomType roomType)
         {
-            // TODO: implement
-            return null;
+            List<int> usedRooms = this.doctorRepository.getAllUsedRoomsId();
+
+            ObservableCollection<Room> rooms = this.roomRepository.GetAllRoomsByRoomType(roomType);
+
+            ObservableCollection<Room> returnValue = new ObservableCollection<Room>();
+
+            bool flag = false;
+
+            foreach (Room r in rooms)
+            {
+                foreach (int id in usedRooms)
+                {
+                    if (r.Id == id)
+                    {
+                        flag = true;
+                    }
+                }
+
+                if (!flag)
+                {
+                    returnValue.Add(r);
+                }
+
+                flag = false;
+            }
+
+            return returnValue;
         }
+        #endregion
 
         public ObservableCollection<RoomType> GetAllRoomTypesForEachRoom()
         {
@@ -110,6 +139,7 @@ namespace Hospital.Service
 
         public RoomType GetRoomTypeByType(string Type)
         {
+
             return roomRepository.GetRoomTypeByType(Type);
         }
 
@@ -370,5 +400,6 @@ namespace Hospital.Service
         private Hospital.Repository.ReservedItemRepository reservedItemRepository = new ReservedItemRepository();
         private Hospital.Repository.AppointmentRepository appointmentRepository = new AppointmentRepository();
         private Hospital.Repository.TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
+        private DoctorRepository doctorRepository = new DoctorRepository();
     }
 }

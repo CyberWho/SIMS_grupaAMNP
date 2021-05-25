@@ -369,5 +369,11 @@ namespace Hospital.xaml_windows.Secretary
             Window s = new Notifications(this.id);
             s.Show();
         }
+
+        private void View_Doctors(object sender, RoutedEventArgs e)
+        {
+            Window s = new ViewDoctors();
+            s.Show();
+        }
     }
 }
