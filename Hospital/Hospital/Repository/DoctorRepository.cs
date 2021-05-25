@@ -36,6 +36,7 @@ namespace Hospital.Repository
             var doctor = ParseDoctor(reader);
 
             connection.Close();
+            connection.Dispose();
            
             return doctor;
 
@@ -181,13 +182,27 @@ namespace Hospital.Repository
 
         public Boolean DeleteDoctorById(int doctorId)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM doctor WHERE id = " + doctorId;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return true;
+            }
+            connection.Close();
+            connection.Dispose();
+
             return false;
         }
 
         public Doctor UpdateDoctor(Doctor doctor)
         {
-            // TODO: implement
+
+
             return null;
         }
 

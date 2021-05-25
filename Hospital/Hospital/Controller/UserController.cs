@@ -35,7 +35,7 @@ namespace Hospital.Controller
 
             //vidim da li je ispravno uneto ako da uzmem id i trazim sta je
             int id = -1;
-            
+
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /// kt5 marko
@@ -67,7 +67,7 @@ namespace Hospital.Controller
             con.Close();
             con.Dispose();
 
-            
+
             Window s;
             switch (uloga)
             {
@@ -158,8 +158,7 @@ namespace Hospital.Controller
 
         public User UpdateUser(User user)
         {
-            // TODO: implement
-            return null;
+            return this.userService.UpdateUser(user);
         }
 
         public void makeDoctorUser()

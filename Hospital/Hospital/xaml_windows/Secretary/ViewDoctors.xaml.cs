@@ -34,6 +34,8 @@ namespace Hospital.xaml_windows.Secretary
         private RoomController roomController = new RoomController();
         private int room_id;
 
+        private int current_doctor_id;
+
         private ObservableCollection<Model.Doctor> doctors;
 
         public ViewDoctors()
@@ -157,7 +159,23 @@ namespace Hospital.xaml_windows.Secretary
 
         private void dataGridPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var info = dataGridDoctors.SelectedCells[0];
+            if (info != null && info.Column.GetCellContent(info.Item) != null)
+            {
+                var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
+                current_doctor_id = int.Parse(content);
+                Model.Doctor doctor = this.doctorController.GetDoctorById(current_doctor_id);
 
+
+                NName = doctor.User.Name;
+                Surname = doctor.User.Surname;
+                Username = doctor.User.Username;
+                PhoneNumber = doctor.User.PhoneNumber;
+                Email = doctor.User.EMail;
+                Salary = doctor.Salary.ToString();
+
+                dataGridDoctors.UnselectAll();
+            }
         }
 
         private void Add_user(object sender, RoutedEventArgs e)
@@ -167,8 +185,7 @@ namespace Hospital.xaml_windows.Secretary
             Model.Doctor doctor = new Model.Doctor();
             doctor.employee_id = employee.Id;
             doctor.room_id = room_id;
-            doctor = this.doctorController.AddDoctor(doctor, specialization); 
-
+            doctor = this.doctorController.AddDoctor(doctor, specialization);
         }
 
         
@@ -223,12 +240,23 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Delete_user(object sender, RoutedEventArgs e)
         {
-
+            this.doctorController.DeleteDoctorById(current_doctor_id);
+            Refresh(sender, e);
         }
 
         private void Update_user(object sender, RoutedEventArgs e)
         {
             User user = parseUserData();
+            Employee employee = new Employee();
+            employee.User = user;
+            employee.Salary = int.Parse(Salary);
+
+            Model.Doctor doctor = new Model.Doctor();
+            doctor.Id = current_doctor_id;
+
+            employee.Id = this.employeeController.getEmployeeIdByDoctorId(current_doctor_id);
+
+            _ = this.employeeController.UpdateEmployee(employee);
         }
 
         private void Refresh(object sender, RoutedEventArgs e)

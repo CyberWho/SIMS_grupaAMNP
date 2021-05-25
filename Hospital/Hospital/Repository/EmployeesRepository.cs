@@ -109,15 +109,58 @@ namespace Hospital.Repository
             return null;
         }
 
+        public int getEmployeeIdByDoctorId(int doctor_id)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT employee_id FROM doctor WHERE id = " + doctor_id;
+
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+            int id = int.Parse(reader.GetString(0));
+            return id;
+        }
+        
+
         public Boolean DeleteEmployeeById(int id)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM employee WHERE id = " + id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return true;
+            }
+            connection.Close();
+            connection.Dispose();
+
             return false;
         }
 
         public Employee UpdateEmployee(Employee employee)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE employee SET salary = :salary WHERE id = :id";
+            command.Parameters.Add("salary", OracleDbType.Int32).Value = employee.Salary;
+            command.Parameters.Add("id", OracleDbType.Int32).Value = employee.Id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+                
+                return employee;
+            }
+
+            connection.Close();
+            connection.Dispose();
+
             return null;
         }
 

@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 using Hospital.Model;
 
 namespace Hospital.Controller
@@ -48,14 +49,12 @@ namespace Hospital.Controller
         }
         public Boolean DeleteDoctorById(int doctorId)
         {
-            // TODO: implement
-            return false;
+            return this.doctorService.DeleteDoctorById(doctorId);
         }
 
         public Doctor UpdateDoctor(Doctor doctor)
         {
-            // TODO: implement
-            return null;
+            return this.doctorService.UpdateDoctor(doctor);
         }
 
         public Doctor AddDoctor(Doctor doctor, string specialization)

@@ -47,14 +47,26 @@ namespace Hospital.Service
         }
         public Boolean DeleteDoctorById(int doctorId)
         {
-            // TODO: implement
+            Doctor doctor = this.doctorRepository.GetDoctorById(doctorId);
+            
+            int employee_id = this.employeesRepository.getEmployeeIdByDoctorId(doctorId);
+            Employee employee = this.employeesRepository.GetEmployeeById(employee_id);
+
+            User user = this.userRepository.GetUserById(employee.User.Id);
+
+
+            if (this.doctorRepository.DeleteDoctorById(doctorId) &&
+                this.employeesRepository.DeleteEmployeeById(employee_id) && 
+                this.userRepository.DeleteUserById(user.Id))
+
+                return true;
+
             return false;
         }
 
         public Doctor UpdateDoctor(Doctor doctor)
         {
-            // TODO: implement
-            return null;
+            return this.doctorRepository.UpdateDoctor(doctor);
         }
 
         #region marko_kt5
@@ -78,5 +90,7 @@ namespace Hospital.Service
         public SpecializationRepository specializationRepository = new SpecializationRepository();
 
         public DoctorRepository doctorRepository = new DoctorRepository();
+        private EmployeesRepository employeesRepository = new EmployeesRepository();
+        private UserRepository userRepository = new UserRepository();
     }
 }

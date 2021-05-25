@@ -29,6 +29,11 @@ namespace Hospital.Controller
             return null;
         }
 
+        public int getEmployeeIdByDoctorId(int doctor_id)
+        {
+            return this.employeeService.getEmployeeIdByDoctorId(doctor_id);
+        }
+
         public Boolean DeleteEmployeeById(int id)
         {
             // TODO: implement
@@ -37,8 +42,7 @@ namespace Hospital.Controller
 
         public Employee UpdateEmployee(Employee employee)
         {
-            // TODO: implement
-            return null;
+            return this.employeeService.UpdateEmployee(employee);
         }
 
         public Employee AddEmployee(Employee employee)

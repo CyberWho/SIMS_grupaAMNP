@@ -146,7 +146,20 @@ namespace Hospital.Repository
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM users WHERE id = " + id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return true;
+            }
+            connection.Close();
+            connection.Dispose();
+            
             return false;
         }
 
@@ -156,9 +169,41 @@ namespace Hospital.Repository
             return false;
         }
 
+        #region marko_kt5
+
+
+
+
+
+        #endregion
         public User UpdateUser(User user)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE users set username=:username, " +
+                                  "name=:name, " +
+                                  "surname=:surname, " +
+                                  "phone_number=:phone_number, " +
+                                  "email=:email " +
+                                  "WHERE ID = " + user.Id;
+
+            command.Parameters.Add("username", user.Username);
+            command.Parameters.Add("name", user.Name);
+            command.Parameters.Add("surname", user.Surname);
+            command.Parameters.Add("phone_number", user.PhoneNumber);
+            command.Parameters.Add("email", user.EMail);
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return user;
+            }
+
+            connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
