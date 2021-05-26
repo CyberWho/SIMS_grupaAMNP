@@ -72,7 +72,7 @@ namespace Hospital.xaml_windows.Manager
             }
             else
             {
-                Window pickDateWindow = new ManagerRoomsPickDate(ManagerID, itemInRoom, int.Parse(IIRID_txtbx.Text), quantity);
+                Window pickDateWindow = new ManagerRoomsPickDate(ManagerID, itemInRoom, destinationRoom, quantity);
                 pickDateWindow.Show();
                 this.Close();
                 return;

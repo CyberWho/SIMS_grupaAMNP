@@ -38,7 +38,16 @@ namespace Hospital.Repository
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT * FROM item_in_room WHERE id = " + id.ToString();
-            OracleDataReader reader = cmd.ExecuteReader();
+            OracleDataReader reader;
+            try
+            {
+                reader = cmd.ExecuteReader();
+            }
+            catch(Exception exp)
+            {
+                Trace.WriteLine("GetItemInRoomById ERROR: " + exp.ToString());
+                return null;
+            }
             reader.Read();
             ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), uint.Parse(reader.GetInt32(2).ToString()), null, null);
             newItemInRoom.inventoryItem_id = reader.GetInt32(1);
@@ -168,6 +177,8 @@ namespace Hospital.Repository
                 "quantity = "              + itemInRoom.Quantity.ToString()         + ", " +
                 "room_id = "               + itemInRoom.room.Id.ToString()          + " "  +
                 "WHERE id = "              + itemInRoom.Id.ToString();
+
+            Trace.WriteLine("SQL COMMAND: " + cmd.CommandText);
             try
             {
                 cmd.ExecuteNonQuery();

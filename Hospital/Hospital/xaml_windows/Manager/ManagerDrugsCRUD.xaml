@@ -16,7 +16,13 @@
                 <DataGridTextColumn Header="Jedinica" Binding="{Binding Unit}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Tip" Binding="{Binding drugType.Type}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Gramaza" Binding="{Binding Grams}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="ToolTip" Value="Test"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Recept" Binding="{Binding NeedsPerscription}" Width="*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>

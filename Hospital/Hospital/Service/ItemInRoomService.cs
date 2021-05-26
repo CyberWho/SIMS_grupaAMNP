@@ -8,6 +8,7 @@ using Hospital.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using static Globals;
 
 namespace Hospital.Service
 {
@@ -58,6 +59,24 @@ namespace Hospital.Service
         public ItemInRoom AddItemInRoom(ItemInRoom itemInRoom)
         {
             return itemInRoomRepository.NewItemInRoom(itemInRoom);
+        }
+        public ItemInRoom MoveWholeItemNowToMainStorage(ItemInRoom itemInRoom)
+        {
+            Room mainStorage = roomRepository.GetRoomById(5);
+            itemInRoom.room_id = mainStorage.Id;
+            itemInRoom.room.Id = mainStorage.Id;
+
+            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, mainStorage.Id);
+            if (itemInDestinationRoom != null)
+            {
+                itemInDestinationRoom.Quantity += itemInRoom.Quantity;
+                itemInRoomRepository.DeleteItemInRoomById(itemInRoom.Id);
+                return itemInRoomRepository.UpdateItemInRoom(itemInDestinationRoom);
+            }
+            else
+            {
+                return itemInRoomRepository.UpdateItemInRoom(itemInRoom);
+            }
         }
         public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity, DateTime? dateTime)
         {
