@@ -249,5 +249,11 @@ namespace Hospital.xaml_windows.Patient
             Obrisi.IsEnabled = true;
             
         }
+        private void Undo_OnClick(object sender, RoutedEventArgs e)
+        {
+            var window = new Reminders(userId);
+            window.Show();
+            this.Close();
+        }
     }
 }
