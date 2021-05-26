@@ -9,7 +9,25 @@
     <Grid>
         <Button x:Name="roomsBtn" Content="Prostorije" HorizontalAlignment="Left" Margin="172,134,0,0" VerticalAlignment="Top" Width="75" Click="roomBtnClick"/>
         <Button x:Name="drugsBtn" Content="Lekovi" HorizontalAlignment="Left" Margin="316,134,0,0" VerticalAlignment="Top" Width="75" Click="drugsBtnClick"/>
-        <Button x:Name="inventorySearchBtn" Content="Pretraga inventara" HorizontalAlignment="Left" Margin="471,134,0,0" VerticalAlignment="Top" Width="117" Click="inventorySearchBtn_Click"/>
-        <Button x:Name="renovationsBtn" Content="Renovacije" HorizontalAlignment="Left" Margin="206,202,0,0" VerticalAlignment="Top" Width="75" Click="renovationsBtn_Click"/>
+        <Button x:Name="inventorySearchBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="494,42,0,0" VerticalAlignment="Top" Width="160" Click="inventorySearchBtn_Click" Height="160">
+            <TextBlock FontFamily="Segoe UI Symbol" Text="     &#xE11A;&#xa;Pretraga&#xa;inventara" Foreground="#e8ebed" FontSize="30" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Background="#3499eb" Margin="494,226,0,0" VerticalAlignment="Top" Width="160" Click="renovationsBtn_Click" Height="160">
+            <TextBlock FontFamily="Segoe UI Symbol" Text="      &#xE15E;&#xa;Renovacije" Foreground="#e8ebed" FontSize="30" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+        </Button>
     </Grid>
 </Window>
