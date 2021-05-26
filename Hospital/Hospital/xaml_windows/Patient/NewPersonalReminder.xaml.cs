@@ -148,15 +148,22 @@ namespace Hospital.xaml_windows.Patient
         {
             if(DataValidation()==false) return;
 
+            CreateNewPersonalReminder();
+            MessageBox.Show("Uspesno ste kreirali novi podsetnik!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
+            ShowPersonalReminders();
+        }
+
+        private void CreateNewPersonalReminder()
+        {
             int newPersonalReminderId = GetCorrectNextPersonalReminderId();
             int newReminderId = GetCorrectNextReminderId();
-            PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
-            PersonalReminder personalReminder = new PersonalReminder(newPersonalReminderId, name_txt.Text, description_txt.Text, DateTime.Parse(alarm_time_txt.Text), frequency, newReminderId);
+            PersonalReminderFrequency frequency = (PersonalReminderFrequency) Enum.Parse(typeof(PersonalReminderFrequency),
+                frequency_txt.SelectedValue.ToString());
+            PersonalReminder personalReminder = new PersonalReminder(newPersonalReminderId, name_txt.Text, description_txt.Text,
+                DateTime.Parse(alarm_time_txt.Text), frequency, newReminderId);
             personalReminder.Patient = patientController.GetPatientByUserId(userId);
             personalReminderController.AddPersonalReminder(personalReminder);
             CreateNewPersonalReminder(personalReminder, frequency);
-            MessageBox.Show("Uspesno ste kreirali novi podsetnik!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
-            ShowPersonalReminders();
         }
 
         private void ShowPersonalReminders()
