@@ -181,7 +181,7 @@ namespace Hospital.xaml_windows.Manager
 
         private Renovation GetRenovationFromXaml()
         {
-            return new Renovation(-1, DateTime.Parse(date_pckr.Text), (RenovationType)type_cmbbx.SelectedValue, SelectedRooms, NewArea);
+            return new Renovation(-1, DateTime.Parse(date_pckr.Text), (RenovationType)type_cmbbx.SelectedValue, SelectedRooms, false, NewArea);
         }
         private bool RenovationTypeNotSelected()
         {

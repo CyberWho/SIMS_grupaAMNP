@@ -5,6 +5,7 @@ using Hospital.Model;
 using System.Diagnostics;
 using System;
 using static Globals;
+using System.Linq;
 
 namespace Hospital.xaml_windows.Manager
 {

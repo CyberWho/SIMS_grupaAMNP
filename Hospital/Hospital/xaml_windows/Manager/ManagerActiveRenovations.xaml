@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="ManagerRenovations" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Renovacije u toku" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <DataGrid x:Name="myDataGrid" ItemsSource="{Binding RenovationDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="329" Margin="281,80,0,0" VerticalAlignment="Top" Width="497" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>

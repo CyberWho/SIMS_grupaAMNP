@@ -5,11 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
         mc:Ignorable="d"
-        Title="ManagerUI" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ManagerUI" Height="720" Width="1080" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="roomsBtn" Content="Prostorije" HorizontalAlignment="Left" Margin="172,134,0,0" VerticalAlignment="Top" Width="75" Click="roomBtnClick"/>
-        <Button x:Name="drugsBtn" Content="Lekovi" HorizontalAlignment="Left" Margin="316,134,0,0" VerticalAlignment="Top" Width="75" Click="drugsBtnClick"/>
-        <Button x:Name="inventorySearchBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="494,42,0,0" VerticalAlignment="Top" Width="160" Click="inventorySearchBtn_Click" Height="160">
+        <Button x:Name="roomsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="333,188,0,0" VerticalAlignment="Top" Width="160" Click="roomBtnClick" Height="160">
+            <TextBlock FontFamily="Segoe UI Symbol" Text="      &#x1f3e2;&#xa;Prostorije" Foreground="#e8ebed" FontSize="30" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="drugsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="333,372,0,0" VerticalAlignment="Top" Width="160" Click="drugsBtnClick" Height="160">
+            <TextBlock FontFamily="Segoe UI Symbol" Text="   &#x1f48a;&#xa;Lekovi" Foreground="#e8ebed" FontSize="30" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="inventorySearchBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="549,188,0,0" VerticalAlignment="Top" Width="160" Click="inventorySearchBtn_Click" Height="160">
             <TextBlock FontFamily="Segoe UI Symbol" Text="     &#xE11A;&#xa;Pretraga&#xa;inventara" Foreground="#e8ebed" FontSize="30" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
@@ -19,7 +37,7 @@
                 <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Background="#3499eb" Margin="494,226,0,0" VerticalAlignment="Top" Width="160" Click="renovationsBtn_Click" Height="160">
+        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Background="#3499eb" Margin="549,372,0,0" VerticalAlignment="Top" Width="160" Click="renovationsBtn_Click" Height="160">
             <TextBlock FontFamily="Segoe UI Symbol" Text="      &#xE15E;&#xa;Renovacije" Foreground="#e8ebed" FontSize="30" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>

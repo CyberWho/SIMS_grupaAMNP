@@ -82,7 +82,7 @@ namespace Hospital.Repository
             SetGlobalConnection();
             OracleCommand query = globalConnection.CreateCommand();
             ObservableCollection<int> RoomIDs = new ObservableCollection<int>();
-            query.CommandText = "SELECT room_id FROM renovation_rooms";
+            query.CommandText = "SELECT DISTINCT room_id FROM renovation_rooms inner join renovation on renovation.id = renovation_id WHERE ended = 0";
             OracleDataReader reader;
 
             try
@@ -282,7 +282,8 @@ namespace Hospital.Repository
                         {
                             newRoom
                         };
-            Renovation newRenovation = new Renovation(reader.GetInt32(1), reader.GetDateTime(5), (RenovationType)reader.GetInt32(4), newRooms);
+            bool Ended = reader.GetInt32(6) == 1 ? true : false;
+            Renovation newRenovation = new Renovation(reader.GetInt32(1), reader.GetDateTime(5), (RenovationType)reader.GetInt32(4), newRooms, Ended, uint.Parse(reader.GetInt32(7).ToString()));
             Renovations.Add(newRenovation);
         }
 

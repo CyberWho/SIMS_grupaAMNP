@@ -31,13 +31,15 @@ namespace Hospital.Repository
             Room room = new Room();
             setConnection();
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM room WHERE id = " + id.ToString();
+            command.CommandText = "SELECT * FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id WHERE room.id = " + id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             room.Id = reader.GetInt32(0);
             room.Floor = reader.GetInt32(1);
             room.Area = reader.GetDouble(2);
             room.Description = reader.GetString(3);
+            RoomType newRoomType = new RoomType(reader.GetInt32(4), reader.GetString(5), null);
+            room.roomType = newRoomType;
 
             connection.Close();
             connection.Dispose();
@@ -292,12 +294,15 @@ namespace Hospital.Repository
             cmd.CommandText = "SELECT max(id) FROM room";
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
+            
+            
             cmd.CommandText = "INSERT INTO room VALUES(" +
                 (reader.GetInt32(0) + 1).ToString() + ", " +
                 room.Floor.ToString() + ", " +
                 room.Area.ToString() + ", '" +
                 room.Description.ToString() + "', " +
                 room.roomType.Id.ToString() + ")";
+            QuickTrace("----- FAIL SQL COMMAND: " + cmd.CommandText);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -309,7 +314,7 @@ namespace Hospital.Repository
             }
             catch (Exception exp)
             {
-                Trace.WriteLine("Failed adding room with ID " + reader.GetInt32(0).ToString() + " .");
+                Trace.WriteLine("Failed adding room with ID " + (reader.GetInt32(0)+1).ToString() + " .");
 
                 connection.Close();
                 connection.Dispose();

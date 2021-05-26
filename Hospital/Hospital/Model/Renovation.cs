@@ -30,12 +30,13 @@ namespace Hospital.Model
             Rooms = rooms;
         }
 
-        public Renovation(int id, DateTime startDate, RenovationType type, ObservableCollection<Room> rooms, uint newArea)
+        public Renovation(int id, DateTime startDate, RenovationType type, ObservableCollection<Room> rooms, bool ended, uint newArea)
         {
             Id = id;
             StartDate = startDate;
             Type = type;
             Rooms = rooms;
+            Ended = ended;
             NewArea = newArea;
         }
 
@@ -53,6 +54,7 @@ namespace Hospital.Model
             {
                 Ended = true;
             }
+            NewArea = DTO.NewArea;
         }
 
         public Renovation()

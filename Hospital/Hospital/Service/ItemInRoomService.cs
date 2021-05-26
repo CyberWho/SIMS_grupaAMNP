@@ -70,8 +70,8 @@ namespace Hospital.Service
             if (itemInDestinationRoom != null)
             {
                 itemInDestinationRoom.Quantity += itemInRoom.Quantity;
-                return itemInRoomRepository.UpdateItemInRoom(itemInDestinationRoom);
                 itemInRoomRepository.DeleteItemInRoomById(itemInRoom.Id);
+                return itemInRoomRepository.UpdateItemInRoom(itemInDestinationRoom);
             }
             else
             {

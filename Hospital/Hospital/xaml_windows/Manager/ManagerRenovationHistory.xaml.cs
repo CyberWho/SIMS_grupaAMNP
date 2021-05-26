@@ -32,7 +32,7 @@ namespace Hospital.xaml_windows.Manager
         private void LoadAllItems()
         {
             RenovationDTOs.Clear();
-            Renovations = renovationController.GetAllActiveRenovations();
+            Renovations = renovationController.GetAllRenovations();
             foreach (Renovation renovation in Renovations)
             {
                 RenovationDTOs.Add(new RenovationDTO(renovation));

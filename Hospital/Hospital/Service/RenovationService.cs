@@ -7,6 +7,7 @@
 using Hospital.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using static Globals;
 
 namespace Hospital.Service
@@ -63,10 +64,8 @@ namespace Hospital.Service
             }
             foreach(Room renovatedRoom in renovation.Rooms)
             {
-                QuickTrace("Usao ovde");
                 foreach(ItemInRoom itemInRenovatedRoom in itemInRoomService.GetAllItemsInRoomByRoomId(renovatedRoom.Id))
                 {
-                    QuickTrace("A i ovde");
                     itemInRoomService.MoveWholeItemNowToMainStorage(itemInRenovatedRoom);
                 }
             }
@@ -108,10 +107,16 @@ namespace Hospital.Service
 
         private void EndSplitRenovation(Renovation renovation)
         {
-
+            renovation.Rooms.First().Area -= renovation.NewArea;
+            roomService.UpdateRoom(renovation.Rooms.First());
+            Room newRoom = renovation.Rooms.First();
+            newRoom.Area = renovation.NewArea;
+            newRoom.roomType = renovation.Rooms.First().roomType;
+            roomService.AddRoom(newRoom);
         }
 
         public Repository.RenovationRepository renovationRepository = new Repository.RenovationRepository();
-        public Service.ItemInRoomService itemInRoomService = new ItemInRoomService();
+        public ItemInRoomService itemInRoomService = new ItemInRoomService();
+        public RoomService roomService = new RoomService();
    }
 }

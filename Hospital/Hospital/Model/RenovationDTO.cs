@@ -19,6 +19,8 @@ namespace Hospital.Model
 
         public string Ended { get; set; }
 
+        public uint NewArea { get; set; }
+
         public RenovationDTO(Renovation renovation)
         {
             Id = renovation.Id;
@@ -55,6 +57,7 @@ namespace Hospital.Model
             {
                 Ended = "U toku";
             }
+            NewArea = renovation.NewArea;
         }
 
         public RenovationDTO()
