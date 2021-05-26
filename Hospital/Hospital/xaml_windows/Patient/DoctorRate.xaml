@@ -28,6 +28,6 @@
 
         <xctk:IntegerUpDown x:Name="rate_txt" Style="{StaticResource RoundedIntegerUpDown}" Foreground="DeepSkyBlue" FontSize="16" DefaultValue="1" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="180,205,0,0" VerticalAlignment="Top" Width="229" Height="27"/>
 
-
+        
     </Grid>
 </Window>

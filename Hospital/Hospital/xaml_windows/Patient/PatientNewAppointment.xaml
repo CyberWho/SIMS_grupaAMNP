@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientNewAppointment"
         mc:Ignorable="d"
-        Title="PatientNewAppointment" Height="500" Width="900" Closed="Window_Closed" Loaded="Window_Loaded">
+        Title="PatientNewAppointment" Height="500" Width="900" Closed="Window_Closed" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="55" />

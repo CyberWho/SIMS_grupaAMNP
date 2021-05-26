@@ -106,6 +106,12 @@ namespace Hospital.xaml_windows.Patient
 
 
         }
+        private void Undo_OnClick(object sender, RoutedEventArgs e)
+        {
+            var window = new PatientHealthRecord(userId);
+            window.Show();
+            this.Close();
+        }
     }
 
 }

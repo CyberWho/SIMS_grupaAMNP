@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.NewPersonalReminder"
         mc:Ignorable="d"
-        Title="NewPersonalReminder" Height="500" Width="500">
+        Title="NewPersonalReminder" Height="500" Width="500" WindowStartupLocation="CenterScreen">
     <Grid>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="0,2,443.6,428.4"/>
 

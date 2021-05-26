@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.xaml_windows.Patient.PatientReminders"
         mc:Ignorable="d"
-        Title="PatientReminders" Height="500" Width="900" Loaded="Window_Loaded">
+        Title="PatientReminders" Height="500" Width="900" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="55" />
@@ -73,6 +73,11 @@
         <Button x:Name="Notifications" ToolTip="Obaveštenja" HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="Undo" ToolTip="Povratak na izbor podsetnika" HorizontalAlignment="Left" Grid.Column="1" Click="Undo_OnClick" Background="White" Width="48" Margin="669.8,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
