@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ManagerUI" Height="720" Width="1080" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="roomsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="333,188,0,0" VerticalAlignment="Top" Width="160" Click="roomBtnClick" Height="160">
+        <Button x:Name="roomsBtn" HorizontalAlignment="Left" Margin="333,188,0,0" VerticalAlignment="Top" Width="160" Click="roomBtnClick" Height="160" GotFocus="roomsBtn_GotFocus" BorderBrush="{x:Null}" Foreground="{x:Null}" LostFocus="roomsBtn_LostFocus"  >
             <TextBlock FontFamily="Segoe UI Symbol" Text="      &#x1f3e2;&#xa;Prostorije" Foreground="#e8ebed" FontSize="30" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
@@ -16,6 +16,25 @@
             <Button.Effect>
                 <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
             </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
         <Button x:Name="drugsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="333,372,0,0" VerticalAlignment="Top" Width="160" Click="drugsBtnClick" Height="160">
             <TextBlock FontFamily="Segoe UI Symbol" Text="   &#x1f48a;&#xa;Lekovi" Foreground="#e8ebed" FontSize="30" >
