@@ -36,7 +36,7 @@ namespace Hospital.xaml_windows.Secretary
             DateTime startDate;
             DateTime endDate;
 
-            // date handling, i don't wanna have to input dates at any point in my life
+            // date handling
             // dates suck
 
             if (start_date.Text.Equals(""))

@@ -45,6 +45,7 @@ namespace Hospital.Service
             doctors = doctorRepository.GetAllGeneralPurposeDoctors();
             return doctors;
         }
+        #region marko_kt5
         public Boolean DeleteDoctorById(int doctorId)
         {
             Doctor doctor = this.doctorRepository.GetDoctorById(doctorId);
@@ -69,7 +70,6 @@ namespace Hospital.Service
             return this.doctorRepository.UpdateDoctor(doctor);
         }
 
-        #region marko_kt5
         private Doctor setSpecialization(Doctor doctor, string specialization)
         {
             if (doctor.specialization_id == 0)

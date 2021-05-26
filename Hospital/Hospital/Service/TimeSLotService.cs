@@ -2,6 +2,7 @@
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net.Http.Headers;
 using System.Windows.Navigation;
 using Hospital.Repository;
 
@@ -203,6 +204,7 @@ namespace Hospital.Service
         {
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
             timeSlots = timeSlotRepository.GetTimeSlotsByDatesAndDoctorId(startTime, endTime, doctorId);
+
             if(timeSlots.Count == 0)
             {
                 if(priority == 0)
@@ -213,8 +215,40 @@ namespace Hospital.Service
                     timeSlots = timeSlotRepository.GetAllFreeTimeSlotsByDates(startTime, endTime);
                 }
             }
-            return timeSlots;
+
+            // marko kt5
+            ObservableCollection<FreeDays> freeDays = this.freeDaysRepository.GetFreeDaysByDoctorId(doctorId);
+            ObservableCollection<TimeSlot> reducedTimeSlots = new ObservableCollection<TimeSlot>();
+
+            bool flag = false;
+
+            foreach (TimeSlot ts in timeSlots)
+            {
+                foreach (FreeDays fd in freeDays)
+                {
+                    DateRange dr = new DateRange(ts.StartTime, ts.StartTime.AddMinutes(30));
+                    
+                    if (WithinDateRange(fd.dateRange, dr))
+                    {
+                        flag = true;
+                    }
+                }
+
+                if (!flag)
+                {  
+                    reducedTimeSlots.Add(ts);
+                }
+            }
+            
+            return reducedTimeSlots;
         }
+
+        private Boolean WithinDateRange(DateRange outer, DateRange inner)
+        {
+            if (inner.StartTime > outer.StartTime && inner.EndTime < outer.EndTime) return true;
+            return false;
+        }
+
         public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date,int doctorId)
         {
             TimeSlot timeSlot = new TimeSlot();
@@ -246,7 +280,8 @@ namespace Hospital.Service
             return true;
         }
 
-        public Repository.TimeSlotRepository timeSlotRepository = new Repository.TimeSlotRepository();
+        public TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
+        private FreeDaysRepository freeDaysRepository = new FreeDaysRepository();
 
     }
 }

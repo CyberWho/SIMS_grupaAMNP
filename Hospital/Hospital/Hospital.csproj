@@ -84,6 +84,7 @@
     <Compile Include="Controller\AnamnesisController.cs" />
     <Compile Include="Controller\AppointmentController.cs" />
     <Compile Include="Controller\CityController.cs" />
+    <Compile Include="Controller\FreeDaysController.cs" />
     <Compile Include="Controller\PersonalReminderController.cs" />
     <Compile Include="Controller\SpecializationContoller.cs" />
     <Compile Include="Controller\DoctorController.cs" />
@@ -109,7 +110,9 @@
     <Compile Include="Controller\TimeSlotController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WorkHoursController.cs" />
+    <Compile Include="Model\FreeDays.cs" />
     <Compile Include="Model\DateRange.cs" />
+    <Compile Include="Model\FreeDaysStatus.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
     <Compile Include="Model\PatientLogs.cs" />
     <Compile Include="Model\PersonalReminder.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="Repository\DrugRepository.cs" />
     <Compile Include="Repository\DrugTypeRepository.cs" />
     <Compile Include="Repository\EmployeesRepository.cs" />
+    <Compile Include="Repository\FreeDaysRepository.cs" />
     <Compile Include="Repository\HealthRecordRepository.cs" />
     <Compile Include="Repository\InventoryItemRepository.cs" />
     <Compile Include="Repository\ItemInRoomRepository.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\DrugService.cs" />
     <Compile Include="Service\EmployeeService.cs" />
+    <Compile Include="Service\FreeDaysService.cs" />
     <Compile Include="Service\HealthRecordService.cs" />
     <Compile Include="Service\InventoryItemService.cs" />
     <Compile Include="Service\ItemInRoomService.cs" />
@@ -299,6 +304,9 @@
     </Compile>
     <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
       <DependentUpon>CreateNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\FreeDays.xaml.cs">
+      <DependentUpon>FreeDays.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Secretary\Notifications.xaml.cs">
       <DependentUpon>Notifications.xaml</DependentUpon>
@@ -508,6 +516,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="xaml_windows\Secretary\CreateNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\FreeDays.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

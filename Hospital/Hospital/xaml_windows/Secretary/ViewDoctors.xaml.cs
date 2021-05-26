@@ -284,7 +284,7 @@ namespace Hospital.xaml_windows.Secretary
 
         private void specialization_selection_loaded(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<Specialization> specializations = this.specializationContoller.GetAllSpecializations();
+            ObservableCollection<Specialization> specializations = this.specializationContoller.GetAllSpecializations(false);
             ObservableCollection<String> specializationsTypes = new ObservableCollection<String>();
 
             foreach (Specialization s in specializations)
@@ -316,6 +316,12 @@ namespace Hospital.xaml_windows.Secretary
             }
 
             this.room_selection.ItemsSource = roomsIds;
+        }
+
+        private void manage_free_days(object sender, RoutedEventArgs e)
+        {
+            Window s = new FreeDays(current_doctor_id);
+            s.Show();
         }
     }
 }

@@ -123,6 +123,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             var doctor = ParseDoctor(reader);
+
             connection.Close();
             connection.Dispose();
             return doctor;

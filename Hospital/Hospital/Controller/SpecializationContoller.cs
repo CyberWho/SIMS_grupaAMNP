@@ -13,9 +13,9 @@ namespace Hospital.Controller
     {
         private SpecializationService specializationService = new SpecializationService();
 
-        public ObservableCollection<Specialization> GetAllSpecializations()
+        public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD = true)
         {
-            return this.specializationService.GetAllSpecializations();
+            return this.specializationService.GetAllSpecializations(withoutGPD);
         }
 
         public int GetSpecializationByType(string selectedSpecialization)
