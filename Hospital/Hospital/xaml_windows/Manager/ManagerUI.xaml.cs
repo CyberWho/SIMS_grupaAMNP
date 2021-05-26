@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Hospital.xaml_windows.Manager
 {
@@ -39,6 +40,16 @@ namespace Hospital.xaml_windows.Manager
             Window newWindow = new ManagerRenovations();
             newWindow.Show();
             this.Close();
+        }
+
+        private void roomsBtn_GotFocus(object sender, RoutedEventArgs e)
+        {
+            roomsBtn.Background = Brushes.RoyalBlue;
+        }
+
+        private void roomsBtn_LostFocus(object sender, RoutedEventArgs e)
+        {
+            roomsBtn.Background = new SolidColorBrush(Color.FromArgb(255, (byte)52, (byte)153, (byte)235));
         }
     }
 }

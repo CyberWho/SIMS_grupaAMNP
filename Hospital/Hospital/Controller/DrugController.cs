@@ -32,6 +32,10 @@ namespace Hospital.Controller
         {
             return drugService.GetAllDrugsPending();
         }
+        public DrugDTO GetRejectionInfo(DrugDTO newDrugDTO)
+        {
+            return drugService.GetRejectionInfo(newDrugDTO);
+        }
 
         public Boolean DeleteDrugById(int id, int invID)
         {

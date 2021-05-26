@@ -9,6 +9,7 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using static Globals;
 
 namespace Hospital.Repository
 {
@@ -91,7 +92,35 @@ namespace Hospital.Repository
                 pendingDrugs.Add(ParseFromReader(reader));
             }
 
+            connection.Close();
             return pendingDrugs;
+        }
+        public DrugDTO GetRejectionInfo(DrugDTO newDrugDTO)
+        {
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
+            query.CommandText = "SELECT * FROM drug_rejection WHERE drug_id = " + newDrugDTO.Id;
+            OracleDataReader reader;
+            try
+            {
+                reader = query.ExecuteReader();
+            }
+            catch (Exception exp)
+            {
+                ThrowException(exp);
+                connection.Close();
+                return null;
+            }
+            reader.Read();
+            int doctorID = reader.GetInt32(2);
+            Doctor rejectionDoctor = doctorRepository.GetDoctorById(doctorID);
+            string RejectionInfo = "(dr " + rejectionDoctor.User.Surname + ")\n";
+            RejectionInfo += reader.GetString(3);
+
+            newDrugDTO.RejectionInfo = RejectionInfo;
+
+            connection.Close();
+            return newDrugDTO;
         }
 
         public bool DeleteDrugById(int id, int invID)
@@ -178,8 +207,6 @@ namespace Hospital.Repository
                 "unit = '" + drug.Unit.ToString() + "', " +
                 "item_type = " + ((int)drug.Type).ToString() + " " +
                 "WHERE id = " + drug.InventoryItemID.ToString();
-
-            Trace.WriteLine("--------- SQL COMMAND:\t" + cmd.CommandText);
 
             try
             {
@@ -272,5 +299,6 @@ namespace Hospital.Repository
 
         InventoryItemRepository inventoryItemRepository = new InventoryItemRepository();
         DrugTypeRepository drugTypeRepository = new DrugTypeRepository();
+        DoctorRepository doctorRepository = new DoctorRepository();
     }
 }

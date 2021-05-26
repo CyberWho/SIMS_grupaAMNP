@@ -112,6 +112,7 @@
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WorkHoursController.cs" />
     <Compile Include="Model\DateRange.cs" />
+    <Compile Include="Model\DrugDTO.cs" />
     <Compile Include="Model\Globals.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
     <Compile Include="Model\PatientLogs.cs" />
