@@ -18,7 +18,6 @@ namespace Hospital.xaml_windows.Patient
         private PatientController patientController = new PatientController();
         private ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
         private PatientLogsController patientLogsController = new PatientLogsController();
 
         public PatientAppointments(int userId)
@@ -113,14 +112,19 @@ namespace Hospital.xaml_windows.Patient
         {
             if (hours > 24)
             {
-                var s = new PatientUpdateAppointment(patientId, appointmentId);
-                s.Show();
-                this.Close();
+                ShowPatientUpdateAppointment(patientId, appointmentId);
             }
             else
             {
-                MessageBox.Show("Nije moguce promeniti vreme odrzavanja termina jer je ostalo manje od 24h");
+                MessageBox.Show("Nije moguce promeniti vreme odrzavanja termina jer je ostalo manje od 24h","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
             }
+        }
+
+        private void ShowPatientUpdateAppointment(int patientId, int appointmentId)
+        {
+            var s = new PatientUpdateAppointment(patientId, appointmentId);
+            s.Show();
+            this.Close();
         }
 
         private void Doktori_Click(object sender,RoutedEventArgs e)
@@ -149,13 +153,18 @@ namespace Hospital.xaml_windows.Patient
         {
             if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
             {
-                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
-                appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
-                var windowLogOut = new MainWindow();
-                windowLogOut.Show();
-                this.Close();
-                return;
+                ShowPatientIsBlocked(patientId);
+                
             }
+        }
+
+        private void ShowPatientIsBlocked(int patientId)
+        {
+            MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
+            appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
+            var windowLogOut = new MainWindow();
+            windowLogOut.Show();
+            this.Close();
         }
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)

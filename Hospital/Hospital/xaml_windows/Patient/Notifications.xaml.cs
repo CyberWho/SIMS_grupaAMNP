@@ -17,7 +17,6 @@ namespace Hospital.xaml_windows.Patient
         private SystemNotificationsController SystemNotificationsController = new SystemNotificationsController();
         private ObservableCollection<SystemNotification> SystemNotifications = new ObservableCollection<SystemNotification>();
         private PatientController patientController = new PatientController();
-        private ReminderController reminderController = new ReminderController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         public Notifications(int userId)
         {

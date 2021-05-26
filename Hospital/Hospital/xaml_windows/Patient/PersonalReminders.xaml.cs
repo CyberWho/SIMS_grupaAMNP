@@ -195,68 +195,42 @@ namespace Hospital.xaml_windows.Patient
 
         private void UpdatePersonalReminder(PersonalReminder personalReminder, PersonalReminderFrequency frequency)
         {
-            if (personalReminder.PersonalReminderFrequency == frequency)
-            {
-                if(frequency == PersonalReminderFrequency.ONLY_ONCE)
-                {
-                    SimpleReminderUpdate(personalReminder);
-                } else
-                {
-                    switch(frequency)
-                    {
-                        case PersonalReminderFrequency.DAILY:
-                            personalReminderController.DeleteAllRemindersExceptFirstReminder(personalReminder);
-                            SimpleReminderUpdate(personalReminder);
-                            personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
-                            personalReminderController.NewDailyReminder(personalReminder);
-                            break;
-                        case PersonalReminderFrequency.WEEKLY:
-                            personalReminderController.DeleteAllRemindersExceptFirstReminder(personalReminder);
-                            SimpleReminderUpdate(personalReminder);
-                            personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
-                            personalReminderController.NewDailyReminder(personalReminder);
-                            break;
-                    }
-                }
-                
-            }
-            else
-            {
-                PersonalReminderFrequencyUpdate(personalReminder, frequency);
-
-
-            }
+            PersonalReminderFrequencyUpdate(personalReminder,frequency);
         }
 
-        private void SimpleReminderUpdate(PersonalReminder personalReminder)
+        private PersonalReminder SimpleReminderUpdate(PersonalReminder personalReminder)
         {
             Reminder reminder = new Reminder(name_txt.Text,description_txt.Text,DateTime.Parse(alarm_time_txt.Text),personalReminder.Id);
-          
             reminderController.UpdateReminder(reminder);
+            PersonalReminder newPersonalReminder = new PersonalReminder(personalReminder.Id, reminder.Name, reminder.Description, reminder.AlarmTime,
+                personalReminder.PersonalReminderFrequency, personalReminder.reminderId);
+            newPersonalReminder.Patient = patientController.GetPatientByUserId(userId);
+            return newPersonalReminder;
         }
         private void PersonalReminderFrequencyUpdate(PersonalReminder personalReminder,PersonalReminderFrequency frequency)
         {
             switch (frequency)
             {
                 case PersonalReminderFrequency.ONLY_ONCE:
-                    SimpleReminderUpdate(personalReminder);
-                    personalReminderController.GenerateOnlyOnceReminder(personalReminder);
-                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.ONLY_ONCE;
-                    personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                    personalReminderController.DeleteAllRemindersExceptFirstReminder(personalReminder);
+                    PersonalReminder onlyOncePersonalReminder =  SimpleReminderUpdate(personalReminder);
+                    personalReminderController.GenerateOnlyOnceReminder(onlyOncePersonalReminder);
+                    onlyOncePersonalReminder.PersonalReminderFrequency = PersonalReminderFrequency.ONLY_ONCE;
+                    personalReminderController.UpdatePersonalReminderFrequency(onlyOncePersonalReminder);
                     break;
                 case PersonalReminderFrequency.DAILY:
                     personalReminderController.DeleteAllRemindersExceptFirstReminder(personalReminder);
-                    SimpleReminderUpdate(personalReminder);
-                    personalReminderController.NewDailyReminder(personalReminder);
-                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
-                    personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                    PersonalReminder dailyPersonalReminder =  SimpleReminderUpdate(personalReminder);
+                    personalReminderController.NewDailyReminder(dailyPersonalReminder);
+                    dailyPersonalReminder.PersonalReminderFrequency = PersonalReminderFrequency.DAILY;
+                    personalReminderController.UpdatePersonalReminderFrequency(dailyPersonalReminder);
                     break;
                 case PersonalReminderFrequency.WEEKLY:
                     personalReminderController.DeleteAllRemindersExceptFirstReminder(personalReminder);
-                    SimpleReminderUpdate(personalReminder);
-                    personalReminderController.NewWeeklyReminder(personalReminder);
-                    personalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
-                    personalReminderController.UpdatePersonalReminderFrequency(personalReminder);
+                    PersonalReminder weeklyPersonalReminder = SimpleReminderUpdate(personalReminder);
+                    personalReminderController.NewWeeklyReminder(weeklyPersonalReminder);
+                    weeklyPersonalReminder.PersonalReminderFrequency = PersonalReminderFrequency.WEEKLY;
+                    personalReminderController.UpdatePersonalReminderFrequency(weeklyPersonalReminder);
                     break;
             }
         }
@@ -273,7 +247,7 @@ namespace Hospital.xaml_windows.Patient
         {
             Izmeni.IsEnabled = true;
             Obrisi.IsEnabled = true;
-            Kreiraj.IsEnabled = false;
+            
         }
     }
 }

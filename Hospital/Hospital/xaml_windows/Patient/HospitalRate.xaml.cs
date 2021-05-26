@@ -11,6 +11,7 @@ namespace Hospital.xaml_windows.Patient
     {
         private int userId;
         private PatientController patientController = new PatientController();
+        private DispatcherTimerForReminder dispatcherTimerForReminder;
         public HospitalRate(int userId)
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (description_txt.Text == "")
             {
-                MessageBox.Show("Obavezno je da unesete opis ocene!");
+                MessageBox.Show("Obavezno je da unesete opis ocene!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return false;
             }
 
@@ -41,7 +42,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (rate_txt.Text == null)
             {
-                MessageBox.Show("Obaveno je da unesete ocenu!");
+                MessageBox.Show("Obaveno je da unesete ocenu!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return false;
             }
 
@@ -57,10 +58,15 @@ namespace Hospital.xaml_windows.Patient
             doctor.Id = 0;
             Review review = new Review(int.Parse(rate_txt.Text), description_txt.Text, patient, doctor);
             new ReviewController().AddReview(review);
-            MessageBox.Show("Hvala Vam sto ste popunili anketu o bolnici!");
+            MessageBox.Show("Hvala Vam sto ste popunili anketu o bolnici!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
             
            
             this.Close();
+        }
+
+        private void HospitalRate_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
         }
     }
 }

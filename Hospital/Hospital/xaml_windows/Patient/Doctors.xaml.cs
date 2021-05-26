@@ -16,7 +16,6 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
         private DoctorController doctorController = new DoctorController();
         private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
         private AppointmentController appointmentController = new AppointmentController();
@@ -95,13 +94,17 @@ namespace Hospital.xaml_windows.Patient
         private void Oceni_Click(object sender, RoutedEventArgs e)
         {
             if(appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id,GetDoctorIdFromForm()) == false) {
-                MessageBox.Show("Ne mozete oceniti doktora kod kog niste bili na pregledu!");
+                MessageBox.Show("Ne mozete oceniti doktora kod kog niste bili na pregledu!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
             } else
             {
-                var window = new DoctorRate(userId,GetDoctorIdFromForm());
-                window.Show();
-                
+                ShowDoctorRate();
             }
+        }
+
+        private void ShowDoctorRate()
+        {
+            var window = new DoctorRate(userId, GetDoctorIdFromForm());
+            window.Show();
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)

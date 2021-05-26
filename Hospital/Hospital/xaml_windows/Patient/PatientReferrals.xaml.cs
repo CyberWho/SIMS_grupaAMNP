@@ -16,10 +16,8 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private int healthRecordId;
         private ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
-        private ReminderController reminderController = new ReminderController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private PatientController patientController = new PatientController();
-
+        
         public PatientReferrals(int userId,int healthRecordId)
         {
             InitializeComponent();
@@ -102,12 +100,17 @@ namespace Hospital.xaml_windows.Patient
                 }
                 else
                 {
-                    var window = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, 0,
-                        GetReferralId());
-                    window.Show();
-                    this.Close();
+                    ShowPatientNewAppointmentRecommendations(endDate, startDate, doctorId);
                 }
             }
+        }
+
+        private void ShowPatientNewAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
+        {
+            var window = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, 0,
+                GetReferralId());
+            window.Show();
+            this.Close();
         }
 
         private void updateDataGrid()

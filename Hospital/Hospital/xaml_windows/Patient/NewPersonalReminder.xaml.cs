@@ -39,6 +39,47 @@ namespace Hospital.xaml_windows.Patient
             reminderId++;
             return reminderId;
         }
+
+        private bool CheckIfNextReminderIdIsCorrect(int nextReminderId)
+        {
+            int reminderId = reminderController.GetLastId();
+            reminderId++;
+            if (nextReminderId == reminderId) return true;
+            return false;
+        }
+
+        private bool CheckIfNextPersonalReminderIdIsCorrect(int nextPersonalReminderId)
+        {
+            int personalReminderId = personalReminderController.GetLastId();
+            personalReminderId++;
+            while (nextPersonalReminderId == personalReminderId) return true;
+            return false;
+        }
+
+        private int GetCorrectNextReminderId()
+        {
+            int reminderId = GetNextReminderId();
+            while (!CheckIfNextReminderIdIsCorrect(reminderId))
+            {
+                reminderId = GetNextReminderId();
+                
+            }
+
+            return reminderId;
+        }
+        private int GetCorrectNextPersonalReminderId()
+        {
+            int personalReminderId = GetNextPersonalReminderId();
+            while (!CheckIfNextPersonalReminderIdIsCorrect(personalReminderId))
+            {
+                personalReminderId =  GetNextPersonalReminderId();
+                
+            }
+
+            return personalReminderId;
+        }
+
+
         private int GetNextPersonalReminderId()
         {
             int personalReminderId = personalReminderController.GetLastId();
@@ -63,7 +104,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (frequency_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!");
+                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -74,7 +115,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (alarm_time_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!");
+                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -85,7 +126,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (description_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete opis podsetnika!");
+                MessageBox.Show("Potrebno je da unesete opis podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -96,7 +137,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (name_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete naziv podsetnika!");
+                MessageBox.Show("Potrebno je da unesete naziv podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -106,15 +147,20 @@ namespace Hospital.xaml_windows.Patient
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
             if(DataValidation()==false) return;
-            
-            int newPersonalReminderId = GetNextPersonalReminderId();
-            int newReminderId = GetNextReminderId();
+
+            int newPersonalReminderId = GetCorrectNextPersonalReminderId();
+            int newReminderId = GetCorrectNextReminderId();
             PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
             PersonalReminder personalReminder = new PersonalReminder(newPersonalReminderId, name_txt.Text, description_txt.Text, DateTime.Parse(alarm_time_txt.Text), frequency, newReminderId);
             personalReminder.Patient = patientController.GetPatientByUserId(userId);
             personalReminderController.AddPersonalReminder(personalReminder);
             CreateNewPersonalReminder(personalReminder, frequency);
-            MessageBox.Show("Uspesno ste kreirali novi podsetnik!");
+            MessageBox.Show("Uspesno ste kreirali novi podsetnik!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
+            ShowPersonalReminders();
+        }
+
+        private void ShowPersonalReminders()
+        {
             var window = new PersonalReminders(userId);
             window.Show();
             this.Close();

@@ -24,7 +24,6 @@ namespace Hospital.xaml_windows.Patient
         private RoomController roomController = new RoomController();
         private ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
         private DoctorController doctorController = new DoctorController();
-        private ReminderController reminderController = new ReminderController();
         private RefferalForSpecialistController refferalForSpecialistController = new RefferalForSpecialistController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         private PatientLogsController patientLogsController = new PatientLogsController();
@@ -92,27 +91,38 @@ namespace Hospital.xaml_windows.Patient
             TimeSlot timeSlot = timeSlotController.GetTimeSlotById(GetTimeSlotId());
             Appointment appointment = new Appointment(30, timeSlot.StartTime, AppointmentType.EXAMINATION, AppointmentStatus.RESERVED, doctor, patient, room);
             appointmentController.ReserveAppointment(appointment);
-            if(referralForSpecialistId != 0)
+            CheckIfReferralForSpecialistIsUsed();
+            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
+            CheckIfPatientIsBlocked(patient.Id);
+        }
+
+        private void CheckIfReferralForSpecialistIsUsed()
+        {
+            if (referralForSpecialistId != 0)
             {
                 refferalForSpecialistController.DeleteReferralById(referralForSpecialistId);
             }
-            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
-            CheckIfPatientIsBlocked(patient.Id);
         }
 
         private void CheckIfPatientIsBlocked(int patientId)
         {
             if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
             {
-                MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!");
-                appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
-                var windowLogOut = new MainWindow();
-                windowLogOut.Show();
-                this.Close();
+                ShowPatientIsBlocked(patientId);
                 return;
             }
             var window = new PatientAppointments(userId);
             window.Show();
+            this.Close();
+        }
+
+        private void ShowPatientIsBlocked(int patientId)
+        {
+            MessageBox.Show("Blokirani ste do daljnjeg zbog previse malicioznih aktivnosti!", "Zdravo korporacija",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+            appointmentController.DeleteAllReservedAppointmentsByPatientId(patientId);
+            var windowLogOut = new MainWindow();
+            windowLogOut.Show();
             this.Close();
         }
 

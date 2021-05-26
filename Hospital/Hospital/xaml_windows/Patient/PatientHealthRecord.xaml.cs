@@ -97,7 +97,7 @@ namespace Hospital.xaml_windows.Patient
         private HealthRecordController healthRecordController = new HealthRecordController();
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        private ReminderController reminderController = new ReminderController();
+        
         public PatientHealthRecord(int userId)
         {
             

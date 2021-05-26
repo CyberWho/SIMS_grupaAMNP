@@ -23,8 +23,6 @@ namespace Hospital.xaml_windows.Patient
     public partial class Reminders : Window
     {
         int userId;
-        private ReminderController reminderController = new ReminderController();
-        private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         public Reminders(int userId)
         {
