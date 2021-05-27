@@ -102,7 +102,7 @@ namespace Hospital.xaml_windows.Doctor
         {
             ObservableCollection<InventoryItem> inventoryItems = GetItemsFromUi();
 
-            ObservableCollection<Room> rooms = roomController.findSuitableRoomsForOperation(DateTime.MaxValue, DateTime.MaxValue, inventoryItems);
+            ObservableCollection<Room> rooms = roomController.findSuitableRoomsWithEquipment(new DateRange(DateTime.MaxValue, DateTime.MaxValue), inventoryItems);
 
             lb_rooms.Items.Clear();
 

@@ -57,14 +57,23 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
-            var address = ParseAddress(reader);
+            var address = new Address();
+            address.Id = int.Parse(reader.GetString(0));
+            address.Name = reader.GetString(1);
+            address.city_id = int.Parse(reader.GetString(3));
 
+            int city_id = reader.GetInt32(3);
             connection.Close();
             connection.Dispose();
+
+            address.City = cityRepository.GetCityById(city_id);
+
+
 
             return address;
         }
 
+        //Otvara drugu konekciju dok predhodna nije bila zatvorena
         private Address ParseAddress(OracleDataReader reader)
         {
             Address address = new Address

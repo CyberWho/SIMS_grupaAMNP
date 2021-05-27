@@ -10,6 +10,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using static Globals;
+using System.Linq;
 
 namespace Hospital.Repository
 {
@@ -295,6 +296,26 @@ namespace Hospital.Repository
             cmd.ExecuteNonQuery();
             connection.Close();
             connection.Dispose();
+        }
+
+        public ObservableCollection<int> getDrugAllergy(int health_record_id)
+        {
+            setConnection();
+            ObservableCollection<int> ids = new ObservableCollection<int>();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText =
+                "SELECT drug.ID FROM allergy, allergy_type, drug_allergies, drug where allergy.allergy_type_id = allergy_type.id and " + 
+                "drug_allergies.ALLERGY_TYPE_ID = allergy_type.ID  and drug.DRUG_TYPE_ID = drug_allergies.ALLERGY_TYPE_ID and health_record_id = " +
+                health_record_id;
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int i = reader.GetInt32(0);
+                ids.Add(i);
+            }
+            connection.Close();
+            connection.Dispose();
+            return ids;
         }
 
         InventoryItemRepository inventoryItemRepository = new InventoryItemRepository();

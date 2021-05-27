@@ -63,7 +63,13 @@ namespace Hospital.Repository
 
         public User GetUserById(int id)
         {
-            setConnection();
+            //setConnection();
+
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            connection = new OracleConnection(conString);
+            connection.Open();
+
+
 
             User user = new User();
 

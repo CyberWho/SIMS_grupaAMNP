@@ -112,10 +112,17 @@ namespace Hospital.Controller
             return roomService.GetRoomTypeByType(Type);
         }
 
-        public ObservableCollection<Room> findSuitableRoomsForOperation(DateTime fromFuture, DateTime toFuture,
+        public ObservableCollection<Room> findSuitableRoomsWithEquipment(DateRange dateRange,
             ObservableCollection<InventoryItem> items_needed)
         {
-            return roomService.findSuitableRoomsForOperation(fromFuture, toFuture,
+            return roomService.findSuitableRoomsWithEquipment(dateRange,
+                items_needed);
+        }
+
+        public String findSuitableRoomsForOperation1(DateRange dateRange,
+            ObservableCollection<InventoryItem> items_needed)
+        {
+            return roomService.findSuitableRoomsForOperation1(dateRange,
                 items_needed);
         }
 
