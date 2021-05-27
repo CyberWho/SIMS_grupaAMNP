@@ -113,7 +113,7 @@ namespace Hospital.Repository
             return patient;
         }
 
-        public ObservableCollection<Patient> GetAllPatients()
+        /*public ObservableCollection<Patient> GetAllPatients()
         {
             setConnection();
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
@@ -125,9 +125,59 @@ namespace Hospital.Repository
             while (reader.Read())
             {
                 User user = new UserRepository().GetUserById(reader.GetInt32(4));
+                user.Id = reader.GetInt32(4);
                 if (user.Name == null) continue;
                 var patient = new Patient(reader.GetInt32(0),reader.GetString(1),reader.GetDateTime(2),user,addressRepository.GetAddressById(3));
-                
+                patient.addres_id = 
+                patients.Add(patient);
+            }
+
+            
+
+            connection.Close();
+            connection.Dispose();
+
+            return patients;
+        }*/
+
+
+        public ObservableCollection<Patient> GetAllPatients()
+        {
+            setConnection();
+            ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID";
+
+            OracleDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                User user = new User();
+
+                try
+                {
+                    user.Name = reader.GetString(3);
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+
+                user.Id = int.Parse(reader.GetString(0));
+                user.Username = reader.GetString(1);
+                user.Password = reader.GetString(2);
+
+                user.Surname = reader.GetString(4);
+                user.PhoneNumber = reader.GetString(5);
+                user.EMail = reader.GetString(6);
+
+                Patient patient = new Patient();
+                patient.User = user;
+                patient.Id = int.Parse(reader.GetString(7));
+                patient.JMBG = reader.GetString(8);
+                patient.DateOfBirth = reader.GetDateTime(9);
+                int addressId = reader.GetInt32(10);
+
                 patients.Add(patient);
             }
 

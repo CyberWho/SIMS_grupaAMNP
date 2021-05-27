@@ -66,6 +66,11 @@ namespace Hospital.Controller
             drugService.RejectDrug(id_drug, id_doctor, description);
         }
 
+        public ObservableCollection<int> getDrugAllergy(int health_record_id)
+        {
+            return drugService.getDrugAllergy(health_record_id);
+        }
+
         public DrugService drugService = new DrugService();
 
     }

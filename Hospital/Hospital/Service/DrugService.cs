@@ -70,6 +70,12 @@ namespace Hospital.Service
             drugRepository.RejectDrug(id_drug, id_doctor, description);
         }
 
+        public ObservableCollection<int> getDrugAllergy(int health_record_id)
+        {
+            return drugRepository.getDrugAllergy(health_record_id);
+        }
+
+
         public DrugRepository drugRepository = new DrugRepository();
 
     }

@@ -162,61 +162,11 @@ namespace Hospital.Service
             return ret;
         }
 
-        public string findSuitableTimeSlotsForOperation1(int id_room, int id_doc, int id_patient, DateTime startTime)
-        {
-            //time slots where doc patient and room are free
-            string s = "";
-            ObservableCollection<TimeSlot> ret = new ObservableCollection<TimeSlot>();
-
-            int num_of_time_slots_needed = 4;
-            int time_slot_duration = 30;
-
-            ObservableCollection<Appointment> takenAppointments =
-                new ObservableCollection<Appointment>(from i in
-                    appointmentRepository.getOccupiedDateTimesForDoctorPatienRoom(id_doc, id_patient, id_room)
-                                                      orderby i.StartTime
-                                                      select i);
-
-
-            ObservableCollection<DateTime> takeDateTimes = new ObservableCollection<DateTime>();
-            foreach (Appointment appointment in takenAppointments)
-                for (int i = 0; i < appointment.DurationInMinutes / 30; i++)
-                    if (!takeDateTimes.Contains(appointment.StartTime.Add(TimeSpan.FromMinutes(i * 30))))
-                        takeDateTimes.Add(appointment.StartTime.Add(TimeSpan.FromMinutes(i * 30)));
-
-
-
-
-            ObservableCollection<TimeSlot> doctorTimeSlots =
-            new ObservableCollection<TimeSlot>(from i in
-                timeSlotRepository.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(startTime, id_doc)
-                                               orderby i.StartTime
-                                               select i);
-            for (int i = 0; i < doctorTimeSlots.Count - 3; i++)
-            {
-                bool valid_time_slot_set = true;
-                for (int j = 0; j < num_of_time_slots_needed - 1; j++)
-                {
-                    if (doctorTimeSlots[i + j].StartTime.Add(TimeSpan.FromMinutes(30)) !=
-                        doctorTimeSlots[i + j + 1].StartTime ||
-                        takeDateTimes.Contains(doctorTimeSlots[i + j].StartTime))
-                    {
-                        valid_time_slot_set = false;
-                        break;
-                    }
-                }
-
-                if (valid_time_slot_set)
-                    ret.Add(doctorTimeSlots[i]);
-            }
-            return s;
-        }
-
-        public ObservableCollection<Room> findSuitableRoomsForOperation(DateTime fromFuture, DateTime toFuture,
+        public ObservableCollection<Room> findSuitableRoomsWithEquipment(DateRange dateRange,
             ObservableCollection<InventoryItem> items_needed)
         {
-            ObservableCollection<Room> currentRooms = GetAllRoomInFutureState(fromFuture);
-            ObservableCollection<Room> futureRooms = GetAllRoomInFutureState(toFuture);
+            ObservableCollection<Room> currentRooms = GetAllRoomInFutureState(dateRange.StartTime);
+            ObservableCollection<Room> futureRooms = GetAllRoomInFutureState(dateRange.EndTime);
 
             ObservableCollection<Room> ret = new ObservableCollection<Room>();
 
@@ -257,11 +207,110 @@ namespace Hospital.Service
             return ret;
         }
 
+        public string findSuitableRoomsForOperation1(DateRange dateRange,
+            ObservableCollection<InventoryItem> items_needed)
+        {
+            ObservableCollection<Room> currentRooms = GetAllRoomInFutureState(dateRange.StartTime);
+            ObservableCollection<Room> futureRooms = GetAllRoomInFutureState(dateRange.EndTime);
 
+            string s = "";
+
+            foreach (var VARIABLE in items_needed)
+            {
+                s += VARIABLE.Name;
+            }
+            s += "\n--\n";
+
+            foreach (var VARIABLE in currentRooms)
+            {
+                foreach (var VARIABLE1 in VARIABLE.itemInRoom)
+                {
+                    s += VARIABLE1.Id;
+                    s += " ";
+                }
+            }
+
+            s += "\n--\n";
+
+            foreach (var VARIABLE in futureRooms)
+            {
+                foreach (var VARIABLE1 in VARIABLE.itemInRoom)
+                {
+                    s += VARIABLE1.Id;
+                    s += " ";
+
+                }
+            }
+
+
+            ObservableCollection<Room> ret = new ObservableCollection<Room>();
+
+            for (int i = 0; i < currentRooms.Count; i++)
+            {
+                bool hasAllNeeded = true;
+
+                foreach (InventoryItem inventoryItemNeeded in items_needed)
+                {
+                    s += inventoryItemNeeded.Name;
+                    s += "?";
+                    bool hasThisItem = false;
+                    foreach (ItemInRoom itemInRoom in currentRooms[i].itemInRoom)
+                    {
+                        if (itemInRoom.inventoryItem_id == inventoryItemNeeded.Id)
+                        {
+                            hasThisItem = true;
+                            s += "sobaP_";
+                            s += currentRooms[i].Id;
+                            s += "ima ";
+                            s += itemInRoom.inventoryItem_id;
+                        }
+                    }
+
+                    if (!hasThisItem)
+                    {
+                        hasAllNeeded = false;
+                        s += "nema ";
+                    }
+                }
+
+                foreach (InventoryItem inventoryItemNeeded in items_needed)
+                {
+                    bool hasThisItem = false;
+                    foreach (ItemInRoom itemInRoom in futureRooms[i].itemInRoom)
+                    {
+                        if (itemInRoom.inventoryItem_id == inventoryItemNeeded.Id)
+                        {
+                            hasThisItem = true;
+                            s += "sobaB_";
+                            s += currentRooms[i].Id;
+                            s += "ima ";
+                            s += itemInRoom.inventoryItem_id;
+                        }
+                    }
+
+                    if (!hasThisItem)
+                    {
+                        hasAllNeeded = false;
+                        s += "nema ";
+                    }
+                }
+
+                if (hasAllNeeded)
+                    ret.Add(currentRooms[i]);
+            }
+
+            foreach (var VARIABLE in ret)
+            {
+                s += "\nSobe:";
+                s += VARIABLE.Id;
+            }
+
+            return s;
+
+        }
 
         public ObservableCollection<Room> GetAllRoomInFutureState(DateTime future)
         {
-            //string test = "";
             int max_item_in_room_id = 0;
             ObservableCollection<Room> rooms = GetAllRooms(); //rooms with roomType only
 

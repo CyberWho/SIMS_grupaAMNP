@@ -14,8 +14,7 @@ namespace Hospital.Controller
    {
       public InventoryItem GetInventoryItemById(int id)
       {
-         // TODO: implement
-         return null;
+          return inventoryItemService.GetInventoryItemById(id);
       }
       
       public ObservableCollection<InventoryItem> GetAllInventoryItems()
