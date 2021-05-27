@@ -11,6 +11,7 @@ namespace Hospital.xaml_windows.Manager
         int id;
         public ManagerUI(int id)
         {
+            new Model.DispatcherTimerForReservedItems();
             InitializeComponent();
             this.id = id;
         }
