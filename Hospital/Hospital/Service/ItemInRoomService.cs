@@ -78,21 +78,21 @@ namespace Hospital.Service
                 return itemInRoomRepository.UpdateItemInRoom(itemInRoom);
             }
         }
-        public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity, DateTime? dateTime)
+        public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
         {
-            if (IsExpendable(itemInRoom)) 
+            /*if (IsExpendable(itemInRoom)) 
             {
                 return MoveExpendable(itemInRoom, destinationRoom, quantity);
             }
             else
             {
-
-            }
+                return 
+            }*/
             
-            return false;
+            return Move(itemInRoom, destinationRoom, quantity);
         }
 
-        private bool MoveExpendable(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
+        private bool Move(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
         {
             ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, destinationRoom.Id);
             if (itemInDestinationRoom != null)
@@ -148,10 +148,10 @@ namespace Hospital.Service
             }
             return null;
         }
-        private bool IsExpendable(ItemInRoom itemInRoom)
+/*        private bool IsExpendable(ItemInRoom itemInRoom)
         {
             return itemInRoom.inventoryItem.Type == 0;
-        }
+        }*/
 
         public ObservableCollection<ItemInRoom> LoadAllItems()
         {

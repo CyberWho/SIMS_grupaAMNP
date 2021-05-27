@@ -51,6 +51,7 @@ namespace Hospital.Repository
             reader.Read();
             ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), uint.Parse(reader.GetInt32(2).ToString()), null, null);
             newItemInRoom.inventoryItem_id = reader.GetInt32(1);
+            newItemInRoom.room_id = reader.GetInt32(3);
             connection.Close();
             connection.Dispose();
 

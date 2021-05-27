@@ -64,9 +64,9 @@ namespace Hospital.Controller
         {
             return itemInRoomService.MoveWholeItemNowToMainStorage(itemInRoom);
         }
-        public Boolean MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity, DateTime? dateTime)
+        public Boolean MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
         {
-            return itemInRoomService.MoveItem(itemInRoom, destinationRoom, quantity, dateTime);
+            return itemInRoomService.MoveItem(itemInRoom, destinationRoom, quantity);
         } 
 
         public ObservableCollection<ItemInRoom> LoadAllItems()
