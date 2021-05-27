@@ -314,7 +314,7 @@ namespace Hospital.xaml_windows.Secretary
 
         private void manage_free_days(object sender, RoutedEventArgs e)
         {
-            Window s = new FreeDays(current_doctor_id);
+            Window s = new Secretary.FreeDays(current_doctor_id);
             s.Show();
         }
     }
