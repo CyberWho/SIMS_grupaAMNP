@@ -75,16 +75,22 @@ namespace Hospital.Service
             return false;
         }
 
+        #region marko_kt5
         public User UpdateUser(User user)
         {
-            // TODO: implement
-            return null;
+            return this.userRepository.UpdateUser(user);
         }
 
         public void makeDoctorUser()
         {
             this.userRepository.makeDoctorUser();
         }
+
+        public User newUser(User user)
+        {
+            return this.userRepository.NewUser(user);
+        }
+        #endregion
 
     }
 }

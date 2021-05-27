@@ -39,10 +39,9 @@ namespace Hospital.Controller
          return null;
       }
       
-      public ObservableCollection<ReservedItem> GetAllRoomsByRoomType(RoomType roomType)
+      public ObservableCollection<Room> GetAllRoomsByRoomType(RoomType roomType)
       {
-         // TODO: implement
-         return null;
+         return this.roomService.GetAllRoomsByRoomType(roomType);
       }
 
         public ObservableCollection<RoomType> GetAllRoomTypesForEachRoom()

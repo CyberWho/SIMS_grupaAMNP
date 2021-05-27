@@ -8,10 +8,10 @@ namespace Hospital.Model
 {
     /// Pending - upravnik je uneo lek i poslat je zahtev lekaru za approval
     public enum DrugStatus
-   {
-      APPROVED,
-      REJECTED,
-      PENDING
-   
-   }
+    {
+        APPROVED,
+        REJECTED,
+        PENDING
+
+    }
 }

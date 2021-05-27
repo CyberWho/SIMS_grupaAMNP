@@ -53,7 +53,7 @@ namespace Hospital.Repository
             HealthRecord healthRecord = new HealthRecord();
             healthRecord.patient_id = patient.Id;
             healthRecord = this.healthRecordRepository.NewHealthRecord(healthRecord, 1);
-            
+
             connection.Close();
             connection.Dispose();
 
@@ -152,7 +152,20 @@ namespace Hospital.Repository
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM users WHERE id = " + id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return true;
+            }
+            connection.Close();
+            connection.Dispose();
+            
             return false;
         }
 
@@ -162,9 +175,35 @@ namespace Hospital.Repository
             return false;
         }
 
+        #region marko_kt5
         public User UpdateUser(User user)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE users set username=:username, " +
+                                  "name=:name, " +
+                                  "surname=:surname, " +
+                                  "phone_number=:phone_number, " +
+                                  "email=:email " +
+                                  "WHERE ID = " + user.Id;
+
+            command.Parameters.Add("username", user.Username);
+            command.Parameters.Add("name", user.Name);
+            command.Parameters.Add("surname", user.Surname);
+            command.Parameters.Add("phone_number", user.PhoneNumber);
+            command.Parameters.Add("email", user.EMail);
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return user;
+            }
+
+            connection.Close();
+            connection.Dispose();
+
             return null;
         }
 
@@ -193,7 +232,24 @@ namespace Hospital.Repository
             // kreiranje obicnog korisnika
             else
             {
+                command.CommandText =
+                    "INSERT INTO users (id, username, password, name, surname, phone_number, email) VALUES (:id, :username, :password, :name, :surname, :phone_number, :email)";
+                user.Id = GetLastId() + 1;
+                command.Parameters.Add("id", OracleDbType.Int32).Value = user.Id;
+                command.Parameters.Add("username", OracleDbType.Varchar2).Value = user.Username;
+                command.Parameters.Add("password", OracleDbType.Varchar2).Value = user.Password;
+                command.Parameters.Add("name", OracleDbType.Varchar2).Value = user.Name;
+                command.Parameters.Add("surname", OracleDbType.Varchar2).Value = user.Surname;
+                command.Parameters.Add("phone_number", OracleDbType.Varchar2).Value = user.PhoneNumber;
+                command.Parameters.Add("email", OracleDbType.Varchar2).Value = user.EMail;
 
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    connection.Close();
+                    connection.Dispose();
+
+                    return user;
+                }
             }
 
             connection.Close();
@@ -201,7 +257,7 @@ namespace Hospital.Repository
 
             return null;
         }
-
+        #endregion
         public int GetLastId()
         {
             setConnection();
@@ -211,10 +267,10 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
-            
+
             connection.Close();
             connection.Dispose();
-            
+
             return last_id;
         }
 
@@ -223,7 +279,7 @@ namespace Hospital.Repository
             setConnection();
             OracleCommand command = connection.CreateCommand();
 
-            User user = new 
+            User user = new
                 User(
                     id: 44,
                     username: "card1",
@@ -255,7 +311,7 @@ namespace Hospital.Repository
                     roleType: "Doctor"
                     );
 
-            Employee employee = new 
+            Employee employee = new
                 Employee(
                         id: 0,
                         salary: 95000,

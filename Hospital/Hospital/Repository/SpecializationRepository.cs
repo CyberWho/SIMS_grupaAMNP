@@ -9,7 +9,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
-    class SpecializationRepository
+    public class SpecializationRepository
     {
 
         OracleConnection connection = null;
@@ -29,7 +29,7 @@ namespace Hospital.Repository
 
         private ObservableCollection<Specialization> specializations;
 
-        public ObservableCollection<Specialization> GetAllSpecializations()
+        public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD)
         {
             setConnection();
             specializations = new ObservableCollection<Specialization>();
@@ -38,7 +38,16 @@ namespace Hospital.Repository
             int generalSpecialization = 1;
 
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM specialization WHERE id != " + generalSpecialization;
+
+            if (withoutGPD)
+            {
+                command.CommandText = "SELECT * FROM specialization WHERE id != " + generalSpecialization;
+
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM specialization";
+            }
             OracleDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
