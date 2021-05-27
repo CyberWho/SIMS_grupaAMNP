@@ -166,16 +166,20 @@ namespace Hospital.xaml_windows.Secretary
                 current_doctor_id = int.Parse(content);
                 Model.Doctor doctor = this.doctorController.GetDoctorById(current_doctor_id);
 
-
-                NName = doctor.User.Name;
-                Surname = doctor.User.Surname;
-                Username = doctor.User.Username;
-                PhoneNumber = doctor.User.PhoneNumber;
-                Email = doctor.User.EMail;
-                Salary = doctor.Salary.ToString();
+                fill_user_data(doctor);
 
                 dataGridDoctors.UnselectAll();
             }
+        }
+
+        private void fill_user_data(Model.Doctor doctor)
+        {
+            NName = doctor.User.Name;
+            Surname = doctor.User.Surname;
+            Username = doctor.User.Username;
+            PhoneNumber = doctor.User.PhoneNumber;
+            Email = doctor.User.EMail;
+            Salary = doctor.Salary.ToString();
         }
 
         private void Add_user(object sender, RoutedEventArgs e)
@@ -187,8 +191,6 @@ namespace Hospital.xaml_windows.Secretary
             doctor.room_id = room_id;
             doctor = this.doctorController.AddDoctor(doctor, specialization);
         }
-
-        
 
         private Employee makeEmployee()
         {
@@ -263,14 +265,6 @@ namespace Hospital.xaml_windows.Secretary
         {
             doctors = this.doctorController.GetAllDoctors();
             dataGridDoctors.ItemsSource = doctors;
-
-            //foreach (Control control in page.Children)
-            //{
-            //    if (control.GetType() == typeof(TextBox))
-            //    {
-            //        ((TextBox)control).Text = String.Empty;
-            //    }
-            //}
         }
 
         private void specialization_selection_SelectionChanged(object sender, SelectionChangedEventArgs e)

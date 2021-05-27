@@ -170,12 +170,6 @@ namespace Hospital.Repository
         }
 
         #region marko_kt5
-
-
-
-
-
-        #endregion
         public User UpdateUser(User user)
         {
             setConnection();
@@ -257,7 +251,7 @@ namespace Hospital.Repository
 
             return null;
         }
-
+        #endregion
         public int GetLastId()
         {
             setConnection();

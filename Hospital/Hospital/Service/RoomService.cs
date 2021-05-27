@@ -52,16 +52,19 @@ namespace Hospital.Service
         public ObservableCollection<Room> GetAllRoomsByRoomType(RoomType roomType)
         {
             List<int> usedRooms = this.doctorRepository.getAllUsedRoomsId();
-
             ObservableCollection<Room> rooms = this.roomRepository.GetAllRoomsByRoomType(roomType);
 
-            ObservableCollection<Room> returnValue = new ObservableCollection<Room>();
+            return this.reduceRooms(usedRooms, rooms);
+        }
 
+        private ObservableCollection<Room> reduceRooms(List<int> usedRoomsId, ObservableCollection<Room> rooms)
+        {
+            ObservableCollection<Room> returnValue = new ObservableCollection<Room>();
             bool flag = false;
 
             foreach (Room r in rooms)
             {
-                foreach (int id in usedRooms)
+                foreach (int id in usedRoomsId)
                 {
                     if (r.Id == id)
                     {
@@ -79,6 +82,7 @@ namespace Hospital.Service
 
             return returnValue;
         }
+
         #endregion
 
         public ObservableCollection<RoomType> GetAllRoomTypesForEachRoom()

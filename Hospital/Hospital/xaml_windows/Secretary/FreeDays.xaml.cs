@@ -44,11 +44,9 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Make_Free_Days(object sender, RoutedEventArgs e)
         {
-            
             String description = not_desc.Text.Remove(0, 22);
 
             DateRange dateRange = parseDateRange();
-
 
             FreeDaysStatus status = FreeDaysStatus.APPROVED;
 
@@ -64,7 +62,6 @@ namespace Hospital.xaml_windows.Secretary
 
             this.freeDaysController.AddFreeDays(freeDays);
             this.Close();
-
         }
 
         private void type_selection_changed(object sender, SelectionChangedEventArgs e)

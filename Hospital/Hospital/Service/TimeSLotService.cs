@@ -205,19 +205,26 @@ namespace Hospital.Service
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
             timeSlots = timeSlotRepository.GetTimeSlotsByDatesAndDoctorId(startTime, endTime, doctorId);
 
-            if(timeSlots.Count == 0)
+            if (timeSlots.Count == 0)
             {
-                if(priority == 0)
+                if (priority == 0)
                 {
                     timeSlots = timeSlotRepository.GetAllFreeTimeSlotsByDoctorId(doctorId);
-                } else
+                } 
+                else
                 {
                     timeSlots = timeSlotRepository.GetAllFreeTimeSlotsByDates(startTime, endTime);
                 }
             }
 
             // marko kt5
-            ObservableCollection<FreeDays> freeDays = this.freeDaysRepository.GetFreeDaysByDoctorId(doctorId);
+
+            return this.reduceTimeSlots(timeSlots, doctorId);
+        }
+
+        private ObservableCollection<TimeSlot> reduceTimeSlots(ObservableCollection<TimeSlot> timeSlots, int doctor_id)
+        {
+            ObservableCollection<FreeDays> freeDays = this.freeDaysRepository.GetFreeDaysByDoctorId(doctor_id);
             ObservableCollection<TimeSlot> reducedTimeSlots = new ObservableCollection<TimeSlot>();
 
             bool flag = false;
@@ -227,7 +234,7 @@ namespace Hospital.Service
                 foreach (FreeDays fd in freeDays)
                 {
                     DateRange dr = new DateRange(ts.StartTime, ts.StartTime.AddMinutes(30));
-                    
+
                     if (WithinDateRange(fd.dateRange, dr))
                     {
                         flag = true;
@@ -235,11 +242,11 @@ namespace Hospital.Service
                 }
 
                 if (!flag)
-                {  
+                {
                     reducedTimeSlots.Add(ts);
                 }
             }
-            
+
             return reducedTimeSlots;
         }
 
@@ -248,6 +255,8 @@ namespace Hospital.Service
             if (inner.StartTime > outer.StartTime && inner.EndTime < outer.EndTime) return true;
             return false;
         }
+
+        // marko kt5 kraj
 
         public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date,int doctorId)
         {

@@ -76,10 +76,6 @@ namespace Hospital.Service
         }
 
         #region marko_kt5
-
-        
-
-        #endregion
         public User UpdateUser(User user)
         {
             return this.userRepository.UpdateUser(user);
@@ -94,6 +90,7 @@ namespace Hospital.Service
         {
             return this.userRepository.NewUser(user);
         }
+        #endregion
 
     }
 }
