@@ -122,7 +122,8 @@ namespace Hospital.Service
 
             foreach (TimeSlot ts in timeSlots)
             {
-                if (ts.StartTime.Equals(now))
+                if (isDateEqual(ts.StartTime, now))
+                // if (/*ts.StartTime.Equals(now)*/ DateTime.Compare(now, ts.StartTime) == 0)
                 {
                     WorkHours workHours = this.workHoursRepository.GetWorkHoursById(ts.workHours_id);
                     Doctor doctor = workHours.doctor;
@@ -144,6 +145,16 @@ namespace Hospital.Service
             }
 
             return timeSlots;
+        }
+
+        private bool isDateEqual(DateTime date1, DateTime date2)
+        {
+            if (date1.Day != date2.Day || date1.Month != date2.Month || date1.Year != date2.Year || date1.Hour != date2.Hour || date1.Minute != date2.Minute || date1.Second != date2.Second)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private DateTime fix_time()
