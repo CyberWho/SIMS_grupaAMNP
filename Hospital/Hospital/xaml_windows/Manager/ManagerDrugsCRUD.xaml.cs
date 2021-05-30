@@ -1,9 +1,9 @@
 ﻿using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using static Globals;
 
 namespace Hospital.xaml_windows.Manager
 {
@@ -14,6 +14,7 @@ namespace Hospital.xaml_windows.Manager
     {
 
         ObservableCollection<Drug> Drugs;
+        ObservableCollection<DrugDTO> DrugDTOs = new ObservableCollection<DrugDTO>();
         Controller.DrugController drugController = new Controller.DrugController();
         Repository.DrugTypeRepository drugTypeRepository = new Repository.DrugTypeRepository();
 
@@ -31,7 +32,18 @@ namespace Hospital.xaml_windows.Manager
         public void updateDataGrid()
         {
             this.DataContext = this;
+            DrugDTOs.Clear();
             Drugs = drugController.GetAllDrugs();
+            foreach (Drug drug in Drugs)
+            {
+                DrugDTO newDrugDTO = new DrugDTO(drug);
+                if(drug.Status == DrugStatus.REJECTED)
+                {
+                    newDrugDTO = drugController.GetRejectionInfo(newDrugDTO);
+                }
+                DrugDTOs.Add(newDrugDTO);
+
+            }
             fillTable();
             add_btn.IsEnabled = true;
             update_btn.IsEnabled = false;
@@ -65,7 +77,7 @@ namespace Hospital.xaml_windows.Manager
         {
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
-            myDataGrid.ItemsSource = Drugs;
+            myDataGrid.ItemsSource = DrugDTOs;
         }
 
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,6 +85,15 @@ namespace Hospital.xaml_windows.Manager
             add_btn.IsEnabled = false;
             update_btn.IsEnabled = true;
             delete_btn.IsEnabled = true;
+
+            if( myDataGrid.SelectedItem != null && ((DrugDTO)myDataGrid.SelectedItem).Drug.Status == DrugStatus.REJECTED)
+            {
+                resubmit_btn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                resubmit_btn.Visibility = Visibility.Hidden;
+            }
         }
 
         private void add_btn_Click(object sender, RoutedEventArgs e)
@@ -90,12 +111,12 @@ namespace Hospital.xaml_windows.Manager
             drugController.AddDrug(newDrug);
 
             updateDataGrid();
-            clear_btn_Click(null, null);
+            clear_btn_Click(sender, e);
         }
 
         private void update_btn_Click(object sender, RoutedEventArgs e)
         { 
-            drugController.UpdateDrug(GetChangedFields((Drug)myDataGrid.SelectedItem));
+            drugController.UpdateDrug(GetChangedFields(((DrugDTO)myDataGrid.SelectedItem).Drug));
             updateDataGrid();
         }
 
@@ -128,7 +149,7 @@ namespace Hospital.xaml_windows.Manager
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            drugController.DeleteDrugById(((Drug)myDataGrid.SelectedItem).Id, ((Drug)myDataGrid.SelectedItem).InventoryItemID);
+            drugController.DeleteDrugById(((DrugDTO)myDataGrid.SelectedItem).Drug.Id, ((DrugDTO)myDataGrid.SelectedItem).Drug.InventoryItemID);
             updateDataGrid();
         }
 
@@ -169,6 +190,21 @@ namespace Hospital.xaml_windows.Manager
             Window w = new ManagerUI(2);
             w.Show();
             this.Close();
+        }
+
+        private void myDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if(myDataGrid.SelectedItem != null)
+            {
+            }
+        }
+
+        private void resubmit_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Drug drugToResubmit = ((DrugDTO)myDataGrid.SelectedItem).Drug;
+            drugToResubmit.Status = DrugStatus.PENDING;
+            drugController.UpdateDrug(drugToResubmit);
+            updateDataGrid();
         }
     }
 }

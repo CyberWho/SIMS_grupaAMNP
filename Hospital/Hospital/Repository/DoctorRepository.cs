@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Documents;
 
 namespace Hospital.Repository
 {
@@ -34,6 +36,7 @@ namespace Hospital.Repository
             var doctor = ParseDoctor(reader);
 
             connection.Close();
+            connection.Dispose();
            
             return doctor;
 
@@ -120,6 +123,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             var doctor = ParseDoctor(reader);
+
             connection.Close();
             connection.Dispose();
             return doctor;
@@ -179,37 +183,104 @@ namespace Hospital.Repository
 
         public Boolean DeleteDoctorById(int doctorId)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM doctor WHERE id = " + doctorId;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return true;
+            }
+            connection.Close();
+            connection.Dispose();
+
             return false;
         }
 
         public Doctor UpdateDoctor(Doctor doctor)
         {
-            // TODO: implement
+
+
             return null;
         }
 
+        #region marko_kt5
         public Doctor NewDoctor(Doctor doctor)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
             command.CommandText = "INSERT INTO doctor (id, employee_id, room_id, spec_id)  VALUES (:id, :employee_id, :room_id, :spec_id)";
 
-            command.Parameters.Add("id", OracleDbType.Int32).Value = 5;
+            int id = GetLastId() + 1;
+
+            doctor.Id = id;
+
+            command.Parameters.Add("id", OracleDbType.Int32).Value = doctor.Id;
             command.Parameters.Add("employee_id", OracleDbType.Int32).Value = doctor.employee_id;
             command.Parameters.Add("room_id", OracleDbType.Int32).Value = doctor.room_id;
             command.Parameters.Add("spec_id", OracleDbType.Int32).Value = doctor.specialization_id;
 
-            command.ExecuteNonQuery();
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
 
+                return doctor;
+            }
+
+            connection.Close();
+            connection.Dispose();
 
             return null;
+        }
+        #endregion
+
+        private Doctor getAllData(Doctor doctor)
+        {
+            if (doctor.specialization_id == 0) doctor.specialization_id = doctor.specialization.id;
+            else if (doctor.specialization == null) doctor.specialization.id = doctor.specialization_id;
+
+            if (doctor.room_id == 0) doctor.room_id = doctor.room.Id;
+
+
+            return doctor;
+        }
+
+        // marko kt5
+        public List<int> getAllUsedRoomsId()
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT room_id FROM doctor";
+            OracleDataReader reader = command.ExecuteReader();
+
+            List<int> usedRooms = new List<int>();
+
+            while (reader.Read())
+            {
+                usedRooms.Add(int.Parse(reader.GetString(0)));
+            }
+
+            return usedRooms;
         }
 
         public int GetLastId()
         {
-            // TODO: implement
-            return 0;
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT MAX(id) FROM doctor";
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            int last_id = int.Parse(reader.GetString(0));
+
+            connection.Close();
+            connection.Dispose();
+
+            return last_id;
         }
 
     }

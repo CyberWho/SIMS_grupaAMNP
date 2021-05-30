@@ -13,9 +13,9 @@ namespace Hospital.Service
     {
         private SpecializationRepository specializationRepository = new SpecializationRepository();
 
-        public ObservableCollection<Specialization> GetAllSpecializations()
+        public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD)
         {
-            return this.specializationRepository.GetAllSpecializations();
+            return this.specializationRepository.GetAllSpecializations(withoutGPD);
         }
         public int GetSpecializationByType(string selectedSpecialization)
         {

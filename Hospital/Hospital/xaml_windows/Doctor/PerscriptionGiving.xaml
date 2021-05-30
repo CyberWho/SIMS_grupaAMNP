@@ -9,7 +9,7 @@
     <Grid>
         <ListBox x:Name="lb_drugs" SelectionChanged="DrugChange" SelectionMode="Single" Margin="509,98,9.6,111"/>
         <TextBox x:Name ="Perscription_description" HorizontalAlignment="Left" Height="140" Margin="311,169,0,0" TextWrapping="Wrap" Text="Opis recepta" VerticalAlignment="Top" Width="175"/>
-        <Button Content="Dodaj recept" HorizontalAlignment="Left" Margin="411,332,0,0" VerticalAlignment="Top" Width="99" Height="29" Click="AddPerscriptionToDB"/>
+        <Button Content="Dodaj recept" HorizontalAlignment="Left" Margin="411,332,0,0" VerticalAlignment="Top" Width="99" Height="29" Click="AddPerscriptionToDb"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="528,332,0,0" VerticalAlignment="Top" Width="113"  Height="48" Click="ReturnOption"/>
 
     </Grid>

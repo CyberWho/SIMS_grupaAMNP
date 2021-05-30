@@ -14,8 +14,7 @@ namespace Hospital.Service
     {
         public Model.InventoryItem GetInventoryItemById(int id)
         {
-            // TODO: implement
-            return null;
+            return inventoryItemRepository.GetInventoryItemById(id);
         }
 
         public System.Collections.ArrayList GetAllInventoryItems()

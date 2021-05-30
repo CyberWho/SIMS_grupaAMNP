@@ -9,6 +9,8 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using static Globals;
+using System.Linq;
 
 namespace Hospital.Repository
 {
@@ -91,7 +93,35 @@ namespace Hospital.Repository
                 pendingDrugs.Add(ParseFromReader(reader));
             }
 
+            connection.Close();
             return pendingDrugs;
+        }
+        public DrugDTO GetRejectionInfo(DrugDTO newDrugDTO)
+        {
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
+            query.CommandText = "SELECT * FROM drug_rejection WHERE drug_id = " + newDrugDTO.Id;
+            OracleDataReader reader;
+            try
+            {
+                reader = query.ExecuteReader();
+            }
+            catch (Exception exp)
+            {
+                ThrowException(exp);
+                connection.Close();
+                return null;
+            }
+            reader.Read();
+            int doctorID = reader.GetInt32(2);
+            Doctor rejectionDoctor = doctorRepository.GetDoctorById(doctorID);
+            string RejectionInfo = "(dr " + rejectionDoctor.User.Surname + ")\n";
+            RejectionInfo += reader.GetString(3);
+
+            newDrugDTO.RejectionInfo = RejectionInfo;
+
+            connection.Close();
+            return newDrugDTO;
         }
 
         public bool DeleteDrugById(int id, int invID)
@@ -178,8 +208,6 @@ namespace Hospital.Repository
                 "unit = '" + drug.Unit.ToString() + "', " +
                 "item_type = " + ((int)drug.Type).ToString() + " " +
                 "WHERE id = " + drug.InventoryItemID.ToString();
-
-            Trace.WriteLine("--------- SQL COMMAND:\t" + cmd.CommandText);
 
             try
             {
@@ -270,7 +298,28 @@ namespace Hospital.Repository
             connection.Dispose();
         }
 
+        public ObservableCollection<int> getDrugAllergy(int health_record_id)
+        {
+            setConnection();
+            ObservableCollection<int> ids = new ObservableCollection<int>();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText =
+                "SELECT drug.ID FROM allergy, allergy_type, drug_allergies, drug where allergy.allergy_type_id = allergy_type.id and " + 
+                "drug_allergies.ALLERGY_TYPE_ID = allergy_type.ID  and drug.DRUG_TYPE_ID = drug_allergies.ALLERGY_TYPE_ID and health_record_id = " +
+                health_record_id;
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int i = reader.GetInt32(0);
+                ids.Add(i);
+            }
+            connection.Close();
+            connection.Dispose();
+            return ids;
+        }
+
         InventoryItemRepository inventoryItemRepository = new InventoryItemRepository();
         DrugTypeRepository drugTypeRepository = new DrugTypeRepository();
+        DoctorRepository doctorRepository = new DoctorRepository();
     }
 }

@@ -5,18 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
         mc:Ignorable="d"
-        Title="ManagerRenovations" Height="450" Width="800">
+        Title="ManagerRenovations" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Renovations}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="329" Margin="10,80,0,0" VerticalAlignment="Top" Width="768" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Naziv" Binding="{Binding inventoryItem.Name}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Količina" Binding="{Binding Quantity}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Cena" Binding="{Binding inventoryItem.Price}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Soba" Binding="{Binding room.Id}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Jedinica" Binding="{Binding inventoryItem.Unit}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Tip" Binding="{Binding inventoryItem.Type}" Width="*" IsReadOnly="True"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Button x:Name="activeRenovationsBtn" Content="Aktivne renovacije" HorizontalAlignment="Left" Margin="206,202,0,0" VerticalAlignment="Top" Width="114" Click="activeRenovationsBtn_Click"/>
+        <Button x:Name="scheduleRenovationBtn" Content="Zakažite renovaciju" HorizontalAlignment="Left" Margin="362,202,0,0" VerticalAlignment="Top" Width="122" Click="scheduleRenovationBtn_Click"/>
+        <Button x:Name="renovationHistoryBtn" Content="Istorija renovacija" HorizontalAlignment="Left" Margin="206,251,0,0" VerticalAlignment="Top" Width="114" Click="renovationHistoryBtn_Click"/>
+        <Button x:Name="backBtn" Content="Nazad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="backBtn_Click"/>
+
     </Grid>
 </Window>

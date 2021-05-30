@@ -13,65 +13,70 @@ namespace Hospital.Controller
 {
    public class ReservedItemController
    {
-      public ReservedItem GetReservedItemById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public ObservableCollection<ReservedItem> GetAllReservedItemsByRoomId(int roomId)
-      {
-         // TODO: implement
-         return null;
-      }
+        public ReservedItem GetReservedItemById(int id)
+        {
+            // TODO: implement
+            return null;
+        }
 
-      public ObservableCollection<ReservedItem> getAllReservedItems()
-      {
-          return new ReservedItemService().GetAllReservedItems();
-      }
-      
-      public ObservableCollection<ReservedItem> GetAllReservedItemsByItemInRoomId(int itemInRoomId)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteReservedItemById(int id)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean DeleteAllReservedItemsByRoomId(int roomId)
-      {
+        public ObservableCollection<ReservedItem> GetAllReservedItemsByRoomId(int roomId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public ObservableCollection<ReservedItem> getAllReservedItems()
+        {
+            return new ReservedItemService().GetAllReservedItems();
+        }
+
+        public ObservableCollection<ReservedItem> GetAllReservedItemsByItemInRoomId(int itemInRoomId)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public Boolean DeleteReservedItemById(int id)
+        {
             // TODO: implement
             return false;
-      }
-      
-      public Boolean DeleteAllReservedItemsByItemInRoomId(int itemInRoomId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public ReservedItem UpdateReservedItem(ReservedItem reservedItem)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public ReservedItem AddReservedItem(ReservedItem reservedItem)
-      {
-         return reservedItemService.AddReservedItem(reservedItem);
-      }
-      
-      public ReservedItem ChangeReservedDate(ReservedItem reservedItem, DateTime newReservedDate)
-      {
-         // TODO: implement
-         return null;
-      }
+        }
+
+        public Boolean DeleteAllReservedItemsByRoomId(int roomId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public Boolean DeleteAllReservedItemsByItemInRoomId(int itemInRoomId)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public ReservedItem UpdateReservedItem(ReservedItem reservedItem)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public ReservedItem AddReservedItem(ReservedItem reservedItem)
+        {
+            return reservedItemService.AddReservedItem(reservedItem);
+        }
+
+        public ReservedItem ChangeReservedDate(ReservedItem reservedItem, DateTime newReservedDate)
+        {
+            // TODO: implement
+            return null;
+        }
+        public ItemInRoom MoveReservedItem(ReservedItem reservedItem)
+        {
+            return reservedItemService.MoveReservedItem(reservedItem);
+        }
+
    
-      public Service.ReservedItemService reservedItemService = new Service.ReservedItemService();
+      public ReservedItemService reservedItemService = new ReservedItemService();
    
    }
 }

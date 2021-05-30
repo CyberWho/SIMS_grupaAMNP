@@ -11,40 +11,52 @@ namespace Hospital.xaml_windows.Doctor
     /// </summary>
     public partial class PerscriptionGiving : Window
     {
-        HealthRecord healthRecord;
-        int id_doc_as_emoloyee;
-        int id_doc;
-        int id_patient;
+        private HealthRecord _healthRecord;
+        private int _idDocAsEmoloyee;
+        private int _idDoc;
+        private int _idPatient;
 
-        DrugController drugController = new DrugController();
-        ObservableCollection<Drug> drugs = null;
-        Anamnesis anamnesis = null;
-        Drug selected_drug = null;
-        public PerscriptionGiving(HealthRecord healthRecord, int id_doc_as_emoloyee, int id_doc, int id_patient, Anamnesis anamnesis)
+        DrugController _drugController = new DrugController();
+        private ObservableCollection<Drug> _drugs = null;
+        private Anamnesis _anamnesis = null;
+        private Drug _selectedDrug = null;
+        private ObservableCollection<int> _drugAllergyIds = null;
+        public PerscriptionGiving(HealthRecord healthRecord, int idDocAsEmoloyee, int idDoc, int idPatient, Anamnesis anamnesis)
         {
             InitializeComponent();
-            this.healthRecord = healthRecord;
-            this.id_doc_as_emoloyee = id_doc_as_emoloyee;
-            this.id_doc = id_doc;
-            this.id_patient = id_patient;
-            this.anamnesis = anamnesis;
+            this._healthRecord = healthRecord;
+            this._idDocAsEmoloyee = idDocAsEmoloyee;
+            this._idDoc = idDoc;
+            this._idPatient = idPatient;
+            this._anamnesis = anamnesis;
 
-            drugs = drugController.GetAllDrugs();
-            foreach (Drug drug in drugs)
+            _drugAllergyIds = _drugController.getDrugAllergy(healthRecord.Id);
+            _drugs = _drugController.GetAllDrugs();
+            FillUi();
+        }
+
+
+        private void FillUi()
+        {
+            foreach (Drug drug in _drugs)
             {
                 ListBoxItem itm = new ListBoxItem();
                 itm.Content = drug.Id + " " + drug.Name + " " + drug.Grams;
+                if (_drugAllergyIds.Contains(drug.Id))
+                {
+                    itm.Content += " ALERGIJA!";
+                }
                 lb_drugs.Items.Add(itm);
             }
 
         }
 
-        private void AddPerscriptionToDB(object sender, RoutedEventArgs e)
+        private void AddPerscriptionToDb(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(selected_drug.Name.ToString() + " dat kao recept");
-            if (selected_drug != null)
+            MessageBox.Show(_selectedDrug.Name.ToString() + " dat kao recept");
+            if (_selectedDrug != null)
             {
-                Perscription perscription = new Perscription(-1, true, Perscription_description.Text, selected_drug, anamnesis);
+                Perscription perscription = new Perscription(-1, true, Perscription_description.Text, _selectedDrug, _anamnesis);
                 new PerscriptionController().AddPerscription(perscription);
             }
         }
@@ -52,19 +64,19 @@ namespace Hospital.xaml_windows.Doctor
         private void DrugChange(object sender, SelectionChangedEventArgs e)
         {
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
-            selected_drug = null;
+            _selectedDrug = null;
             if (lbi != null)
             {
-                int drug_id = int.Parse(lbi.Content.ToString().Split(' ')[0]);
-                foreach (Drug drug in drugs)
-                    if (drug.Id == drug_id)
-                        selected_drug = drug;
+                int drugId = int.Parse(lbi.Content.ToString().Split(' ')[0]);
+                foreach (Drug drug in _drugs)
+                    if (drug.Id == drugId)
+                        _selectedDrug = drug;
             }
         }
 
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new HealthRecordDoctorView(id_doc_as_emoloyee, id_doc, id_patient);
+            Window s = new HealthRecordDoctorView(_idDocAsEmoloyee, _idDoc, _idPatient);
             s.Show();
             this.Close();
         }

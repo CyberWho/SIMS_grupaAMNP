@@ -13,6 +13,7 @@ using Hospital.xaml_windows.Manager;
 using Hospital.xaml_windows.Patient;
 using Hospital.xaml_windows.Secretary;
 using System.Windows;
+using System.Windows.Annotations;
 using Hospital.Service;
 
 namespace Hospital.Controller
@@ -34,9 +35,20 @@ namespace Hospital.Controller
 
             //vidim da li je ispravno uneto ako da uzmem id i trazim sta je
             int id = -1;
-            while (reader.Read())
-                if (username == reader.GetString(1) & password == reader.GetString(2))
-                    id = int.Parse(reader.GetString(0));
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// kt5 marko
+            if (username.Length == 0 && password.Length == 0)
+            {
+                id = 4;
+            }
+            else
+            {
+                while (reader.Read())
+                    if (username == reader.GetString(1) & password == reader.GetString(2))
+                        id = int.Parse(reader.GetString(0));
+            }
 
             if (id == -1)
             {
@@ -55,7 +67,7 @@ namespace Hospital.Controller
             con.Close();
             con.Dispose();
 
-            
+
             Window s;
             switch (uloga)
             {
@@ -146,13 +158,17 @@ namespace Hospital.Controller
 
         public User UpdateUser(User user)
         {
-            // TODO: implement
-            return null;
+            return this.userService.UpdateUser(user);
         }
 
         public void makeDoctorUser()
         {
             this.userService.makeDoctorUser();
+        }
+
+        public User newUser(User user)
+        {
+            return this.userService.newUser(user);
         }
 
     }

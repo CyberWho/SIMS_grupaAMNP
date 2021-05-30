@@ -90,7 +90,12 @@ namespace Hospital.xaml_windows.Patient
             window.Show();
             this.Close();
         }
+        private void Undo_OnClick(object sender, RoutedEventArgs e)
+        {
+            var window = new Reminders(userId);
+            window.Show();
+            this.Close();
+        }
 
-        
     }
 }

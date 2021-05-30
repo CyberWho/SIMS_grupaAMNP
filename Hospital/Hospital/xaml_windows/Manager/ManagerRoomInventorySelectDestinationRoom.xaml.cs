@@ -61,7 +61,7 @@ namespace Hospital.xaml_windows.Manager
             // provera da li je inventar statican ili dinamican
             if(itemInRoom.inventoryItem.Type == ItemType.EXPENDABLE)
             {
-                if(itemInRoomController.MoveItem(itemInRoom, destinationRoom, quantity, null))
+                if(itemInRoomController.MoveItem(itemInRoom, destinationRoom, quantity))
                 {
                     MessageBox.Show("Uspesno premeštanje.");
                 }
@@ -72,7 +72,7 @@ namespace Hospital.xaml_windows.Manager
             }
             else
             {
-                Window pickDateWindow = new ManagerRoomsPickDate(ManagerID, itemInRoom, int.Parse(IIRID_txtbx.Text), quantity);
+                Window pickDateWindow = new ManagerRoomsPickDate(ManagerID, itemInRoom, destinationRoom, quantity);
                 pickDateWindow.Show();
                 this.Close();
                 return;

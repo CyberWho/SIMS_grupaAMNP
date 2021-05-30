@@ -32,6 +32,10 @@ namespace Hospital.Controller
         {
             return drugService.GetAllDrugsPending();
         }
+        public DrugDTO GetRejectionInfo(DrugDTO newDrugDTO)
+        {
+            return drugService.GetRejectionInfo(newDrugDTO);
+        }
 
         public Boolean DeleteDrugById(int id, int invID)
         {
@@ -64,6 +68,11 @@ namespace Hospital.Controller
         public void RejectDrug(int id_drug, int id_doctor, String description)
         {
             drugService.RejectDrug(id_drug, id_doctor, description);
+        }
+
+        public ObservableCollection<int> getDrugAllergy(int health_record_id)
+        {
+            return drugService.getDrugAllergy(health_record_id);
         }
 
         public DrugService drugService = new DrugService();

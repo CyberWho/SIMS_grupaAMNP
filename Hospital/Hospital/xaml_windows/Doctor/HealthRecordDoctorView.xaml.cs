@@ -33,7 +33,11 @@ namespace Hospital.xaml_windows.Doctor
             //MessageBox.Show(id_patient.ToString());
             appointments = appointmentController.GetAllReservedAppointmentsByPatientId(id_patient);
             patient = patientController.GetPatientByPatientId(id_patient);
+            fillAppointmentsToUi();
+        }
 
+        private void fillAppointmentsToUi()
+        {
             foreach (Appointment appointment in appointments)
             {
                 ListBoxItem itm = new ListBoxItem();
@@ -71,24 +75,22 @@ namespace Hospital.xaml_windows.Doctor
             if (lbi != null)
             {
                 selected_appointment_id = int.Parse(lbi.Content.ToString().Split(' ')[0]);
-                //MessageBox.Show(selected_appointment_id.ToString());
-                int found_anamneisis = -1;
-                selected_anamensis = null;
-                String anamnesis_description = "Nema anamneze";
-                foreach (Anamnesis anamnesis in healthRecord.anamnesis)
-                {
-                    if (anamnesis.appointment.Id == selected_appointment_id)
-                    {
-                        selected_anamensis = anamnesis;
-                        found_anamneisis = anamnesis.Id;
-                        anamnesis_description = anamnesis.Description;
-                        break;
-                    }
-                }
-                Anamnesis_Text_Box.Text = anamnesis_description;
-
+                Anamnesis_Text_Box.Text = getSelectedAnamnesisDescription();
             }
 
+        }
+
+        private String getSelectedAnamnesisDescription()
+        {
+            selected_anamensis = null;
+            foreach (Anamnesis anamnesis in healthRecord.anamnesis)
+                if (anamnesis.appointment.Id == selected_appointment_id)
+                {
+                    selected_anamensis = anamnesis;
+                    return anamnesis.Description;
+                }
+
+            return "Nema anamneze";
         }
 
 
@@ -121,6 +123,16 @@ namespace Hospital.xaml_windows.Doctor
             if (selected_appointment_id != -1)
             {
                 Window s = new SpecialistReferal(healthRecord, id_doc_as_user, id_doc, id_patient, selected_appointment_id);
+                s.Show();
+                this.Close();
+            }
+        }
+
+        private void GoToClinicalTreatmentGiving(object sender, RoutedEventArgs e)
+        {
+            if (selected_appointment_id != -1)
+            {
+                Window s = new ClinicalTreatmentGiving(healthRecord, id_doc_as_user, id_doc, id_patient, selected_appointment_id);
                 s.Show();
                 this.Close();
             }

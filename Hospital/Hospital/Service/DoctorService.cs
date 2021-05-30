@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
@@ -44,25 +45,52 @@ namespace Hospital.Service
             doctors = doctorRepository.GetAllGeneralPurposeDoctors();
             return doctors;
         }
+        #region marko_kt5
         public Boolean DeleteDoctorById(int doctorId)
         {
-            // TODO: implement
+            Doctor doctor = this.doctorRepository.GetDoctorById(doctorId);
+            
+            int employee_id = this.employeesRepository.getEmployeeIdByDoctorId(doctorId);
+            Employee employee = this.employeesRepository.GetEmployeeById(employee_id);
+
+            User user = this.userRepository.GetUserById(employee.User.Id);
+
+
+            if (this.doctorRepository.DeleteDoctorById(doctorId) &&
+                this.employeesRepository.DeleteEmployeeById(employee_id) && 
+                this.userRepository.DeleteUserById(user.Id))
+
+                return true;
+
             return false;
         }
 
         public Doctor UpdateDoctor(Doctor doctor)
         {
-            // TODO: implement
-            return null;
+            return this.doctorRepository.UpdateDoctor(doctor);
         }
 
-        public Doctor AddDoctor(Doctor doctor)
+        private Doctor setSpecialization(Doctor doctor, string specialization)
         {
-            // TODO: implement
-            return null;
+            if (doctor.specialization_id == 0)
+            {
+                doctor.specialization_id = this.specializationRepository.GetSpecializationByType(specialization);
+            }
+
+            return doctor;
         }
+        public Doctor AddDoctor(Doctor doctor, string specialization)
+        {
+            doctor = setSpecialization(doctor, specialization);
 
-        public Repository.DoctorRepository doctorRepository = new Repository.DoctorRepository();
+            return this.doctorRepository.NewDoctor(doctor);
+        }
+        #endregion
 
+        public SpecializationRepository specializationRepository = new SpecializationRepository();
+
+        public DoctorRepository doctorRepository = new DoctorRepository();
+        private EmployeesRepository employeesRepository = new EmployeesRepository();
+        private UserRepository userRepository = new UserRepository();
     }
 }

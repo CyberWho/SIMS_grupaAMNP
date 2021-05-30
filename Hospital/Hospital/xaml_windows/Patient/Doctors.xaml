@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
         mc:Ignorable="d"
-        Title="Doctors" Height="500" Width="900" Loaded="Window_Loaded">
+        Title="Doctors" Height="500" Width="900" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60"  />

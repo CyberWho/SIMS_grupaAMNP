@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using Hospital.Model;
 using Hospital.Repository;
+using static Globals;
 
 namespace Hospital.Repository
 {
@@ -19,8 +20,8 @@ namespace Hospital.Repository
         private ItemInRoomRepository itemInRoomRepository = new ItemInRoomRepository();
         private RoomRepository roomRepository = new RoomRepository();
 
-        OracleConnection connection = null;
-        private void setConnection()
+        //OracleConnection globalConnection = null;
+        /*private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             connection = new OracleConnection(conString);
@@ -32,7 +33,7 @@ namespace Hospital.Repository
             {
                 Trace.WriteLine(exp.ToString());
             }
-        }
+        }*/
         public ReservedItem GetReservedItemById(int id)
         {
             // TODO: implement
@@ -41,8 +42,8 @@ namespace Hospital.Repository
 
         public ObservableCollection<ReservedItem> GetAllReservedItems()
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            SetGlobalConnection();
+            OracleCommand command = globalConnection.CreateCommand();
             ObservableCollection<ReservedItem> reservedItems = new ObservableCollection<ReservedItem>();
             command.CommandText = "select * from reserved_item";
             OracleDataReader reader = command.ExecuteReader();
@@ -56,11 +57,13 @@ namespace Hospital.Repository
                 reservedItem.room_id = reader.GetInt32(2);
 
                 reservedItem.item_in_room_id = reader.GetInt32(3);
+                reservedItem.ItemInRoom = itemInRoomRepository.GetItemInRoomById(reservedItem.item_in_room_id);
+                reservedItem.Room = roomRepository.GetRoomById(reservedItem.room_id);
 
                 reservedItems.Add(reservedItem);
             }
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             /*foreach (ReservedItem reservedItem in reservedItems)
             {
@@ -109,8 +112,8 @@ namespace Hospital.Repository
 
         public ReservedItem NewReservedItem(ReservedItem reservedItem)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            SetGlobalConnection();
+            OracleCommand cmd = globalConnection.CreateCommand();
 
             if (reservedItem.ReservedDate == null)
             {
@@ -136,20 +139,21 @@ namespace Hospital.Repository
             {
                 cmd.ExecuteNonQuery();
 
-                connection.Close();
-                connection.Dispose();
+                globalConnection.Close();
+                globalConnection.Dispose();
 
                 return reservedItem;
             }
             catch (Exception exp)
             {
 
-                connection.Close();
-                connection.Dispose();
+                globalConnection.Close();
+                globalConnection.Dispose();
                 Trace.WriteLine(exp.ToString());
                 return null;
             }
         }
+
 
         public int GetLastId()
         {

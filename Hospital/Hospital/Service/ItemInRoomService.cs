@@ -8,6 +8,7 @@ using Hospital.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using static Globals;
 
 namespace Hospital.Service
 {
@@ -59,21 +60,39 @@ namespace Hospital.Service
         {
             return itemInRoomRepository.NewItemInRoom(itemInRoom);
         }
-        public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity, DateTime? dateTime)
+        public ItemInRoom MoveWholeItemNowToMainStorage(ItemInRoom itemInRoom)
         {
-            if (IsExpendable(itemInRoom)) 
+            Room mainStorage = roomRepository.GetRoomById(5);
+            itemInRoom.room_id = mainStorage.Id;
+            itemInRoom.room.Id = mainStorage.Id;
+
+            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, mainStorage.Id);
+            if (itemInDestinationRoom != null)
+            {
+                itemInDestinationRoom.Quantity += itemInRoom.Quantity;
+                itemInRoomRepository.DeleteItemInRoomById(itemInRoom.Id);
+                return itemInRoomRepository.UpdateItemInRoom(itemInDestinationRoom);
+            }
+            else
+            {
+                return itemInRoomRepository.UpdateItemInRoom(itemInRoom);
+            }
+        }
+        public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
+        {
+            /*if (IsExpendable(itemInRoom)) 
             {
                 return MoveExpendable(itemInRoom, destinationRoom, quantity);
             }
             else
             {
-
-            }
+                return 
+            }*/
             
-            return false;
+            return Move(itemInRoom, destinationRoom, quantity);
         }
 
-        private bool MoveExpendable(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
+        private bool Move(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
         {
             ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, destinationRoom.Id);
             if (itemInDestinationRoom != null)
@@ -129,10 +148,10 @@ namespace Hospital.Service
             }
             return null;
         }
-        private bool IsExpendable(ItemInRoom itemInRoom)
+/*        private bool IsExpendable(ItemInRoom itemInRoom)
         {
             return itemInRoom.inventoryItem.Type == 0;
-        }
+        }*/
 
         public ObservableCollection<ItemInRoom> LoadAllItems()
         {
