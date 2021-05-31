@@ -71,6 +71,42 @@ namespace Hospital.Repository
             return patient;
         }
 
+        public bool CheckIfPatientHasBeenLogedByPatientId(int patientId)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM HAS_BEEN_LOGED WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            reader.Read();
+            if (reader.GetInt32(2) == 0)
+            {
+                connection.Close();
+                connection.Dispose();
+                return false;
+                
+            }
+            else
+            {
+                connection.Close();
+                connection.Dispose();
+                return true;
+            }
+           
+        }
+
+        public void UpdateHasBeenLogedByPatientId(int patientId)
+        {
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE HAS_BEEN_LOGED SET HAS_BEEN_LOGED = 1 WHERE PATIENT_ID = :patient_id";
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
+            command.ExecuteNonQuery();
+            connection.Close();
+            connection.Dispose();
+
+        }
+
         private static Patient ParsePatient(OracleDataReader reader)
         {
             Patient patient = new Patient();

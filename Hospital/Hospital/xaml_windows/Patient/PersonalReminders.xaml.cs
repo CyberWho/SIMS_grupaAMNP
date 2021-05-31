@@ -36,12 +36,31 @@ namespace Hospital.xaml_windows.Patient
             this.userId = userId;
             InitializeComponent();
             updateDataGrid();
+            // FillComboBox();
             frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
             Izmeni.IsEnabled = false;
             Obrisi.IsEnabled = false;
             Kreiraj.IsEnabled = true;
         }
-      
+        private void FillComboBox()
+        {
+            frequency_txt.Items.Add(new
+            {
+                Value = (int)PersonalReminderFrequency.ONLY_ONCE,
+                Display = "Samo jednom"
+            });
+            frequency_txt.Items.Add(new
+            {
+                Value = (int)PersonalReminderFrequency.DAILY,
+                Display = "Svaki dan"
+            });
+            frequency_txt.Items.Add(new
+            {
+                Value = (int)PersonalReminderFrequency.WEEKLY,
+                Display = "Jednom nedeljno"
+            });
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
@@ -186,8 +205,8 @@ namespace Hospital.xaml_windows.Patient
             if(!DataValidation()) return;
             
             PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(GetPersonalReminderId());
-           
-            PersonalReminderFrequency frequency = (PersonalReminderFrequency)Enum.Parse(typeof(PersonalReminderFrequency), frequency_txt.SelectedValue.ToString());
+
+            PersonalReminderFrequency frequency = (PersonalReminderFrequency) frequency_txt.SelectedValue;
             UpdatePersonalReminder(personalReminder, frequency);
             updateDataGrid();
 
@@ -247,7 +266,7 @@ namespace Hospital.xaml_windows.Patient
         {
             Izmeni.IsEnabled = true;
             Obrisi.IsEnabled = true;
-            
+
         }
         private void Undo_OnClick(object sender, RoutedEventArgs e)
         {

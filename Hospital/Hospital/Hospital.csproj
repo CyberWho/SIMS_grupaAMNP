@@ -328,6 +328,15 @@
     <Compile Include="xaml_windows\Patient\Reminders.xaml.cs">
       <DependentUpon>Reminders.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\Wizard2.xaml.cs">
+      <DependentUpon>Wizard2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\Wizard3.xaml.cs">
+      <DependentUpon>Wizard3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Patient\WizardHome.xaml.cs">
+      <DependentUpon>WizardHome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
       <DependentUpon>CreateNotification.xaml</DependentUpon>
     </Compile>
@@ -556,6 +565,18 @@
     <Page Include="xaml_windows\Patient\Reminders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Patient\Wizard2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Patient\Wizard3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="xaml_windows\Patient\WizardHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Secretary\CreateNotification.xaml">
       <SubType>Designer</SubType>

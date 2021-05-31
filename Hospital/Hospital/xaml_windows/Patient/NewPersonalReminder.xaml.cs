@@ -31,13 +31,32 @@ namespace Hospital.xaml_windows.Patient
         {
             InitializeComponent();
             this.userId = userId;
-            frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
+            FillComboBox();
         }
         private int GetNextReminderId()
         {
             int reminderId = reminderController.GetLastId();
             reminderId++;
             return reminderId;
+        }
+
+        private void FillComboBox()
+        {
+            frequency_txt.Items.Add(new
+            {
+                Value = (int)PersonalReminderFrequency.ONLY_ONCE,
+                Display = "Samo jednom"
+            });
+            frequency_txt.Items.Add(new
+            {
+                Value = (int)PersonalReminderFrequency.DAILY,
+                Display = "Svaki dan"
+            });
+            frequency_txt.Items.Add(new
+            {
+                Value = (int)PersonalReminderFrequency.WEEKLY,
+                Display = "Jednom nedeljno"
+            });
         }
 
         private bool CheckIfNextReminderIdIsCorrect(int nextReminderId)
@@ -48,6 +67,7 @@ namespace Hospital.xaml_windows.Patient
             return false;
         }
 
+        
         private bool CheckIfNextPersonalReminderIdIsCorrect(int nextPersonalReminderId)
         {
             int personalReminderId = personalReminderController.GetLastId();
@@ -157,8 +177,7 @@ namespace Hospital.xaml_windows.Patient
         {
             int newPersonalReminderId = GetCorrectNextPersonalReminderId();
             int newReminderId = GetCorrectNextReminderId();
-            PersonalReminderFrequency frequency = (PersonalReminderFrequency) Enum.Parse(typeof(PersonalReminderFrequency),
-                frequency_txt.SelectedValue.ToString());
+            PersonalReminderFrequency frequency = (PersonalReminderFrequency) frequency_txt.SelectedValue;
             PersonalReminder personalReminder = new PersonalReminder(newPersonalReminderId, name_txt.Text, description_txt.Text,
                 DateTime.Parse(alarm_time_txt.Text), frequency, newReminderId);
             personalReminder.Patient = patientController.GetPatientByUserId(userId);

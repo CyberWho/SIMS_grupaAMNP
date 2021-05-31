@@ -35,6 +35,15 @@ namespace Hospital.Service
             return patientRepository.GetAllPatients();
         }
 
+        public bool CheckIfPatientHasBeenLogedByPatientId(int patientId)
+        {
+            return patientRepository.CheckIfPatientHasBeenLogedByPatientId(patientId);
+        }
+
+        public void UpdateHasBeenLogedByPatientId(int patientId)
+        {
+            patientRepository.UpdateHasBeenLogedByPatientId(patientId);
+        }
         public System.Collections.ArrayList GetAllPatientsByDoctorId(int doctorId)
         {
             // TODO: implement
