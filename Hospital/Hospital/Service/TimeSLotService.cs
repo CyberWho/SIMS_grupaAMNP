@@ -245,6 +245,8 @@ namespace Hospital.Service
                 {
                     reducedTimeSlots.Add(ts);
                 }
+
+                flag = false;
             }
 
             return reducedTimeSlots;

@@ -93,6 +93,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void fillSuitableRooms(ObservableCollection<Room> rooms, DateRange dateRange)
         {
+            rooms.Clear();
             foreach (Room room in rooms)
                 foreach (ItemInRoom itemInRoom in room.itemInRoom)
                     if (itemInRoom.inventoryItem_id == krevet_id &&
@@ -102,7 +103,6 @@ namespace Hospital.xaml_windows.Doctor
 
         private void fillRoomsToUi(ObservableCollection<Room> rooms)
         {
-            rooms.Clear();
             foreach (Room room in rooms)
             {
                 ListBoxItem item = new ListBoxItem();
