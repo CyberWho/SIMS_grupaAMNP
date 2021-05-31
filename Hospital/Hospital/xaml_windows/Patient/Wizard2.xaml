@@ -1,0 +1,31 @@
+﻿<Window x:Class="Hospital.xaml_windows.Patient.Wizard2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
+        mc:Ignorable="d"
+        Title="Wizard2" Height="500" Width="900">
+    <Grid>
+        <Button Content="Prethodni korak" x:Name="undo" Click="Undo_OnClick" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="21,427,0,0" VerticalAlignment="Top" Width="142"/>
+        <Button Content="Sledeći korak" x:Name="next" Click="Next_OnClick" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="754,427,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button Content="Odustani" x:Name="cancel" Click="Cancel_OnClick" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="616,427,0,0" VerticalAlignment="Top" Width="112"/>
+        <Label Content="Upoznavanje sa ikonicama" FontSize="40" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="219,33,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-home-96.png" Margin="82,113,753.6,318.4"/>
+        <Label Content="Početna stranica" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-male-user-96.png" Margin="173,113,661.6,318.4"/>
+        <Label Content="Moj profil" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="170,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-calendar-52.png" Margin="274,113,569.6,318.4"/>
+        <Label Content="Moji termini" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="263,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.106"/>
+        <Image Source="/Resources/Icons/icons8-heart-health-100.png" Margin="388,113,453.6,318.4"/>
+        <Label Content="Moj zdravstevni karton" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="354,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-stethoscope-48.png" Margin="502,113,337.6,318.4"/>
+        <Label Content="Doktori" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="506,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-notification-96.png" Margin="603,113,244.6,318.4"/>
+        <Label Content="Moj podsetnik" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="584,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-read-message-96.png" Margin="705,113,136.6,318.4"/>
+        <Label Content="Obaveštenja" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="694,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-exit-52.png" Margin="801,113,43.6,318.4"/>
+        <Label Content="Odjavi se" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="797,157,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

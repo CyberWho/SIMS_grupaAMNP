@@ -79,8 +79,18 @@ namespace Hospital.Controller
                     }
                     else
                     {
-                        s = new PatientUI(id);
-                        s.Show();
+                        bool logedInfo = patientController.CheckIfPatientHasBeenLogedByPatientId(patient.Id);
+                        if (!logedInfo)
+                        {
+                            patientController.UpdateHasBeenLogedByPatientId(patient.Id);
+                            s = new WizardHome(id);
+                            s.Show();
+                        }
+                        else
+                        {
+                            s = new PatientUI(id);
+                            s.Show();
+                        }
                     }
                     break;
                 case "Doctor":

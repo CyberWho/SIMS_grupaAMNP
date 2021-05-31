@@ -24,6 +24,15 @@ namespace Hospital.Controller
             return this.patientService.GetPatientById(id);
         }
 
+        public bool CheckIfPatientHasBeenLogedByPatientId(int patientId)
+        {
+            return patientService.CheckIfPatientHasBeenLogedByPatientId(patientId);
+        }
+
+        public void UpdateHasBeenLogedByPatientId(int patientId)
+        {
+            patientService.UpdateHasBeenLogedByPatientId(patientId);
+        }
         public Patient GetPatientByPatientId(int id)
         {
             Patient patient = this.patientService.GetPatientByPatientId(id);

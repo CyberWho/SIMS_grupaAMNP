@@ -1,0 +1,17 @@
+﻿<Window x:Class="Hospital.xaml_windows.Patient.WizardHome"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
+        mc:Ignorable="d"
+        Title="WizardHome" Height="500" Width="900">
+    <Grid >
+        <Label Content="Dobrodošli u pomoćnik!" FontSize="40" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="243,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ovaj pomoćnik će Vam omogućiti lakše korišćenje aplikacije" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="303,105,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="386,149,353.6,204.4" />
+        <Button Content="Prethodni korak" x:Name="undo" Click="Undo_OnClick" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="21,427,0,0" VerticalAlignment="Top" Width="142"/>
+        <Button Content="Sledeći korak" x:Name="next" Click="Next_OnClick" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="754,427,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button Content="Odustani" x:Name="cancel" Click="Cancel_OnClick" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="616,427,0,0" VerticalAlignment="Top" Width="112"/>
+    </Grid>
+</Window>
