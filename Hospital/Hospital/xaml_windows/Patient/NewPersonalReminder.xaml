@@ -18,7 +18,7 @@
         <Label Content="Opis:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="50,229,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="name_txt" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="166,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="description_txt" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="86" Margin="166,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144"/>
-        <ComboBox x:Name="frequency_txt" HorizontalAlignment="Left" Margin="166,196,0,0" ItemsSource="{Binding }" VerticalAlignment="Top" Width="144" FontSize="16" Foreground="DeepSkyBlue"/>
+        <ComboBox x:Name="frequency_txt" SelectedValuePath="Value" DisplayMemberPath="Display" HorizontalAlignment="Left" Margin="166,196,0,0" ItemsSource="{Binding }" VerticalAlignment="Top" Width="144" FontSize="16" Foreground="DeepSkyBlue"/>
         <xctk:DateTimePicker x:Name="alarm_time_txt" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="166,168,0,0"  VerticalAlignment="Top" Width="144"/>
         <Button Content="Potvrda" ToolTip="Klikom na dugme potvdjujete kreiranje podsetnika" x:Name="Potvrda" Click="Potvrda_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="166,345,0,0" VerticalAlignment="Top" Width="144"/>
 

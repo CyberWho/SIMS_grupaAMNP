@@ -310,5 +310,12 @@ namespace Hospital.xaml_windows.Patient
         {
             Izmeni.IsEnabled = true;
         }
+
+        private void Undo_OnClick(object sender, RoutedEventArgs e)
+        {
+            var window = new PatientAppointments(userId);
+            window.Show();
+            this.Close();
+        }
     }
 }
