@@ -190,6 +190,14 @@
     <Compile Include="Service\TimeSlotService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\WorkHoursService.cs" />
+    <Compile Include="ViewModel\Doctor\DoctorUIViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\MyICommand.cs" />
+    <Compile Include="ViewModel\Manager\ManagerUIViewModel.cs" />
+    <Compile Include="ViewModel\Manager\MyICommand.cs" />
+    <Compile Include="ViewModel\Patient\MyICommand.cs" />
+    <Compile Include="ViewModel\Patient\PatientUIViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\MyICommand.cs" />
+    <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
     <Compile Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml.cs">
       <DependentUpon>ClinicalTreatmentGiving.xaml</DependentUpon>
     </Compile>
@@ -714,10 +722,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
-    <Folder Include="ViewModel\Doctor\" />
-    <Folder Include="ViewModel\Manager\" />
-    <Folder Include="ViewModel\Patient\" />
-    <Folder Include="ViewModel\Secretary\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-undo-90.png" />
