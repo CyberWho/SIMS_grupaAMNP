@@ -24,6 +24,7 @@ namespace Hospital.xaml_windows.Patient
     public partial class PersonalReminders : Window
     {
         int userId;
+        private bool tooltipChecked;
         private ReminderController reminderController = new ReminderController();
         
         private PatientController patientController = new PatientController();
@@ -31,9 +32,10 @@ namespace Hospital.xaml_windows.Patient
         private ObservableCollection<PersonalReminder> personalReminders = new ObservableCollection<PersonalReminder>();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
 
-        public PersonalReminders(int userId)
+        public PersonalReminders(int userId,bool tooltipChecked)
         {
             this.userId = userId;
+            this.tooltipChecked = tooltipChecked;
             InitializeComponent();
             updateDataGrid();
             // FillComboBox();
@@ -41,6 +43,23 @@ namespace Hospital.xaml_windows.Patient
             Izmeni.IsEnabled = false;
             Obrisi.IsEnabled = false;
             Kreiraj.IsEnabled = true;
+            ToolTipChecked(tooltipChecked);
+        }
+        private void ToolTipChecked(bool tooltipChecked)
+        {
+            if (tooltipChecked == true)
+            {
+                CheckBox.IsChecked = true;
+            }
+            else
+            {
+                CheckBox.IsChecked = false;
+            }
+        }
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
+            tooltipChecked = true;
         }
         private void FillComboBox()
         {
@@ -67,13 +86,13 @@ namespace Hospital.xaml_windows.Patient
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId);
+            var window = new Reminders(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientUI(userId);
+            var window = new PatientUI(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -90,25 +109,25 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientInfo(userId);
+            var window = new PatientInfo(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientAppointments(userId);
+            var window = new PatientAppointments(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Doctors(userId);
+            var window = new Doctors(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientHealthRecord(userId);
+            var window = new PatientHealthRecord(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -120,7 +139,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Notifications(userId);
+            var window = new Notifications(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -258,8 +277,7 @@ namespace Hospital.xaml_windows.Patient
         {
             var window = new NewPersonalReminder(userId);
             window.Show();
-            this.Close();
-            
+
         }
 
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -270,9 +288,15 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Undo_OnClick(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId);
+            var window = new Reminders(userId,tooltipChecked);
             window.Show();
             this.Close();
+        }
+
+        private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
+            tooltipChecked = false;
         }
     }
 }

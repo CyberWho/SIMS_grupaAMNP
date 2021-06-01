@@ -83,6 +83,8 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <CheckBox x:Name="CheckBox" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="ToggleButton_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
+
         <Label Content="Odabrana anamneza:" FontSize="24" Foreground="DeepSkyBlue" Grid.Column="1" Margin="11.6,48,575.6,375.4" />
         <Label Content="Termin:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="11.6,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
         <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>

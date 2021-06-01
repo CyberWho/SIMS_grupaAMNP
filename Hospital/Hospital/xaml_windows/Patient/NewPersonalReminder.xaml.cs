@@ -170,7 +170,7 @@ namespace Hospital.xaml_windows.Patient
 
             CreateNewPersonalReminder();
             MessageBox.Show("Uspesno ste kreirali novi podsetnik!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
-            ShowPersonalReminders();
+            this.Close();
         }
 
         private void CreateNewPersonalReminder()
@@ -185,12 +185,7 @@ namespace Hospital.xaml_windows.Patient
             CreateNewPersonalReminder(personalReminder, frequency);
         }
 
-        private void ShowPersonalReminders()
-        {
-            var window = new PersonalReminders(userId);
-            window.Show();
-            this.Close();
-        }
+       
 
         private void CreateNewPersonalReminder(PersonalReminder personalReminder, PersonalReminderFrequency frequency)
         {

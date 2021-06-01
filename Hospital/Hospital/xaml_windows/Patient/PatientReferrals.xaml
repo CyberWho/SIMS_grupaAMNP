@@ -102,6 +102,7 @@
 
         <Label Content="Iskoristi odabrani uput:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Moji uputi:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="365.6,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.68"/>
+        <CheckBox x:Name="CheckBox" Unchecked="CheckBox_OnUnchecked"  Content="Pomoć" Checked="ToggleButton_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
 
     </Grid>
 </Window>

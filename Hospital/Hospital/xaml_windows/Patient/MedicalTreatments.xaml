@@ -93,5 +93,7 @@
         <TextBox Grid.Column="1" x:Name="start_time_txt" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="156,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.dateRange.StartTime,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox Grid.Column="1" x:Name="end_time_txt" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="156,144,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.dateRange.EndTime,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox Grid.Column="1" x:Name="period_txt" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="156,176,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Period,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
-    </Grid>
+        <CheckBox x:Name="CheckBox" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="ToggleButton_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
+
+</Grid>
 </Window>

@@ -57,5 +57,15 @@
                 <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
             </Border>
         </ControlTemplate>
+        <Style TargetType="CheckBox" x:Key="RoundedCheckBox">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7"/>
+                    <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                    <Setter Property="BorderThickness" Value="0.5"/>
+                </Style>
+            </Style.Resources>
+            
+        </Style>
     </Application.Resources>
 </Application>

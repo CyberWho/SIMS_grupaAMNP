@@ -75,5 +75,6 @@
         <Label Content="Dobrodošli!" FontSize="36" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="287.8,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.309,0.598"/>
         <Label Content="Cenimo Vase misljenje:" FontSize="16" Foreground="DeepSkyBlue"  Grid.Column="1" HorizontalAlignment="Left" Margin="370.8,421,0,0" VerticalAlignment="Top"/>
         <Label Content="Brinemo o Vašem zdravlju svakodnevno" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="252.8,266,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="CheckBox" Content="Pomoć" Unchecked="ToggleButton_OnUnchecked" Checked="ToggleButton_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
     </Grid>
 </Window>

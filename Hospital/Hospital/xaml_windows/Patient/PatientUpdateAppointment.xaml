@@ -67,6 +67,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <CheckBox x:Name="CheckBox" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="ToggleButton_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
+
 
         <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="155,144,0,0" TextWrapping="Wrap" Text="{Binding Path=DurationInMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
 

@@ -14,26 +14,43 @@ namespace Hospital.xaml_windows.Patient
     public partial class PatientAppointments : Window
     {
         private int userId;
+        private bool tooltipChecked;
         private AppointmentController appointmentController = new AppointmentController();
         private PatientController patientController = new PatientController();
         private ObservableCollection<Appointment> Appointments = new ObservableCollection<Appointment>();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         private PatientLogsController patientLogsController = new PatientLogsController();
 
-        public PatientAppointments(int userId)
+        public PatientAppointments(int userId,bool tooltipChecked)
         {
             
             InitializeComponent();
             this.userId = userId;
+            this.tooltipChecked = tooltipChecked;
             this.DataContext = this;
             updateDataGrid();
             ZakaziNoviTermin.IsEnabled = true;
             Izmeni.IsEnabled = false;
             Obrisi.IsEnabled = false;
+            ToolTipChecked(tooltipChecked);
+        }
+        private void ToolTipChecked(bool tooltipChecked)
+        {
+            if (tooltipChecked == true)
+            {
+                CheckBox.IsChecked = true;
+            }
+            else
+            {
+                CheckBox.IsChecked = false;
+            }
         }
 
-       
-
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
+            tooltipChecked = true;
+        }
         private int getPatientId()
         {
 
@@ -58,21 +75,21 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientInfo(userId);
+            var window = new PatientInfo(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientAppointments(userId);
+            var window = new PatientAppointments(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientUI(userId);
+            var window = new PatientUI(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -80,7 +97,7 @@ namespace Hospital.xaml_windows.Patient
        
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId);
+            var window = new Reminders(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -122,20 +139,20 @@ namespace Hospital.xaml_windows.Patient
 
         private void ShowPatientUpdateAppointment(int patientId, int appointmentId)
         {
-            var s = new PatientUpdateAppointment(patientId, appointmentId);
+            var s = new PatientUpdateAppointment(patientId, appointmentId,tooltipChecked);
             s.Show();
             this.Close();
         }
 
         private void Doktori_Click(object sender,RoutedEventArgs e)
         {
-            var window = new Doctors(userId);
+            var window = new Doctors(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void ZdravstveniKarton_Click(object sender,RoutedEventArgs e)
         {
-            var window = new PatientHealthRecord(userId);
+            var window = new PatientHealthRecord(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -169,7 +186,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientNewAppointment(userId);
+            var window = new PatientNewAppointment(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -179,7 +196,7 @@ namespace Hospital.xaml_windows.Patient
           
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ZakaziNoviTermin.IsEnabled = false;
+            ZakaziNoviTermin.IsEnabled = true;
             Obrisi.IsEnabled = true;
             Izmeni.IsEnabled = true;
         }
@@ -191,9 +208,15 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Notifications(userId);
+            var window = new Notifications(userId,tooltipChecked);
             window.Show();
             this.Close();
+        }
+
+        private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
+            tooltipChecked = false;
         }
     }
 }

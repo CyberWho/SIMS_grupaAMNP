@@ -94,14 +94,16 @@ namespace Hospital.xaml_windows.Patient
         #endregion
         
         private int userId;
+        private bool tooltipChecked;
         private HealthRecordController healthRecordController = new HealthRecordController();
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         
-        public PatientHealthRecord(int userId)
+        public PatientHealthRecord(int userId,bool tooltipChecked)
         {
             
             this.userId = userId;
+            this.tooltipChecked = tooltipChecked;
             InitializeComponent();
             Model.Patient patient = GetPatientByUserId(userId);
             HealthRecord healthRecord = GetHealthRecordByPatientId(patient.Id);
@@ -110,37 +112,48 @@ namespace Hospital.xaml_windows.Patient
             Gender = healthRecord.Gender;
             MaritalStatus = healthRecord.MaritalStatus;
             PlaceOfBirth = healthRecord.PlaceOfBirth.Name;
+            ToolTipChecked(tooltipChecked);
         }
-        
+        private void ToolTipChecked(bool tooltipChecked)
+        {
+            if (tooltipChecked == true)
+            {
+                CheckBox.IsChecked = true;
+            }
+            else
+            {
+                CheckBox.IsChecked = false;
+            }
+        }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientInfo(userId);
+            var window = new PatientInfo(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientAppointments(userId);
+            var window = new PatientAppointments(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientUI(userId);
+            var window = new PatientUI(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Doctors(userId);
+            var window = new Doctors(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientHealthRecord(userId);
+            var window = new PatientHealthRecord(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -158,7 +171,7 @@ namespace Hospital.xaml_windows.Patient
         private void MojiUputi_Click(object sender, RoutedEventArgs e)
         {
             var healthRecord = GetHealthRecord();
-            var window = new PatientReferrals(userId,healthRecord.Id);
+            var window = new PatientReferrals(userId,healthRecord.Id,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -173,7 +186,7 @@ namespace Hospital.xaml_windows.Patient
         private void MojeAlergije_Click(object sender, RoutedEventArgs e)
         {
             var healthRecord = GetHealthRecord();
-            var window = new Allergies(userId, healthRecord.Id);
+            var window = new Allergies(userId, healthRecord.Id,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -181,7 +194,7 @@ namespace Hospital.xaml_windows.Patient
         private void MojeAnamneze_Click(object sender, RoutedEventArgs e)
         {
             var healthRecord = GetHealthRecord();
-            var window = new PatientAnamnesis(userId, healthRecord.Id);
+            var window = new PatientAnamnesis(userId, healthRecord.Id,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -189,7 +202,7 @@ namespace Hospital.xaml_windows.Patient
        
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId);
+            var window = new Reminders(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -197,9 +210,14 @@ namespace Hospital.xaml_windows.Patient
         private void MojiRecepti_Click(object sender, RoutedEventArgs e)
         {
             var healthRecord = GetHealthRecord();
-            var window = new PatientPerscriptions(userId, healthRecord.Id);
+            var window = new PatientPerscriptions(userId, healthRecord.Id,tooltipChecked);
             window.Show();
             this.Close();
+        }
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
+            tooltipChecked = true;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -214,7 +232,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Notifications(userId);
+            var window = new Notifications(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -222,7 +240,7 @@ namespace Hospital.xaml_windows.Patient
         private void BolnickoLecenje_Click(object sender, RoutedEventArgs e)
         {
             var healthRecord = GetHealthRecord();
-            var window = new ClinicalTreatmentReferrals(userId, healthRecord.Id);
+            var window = new ClinicalTreatmentReferrals(userId, healthRecord.Id,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -230,9 +248,15 @@ namespace Hospital.xaml_windows.Patient
         private void Terapije_OnClick(object sender, RoutedEventArgs e)
         {
             var healthRecord = GetHealthRecord();
-            var window = new MedicalTreatments(userId, healthRecord.Id);
+            var window = new MedicalTreatments(userId, healthRecord.Id,tooltipChecked);
             window.Show();
             this.Close();
+        }
+
+        private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
+            tooltipChecked = false;
         }
     }
 }
