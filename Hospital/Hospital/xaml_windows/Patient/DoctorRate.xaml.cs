@@ -115,44 +115,7 @@ namespace Hospital.xaml_windows.Patient
         }
 
 
-        private void MojProfil_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PatientInfo(userId);
-            window.Show();
-            this.Close();
-        }
-
-        private void MojiPregledi_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PatientAppointments(userId);
-            window.Show();
-            this.Close();
-        }
-
-        private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PatientUI(userId);
-            window.Show();
-            this.Close();
-        }
-        private void Doktori_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new Doctors(userId);
-            window.Show();
-            this.Close();
-        }
-        private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PatientHealthRecord(userId);
-            window.Show();
-            this.Close();
-        }
-        private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PatientReminders(userId);
-            window.Show();
-            this.Close();
-        }
+        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -168,12 +131,19 @@ namespace Hospital.xaml_windows.Patient
             return true;
         }
 
+        private void ClearTextBlocks()
+        {
+            DescriptionBox.Text = "";
+            RateBox.Text = "";
+        }
+
         private bool DescriptionValidation()
         {
             if (description_txt.Text == "")
             {
-                MessageBox.Show("Obavezno je da date komentar ocene!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
-                return false;
+               // MessageBox.Show("Obavezno je da date komentar ocene!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
+               DescriptionBox.Text = "Obavezno je da date komentar ocene!";
+               return false;
             }
 
             return true;
@@ -183,8 +153,9 @@ namespace Hospital.xaml_windows.Patient
         {
             if (rate_txt.Text == null)
             {
-                MessageBox.Show("Obavezno je dodeliti ocenu doktoru!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
-                return false;
+               // MessageBox.Show("Obavezno je dodeliti ocenu doktoru!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
+               RateBox.Text = "Obavezno je dodeliti ocenu doktoru!";
+               return false;
             }
 
             return true;
@@ -192,6 +163,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void OceniDoktora_Click(object sender, RoutedEventArgs e)
         {
+            ClearTextBlocks();
             if (DataValidation() == false) return;
            
             

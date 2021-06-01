@@ -111,11 +111,11 @@ namespace Hospital.xaml_windows.Patient
         {
             if (!NameValidation()) return false;
 
-            if (!DescriptionValidation()) return false;
-
             if (!AlarmTimeValidation()) return false;
 
             if (!FrequencyValidation()) return false;
+
+            if (!DescriptionValidation()) return false;
 
             return true;
         }
@@ -124,7 +124,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (frequency_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
+                FreqBlock.Text = "Potrebno je da odaberete učestalost oglašavanja podsetnika!";
                 return false;
             }
 
@@ -133,10 +133,10 @@ namespace Hospital.xaml_windows.Patient
 
         private bool AlarmTimeValidation()
         {
-            if (alarm_time_txt.Text == "")
+            if (alarm_time_txt.Text == null)
             {
-                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
-                return false;
+                TimeBlock.Text = "Potrebno je da unesete vreme oglašavanja podsetnika!";
+               return false;
             }
 
             return true;
@@ -146,8 +146,8 @@ namespace Hospital.xaml_windows.Patient
         {
             if (description_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete opis podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
-                return false;
+                DescriptionBlock.Text = "Potrebno je da unesete opis podsetnika!";
+               return false;
             }
 
             return true;
@@ -157,20 +157,29 @@ namespace Hospital.xaml_windows.Patient
         {
             if (name_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete naziv podsetnika!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
+                NameBlock.Text = "Potrebno je da unesete naziv podsetnika!";
                 return false;
             }
 
             return true;
         }
 
+        private void ClearTextBlocks()
+        {
+            NameBlock.Text = "";
+            DescriptionBlock.Text = "";
+            TimeBlock.Text = "";
+            FreqBlock.Text = "";
+        }
+
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
+            ClearTextBlocks();
             if(DataValidation()==false) return;
 
             CreateNewPersonalReminder();
             MessageBox.Show("Uspesno ste kreirali novi podsetnik!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Information);
-            ShowPersonalReminders();
+            this.Close();
         }
 
         private void CreateNewPersonalReminder()
@@ -185,12 +194,7 @@ namespace Hospital.xaml_windows.Patient
             CreateNewPersonalReminder(personalReminder, frequency);
         }
 
-        private void ShowPersonalReminders()
-        {
-            var window = new PersonalReminders(userId);
-            window.Show();
-            this.Close();
-        }
+       
 
         private void CreateNewPersonalReminder(PersonalReminder personalReminder, PersonalReminderFrequency frequency)
         {

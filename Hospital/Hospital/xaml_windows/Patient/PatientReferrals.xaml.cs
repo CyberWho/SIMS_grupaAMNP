@@ -15,53 +15,71 @@ namespace Hospital.xaml_windows.Patient
     {
         private int userId;
         private int healthRecordId;
+        private bool tooltipChecked;
         private ObservableCollection<ReferralForSpecialist> ReferralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         
-        public PatientReferrals(int userId,int healthRecordId)
+        public PatientReferrals(int userId,int healthRecordId,bool tooltipChecked)
         {
             InitializeComponent();
             this.userId = userId;
             this.healthRecordId = healthRecordId;
+            this.tooltipChecked = tooltipChecked;
             updateDataGrid();
             Predlozi.IsEnabled = false;
+            ToolTipChecked(tooltipChecked);
         }
-     
+        private void ToolTipChecked(bool tooltipChecked)
+        {
+            if (tooltipChecked == true)
+            {
+                CheckBox.IsChecked = true;
+            }
+            else
+            {
+                CheckBox.IsChecked = false;
+            }
+        }
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
+            tooltipChecked = true;
+        }
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientInfo(userId);
+            var window = new PatientInfo(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
 
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientAppointments(userId);
+            var window = new PatientAppointments(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
 
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientUI(userId);
+            var window = new PatientUI(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Doctors(userId);
+            var window = new Doctors(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientHealthRecord(userId);
+            var window = new PatientHealthRecord(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId);
+            var window = new Reminders(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -108,7 +126,7 @@ namespace Hospital.xaml_windows.Patient
         private void ShowPatientNewAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
         {
             var window = new PatientNewAppointmentRecommendations(userId, startDate, endDate, doctorId, 0,
-                GetReferralId());
+                GetReferralId(),tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -144,15 +162,21 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Notifications(userId);
+            var window = new Notifications(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void Undo_OnClick(object sender, RoutedEventArgs e)
         {
-            var window = new PatientHealthRecord(userId);
+            var window = new PatientHealthRecord(userId,tooltipChecked);
             window.Show();
             this.Close();
+        }
+
+        private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
+            tooltipChecked = false;
         }
     }
 }

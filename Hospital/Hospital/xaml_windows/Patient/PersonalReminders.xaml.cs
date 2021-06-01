@@ -24,16 +24,21 @@ namespace Hospital.xaml_windows.Patient
     public partial class PersonalReminders : Window
     {
         int userId;
+        private Point startPoint = new Point();
+        private bool tooltipChecked;
         private ReminderController reminderController = new ReminderController();
-        
+
+        private ObservableCollection<PersonalReminder> SelectedPersonalReminders =
+            new ObservableCollection<PersonalReminder>();
         private PatientController patientController = new PatientController();
         private PersonalReminderController personalReminderController = new PersonalReminderController();
         private ObservableCollection<PersonalReminder> personalReminders = new ObservableCollection<PersonalReminder>();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
 
-        public PersonalReminders(int userId)
+        public PersonalReminders(int userId,bool tooltipChecked)
         {
             this.userId = userId;
+            this.tooltipChecked = tooltipChecked;
             InitializeComponent();
             updateDataGrid();
             // FillComboBox();
@@ -41,6 +46,25 @@ namespace Hospital.xaml_windows.Patient
             Izmeni.IsEnabled = false;
             Obrisi.IsEnabled = false;
             Kreiraj.IsEnabled = true;
+            DeleteAll.IsEnabled = false;
+            ToolTipChecked(tooltipChecked);
+        }
+        private void ToolTipChecked(bool tooltipChecked)
+        {
+            if (tooltipChecked == true)
+            {
+                CheckBox.IsChecked = true;
+            }
+            else
+            {
+                CheckBox.IsChecked = false;
+            }
+        }
+        
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
+            tooltipChecked = true;
         }
         private void FillComboBox()
         {
@@ -67,13 +91,13 @@ namespace Hospital.xaml_windows.Patient
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId);
+            var window = new Reminders(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientUI(userId);
+            var window = new PatientUI(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -85,30 +109,34 @@ namespace Hospital.xaml_windows.Patient
             DataTable dt = new DataTable();
             myDataGrid.DataContext = dt;
             myDataGrid.ItemsSource = personalReminders;
+            DataTable dtSelected = new DataTable();
+            myDataGridDrop.DataContext = dtSelected;
+            SelectedPersonalReminders = new ObservableCollection<PersonalReminder>();
+            myDataGridDrop.ItemsSource = SelectedPersonalReminders;
         }
 
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientInfo(userId);
+            var window = new PatientInfo(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientAppointments(userId);
+            var window = new PatientAppointments(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Doctors(userId);
+            var window = new Doctors(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientHealthRecord(userId);
+            var window = new PatientHealthRecord(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -120,7 +148,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Notifications(userId);
+            var window = new Notifications(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -258,8 +286,7 @@ namespace Hospital.xaml_windows.Patient
         {
             var window = new NewPersonalReminder(userId);
             window.Show();
-            this.Close();
-            
+
         }
 
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -268,11 +295,92 @@ namespace Hospital.xaml_windows.Patient
             Obrisi.IsEnabled = true;
 
         }
+        private void myDataGridDrop_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
         private void Undo_OnClick(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId);
+            var window = new Reminders(userId,tooltipChecked);
             window.Show();
             this.Close();
+        }
+
+        private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
+            tooltipChecked = false;
+        }
+
+        private void MyDataGrid_OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+        }
+
+        private void MyDataGrid_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                // Get the dragged ListViewItem
+                DataGrid dataGrid = sender as DataGrid;
+                DataGridRow dataGridRow =
+                    FindAncestor<DataGridRow>((DependencyObject)e.OriginalSource);
+
+                if (dataGridRow == null) return;
+
+                // Find the data behind the ListViewItem
+                PersonalReminder personalReminder = (PersonalReminder)myDataGrid.ItemContainerGenerator.
+                    ItemFromContainer(dataGridRow);
+
+                // Initialize the drag & drop operation
+                DataObject dragData = new DataObject("myFormat", personalReminder);
+                DragDrop.DoDragDrop(dataGridRow, dragData, DragDropEffects.Move);
+            }
+        }
+        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T)
+                {
+                    return (T)current;
+                }
+                current = VisualTreeHelper.GetParent(current);
+            }
+            while (current != null);
+            return null;
+        }
+        private void MyDataGridDrop_OnDragOver(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("myFormat") || e.Source == sender)
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+        private void MyDataGridDrop_OnDrop(object sender, DragEventArgs e)
+        {
+            SelectedPersonalReminders.Add((PersonalReminder)myDataGrid.SelectedItem);
+            personalReminders.Remove((PersonalReminder) myDataGrid.SelectedItem);
+            DeleteAll.IsEnabled = true;
+        }
+
+
+        private void DeleteAll_OnClick(object sender, RoutedEventArgs e)
+        {
+            foreach (PersonalReminder personalReminder in SelectedPersonalReminders)
+            {
+                personalReminderController.DeletePersonalReminderById(personalReminder.Id);
+                
+            }
+
+            updateDataGrid();
+            DeleteAll.IsEnabled = false;
         }
     }
 }

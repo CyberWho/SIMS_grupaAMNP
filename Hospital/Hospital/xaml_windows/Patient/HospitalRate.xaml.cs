@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Drawing;
+using System.Windows;
 using Hospital.Model;
 using Hospital.Controller;
 
@@ -27,11 +28,18 @@ namespace Hospital.xaml_windows.Patient
             return true;
         }
 
+        private void ClearTextBlocks()
+        {
+            Block1.Text = "";
+            Block.Text = "";
+        }
+
         private bool ValidateDescription()
         {
             if (description_txt.Text == "")
             {
-                MessageBox.Show("Obavezno je da unesete opis ocene!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
+                //MessageBox.Show("Obavezno je da unesete opis ocene!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
+                Block1.Text = "Obavezno je da unesete opis ocene!";
                 return false;
             }
 
@@ -42,7 +50,8 @@ namespace Hospital.xaml_windows.Patient
         {
             if (rate_txt.Text == null)
             {
-                MessageBox.Show("Obaveno je da unesete ocenu!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
+                //MessageBox.Show("Obaveno je da unesete ocenu!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Warning);
+                Block.Text = "Obavezno je da unesete ocenu!";
                 return false;
             }
 
@@ -51,6 +60,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
+            ClearTextBlocks();
             if(DataValidation() == false) return;
             
             Model.Patient patient = patientController.GetPatientByUserId(userId);

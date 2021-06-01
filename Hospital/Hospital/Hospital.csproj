@@ -328,6 +328,7 @@
     <Compile Include="xaml_windows\Patient\Reminders.xaml.cs">
       <DependentUpon>Reminders.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Patient\ToolTipBehavior.cs" />
     <Compile Include="xaml_windows\Patient\Wizard2.xaml.cs">
       <DependentUpon>Wizard2.xaml</DependentUpon>
     </Compile>
