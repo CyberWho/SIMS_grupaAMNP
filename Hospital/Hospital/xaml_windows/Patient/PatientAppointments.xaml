@@ -102,7 +102,7 @@
 
 
 
-        <xctk:DateTimePicker x:Name="date_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedDateTimePicker}" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="154.8,176,0,0" VerticalAlignment="Top" Value="{Binding SelectedItem.StartTime,ElementName=myDataGrid}" Width="144" Height="19"/>
+        <xctk:DateTimePicker x:Name="date_txt" IsReadOnly="True" Grid.Column="1" Style="{StaticResource RoundedDateTimePicker}" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="154.8,176,0,0" VerticalAlignment="Top" Value="{Binding SelectedItem.StartTime,ElementName=myDataGrid}" Width="144" Height="19"/>
         <Label Content="Status termina:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.634" Height="32" Width="115"/>
         <Label Content="Tip termina:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,1.052" Height="32" Width="94"/>
         <TextBox x:Name="app_stat_txt" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.8,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Status,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
