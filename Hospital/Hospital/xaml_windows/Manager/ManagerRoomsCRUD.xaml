@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
         mc:Ignorable="d"
-        Title="Prostorije" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        FontFamily="Segoe UI Symbol"
+        Title="Prostorije" Height="720" Width="1080" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="399" Margin="311,10,0,0" VerticalAlignment="Top" Width="467" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="471" Margin="443,132,0,0" VerticalAlignment="Top" Width="576" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Sprat" Binding="{Binding Floor}" Width="*" IsReadOnly="True"/>
@@ -33,11 +34,11 @@
         <TextBox x:Name="desc_txtbx" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="137,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="137,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="LightGray"/>
         <ComboBox x:Name="rtype_cmbbx" SelectedValue="{Binding SelectedItem.roomType.Id, ElementName=myDataGrid}" HorizontalAlignment="Left" Margin="137,196,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
-        <Button x:Name="add_btn" Content="Dodaj" HorizontalAlignment="Left" Margin="38,257,0,0" VerticalAlignment="Top" Width="75" Click="add_btn_Click"/>
-        <Button x:Name="update_btn" Content="Ažuriraj" HorizontalAlignment="Left" Margin="121,257,0,0" VerticalAlignment="Top" Width="75" Click="update_btn_Click" IsEnabled="False"/>
-        <Button x:Name="delete_btn" Content="Obriši" HorizontalAlignment="Left" Margin="204,257,0,0" VerticalAlignment="Top" Width="75" Click="delete_btn_Click" IsEnabled="False"/>
+        <Button x:Name="add_btn" Content="Dodaj &#xE109;" HorizontalAlignment="Left" Margin="38,239,0,0" VerticalAlignment="Top" Width="83" Click="add_btn_Click" Height="37"/>
+        <Button x:Name="update_btn" Content="Ažuriraj" HorizontalAlignment="Left" Margin="145,257,0,0" VerticalAlignment="Top" Width="75" Click="update_btn_Click" IsEnabled="False"/>
+        <Button x:Name="delete_btn" Content="Obriši" HorizontalAlignment="Left" Margin="228,257,0,0" VerticalAlignment="Top" Width="75" Click="delete_btn_Click" IsEnabled="False"/>
         <Button x:Name="clear_btn" Content="Očisti" HorizontalAlignment="Left" Margin="38,293,0,0" VerticalAlignment="Top" Width="75" Click="clear_btn_Click"/>
-        <Button x:Name="btnBack" Content="Nazad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-3.381,0.667" Click="btnBack_Click"/>
+        <Button x:Name="btnBack" Content="&#xE112; Nazad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-3.381,0.667" Click="btnBack_Click"/>
 
     </Grid>
 </Window>

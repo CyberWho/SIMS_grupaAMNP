@@ -30,12 +30,12 @@
         <Button x:Name="BackButton" FontFamily="Segoe UI Symbol" Content="&#xE112; Nazad" HorizontalAlignment="Left" Margin="38,13,0,0" VerticalAlignment="Top" Width="67" Height="21" Click="BackButton_Click"/>
         <Label Content="Izaberite prostorije:" HorizontalAlignment="Left" Margin="60,231,0,0" VerticalAlignment="Top"/>
         <Label Content="Odabrane prostorije:" HorizontalAlignment="Left" Margin="620,231,0,0" VerticalAlignment="Top"/>
-        <Label Content="Izaberite datum početka:" HorizontalAlignment="Left" Margin="247,96,0,0" VerticalAlignment="Top"/>
-        <Label Content="Izaberite tip:" HorizontalAlignment="Left" Margin="562,96,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="renovateBtn" Content="Renoviraj" HorizontalAlignment="Left" Margin="750,116,0,0" VerticalAlignment="Top" Width="95" Height="37" Click="renovateBtn_Click"/>
-        <Button x:Name="clearBtn" Content="Оčisti" HorizontalAlignment="Left" Margin="750,168,0,0" VerticalAlignment="Top" Width="95" Height="37" Click="clearBtn_Click"/>
-        <ComboBox x:Name="type_cmbbx" HorizontalAlignment="Left" Margin="562,123,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value" SelectionChanged="type_cmbbx_SelectionChanged"/>
-        <xctk:DateTimePicker x:Name="date_pckr" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="240" Height="24" Margin="247,122,0,0"/>
+        <Label Content="Izaberite datum početka:" HorizontalAlignment="Left" Margin="60,104,0,0" VerticalAlignment="Top"/>
+        <Label Content="Izaberite tip:" HorizontalAlignment="Left" Margin="340,98,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="renovateBtn" Content="Renoviraj" HorizontalAlignment="Left" Margin="340,175,0,0" VerticalAlignment="Top" Width="120" Height="37" Click="renovateBtn_Click"/>
+        <Button x:Name="clearBtn" Content="Оčisti" HorizontalAlignment="Left" Margin="180,175,0,0" VerticalAlignment="Top" Width="120" Height="37" Click="clearBtn_Click"/>
+        <ComboBox x:Name="type_cmbbx" HorizontalAlignment="Left" Margin="340,132,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value" SelectionChanged="type_cmbbx_SelectionChanged"/>
+        <xctk:DateTimePicker x:Name="date_pckr" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="240" Height="24" Margin="60,130,0,0"/>
 
     </Grid>
 </Window>

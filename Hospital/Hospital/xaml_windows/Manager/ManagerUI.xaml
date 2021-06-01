@@ -5,39 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
         mc:Ignorable="d"
-        Title="ManagerUI" Height="720" Width="1080" WindowStartupLocation="CenterScreen">
+        Title="ManagerUI" Height="720" Width="1080" WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI Symbol">
     <Grid>
-        <Button x:Name="roomsBtn" HorizontalAlignment="Left" Margin="333,188,0,0" VerticalAlignment="Top" Width="160" Click="roomBtnClick" Height="160" GotFocus="roomsBtn_GotFocus" BorderBrush="{x:Null}" Foreground="{x:Null}" LostFocus="roomsBtn_LostFocus"  >
-            <TextBlock FontFamily="Segoe UI Symbol" Text="      &#x1f3e2;&#xa;Prostorije" Foreground="#e8ebed" FontSize="30" >
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
-                </TextBlock.Effect>
-            </TextBlock>
-            <Button.Effect>
-                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
-            </Button.Effect>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#3499eb"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="RoyalBlue"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button x:Name="drugsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="333,372,0,0" VerticalAlignment="Top" Width="160" Click="drugsBtnClick" Height="160">
-            <TextBlock FontFamily="Segoe UI Symbol" Text="   &#x1f48a;&#xa;Lekovi" Foreground="#e8ebed" FontSize="30" >
+        <Button x:Name="roomsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="302,170,0,0" VerticalAlignment="Top" Width="200" Click="roomBtnClick" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
+            <TextBlock Text="      &#x1f3e2;&#xa;Prostorije" Foreground="#e8ebed" FontSize="30" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
                 </TextBlock.Effect>
@@ -46,8 +18,8 @@
                 <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="inventorySearchBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="549,188,0,0" VerticalAlignment="Top" Width="160" Click="inventorySearchBtn_Click" Height="160">
-            <TextBlock FontFamily="Segoe UI Symbol" Text="     &#xE11A;&#xa;Pretraga&#xa;inventara" Foreground="#e8ebed" FontSize="30" >
+        <Button x:Name="inventorySearchBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="549,170,0,0" VerticalAlignment="Top" Width="200" Click="inventorySearchBtn_Click" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
+            <TextBlock Text="     &#xE11A;&#xa;Pretraga&#xa;inventara" Foreground="#e8ebed" FontSize="30" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
                 </TextBlock.Effect>
@@ -56,8 +28,8 @@
                 <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Background="#3499eb" Margin="549,372,0,0" VerticalAlignment="Top" Width="160" Click="renovationsBtn_Click" Height="160">
-            <TextBlock FontFamily="Segoe UI Symbol" Text="      &#xE15E;&#xa;Renovacije" Foreground="#e8ebed" FontSize="30" >
+        <Button x:Name="drugsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="302,405,0,0" VerticalAlignment="Top" Width="200" Click="drugsBtnClick" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
+            <TextBlock Text="   &#x1f48a;&#xa;Lekovi" Foreground="#e8ebed" FontSize="30" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
                 </TextBlock.Effect>
@@ -66,5 +38,40 @@
                 <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
             </Button.Effect>
         </Button>
+        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Background="#3499eb" Margin="549,405,0,0" VerticalAlignment="Top" Width="200" Click="renovationsBtn_Click" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
+            <TextBlock Text="      &#xE15E;&#xa;Renovacije" Foreground="#e8ebed" FontSize="30" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="logout_btn" Background="#3499eb" HorizontalAlignment="Left" Margin="887,29,0,0" VerticalAlignment="Top" Width="153" Height="37" Click="logout_btn_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
+            <TextBlock Text="&#xE127; Izlogujte se" Foreground="#e8ebed" FontSize="20" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+        </Button>
+        <Canvas Grid.Row="1">
+            <Image Source="/Hospital;component/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="10,21,1018.6,624.4">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="bgTranslate"/>
+                </Image.RenderTransform>
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Image.Effect>
+            </Image>
+            <TextBlock Text="ZDRAVO KORPORACIJA" Foreground="#e8ebed" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Canvas>
     </Grid>
 </Window>

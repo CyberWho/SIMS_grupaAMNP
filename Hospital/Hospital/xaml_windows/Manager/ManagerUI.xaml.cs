@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Hospital.xaml_windows.Manager
@@ -11,7 +12,6 @@ namespace Hospital.xaml_windows.Manager
         int id;
         public ManagerUI(int id)
         {
-            new Model.DispatcherTimerForReservedItems();
             InitializeComponent();
             this.id = id;
         }
@@ -43,14 +43,23 @@ namespace Hospital.xaml_windows.Manager
             this.Close();
         }
 
-        private void roomsBtn_GotFocus(object sender, RoutedEventArgs e)
+        private void btn_GotFocus(object sender, RoutedEventArgs e)
         {
-            roomsBtn.Background = Brushes.RoyalBlue;
+            Button btn = sender as Button;
+            btn.Background = new SolidColorBrush(Color.FromArgb(255, (byte)16, (byte)93, (byte)151));
         }
 
-        private void roomsBtn_LostFocus(object sender, RoutedEventArgs e)
+        private void btn_LostFocus(object sender, RoutedEventArgs e)
         {
-            roomsBtn.Background = new SolidColorBrush(Color.FromArgb(255, (byte)52, (byte)153, (byte)235));
+            Button btn = sender as Button;
+            btn.Background = new SolidColorBrush(Color.FromArgb(255, (byte)52, (byte)153, (byte)235));
+        }
+
+        private void logout_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Window newWindow = new MainWindow();
+            newWindow.Show();
+            this.Close();
         }
     }
 }
