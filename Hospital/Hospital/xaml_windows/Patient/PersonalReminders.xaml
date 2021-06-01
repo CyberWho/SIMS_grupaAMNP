@@ -21,7 +21,7 @@
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
-                        
+
 
                     </StackPanel>
                 </MenuItem.Header>
@@ -81,7 +81,17 @@
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding personalReminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" AllowDrop="True" ItemsSource="{Binding personalReminders}" MouseMove="MyDataGrid_OnMouseMove" PreviewMouseLeftButtonDown="MyDataGrid_OnPreviewMouseLeftButtonDown" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480" SelectionChanged="myDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Id podsetnika" Binding="{Binding reminderId}" Width="*" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Vreme oglašavanja" Binding="{Binding AlarmTime}" Width="*"/>
+                <DataGridTextColumn Header="Učestalost" Binding="{Binding PersonalReminderFrequency}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="myDataGridDrop" AllowDrop="True" ItemsSource="{Binding SelectedPersonalReminders}" DragOver="MyDataGridDrop_OnDragOver" Drop="MyDataGridDrop_OnDrop"  CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="73" Margin="348.8,330,0,0" VerticalAlignment="Top" Width="475" SelectionChanged="myDataGridDrop_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Id podsetnika" Binding="{Binding reminderId}" Width="*" Visibility="Hidden"/>
@@ -108,6 +118,7 @@
         <Button Content="Izmeni podsetnik" ToolTip="Klikom na dugme izmenićete podsetnik" x:Name="Izmeni" Click="Izmeni_Click" FontSize="16" Foreground="White" Background="RoyalBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="29.8,318,0,0" VerticalAlignment="Top" Width="144"/>
         <Button Content="Obriši podsetnik" ToolTip="Klikom na dugme obrisaćete podsetnik" x:Name="Obrisi" Click="Obrisi_Click" FontSize="16" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,318,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="1.627,0.417"/>
         <Button Content="Kreiraj novi podsetnik" ToolTip="Klikom na dugme možete kreirati novi podsetnik" x:Name="Kreiraj" Click="Kreiraj_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="93.8,348,0,0" VerticalAlignment="Top" Width="171"/>
+        <Button Content="Obriši sve podsetnike" Click="DeleteAll_OnClick" ToolTip="Klikom na dugme možete obrisati sve podsetnike iz tabele" x:Name="DeleteAll" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="487.8,426,0,0" VerticalAlignment="Top" Width="182" Height="24"/>
 
     </Grid>
 </Window>
