@@ -190,7 +190,8 @@
     <Compile Include="Service\TimeSlotService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\WorkHoursService.cs" />
-    <Compile Include="ViewModel\Doctor\DoctorUIViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\BindableBase.cs" />
+    <Compile Include="ViewModel\Doctor\DoctorUIwindowViewModel.cs" />
     <Compile Include="ViewModel\Doctor\MyICommand.cs" />
     <Compile Include="ViewModel\Manager\ManagerUIViewModel.cs" />
     <Compile Include="ViewModel\Manager\MyICommand.cs" />
@@ -198,6 +199,9 @@
     <Compile Include="ViewModel\Patient\PatientUIViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
+    <Compile Include="View\Doctor\DoctorUIwindow.xaml.cs">
+      <DependentUpon>DoctorUIwindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml.cs">
       <DependentUpon>ClinicalTreatmentGiving.xaml</DependentUpon>
     </Compile>
@@ -385,6 +389,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Doctor\DoctorUIwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
