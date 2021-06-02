@@ -68,9 +68,16 @@ namespace Hospital.ViewModel.Patient
             Update = new MyICommand(OnUpdate);
             Delete = new MyICommand(OnDelete);
             New = new MyICommand(OnNew);
+            MyHealthRecord = new MyICommand(OnHealthRecord);
             SelectionChanged = new MyICommand(OnSelectionChanged);
             LogOut = new MyICommand(OnLogOut);
             updateDataGrid();
+        }
+        private void OnHealthRecord()
+        {
+            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnLogOut()
         {

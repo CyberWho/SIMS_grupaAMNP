@@ -60,13 +60,21 @@ namespace Hospital.ViewModel.Patient
             this.referralForSpecialistId = referralForSpecialist;
             this.tooltipChecked = tooltipChecked;
             this.thisWindow = thisWindow;
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
             New = new MyICommand(OnNew);
             LogOut = new MyICommand(OnLogOut);
             Undo = new MyICommand(OnUndo);
+            MyHealthRecord = new MyICommand(OnHealthRecord);
             updateDataGrid();
+        }
+        private void OnHealthRecord()
+        {
+            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
 
         private void OnUndo()

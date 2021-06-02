@@ -194,18 +194,35 @@
     <Compile Include="ViewModel\Doctor\MyICommand.cs" />
     <Compile Include="ViewModel\Manager\ManagerUIViewModel.cs" />
     <Compile Include="ViewModel\Manager\MyICommand.cs" />
+    <Compile Include="ViewModel\Patient\AllergiesViewModel.cs" />
     <Compile Include="ViewModel\Patient\BindableBase.cs" />
+    <Compile Include="ViewModel\Patient\ClinicalTreatmentReferralsViewModel.cs" />
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
+    <Compile Include="ViewModel\Patient\PatientAnamnsisViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientAppointmentsViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientHealthRecordViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientInfoViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientNewAppointmentRecommendationsViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientNewAppointmentViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientReferralsViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientUIViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientUpdateAppointmentViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
+    <Compile Include="View\Patient\AllergiesView.xaml.cs">
+      <DependentUpon>AllergiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\ClinicalTreatmentReferralsView.xaml.cs">
+      <DependentUpon>ClinicalTreatmentReferralsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientAnamnesisView.xaml.cs">
+      <DependentUpon>PatientAnamnesisView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\PatientAppointmentsView.xaml.cs">
       <DependentUpon>PatientAppointmentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientHealthRecordView.xaml.cs">
+      <DependentUpon>PatientHealthRecordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientInfoView.xaml.cs">
       <DependentUpon>PatientInfoView.xaml</DependentUpon>
@@ -215,6 +232,9 @@
     </Compile>
     <Compile Include="View\Patient\PatientNewAppointmentView.xaml.cs">
       <DependentUpon>PatientNewAppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientReferralsView.xaml.cs">
+      <DependentUpon>PatientReferralsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientUIView.xaml.cs">
       <DependentUpon>PatientUIView.xaml</DependentUpon>
@@ -419,7 +439,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Patient\AllergiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\ClinicalTreatmentReferralsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientAnamnesisView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Patient\PatientAppointmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientHealthRecordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -432,6 +468,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\PatientNewAppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientReferralsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

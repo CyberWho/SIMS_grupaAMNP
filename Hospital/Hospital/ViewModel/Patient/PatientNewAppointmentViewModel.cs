@@ -47,6 +47,7 @@ namespace Hospital.ViewModel.Patient
             this.userId = userId;
             this.tooltipChecked = tooltipChecked;
             this.thisWindow = thisWindow;
+            dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
@@ -55,9 +56,15 @@ namespace Hospital.ViewModel.Patient
             CheckedDoctor = new MyICommand(OnCheckedDoctor);
             CheckedTime = new MyICommand(OnCheckedTime);
             ChooseDoctor = new MyICommand(OnChooseDoctor);
+            MyHealthRecord = new MyICommand(OnHealthRecord);
             ShowGeneralPurposeDoctors();
         }
-
+        private void OnHealthRecord()
+        {
+            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
+        }
         private void ShowGeneralPurposeDoctors()
         {
             Doctors = doctorController.GetAllGeneralPurposeDoctors();

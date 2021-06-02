@@ -14,7 +14,7 @@ namespace Hospital.ViewModel.Patient
     class PatientInfoViewModel : BindableBase
     {
         private int userId;
-        private bool tooltipCheked;
+        private bool tooltipChecked;
         private Window thisWindow;
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         public string Username { get; set; }
@@ -47,17 +47,24 @@ namespace Hospital.ViewModel.Patient
         }
 
 
-        public PatientInfoViewModel(int userId,bool tooltipCheked, Window thisWindow)
+        public PatientInfoViewModel(int userId,bool tooltipChecked, Window thisWindow)
         {
             this.userId = userId;
             this.thisWindow = thisWindow;
-            this.tooltipCheked = tooltipCheked;
+            this.tooltipChecked = tooltipChecked;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             ShowPatientInfo();
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
             LogOut = new MyICommand(OnLogOut);
+            MyHealthRecord = new MyICommand(OnHealthRecord);
+        }
+        private void OnHealthRecord()
+        {
+            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnLogOut()
         {
@@ -68,7 +75,7 @@ namespace Hospital.ViewModel.Patient
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId,tooltipCheked);
+            Window window = new PatientAppointmentsView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -86,14 +93,14 @@ namespace Hospital.ViewModel.Patient
 
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId,tooltipCheked);
+            Window window = new PatientInfoView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnHomePage()
         {
-            Window window = new PatientUIView(userId,tooltipCheked);
+            Window window = new PatientUIView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
