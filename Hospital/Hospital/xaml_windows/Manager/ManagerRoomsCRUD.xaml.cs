@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace Hospital.xaml_windows.Manager
 {
@@ -43,6 +44,7 @@ namespace Hospital.xaml_windows.Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            EnablePrimaryButtons();
             this.updateDataGrid();
         }
 
@@ -122,21 +124,18 @@ namespace Hospital.xaml_windows.Manager
 
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           add_btn.IsEnabled = false;
-           update_btn.IsEnabled = true;
-           delete_btn.IsEnabled = true;
+            EnableSecondaryButtons();
         }
 
         private void clear_btn_Click(object sender, RoutedEventArgs e)
         {
-            floor_txtbx.Text = "";
+            /*floor_txtbx.Text = "";
             area_txtbx.Text = "";
             desc_txtbx.Text = "";
             id_txtbx.Text = "";
-            rtype_cmbbx.SelectedItem = null;
-            add_btn.IsEnabled = true;
-            update_btn.IsEnabled = false;
-            delete_btn.IsEnabled = false;
+            rtype_cmbbx.SelectedItem = null;*/
+            myDataGrid.SelectedItem = null;
+            EnablePrimaryButtons();
         }
         private void fillComboBox()
         {
@@ -173,6 +172,37 @@ namespace Hospital.xaml_windows.Manager
         {
             Button btn = sender as Button;
             btn.Background = new SolidColorBrush(Color.FromArgb(255, (byte)52, (byte)153, (byte)235));
+        }
+        public void EnablePrimaryButtons()
+        {
+            add_btn.IsEnabled = true;
+            add_txtblk.Effect = new DropShadowEffect
+            {
+                Color = Colors.Black,
+                Direction = 330,
+                ShadowDepth = 3,
+                BlurRadius = 4
+            };
+            update_btn.IsEnabled = false;
+            update_txtblk.Effect = null;
+            delete_btn.IsEnabled = false;
+            delete_txtblk.Effect = null;
+        }
+        public void EnableSecondaryButtons()
+        {
+            add_btn.IsEnabled = false;
+            add_txtblk.Effect = null;
+            DropShadowEffect shadow = new DropShadowEffect
+            {
+                Color = Colors.Black,
+                Direction = 330,
+                ShadowDepth = 3,
+                BlurRadius = 4
+            };
+            update_btn.IsEnabled = true;
+            update_txtblk.Effect = shadow;
+            delete_btn.IsEnabled = true;
+            delete_txtblk.Effect = shadow;
         }
     }
 }

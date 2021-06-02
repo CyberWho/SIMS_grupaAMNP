@@ -11,12 +11,12 @@
     <Window.Resources>
     </Window.Resources>
     <Grid>
-        <Border  Background="White" Padding="30" CornerRadius="14" Margin="49,131,767.6,299.4">
+        <Border  Background="White" Padding="30" CornerRadius="14" Margin="49,131,767.6,257.4">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
             </Border.Effect>
         </Border>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="534" Margin="377,119,0,0" VerticalAlignment="Top" Width="663" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="534" Margin="377,119,0,0" VerticalAlignment="Top" Width="663" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged" Style="{StaticResource managerDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Sprat" Binding="{Binding Floor}" Width="*" IsReadOnly="True"/>
@@ -40,16 +40,16 @@
         <TextBox x:Name="desc_txtbx" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Opis" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="68,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
         <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" IsReadOnly="True" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Broj" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="68,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222" Background="LightGray"/>
         <ComboBox x:Name="rtype_cmbbx" SelectedValue="{Binding SelectedItem.roomType.Id, ElementName=myDataGrid}" DisplayMemberPath="Display" SelectedValuePath="Value" materialDesign:HintAssist.Hint="Tip" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="68,328,783.6,325.4" Height="37"/>
-        <Button x:Name="add_btn" HorizontalAlignment="Left" Margin="81,424,0,0" VerticalAlignment="Top" Click="add_btn_Click" Style="{StaticResource managerRegularBtn}">
-            <TextBlock Text="&#xE109; Dodaj" Style="{StaticResource managerTextBlock}"/>
+        <Button x:Name="add_btn" HorizontalAlignment="Left" Margin="84,456,0,0" VerticalAlignment="Top" Click="add_btn_Click" Style="{StaticResource managerRegularBtn}">
+            <TextBlock x:Name="add_txtblk" Text="&#xE109; Dodaj" Style="{StaticResource managerTextBlock}"/>
         </Button>
-        <Button x:Name="update_btn"  HorizontalAlignment="Left" Margin="81,479,0,0" VerticalAlignment="Top"  Click="update_btn_Click" IsEnabled="False" Style="{StaticResource managerRegularBtn}">
-            <TextBlock Text="&#xE104; Ažuriraj" Style="{StaticResource managerTextBlock}"/>
+        <Button x:Name="update_btn"  HorizontalAlignment="Left" Margin="84,509,0,0" VerticalAlignment="Top"  Click="update_btn_Click" IsEnabled="False" Style="{StaticResource managerRegularBtn}">
+            <TextBlock x:Name="update_txtblk" Text="&#xE104; Ažuriraj" Style="{StaticResource managerTextBlock}"/>
         </Button>
-        <Button x:Name="delete_btn" HorizontalAlignment="Left" Margin="81,533,0,0" VerticalAlignment="Top" Click="delete_btn_Click" IsEnabled="False" Style="{StaticResource managerRegularBtn}">
-            <TextBlock Text="&#xE107; Obriši" Style="{StaticResource managerTextBlock}"/>
+        <Button x:Name="delete_btn" HorizontalAlignment="Left" Margin="84,563,0,0" VerticalAlignment="Top" Click="delete_btn_Click" IsEnabled="False" Style="{StaticResource managerRegularBtn}">
+            <TextBlock x:Name="delete_txtblk" Text="&#xE107; Obriši" Style="{StaticResource managerTextBlock}"/>
         </Button>
-        <Button x:Name="clear_btn" HorizontalAlignment="Left" Margin="81,584,0,0" VerticalAlignment="Top"  Click="clear_btn_Click" Style="{StaticResource managerRegularBtn}">
+        <Button x:Name="clear_btn" HorizontalAlignment="Left" Margin="84,614,0,0" VerticalAlignment="Top"  Click="clear_btn_Click" Style="{StaticResource managerRegularBtn}">
             <TextBlock Text="&#xE106; Očisti" Style="{StaticResource managerTextBlock}"/>
         </Button>
         <Button x:Name="logout_btn" Background="#3499eb" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="btnBack_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Canvas.Left="860" Canvas.Top="18" Margin="860,18,0,0" Style="{StaticResource managerRegularBtn}">

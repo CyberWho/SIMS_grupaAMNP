@@ -9,55 +9,20 @@
         Title="ManagerUI" Height="720" Width="1080" WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI Symbol">
     <Grid>
-        <Button x:Name="roomsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="302,170,0,0" VerticalAlignment="Top" Width="200" Click="roomBtnClick" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
-            <TextBlock Text="      &#x1f3e2;&#xa;Prostorije" Foreground="#e8ebed" FontSize="30" >
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
-                </TextBlock.Effect>
-            </TextBlock>
-            <Button.Effect>
-                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
-            </Button.Effect>
+        <Button x:Name="roomsBtn"  HorizontalAlignment="Left" Margin="302,170,0,0" VerticalAlignment="Top" Width="200" Click="roomBtnClick" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="      &#x1f3e2;&#xa;Prostorije" FontSize="30" Style="{StaticResource managerTextBlock}" />
         </Button>
-        <Button x:Name="inventorySearchBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="549,170,0,0" VerticalAlignment="Top" Width="200" Click="inventorySearchBtn_Click" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
-            <TextBlock Text="     &#xE11A;&#xa;Pretraga&#xa;inventara" Foreground="#e8ebed" FontSize="30" >
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
-                </TextBlock.Effect>
-            </TextBlock>
-            <Button.Effect>
-                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
-            </Button.Effect>
+        <Button x:Name="inventorySearchBtn" HorizontalAlignment="Left" Margin="549,170,0,0" VerticalAlignment="Top" Width="200" Click="inventorySearchBtn_Click" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="     &#xE11A;&#xa;Pretraga&#xa;inventara" FontSize="30" Style="{StaticResource managerTextBlock}" />
         </Button>
-        <Button x:Name="drugsBtn" Background="#3499eb" HorizontalAlignment="Left" Margin="302,405,0,0" VerticalAlignment="Top" Width="200" Click="drugsBtnClick" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
-            <TextBlock Text="   &#x1f48a;&#xa;Lekovi" Foreground="#e8ebed" FontSize="30" >
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
-                </TextBlock.Effect>
-            </TextBlock>
-            <Button.Effect>
-                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
-            </Button.Effect>
+        <Button x:Name="drugsBtn" HorizontalAlignment="Left" Margin="302,405,0,0" VerticalAlignment="Top" Width="200" Click="drugsBtnClick" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="   &#x1f48a;&#xa;Lekovi" FontSize="30" Style="{StaticResource managerTextBlock}"/>
         </Button>
-        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Background="#3499eb" Margin="549,405,0,0" VerticalAlignment="Top" Width="200" Click="renovationsBtn_Click" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
-            <TextBlock Text="      &#xE15E;&#xa;Renovacije" Foreground="#e8ebed" FontSize="30" >
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
-                </TextBlock.Effect>
-            </TextBlock>
-            <Button.Effect>
-                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
-            </Button.Effect>
+        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Margin="549,405,0,0" VerticalAlignment="Top" Width="200" Click="renovationsBtn_Click" Height="200" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="      &#xE15E;&#xa;Renovacije" FontSize="30" Style="{StaticResource managerTextBlock}"/>
         </Button>
-        <Button x:Name="logout_btn" Background="#3499eb" HorizontalAlignment="Left" Margin="860,18,0,0" VerticalAlignment="Top" Width="180" Height="50" Click="logout_btn_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
-            <TextBlock Text="&#xE127; Izlogujte se" Foreground="#e8ebed" FontSize="20" >
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
-                </TextBlock.Effect>
-            </TextBlock>
-            <Button.Effect>
-                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
-            </Button.Effect>
+        <Button x:Name="logout_btn" HorizontalAlignment="Left" Margin="860,18,0,0" VerticalAlignment="Top" Width="180" Height="50" Click="logout_btn_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE127; Izlogujte se" FontSize="20" Style="{StaticResource managerTextBlock}"/>
         </Button>
         <Canvas Grid.Row="1">
             <Image Source="/Hospital;component/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="10,21,1018.6,624.4">
@@ -68,11 +33,7 @@
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Gray" BlurRadius="4"/>
                 </Image.Effect>
             </Image>
-            <TextBlock Text="ZDRAVO KORPORACIJA" Foreground="#e8ebed" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37">
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="black" BlurRadius="4"/>
-                </TextBlock.Effect>
-            </TextBlock>
+            <TextBlock Text="ZDRAVO KORPORACIJA" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37" Style="{StaticResource managerTextBlock}"/>
         </Canvas>
     </Grid>
 </Window>
