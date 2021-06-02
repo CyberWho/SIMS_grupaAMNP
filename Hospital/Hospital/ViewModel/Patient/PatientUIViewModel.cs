@@ -56,7 +56,14 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             HospitalRate = new MyICommand(OnHospitalRate);
             MyReminders = new MyICommand(OnMyReminders);
+            ShowNotifications = new MyICommand(OnShowNotifications);
 
+        }
+        private void OnShowNotifications()
+        {
+            Window window = new NotificationsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnMyReminders()
         {

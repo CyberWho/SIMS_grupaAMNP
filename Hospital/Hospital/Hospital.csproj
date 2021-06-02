@@ -202,6 +202,7 @@
     <Compile Include="ViewModel\Patient\HospitalRateViewModel.cs" />
     <Compile Include="ViewModel\Patient\MedicalTreatmenstViewModel.cs" />
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
+    <Compile Include="ViewModel\Patient\NotificationsViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientAnamnsisViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientHealthRecordViewModel.cs" />
@@ -233,6 +234,9 @@
     </Compile>
     <Compile Include="View\Patient\MedicalTreatmentsView.xaml.cs">
       <DependentUpon>MedicalTreatmentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientAnamnesisView.xaml.cs">
       <DependentUpon>PatientAnamnesisView.xaml</DependentUpon>
@@ -488,6 +492,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\MedicalTreatmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\NotificationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

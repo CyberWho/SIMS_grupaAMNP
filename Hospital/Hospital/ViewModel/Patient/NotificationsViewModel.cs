@@ -9,18 +9,19 @@ using Hospital.Controller;
 using Hospital.Model;
 using Hospital.View.Patient;
 using Hospital.xaml_windows.Patient;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace Hospital.ViewModel.Patient
 {
-    class PatientRemindersViewModel : BindableBase
+    class NotificationsViewModel : BindableBase
     {
         private int userId;
         private bool tooltipChecked;
         private Window thisWindow;
-        private ReminderController reminderController = new ReminderController();
+        private SystemNotificationsController SystemNotificationsController = new SystemNotificationsController();
         private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        public ObservableCollection<Reminder> Reminders { get; set; }
+        public ObservableCollection<SystemNotification> SystemNotifications { get; set; }
         public MyICommand HomePage { get; set; }
         public MyICommand MyProfile { get; set; }
         public MyICommand MyAppointments { get; set; }
@@ -30,14 +31,12 @@ namespace Hospital.ViewModel.Patient
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
         public MyICommand ToolTipsOn { get; set; }
-        public MyICommand Undo { get; set; }
-        
-        public PatientRemindersViewModel()
+        public NotificationsViewModel()
         {
 
         }
 
-        public PatientRemindersViewModel(int userId, bool tooltipChecked, Window thisWindow)
+        public NotificationsViewModel(int userId, bool tooltipChecked, Window thisWindow)
         {
             this.userId = userId;
             this.tooltipChecked = tooltipChecked;
@@ -50,19 +49,20 @@ namespace Hospital.ViewModel.Patient
             MyHealthRecord = new MyICommand(OnHealthRecord);
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
-            Undo = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
-            ShowReminders();
+            ShowAllNotifications();
         }
+
         private void OnShowNotifications()
         {
             Window window = new NotificationsView(userId, tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
-        private void ShowReminders()
+
+        private void ShowAllNotifications()
         {
-            Reminders = reminderController.GetAllRemindersByPatientId(patientController.GetPatientByUserId(userId).Id);
+            SystemNotifications = SystemNotificationsController.GetAllSystemNotificationsByUserId(userId);
         }
         private void OnMyReminders()
         {
@@ -70,7 +70,6 @@ namespace Hospital.ViewModel.Patient
             window.Show();
             thisWindow.Close();
         }
-
         private void OnShowDoctors()
         {
             Window window = new DoctorsView(userId, tooltipChecked);
@@ -90,13 +89,13 @@ namespace Hospital.ViewModel.Patient
             window.Show();
             thisWindow.Close();
         }
-
         private void OnMyAppointments()
         {
             Window window = new PatientAppointmentsView(userId, tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
+
         private void OnMyProfile()
         {
             Window window = new PatientInfoView(userId, tooltipChecked);

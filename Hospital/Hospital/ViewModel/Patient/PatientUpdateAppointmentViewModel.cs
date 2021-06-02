@@ -68,10 +68,17 @@ namespace Hospital.ViewModel.Patient
             MyHealthRecord = new MyICommand(OnHealthRecord);
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
+            ShowNotifications = new MyICommand(OnShowNotifications);
             ShowAppointmentInformations(appointmentId);
             appointment = appointmentController.GetAppointmentById(appointmentId);
             appointment.Doctor_Id = appointment.doctor.Id;
             updateMyGrid();
+        }
+        private void OnShowNotifications()
+        {
+            Window window = new NotificationsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnMyReminders()
         {

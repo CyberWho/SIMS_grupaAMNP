@@ -62,7 +62,14 @@ namespace Hospital.ViewModel.Patient
             ShowMedicalTreatments = new MyICommand(OnShowMedicalTreatments);
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
+            ShowNotifications = new MyICommand(OnShowNotifications);
             ShowPatientInfo();
+        }
+        private void OnShowNotifications()
+        {
+            Window window = new NotificationsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnMyReminders()
         {
