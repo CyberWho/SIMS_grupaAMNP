@@ -215,6 +215,9 @@
     <Compile Include="ViewModel\Patient\PatientUIViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientUpdateAppointmentViewModel.cs" />
     <Compile Include="ViewModel\Patient\RemindersViewModel.cs" />
+    <Compile Include="ViewModel\Patient\Wizard2ViewModel.cs" />
+    <Compile Include="ViewModel\Patient\Wizard3ViewModel.cs" />
+    <Compile Include="ViewModel\Patient\WizardHomeViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
     <Compile Include="View\Patient\AllergiesView.xaml.cs">
@@ -273,6 +276,15 @@
     </Compile>
     <Compile Include="View\Patient\RemindersView.xaml.cs">
       <DependentUpon>RemindersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Wizar2View.xaml.cs">
+      <DependentUpon>Wizar2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Wizard3View.xaml.cs">
+      <DependentUpon>Wizard3View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\WizardHomeView.xaml.cs">
+      <DependentUpon>WizardHomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml.cs">
       <DependentUpon>ClinicalTreatmentGiving.xaml</DependentUpon>
@@ -544,6 +556,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\RemindersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Wizar2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Wizard3View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\WizardHomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

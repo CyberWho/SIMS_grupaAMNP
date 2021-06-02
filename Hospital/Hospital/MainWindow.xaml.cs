@@ -26,7 +26,7 @@ namespace Hospital
 
              if(new UserController().LoginUser(user, pass))
                  this.Close();*/
-            Window s = new PatientUIView(1);
+            Window s = new WizardHomeView(1);
             s.Show();
             this.Close();
 

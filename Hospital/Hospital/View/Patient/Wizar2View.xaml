@@ -1,15 +1,19 @@
-﻿<Window x:Class="Hospital.xaml_windows.Patient.Wizard2"
+﻿<Window x:Class="Hospital.View.Patient.Wizar2View"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital.xaml_windows.Patient"
+        xmlns:local="clr-namespace:Hospital.View.Patient"
+        xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
         mc:Ignorable="d"
-        Title="Wizard2" Height="500" Width="900">
+        Title="Wizar2View" Height="500" Width="900" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModel:Wizard2ViewModel/>
+    </Window.DataContext>
     <Grid>
-        <Button Content="Prethodni korak" x:Name="undo" Click="Undo_OnClick" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="21,427,0,0" VerticalAlignment="Top" Width="142"/>
-        <Button Content="Sledeći korak" x:Name="next" Click="Next_OnClick" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="754,427,0,0" VerticalAlignment="Top" Width="130"/>
-        <Button Content="Odustani" x:Name="cancel" Click="Cancel_OnClick" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="616,427,0,0" VerticalAlignment="Top" Width="112"/>
+        <Button Content="Prethodni korak" x:Name="undo" Command="{Binding Undo}" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="21,427,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Sledeći korak" x:Name="next" Command="{Binding Next}" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="729,427,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Odustani" x:Name="cancel" Command="{Binding Cancel}" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="568,427,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Upoznavanje sa ikonicama" FontSize="40" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="219,33,0,0" VerticalAlignment="Top"/>
         <Image Source="/Resources/Icons/icons8-home-96.png" Margin="82,113,753.6,318.4"/>
         <Label Content="Početna stranica" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,152,0,0" VerticalAlignment="Top"/>

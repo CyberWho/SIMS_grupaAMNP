@@ -13,5 +13,6 @@
         <Button Content="Prethodni korak" x:Name="undo" Click="Undo_OnClick" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="21,427,0,0" VerticalAlignment="Top" Width="142"/>
         <Button Content="Sledeći korak" x:Name="next" Click="Next_OnClick" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="754,427,0,0" VerticalAlignment="Top" Width="130"/>
         <Button Content="Odustani" x:Name="cancel" Click="Cancel_OnClick" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="616,427,0,0" VerticalAlignment="Top" Width="112"/>
+
     </Grid>
 </Window>
