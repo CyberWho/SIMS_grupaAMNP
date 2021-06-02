@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital.ViewModel.Patient;
 using Hospital.xaml_windows.Patient;
 
 namespace Hospital.View.Patient
@@ -23,10 +24,13 @@ namespace Hospital.View.Patient
         private int userId;
         private int appointmentId;
         private bool tooltipChecked;
+        private ViewModel.Patient.PatientUpdateAppointmentViewModel patientUpdateAppointmentViewModel;
         public PatientUpdateAppointmentView(int userId,int appointmentId,bool tooltipChecked)
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Patient.PatientUpdateAppointmentViewModel(userId, appointmentId,tooltipChecked, this);
+            patientUpdateAppointmentViewModel =
+                new PatientUpdateAppointmentViewModel(userId, appointmentId, tooltipChecked, this);
+            this.DataContext = patientUpdateAppointmentViewModel;
             ToolTipChecked(tooltipChecked);
         }
         private void ToolTipChecked(bool tooltipChecked)
@@ -34,22 +38,24 @@ namespace Hospital.View.Patient
             if (tooltipChecked == true)
             {
                 CheckBox.IsChecked = true;
+                patientUpdateAppointmentViewModel.ToolTipChecked = true;
             }
             else
             {
                 CheckBox.IsChecked = false;
+                patientUpdateAppointmentViewModel.ToolTipChecked = false;
             }
         }
         private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
-            tooltipChecked = true;
+            patientUpdateAppointmentViewModel.ToolTipChecked = true;
         }
 
         private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
-            tooltipChecked = false;
+            patientUpdateAppointmentViewModel.ToolTipChecked = false;
         }
     }
 }

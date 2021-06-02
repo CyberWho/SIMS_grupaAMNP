@@ -19,7 +19,7 @@ namespace Hospital.ViewModel.Patient
     {
         private int userId;
         private Window thisWindow;
-        private bool tooltipChecked;
+        public bool ToolTipChecked { get; set; }
         private BindableBase currentViewModel;
         public MyICommand HomePage { get; set; }
         public MyICommand MyProfile { get; set; }
@@ -56,12 +56,18 @@ namespace Hospital.ViewModel.Patient
 
         }
 
-        public PatientAppointmentsViewModel(int userId,bool tooltipChecked, Window thisWindow)
+        public PatientAppointmentsViewModel(int userId,bool toolTipChecked, Window thisWindow)
         {
             this.userId = userId;
             this.thisWindow = thisWindow;
-            this.tooltipChecked = tooltipChecked;
+            this.ToolTipChecked = toolTipChecked;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
+            InstanceMyICommands();
+            updateDataGrid();
+        }
+
+        private void InstanceMyICommands()
+        {
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
@@ -74,29 +80,29 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
-            updateDataGrid();
         }
+
         private void OnShowNotifications()
         {
-            Window window = new NotificationsView(userId, tooltipChecked);
+            Window window = new NotificationsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnMyReminders()
         {
-            Window window = new RemindersView(userId, tooltipChecked);
+            Window window = new RemindersView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnShowDoctors()
         {
-            Window window = new DoctorsView(userId, tooltipChecked);
+            Window window = new DoctorsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnHealthRecord()
         {
-            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            Window window = new PatientHealthRecordView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -113,7 +119,7 @@ namespace Hospital.ViewModel.Patient
 
         private void OnNew()
         {
-            Window window = new PatientNewAppointmentView(userId, tooltipChecked);
+            Window window = new PatientNewAppointmentView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -152,7 +158,7 @@ namespace Hospital.ViewModel.Patient
             appointment = appointmentController.GetAppointmentById(GetAppointmentId());
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
             //DateValidationForUpdate(hours, patientId, GetAppointmentId());
-            Window window = new PatientUpdateAppointmentView(userId, appointment.Id,tooltipChecked);
+            Window window = new PatientUpdateAppointmentView(userId, appointment.Id,ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -189,21 +195,21 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId,tooltipChecked);
+            Window window = new PatientInfoView(userId,ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnHomePage()
         {
-            Window window = new PatientUIView(userId,tooltipChecked);
+            Window window = new PatientUIView(userId,ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId,tooltipChecked);
+            Window window = new PatientAppointmentsView(userId,ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }

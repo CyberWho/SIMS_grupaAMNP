@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital.ViewModel.Patient;
 using Hospital.xaml_windows.Patient;
 
 namespace Hospital.View.Patient
@@ -22,10 +23,12 @@ namespace Hospital.View.Patient
     {
         private int userId;
         private bool tooltipChecked;
+        private ViewModel.Patient.DoctorsViewModel doctorsViewModel;
         public DoctorsView(int userId,bool tooltipChecked)
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Patient.DoctorsViewModel(userId, tooltipChecked, this);
+            doctorsViewModel = new DoctorsViewModel(userId, tooltipChecked, this);
+            this.DataContext = doctorsViewModel;
             ToolTipChecked(tooltipChecked);
         }
 
@@ -34,21 +37,23 @@ namespace Hospital.View.Patient
             if (tooltipChecked == true)
             {
                 CheckBox.IsChecked = true;
+                doctorsViewModel.ToolTipChecked = true;
             }
             else
             {
                 CheckBox.IsChecked = false;
+                doctorsViewModel.ToolTipChecked = false;
             }
         }
         private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
-            tooltipChecked = true;
+            doctorsViewModel.ToolTipChecked = true;
         }
         private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
-            tooltipChecked = false;
+            doctorsViewModel.ToolTipChecked = false;
         }
 
     }

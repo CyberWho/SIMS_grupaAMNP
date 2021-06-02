@@ -24,10 +24,12 @@ namespace Hospital.View.Patient
         private int userId;
         private int healthRecordId;
         private bool tooltipChecked;
+        private ViewModel.Patient.PatientReferralsViewModel patientReferralsViewModel;
         public PatientReferralsView(int userId,int healthRecordId,bool tooltipChecked)
         {
             InitializeComponent();
-            this.DataContext = new PatientReferralsViewModel(userId, healthRecordId, tooltipChecked, this);
+            patientReferralsViewModel = new PatientReferralsViewModel(userId, healthRecordId, tooltipChecked, this);
+            this.DataContext = patientReferralsViewModel;
             ToolTipChecked(tooltipChecked);
 
         }
@@ -37,21 +39,23 @@ namespace Hospital.View.Patient
             if (tooltipChecked == true)
             {
                 CheckBox.IsChecked = true;
+                patientReferralsViewModel.ToolTipChecked = true;
             }
             else
             {
                 CheckBox.IsChecked = false;
+                patientReferralsViewModel.ToolTipChecked = false;
             }
         }
         private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
-            tooltipChecked = true;
+            patientReferralsViewModel.ToolTipChecked = true;
         }
         private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
-            tooltipChecked = false;
+            patientReferralsViewModel.ToolTipChecked = false;
         }
     }
 }

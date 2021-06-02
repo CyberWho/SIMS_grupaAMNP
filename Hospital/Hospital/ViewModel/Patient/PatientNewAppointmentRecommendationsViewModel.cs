@@ -20,7 +20,7 @@ namespace Hospital.ViewModel.Patient
         private int doctorId;
         private int priority = 0;
         private int referralForSpecialistId;
-        private bool tooltipChecked;
+        public bool ToolTipChecked { get; set; }
         private Window thisWindow;
         private TimeSlotController timeSlotController = new TimeSlotController();
         private PatientController patientController = new PatientController();
@@ -50,7 +50,7 @@ namespace Hospital.ViewModel.Patient
 
         }
 
-        public PatientNewAppointmentRecommendationsViewModel(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority,int referralForSpecialist,bool tooltipChecked,Window thisWindow)
+        public PatientNewAppointmentRecommendationsViewModel(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority,int referralForSpecialist,bool toolTipChecked,Window thisWindow)
         {
             this.userId = userId;
             this.startTime = startTime;
@@ -58,9 +58,15 @@ namespace Hospital.ViewModel.Patient
             this.doctorId = doctorId;
             this.priority = priority;
             this.referralForSpecialistId = referralForSpecialist;
-            this.tooltipChecked = tooltipChecked;
+            this.ToolTipChecked = toolTipChecked;
             this.thisWindow = thisWindow;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
+            InstanceMyICommands();
+            updateDataGrid();
+        }
+
+        private void InstanceMyICommands()
+        {
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
@@ -71,36 +77,36 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
-            updateDataGrid();
         }
+
         private void OnShowNotifications()
         {
-            Window window = new NotificationsView(userId, tooltipChecked);
+            Window window = new NotificationsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnMyReminders()
         {
-            Window window = new RemindersView(userId, tooltipChecked);
+            Window window = new RemindersView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnShowDoctors()
         {
-            Window window = new DoctorsView(userId, tooltipChecked);
+            Window window = new DoctorsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnHealthRecord()
         {
-            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            Window window = new PatientHealthRecordView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnUndo()
         {
-            Window window = new PatientNewAppointmentView(userId, tooltipChecked);
+            Window window = new PatientNewAppointmentView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -137,7 +143,7 @@ namespace Hospital.ViewModel.Patient
                 ShowPatientIsBlocked(patientId);
                 return;
             }
-            var window = new PatientAppointmentsView(userId, tooltipChecked);
+            var window = new PatientAppointmentsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -158,21 +164,21 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId, tooltipChecked);
+            Window window = new PatientInfoView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnHomePage()
         {
-            Window window = new PatientUIView(userId, tooltipChecked);
+            Window window = new PatientUIView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId, tooltipChecked);
+            Window window = new PatientAppointmentsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }

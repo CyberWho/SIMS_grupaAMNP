@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital.ViewModel.Patient;
 using Hospital.xaml_windows.Patient;
 
 namespace Hospital.View.Patient
@@ -23,12 +24,14 @@ namespace Hospital.View.Patient
         private int userId;
         private int healthRecordId;
         private bool tooltipChecked;
+        private ViewModel.Patient.PatientPerscriptionsViewModel patientPerscriptionsViewModel;
         public PatientPerscriptionsView(int userId,int healthRecordId,bool tooltipChecked)
         {
             InitializeComponent();
-            this.DataContext =
-                new ViewModel.Patient.PatientPerscriptionsViewModel(userId, healthRecordId, tooltipChecked, this);
-            ToolTipChecked(tooltipChecked);
+            patientPerscriptionsViewModel =
+                new PatientPerscriptionsViewModel(userId, healthRecordId, tooltipChecked, this);
+            this.DataContext = patientPerscriptionsViewModel;
+                ToolTipChecked(tooltipChecked);
 
         }
 
@@ -37,21 +40,23 @@ namespace Hospital.View.Patient
             if (tooltipChecked == true)
             {
                 CheckBox.IsChecked = true;
+                patientPerscriptionsViewModel.ToolTipChecked = true;
             }
             else
             {
                 CheckBox.IsChecked = false;
+                patientPerscriptionsViewModel.ToolTipChecked = false;
             }
         }
         private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
-            tooltipChecked = true;
+            patientPerscriptionsViewModel.ToolTipChecked = true;
         }
         private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
-            tooltipChecked = false;
+            patientPerscriptionsViewModel.ToolTipChecked = false;
         }
     }
 }

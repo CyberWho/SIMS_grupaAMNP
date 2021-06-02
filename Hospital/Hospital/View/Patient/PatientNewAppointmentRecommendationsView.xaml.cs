@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital.ViewModel.Patient;
 using Hospital.xaml_windows.Patient;
 
 namespace Hospital.View.Patient
@@ -27,11 +28,15 @@ namespace Hospital.View.Patient
         private int priority = 0;
         private int referralForSpecialistId;
         private bool tooltipChecked;
+
+        private ViewModel.Patient.PatientNewAppointmentRecommendationsViewModel
+            patientNewAppointmentRecommendationsViewModel;
         public PatientNewAppointmentRecommendationsView(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority,int referralForSpecialist,bool tooltipChecked)
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Patient.PatientNewAppointmentRecommendationsViewModel(userId, startTime,
-                endTime, doctorId, priority, referralForSpecialist, tooltipChecked, this);
+            patientNewAppointmentRecommendationsViewModel = new PatientNewAppointmentRecommendationsViewModel(userId,
+                startTime, endTime, doctorId, priority, referralForSpecialist, tooltipChecked, this);
+            this.DataContext = patientNewAppointmentRecommendationsViewModel;
             ToolTipChecked(tooltipChecked);
 
         }
@@ -40,23 +45,25 @@ namespace Hospital.View.Patient
             if (tooltipChecked == true)
             {
                 CheckBox.IsChecked = true;
+                patientNewAppointmentRecommendationsViewModel.ToolTipChecked = true;
             }
             else
             {
                 CheckBox.IsChecked = false;
+                patientNewAppointmentRecommendationsViewModel.ToolTipChecked = false;
             }
         }
 
         private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
-            tooltipChecked = true;
+            patientNewAppointmentRecommendationsViewModel.ToolTipChecked = true;
         }
 
         private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
-            tooltipChecked = false;
+            patientNewAppointmentRecommendationsViewModel.ToolTipChecked = false;
         }
 
        

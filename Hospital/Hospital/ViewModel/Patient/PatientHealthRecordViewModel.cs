@@ -14,7 +14,7 @@ namespace Hospital.ViewModel.Patient
     class PatientHealthRecordViewModel : BindableBase
     {
         private int userId;
-        private bool tooltipChecked;
+        public bool ToolTipChecked { get; set; }
         private Window thisWindow;
         private HealthRecordController healthRecordController = new HealthRecordController();
         private PatientController patientController = new PatientController();
@@ -44,11 +44,17 @@ namespace Hospital.ViewModel.Patient
 
         }
 
-        public PatientHealthRecordViewModel(int userId, bool tooltipChecked, Window thisWindow)
+        public PatientHealthRecordViewModel(int userId, bool toolTipChecked, Window thisWindow)
         {
             this.userId = userId;
-            this.tooltipChecked = tooltipChecked;
+            this.ToolTipChecked = toolTipChecked;
             this.thisWindow = thisWindow;
+            InstanceMyICommands();
+            ShowPatientInfo();
+        }
+
+        private void InstanceMyICommands()
+        {
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
@@ -63,65 +69,65 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
-            ShowPatientInfo();
         }
+
         private void OnShowNotifications()
         {
-            Window window = new NotificationsView(userId, tooltipChecked);
+            Window window = new NotificationsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnMyReminders()
         {
-            Window window = new RemindersView(userId, tooltipChecked);
+            Window window = new RemindersView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnShowDoctors()
         {
-            Window window = new DoctorsView(userId, tooltipChecked);
+            Window window = new DoctorsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnShowMedicalTreatments()
         {
-            Window window = new MedicalTreatmentsView(userId, GetHealthRecord().Id, tooltipChecked);
+            Window window = new MedicalTreatmentsView(userId, GetHealthRecord().Id, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnShowPerscriptions()
         {
-            Window window = new PatientPerscriptionsView(userId, GetHealthRecord().Id, tooltipChecked);
+            Window window = new PatientPerscriptionsView(userId, GetHealthRecord().Id, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnShowAnamnesis()
         {
-            Window window = new PatientAnamnesisView(userId, GetHealthRecord().Id, tooltipChecked);
+            Window window = new PatientAnamnesisView(userId, GetHealthRecord().Id, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnShowAllergies()
         {
-            Window window = new AllergiesView(userId, GetHealthRecord().Id, tooltipChecked);
+            Window window = new AllergiesView(userId, GetHealthRecord().Id, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnShowClinicalReferrals()
         {
-            Window window = new ClinicalTreatmentReferralsView(userId, GetHealthRecord().Id, tooltipChecked);
+            Window window = new ClinicalTreatmentReferralsView(userId, GetHealthRecord().Id, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnShowReferrals()
         {
-            Window window = new PatientReferralsView(userId, GetHealthRecord().Id, tooltipChecked);
+            Window window = new PatientReferralsView(userId, GetHealthRecord().Id, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -152,7 +158,7 @@ namespace Hospital.ViewModel.Patient
 
         private void OnHealthRecord()
         {
-            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            Window window = new PatientHealthRecordView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -166,21 +172,21 @@ namespace Hospital.ViewModel.Patient
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId, tooltipChecked);
+            Window window = new PatientAppointmentsView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId, tooltipChecked);
+            Window window = new PatientInfoView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         public void OnHomePage()
         {
-            Window window = new PatientUIView(userId, tooltipChecked);
+            Window window = new PatientUIView(userId, ToolTipChecked);
             window.Show();
             thisWindow.Close();
         }

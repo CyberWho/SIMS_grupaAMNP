@@ -15,8 +15,8 @@
         <Label FontSize="16"  Content="Ovaj pomoćnik će Vam omogućiti lakše korišćenje aplikacije" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="248,105,0,0" VerticalAlignment="Top"/>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="386,149,353.6,204.4" />
         <Button Content="Prethodni korak" x:Name="undo" IsEnabled="{Binding CanUndo}" Command="{Binding Undo}" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="21,427,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Sledeći korak" x:Name="next" Command="{Binding Next}" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="740,427,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Odustani" x:Name="cancel" Command="{Binding Cancel}" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="570,427,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Sledeći korak" x:Name="next" Command="{Binding Next}" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="728,427,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Odustani" x:Name="cancel" Command="{Binding Cancel}" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="568,427,0,0" VerticalAlignment="Top" Width="144"/>
 
     </Grid>
 </Window>
