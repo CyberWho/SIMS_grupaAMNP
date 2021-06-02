@@ -50,9 +50,15 @@ namespace Hospital.ViewModel.Patient
             MyHealthRecord = new MyICommand(OnHealthRecord);
             ShowDoctors = new MyICommand(OnShowDoctors);
             DoctorRate = new MyICommand(OnDoctorRate);
+            MyReminders = new MyICommand(OnMyReminders);
             ShowAllDoctors();
         }
-
+        private void OnMyReminders()
+        {
+            Window window = new RemindersView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
+        }
         private void OnDoctorRate()
         {
             if (appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id, SelectedItem.Id) == false)

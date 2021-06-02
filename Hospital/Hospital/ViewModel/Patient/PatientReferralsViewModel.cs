@@ -53,7 +53,14 @@ namespace Hospital.ViewModel.Patient
             Undo = new MyICommand(OnHealthRecord);
             ShowRecommendations = new MyICommand(OnShowRecommendations);
             ShowDoctors = new MyICommand(OnShowDoctors);
+            MyReminders = new MyICommand(OnMyReminders);
             ShowReferrals();
+        }
+        private void OnMyReminders()
+        {
+            Window window = new RemindersView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnShowDoctors()
         {

@@ -69,7 +69,14 @@ namespace Hospital.ViewModel.Patient
             Undo = new MyICommand(OnUndo);
             MyHealthRecord = new MyICommand(OnHealthRecord);
             ShowDoctors = new MyICommand(OnShowDoctors);
+            MyReminders = new MyICommand(OnMyReminders);
             updateDataGrid();
+        }
+        private void OnMyReminders()
+        {
+            Window window = new RemindersView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnShowDoctors()
         {

@@ -199,6 +199,7 @@
     <Compile Include="ViewModel\Patient\ClinicalTreatmentReferralsViewModel.cs" />
     <Compile Include="ViewModel\Patient\DoctorRateViewModel.cs" />
     <Compile Include="ViewModel\Patient\DoctorsViewModel.cs" />
+    <Compile Include="ViewModel\Patient\HospitalRateViewModel.cs" />
     <Compile Include="ViewModel\Patient\MedicalTreatmenstViewModel.cs" />
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
     <Compile Include="ViewModel\Patient\PatientAnamnsisViewModel.cs" />
@@ -209,8 +210,10 @@
     <Compile Include="ViewModel\Patient\PatientNewAppointmentViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientPerscriptionsViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientReferralsViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientRemindersViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientUIViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientUpdateAppointmentViewModel.cs" />
+    <Compile Include="ViewModel\Patient\RemindersViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
     <Compile Include="View\Patient\AllergiesView.xaml.cs">
@@ -224,6 +227,9 @@
     </Compile>
     <Compile Include="View\Patient\DoctorsView.xaml.cs">
       <DependentUpon>DoctorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\HospitalRateView.xaml.cs">
+      <DependentUpon>HospitalRateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\MedicalTreatmentsView.xaml.cs">
       <DependentUpon>MedicalTreatmentsView.xaml</DependentUpon>
@@ -252,11 +258,17 @@
     <Compile Include="View\Patient\PatientReferralsView.xaml.cs">
       <DependentUpon>PatientReferralsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Patient\PatientRemindersView.xaml.cs">
+      <DependentUpon>PatientRemindersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\PatientUIView.xaml.cs">
       <DependentUpon>PatientUIView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientUpdateAppointmentView.xaml.cs">
       <DependentUpon>PatientUpdateAppointmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\RemindersView.xaml.cs">
+      <DependentUpon>RemindersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml.cs">
       <DependentUpon>ClinicalTreatmentGiving.xaml</DependentUpon>
@@ -471,6 +483,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Patient\HospitalRateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Patient\MedicalTreatmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -507,11 +523,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Patient\PatientRemindersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Patient\PatientUIView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\PatientUpdateAppointmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\RemindersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -60,6 +60,13 @@ namespace Hospital.ViewModel.Patient
             LogOut = new MyICommand(OnLogOut);
             MyHealthRecord = new MyICommand(OnHealthRecord);
             ShowDoctors = new MyICommand(OnShowDoctors);
+            MyReminders = new MyICommand(OnMyReminders);
+        }
+        private void OnMyReminders()
+        {
+            Window window = new RemindersView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnShowDoctors()
         {

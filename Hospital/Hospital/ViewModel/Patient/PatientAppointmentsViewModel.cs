@@ -72,7 +72,14 @@ namespace Hospital.ViewModel.Patient
             SelectionChanged = new MyICommand(OnSelectionChanged);
             LogOut = new MyICommand(OnLogOut);
             ShowDoctors = new MyICommand(OnShowDoctors);
+            MyReminders = new MyICommand(OnMyReminders);
             updateDataGrid();
+        }
+        private void OnMyReminders()
+        {
+            Window window = new RemindersView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnShowDoctors()
         {

@@ -43,10 +43,6 @@ namespace Hospital.xaml_windows.Patient
             updateDataGrid();
             // FillComboBox();
             frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
-            Izmeni.IsEnabled = false;
-            Obrisi.IsEnabled = false;
-            Kreiraj.IsEnabled = true;
-            DeleteAll.IsEnabled = false;
             ToolTipChecked(tooltipChecked);
         }
         private void ToolTipChecked(bool tooltipChecked)
@@ -291,9 +287,6 @@ namespace Hospital.xaml_windows.Patient
 
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Izmeni.IsEnabled = true;
-            Obrisi.IsEnabled = true;
-
         }
         private void myDataGridDrop_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
