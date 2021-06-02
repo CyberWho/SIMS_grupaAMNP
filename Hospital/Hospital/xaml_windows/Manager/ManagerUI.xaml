@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
         mc:Ignorable="d"
         Title="ManagerUI" Height="720" Width="1080" WindowStartupLocation="CenterScreen"
@@ -48,7 +49,7 @@
                 <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="logout_btn" Background="#3499eb" HorizontalAlignment="Left" Margin="887,29,0,0" VerticalAlignment="Top" Width="153" Height="37" Click="logout_btn_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
+        <Button x:Name="logout_btn" Background="#3499eb" HorizontalAlignment="Left" Margin="860,18,0,0" VerticalAlignment="Top" Width="180" Height="50" Click="logout_btn_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus">
             <TextBlock Text="&#xE127; Izlogujte se" Foreground="#e8ebed" FontSize="20" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>

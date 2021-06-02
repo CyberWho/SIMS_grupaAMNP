@@ -4,41 +4,73 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         FontFamily="Segoe UI Symbol"
         Title="Prostorije" Height="720" Width="1080" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+    </Window.Resources>
     <Grid>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="471" Margin="443,132,0,0" VerticalAlignment="Top" Width="576" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
+        <Border  Background="White" Padding="30" CornerRadius="14" Margin="49,131,767.6,299.4">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+            </Border.Effect>
+        </Border>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="534" Margin="377,119,0,0" VerticalAlignment="Top" Width="663" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Sprat" Binding="{Binding Floor}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Površina" Binding="{Binding Area}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Tip" Binding="{Binding roomType.Type}" Width="*" IsReadOnly="True"/>
-                <DataGridTemplateColumn Width="*">
+                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding roomType.Type}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ShowInventory_Click" Content="Inventar"/>
+                            <Button Click="ShowInventory_Click">
+                                <TextBlock Text="Inventar" Style="{StaticResource managerTextBlock}"/>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Sprat" HorizontalAlignment="Left" Margin="60,70,0,0" VerticalAlignment="Top"/>
-        <Label Content="Površina" HorizontalAlignment="Left" Margin="60,101,0,0" VerticalAlignment="Top"/>
-        <Label Content="Opis" HorizontalAlignment="Left" Margin="60,132,0,0" VerticalAlignment="Top"/>
-        <Label Content="Broj" HorizontalAlignment="Left" Margin="60,163,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tip" HorizontalAlignment="Left" Margin="60,193,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="floor_txtbx" Text="{Binding SelectedItem.Floor, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="137,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="area_txtbx" Text="{Binding SelectedItem.Area, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="137,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="desc_txtbx" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" HorizontalAlignment="Left" Height="23" Margin="137,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="137,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="LightGray"/>
-        <ComboBox x:Name="rtype_cmbbx" SelectedValue="{Binding SelectedItem.roomType.Id, ElementName=myDataGrid}" HorizontalAlignment="Left" Margin="137,196,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
-        <Button x:Name="add_btn" Content="Dodaj &#xE109;" HorizontalAlignment="Left" Margin="38,239,0,0" VerticalAlignment="Top" Width="83" Click="add_btn_Click" Height="37"/>
-        <Button x:Name="update_btn" Content="Ažuriraj" HorizontalAlignment="Left" Margin="145,257,0,0" VerticalAlignment="Top" Width="75" Click="update_btn_Click" IsEnabled="False"/>
-        <Button x:Name="delete_btn" Content="Obriši" HorizontalAlignment="Left" Margin="228,257,0,0" VerticalAlignment="Top" Width="75" Click="delete_btn_Click" IsEnabled="False"/>
-        <Button x:Name="clear_btn" Content="Očisti" HorizontalAlignment="Left" Margin="38,293,0,0" VerticalAlignment="Top" Width="75" Click="clear_btn_Click"/>
-        <Button x:Name="btnBack" Content="&#xE112; Nazad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-3.381,0.667" Click="btnBack_Click"/>
 
+        <TextBox x:Name="floor_txtbx" Text="{Binding SelectedItem.Floor, ElementName=myDataGrid}" materialDesign:HintAssist.Hint="Sprat" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="68,160,783.6,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="area_txtbx" Text="{Binding SelectedItem.Area, ElementName=myDataGrid}" materialDesign:HintAssist.Hint="Površina" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="68,202,783.6,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="desc_txtbx" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Opis" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="68,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+        <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" IsReadOnly="True" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Broj" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="68,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222" Background="LightGray"/>
+        <ComboBox x:Name="rtype_cmbbx" SelectedValue="{Binding SelectedItem.roomType.Id, ElementName=myDataGrid}" DisplayMemberPath="Display" SelectedValuePath="Value" materialDesign:HintAssist.Hint="Tip" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="68,328,783.6,325.4" Height="37"/>
+        <Button x:Name="add_btn" HorizontalAlignment="Left" Margin="81,424,0,0" VerticalAlignment="Top" Click="add_btn_Click" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE109; Dodaj" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="update_btn"  HorizontalAlignment="Left" Margin="81,479,0,0" VerticalAlignment="Top"  Click="update_btn_Click" IsEnabled="False" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE104; Ažuriraj" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="delete_btn" HorizontalAlignment="Left" Margin="81,533,0,0" VerticalAlignment="Top" Click="delete_btn_Click" IsEnabled="False" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE107; Obriši" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="clear_btn" HorizontalAlignment="Left" Margin="81,584,0,0" VerticalAlignment="Top"  Click="clear_btn_Click" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE106; Očisti" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="logout_btn" Background="#3499eb" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="btnBack_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Canvas.Left="860" Canvas.Top="18" Margin="860,18,0,0" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE112; Nazad" Foreground="#e8ebed" FontSize="20" Style="{StaticResource managerTextBlock}">
+            </TextBlock>
+        </Button>
+        <Canvas Grid.Row="1">
+            <Image Source="/Hospital;component/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="10,21,1018.6,624.4">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="bgTranslate"/>
+                </Image.RenderTransform>
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Image.Effect>
+            </Image>
+            <TextBlock Text="ZDRAVO KORPORACIJA" Foreground="#e8ebed" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+        </Canvas>
     </Grid>
 </Window>

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace Hospital.xaml_windows.Manager
 {
@@ -131,6 +132,8 @@ namespace Hospital.xaml_windows.Manager
             floor_txtbx.Text = "";
             area_txtbx.Text = "";
             desc_txtbx.Text = "";
+            id_txtbx.Text = "";
+            rtype_cmbbx.SelectedItem = null;
             add_btn.IsEnabled = true;
             update_btn.IsEnabled = false;
             delete_btn.IsEnabled = false;
@@ -159,6 +162,17 @@ namespace Hospital.xaml_windows.Manager
             Window w = new ManagerUI(2);
             w.Show();
             this.Close();
+        }
+        private void btn_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Background = new SolidColorBrush(Color.FromArgb(255, (byte)16, (byte)93, (byte)151));
+        }
+
+        private void btn_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Background = new SolidColorBrush(Color.FromArgb(255, (byte)52, (byte)153, (byte)235));
         }
     }
 }
