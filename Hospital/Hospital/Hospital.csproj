@@ -198,6 +198,8 @@
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
     <Compile Include="ViewModel\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientInfoViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientNewAppointmentRecommendationsViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientNewAppointmentViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientUIViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientUpdateAppointmentViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
@@ -207,6 +209,12 @@
     </Compile>
     <Compile Include="View\Patient\PatientInfoView.xaml.cs">
       <DependentUpon>PatientInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientNewAppointmentRecommendationsView.xaml.cs">
+      <DependentUpon>PatientNewAppointmentRecommendationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientNewAppointmentView.xaml.cs">
+      <DependentUpon>PatientNewAppointmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientUIView.xaml.cs">
       <DependentUpon>PatientUIView.xaml</DependentUpon>
@@ -416,6 +424,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\PatientInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientNewAppointmentRecommendationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientNewAppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

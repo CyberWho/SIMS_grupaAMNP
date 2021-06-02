@@ -16,17 +16,24 @@ using Hospital.xaml_windows.Patient;
 namespace Hospital.View.Patient
 {
     /// <summary>
-    /// Interaction logic for PatientAppointmentsView.xaml
+    /// Interaction logic for PatientNewAppointmentRecommendationsView.xaml
     /// </summary>
-    public partial class PatientAppointmentsView : Window
+    public partial class PatientNewAppointmentRecommendationsView : Window
     {
         private int userId;
+        private DateTime startTime;
+        private DateTime endTime;
+        private int doctorId;
+        private int priority = 0;
+        private int referralForSpecialistId;
         private bool tooltipChecked;
-        public PatientAppointmentsView(int userId,bool tooltipChecked)
+        public PatientNewAppointmentRecommendationsView(int userId,DateTime startTime,DateTime endTime,int doctorId,int priority,int referralForSpecialist,bool tooltipChecked)
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Patient.PatientAppointmentsViewModel(userId,tooltipChecked,this);
+            this.DataContext = new ViewModel.Patient.PatientNewAppointmentRecommendationsViewModel(userId, startTime,
+                endTime, doctorId, priority, referralForSpecialist, tooltipChecked, this);
             ToolTipChecked(tooltipChecked);
+
         }
         private void ToolTipChecked(bool tooltipChecked)
         {
@@ -51,5 +58,7 @@ namespace Hospital.View.Patient
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
             tooltipChecked = false;
         }
+
+       
     }
 }

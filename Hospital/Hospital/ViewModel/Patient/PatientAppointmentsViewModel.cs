@@ -19,6 +19,7 @@ namespace Hospital.ViewModel.Patient
     {
         private int userId;
         private Window thisWindow;
+        private bool tooltipChecked;
         private BindableBase currentViewModel;
         public MyICommand HomePage { get; set; }
         public MyICommand MyProfile { get; set; }
@@ -55,10 +56,11 @@ namespace Hospital.ViewModel.Patient
 
         }
 
-        public PatientAppointmentsViewModel(int userId, Window thisWindow)
+        public PatientAppointmentsViewModel(int userId,bool tooltipChecked, Window thisWindow)
         {
             this.userId = userId;
             this.thisWindow = thisWindow;
+            this.tooltipChecked = tooltipChecked;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
@@ -67,9 +69,15 @@ namespace Hospital.ViewModel.Patient
             Delete = new MyICommand(OnDelete);
             New = new MyICommand(OnNew);
             SelectionChanged = new MyICommand(OnSelectionChanged);
+            LogOut = new MyICommand(OnLogOut);
             updateDataGrid();
         }
-
+        private void OnLogOut()
+        {
+            Window window = new MainWindow();
+            window.Show();
+            thisWindow.Close();
+        }
         private void OnSelectionChanged()
         {
             
@@ -77,9 +85,9 @@ namespace Hospital.ViewModel.Patient
 
         private void OnNew()
         {
-            /*var window = new PatientNewAppointment(userId, tooltipChecked);
+            Window window = new PatientNewAppointmentView(userId, tooltipChecked);
             window.Show();
-            this.Close();*/
+            thisWindow.Close();
         }
 
         private void OnDelete()
@@ -116,7 +124,7 @@ namespace Hospital.ViewModel.Patient
             appointment = appointmentController.GetAppointmentById(GetAppointmentId());
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
             //DateValidationForUpdate(hours, patientId, GetAppointmentId());
-            Window window = new PatientUpdateAppointmentView(userId, appointment.Id);
+            Window window = new PatientUpdateAppointmentView(userId, appointment.Id,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
@@ -153,21 +161,21 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId);
+            Window window = new PatientInfoView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnHomePage()
         {
-            Window window = new PatientUIView(userId);
+            Window window = new PatientUIView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId);
+            Window window = new PatientAppointmentsView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }

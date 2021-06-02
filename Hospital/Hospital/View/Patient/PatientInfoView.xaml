@@ -71,7 +71,7 @@
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipsOn}" Content="Pomoć" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
+        <CheckBox x:Name="CheckBox" Checked="CheckBox_OnChecked" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
         <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="323,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
 

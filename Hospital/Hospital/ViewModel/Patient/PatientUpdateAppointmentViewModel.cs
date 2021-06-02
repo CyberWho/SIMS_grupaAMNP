@@ -16,6 +16,7 @@ namespace Hospital.ViewModel.Patient
     {
         private int userId;
         private int appointmentId;
+        private bool tooltipChecked;
         private Window thisWindow;
         private BindableBase currentViewModel;
         public MyICommand HomePage { get; set; }
@@ -51,10 +52,11 @@ namespace Hospital.ViewModel.Patient
 
         }
 
-        public PatientUpdateAppointmentViewModel(int userId, int appointmentId, Window thisWindow)
+        public PatientUpdateAppointmentViewModel(int userId, int appointmentId, bool tooltipChecked,Window thisWindow)
         {
             this.userId = userId;
             this.appointmentId = appointmentId;
+            this.tooltipChecked = tooltipChecked;
             this.thisWindow = thisWindow;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             HomePage = new MyICommand(OnHomePage);
@@ -62,12 +64,18 @@ namespace Hospital.ViewModel.Patient
             MyAppointments = new MyICommand(OnMyAppointments);
             Add = new MyICommand(OnAdd);
             Undo = new MyICommand(OnUndo);
+            LogOut = new MyICommand(OnLogOut);
             ShowAppointmentInformations(appointmentId);
             appointment = appointmentController.GetAppointmentById(appointmentId);
             appointment.Doctor_Id = appointment.doctor.Id;
             updateMyGrid();
         }
-
+        private void OnLogOut()
+        {
+            Window window = new MainWindow();
+            window.Show();
+            thisWindow.Close();
+        }
         private void OnAdd()
         {
             TimeSlot timeSlot = timeSlotController.GetTimeSlotById(SelectedItem.Id);
@@ -99,13 +107,13 @@ namespace Hospital.ViewModel.Patient
 
         private void ShowPatientAppointments()
         {
-            var window = new PatientAppointmentsView(userId);
+            var window = new PatientAppointmentsView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
         private void OnUndo()
         {
-            Window window = new PatientAppointmentsView(userId);
+            Window window = new PatientAppointmentsView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
             
@@ -136,21 +144,21 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId);
+            Window window = new PatientInfoView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnHomePage()
         {
-            Window window = new PatientUIView(userId);
+            Window window = new PatientUIView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId);
+            Window window = new PatientAppointmentsView(userId,tooltipChecked);
             window.Show();
             thisWindow.Close();
         }

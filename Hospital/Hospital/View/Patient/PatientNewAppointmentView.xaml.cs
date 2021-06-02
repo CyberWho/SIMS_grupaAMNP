@@ -16,16 +16,16 @@ using Hospital.xaml_windows.Patient;
 namespace Hospital.View.Patient
 {
     /// <summary>
-    /// Interaction logic for PatientAppointmentsView.xaml
+    /// Interaction logic for PatientNewAppointmentView.xaml
     /// </summary>
-    public partial class PatientAppointmentsView : Window
+    public partial class PatientNewAppointmentView : Window
     {
         private int userId;
         private bool tooltipChecked;
-        public PatientAppointmentsView(int userId,bool tooltipChecked)
+        public PatientNewAppointmentView(int userId,bool tooltipChecked)
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Patient.PatientAppointmentsViewModel(userId,tooltipChecked,this);
+            this.DataContext = new ViewModel.Patient.PatientNewAppointmentViewModel(userId, tooltipChecked, this);
             ToolTipChecked(tooltipChecked);
         }
         private void ToolTipChecked(bool tooltipChecked)
@@ -39,13 +39,11 @@ namespace Hospital.View.Patient
                 CheckBox.IsChecked = false;
             }
         }
-
-        private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
             tooltipChecked = true;
         }
-
         private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);

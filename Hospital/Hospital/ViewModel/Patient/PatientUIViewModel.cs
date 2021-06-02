@@ -13,6 +13,7 @@ namespace Hospital.ViewModel.Patient
     class PatientUIViewModel : BindableBase
     {
         private int userId;
+        private bool tooltipCheked;
         private BindableBase currentViewModel;
         private Window thisWindow;
         public MyICommand HomePage { get; set; }
@@ -41,34 +42,42 @@ namespace Hospital.ViewModel.Patient
 
         }
 
-        public PatientUIViewModel(int userId, Window thisWindow)
+        public PatientUIViewModel(int userId,bool tooltipCheked, Window thisWindow)
         {
             this.userId = userId;
+            this.tooltipCheked = tooltipCheked;
             this.thisWindow = thisWindow;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
+            LogOut = new MyICommand(OnLogOut);
 
+        }
+        private void OnLogOut()
+        {
+            Window window = new MainWindow();
+            window.Show();
+            thisWindow.Close();
         }
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId);
+            Window window = new PatientAppointmentsView(userId,tooltipCheked);
             window.Show();
             thisWindow.Close();
         }
 
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId);
+            Window window = new PatientInfoView(userId,tooltipCheked);
             window.Show();
             thisWindow.Close();
         }
 
         public void OnHomePage()
         {
-            Window window = new PatientUIView(userId);
+            Window window = new PatientUIView(userId,tooltipCheked);
             window.Show();
             thisWindow.Close();
         }

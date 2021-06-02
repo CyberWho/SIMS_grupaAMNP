@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.xaml_windows.Patient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,35 @@ namespace Hospital.View.Patient
     public partial class PatientUIView : Window
     {
         private int userId;
-        public PatientUIView(int userId)
+        private bool tooltipChecked;
+        public PatientUIView(int userId,bool tooltipCheked = true)
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Patient.PatientUIViewModel(userId, this);
+            this.DataContext = new ViewModel.Patient.PatientUIViewModel(userId,tooltipCheked, this);
+            ToolTipChecked(tooltipCheked);
+        }
+        private void ToolTipChecked(bool tooltipChecked)
+        {
+            if (tooltipChecked == true)
+            {
+                CheckBox.IsChecked = true;
+            }
+            else
+            {
+                CheckBox.IsChecked = false;
+            }
         }
 
+        private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, true);
+            tooltipChecked = true;
+        }
+
+        private void CheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
+            tooltipChecked = false;
+        }
     }
 }
