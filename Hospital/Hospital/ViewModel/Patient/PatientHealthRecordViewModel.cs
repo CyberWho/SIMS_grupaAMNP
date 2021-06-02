@@ -58,7 +58,23 @@ namespace Hospital.ViewModel.Patient
             ShowClinicalReferrals = new MyICommand(OnShowClinicalReferrals);
             ShowAllergies = new MyICommand(OnShowAllergies);
             ShowAnamnesis = new MyICommand(OnShowAnamnesis);
+            ShowPerscriptions = new MyICommand(OnShowPerscriptions);
+            ShowMedicalTreatments = new MyICommand(OnShowMedicalTreatments);
             ShowPatientInfo();
+        }
+
+        private void OnShowMedicalTreatments()
+        {
+            Window window = new MedicalTreatmentsView(userId, GetHealthRecord().Id, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
+        }
+
+        private void OnShowPerscriptions()
+        {
+            Window window = new PatientPerscriptionsView(userId, GetHealthRecord().Id, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
 
         private void OnShowAnamnesis()
