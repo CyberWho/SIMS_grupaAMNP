@@ -197,6 +197,8 @@
     <Compile Include="ViewModel\Patient\AllergiesViewModel.cs" />
     <Compile Include="ViewModel\Patient\BindableBase.cs" />
     <Compile Include="ViewModel\Patient\ClinicalTreatmentReferralsViewModel.cs" />
+    <Compile Include="ViewModel\Patient\DoctorRateViewModel.cs" />
+    <Compile Include="ViewModel\Patient\DoctorsViewModel.cs" />
     <Compile Include="ViewModel\Patient\MedicalTreatmenstViewModel.cs" />
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
     <Compile Include="ViewModel\Patient\PatientAnamnsisViewModel.cs" />
@@ -216,6 +218,12 @@
     </Compile>
     <Compile Include="View\Patient\ClinicalTreatmentReferralsView.xaml.cs">
       <DependentUpon>ClinicalTreatmentReferralsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\DoctorRateView.xaml.cs">
+      <DependentUpon>DoctorRateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\DoctorsView.xaml.cs">
+      <DependentUpon>DoctorsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\MedicalTreatmentsView.xaml.cs">
       <DependentUpon>MedicalTreatmentsView.xaml</DependentUpon>
@@ -452,6 +460,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\ClinicalTreatmentReferralsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\DoctorRateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\DoctorsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

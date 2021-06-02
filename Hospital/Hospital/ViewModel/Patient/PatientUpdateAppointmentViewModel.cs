@@ -66,10 +66,17 @@ namespace Hospital.ViewModel.Patient
             Undo = new MyICommand(OnUndo);
             LogOut = new MyICommand(OnLogOut);
             MyHealthRecord = new MyICommand(OnHealthRecord);
+            ShowDoctors = new MyICommand(OnShowDoctors);
             ShowAppointmentInformations(appointmentId);
             appointment = appointmentController.GetAppointmentById(appointmentId);
             appointment.Doctor_Id = appointment.doctor.Id;
             updateMyGrid();
+        }
+        private void OnShowDoctors()
+        {
+            Window window = new DoctorsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnHealthRecord()
         {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,17 +11,16 @@ using Hospital.xaml_windows.Patient;
 
 namespace Hospital.ViewModel.Patient
 {
-    class PatientInfoViewModel : BindableBase
+    class DoctorsViewModel : BindableBase
     {
         private int userId;
         private bool tooltipChecked;
         private Window thisWindow;
+        private PatientController patientController = new PatientController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-        public string Username { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string EMail { get; set; }
-        public string PhoneNumber { get; set; }
+        private DoctorController doctorController = new DoctorController();
+        private AppointmentController appointmentController = new AppointmentController();
+        public ObservableCollection<Model.Doctor> doctors { get; set; }
         public MyICommand HomePage { get; set; }
         public MyICommand MyProfile { get; set; }
         public MyICommand MyAppointments { get; set; }
@@ -31,48 +30,57 @@ namespace Hospital.ViewModel.Patient
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
         public MyICommand ToolTipsOn { get; set; }
-        public PatientInfoViewModel()
+        public MyICommand DoctorRate { get; set; }
+        public Model.Doctor SelectedItem { get; set; }
+        public DoctorsViewModel()
         {
 
         }
 
-        private BindableBase currentViewModel;
-        public BindableBase CurrentViewModel
-        {
-            get { return currentViewModel; }
-            set
-            {
-                SetProperty(ref currentViewModel, value);
-            }
-        }
-
-
-        public PatientInfoViewModel(int userId,bool tooltipChecked, Window thisWindow)
+        public DoctorsViewModel(int userId, bool tooltipChecked, Window thisWindow)
         {
             this.userId = userId;
-            this.thisWindow = thisWindow;
             this.tooltipChecked = tooltipChecked;
+            this.thisWindow = thisWindow;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
-            ShowPatientInfo();
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
             LogOut = new MyICommand(OnLogOut);
             MyHealthRecord = new MyICommand(OnHealthRecord);
             ShowDoctors = new MyICommand(OnShowDoctors);
+            DoctorRate = new MyICommand(OnDoctorRate);
+            ShowAllDoctors();
         }
+
+        private void OnDoctorRate()
+        {
+            if (appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id, SelectedItem.Id) == false)
+            {
+                MessageBox.Show("Ne mozete oceniti doktora kod kog niste bili na pregledu!", "Zdravo korporacija", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                ShowDoctorRate();
+            }
+        }
+        private void ShowDoctorRate()
+        {
+            var window = new DoctorRateView(userId, SelectedItem.Id);
+            window.Show();
+        }
+        private void ShowAllDoctors()
+        {
+            doctors = doctorController.GetAllDoctors();
+        }
+
         private void OnShowDoctors()
         {
             Window window = new DoctorsView(userId, tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
-        private void OnHealthRecord()
-        {
-            Window window = new PatientHealthRecordView(userId, tooltipChecked);
-            window.Show();
-            thisWindow.Close();
-        }
+
         private void OnLogOut()
         {
             Window window = new MainWindow();
@@ -82,34 +90,30 @@ namespace Hospital.ViewModel.Patient
 
         private void OnMyAppointments()
         {
-            Window window = new PatientAppointmentsView(userId,tooltipChecked);
+            Window window = new PatientAppointmentsView(userId, tooltipChecked);
             window.Show();
             thisWindow.Close();
-        }
-
-        private void ShowPatientInfo()
-        {
-
-            Model.Patient patient = new PatientController().GetPatientByUserId(userId);
-            Username = patient.User.Username;
-            Name = patient.User.Name;
-            Surname = patient.User.Surname;
-            PhoneNumber = patient.User.PhoneNumber;
-            EMail = patient.User.EMail;
         }
 
         private void OnMyProfile()
         {
-            Window window = new PatientInfoView(userId,tooltipChecked);
+            Window window = new PatientInfoView(userId, tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
 
-        private void OnHomePage()
+        public void OnHomePage()
         {
-            Window window = new PatientUIView(userId,tooltipChecked);
+            Window window = new PatientUIView(userId, tooltipChecked);
             window.Show();
             thisWindow.Close();
         }
+        private void OnHealthRecord()
+        {
+            Window window = new PatientHealthRecordView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
+        }
+
     }
 }

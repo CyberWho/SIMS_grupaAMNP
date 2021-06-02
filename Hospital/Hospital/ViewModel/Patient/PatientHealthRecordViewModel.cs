@@ -60,7 +60,14 @@ namespace Hospital.ViewModel.Patient
             ShowAnamnesis = new MyICommand(OnShowAnamnesis);
             ShowPerscriptions = new MyICommand(OnShowPerscriptions);
             ShowMedicalTreatments = new MyICommand(OnShowMedicalTreatments);
+            ShowDoctors = new MyICommand(OnShowDoctors);
             ShowPatientInfo();
+        }
+        private void OnShowDoctors()
+        {
+            Window window = new DoctorsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
 
         private void OnShowMedicalTreatments()

@@ -53,9 +53,15 @@ namespace Hospital.ViewModel.Patient
             LogOut = new MyICommand(OnLogOut);
             MyHealthRecord = new MyICommand(OnHealthRecord);
             Undo = new MyICommand(OnHealthRecord);
+            ShowDoctors = new MyICommand(OnShowDoctors);
             ShowClinicalReferrals();
         }
-
+        private void OnShowDoctors()
+        {
+            Window window = new DoctorsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
+        }
         private void ShowClinicalReferrals()
         {
             referralForClinicalTreatments = refferalForClinicalTreatmentController.GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(healthRecordId);

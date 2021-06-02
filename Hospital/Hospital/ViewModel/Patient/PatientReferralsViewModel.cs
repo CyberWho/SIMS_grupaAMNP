@@ -52,9 +52,15 @@ namespace Hospital.ViewModel.Patient
             MyHealthRecord = new MyICommand(OnHealthRecord);
             Undo = new MyICommand(OnHealthRecord);
             ShowRecommendations = new MyICommand(OnShowRecommendations);
+            ShowDoctors = new MyICommand(OnShowDoctors);
             ShowReferrals();
         }
-
+        private void OnShowDoctors()
+        {
+            Window window = new DoctorsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
+        }
         private void ShowReferrals()
         {
             ReferralForSpecialists = new RefferalForSpecialistController().GetReferralForSpecialistsByHealthRecordId(healthRecordId);

@@ -68,7 +68,14 @@ namespace Hospital.ViewModel.Patient
             LogOut = new MyICommand(OnLogOut);
             Undo = new MyICommand(OnUndo);
             MyHealthRecord = new MyICommand(OnHealthRecord);
+            ShowDoctors = new MyICommand(OnShowDoctors);
             updateDataGrid();
+        }
+        private void OnShowDoctors()
+        {
+            Window window = new DoctorsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnHealthRecord()
         {

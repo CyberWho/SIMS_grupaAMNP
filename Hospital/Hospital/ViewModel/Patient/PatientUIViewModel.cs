@@ -53,7 +53,14 @@ namespace Hospital.ViewModel.Patient
             MyAppointments = new MyICommand(OnMyAppointments);
             LogOut = new MyICommand(OnLogOut);
             MyHealthRecord = new MyICommand(OnHealthRecord);
+            ShowDoctors = new MyICommand(OnShowDoctors);
 
+        }
+        private void OnShowDoctors()
+        {
+            Window window = new DoctorsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnLogOut()
         {

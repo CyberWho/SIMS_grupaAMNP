@@ -57,7 +57,14 @@ namespace Hospital.ViewModel.Patient
             CheckedTime = new MyICommand(OnCheckedTime);
             ChooseDoctor = new MyICommand(OnChooseDoctor);
             MyHealthRecord = new MyICommand(OnHealthRecord);
+            ShowDoctors = new MyICommand(OnShowDoctors);
             ShowGeneralPurposeDoctors();
+        }
+        private void OnShowDoctors()
+        {
+            Window window = new DoctorsView(userId, tooltipChecked);
+            window.Show();
+            thisWindow.Close();
         }
         private void OnHealthRecord()
         {
