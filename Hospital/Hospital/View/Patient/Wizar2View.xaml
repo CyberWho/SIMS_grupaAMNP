@@ -15,22 +15,22 @@
         <Button Content="Sledeći korak" x:Name="next" Command="{Binding Next}" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="729,427,0,0" VerticalAlignment="Top" Width="144"/>
         <Button Content="Odustani" x:Name="cancel" Command="{Binding Cancel}" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="568,427,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Upoznavanje sa ikonicama" FontSize="40" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="219,33,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-home-96.png" Margin="82,113,753.6,318.4"/>
-        <Label Content="Početna stranica" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,152,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-male-user-96.png" Margin="173,113,661.6,318.4"/>
-        <Label Content="Moj profil" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="170,152,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-calendar-52.png" Margin="274,113,569.6,318.4"/>
-        <Label Content="Moji termini" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="263,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.106"/>
-        <Image Source="/Resources/Icons/icons8-heart-health-100.png" Margin="388,113,453.6,318.4"/>
-        <Label Content="Moj zdravstevni karton" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="354,152,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-stethoscope-48.png" Margin="502,113,337.6,318.4"/>
-        <Label Content="Doktori" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="506,152,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-notification-96.png" Margin="603,113,244.6,318.4"/>
-        <Label Content="Moj podsetnik" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="584,152,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-read-message-96.png" Margin="705,113,136.6,318.4"/>
-        <Label Content="Obaveštenja" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="694,152,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-exit-52.png" Margin="801,113,43.6,318.4"/>
-        <Label Content="Odjavi se" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="797,157,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-home-96.png" Margin="88,113,740.6,318.4" RenderTransformOrigin="0.705,0.422"/>
+        <Label Content="Početna stranica" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-male-user-96.png" Margin="249,113,585.6,318.4"/>
+        <Label Content="Moj profil" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="244,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-calendar-52.png" Margin="410,113,433.6,318.4"/>
+        <Label Content="Moji termini" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="390,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.106"/>
+        <Image Source="/Resources/Icons/icons8-heart-health-100.png" Margin="585,113,256.6,318.4" RenderTransformOrigin="-0.286,0.396"/>
+        <Label FontSize="16" Content="Moj zdravstevni karton" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="541,152,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-stethoscope-48.png" Margin="773,111,66.6,320.4"/>
+        <Label FontSize="16" Content="Doktori" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="773,150,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-notification-96.png" Margin="249,209,598.6,222.4"/>
+        <Label FontSize="16" Content="Moj podsetnik" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="219,253,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-read-message-96.png" Margin="408,209,433.6,222.4"/>
+        <Label FontSize="16" Content="Obaveštenja" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="388,253,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-exit-52.png" Margin="588,209,256.6,222.4"/>
+        <Label FontSize="16" Content="Odjavi se" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="575,253,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
