@@ -23,7 +23,7 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ShowDoctors { get; set; }
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
-        public MyICommand ToolTipsOn { get; set; }
+        public MyICommand Help { get; set; }
         public MyICommand PersonalReminders { get; set; }
         public MyICommand MedicalReminders { get; set; }
         public RemindersViewModel()
@@ -52,8 +52,14 @@ namespace Hospital.ViewModel.Patient
             PersonalReminders = new MyICommand(OnPersonalReminders);
             MedicalReminders = new MyICommand(OnMedicalReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
+            Help = new MyICommand(OnHelp);
         }
+        private void OnHelp()
+        {
+            string str = "PatientRemindersHelp";
+            HelpProvider.ShowHelp(str, thisWindow);
 
+        }
         private void OnShowNotifications()
         {
             Window window = new NotificationsView(userId, ToolTipChecked);

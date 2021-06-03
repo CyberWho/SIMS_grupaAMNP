@@ -30,7 +30,7 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ShowDoctors { get; set; }
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
-        public MyICommand ToolTipsOn { get; set; }
+        public MyICommand Help { get; set; }
         public MyICommand SelectionChanged { get; set; }
         public MyICommand Update { get; set; }
         public MyICommand New { get; set; }
@@ -78,7 +78,12 @@ namespace Hospital.ViewModel.Patient
             InstanceMyICommands();
             updateDataGrid();
         }
+        private void OnHelp()
+        {
+            string str = "PatientAppointmentsHelp";
+            HelpProvider.ShowHelp(str, thisWindow);
 
+        }
         private void InstanceMyICommands()
         {
             HomePage = new MyICommand(OnHomePage);
@@ -93,6 +98,7 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
+            Help = new MyICommand(OnHelp);
         }
 
         private void OnShowNotifications()

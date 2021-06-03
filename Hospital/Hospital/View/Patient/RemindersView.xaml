@@ -21,6 +21,7 @@
         <KeyBinding Modifiers="Alt" Key="L" Command="{Binding LogOut}"/>
         <KeyBinding Modifiers="Control" Key="P" Command="{Binding PersonalReminders}"/>
         <KeyBinding Modifiers="Control" Key="T" Command="{Binding MedicalReminders}"/>
+        <KeyBinding Modifiers="Alt" Key="S" Command="{Binding Help}"/>
     </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -89,6 +90,10 @@
         <Image Source="/Resources/Icons/icons8-hospital-3-96.png" Grid.Column="1" Margin="161.8,79,573.6,272.4"  ></Image>
         <Label Content="Odaberite podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="450.8,42,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
-
+        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

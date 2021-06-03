@@ -40,7 +40,7 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ShowDoctors { get; set; }
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
-        public MyICommand ToolTipsOn { get; set; }
+        public MyICommand Help { get; set; }
         public MyICommand SelectionChanged { get; set; }
         public MyICommand New { get; set; }
         public TimeSlot SelectedItem { get; set; }
@@ -87,8 +87,14 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
+            Help = new MyICommand(OnHelp);
         }
+        private void OnHelp()
+        {
+            string str = "PatientNewAppointmentRecommendationsHelp";
+            HelpProvider.ShowHelp(str, thisWindow);
 
+        }
         private void OnShowNotifications()
         {
             Window window = new NotificationsView(userId, ToolTipChecked);

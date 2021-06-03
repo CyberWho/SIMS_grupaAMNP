@@ -950,6 +950,7 @@
     <Content Include="Help\PatientNewAppointmentRecommendationsHelp.html" />
     <Content Include="Help\PatientRemindersHelp.html" />
     <Content Include="Help\PatientUIHelp.html" />
+    <Content Include="Help\PatientUpdateAppointmentHelp.html" />
     <Content Include="Help\PersonalRemindersHelp.html" />
     <Content Include="Help\TreatmentRemindersHelp.html" />
     <Resource Include="Resources\Icons\icons8-help-100 %281%29.png" />

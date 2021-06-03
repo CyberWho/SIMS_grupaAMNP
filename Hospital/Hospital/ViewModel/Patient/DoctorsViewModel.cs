@@ -29,7 +29,7 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ShowDoctors { get; set; }
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
-        public MyICommand ToolTipsOn { get; set; }
+        public MyICommand Help { get; set; }
         public MyICommand DoctorRate { get; set; }
         public Model.Doctor SelectedItem { get; set; }
         public bool CanRate { get; set; }
@@ -59,6 +59,12 @@ namespace Hospital.ViewModel.Patient
             ShowAllDoctors();
             CanRate = false;
         }
+        private void OnHelp()
+        {
+            string str = "DoctorsHelp";
+            HelpProvider.ShowHelp(str, thisWindow);
+
+        }
 
         private void InstanceMyICommands()
         {
@@ -71,6 +77,7 @@ namespace Hospital.ViewModel.Patient
             DoctorRate = new MyICommand(OnDoctorRate);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
+            Help = new MyICommand(OnHelp);
         }
 
         private void OnShowNotifications()

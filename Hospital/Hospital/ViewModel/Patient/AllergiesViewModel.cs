@@ -31,10 +31,9 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ShowDoctors { get; set; }
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
-        public MyICommand ToolTipsOn { get; set; }
         public MyICommand Undo { get; set; }
 
-
+        public MyICommand Help { get; set; }
         public AllergiesViewModel()
         {
 
@@ -46,6 +45,13 @@ namespace Hospital.ViewModel.Patient
             this.healthRecordId = healthRecordId;
             this.ToolTipChecked = toolTipChecked;
             this.thisWindow = thisWindow;
+          
+            InstanceMyICommands();
+            ShowAllergies();
+        }
+
+        private void InstanceMyICommands()
+        {
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
@@ -55,7 +61,14 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
-            ShowAllergies();
+            Help = new MyICommand(OnHelp);
+        }
+
+        private void OnHelp()
+        {
+            string str = "PatientHealthRecordHelp";
+            HelpProvider.ShowHelp(str, thisWindow);
+
         }
         private void OnShowNotifications()
         {

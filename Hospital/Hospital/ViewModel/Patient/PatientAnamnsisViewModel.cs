@@ -32,7 +32,7 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ShowNotifications { get; set; }
         public MyICommand ToolTipsOn { get; set; }
         public MyICommand Undo { get; set; }
-
+        public MyICommand Help { get; set; }
         public PatientAnamnsisViewModel()
         {
 
@@ -49,7 +49,12 @@ namespace Hospital.ViewModel.Patient
             ShowAnamensis();
 
         }
+        private void OnHelp()
+        {
+            string str = "PatientHealthRecordHelp";
+            HelpProvider.ShowHelp(str, thisWindow);
 
+        }
         private void InstanceMyICommands()
         {
             HomePage = new MyICommand(OnHomePage);
@@ -61,6 +66,7 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
+            Help = new MyICommand(OnHelp);
         }
 
         private void OnShowNotifications()

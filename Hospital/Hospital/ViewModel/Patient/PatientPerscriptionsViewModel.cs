@@ -29,13 +29,18 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ShowDoctors { get; set; }
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
-        public MyICommand ToolTipsOn { get; set; }
+        public MyICommand Help { get; set; }
         public MyICommand Undo { get; set; }
         public PatientPerscriptionsViewModel()
         {
 
         }
+        private void OnHelp()
+        {
+            string str = "PatientHealthRecordHelp";
+            HelpProvider.ShowHelp(str, thisWindow);
 
+        }
         public PatientPerscriptionsViewModel(int userId, int healthRecordId, bool toolTipChecked, Window thisWindow)
         {
             this.userId = userId;
@@ -58,6 +63,7 @@ namespace Hospital.ViewModel.Patient
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
+            Help = new MyICommand(OnHelp);
         }
 
         private void OnShowNotifications()

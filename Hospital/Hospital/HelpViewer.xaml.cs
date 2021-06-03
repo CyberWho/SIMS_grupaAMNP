@@ -28,7 +28,6 @@ namespace Hospital
             InitializeComponent();
             string curDir = "C:/Users/DELL/Desktop/HCI/SIMS_grupaAMNP/Hospital/Hospital/Help";
             string path = String.Format("{0}/{1}.html", curDir, key);
-            MessageBox.Show(path);
             if (!File.Exists(path))
             {
                 key = "error";
@@ -36,30 +35,7 @@ namespace Hospital
             wbHelp.Source = new Uri(path);
 
         }
-        private void BrowseBack_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = ((wbHelp != null) && (wbHelp.CanGoBack));
-        }
-
-        private void BrowseBack_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            wbHelp.GoBack();
-        }
-
-        private void BrowseForward_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = ((wbHelp != null) && (wbHelp.CanGoForward));
-        }
-
-        private void BrowseForward_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            wbHelp.GoForward();
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-        }
-
+        
         private void wbHelp_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
         {
         }
