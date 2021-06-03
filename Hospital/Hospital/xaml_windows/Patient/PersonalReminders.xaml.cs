@@ -15,6 +15,8 @@ using Hospital.Model;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
 using System.Data;
+using Hospital.View.Patient;
+using Hospital.ViewModel.Patient;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -43,10 +45,6 @@ namespace Hospital.xaml_windows.Patient
             updateDataGrid();
             // FillComboBox();
             frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
-            Izmeni.IsEnabled = false;
-            Obrisi.IsEnabled = false;
-            Kreiraj.IsEnabled = true;
-            DeleteAll.IsEnabled = false;
             ToolTipChecked(tooltipChecked);
         }
         private void ToolTipChecked(bool tooltipChecked)
@@ -91,13 +89,13 @@ namespace Hospital.xaml_windows.Patient
         }
         private void MojiPodsetnici_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId,tooltipChecked);
+            var window = new RemindersView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void PocetnaStranica_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientUI(userId,tooltipChecked);
+            var window = new PatientUIView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -118,25 +116,25 @@ namespace Hospital.xaml_windows.Patient
 
         private void MojProfil_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientInfo(userId,tooltipChecked);
+            var window = new PatientInfoView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void MojiPregledi_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientAppointments(userId,tooltipChecked);
+            var window = new PatientAppointmentsView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void Doktori_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Doctors(userId,tooltipChecked);
+            var window = new DoctorsView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
         private void ZdravstveniKarton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PatientHealthRecord(userId,tooltipChecked);
+            var window = new PatientHealthRecordView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -148,7 +146,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Notifications(userId,tooltipChecked);
+            var window = new NotificationsView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -291,9 +289,6 @@ namespace Hospital.xaml_windows.Patient
 
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Izmeni.IsEnabled = true;
-            Obrisi.IsEnabled = true;
-
         }
         private void myDataGridDrop_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -301,7 +296,7 @@ namespace Hospital.xaml_windows.Patient
         }
         private void Undo_OnClick(object sender, RoutedEventArgs e)
         {
-            var window = new Reminders(userId,tooltipChecked);
+            var window = new RemindersView(userId,tooltipChecked);
             window.Show();
             this.Close();
         }
@@ -381,6 +376,12 @@ namespace Hospital.xaml_windows.Patient
 
             updateDataGrid();
             DeleteAll.IsEnabled = false;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            string str = "PersonalRemindersHelp";
+            HelpProvider.ShowHelp(str, this);
         }
     }
 }

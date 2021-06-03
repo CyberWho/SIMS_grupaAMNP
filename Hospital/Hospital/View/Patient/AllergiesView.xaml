@@ -1,0 +1,111 @@
+﻿<Window x:Class="Hospital.View.Patient.AllergiesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Patient"
+        xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
+        mc:Ignorable="d"
+        Title="AllergiesView" Height="500" Width="900" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModel:AllergiesViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Alt" Key="H" Command="{Binding HomePage}"/>
+        <KeyBinding Modifiers="Alt" Key="P" Command="{Binding MyProfile}"/>
+        <KeyBinding Modifiers="Alt" Key="A" Command="{Binding MyAppointments}"/>
+        <KeyBinding Modifiers="Alt" Key="M" Command="{Binding MyHealthRecord}"/>
+        <KeyBinding Modifiers="Alt" Key="D" Command="{Binding ShowDoctors}"/>
+        <KeyBinding Modifiers="Alt" Key="R" Command="{Binding MyReminders}"/>
+        <KeyBinding Modifiers="Alt" Key="N" Command="{Binding ShowNotifications}"/>
+        <KeyBinding Modifiers="Alt" Key="L" Command="{Binding LogOut}"/>
+        <KeyBinding Modifiers="Alt" Key="U" Command="{Binding Undo}"/>
+        <KeyBinding Modifiers="Alt" Key="S" Command="{Binding Help}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55"  />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
+            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)"  HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
+
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="41" Height="43" Source="/Resources/Icons/icons8-calendar-52.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
+        
+        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
+        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="Undo" ToolTip="Povratak na pregled zdravstvenog kartona (Alt+U)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Undo}" Background="White" Width="48" Margin="615.8,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
+       
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding allergies}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,90,0,0" VerticalAlignment="Top" Width="468">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding allergyType.Type}" Width="*"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Naziv alergije:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,80,0,0" VerticalAlignment="Top" Height="32" Width="124"/>
+        <TextBox x:Name="allergy_name_txt" IsReadOnly="True" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="145.8,87,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.allergyType.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Odabrana alergija:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.6,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,-0.8" Width="197"/>
+        <Label Content="Moje alergije:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="356,42,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Content="Pomoć" Unchecked="CheckBox_OnUnchecked" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
+        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

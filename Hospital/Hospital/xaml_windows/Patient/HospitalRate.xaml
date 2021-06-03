@@ -12,13 +12,13 @@
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="54,0,181,420" Height="Auto"/>
         <Label Content="Ocenite bolnicu:" Foreground="DeepSkyBlue" FontSize="22" HorizontalAlignment="Left" Margin="54,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Ocena:" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="51,109,0,0" VerticalAlignment="Top"/>
-        <Label Content="Komentar" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="51,141,0,0" VerticalAlignment="Top"/>
+        <Label Content="Komentar:" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="51,146,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" x:Name="description_txt" Height="81" Margin="148,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="229" />
-        <xctk:IntegerUpDown FontSize="16" Foreground="DeepSkyBlue" x:Name="rate_txt" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="146,112,0,0" VerticalAlignment="Top" Width="229"/>
+        <xctk:IntegerUpDown FontSize="16" Foreground="DeepSkyBlue" x:Name="rate_txt" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="151,112,0,0" VerticalAlignment="Top" Width="224"/>
         <Button x:Name="Potvrda" ToolTip="Klikom na dugme potvrdjujete ocenu" Click="Potvrda_Click" Content="Potvrda" Foreground="White" FontSize="16" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="187,262,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.459,2.338"/>
         <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block"  Margin="148,137,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"/>
         <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block1"  Margin="151,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="224" RenderTransformOrigin="0.5,0.5">
-            
+
         </TextBlock>
 
     </Grid>

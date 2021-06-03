@@ -27,5 +27,6 @@
         <Label Content="Obaveštenja" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="694,152,0,0" VerticalAlignment="Top"/>
         <Image Source="/Resources/Icons/icons8-exit-52.png" Margin="801,113,43.6,318.4"/>
         <Label Content="Odjavi se" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="797,157,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

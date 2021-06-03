@@ -1,0 +1,37 @@
+﻿<Window x:Class="Hospital.View.Patient.ReportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Patient"
+        xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
+        mc:Ignorable="d"
+        Title="Izveštaj" Height="500" Width="900">
+    <Window.DataContext>
+        <viewModel:ReportViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="Black" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="55,1,573.6,423.4" Height="Auto"/>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="5,1,843.6,423.4"/>
+        <Label Content="Izveštaj o konzumaciji leka" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="219,47,0,0"/>
+        <Label Content="Naziv leka:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,116,0,0"/>
+        <Label Content="Početak izveštaja:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,227,0,0"/>
+        <Label Content="Završetak izveštaja:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,264,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DrugName}" VerticalAlignment="Top" Width="144" Margin="202,124,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding startTime}" VerticalAlignment="Top" Width="144" Margin="202,235,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding endTime}" VerticalAlignment="Top" Width="144" Margin="202,272,0,0"/>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="295" Margin="380,124,0,0" VerticalAlignment="Top" Width="480">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Vreme oglašavanja" Binding="{Binding AlarmTime}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Ime pacijenta:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,153,0,0"/>
+        <Label Content="Prezime pacijenta:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,190,0,0" RenderTransformOrigin="0.443,-3.122"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding PatientName}" VerticalAlignment="Top" Width="144" Margin="202,162,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding PatientSurname}" VerticalAlignment="Top" Width="144" Margin="202,198,0,0"/>
+
+    </Grid>
+</Window>

@@ -15,6 +15,7 @@ using Hospital.xaml_windows.Secretary;
 using System.Windows;
 using System.Windows.Annotations;
 using Hospital.Service;
+using Hospital.View.Patient;
 
 namespace Hospital.Controller
 {
@@ -75,7 +76,7 @@ namespace Hospital.Controller
                     Patient patient = patientController.GetPatientByUserId(id);
                     if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patient.Id) == true)
                     {
-                        MessageBox.Show("Blokirani ste i nije moguce da se ulogujete!");
+                        MessageBox.Show("Blokirani ste i nije moguce da se ulogujete!","Zdravo korporacija",MessageBoxButton.OK,MessageBoxImage.Error);
                     }
                     else
                     {
@@ -83,12 +84,12 @@ namespace Hospital.Controller
                         if (!logedInfo)
                         {
                             patientController.UpdateHasBeenLogedByPatientId(patient.Id);
-                            s = new WizardHome(id);
+                            s = new WizardHomeView(id);
                             s.Show();
                         }
                         else
                         {
-                            s = new PatientUI(id);
+                            s = new PatientUIView(id);
                             s.Show();
                         }
                     }

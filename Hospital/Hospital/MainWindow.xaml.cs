@@ -2,6 +2,7 @@
 using System.Windows;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Controller;
+using Hospital.View.Patient;
 
 namespace Hospital
 {
@@ -20,12 +21,11 @@ namespace Hospital
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
 
-            string user = Username.Text;
-            string pass = Password.Password;
+             string user = Username.Text;
+             string pass = Password.Password;
 
-            if(new UserController().LoginUser(user, pass))
-                this.Close();
-
+             if(new UserController().LoginUser(user, pass))
+                 this.Close();
         }
 
     }
