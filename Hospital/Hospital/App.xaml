@@ -103,6 +103,9 @@
                                     <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Background" Value="#838b91" TargetName="Border"/>
                                 </Trigger>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter Property="Background" Value="#0471c9"/>
+                                </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
@@ -125,8 +128,8 @@
                                 <DropShadowEffect ShadowDepth="5" BlurRadius="4"/>
                             </Setter.Value>
                         </Setter>
-                            <Setter Property="Cursor" Value="Hand"/>
-                        </Trigger>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
                 </Style.Triggers>
            </Style>
             

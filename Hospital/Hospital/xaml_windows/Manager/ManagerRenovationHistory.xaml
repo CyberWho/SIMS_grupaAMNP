@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
         mc:Ignorable="d"
-        Title="ManagerRenovationHistory" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="ManagerRenovationHistory" Height="720" Width="1080" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding RenovationDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="329" Margin="10,80,0,0" VerticalAlignment="Top" Width="768" SelectionUnit="FullRow" SelectionMode="Single" Style="{}">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding RenovationDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" Height="329" Margin="100,157,100,0" VerticalAlignment="Top" SelectionUnit="FullRow" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto  "  IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"  IsReadOnly="True" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Datum početka" Binding="{Binding StartDate}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Tip renovacije" Binding="{Binding Type}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Prostorije" Binding="{Binding Rooms}" Width="*" IsReadOnly="True"/>

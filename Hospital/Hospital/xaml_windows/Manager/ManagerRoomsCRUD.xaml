@@ -26,13 +26,18 @@
                 <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ShowInventory_Click">
-                                <TextBlock Text="Inventar" Style="{StaticResource managerTextBlock}"/>
+                            <Button Click="ShowInventory_Click" Style="{StaticResource managerRegularBtn}" Width="80">
+                                <TextBlock Text="Inventar" Style="{StaticResource managerTextBlock}" FontSize="12"/>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="IsTabStop" Value="False"/>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
 
         <TextBox x:Name="floor_txtbx" Text="{Binding SelectedItem.Floor, ElementName=myDataGrid}" materialDesign:HintAssist.Hint="Sprat" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="68,160,783.6,0" VerticalAlignment="Top"/>
