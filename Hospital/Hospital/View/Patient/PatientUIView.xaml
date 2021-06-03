@@ -85,12 +85,12 @@
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Image Source="/Resources/Icons/icons8-hospital-3-96.png" Grid.Column="1" Margin="336.8,151,400.6,209.4" RenderTransformOrigin="0.223,0.523"/>
+        <Image Source="/Resources/Icons/icons8-hospital-sign-96.png" Grid.Column="1" Margin="331.8,134,398.6,223.4" RenderTransformOrigin="0.223,0.523"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
         <Button x:Name="OceniBolnicu" Content="Oceni bolnicu" ToolTip="Klikom na dugme otvoriće Vam se anketa za bolnicu (Ctrl+R)" Command="{Binding HospitalRate}" Foreground="White" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="573.8,421,44.6,10.4" Grid.Column="1"/>
-        <Label Content="Dobrodošli!" FontSize="36" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="287.8,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.309,0.598"/>
+        <Label Content="Dobrodošli!" FontSize="40" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="274.8,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.309,0.598"/>
         <Label Content="Cenimo Vase misljenje:" FontSize="16" Foreground="DeepSkyBlue"  Grid.Column="1" HorizontalAlignment="Left" Margin="370.8,421,0,0" VerticalAlignment="Top"/>
-        <Label Content="Brinemo o Vašem zdravlju svakodnevno" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="252.8,266,0,0" VerticalAlignment="Top"/>
+        <Label Content="Brinemo o Vašem zdravlju svakodnevno" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="242.8,252,0,0" VerticalAlignment="Top"/>
        <CheckBox x:Name="CheckBox" Content="Pomoć" Style="{StaticResource RoundedCheckBox}" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Checked="CheckBox_OnChecked"  Foreground="DeepSkyBlue"  ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
         <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">

@@ -191,10 +191,7 @@ namespace Hospital.ViewModel.Patient
             int patientId = getPatientId();
             appointment = appointmentController.GetAppointmentById(GetAppointmentId());
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
-            //DateValidationForUpdate(hours, patientId, GetAppointmentId());
-            Window window = new PatientUpdateAppointmentView(userId, appointment.Id,ToolTipChecked);
-            window.Show();
-            thisWindow.Close();
+            DateValidationForUpdate(hours, patientId, GetAppointmentId());
         }
         private int GetAppointmentId()
         {
@@ -204,7 +201,7 @@ namespace Hospital.ViewModel.Patient
         {
             if (hours > 24)
             {
-                //ShowPatientUpdateAppointment(patientId, appointmentId);
+                ShowPatientUpdateAppointment(patientId, appointmentId);
             }
             else
             {
@@ -212,7 +209,12 @@ namespace Hospital.ViewModel.Patient
             }
         }
 
-
+        private void ShowPatientUpdateAppointment(int patientId, int appointmentId)
+        {
+            Window window = new PatientUpdateAppointmentView(userId, appointmentId, ToolTipChecked);
+            window.Show();
+            thisWindow.Close();
+        }
         private int getPatientId()
         {
 

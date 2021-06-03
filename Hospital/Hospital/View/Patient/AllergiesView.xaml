@@ -73,6 +73,7 @@
             </MenuItem>
         </Menu>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
+        
         <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
@@ -89,6 +90,7 @@
             </StackPanel>
         </Button>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
+       
         <DataGrid x:Name="myDataGrid" ItemsSource="{Binding allergies}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,90,0,0" VerticalAlignment="Top" Width="468">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Binding="{Binding allergyType.Type}" Width="*"/>

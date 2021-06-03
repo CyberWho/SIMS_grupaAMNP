@@ -25,12 +25,15 @@
         <Label FontSize="16" Content="Moj zdravstevni karton" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="525,152,0,0" VerticalAlignment="Top"/>
         <Image Source="/Resources/Icons/icons8-stethoscope-48.png" Margin="729,113,110.6,318.4"/>
         <Label FontSize="16" Content="Doktori" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="729,152,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-notification-96.png" Margin="249,209,598.6,222.4"/>
-        <Label FontSize="16" Content="Moj podsetnik" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="219,253,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-read-message-96.png" Margin="410,209,431.6,222.4"/>
-        <Label FontSize="16" Content="Obaveštenja" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="390,253,0,0" VerticalAlignment="Top"/>
-        <Image Source="/Resources/Icons/icons8-exit-52.png" Margin="572,209,272.6,222.4"/>
-        <Label FontSize="16" Content="Odjavi se" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="562,253,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-notification-96.png" Margin="187,209,660.6,222.4"/>
+        <Label FontSize="16" Content="Moj podsetnik" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="154,248,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-read-message-96.png" Margin="331,209,510.6,222.4"/>
+        <Label FontSize="16" Content="Obaveštenja" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="310,253,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-exit-52.png" Margin="476,209,368.6,222.4"/>
+        <Label FontSize="16" Content="Odjavi se" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="463,253,0,0" VerticalAlignment="Top"/>
+        <Image Source="/Resources/Icons/icons8-help-100 (1).png" Margin="630,209,212.6,222.4"/>
+        <Label Content="Pomoćnik" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="16.795,9.528" Margin="618,248,0,0"/>
+        <CheckBox Content="Uključivanje/Isključivanje pomoći" Style="{StaticResource RoundedCheckBox}" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="310,314,0,0"/>
 
     </Grid>
 </Window>
