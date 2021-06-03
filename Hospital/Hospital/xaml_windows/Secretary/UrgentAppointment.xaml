@@ -7,20 +7,20 @@
         mc:Ignorable="d"
         Title="UrgentAppointment" Height="750" Width="430">
     <Grid>
-        <Button Content="Kreiraj hitan termin" Margin="141,0,143,9.8" VerticalAlignment="Bottom" Height="30" Click="Move_Reserved_Appointment"/>
-        <Label Content="Odabrani pacijent" Height="26" Margin="141,83,143,0" VerticalAlignment="Top"/>
+        <Button Content="Kreiraj hitan termin" Margin="0,0,10,56" VerticalAlignment="Bottom" Height="30" Click="Move_Reserved_Appointment" HorizontalAlignment="Right" Width="138"/>
+        <Label Content="Odabrani pacijent" Margin="0,348,10,345" HorizontalAlignment="Right" Width="138"/>
 
-        <TextBlock x:Name="PatName" Margin="141,114,143,0" Text="Ime pacijenta" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Surname" Margin="141,135,143,0" Text="Prezime pacijenta" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Username" Margin="141,198,143,0" Text="Korisnicko ime pacijenta" VerticalAlignment="Top"/>
-        <TextBlock x:Name="PhoneNumber" Margin="141,156,143,0" Text="Kontakt telefon pacijenta" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Email" Margin="141,177,143,0" Text="Email adresa pacijenta" VerticalAlignment="Top"/>
+        <TextBlock x:Name="PatName" Margin="0,0,10,314" Text="Ime pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
+        <TextBlock x:Name="Surname" Margin="0,0,10,283" Text="Prezime pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
+        <TextBlock x:Name="Username" Margin="0,0,10,190" Text="Korisnicko ime pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
+        <TextBlock x:Name="PhoneNumber" Margin="0,0,10,252" Text="Kontakt telefon pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
+        <TextBlock x:Name="Email" Margin="0,0,10,221" Text="Email adresa pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
 
-        <Label Content="Odaberite oblast lekara" Margin="141,250,143,0" VerticalAlignment="Top"/>
-        <ComboBox ToolTip="Selektovati specijalizaciju koja vam je potrebna" Name ="selection" Loaded="selection_loaded" Margin="141,290,143,0" VerticalAlignment="Top" SelectionChanged="selection_SelectionChanged"/>
+        <Label Content="Odaberite oblast lekara" Margin="0,0,10,159" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="138"/>
+        <ComboBox ToolTip="Selektovati specijalizaciju koja vam je potrebna" Name ="selection" Loaded="selection_loaded" Margin="0,0,10,132" VerticalAlignment="Bottom" SelectionChanged="selection_SelectionChanged" HorizontalAlignment="Right" Width="138"/>
 
 
-        <DataGrid ToolTip="Odaberite vreme u koje zelite da pomerite prethodno zakazan termin" x:Name="available_timeslots" ItemsSource="{Binding timeSlots}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,317,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="Selected_TimeSlot_In_Which_To_Move_Appointment">
+        <DataGrid ToolTip="Odaberite vreme u koje zelite da pomerite prethodno zakazan termin" x:Name="available_timeslots" ItemsSource="{Binding timeSlots}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,10,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="Selected_TimeSlot_In_Which_To_Move_Appointment" d:LayoutOverrides="VerticalAlignment">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Pocetak" Binding="{Binding StartTime}" Width="*"/>

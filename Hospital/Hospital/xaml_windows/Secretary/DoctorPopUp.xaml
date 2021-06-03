@@ -1,0 +1,39 @@
+﻿<Window x:Class="Hospital.xaml_windows.Secretary.DoctorPopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Secretary"
+        mc:Ignorable="d"
+        Title="DoctorPopUp" Height="550" Width="350">
+    <Grid>
+        <Label Content="Ime" HorizontalAlignment="Left" Margin="29,66,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="36"/>
+        <Label Content="Prezime" HorizontalAlignment="Left" Margin="29,97,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+        <Label Content="Korisnicko ime" HorizontalAlignment="Left" Margin="29,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,0.923" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+        <Label Content="Kontakt" HorizontalAlignment="Left" Margin="29,159,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="29,190,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.447,-2.346" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+        <Label Content="Plata" HorizontalAlignment="Left" Margin="29,221,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.447,-2.346" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+        <Label Content="Specijalizacija" HorizontalAlignment="Right" Margin="0,250,196,0" VerticalAlignment="Top" Width="117"/>
+        <Label Content="Soba" Margin="29,276,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+
+        <Grid>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding NName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <ComboBox x:Name ="specialization_selection" Loaded="specialization_selection_loaded" Margin="161,247,91,0" SelectionChanged="specialization_selection_SelectionChanged" VerticalAlignment="Top"/>
+            <ComboBox x:Name ="room_selection" Loaded="room_selection_loaded" SelectionChanged="room_selection_SelectionChanged" Margin="161,274,91,0" VerticalAlignment="Top"/>
+        </Grid>
+
+
+
+        <Button Name="deleteDoctor" ToolTip="Klikom na dugme brisete selektovanog lekara" Content="Obrisi lekara" Margin="29,345,0,0" VerticalAlignment="Top" Click="Delete_user" Height="30" HorizontalAlignment="Left" Width="129"/>
+        <Button Name="updateDoctor"  ToolTip="Klikom na dugme menjate podatke koje ste izmenili u poljima iznad" Content="Izmeni lekara" Margin="29,380,0,0" VerticalAlignment="Top" Click="Update_user" Height="30" HorizontalAlignment="Left" Width="129"/>
+        <Button Name="freeDays" ToolTip="Klikom na dugme otvara se prozor vezan za upravljanjem slobodnim danima lekara"  Content="Slobodni dani lekara" Margin="29,415,0,0" VerticalAlignment="Top" Height="30" Click="manage_free_days" HorizontalAlignment="Left" Width="129"/>
+        <Button Name="createDoctor" ToolTip="Kreiranje lekara, prethodno popuniti sve neophodne podatke"  Content="Kreiraj lekara" HorizontalAlignment="Left" Margin="29,450,0,0" VerticalAlignment="Top" Width="129" Height="30" Visibility="Hidden" Click="CreateUser"/>
+
+    </Grid>
+</Window>

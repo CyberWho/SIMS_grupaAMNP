@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Controller;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -7,27 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Hospital.Controller;
-using Hospital.Model;
-using Hospital.Repository;
 using Hospital.View.Secretary;
-using Hospital.ViewModel.Secretary;
+using Hospital.xaml_windows.Secretary;
+using Xceed.Wpf.Toolkit.Core;
 
-// kt5
-namespace Hospital.xaml_windows.Secretary
+namespace Hospital.ViewModel.Secretary
 {
-    /// <summary>
-    /// Interaction logic for ViewDoctors.xaml
-    /// </summary>
-    public partial class ViewDoctors : Window, INotifyPropertyChanged
+    public class DoctorViewModel : BindableBase
     {
+        
+        public ObservableCollection<Model.Doctor> doctors { get; set; }
+        public Model.Doctor selectedtDoctor { get; set; }
+
         private DoctorController doctorController = new DoctorController();
+
+        
+
         private UserController userController = new UserController();
         private EmployeeController employeeController = new EmployeeController();
 
@@ -38,18 +34,23 @@ namespace Hospital.xaml_windows.Secretary
 
         private int current_doctor_id;
 
-        private ObservableCollection<Model.Doctor> doctors;
+        public MyICommand addDoctorCommand { get; set; }
+        public MyICommand openDoctorCommand { get; set; }
 
-        public ViewDoctors()
-        {
-            InitializeComponent();
-            this.DataContext = this;
-
-            doctors = this.doctorController.GetAllDoctors();
-            dataGridDoctors.ItemsSource = doctors;
-        }
 
         #region NotifyProperties
+
+        public Model.Doctor SelectedDoctor
+        {
+            get { return selectedtDoctor; }
+            set
+            {
+                selectedtDoctor = value;
+                openDoctorCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+
         private string _username;
         private string _nname;
         private string _surname;
@@ -146,42 +147,60 @@ namespace Hospital.xaml_windows.Secretary
                 }
             }
         }
+
         #endregion
         #region PropertyChangedNotifier
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
+
+        public DoctorViewModel()
+        {
+            this.doctors = this.doctorController.GetAllDoctors();
+            this.addDoctorCommand = new MyICommand(Add_user);
+            this.openDoctorCommand = new MyICommand(Open_doctor, Can_open);
+        }
 
         private void dataGridPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var info = dataGridDoctors.SelectedCells[0];
-            if (info != null && info.Column.GetCellContent(info.Item) != null)
-            {
-                var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
-                current_doctor_id = int.Parse(content);
-                Model.Doctor doctor = this.doctorController.GetDoctorById(current_doctor_id);
+            //var info = dataGridDoctors.SelectedCells[0];
+            //if (info != null && info.Column.GetCellContent(info.Item) != null)
+            //{
+            //    var content = (info.Column.GetCellContent(info.Item) as TextBlock).Text;
+            //    current_doctor_id = int.Parse(content);
+            //    Model.Doctor doctor = this.doctorController.GetDoctorById(current_doctor_id);
 
-                //DoctorProfileViewModel p = new ViewModel.Secretary.DoctorProfileViewModel(doctor);
-                Window s = new DoctorPopUp(doctor);
-                s.Show();
-                
+            //    //DoctorProfileViewModel p = new ViewModel.Secretary.DoctorProfileViewModel(doctor);
+            //    Window s = new DoctorPopUp(doctor);
+            //    s.Show();
 
-                dataGridDoctors.UnselectAll();
-            }
+
+            //    dataGridDoctors.UnselectAll();
+            //}
         }
 
-        private void Add_user(object sender, RoutedEventArgs e)
+
+        private void Add_user()
         {
-            Window s = new DoctorPopUp(null);
+            Window s;
+            if (selectedtDoctor == null)
+            {
+                s = new DoctorProfileView(null);
+            }
+
+            s = new DoctorProfileView(selectedtDoctor);
             s.Show();
         }
-        
+
+        private bool Can_open()
+        {
+            return this.selectedtDoctor != null;
+        }
+
+        private void Open_doctor()
+        {
+            MessageBox.Show("AAAAAAAAAAAAAAAAAA");
+            Window s = new DoctorProfileView(selectedtDoctor);
+            s.Show();
+        }
+
     }
 }

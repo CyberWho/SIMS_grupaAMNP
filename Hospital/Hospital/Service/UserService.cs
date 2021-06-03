@@ -71,8 +71,7 @@ namespace Hospital.Service
 
         public Boolean DeleteUserByUsername(String username)
         {
-            // TODO: implement
-            return false;
+            return this.userRepository.DeleteUserByUsername(username);
         }
 
         #region marko_kt5

@@ -2,6 +2,9 @@
 using System.Windows;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Controller;
+using Hospital.xaml_windows.Secretary;
+using Hospital.View.Secretary;
+
 
 namespace Hospital
 {
@@ -23,9 +26,11 @@ namespace Hospital
             string user = Username.Text;
             string pass = Password.Password;
 
-            if(new UserController().LoginUser(user, pass))
-                this.Close();
+            /*if(new UserController().LoginUser(user, pass))
+               this.Close();*/
 
+               Window s = new SecretaryUIWindow();
+               s.Show();
         }
 
     }

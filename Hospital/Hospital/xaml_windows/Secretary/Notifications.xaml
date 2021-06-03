@@ -24,7 +24,7 @@
 
 
         <Button ToolTip="Klikom na dugme moci cete da unesete podatke radi kreiranja novog obavestenja" Content="Kreirajte novo obavestenje" Margin="10,0,0,294.8" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="148" Click="Add_Notification" Height="30"/>
-        <Button Content="Refresh" Margin="0,0,10,9.8" VerticalAlignment="Bottom" Click="Refresh" Height="30" HorizontalAlignment="Right" Width="148"/>
+        <Button Content="Refresh" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="Refresh" Height="30" HorizontalAlignment="Right" Width="148"/>
         <Button ToolTip="Klikom na dugme obrisace se selektovano obavestenje" Content="Obrisi obavestenje" Margin="10,0,0,224.8" VerticalAlignment="Bottom" Click="Delete_Notification" Height="30" HorizontalAlignment="Left" Width="148"/>
         <Button ToolTip="Klikom na dugme moci cete da izmenite podatke o selektovanom obavestenju" Content="Izmeni obavestenje" HorizontalAlignment="Left" Margin="10,0,0,259.8" VerticalAlignment="Bottom" Width="148" Click="Update_Notification" Height="30"/>
 

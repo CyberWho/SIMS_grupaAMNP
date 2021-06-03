@@ -9,6 +9,8 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
 
+using static Globals;
+
 namespace Hospital.Repository
 {
     public class UserRepository
@@ -17,26 +19,12 @@ namespace Hospital.Repository
         HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
 
 
-        OracleConnection connection = null;
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-
-            }
-        }
+        
 
 
         public User GuestUser()
         {
-            setConnection();
+            SetGlobalConnection();
 
             int last_id = this.GetLastId();
 
@@ -54,8 +42,8 @@ namespace Hospital.Repository
             healthRecord.patient_id = patient.Id;
             healthRecord = this.healthRecordRepository.NewHealthRecord(healthRecord, 1);
 
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             return user;
         }
@@ -63,17 +51,17 @@ namespace Hospital.Repository
 
         public User GetUserById(int id)
         {
-            //setConnection();
+            //SetGlobalConnection();
 
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            connection.Open();
+            globalConnection = new OracleConnection(conString);
+            globalConnection.Open();
 
 
 
             User user = new User();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM users WHERE id = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -92,8 +80,8 @@ namespace Hospital.Repository
             user.PhoneNumber = reader.GetString(5);
             user.EMail = reader.GetString(6);
 
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             return user;
         }
@@ -106,11 +94,11 @@ namespace Hospital.Repository
 
         public ObservableCollection<User> GetAllUsers()
         {
-            setConnection();
+            SetGlobalConnection();
 
             ObservableCollection<User> users = new ObservableCollection<User>();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = globalConnection.CreateCommand();
             command.CommandText = "SELECT users.id, users.username, users.name, users.surname, users.phone_number, users.email, " +
                 "patient.jmbg, patient.date_of_birth " +
                 "FROM users, patient " +
@@ -134,52 +122,67 @@ namespace Hospital.Repository
                     {
                         Id = int.Parse(reader.GetString(0)),
                         Username = reader.GetString(1),
-                        Name = reader.GetString(3),
-                        Surname = reader.GetString(4),
-                        PhoneNumber = reader.GetString(5),
-                        EMail = reader.GetString(6)
+                        Name = reader.GetString(2),
+                        Surname = reader.GetString(3),
+                        PhoneNumber = reader.GetString(4),
+                        EMail = reader.GetString(5)
                     };
                 }
 
                 users.Add(nUser);
             }
 
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             return users;
         }
 
         public Boolean DeleteUserById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            SetGlobalConnection();
+            OracleCommand command = globalConnection.CreateCommand();
             command.CommandText = "DELETE FROM users WHERE id = " + id;
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
+                globalConnection.Close();
+                globalConnection.Dispose();
 
                 return true;
             }
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
             
             return false;
         }
 
         public Boolean DeleteUserByUsername(String username)
         {
-            // TODO: implement
+            SetGlobalConnection();
+
+            OracleCommand command = globalConnection.CreateCommand();
+            command.CommandText = "DELETE FROM users WHERE username LIKE " + username;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                globalConnection.Close();
+                globalConnection.Dispose();
+
+                return true;
+            }
+
+            globalConnection.Close();
+            globalConnection.Dispose();
+
             return false;
         }
 
         #region marko_kt5
         public User UpdateUser(User user)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            SetGlobalConnection();
+            OracleCommand command = globalConnection.CreateCommand();
             command.CommandText = "UPDATE users set username=:username, " +
                                   "name=:name, " +
                                   "surname=:surname, " +
@@ -195,22 +198,22 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
+                globalConnection.Close();
+                globalConnection.Dispose();
 
                 return user;
             }
 
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             return null;
         }
 
         public User NewUser(User user, int guest = 0)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            SetGlobalConnection();
+            OracleCommand command = globalConnection.CreateCommand();
 
             // kreiranje guest naloga
             if (guest == 1)
@@ -223,8 +226,8 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
-                    connection.Close();
-                    connection.Dispose();
+                    globalConnection.Close();
+                    globalConnection.Dispose();
 
                     return user;
                 }
@@ -245,39 +248,39 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
-                    connection.Close();
-                    connection.Dispose();
+                    globalConnection.Close();
+                    globalConnection.Dispose();
 
                     return user;
                 }
             }
 
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             return null;
         }
         #endregion
         public int GetLastId()
         {
-            setConnection();
+            SetGlobalConnection();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = globalConnection.CreateCommand();
             command.CommandText = "SELECT MAX(id) FROM users";
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
 
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             return last_id;
         }
 
         public void makeDoctorUser()
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            SetGlobalConnection();
+            OracleCommand command = globalConnection.CreateCommand();
 
             User user = new
                 User(
@@ -302,8 +305,8 @@ namespace Hospital.Repository
 
             command.ExecuteNonQuery();
 
-            connection.Close();
-            connection.Dispose();
+            globalConnection.Close();
+            globalConnection.Dispose();
 
             Role role = new
                 Role(

@@ -24,10 +24,10 @@
         </DataGrid>
 
         <!--<TextBox Grid.Row="0" HorizontalAlignment="Left" Text ="{Binding Path=Nova_alergija, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="160,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
-        <ComboBox ToolTip="Odabrati alergiju koju zelite da dodate kod pacijenta" Name ="selection" Loaded="selection_loaded" HorizontalAlignment="Left" Margin="164,88,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="selection_SelectionChanged"/>
+        <ComboBox ToolTip="Odabrati alergiju koju zelite da dodate kod pacijenta" Name ="selection" Loaded="selection_loaded" HorizontalAlignment="Left" Margin="260,90,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="selection_SelectionChanged"/>
 
-        <Button ToolTip="Klikom na dugme pacijentu se u listu alergija dodaje i prethodno odabrana alergija" Content="Dodaj alergiju" HorizontalAlignment="Left" Margin="302,88,0,0" VerticalAlignment="Top" Width="98" Click="Dodaj_alergiju" Height="30"/>
-        <Button ToolTip="Klikom na dugme se pacijentu iz liste alergija brise selektovana alergija" Content="Obrisi selektovani alergen" HorizontalAlignment="Left" Margin="215,245,0,0" VerticalAlignment="Top" Width="150" Click="Obrisi_alergen" Height="30"/>
+        <Button ToolTip="Klikom na dugme pacijentu se u listu alergija dodaje i prethodno odabrana alergija" Content="Dodaj alergiju" HorizontalAlignment="Left" Margin="260,128,0,0" VerticalAlignment="Top" Width="150" Click="Dodaj_alergiju" Height="30"/>
+        <Button ToolTip="Klikom na dugme se pacijentu iz liste alergija brise selektovana alergija" Content="Obrisi selektovani alergen" HorizontalAlignment="Left" Margin="260,45,0,0" VerticalAlignment="Top" Width="150" Click="Obrisi_alergen" Height="30" RenderTransformOrigin="0.8,0.357"/>
         <!--<Button Content="Izmeni adresu" HorizontalAlignment="Left" Margin="310,69,0,0" VerticalAlignment="Top" Width="100" Click="Izmeni_adresu"/>-->
         <!--<Button Content="Sacuvajte pacijenta" HorizontalAlignment="Left" Margin="233,340,0,0" VerticalAlignment="Top" Width="120" Click="Sacuvaj_pacijenta" Height="30"/>-->
 

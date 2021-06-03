@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +37,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=2.0.1.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.0.1\lib\net452\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.1.0.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.1.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
@@ -45,6 +56,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="system.windows.controls.ribbon" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -196,8 +210,28 @@
     <Compile Include="ViewModel\Manager\MyICommand.cs" />
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
     <Compile Include="ViewModel\Patient\PatientUIViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\BindableBase.cs" />
+    <Compile Include="ViewModel\Secretary\CreateNotificationViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\DoctorProfileViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\DoctorViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\UsersViewModel.cs" />
+    <Compile Include="View\Secretary\CreateNotificationView.xaml.cs">
+      <DependentUpon>CreateNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\DoctorProfileView.xaml.cs">
+      <DependentUpon>DoctorProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\DoctorsView.xaml.cs">
+      <DependentUpon>DoctorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\SecretaryUIWindow.xaml.cs">
+      <DependentUpon>SecretaryUIWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml.cs">
       <DependentUpon>ClinicalTreatmentGiving.xaml</DependentUpon>
     </Compile>
@@ -331,6 +365,9 @@
     <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
       <DependentUpon>CreateNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\DoctorPopUp.xaml.cs">
+      <DependentUpon>DoctorPopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\FreeDays.xaml.cs">
       <DependentUpon>FreeDays.xaml</DependentUpon>
     </Compile>
@@ -385,6 +422,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Secretary\CreateNotificationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\DoctorProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\DoctorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SecretaryUIWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\UsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -561,6 +618,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="xaml_windows\Secretary\DoctorPopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="xaml_windows\Secretary\FreeDays.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -727,4 +788,11 @@
     <Resource Include="Resources\Icons\icons8-undo-90.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
 </Project>

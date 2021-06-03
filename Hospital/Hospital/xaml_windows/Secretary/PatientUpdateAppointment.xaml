@@ -26,18 +26,18 @@
         <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,630,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
 
         <Button x:Name="Izmeni" Content="Izmeni termin" Grid.Column="1" HorizontalAlignment="Left" Margin="10,405,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click" Height="30"/>
-        <Label Content="Trajanje" Grid.Column="1" HorizontalAlignment="Left" Margin="234,487,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vreme" Grid.Column="1" HorizontalAlignment="Left" Margin="240,515,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soba" Grid.Column="1" HorizontalAlignment="Left" Margin="248,543,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="210,599,0,0" VerticalAlignment="Top"/>
+        <Label Content="Trajanje" Grid.Column="1" HorizontalAlignment="Left" Margin="188,487,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vreme" Grid.Column="1" HorizontalAlignment="Left" Margin="188,515,0,0" VerticalAlignment="Top"/>
+        <Label Content="Soba" Grid.Column="1" HorizontalAlignment="Left" Margin="188,543,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="188,599,0,0" VerticalAlignment="Top"/>
         <Label Content="Prezime doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="188,630,0,0" VerticalAlignment="Top" Height="23" Width="99"/>
-        <Label Content="Oznaka doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="190,571,0,0" VerticalAlignment="Top"/>
+        <Label Content="Oznaka doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="188,571,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,574,0,0" TextWrapping="Wrap" Text="{Binding Path=DoctorId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Oznaka termina" Grid.Column="1" HorizontalAlignment="Left" Margin="191,458,0,0" VerticalAlignment="Top"/>
+        <Label Content="Oznaka termina" Grid.Column="1" HorizontalAlignment="Left" Margin="188,458,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,461,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
 
-        <Label Content="Status termina" Grid.Column="1" HorizontalAlignment="Left" Margin="198,402,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tip termina" Grid.Column="1" HorizontalAlignment="Left" Margin="214,430,0,0" VerticalAlignment="Top"/>
+        <Label Content="Status termina" Grid.Column="1" HorizontalAlignment="Left" Margin="188,402,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tip termina" Grid.Column="1" HorizontalAlignment="Left" Margin="188,430,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,405,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,433,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="timeslot_id_txt" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,518,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>

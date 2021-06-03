@@ -1,0 +1,48 @@
+﻿<Window x:Class="Hospital.View.Secretary.DoctorsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Secretary"
+        xmlns:secretary="clr-namespace:Hospital.ViewModel.Secretary"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="SecretaryUI" Height="750" Width="430">
+
+    <Window.DataContext>
+        <secretary:DoctorViewModel></secretary:DoctorViewModel>
+    </Window.DataContext>
+
+    <Grid>
+        <DataGrid x:Name="dataGridDoctors" ItemsSource="{Binding doctors}"
+                  IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
+                  Height="546" Margin="10,45,0,0" VerticalAlignment="Top" Width="402" 
+                  SelectedItem="{Binding SelectedDoctor}">
+
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="26"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding User.Username}" Width="*"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding User.Name}" Width="*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding User.Surname}" Width="*"/>
+                <DataGridTextColumn Header="Kontak" Binding="{Binding User.PhoneNumber}" Width="*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding User.EMail}" Width="*"/>
+            </DataGrid.Columns>
+
+
+
+        </DataGrid>
+        <Menu Margin="0,0,0,679"/>
+
+        <Button ToolTip="Klikom na dugme kreiracete korisnika cije ste podatke prethodno uneli u poljima iznad"
+                Content="Dodaj lekara" Margin="151,652,151,0" VerticalAlignment="Top"
+                Command="{Binding openDoctorCommand}" Height="30" />
+
+
+
+
+
+
+    </Grid>
+</Window>

@@ -152,8 +152,7 @@ namespace Hospital.Controller
 
         public Boolean DeleteUserByUsername(String username)
         {
-            // TODO: implement
-            return false;
+            return this.userService.DeleteUserByUsername(username);
         }
 
         public User UpdateUser(User user)

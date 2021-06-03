@@ -29,5 +29,11 @@ namespace Hospital.Model
         public User()
         {
         }
+
+        public User(string name, string surname)
+        {
+            this.Name = name;
+            this.Surname = surname;
+        }
     }
 }
