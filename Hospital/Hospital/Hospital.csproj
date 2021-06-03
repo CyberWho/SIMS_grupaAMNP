@@ -114,6 +114,9 @@
     <Compile Include="Controller\TimeSlotController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\WorkHoursController.cs" />
+    <Compile Include="HelpViewer.xaml.cs">
+      <DependentUpon>HelpViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />
     <Compile Include="Model\DrugDTO.cs" />
@@ -235,9 +238,6 @@
     </Compile>
     <Compile Include="View\Patient\DoctorsView.xaml.cs">
       <DependentUpon>DoctorsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Patient\HelpViewer.xaml.cs">
-      <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\HospitalRateView.xaml.cs">
       <DependentUpon>HospitalRateView.xaml</DependentUpon>
@@ -478,6 +478,10 @@
     <Compile Include="xaml_windows\Secretary\ViewDoctors.xaml.cs">
       <DependentUpon>ViewDoctors.xaml</DependentUpon>
     </Compile>
+    <Page Include="HelpViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -503,10 +507,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\DoctorsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Patient\HelpViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -952,6 +952,7 @@
     <Content Include="Help\PatientUIHelp.html" />
     <Content Include="Help\PersonalRemindersHelp.html" />
     <Content Include="Help\TreatmentRemindersHelp.html" />
+    <Resource Include="Resources\Icons\icons8-help-100 %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

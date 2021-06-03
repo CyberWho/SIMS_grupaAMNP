@@ -1,9 +1,9 @@
-﻿<Window x:Class="Hospital.View.Patient.HelpViewer"
+﻿<Window x:Class="Hospital.HelpViewer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital.View.Patient"
+        xmlns:local="clr-namespace:Hospital"
         mc:Ignorable="d"
         Title="HelpViewer" Height="500" Width="500">
     <Window.CommandBindings>
@@ -11,7 +11,7 @@
         <CommandBinding Command="NavigationCommands.BrowseForward" CanExecute="BrowseForward_CanExecute" Executed="BrowseForward_Executed" />
     </Window.CommandBindings>
     <Grid>
-       <DockPanel>
+        <DockPanel>
             <ToolBar DockPanel.Dock="Top" Height="32" Margin="0,0,-0.4,0">
                 <Button Command="NavigationCommands.BrowseBack">
                     Back

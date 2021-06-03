@@ -25,8 +25,8 @@ namespace Hospital.ViewModel.Patient
         public MyICommand LogOut { get; set; }
         public MyICommand ShowNotifications { get; set; }
         public MyICommand ToolTipsOn { get; set; }
-        public MyICommand ToolTipsOff { get; set; }
         public MyICommand HospitalRate { get; set; }
+        public MyICommand Help { get; set; }
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         public BindableBase CurrentViewModel
         {
@@ -48,6 +48,11 @@ namespace Hospital.ViewModel.Patient
             this.ToolTipChecked = toolTipChecked;
             this.thisWindow = thisWindow;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
+            InstanceMyICommands();
+        }
+
+        private void InstanceMyICommands()
+        {
             HomePage = new MyICommand(OnHomePage);
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
@@ -57,8 +62,16 @@ namespace Hospital.ViewModel.Patient
             HospitalRate = new MyICommand(OnHospitalRate);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
+            Help = new MyICommand(OnHelp);
+        }
+
+        private void OnHelp()
+        {
+            string str = "PatientUIHelp";
+            HelpProvider.ShowHelp(str,thisWindow);
 
         }
+
         private void OnShowNotifications()
         {
             Window window = new NotificationsView(userId, ToolTipChecked);
