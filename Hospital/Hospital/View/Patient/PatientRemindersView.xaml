@@ -61,7 +61,7 @@
                 </MenuItem.Header>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="205" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="295" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
@@ -86,14 +86,14 @@
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
 
 
-        <Label Content="Vreme oglašavanja:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="9,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
+        <Label Content="Vreme oglašavanja:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,107,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
         <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,80,0,0"/>
         <TextBox HorizontalAlignment="Left" IsReadOnly="True" Height="111" Style="{StaticResource RoundedTextBox}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.8,144,0,0"/>
-        <xctk:DateTimePicker x:Name="datepicker_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,112,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
+        <xctk:DateTimePicker x:Name="datepicker_txt" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,112,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
         <Label Content="Odabrani podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Moji podsetnici:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="344,42,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked"  Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>

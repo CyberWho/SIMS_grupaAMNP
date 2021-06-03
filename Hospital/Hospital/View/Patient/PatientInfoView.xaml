@@ -73,19 +73,20 @@
         </Button>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Checked="CheckBox_OnChecked" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="323,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
+        <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
 
-        <Label Content="Korisničko ime:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="98,107,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.185,0.324"/>
-        <Label Content="Prezime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
-        <Label Content="Email:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
-        <Label Content="Telefon:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="98,203,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="267,116,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,148,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,180,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,212,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=EMail, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="267,244,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-
+        <Label Content="Korisničko ime:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="27.8,87,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.185,0.324"/>
+        <Label Content="Prezime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,157,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
+        <Label Content="Email:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
+        <Label Content="Telefon:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,193,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="170.8,91,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,124,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,161,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,198,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=EMail, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,235,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <Image Source="/Resources/Icons/icons8-hospital-3-96.png" Grid.Column="1" Margin="537.8,91,187.6,265.4"/>
+        <Label FontSize="16" Foreground="Red" Content="Vaš partner kroz život" Grid.Column="1" HorizontalAlignment="Left" Margin="520.8,226,0,0" VerticalAlignment="Top" Width="170"/>
 
     </Grid>
 </Window>

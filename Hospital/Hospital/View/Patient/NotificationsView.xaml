@@ -81,8 +81,8 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Naslov:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.634" Height="32" Width="115"/>
-        <Label Content="Tekst:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,1.052" Height="32" Width="94"/>
+        <Label Content="Naslov:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.634" Height="32" Width="115"/>
+        <Label Content="Tekst:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,1.052" Height="32" Width="94"/>
         <TextBox x:Name="app_stat_txt" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.8,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="app_type_txt" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="90" Margin="154.8,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Description,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
         <Label Content="Odabrano obaveštenje:" Foreground="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,38,0,0" VerticalAlignment="Top"/>

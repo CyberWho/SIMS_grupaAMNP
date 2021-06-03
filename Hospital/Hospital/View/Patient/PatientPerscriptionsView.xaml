@@ -78,7 +78,7 @@
             </StackPanel>
         </Button>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding perscriptions}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,90,0,0" VerticalAlignment="Top" Width="468">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding perscriptions}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,80,0,0" VerticalAlignment="Top" Width="468">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv leka" Binding="{Binding Drug.Name}" Width="*"/>
                 <DataGridTextColumn Header="Gramaža" Binding="{Binding Drug.Grams}" Width="*"/>
@@ -89,9 +89,9 @@
         <TextBox x:Name="end_time_txtbx" IsReadOnly="True" Grid.Column="1" Foreground="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.6,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Drug.Grams,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
         <TextBox x:Name="description_txtbx" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="89" Margin="155,144,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Description,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Gramaža:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.575,1.734" Height="32" Width="133"/>
-        <Label Content="Opis:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,144,0,0" VerticalAlignment="Top" Height="32" Width="133"/>
-        <Label Content="Naziv leka:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,80,0,0" VerticalAlignment="Top" Height="32" Width="124"/>
+        <Label Content="Gramaža:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,107,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.575,1.734" Height="32" Width="133"/>
+        <Label Content="Opis:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,139,0,0" VerticalAlignment="Top" Height="32" Width="133"/>
+        <Label Content="Naziv leka:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,75,0,0" VerticalAlignment="Top" Height="32" Width="124"/>
         <TextBox x:Name="start_time_txt" IsReadOnly="True" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.8,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Drug.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
         <Label Content="Odabrani recept:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.6,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,-0.8" Width="197"/>
         <Label Content="Moji recepti:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="356,42,0,0" VerticalAlignment="Top"/>

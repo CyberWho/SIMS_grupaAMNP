@@ -90,15 +90,15 @@
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
 
         <Label Content="Odabrana anamneza:" FontSize="24" Foreground="DeepSkyBlue" Grid.Column="1" Margin="11.6,48,575.6,375.4" />
-        <Label Content="Termin:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="11.6,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
-        <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.6,193,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Termin:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="12,90,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
+        <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="12,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="12,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="12,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
         <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.appointment.StartTime,ElementName=myDataGrid}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,97,0,0"/>
         <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.appointment.doctor.User.Name, ElementName=myDataGrid}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,129,0,0"/>
         <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.appointment.doctor.User.Surname, ElementName=myDataGrid}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,161,0,0"/>
         <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.Description, ElementName=myDataGrid}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,193,0,0" Height="87"/>
-        <Label Content="Moje anamneze:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="356,42,0,0" VerticalAlignment="Top"/>
+        <Label Content="Moje anamneze:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="356,50,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

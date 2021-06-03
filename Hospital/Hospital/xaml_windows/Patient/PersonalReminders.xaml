@@ -101,14 +101,14 @@
                 <DataGridTextColumn Header="Učestalost" Binding="{Binding PersonalReminderFrequency}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="8.8,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
         <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
 
 
 
 
         <Label Content="Vreme oglašavanja:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="8.8,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
-        <Label Content="Učestalost:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="8.8,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
+        <Label Content="Učestalost:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="6.8,107,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
         <TextBox HorizontalAlignment="Left"  x:Name="name_txt" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,80,0,0"/>
         <TextBox HorizontalAlignment="Left" x:Name="description_txt" Height="111" Style="{StaticResource RoundedTextBox}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.8,180,0,0"/>
         <xctk:DateTimePicker x:Name="alarm_time_txt" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="154.8,150,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>

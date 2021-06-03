@@ -20,12 +20,12 @@
         <Label Content="Prezime doktora:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="33,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
         <Label Content="Specijalizacija:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="34,173,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
         <Label Content="Ocena:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="34,205,0,0" VerticalAlignment="Top"/>
-        <Label Content="Komentar:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="33,237,0,0" VerticalAlignment="Top"/>
+        <Label Content="Komentar:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="34,255,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="180,109,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
         <TextBox Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="180,141,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
         <TextBox Text="{Binding Specialization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="180,173,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229" RenderTransformOrigin="0.781,0.343"/>
         <TextBox x:Name="description_txt" Text="{Binding Description}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="94" Margin="180,259,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <Button x:Name="OceniDoktora" ToolTip="Klikom na dugme potvrdjujete ocenu za doktora" Command="{Binding RateDoctor}" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="175,382,84.6,52.4" RenderTransformOrigin="0.729,0.431"/>
+        <Button x:Name="OceniDoktora" ToolTip="Klikom na dugme potvrdjujete ocenu za doktora" Command="{Binding RateDoctor}" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="226,382,123.6,63.4" Width="144" Height="25"/>
 
 
         <xctk:IntegerUpDown x:Name="rate_txt" Text="{Binding Rate}" Style="{StaticResource RoundedIntegerUpDown}" Foreground="DeepSkyBlue" FontSize="16" DefaultValue="1" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="180,205,0,0" VerticalAlignment="Top" Width="229" Height="27"/>
