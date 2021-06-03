@@ -40,6 +40,15 @@ namespace Hospital.ViewModel.Patient
         public string Name { get; set; }
         public string Surname { get; set; }
         public TimeSlot SelectedItem { get; set; }
+        private string _selectionError;
+         public string SelectionError
+        {
+            get { return _selectionError; }
+            set
+            {
+                SetProperty(ref _selectionError, value);
+            }
+        }
         public ObservableCollection<TimeSlot> TimeSlots { get; set; }
         private AppointmentController appointmentController = new AppointmentController();
         private TimeSlotController timeSlotController = new TimeSlotController();
@@ -112,12 +121,25 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnAdd()
         {
+            if(!SelectionValidation()) return;
             TimeSlot timeSlot = timeSlotController.GetTimeSlotById(SelectedItem.Id);
             appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
         }
+
+        private bool SelectionValidation()
+        {
+            if (SelectedItem == null)
+            {
+                this.SelectionError = "Potrebno je da označite željeni termin";
+                return false;
+            }
+
+            return true;
+        }
+
         private void CheckIfPatientIsBlocked(int patientId)
         {
             if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))

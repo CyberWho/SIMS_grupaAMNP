@@ -124,6 +124,7 @@
         <TextBox x:Name="app_type_txt" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.8,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
         <Label Content="Odabrani termin:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,42,0,0" VerticalAlignment="Top" Height="40" Width="174"/>
         <Label Content="Moji termini:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="355.8,42,0,0" VerticalAlignment="Top" Height="40" Width="132"/>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="16.8,304,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Width="282" Height="25"/>
 
 
 

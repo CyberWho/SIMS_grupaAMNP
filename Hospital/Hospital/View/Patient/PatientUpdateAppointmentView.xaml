@@ -93,7 +93,7 @@
         <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,208,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="doctor_surname_txtbx" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16"  IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="155,240,0,0" TextWrapping="Wrap" Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="144"/>
 
-        <Button x:Name="Izmeni" ToolTip="Klikom na dugme promenićete vreme održavanja termina (Ctrl+P)" Content="Potvrdi izmenu" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="155.8,322,0,0" VerticalAlignment="Top" Width="144" Background="DeepSkyBlue" Foreground="White" Command="{Binding Add}"/>
+        <Button x:Name="Izmeni" ToolTip="Klikom na dugme promenićete vreme održavanja termina (Ctrl+P)" Content="Potvrdi izmenu" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="155.8,325,0,0" VerticalAlignment="Top" Width="144" Background="DeepSkyBlue" Foreground="White" Command="{Binding Add}"/>
         <Label Content="Trajanje:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,140,0,0" VerticalAlignment="Top"/>
         <Label Content="Soba:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,172,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.436,1.166"/>
         <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,204,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.443,1.435"/>
@@ -125,5 +125,6 @@
         </Button>
         <xctk:DateTimePicker Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" Value="{Binding SelectedItem.StartTime, ElementName=myGrid}" HorizontalAlignment="Left" Margin="154.8,272,0,0" VerticalAlignment="Top" Width="145"/>
         <Label Content="Vreme:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,267,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.559,0.378"/>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="9.8,304,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Width="289" Height="21"/>
     </Grid>
 </Window>

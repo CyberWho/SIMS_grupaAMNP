@@ -94,7 +94,7 @@
         <TextBox x:Name="doc_surname_txt" FontSize="16" IsReadOnly="True" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="166,112,0,0" Style="{StaticResource RoundedTextBox}" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="room_id_txt" Grid.Column="2" IsReadOnly="True" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBox}" Height="23" Margin="166,144,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.room.Id,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
-        <Button x:Name="Predlozi" ToolTip="Klikom na dugme prikazaće Vam se predlozi vremena održavanja termina (Ctrl+P)" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikaži predloge" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="165.8,287,0,0" VerticalAlignment="Top" Width="144" Command="{Binding ChooseDoctor}" RenderTransformOrigin="0.631,1.255"/>
+        <Button x:Name="Predlozi" ToolTip="Klikom na dugme prikazaće Vam se predlozi vremena održavanja termina (Ctrl+P)" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikaži predloge" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="165.8,297,0,0" VerticalAlignment="Top" Width="144" Command="{Binding ChooseDoctor}" RenderTransformOrigin="0.631,1.255"/>
 
         <xctk:DateTimePicker x:Name="date_txt" Text="{Binding StartTime}" Grid.Column="2" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="166,176,0,0" VerticalAlignment="Top" Width="144" Height="24"/>
 
@@ -121,5 +121,6 @@
                 <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="9.8,271,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Width="300" Height="21"/>
     </Grid>
 </Window>

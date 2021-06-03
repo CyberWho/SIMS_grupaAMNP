@@ -103,7 +103,7 @@ namespace Hospital.ViewModel.Patient
         {
             if (SelectedItem == null)
             {
-                this.RateError = "Morate označiti doktora!";
+                this.RateError = "Potrebno je da označite željenog doktora!";
                 return false;
             }
 

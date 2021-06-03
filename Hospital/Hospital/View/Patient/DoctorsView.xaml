@@ -105,7 +105,7 @@
         <Label Content="Doktori:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="366,40,0,0" VerticalAlignment="Top"/>
         <Button Content="Oceni doktora" ToolTip="Klikom na dugme možete da ocenite odabranog doktora (Ctrl+O)" x:Name="Oceni" Command="{Binding DoctorRate}" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="155,193,0,0" VerticalAlignment="Top" Width="144"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
-        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="155,172,0,0" TextWrapping="Wrap" Text="{Binding RateError}" VerticalAlignment="Top" Width="144"/>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="17,172,0,0" TextWrapping="Wrap" Text="{Binding RateError}" VerticalAlignment="Top" Width="282"/>
 
 
 

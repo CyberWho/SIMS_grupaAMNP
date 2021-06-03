@@ -113,11 +113,12 @@
 
 
         <xctk:DateTimePicker x:Name="date_end_txt" Text="{Binding endTime}" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="165.6,260,0,0" VerticalAlignment="Top" Width="144" Height="21"/>
-        <Button x:Name="Predlozi" ToolTip="Klikom na dugme prikazaće Vam se predlozi termina kod doktora specijaliste" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikaži predloge" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="165.8,306,0,0" VerticalAlignment="Top" Width="144" Command="{Binding ShowRecommendations}" RenderTransformOrigin="0.631,1.255"/>
+        <Button x:Name="Predlozi" ToolTip="Klikom na dugme prikazaće Vam se predlozi termina kod doktora specijaliste" Style="{StaticResource RoundedButton}" Foreground="White" Content="Prikaži predloge" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="165.8,309,0,0" VerticalAlignment="Top" Width="144" Command="{Binding ShowRecommendations}" RenderTransformOrigin="0.631,1.255"/>
 
         <Label Content="Iskoristi odabrani uput:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Moji uputi:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="365.6,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.68"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked"  Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="9.8,286,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Height="23" Width="300"/>
 
     </Grid>
 </Window>

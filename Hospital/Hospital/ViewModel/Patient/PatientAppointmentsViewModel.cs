@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using Hospital.Controller;
 using Hospital.Model;
 using Hospital.xaml_windows.Patient;
@@ -36,6 +37,18 @@ namespace Hospital.ViewModel.Patient
         public MyICommand Delete { get; set; }
         public DataGrid myDataGrid { get; set; }
         public Appointment selectedItem { get; set; }
+        private string _selectionError;
+
+
+        public string SelectionError
+        {
+            get { return _selectionError; }
+            set
+            {
+                SetProperty(ref _selectionError, value);
+            }
+        }
+
 
         private PatientController patientController = new PatientController();
         private AppointmentController appointmentController = new AppointmentController();
@@ -126,12 +139,26 @@ namespace Hospital.ViewModel.Patient
 
         private void OnDelete()
         {
+            if(!SelectionValidation()) return;
+            
             appointmentController.CancelAppointmentById(GetAppointmentId());
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
             updateDataGrid();
         }
+
+        private bool SelectionValidation()
+        {
+            if (selectedItem == null)
+            {
+                this.SelectionError = "Potrebno je da označite termin!";
+                return false;
+            }
+
+            return true;
+        }
+
         private void CheckIfPatientIsBlocked(int patientId)
         {
             if (patientLogsController.CheckIfPatientIsBlockedByPatientId(patientId))
@@ -152,6 +179,7 @@ namespace Hospital.ViewModel.Patient
 
         private void OnUpdate()
         {
+            if(!SelectionValidation()) return;
             Appointment appointment = new Appointment();
 
             int patientId = getPatientId();

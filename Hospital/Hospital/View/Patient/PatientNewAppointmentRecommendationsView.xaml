@@ -93,7 +93,7 @@
         <TextBox x:Name="doctor_name_txt" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="155,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="doctor_surname_txt" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="155,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
         <TextBox x:Name="room_id_txt" IsReadOnly="True" FontSize="16" Grid.Column="2" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Height="23" Margin="155,176,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Zakaži" ToolTip="Klikom na dugme zakazaćete termin (Ctrl+Z)" FontSize="16" Style="{StaticResource RoundedButton}" Background="DeepSkyBlue" Foreground="White" x:Name="Zakazi" Grid.Column="1" HorizontalAlignment="Left" Margin="154.8,219,0,0" VerticalAlignment="Top" Width="144" Command="{Binding New}"/>
+        <Button Content="Zakaži" ToolTip="Klikom na dugme zakazaćete termin (Ctrl+Z)" FontSize="16" Style="{StaticResource RoundedButton}" Background="DeepSkyBlue" Foreground="White" x:Name="Zakazi" Grid.Column="1" HorizontalAlignment="Left" Margin="154.8,224,0,0" VerticalAlignment="Top" Width="144" Command="{Binding New}"/>
 
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
 
@@ -115,6 +115,7 @@
                 <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="9.8,204,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Width="289" Height="20"/>
 
     </Grid>
 </Window>

@@ -45,6 +45,16 @@ namespace Hospital.ViewModel.Patient
         public MyICommand New { get; set; }
         public TimeSlot SelectedItem { get; set; }
         public MyICommand Undo { get; set; }
+        private string _selectionError;
+        public string SelectionError
+        {
+            get { return _selectionError; }
+            set
+            {
+                SetProperty(ref _selectionError, value);
+            }
+        }
+
         public PatientNewAppointmentRecommendationsViewModel()
         {
 
@@ -118,6 +128,7 @@ namespace Hospital.ViewModel.Patient
 
         private void OnNew()
         {
+            if(!SelectionValidation()) return;
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             Room room = roomController.GetAppointmentRoomById(SelectedItem.WorkHours.doctor.room_id);
             Model.Doctor doctor = doctorController.GetWorkHoursDoctorById(doctorId);
@@ -128,6 +139,18 @@ namespace Hospital.ViewModel.Patient
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
         }
+
+        private bool SelectionValidation()
+        {
+            if (SelectedItem == null)
+            {
+                this.SelectionError = "Potrebno je da označite željeno vreme!";
+                return false;
+            }
+
+            return true;
+        }
+
         private void CheckIfReferralForSpecialistIsUsed()
         {
             if (referralForSpecialistId != 0)

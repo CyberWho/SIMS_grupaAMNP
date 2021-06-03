@@ -35,6 +35,19 @@ namespace Hospital.ViewModel.Patient
         public string startTime { get; set; }
         public string endTime { get; set; }
         public ReferralForSpecialist SelectedItem { get; set; }
+        private string _selectionError;
+
+
+        public string SelectionError
+        {
+            get { return _selectionError; }
+            set
+            {
+                SetProperty(ref _selectionError, value);
+            }
+        }
+
+
         public PatientReferralsViewModel()
         {
 
@@ -90,10 +103,23 @@ namespace Hospital.ViewModel.Patient
 
         private void OnShowRecommendations()
         {
+            if(!SelectionValidation()) return;
             DateTime startDate = DateTime.Parse(startTime);
             DateTime endDate = DateTime.Parse(endTime);
             DateValidationForAppointmentRecommendations(endDate, startDate, SelectedItem.Doctor.Id);
         }
+
+        private bool SelectionValidation()
+        {
+            if (SelectedItem == null)
+            {
+                this.SelectionError = "Potrebno je označite željeni uput!";
+                return false;
+            }
+
+            return true;
+        }
+
         private void DateValidationForAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
         {
             if (endDate <= startDate)

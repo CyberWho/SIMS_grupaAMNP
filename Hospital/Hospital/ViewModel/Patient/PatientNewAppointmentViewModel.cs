@@ -37,6 +37,19 @@ namespace Hospital.ViewModel.Patient
         public MyICommand Undo { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
+        private string _selectionError;
+
+
+        public string SelectionError
+        {
+            get { return _selectionError; }
+            set
+            {
+                SetProperty(ref _selectionError, value);
+            }
+        }
+
+
         public PatientNewAppointmentViewModel()
         {
 
@@ -104,11 +117,24 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnChooseDoctor()
         {
+            if(!SelectionValidation()) return;
             int doctorId = GetDoctorId();
             DateTime startDate = DateTime.Parse(StartTime);
             DateTime endDate = DateTime.Parse(EndTime);
             DateValidationForAppointmentRecommendations(endDate, startDate, doctorId);
         }
+
+        private bool SelectionValidation()
+        {
+            if (SelectedItem == null)
+            {
+                this.SelectionError = "Potrebno je da označite željenog doktora!";
+                return false;
+            }
+
+            return true;
+        }
+
         private void DateValidationForAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
         {
             if (endDate <= startDate)
