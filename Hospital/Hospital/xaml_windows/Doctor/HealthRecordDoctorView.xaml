@@ -5,16 +5,94 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Doctor"
         mc:Ignorable="d"
-        Title="HealthRecordDoctorView" Height="450" Width="800">
+        Title="HealthRecordDoctorView" Height="768" Width="1024">
+       
+
     <Grid>
-        <ListBox x:Name="lb_appointments" SelectionChanged="AppointmentChange" SelectionMode="Single" Margin="519,98,-0.4,111"/>
-        <TextBox x:Name="Anamnesis_Text_Box" HorizontalAlignment="Left" Height="84" Margin="10,225,0,0" TextWrapping="Wrap" Text="Izaberite prvo neki pregled" VerticalAlignment="Top" Width="226" RenderTransformOrigin="0.843,0.086"/>
-        <Button Content="Potvrdi promenu anamneze" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Width="178" Click="ChangeAnamnesis" Height="48"/>
-        <Button Content="Izdaj recept(e) za izabranu anamnezu" HorizontalAlignment="Left" Margin="193,314,0,0" VerticalAlignment="Top" Width="207" Click="GoToPerscriptionGiving" Height="48"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="425,314,0,0" VerticalAlignment="Top" Width="113"  Height="48" Click="ReturnOption"/>
-        <Button Content="Zakazi operaciju" HorizontalAlignment="Left" Margin="425,367,0,0" VerticalAlignment="Top" Width="113" Height="48" Click="GoToCreateOperation" />
-        <Button Content="Izdavanje uput za pregled &#x0a;na osnovu termina" HorizontalAlignment="Left" Margin="10,367,0,0" VerticalAlignment="Top" Width="178" Click="GoToReferralGiving" Height="48"/>
-        <Button Content="Izdavanje uput za lecenje &#x0a;na osnovu termina" HorizontalAlignment="Left" Margin="193,367,0,0" VerticalAlignment="Top" Width="207" Click="GoToClinicalTreatmentGiving" Height="48"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150">
+            </RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="4" Background="CadetBlue">
+
+            <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="0,0,917.6,65.4"/>
+
+            <TextBlock FontFamily="Segoe UI Symbol" Text="🏥 ZDRAVO KORPORACIJA 🏥" Foreground="black" FontSize="20" Height="30" Margin="732,110,9.6,10.4" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="50" Margin="10,90,0,0" BorderBrush="CadetBlue" Command="{Binding GoToPatientSearchCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Trazi pacijenta&#xE11A;&#xA;" Foreground="black" FontSize="20" Height="30" Width="150" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="275,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToDrugOperationCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Pregled lekova&#x1f48a;" Foreground="black" FontSize="20" Height="30" Width="150" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="105,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToAppointmentsCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Termini&#xE008;" Foreground="black" FontSize="20" Height="30" Width="96" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="615,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToScheduleCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Pregled zauzeca&#x1f516;" Foreground="black" FontSize="20" Height="30" Width="160" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="445,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToCreateAppointmentCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Dodaj termin &#x2795;" Foreground="black" FontSize="20" Height="30" Width="143" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="838,10,0,0" BorderBrush="CadetBlue" Command="{Binding ReturnOptionCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Izloguj se &#x1f5f7;" Foreground="black" FontSize="20" Height="30" Width="111" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="4">
+            <ListBox x:Name="lb_appointments" SelectionChanged="AppointmentChange" SelectionMode="Single" Margin="519,98,117.6,230"/>
+            <TextBox x:Name="Anamnesis_Text_Box" HorizontalAlignment="Left" Height="84" Margin="10,225,0,0" TextWrapping="Wrap" Text="Izaberite prvo neki pregled" VerticalAlignment="Top" Width="226" RenderTransformOrigin="0.843,0.086"/>
+            <Button Content="Potvrdi promenu anamneze" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Width="178" Click="ChangeAnamnesis" Height="48"/>
+            <Button Content="Izdaj recept(e) za izabranu anamnezu" HorizontalAlignment="Left" Margin="193,314,0,0" VerticalAlignment="Top" Width="207" Click="GoToPerscriptionGiving" Height="48"/>
+            <Button Content="Odustani" HorizontalAlignment="Left" Margin="425,314,0,0" VerticalAlignment="Top" Width="113"  Height="48" Click="ReturnOption"/>
+            <Button Content="Zakazi operaciju" HorizontalAlignment="Left" Margin="425,367,0,0" VerticalAlignment="Top" Width="113" Height="48" Click="GoToCreateOperation" />
+            <Button Content="Izdavanje uput za pregled &#x0a;na osnovu termina" HorizontalAlignment="Left" Margin="10,367,0,0" VerticalAlignment="Top" Width="178" Click="GoToReferralGiving" Height="48"/>
+            <Button Content="Izdavanje uput za lecenje &#x0a;na osnovu termina" HorizontalAlignment="Left" Margin="193,367,0,0" VerticalAlignment="Top" Width="207" Click="GoToClinicalTreatmentGiving" Height="48"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="CadetBlue">
+            <TextBlock HorizontalAlignment="Left" Margin="708,63,0,0" TextWrapping="Wrap" Text="Tehnicka podrska: 060-123456789" VerticalAlignment="Top" Height="27" Width="300" FontSize="20"/>
+        </Grid>
+
 
     </Grid>
 </Window>

@@ -10,6 +10,7 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using System.IO.Packaging;
 
 namespace Hospital.Repository
 {
@@ -62,13 +63,24 @@ namespace Hospital.Repository
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-           
-            var patient = ParsePatient(reader);
+
+            int idGetUserById = reader.GetInt32(4);
+            Patient tmp = new Patient
+            {
+                Id = int.Parse(reader.GetString(0)),
+                JMBG = reader.GetString(1),
+                DateOfBirth = DateTime.Parse(reader.GetString(2)),
+                addres_id = int.Parse(reader.GetString(3)),
+                user_id = int.Parse(reader.GetString(4))
+            };
+
+
 
             connection.Close();
-            connection.Dispose(); 
-            
-            return patient;
+            connection.Dispose();
+            User user = new UserRepository().GetUserById(idGetUserById);
+            tmp.User = user;
+            return tmp;
         }
 
         private static Patient ParsePatient(OracleDataReader reader)

@@ -1,13 +1,32 @@
-﻿<Window x:Class="Hospital.xaml_windows.Doctor.Schedule"
+﻿<Window x:Class="Hospital.View.Doctor.DrugOperations"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital.xaml_windows.Doctor"
+        xmlns:local="clr-namespace:Hospital.View.Doctor"
+        xmlns:doctor="clr-namespace:Hospital.ViewModel.Doctor"
+        xmlns:data="clr-namespace:Hospital.Model"
         mc:Ignorable="d"
-        Title="Schedule" Height="768" Width="1024">
+        Title="DrugOperations" Height="768" Width="1024">
 
-
+        <!--
+        <Window.Resources>
+            <DataTemplate DataType="{x:Type data:Drug}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=Id, Mode=TwoWay}" Width="100"/>
+                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Width="100"/>
+                    <TextBlock Text="{Binding Path=drugType.Type, Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding Path=Grams, Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding Path=NeedsPerscription, Mode=TwoWay}"/>
+            </StackPanel>
+            </DataTemplate>
+        </Window.Resources>*/
+    -->
+<!--
+    /*drug.Id + "|" + drug.Name + " " + drug.drugType.Type + " " + drug.Grams +
+    (drug.NeedsPerscription ? " potreban recept" : "");*/
+-->
+       
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150">
@@ -68,7 +87,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </Button>
-            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="838,10,0,0" BorderBrush="CadetBlue" Command="{Binding ReturnOptionCommand}">
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="838,10,0,0" BorderBrush="CadetBlue" Command="{Binding ReturnOptionStartCommand}">
                 <TextBlock FontFamily="Segoe UI Symbol" Text="Izloguj se &#x1f5f7;" Foreground="black" FontSize="20" Height="30" Width="111" >
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
@@ -78,13 +97,34 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <Button Content="Odustani" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="94" Height="44" Click="ReturnOption"/>
-            <ListBox Name="lb_appointments" SelectionChanged="PrintText" SelectionMode="Single" Margin="519,98,9.6,159"/>
-            <TextBlock x:Name="more_info" Margin="76,50,522.6,159"/>
+            <DataGrid ItemsSource="{Binding drugsApproved }"  AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single"
+                 SelectedItem="{Binding SelectedDrugApproved}" Margin="514,80,135.6,183">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Gramaža" Binding="{Binding Grams}" />
+                    <DataGridTextColumn Header="Tip" Binding="{Binding drugType.Type}" />
+                    <DataGridTextColumn Header="Potreban recept" Binding="{Binding NeedsPerscription}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid ItemsSource="{Binding drugsPending}"  AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single"
+            SelectedItem="{Binding SelectedDrugPending}" Margin="234,80,537.6,183">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Gramaža" Binding="{Binding Grams}" />
+                    <DataGridTextColumn Header="Tip" Binding="{Binding drugType.Type}" />
+                    <DataGridTextColumn Header="Potreban recept" Binding="{Binding NeedsPerscription}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBox x:Name="tb_rejection" HorizontalAlignment="Left" Height="86" Margin="10,219,0,0" TextWrapping="Wrap" Text="Razlog odbijanja leka." VerticalAlignment="Top" Width="178"/>
+            <Button Content="Odbi lek" HorizontalAlignment="Left" Margin="113,310,0,0" VerticalAlignment="Top" Width="75" Command="{Binding RejectDrugCommand}"/>
+            <Button Content="Potvrdi lek" HorizontalAlignment="Left" Margin="239,310,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ApproveDrugCommand}"/>
+            <Button Content="Odustani" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ReturnOptionCommand}"/>
 
         </Grid>
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="CadetBlue">
+            <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="CadetBlue">
             <TextBlock HorizontalAlignment="Left" Margin="708,63,0,0" TextWrapping="Wrap" Text="Tehnicka podrska: 060-123456789" VerticalAlignment="Top" Height="27" Width="300" FontSize="20"/>
         </Grid>
 

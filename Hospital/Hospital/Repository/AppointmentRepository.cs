@@ -325,7 +325,7 @@ namespace Hospital.Repository
             if (command.ExecuteNonQuery() > 0)
             {
                 NotifyPatient(appointment, "Izmenjen termin");
-                NotifyDoctor(appointment, "Izmenjen termin");
+                //NotifyDoctor(appointment, "Izmenjen termin");
 
                 connection.Close();
                 connection.Dispose();

@@ -192,6 +192,7 @@
     <Compile Include="Service\WorkHoursService.cs" />
     <Compile Include="ViewModel\Doctor\BindableBase.cs" />
     <Compile Include="ViewModel\Doctor\DoctorUIwindowViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\DrugOperationsViewModel.cs" />
     <Compile Include="ViewModel\Doctor\MyICommand.cs" />
     <Compile Include="ViewModel\Manager\ManagerUIViewModel.cs" />
     <Compile Include="ViewModel\Manager\MyICommand.cs" />
@@ -201,6 +202,9 @@
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
     <Compile Include="View\Doctor\DoctorUIwindow.xaml.cs">
       <DependentUpon>DoctorUIwindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DrugOperations.xaml.cs">
+      <DependentUpon>DrugOperations.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml.cs">
       <DependentUpon>ClinicalTreatmentGiving.xaml</DependentUpon>
@@ -390,6 +394,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Doctor\DoctorUIwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DrugOperations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

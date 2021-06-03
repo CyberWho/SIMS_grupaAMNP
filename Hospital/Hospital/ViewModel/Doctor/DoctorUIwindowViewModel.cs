@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Hospital.Controller;
+using Hospital.View.Doctor;
 using Hospital.xaml_windows.Doctor;
 using MVVM1;
 
 namespace Hospital.ViewModel.Doctor
 {
-    class DoctorUIwindowViewModel: BindableBase
+    class DoctorUIwindowViewModel : BindableBase
     {
         private BindableBase currentViewModel;
 
@@ -18,8 +19,13 @@ namespace Hospital.ViewModel.Doctor
 
         private Window thisWindow;
 
-        public MyICommand ReturnOptionCommand { get; set; } 
+        public MyICommand ReturnOptionCommand { get; set; }
         public MyICommand GoToDrugOperationCommand { get; set; }
+        public MyICommand GoToAppointmentsCommand { get; set; }
+        public MyICommand GoToCreateAppointmentCommand { get; set; }
+        public MyICommand GoToScheduleCommand { get; set; }
+        public MyICommand GoToPatientSearchCommand { get; set; }
+
 
         private int id;
         private int id_doc;
@@ -37,7 +43,14 @@ namespace Hospital.ViewModel.Doctor
         {
             this.id = doctors_id;
             this.id_doc = doctorController.GetDoctorByUserId(id).Id;
+
             this.ReturnOptionCommand = new MyICommand(ReturnOption);
+            this.GoToDrugOperationCommand = new MyICommand(GoToDrugOperation);
+            this.GoToAppointmentsCommand = new MyICommand(GoToAppointments);
+            this.GoToCreateAppointmentCommand = new MyICommand(GoToCreateAppointment);
+            this.GoToScheduleCommand = new MyICommand(GoToSchedule);
+            this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
+
             this.thisWindow = window;
         }
 
@@ -47,8 +60,6 @@ namespace Hospital.ViewModel.Doctor
 
         public void ReturnOption()
         {
-            //logout
-            //MessageBox.Show(id.ToString());
             Window s = new MainWindow();
             s.Show();
             thisWindow.Close();
@@ -82,9 +93,10 @@ namespace Hospital.ViewModel.Doctor
             thisWindow.Close();
         }
 
-        private void GoToDrugOperation()
+        private void GoToDrugOperation() // Obradjuje se
         {
-            Window s = new DrugOperations(id, id_doc);
+
+            Window s = new View.Doctor.DrugOperations(id, id_doc);
             s.Show();
             thisWindow.Close();
         }

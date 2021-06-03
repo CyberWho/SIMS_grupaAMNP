@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +18,7 @@ using System.Windows.Shapes;
 using Hospital.Controller;
 using Hospital.Model;
 using Hospital.Service;
+using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -51,6 +54,14 @@ namespace Hospital.xaml_windows.Doctor
             this.id_doc = id_doc;
             this.id_patient = id_patient;
             this.selected_appointment_id = selected_appointment_id;
+
+            this.DataContext = this;
+            this.ReturnOptionCommand = new MyICommand(ReturnOption);
+            this.GoToDrugOperationCommand = new MyICommand(GoToDrugOperation);
+            this.GoToAppointmentsCommand = new MyICommand(GoToAppointments);
+            this.GoToCreateAppointmentCommand = new MyICommand(GoToCreateAppointment);
+            this.GoToScheduleCommand = new MyICommand(GoToSchedule);
+            this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
         }
 
 
@@ -81,6 +92,10 @@ namespace Hospital.xaml_windows.Doctor
                 return;
 
             ObservableCollection<Room> tmp = roomController.findSuitableRoomsWithEquipment(dateRange, getObservableCollectionWithBed());
+            foreach (var VARIABLE in tmp)
+            {
+                MessageBox.Show(VARIABLE.Id.ToString());
+            }
             fillSuitableRooms(tmp, dateRange);
         }
 
@@ -93,16 +108,17 @@ namespace Hospital.xaml_windows.Doctor
 
         private void fillSuitableRooms(ObservableCollection<Room> rooms, DateRange dateRange)
         {
+            this.rooms.Clear();
             foreach (Room room in rooms)
                 foreach (ItemInRoom itemInRoom in room.itemInRoom)
                     if (itemInRoom.inventoryItem_id == krevet_id &&
                         itemInRoom.Quantity > refferalForClinicalTreatmentController.GetMaxTakenBeds(room.Id, dateRange))
-                        rooms.Add(room);
+                        this.rooms.Add(room);
         }
 
         private void fillRoomsToUi(ObservableCollection<Room> rooms)
         {
-            rooms.Clear();
+            //MessageBox.Show("A");
             foreach (Room room in rooms)
             {
                 ListBoxItem item = new ListBoxItem();
@@ -149,5 +165,62 @@ namespace Hospital.xaml_windows.Doctor
             MessageBox.Show("Uspesno");
             selected_room_id = -1;
         }
+        /***************************
+        ***
+        Dodavanje navigacije
+        ***
+        ***************************/
+        public MyICommand ReturnOptionCommand { get; set; }
+        public MyICommand GoToDrugOperationCommand { get; set; }
+        public MyICommand GoToAppointmentsCommand { get; set; }
+        public MyICommand GoToCreateAppointmentCommand { get; set; }
+        public MyICommand GoToScheduleCommand { get; set; }
+        public MyICommand GoToPatientSearchCommand { get; set; }
+
+        public void ReturnOption()
+        {
+            Window s = new MainWindow();
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToAppointments()
+        {
+            Window s = new Doctor_crud_appointments(id_doc_as_emoloyee, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToCreateAppointment()
+        {
+            Window s = new Create_appointment(id_doc_as_emoloyee, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToSchedule()
+        {
+            Window s = new Schedule(id_doc_as_emoloyee, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToPatientSearch()
+        {
+            Window s = new SearchPatient(id_doc_as_emoloyee, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToDrugOperation() // Obradjuje se
+        {
+
+            Window s = new View.Doctor.DrugOperations(id_doc_as_emoloyee, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+
+
     }
 }
