@@ -40,7 +40,9 @@
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
     <Reference Include="system.windows.controls.ribbon" />
@@ -199,7 +201,9 @@
     <Compile Include="ViewModel\Patient\ClinicalTreatmentReferralsViewModel.cs" />
     <Compile Include="ViewModel\Patient\DoctorRateViewModel.cs" />
     <Compile Include="ViewModel\Patient\DoctorsViewModel.cs" />
+    <Compile Include="ViewModel\Patient\HelpProvider.cs" />
     <Compile Include="ViewModel\Patient\HospitalRateViewModel.cs" />
+    <Compile Include="ViewModel\Patient\JavaScriptControlTemplate.cs" />
     <Compile Include="ViewModel\Patient\MedicalTreatmenstViewModel.cs" />
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
     <Compile Include="ViewModel\Patient\NotificationsViewModel.cs" />
@@ -231,6 +235,9 @@
     </Compile>
     <Compile Include="View\Patient\DoctorsView.xaml.cs">
       <DependentUpon>DoctorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\HelpViewer.xaml.cs">
+      <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\HospitalRateView.xaml.cs">
       <DependentUpon>HospitalRateView.xaml</DependentUpon>
@@ -496,6 +503,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\DoctorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\HelpViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -923,6 +934,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-undo-90.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Help\DoctorsHelp.html" />
+    <Content Include="Help\error.html" />
+    <Content Include="Help\HealthRecordHelp.html" />
+    <Content Include="Help\NotificationsHelp.html" />
+    <Content Include="Help\PatientAppointmentsHelp.html" />
+    <Content Include="Help\PatientHealthRecordHelp.html" />
+    <Content Include="Help\PatientInfoHelp.html" />
+    <Content Include="Help\PatientNewAppointmentHelp.html" />
+    <Content Include="Help\PatientNewAppointmentRecommendationsHelp.html" />
+    <Content Include="Help\PatientRemindersHelp.html" />
+    <Content Include="Help\PatientUIHelp.html" />
+    <Content Include="Help\PersonalRemindersHelp.html" />
+    <Content Include="Help\TreatmentRemindersHelp.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
