@@ -21,15 +21,11 @@ namespace Hospital
         private void Potvrda_Click(object sender, RoutedEventArgs e)
         {
 
-            /* string user = Username.Text;
+             string user = Username.Text;
              string pass = Password.Password;
 
              if(new UserController().LoginUser(user, pass))
-                 this.Close();*/
-            Window s = new WizardHomeView(1);
-            s.Show();
-            this.Close();
-
+                 this.Close();
         }
 
     }
