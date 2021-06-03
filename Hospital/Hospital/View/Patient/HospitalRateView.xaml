@@ -11,6 +11,9 @@
     <Window.DataContext>
         <viewModel:HospitalRateViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="O" Command="{Binding RateHospital}"/>
+    </Window.InputBindings>
     <Grid>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="4,0,442.6,427.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="54,0,174.6,420.4" Height="Auto"/>
@@ -19,7 +22,7 @@
         <Label Content="Komentar:" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="54,158,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Text="{Binding Description}" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" x:Name="description_txt" Height="109" Margin="148,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" />
         <xctk:IntegerUpDown FontSize="16" Text="{Binding Rate}" Foreground="DeepSkyBlue" x:Name="rate_txt" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="151,112,0,0" VerticalAlignment="Top" Width="229"/>
-        <Button x:Name="Potvrda" ToolTip="Klikom na dugme potvrdjujete ocenu" Command="{Binding RateHospital}" Content="Potvrda" Foreground="White" FontSize="16" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="205,295,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.459,2.338"/>
+        <Button x:Name="Potvrda" ToolTip="Klikom na dugme potvrdjujete ocenu (Ctrl+O)" Command="{Binding RateHospital}" Content="Potvrda" Foreground="White" FontSize="16" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Margin="205,295,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.459,2.338"/>
         <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block" Text="{Binding RateError,UpdateSourceTrigger=Default,Mode=TwoWay}" Margin="148,137,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"/>
         <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block1" Text="{Binding DescriptionError,UpdateSourceTrigger=Default,Mode=TwoWay}" Margin="151,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="224" RenderTransformOrigin="0.5,0.5">
 

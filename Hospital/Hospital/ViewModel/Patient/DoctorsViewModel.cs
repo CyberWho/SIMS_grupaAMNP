@@ -32,6 +32,18 @@ namespace Hospital.ViewModel.Patient
         public MyICommand ToolTipsOn { get; set; }
         public MyICommand DoctorRate { get; set; }
         public Model.Doctor SelectedItem { get; set; }
+        public bool CanRate { get; set; }
+        private string _rateError;
+
+
+        public string RateError
+        {
+            get { return _rateError; }
+            set
+            {
+                SetProperty(ref _rateError, value);
+            }
+        }
         public DoctorsViewModel()
         {
 
@@ -45,6 +57,7 @@ namespace Hospital.ViewModel.Patient
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             InstanceMyICommands();
             ShowAllDoctors();
+            CanRate = false;
         }
 
         private void InstanceMyICommands()
@@ -74,6 +87,8 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnDoctorRate()
         {
+            if(!ValidateSelection()) return;
+            ;
             if (appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id, SelectedItem.Id) == false)
             {
                 MessageBox.Show("Ne mozete oceniti doktora kod kog niste bili na pregledu!", "Zdravo korporacija", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -83,6 +98,18 @@ namespace Hospital.ViewModel.Patient
                 ShowDoctorRate();
             }
         }
+
+        private bool ValidateSelection()
+        {
+            if (SelectedItem == null)
+            {
+                this.RateError = "Morate označiti doktora!";
+                return false;
+            }
+
+            return true;
+        }
+
         private void ShowDoctorRate()
         {
             var window = new DoctorRateView(userId, SelectedItem.Id);

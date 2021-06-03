@@ -10,13 +10,23 @@
     <Window.DataContext>
         <viewModel:PatientInfoViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Alt" Key="H" Command="{Binding HomePage}"/>
+        <KeyBinding Modifiers="Alt" Key="P" Command="{Binding MyProfile}"/>
+        <KeyBinding Modifiers="Alt" Key="A" Command="{Binding MyAppointments}"/>
+        <KeyBinding Modifiers="Alt" Key="M" Command="{Binding MyHealthRecord}"/>
+        <KeyBinding Modifiers="Alt" Key="D" Command="{Binding ShowDoctors}"/>
+        <KeyBinding Modifiers="Alt" Key="R" Command="{Binding MyReminders}"/>
+        <KeyBinding Modifiers="Alt" Key="N" Command="{Binding ShowNotifications}"/>
+        <KeyBinding Modifiers="Alt" Key="L" Command="{Binding LogOut}"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="55" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
-            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica" HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
+            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
@@ -24,35 +34,35 @@
 
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojProfil" ToolTip="Moj profil" HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
+            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini" Height="45"  HorizontalAlignment="Left" Command="{Binding MyAppointments}" Background="White">
+            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" Height="45"  HorizontalAlignment="Left" Command="{Binding MyAppointments}" Background="White">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="41" Height="43" HorizontalAlignment="Left" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
+            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="Doktori" ToolTip="Doktori" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
+            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
+            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
@@ -61,32 +71,32 @@
             </MenuItem>
         </Menu>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
-        <Button x:Name="LogOut" ToolTip="Odjavi se" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
+        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
             </StackPanel>
         </Button>
-        <Button x:Name="Notifications" ToolTip="Obaveštenja" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
+        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Checked="CheckBox_OnChecked" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
+        <Label Content="Moj profil" Grid.Column="1" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="327.8,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
 
-        <Label Content="Korisničko ime:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="27.8,87,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.185,0.324"/>
-        <Label Content="Prezime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,157,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
-        <Label Content="Email:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
-        <Label Content="Telefon:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="27.8,193,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="170.8,91,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
-        <TextBox Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,124,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
-        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,161,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,198,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
-        <TextBox   Grid.Column="1" Text="{Binding Path=EMail, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="170.8,235,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
-        <Image Source="/Resources/Icons/icons8-hospital-3-96.png" Grid.Column="1" Margin="537.8,91,187.6,265.4"/>
-        <Label FontSize="16" Foreground="Red" Content="Vaš partner kroz život" Grid.Column="1" HorizontalAlignment="Left" Margin="520.8,226,0,0" VerticalAlignment="Top" Width="170"/>
+        <Label Content="Korisničko ime:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="190.8,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="190.8,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.185,0.324"/>
+        <Label Content="Prezime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="190.8,157,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.163"/>
+        <Label Content="Email:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="190.8,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.491"/>
+        <Label Content="Telefon:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="190.8,189,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="315.8,91,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="315.8,124,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox  Grid.Column="1" Text="{Binding Path=Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="315.8,157,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="315.8,193,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <TextBox   Grid.Column="1" Text="{Binding Path=EMail, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="315.8,226,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="144"/>
+        <Image Source="/Resources/Icons/icons8-hospital-3-96.png" Grid.Column="1" Margin="597.8,91,132.6,281.4"/>
+        <Label FontSize="16" Foreground="Red" Content="Vaš partner kroz život" Grid.Column="1" HorizontalAlignment="Left" Margin="574.8,199,0,0" VerticalAlignment="Top" Width="170"/>
 
     </Grid>
 </Window>

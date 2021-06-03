@@ -11,6 +11,9 @@
     <Window.DataContext>
         <viewModel:DoctorRateViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="O" Command="{Binding RateDoctor}"/>
+    </Window.InputBindings>
     <Grid>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="0,2,443.6,428.4"/>
 
@@ -25,7 +28,7 @@
         <TextBox Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="180,141,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
         <TextBox Text="{Binding Specialization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="180,173,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229" RenderTransformOrigin="0.781,0.343"/>
         <TextBox x:Name="description_txt" Text="{Binding Description}" Foreground="DeepSkyBlue" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="94" Margin="180,259,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <Button x:Name="OceniDoktora" ToolTip="Klikom na dugme potvrdjujete ocenu za doktora" Command="{Binding RateDoctor}" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="226,382,123.6,63.4" Width="144" Height="25"/>
+        <Button x:Name="OceniDoktora" ToolTip="Klikom na dugme potvrdjujete ocenu za doktora (Ctrl+O)" Command="{Binding RateDoctor}" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedButton}" Margin="226,382,123.6,63.4" Width="144" Height="25"/>
 
 
         <xctk:IntegerUpDown x:Name="rate_txt" Text="{Binding Rate}" Style="{StaticResource RoundedIntegerUpDown}" Foreground="DeepSkyBlue" FontSize="16" DefaultValue="1" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="180,205,0,0" VerticalAlignment="Top" Width="229" Height="27"/>
