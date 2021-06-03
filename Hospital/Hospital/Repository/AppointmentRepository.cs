@@ -280,7 +280,7 @@ namespace Hospital.Repository
         private void NotifyDoctor(Appointment app, String Name)
         {
             SystemNotification systemNotification = new SystemNotification();
-            int user_id = this.employeesRepository.GetUserIdByEmployeeId(app.doctor.employee_id);
+            int user_id = app.doctor.User.Id;
             systemNotification.user_id = user_id;
             systemNotification.Name = Name;
             String desc = Name + " zakazan za: " + app.StartTime + " za pacijenta " + app.patient.User.Name + " " + app.patient.User.Surname;
@@ -427,14 +427,14 @@ namespace Hospital.Repository
             switch (appointment.Type)
             {
                 case AppointmentType.EXAMINATION:
-                    appointment_type_id = 1;
+                    appointment_type_id = 0;
                     break;
 
                 case AppointmentType.OPERATION:
-                    appointment_type_id = 2;
+                    appointment_type_id = 1;
                     break;
                 case AppointmentType.REFERRAL:
-                    appointment_type_id = 3;
+                    appointment_type_id = 2;
                     break;
             }
 

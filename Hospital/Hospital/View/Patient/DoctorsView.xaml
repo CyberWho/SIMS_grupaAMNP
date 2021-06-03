@@ -1,0 +1,119 @@
+﻿<Window x:Class="Hospital.View.Patient.DoctorsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Patient"
+        xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
+        mc:Ignorable="d"
+        Title="DoctorsView" Height="500" Width="900" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModel:DoctorsViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Alt" Key="H" Command="{Binding HomePage}"/>
+        <KeyBinding Modifiers="Alt" Key="P" Command="{Binding MyProfile}"/>
+        <KeyBinding Modifiers="Alt" Key="A" Command="{Binding MyAppointments}"/>
+        <KeyBinding Modifiers="Alt" Key="M" Command="{Binding MyHealthRecord}"/>
+        <KeyBinding Modifiers="Alt" Key="D" Command="{Binding ShowDoctors}"/>
+        <KeyBinding Modifiers="Alt" Key="R" Command="{Binding MyReminders}"/>
+        <KeyBinding Modifiers="Alt" Key="N" Command="{Binding ShowNotifications}"/>
+        <KeyBinding Modifiers="Alt" Key="L" Command="{Binding LogOut}"/>
+        <KeyBinding Modifiers="Control" Key="O" Command="{Binding DoctorRate}"/>
+        <KeyBinding Modifiers="Alt" Key="S" Command="{Binding Help}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"  />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
+            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
+
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)"  HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="41" Height="43" Source="/Resources/Icons/icons8-calendar-52.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
+
+        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
+        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding doctors}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="366,80,0,0" VerticalAlignment="Top" Width="458">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" MaxWidth="0"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding User.Name}" Width="*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding User.Surname}" Width="*"/>
+                <DataGridTextColumn Header="Specijalizacija" Binding="{Binding specialization.Type}" Width="*"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Grid.Column="1" Foreground="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.6,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+
+        <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource RoundedTextBox}" HorizontalAlignment="Left" Height="23" Margin="154.8,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Ime doktora:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.575,1.734" Height="32" Width="119"/>
+        <Label Content="Specijalizacija:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="17,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,1.774" Height="32" Width="119"/>
+        <Label Content="Prezime doktora:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,107,0,0" VerticalAlignment="Top" Height="32" Width="133"/>
+        <TextBox x:Name="doctor_spec_txt" IsReadOnly="True" Foreground="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="154.8,144,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.specialization.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+
+        <Label Content="Odabrani doktor:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.6,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,-0.8" Width="197"/>
+        <Label Content="Doktori:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="366,40,0,0" VerticalAlignment="Top"/>
+        <Button Content="Oceni doktora" ToolTip="Klikom na dugme možete da ocenite odabranog doktora (Ctrl+O)" x:Name="Oceni" Command="{Binding DoctorRate}" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="155,193,0,0" VerticalAlignment="Top" Width="144"/>
+        
+        <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="17,172,0,0" TextWrapping="Wrap" Text="{Binding RateError}" VerticalAlignment="Top" Width="282"/>
+        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
+            <StackPanel Height="45" Width="45">
+                <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>
+            </StackPanel>
+        </Button>
+
+
+    </Grid>
+</Window>

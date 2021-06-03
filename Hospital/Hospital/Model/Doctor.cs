@@ -226,5 +226,16 @@ namespace Hospital.Model
             //this.employee_id = id;
             this.specialization_id = specialization.id;
         }
+        public Doctor(int id, int salary, int yearsOfService, User user, Role role, Specialization specialization) : base(id, salary, yearsOfService, user, role)
+        {
+            this.User = user;
+            this.role = role;
+            this.specialization = specialization;
+
+
+            this.room_id = room.Id;
+            this.employee_id = id;
+            this.specialization_id = specialization.id;
+        }
     }
 }

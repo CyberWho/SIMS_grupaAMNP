@@ -158,7 +158,7 @@ namespace Hospital.xaml_windows.Patient
         private int userId;
         private int appointmentId;
         private bool tooltipChecked;
-        private ObservableCollection<TimeSlot> TimeSlots = new ObservableCollection<TimeSlot>();
+        public ObservableCollection<TimeSlot> TimeSlots { get; set; }
         private AppointmentController appointmentController = new AppointmentController();
         private TimeSlotController timeSlotController = new TimeSlotController();
         private Appointment appointment = new Appointment();
