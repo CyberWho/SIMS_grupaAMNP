@@ -8,5 +8,6 @@ namespace Hospital.ViewModel.Manager
 {
     class ManagerUIViewModel
     {
+
     }
 }

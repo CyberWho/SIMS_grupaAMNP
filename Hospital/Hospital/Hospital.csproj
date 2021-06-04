@@ -338,37 +338,37 @@
     <Compile Include="xaml_windows\Doctor\SpecialistReferal.xaml.cs">
       <DependentUpon>SpecialistReferal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerDrugsCRUD.xaml.cs">
+    <Compile Include="View\Manager\ManagerDrugsCRUD.xaml.cs">
       <DependentUpon>ManagerDrugsCRUD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerInventorySearch.xaml.cs">
+    <Compile Include="View\Manager\ManagerInventorySearch.xaml.cs">
       <DependentUpon>ManagerInventorySearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerActiveRenovations.xaml.cs">
+    <Compile Include="View\Manager\ManagerActiveRenovations.xaml.cs">
       <DependentUpon>ManagerActiveRenovations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerNewRenovation.xaml.cs">
+    <Compile Include="View\Manager\ManagerNewRenovation.xaml.cs">
       <DependentUpon>ManagerNewRenovation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerRenovationHistory.xaml.cs">
+    <Compile Include="View\Manager\ManagerRenovationHistory.xaml.cs">
       <DependentUpon>ManagerRenovationHistory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerRenovations.xaml.cs">
+    <Compile Include="View\Manager\ManagerRenovations.xaml.cs">
       <DependentUpon>ManagerRenovations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerRoomInventory.xaml.cs">
+    <Compile Include="View\Manager\ManagerRoomInventory.xaml.cs">
       <DependentUpon>ManagerRoomInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerRoomInventorySelectDestinationRoom.xaml.cs">
+    <Compile Include="View\Manager\ManagerRoomInventorySelectDestinationRoom.xaml.cs">
       <DependentUpon>ManagerRoomInventorySelectDestinationRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerRoomsCRUD.xaml.cs">
+    <Compile Include="View\Manager\ManagerRoomsCRUD.xaml.cs">
       <DependentUpon>ManagerRoomsCRUD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerRoomsPickDate.xaml.cs">
+    <Compile Include="View\Manager\ManagerRoomsPickDate.xaml.cs">
       <DependentUpon>ManagerRoomsPickDate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
+    <Compile Include="View\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Patient\Allergies.xaml.cs">
@@ -626,43 +626,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerDrugsCRUD.xaml">
+    <Page Include="View\Manager\ManagerDrugsCRUD.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerInventorySearch.xaml">
+    <Page Include="View\Manager\ManagerInventorySearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerActiveRenovations.xaml">
+    <Page Include="View\Manager\ManagerActiveRenovations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerNewRenovation.xaml">
+    <Page Include="View\Manager\ManagerNewRenovation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerRenovationHistory.xaml">
+    <Page Include="View\Manager\ManagerRenovationHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerRenovations.xaml">
+    <Page Include="View\Manager\ManagerRenovations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerRoomInventory.xaml">
+    <Page Include="View\Manager\ManagerRoomInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerRoomInventorySelectDestinationRoom.xaml">
+    <Page Include="View\Manager\ManagerRoomInventorySelectDestinationRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerRoomsCRUD.xaml">
+    <Page Include="View\Manager\ManagerRoomsCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerRoomsPickDate.xaml">
+    <Page Include="View\Manager\ManagerRoomsPickDate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -682,7 +682,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="xaml_windows\Manager\ManagerUI.xaml">
+    <Page Include="View\Manager\ManagerUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -947,6 +947,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
+    <Folder Include="xaml_windows\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-undo-90.png" />
