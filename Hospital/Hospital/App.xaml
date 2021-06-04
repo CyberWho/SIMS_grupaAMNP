@@ -67,5 +67,19 @@
             </Style.Resources>
             
         </Style>
+       <Style TargetType="DataGrid" x:Key="RoundedDataGrid">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+           <Style.Triggers>
+               <Trigger Property="IsSelected" Value="True">
+                   <Setter Property="Background" Value="DeepSkyBlue"/>
+               </Trigger>
+           </Style.Triggers>
+       </Style>
     </Application.Resources>
 </Application>

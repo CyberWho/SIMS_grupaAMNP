@@ -85,7 +85,7 @@
             </StackPanel>
         </Button>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding doctors}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="366,80,0,0" VerticalAlignment="Top" Width="458">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding doctors}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" Height="277" Margin="352,80,24.6,0" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" MaxWidth="0"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding User.Name}" Width="*"/>
@@ -103,9 +103,9 @@
         <TextBox x:Name="doctor_spec_txt" IsReadOnly="True" Foreground="DeepSkyBlue" FontSize="16" Style="{StaticResource RoundedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="154.8,144,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.specialization.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
         <Label Content="Odabrani doktor:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.6,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,-0.8" Width="197"/>
-        <Label Content="Doktori:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="366,40,0,0" VerticalAlignment="Top"/>
+        <Label Content="Doktori:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="352,40,0,0" VerticalAlignment="Top"/>
         <Button Content="Oceni doktora" ToolTip="Klikom na dugme možete da ocenite odabranog doktora (Ctrl+O)" x:Name="Oceni" Command="{Binding DoctorRate}" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="155,193,0,0" VerticalAlignment="Top" Width="144"/>
-        
+
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
         <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="17,172,0,0" TextWrapping="Wrap" Text="{Binding RateError}" VerticalAlignment="Top" Width="282"/>
         <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
