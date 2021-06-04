@@ -5,81 +5,159 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Hospital.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Menu" x:Key="Horizontal">
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <StackPanel VerticalAlignment="Top"/>
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="Button" x:Key="RoundedButton">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="7"/>
-                    
-                </Style>
-            </Style.Resources>
-        </Style>
-        <Style TargetType="TextBox" x:Key="RoundedTextBox">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="7" />
-                    <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
-                    <Setter Property="BorderThickness" Value="10"/>
-                </Style>
-            </Style.Resources>
-        </Style>
-        
-        <Style TargetType="{x:Type xctk:DateTimePicker}" x:Key="RoundedDateTimePicker">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="7" />
-                    <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
-                    <Setter Property="BorderThickness" Value="0.5"/>
-                </Style>
-            </Style.Resources>
-        </Style>
-        <Style TargetType="{x:Type xctk:IntegerUpDown}" x:Key="RoundedIntegerUpDown">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="7" />
-                    <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
-                    <Setter Property="BorderThickness" Value="10"/>
-                </Style>
-            </Style.Resources>
-        </Style>
-        <ControlTemplate x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
-            <Border Background="{TemplateBinding Background}" 
-                x:Name="Bd" BorderBrush="DeepSkyBlue"
-                BorderThickness="1" CornerRadius="7">
-                <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-            </Border>
-        </ControlTemplate>
-        <Style TargetType="CheckBox" x:Key="RoundedCheckBox">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="7"/>
-                    <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
-                    <Setter Property="BorderThickness" Value="0.5"/>
-                </Style>
-            </Style.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.LightBlue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#3499eb"/>
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#e8ebed"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#3499eb"/>
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#e8ebed"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#105d97"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#e8ebed"/>
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#757575"/>
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#e8ebed"/>
+
+            <Style TargetType="Menu" x:Key="Horizontal">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <StackPanel VerticalAlignment="Top"/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" x:Key="RoundedButton">
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7"/>
+
+                    </Style>
+                </Style.Resources>
+            </Style>
+            <Style TargetType="TextBox" x:Key="RoundedTextBox">
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7" />
+                        <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                        <Setter Property="BorderThickness" Value="10"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+            <Style TargetType="{x:Type xctk:DateTimePicker}" x:Key="RoundedDateTimePicker">
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7" />
+                        <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                        <Setter Property="BorderThickness" Value="0.5"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+            <Style TargetType="{x:Type xctk:IntegerUpDown}" x:Key="RoundedIntegerUpDown">
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7" />
+                        <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                        <Setter Property="BorderThickness" Value="10"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+            <ControlTemplate x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
+                <Border Background="{TemplateBinding Background}" 
+                    x:Name="Bd" BorderBrush="DeepSkyBlue"
+                    BorderThickness="1" CornerRadius="7">
+                    <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                </Border>
+            </ControlTemplate>
+            <Style TargetType="CheckBox" x:Key="RoundedCheckBox">
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7"/>
+                        <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                        <Setter Property="BorderThickness" Value="0.5"/>
+                    </Style>
+                </Style.Resources>
+
+            </Style>
+            <Style x:Key="managerRegularBtn" TargetType="Button">
+                    <Style.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="3" />
+                        </Style>
+                    </Style.Resources>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#3499eb" TargetName="Border"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="#838b90" TargetName="Border"/>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter Property="Background" Value="#0471c9"/>
+                                </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="Background" Value="#3499eb"/>
+                <Setter Property="Foreground" Value="#e8ebed"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Width" Value="180"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect ShadowDepth="5" BlurRadius="4"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+           </Style>
             
-        </Style>
-       <Style TargetType="DataGrid" x:Key="RoundedDataGrid">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Margin" Value="0"/>
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Style.Resources>
-           <Style.Triggers>
-               <Trigger Property="IsSelected" Value="True">
-                   <Setter Property="Background" Value="DeepSkyBlue"/>
-               </Trigger>
-           </Style.Triggers>
-       </Style>
+            <Style x:Key="managerTextBlock" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#e8ebed"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="TextBlock.Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Transparent"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <Style x:Key="managerDataGrid" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                <Setter Property="SelectionMode" Value="Single"/>
+                <Setter Property="SelectionUnit" Value="FullRow"/>
+            </Style>
+
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
