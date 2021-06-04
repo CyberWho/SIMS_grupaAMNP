@@ -33,7 +33,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
-            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
+            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
@@ -41,35 +41,35 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
+            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" HorizontalAlignment="Left" Style="{StaticResource menuItemPatient}" Background="White" Command="{Binding MyProfile}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
+            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="41" Height="43" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
+            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
+            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Style="{StaticResource menuItemPatient}" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
+            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Style="{StaticResource menuItemPatient}" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
@@ -78,32 +78,32 @@
             </MenuItem>
         </Menu>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
-        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
+        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
             </StackPanel>
         </Button>
-        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
+        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <Button Content="Moji specijalistički uputi" ToolTip="Klikom na dugme prikazaće Vam se svi aktivni uputi za specijalističke preglede (Ctrl+S)" x:Name="MojiUputi" Command="{Binding ShowReferrals}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,82,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
-        <Button Content="Moje alergije" ToolTip="Klikom na dugme prikazaće Vam se sve Vaše alergije (Ctrl+A)" FontSize="24" x:Name="MojeAlergije" Command="{Binding ShowAllergies}" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,182,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
-        <Button Content="Moje anamneze" ToolTip="Klikom na dugme prikazaće Vam se sve Vaše anamneze (Ctrl+M)" x:Name="MojeAnamneze" Command="{Binding ShowAnamnesis}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,232,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
-        <Button Content="Moji recepti" ToolTip="Klikom na dugme prikazaće Vam se svi Vaši recepti (Ctrl+R)" x:Name="MojiRecepti" Command="{Binding ShowPerscriptions}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,282,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
+        <Button Content="Moji specijalistički uputi" ToolTip="Klikom na dugme prikazaće Vam se svi aktivni uputi za specijalističke preglede (Ctrl+S)" x:Name="MojiUputi" Command="{Binding ShowReferrals}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,82,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
+        <Button Content="Moje alergije" ToolTip="Klikom na dugme prikazaće Vam se sve Vaše alergije (Ctrl+A)" FontSize="24" x:Name="MojeAlergije" Command="{Binding ShowAllergies}" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,182,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
+        <Button Content="Moje anamneze" ToolTip="Klikom na dugme prikazaće Vam se sve Vaše anamneze (Ctrl+M)" x:Name="MojeAnamneze" Command="{Binding ShowAnamnesis}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,232,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
+        <Button Content="Moji recepti" ToolTip="Klikom na dugme prikazaće Vam se svi Vaši recepti (Ctrl+R)" x:Name="MojiRecepti" Command="{Binding ShowPerscriptions}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,282,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
         <Label Content="Osnovne informacije:" FontSize="24" Foreground="DeepSkyBlue" Grid.Column="1" Margin="11.6,48,575.6,375.4" />
-        <Label Content="Pol:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.8,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Bračni status:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
-        <Label Content="Mesto rođenja:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Text="{Binding Path=Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,100,0,0"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=MaritalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,132,0,0"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=PlaceOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,164,0,0"/>
-        <Button Content="Moji uputi za bolničko lečenje" ToolTip="Klikom na dugme prikazaće Vam se svi uputi za bolničko lečenje (Ctrl+B)" x:Name="BolnickoLecenje" Command="{Binding ShowClinicalReferrals}" Style="{StaticResource RoundedButton}" Foreground="White" Background="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,132,0,0" VerticalAlignment="Top" Width="347" Height="38" RenderTransformOrigin="0.338,0.645"/>
-        <Button Content="Moje terapije" FontSize="24" ToolTip="Klikom na dugme prikazaće Vam se sve terapije (Ctrl+T)" x:Name="Terapije" Command="{Binding ShowMedicalTreatments}" Style="{StaticResource RoundedButton}" Foreground="White" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,332,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
+        <Label Content="Pol:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.8,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Bračni status:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.8,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Mesto rođenja:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="11.8,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" IsReadOnly="True" BorderBrush="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" FontSize="16" Height="34" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,100,0,0"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" IsReadOnly="True" BorderBrush="DeepSkyBlue"  Height="34" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=MaritalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.8,139,0,0"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" IsReadOnly="True" BorderBrush="DeepSkyBlue" Height="34" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=PlaceOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.8,178,0,0"/>
+        <Button Content="Moji uputi za bolničko lečenje" ToolTip="Klikom na dugme prikazaće Vam se svi uputi za bolničko lečenje (Ctrl+B)" x:Name="BolnickoLecenje" Command="{Binding ShowClinicalReferrals}" Style="{StaticResource patientRegularBtn}" Foreground="White" Background="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,132,0,0" VerticalAlignment="Top" Width="347" Height="38" RenderTransformOrigin="0.338,0.645"/>
+        <Button Content="Moje terapije" FontSize="24" ToolTip="Klikom na dugme prikazaće Vam se sve terapije (Ctrl+T)" x:Name="Terapije" Command="{Binding ShowMedicalTreatments}" Style="{StaticResource patientRegularBtn}" Foreground="White" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,332,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
-        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
+        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Style="{StaticResource buttonPatient}" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>

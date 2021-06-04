@@ -5,6 +5,7 @@ using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.Data;
 using Hospital.View.Patient;
+using Hospital.ViewModel.Patient;
 
 namespace Hospital.xaml_windows.Patient
 {
@@ -119,6 +120,12 @@ namespace Hospital.xaml_windows.Patient
         {
             this.SetValue(ToolTipBehavior.ToolTipEnabledProperty, false);
             tooltipChecked = false;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            string str = "PersonalRemindersHelp";
+            HelpProvider.ShowHelp(str, this);
         }
     }
 }

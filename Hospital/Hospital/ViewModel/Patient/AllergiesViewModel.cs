@@ -34,6 +34,7 @@ namespace Hospital.ViewModel.Patient
         public MyICommand Undo { get; set; }
 
         public MyICommand Help { get; set; }
+        public Allergy SelectedItem { get; set; }
         public AllergiesViewModel()
         {
 
