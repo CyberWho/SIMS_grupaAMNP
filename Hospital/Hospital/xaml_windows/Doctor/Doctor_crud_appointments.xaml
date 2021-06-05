@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Doctor"
         mc:Ignorable="d"
         Title="Doctor_crud_appointments" Height="768" Width="1024">
-        
-        <!--
+
+    <!--
         <DataGrid ItemsSource="{Binding drugsPending}"  AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single"
             SelectedItem="{Binding SelectedDrugPending}" Margin="234,80,284.6,169">
             <DataGrid.Columns>
@@ -60,7 +60,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </Button>
-            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="105,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToAppointmentsCommand}">
+            <Button IsEnabled="False" Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="105,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToAppointmentsCommand}">
                 <TextBlock FontFamily="Segoe UI Symbol" Text="Termini&#xE008;" Foreground="black" FontSize="20" Height="30" Width="96" >
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
@@ -91,24 +91,27 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <TextBlock x:Name="more_info" Margin="319,98,279.6,111"/>
-            <Button Content="Brisi selektovano" HorizontalAlignment="Center" Margin="145,339,518.6,0" VerticalAlignment="Top" Height="71" Width="130" Click="DelateAppointment" />
-            <Button Content="Odustani" HorizontalAlignment="Left" Margin="519,339,0,0" VerticalAlignment="Top" Width="130"  Height="71" Click="ReturnOption"/>
-            <Button Content="Azuriraj" HorizontalAlignment="Center" Margin="10,339,653.6,0" VerticalAlignment="Top" Height="71" Width="130" Click="UpdateAppointment" />
-            <DataGrid ItemsSource="{Binding   timeSlots, Mode= TwoWay}"   Margin="10,98,518.6,160"
+            <TextBlock x:Name="more_info" Margin="326,106,413.6,187" FontFamily="Courier New" FontSize="15"/>
+            <DataGrid ItemsSource="{Binding   timeSlots, Mode= TwoWay}"   Margin="71,106,707.6,187" AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single" FontFamily="Courier New" FontSize="15"
+
                       SelectedItem="{Binding SelectedTimeSlot, Mode= TwoWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-
+                    <DataGridTextColumn Width="*" Header="Novo vreme" Binding="{Binding StartTime}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid ItemsSource="{Binding appointments}" Margin="519,49,9.6,160" SelectionChanged="DataGrid_SelectionChanged"
-                      SelectedItem="{Binding SelectedAppointment}">
+            <DataGrid ItemsSource="{Binding appointments}" Margin="617,106,57.6,187" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single" FontFamily="Courier New" FontSize="15"
+
+                      SelectedItem="{Binding SelectedAppointment}" RenderTransformOrigin="0.616,0.491">
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Pocetak" Binding="{Binding StartTime}"/>
+                    <DataGridTextColumn Width="*" Header="Tip" Binding="{Binding Type}"/>
 
                 </DataGrid.Columns>
             </DataGrid>
+            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="71,317,0,0" VerticalAlignment="Top" Width="239"  Height="35" Click="ReturnOption" FontFamily="Courier New" FontSize="15" RenderTransformOrigin="-1.087,2.86"/>
+            <Button IsEnabled="False" Name="btn_azuriraj" Content="Azuriraj" HorizontalAlignment="Center" Margin="326,317,413.6,0" VerticalAlignment="Top" Height="35" Width="278" Click="UpdateAppointment" FontFamily="Courier New" FontSize="15"/>
+            <Button IsEnabled="False" Name="btn_brisi" Content="Brisi selektovano" HorizontalAlignment="Center" Margin="617,317,57.6,0" VerticalAlignment="Top" Height="35" Width="343" Click="DelateAppointment" FontFamily="Courier New" FontSize="15" />
         </Grid>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="CadetBlue">

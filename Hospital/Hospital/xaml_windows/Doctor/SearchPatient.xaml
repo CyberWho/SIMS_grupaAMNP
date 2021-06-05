@@ -9,7 +9,7 @@
 
 
 
-       
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150">
@@ -35,7 +35,7 @@
             </TextBlock>
 
 
-            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="50" Margin="10,90,0,0" BorderBrush="CadetBlue" Command="{Binding GoToPatientSearchCommand}">
+            <Button IsEnabled="False" Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="50" Margin="10,90,0,0" BorderBrush="CadetBlue" Command="{Binding GoToPatientSearchCommand}">
                 <TextBlock FontFamily="Segoe UI Symbol" Text="Trazi pacijenta&#xE11A;&#xA;" Foreground="black" FontSize="20" Height="30" Width="150" >
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
@@ -80,10 +80,9 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <ListBox x:Name="lb_appointments"  SelectionChanged="ChangeFocusedPatient" SelectionMode="Single" Margin="541,98,-0.4,165"/>
-            <Button Content="Idi na karton"   HorizontalAlignment="Left" Margin="519,345,0,0" VerticalAlignment="Top" Width="119" Height="41" Click="GoToHealthRecord"/>
-            <Button Content="Odustani" HorizontalAlignment="Left" Margin="671,345,0,0" VerticalAlignment="Top" Width="113"  Height="48" Click="ReturnOption"/>
-            <ListBox x:Name="lb_appointments_Copy" SelectionChanged="ChangeFocusedPatient" SelectionMode="Single" Margin="10,98,541.6,185"/>
+            <ListBox x:Name="lb_appointments"  SelectionChanged="ChangeFocusedPatient" SelectionMode="Single" Margin="333,51,326.6,102" FontFamily="Courier New" FontSize="15"/>
+            <Button IsEnabled="False" Name="btn_idi_na_karton" Content="Idi na karton"   HorizontalAlignment="Left" Margin="533,406,0,0" VerticalAlignment="Top" Width="158" Height="35" Click="GoToHealthRecord" FontFamily="Courier New" FontSize="15" />
+            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="333,406,0,0" VerticalAlignment="Top" Width="158"  Height="35" Click="ReturnOption"  FontFamily="Courier New" FontSize="15"/>
 
         </Grid>
 

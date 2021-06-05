@@ -3,6 +3,7 @@ using Hospital.Model;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using Hospital.View.Doctor;
 using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
@@ -80,6 +81,7 @@ namespace Hospital.xaml_windows.Doctor
                 foreach (Drug drug in _drugs)
                     if (drug.Id == drugId)
                         _selectedDrug = drug;
+                btn_dodaj.IsEnabled = true;
             }
         }
 
@@ -132,7 +134,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(_idDocAsEmoloyee, _idDoc);
+            Window s = new SearchPatientMVVM(_idDocAsEmoloyee, _idDoc);
             s.Show();
             this.Close();
         }
@@ -145,5 +147,6 @@ namespace Hospital.xaml_windows.Doctor
             this.Close();
         }
 
+      
     }
 }

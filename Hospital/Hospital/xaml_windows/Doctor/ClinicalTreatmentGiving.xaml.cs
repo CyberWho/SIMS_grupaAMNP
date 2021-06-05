@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using Hospital.Controller;
 using Hospital.Model;
 using Hospital.Service;
+using Hospital.View.Doctor;
 using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
@@ -92,10 +93,10 @@ namespace Hospital.xaml_windows.Doctor
                 return;
 
             ObservableCollection<Room> tmp = roomController.findSuitableRoomsWithEquipment(dateRange, getObservableCollectionWithBed());
-            foreach (var VARIABLE in tmp)
+            /*foreach (var VARIABLE in tmp)
             {
                 MessageBox.Show(VARIABLE.Id.ToString());
-            }
+            }*/
             fillSuitableRooms(tmp, dateRange);
         }
 
@@ -121,6 +122,7 @@ namespace Hospital.xaml_windows.Doctor
             //MessageBox.Show("A");
             foreach (Room room in rooms)
             {
+                tb_tip_trazi.Visibility = Visibility.Hidden;
                 ListBoxItem item = new ListBoxItem();
                 item.Content = "Soba: " + room.Id;
                 lb_rooms.Items.Add(item);
@@ -147,8 +149,9 @@ namespace Hospital.xaml_windows.Doctor
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             if (lbi != null)
             {
+                BtnZakazi.IsEnabled = true;
                 selected_room_id = int.Parse(lbi.Content.ToString().Split(' ')[1]);
-                MessageBox.Show(selected_room_id.ToString());
+                //MessageBox.Show(selected_room_id.ToString());
             }
 
         }
@@ -162,8 +165,10 @@ namespace Hospital.xaml_windows.Doctor
             ClinicalTreatment nCT = new ClinicalTreatment(-1, dateRange.StartTime, dateRange.EndTime, selected_room_id,
                 healthRecord.Id);
             refferalForClinicalTreatmentController.createClinicalTreatment(nCT);
-            MessageBox.Show("Uspesno");
+            MessageBox.Show("Uspesno dodato bolnicko lecenje");
             selected_room_id = -1;
+            BtnZakazi.IsEnabled = false;
+            lb_rooms.Items.Clear();
         }
         /***************************
         ***
@@ -207,7 +212,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(id_doc_as_emoloyee, id_doc);
+            Window s = new SearchPatientMVVM(id_doc_as_emoloyee, id_doc);
             s.Show();
             this.Close();
         }

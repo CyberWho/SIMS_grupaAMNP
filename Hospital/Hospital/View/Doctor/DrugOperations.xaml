@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="DrugOperations" Height="768" Width="1024">
 
-        <!--
+    <!--
         <Window.Resources>
             <DataTemplate DataType="{x:Type data:Drug}">
                 <StackPanel Orientation="Horizontal">
@@ -22,11 +22,11 @@
             </DataTemplate>
         </Window.Resources>*/
     -->
-<!--
+    <!--
     /*drug.Id + "|" + drug.Name + " " + drug.drugType.Type + " " + drug.Grams +
     (drug.NeedsPerscription ? " potreban recept" : "");*/
 -->
-       
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150">
@@ -59,7 +59,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </Button>
-            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="275,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToDrugOperationCommand}">
+            <Button IsEnabled="False" Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="275,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToDrugOperationCommand}">
                 <TextBlock FontFamily="Segoe UI Symbol" Text="Pregled lekova&#x1f48a;" Foreground="black" FontSize="20" Height="30" Width="150" >
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
@@ -67,7 +67,7 @@
                 </TextBlock>
             </Button>
             <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="105,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToAppointmentsCommand}">
-                <TextBlock FontFamily="Segoe UI Symbol" Text="Termini&#xE008;" Foreground="black" FontSize="20" Height="30" Width="96" >
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Termini&#xE008;" Foreground="black" FontSize="20" Height="30" Width="96"  >
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
                     </TextBlock.Effect>
@@ -97,34 +97,36 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <DataGrid ItemsSource="{Binding drugsApproved }"  AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single"
-                 SelectedItem="{Binding SelectedDrugApproved}" Margin="514,80,135.6,183">
+            <DataGrid ItemsSource="{Binding drugsApproved }"  AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single" FontFamily="Courier New" FontSize="15"
+                 SelectedItem="{Binding SelectedDrugApproved}" Margin="521,102,158.6,110">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Gramaža" Binding="{Binding Grams}" />
-                    <DataGridTextColumn Header="Tip" Binding="{Binding drugType.Type}" />
-                    <DataGridTextColumn Header="Potreban recept" Binding="{Binding NeedsPerscription}" />
+                    <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}" />-->
+                    <DataGridTextColumn Width="150" Header="Naziv" Binding="{Binding Name}" />
+                    <DataGridTextColumn Width="50" Header="[mg]" Binding="{Binding Grams}" />
+                    <DataGridTextColumn Width="*"  Header="Tip" Binding="{Binding drugType.Type}" />
+                    <!--<DataGridTextColumn Header="Potreban recept" Binding="{Binding NeedsPerscription}" />-->
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid ItemsSource="{Binding drugsPending}"  AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single"
-            SelectedItem="{Binding SelectedDrugPending}" Margin="234,80,537.6,183">
+            <DataGrid ItemsSource="{Binding drugsPending}"  AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single" FontFamily="Courier New" FontSize="15"
+            SelectedItem="{Binding SelectedDrugPending}" Margin="165,102,514.6,209">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Gramaža" Binding="{Binding Grams}" />
-                    <DataGridTextColumn Header="Tip" Binding="{Binding drugType.Type}" />
-                    <DataGridTextColumn Header="Potreban recept" Binding="{Binding NeedsPerscription}" />
+                    <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}" />-->
+                    <DataGridTextColumn Width="150" Header="Naziv" Binding="{Binding Name}" />
+                    <DataGridTextColumn Width="50" Header="[mg]" Binding="{Binding Grams}" />
+                    <DataGridTextColumn Width="*" Header="Tip" Binding="{Binding drugType.Type}" />
+                    <!--<DataGridTextColumn Header="Potreban recept" Binding="{Binding NeedsPerscription}" />-->
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBox x:Name="tb_rejection" HorizontalAlignment="Left" Height="86" Margin="10,219,0,0" TextWrapping="Wrap" Text="Razlog odbijanja leka." VerticalAlignment="Top" Width="178"/>
-            <Button Content="Odbi lek" HorizontalAlignment="Left" Margin="113,310,0,0" VerticalAlignment="Top" Width="75" Command="{Binding RejectDrugCommand}"/>
-            <Button Content="Potvrdi lek" HorizontalAlignment="Left" Margin="239,310,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ApproveDrugCommand}"/>
-            <Button Content="Odustani" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ReturnOptionCommand}"/>
+            <TextBox x:Name="tb_rejection" HorizontalAlignment="Left" Height="86" Margin="165,284,0,0" TextWrapping="Wrap" Text="Razlog odbijanja leka." VerticalAlignment="Top" Width="330" FontSize="15" FontFamily="Courier New"/>
+            <Button IsEnabled="False" Name="btn_odbij_lek" Content="Odbij lek" HorizontalAlignment="Left" Margin="343,389,0,0" VerticalAlignment="Top" Width="152" Height="35" FontSize="15"  Command="{Binding RejectDrugCommand}" FontFamily="Courier New"/>
+            <Button IsEnabled="False" Name="btn_potvrdi_lek" Content="Potvrdi lek" HorizontalAlignment="Left" Margin="521,389,0,0" VerticalAlignment="Top" Width="160"  Height="35" FontSize="15" Command="{Binding ApproveDrugCommand}" FontFamily="Courier New"/>
+            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="165,389,0,0" VerticalAlignment="Top" Width="160"  Height="35" FontSize="15" Command="{Binding ReturnOptionCommand}" FontFamily="Courier New"/>
+            <TextBlock HorizontalAlignment="Left" Margin="165,72,0,0" TextWrapping="Wrap" Text="Lekovi na čekanju:" VerticalAlignment="Top" FontSize="15" FontFamily="Courier New" Width="178"/>
+            <TextBlock HorizontalAlignment="Left" Margin="521,72,0,0" TextWrapping="Wrap" Text="Odobreni lekovi:" VerticalAlignment="Top" FontSize="15" FontFamily="Courier New" Width="172"/>
 
         </Grid>
 
-            <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="CadetBlue">
+        <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="CadetBlue">
             <TextBlock HorizontalAlignment="Left" Margin="708,63,0,0" TextWrapping="Wrap" Text="Tehnicka podrska: 060-123456789" VerticalAlignment="Top" Height="27" Width="300" FontSize="20"/>
         </Grid>
 

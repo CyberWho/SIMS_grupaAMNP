@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital.Model;
 using Hospital.Controller;
+using Hospital.View.Doctor;
 using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
@@ -80,6 +81,7 @@ namespace Hospital.xaml_windows.Doctor
                 referralForSpecialist.appointment_id = this.selected_appointment_id;
                 referralForSpecialist.healthRecord_id = this.healthRecord.Id;
                 refferalForSpecialistController.AddReferral(referralForSpecialist);
+                MessageBox.Show("Uput uspesno zadat.");
             }
         }
 
@@ -96,6 +98,7 @@ namespace Hospital.xaml_windows.Doctor
             if (lbi != null)
             {
                 id_selected_doctor = int.Parse(lbi.Content.ToString().Split('|')[0]);
+                btn_zadaj_uput.IsEnabled = true;
             }
         }
 
@@ -141,7 +144,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(id_doc_as_emoloyee, id_doc);
+            Window s = new SearchPatientMVVM(id_doc_as_emoloyee, id_doc);
             s.Show();
             this.Close();
         }

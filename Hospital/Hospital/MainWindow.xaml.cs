@@ -4,6 +4,7 @@ using Oracle.ManagedDataAccess.Client;
 using Hospital.Controller;
 using Hospital.View.Doctor;
 using Hospital.ViewModel.Doctor;
+using Hospital.xaml_windows.Doctor;
 
 namespace Hospital
 {

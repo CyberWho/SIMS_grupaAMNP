@@ -11,18 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital.ViewModel.Doctor;
 
 namespace Hospital.View.Doctor
 {
     /// <summary>
-    /// Interaction logic for DrugOperations.xaml
+    /// Interaction logic for SearchPatientMVVM.xaml
     /// </summary>
-    public partial class DrugOperations : Window
+    public partial class SearchPatientMVVM : Window
     {
-        public DrugOperations(int id, int id_doc)
+        public SearchPatientMVVM(int id, int id_doc)
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Doctor.DrugOperationsViewModel(id, id_doc, this, btn_odbij_lek, btn_potvrdi_lek, tb_rejection);
+            this.DataContext = new SearchPatientViewModel(id, id_doc, this, lb_appointments, btn_nazad, btn_idi_na_karton);
         }
     }
 }

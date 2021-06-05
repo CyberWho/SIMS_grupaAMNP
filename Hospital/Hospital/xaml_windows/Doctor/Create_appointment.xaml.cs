@@ -5,6 +5,7 @@ using System.Windows.Controls;
 
 using Hospital.Controller;
 using Hospital.Model;
+using Hospital.View.Doctor;
 using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
@@ -61,7 +62,7 @@ namespace Hospital.xaml_windows.Doctor
                     AppointmentStatus.RESERVED, doctor, getPatientFromUi(), doctrorsRoom);
                 appointmentController.ReserveAppointment(newAppointment);
                 timeSlotController.TakeTimeSlot(getTimeSlotFromUi());
-
+                MessageBox.Show("Termin kreiran.");
             }
         }
 
@@ -125,6 +126,8 @@ namespace Hospital.xaml_windows.Doctor
             {
                 patient_for_create = lbi;
             }
+            if (patient_for_create != null && time_slot_for_create != null)
+                btn_novi_pregled.IsEnabled = true;
         }
         private void TimeSlotFocusSwitch(object sender, SelectionChangedEventArgs e)
         {
@@ -133,6 +136,8 @@ namespace Hospital.xaml_windows.Doctor
             {
                 time_slot_for_create = lbi;
             }
+            if (patient_for_create != null && time_slot_for_create != null)
+                btn_novi_pregled.IsEnabled = true;
         }
 
         //object creation from ui information
@@ -163,7 +168,7 @@ namespace Hospital.xaml_windows.Doctor
         //go back to prev window
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new DoctorUI(this.doctor_id_as_user);
+            Window s = new DoctorUIwindow(this.doctor_id_as_user);
             s.Show();
             this.Close();
         }
@@ -210,7 +215,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(doctor_id_as_user, id_doc);
+            Window s = new SearchPatientMVVM(doctor_id_as_user, id_doc);
             s.Show();
             this.Close();
         }

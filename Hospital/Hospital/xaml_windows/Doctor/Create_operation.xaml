@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Doctor"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Create_operation" Height="768" Width="1024">
 
-  
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -79,15 +80,35 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <ListBox Name="lb_options" SelectionChanged ="SwitchToSelected"  HorizontalAlignment="Left" Height="182"  Margin="10,74,0,0" VerticalAlignment="Top" Width="167"/>
-            <ListBox Name="lb_selected" SelectionChanged="SwitchToOptions" HorizontalAlignment="Left" Height="182" Margin="195,74,0,0" VerticalAlignment="Top" Width="165"/>
-            <ListBox Name ="lb_rooms" SelectionChanged ="SelectedRoomChanged" SelectionMode="Single" HorizontalAlignment="Left" Height="182" Margin="413,74,0,0" VerticalAlignment="Top" Width="172"/>
-            <ListBox Name ="lb_operation_start" SelectionChanged="TimeSlotChanged" HorizontalAlignment="Left" Height="182" Margin="607,74,0,0" VerticalAlignment="Top" Width="177"/>
-            <Button Content="Nadji adekvatne sobe" HorizontalAlignment="Left" Margin="230,290,0,0" VerticalAlignment="Top" Width="130" Height="46" Click="FindRoomWithSelected"/>
-            <DatePicker x:Name="datePickerOperation" HorizontalAlignment="Left" SelectedDateChanged="DatePicker_OnSelectedDateChanged" Margin="413,262,0,0" VerticalAlignment="Top"/>
-            <Button Content="Trazi slobodne termine" HorizontalAlignment="Left" Margin="413,290,0,0" VerticalAlignment="Top" Width="130" Height="46" Click="findOperationTimes" />
-            <Button Content="Zakazi operaciju" HorizontalAlignment="Left" Margin="607,290,0,0" VerticalAlignment="Top" Width="130" Height="46" Click="createOperation"/>
-            <Button Content="Odustani" HorizontalAlignment="Left" Margin="47,290,0,0" VerticalAlignment="Top" Width="130"  Height="46" Click="ReturnOption"/>
+            <ListBox Name="lb_options" 
+                     PreviewMouseLeftButtonDown="LB1_PreviewMouseLeftButtonDown"
+                     AllowDrop="True" Drop="LB1_Drop"
+                     MouseMove="LB1_MouseMove"
+
+                       HorizontalAlignment="Left" Height="181"  Margin="46,75,0,0" VerticalAlignment="Top" Width="225" FontFamily="Courier New" FontSize="15"/>
+            <ListBox Name="lb_selected" 
+                     PreviewMouseLeftButtonDown="LB2_PreviewMouseLeftButtonDown"
+                     AllowDrop="True" Drop="LB2_Drop"
+                     MouseMove="LB2_MouseMove"
+                     
+                     HorizontalAlignment="Left" Height="181" Margin="279,75,0,0" VerticalAlignment="Top" Width="225" FontFamily="Courier New" FontSize="15"/>
+            <ListBox Name ="lb_rooms" SelectionChanged ="SelectedRoomChanged" SelectionMode="Single" HorizontalAlignment="Left" Height="181" Margin="515,75,0,0" VerticalAlignment="Top" Width="225" FontFamily="Courier New" FontSize="15"/>
+            <ListBox Name ="lb_operation_start" SelectionChanged="TimeSlotChanged" HorizontalAlignment="Left" Height="181" Margin="749,75,0,0" VerticalAlignment="Top" Width="225" FontFamily="Courier New" FontSize="15"/>
+            <DatePicker x:Name="datePickerOperation" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" SelectedDateChanged="DatePicker_OnSelectedDateChanged" Margin="515,268,0,0" VerticalAlignment="Top" Width="225" FontSize="15" FontFamily="Courier New"/>
+            <Button Content="Nadji adekvatne sobe" HorizontalAlignment="Left" Margin="279,304,0,0" VerticalAlignment="Top" Width="225" Height="35" Click="FindRoomWithSelected" FontSize="15" FontFamily="Courier New"/>
+            <Button Name="btn_trazi_sobe" IsEnabled="False" Content="Trazi slobodne termine" HorizontalAlignment="Left" Margin="515,304,0,0" VerticalAlignment="Top" Width="225" Height="35" Click="findOperationTimes" FontSize="15" FontFamily="Courier New"/>
+            <Button Name="btn_zakazi_operaciju" IsEnabled="False" Content="Zakazi operaciju" HorizontalAlignment="Left" Margin="749,304,0,0" VerticalAlignment="Top" Width="225" Height="35" Click="createOperation" FontSize="15" FontFamily="Courier New" />
+            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="46,304,0,0" VerticalAlignment="Top" Width="225"  Height="35" Click="ReturnOption" FontSize="15" FontFamily="Courier New" />
+            <TextBlock HorizontalAlignment="Left" Margin="46,53,0,0" TextWrapping="Wrap" Text="Tipovi opreme:" VerticalAlignment="Top" FontSize="15" FontFamily="Courier New" Width="225"/>
+            <TextBlock HorizontalAlignment="Left" Margin="279,53,0,0" TextWrapping="Wrap" Text="Izabrana oprema:" VerticalAlignment="Top" FontSize="15" FontFamily="Courier New" Width="225"/>
+            <TextBlock HorizontalAlignment="Left" Margin="515,53,0,0" TextWrapping="Wrap" Text="Adekvatne sobe:" VerticalAlignment="Top" FontSize="15" FontFamily="Courier New" Width="225"/>
+            <TextBlock HorizontalAlignment="Left" Margin="749,53,0,0" TextWrapping="Wrap" Text="Slobodni termini:" VerticalAlignment="Top" FontSize="15" FontFamily="Courier New" Width="225"/>
+
+
+
+
+
+
         </Grid>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="4" Background="CadetBlue">

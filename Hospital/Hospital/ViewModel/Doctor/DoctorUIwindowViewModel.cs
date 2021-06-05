@@ -88,7 +88,7 @@ namespace Hospital.ViewModel.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(id, id_doc);
+            Window s = new SearchPatientMVVM(id, id_doc);
             s.Show();
             thisWindow.Close();
         }

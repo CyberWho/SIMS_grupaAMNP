@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using Hospital.Controller;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.View.Doctor;
 using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
@@ -36,6 +37,8 @@ namespace Hospital.xaml_windows.Doctor
             patient = patientController.GetPatientByPatientId(id_patient);
             fillAppointmentsToUi();
 
+            tb_name.Text = patient.User.Surname + " " + patient.User.Name;
+
             this.DataContext = this;
             this.ReturnOptionCommand = new MyICommand(ReturnOption);
             this.GoToDrugOperationCommand = new MyICommand(GoToDrugOperation);
@@ -62,6 +65,7 @@ namespace Hospital.xaml_windows.Doctor
             {
                 selected_anamensis.Description = Anamnesis_Text_Box.Text;
                 new AnamnesisController().UpdateAnamnesis(selected_anamensis);
+                MessageBox.Show("Uspesno izmenjena anamneza");
             }
             else
             {
@@ -85,6 +89,12 @@ namespace Hospital.xaml_windows.Doctor
             {
                 selected_appointment_id = int.Parse(lbi.Content.ToString().Split(' ')[0]);
                 Anamnesis_Text_Box.Text = getSelectedAnamnesisDescription();
+
+                btn_1.IsEnabled = true;
+                btn_2.IsEnabled = true;
+                btn_3.IsEnabled = true;
+                btn_4.IsEnabled = true;
+
             }
 
         }
@@ -115,7 +125,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new SearchPatient(id_doc_as_user, id_doc);
+            Window s = new SearchPatientMVVM(id_doc_as_user, id_doc);
             s.Show();
             this.Close();
         }
@@ -202,6 +212,11 @@ namespace Hospital.xaml_windows.Doctor
             this.Close();
         }
 
-
+        private void GoToReport(object sender, RoutedEventArgs e)
+        {
+            Window s = new Report(healthRecord, appointments, patient);
+            s.Show();
+            //this.Close();
+        }
     }
 }

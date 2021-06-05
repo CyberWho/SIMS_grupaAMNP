@@ -54,7 +54,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </Button>
-            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="615,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToScheduleCommand}">
+            <Button IsEnabled="False" Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="615,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToScheduleCommand}">
                 <TextBlock FontFamily="Segoe UI Symbol" Text="Pregled zauzeca&#x1f516;" Foreground="black" FontSize="20" Height="30" Width="160" >
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
@@ -78,9 +78,9 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <Button Content="Odustani" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="94" Height="44" Click="ReturnOption"/>
-            <ListBox Name="lb_appointments" SelectionChanged="PrintText" SelectionMode="Single" Margin="519,98,9.6,159"/>
-            <TextBlock x:Name="more_info" Margin="76,50,522.6,159"/>
+            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="224,294,0,0" VerticalAlignment="Top" Width="132" Height="35" Click="ReturnOption" RenderTransformOrigin="-0.604,0.241" FontSize="15"/>
+            <ListBox Name="lb_appointments" SelectionChanged="PrintText" SelectionMode="Single" Margin="474,98,208.6,159" FontFamily="Courier New" FontSize="15"/>
+            <TextBlock x:Name="more_info" Margin="224,98,564.6,203" FontFamily="Courier New" FontSize="15"><Run Text="Izaberite termin za"/><LineBreak/><Run Text="vise detalja."/></TextBlock>
 
         </Grid>
 

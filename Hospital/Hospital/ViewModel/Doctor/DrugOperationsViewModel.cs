@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Resources;
 using System.Windows;
+using System.Windows.Controls;
 using Hospital.Controller;
 using Hospital.Model;
 using Hospital.View.Doctor;
@@ -28,15 +29,22 @@ namespace Hospital.ViewModel.Doctor
         public ObservableCollection<Drug> drugsPending { get; set; }
         private Drug selectedDrugPending;
 
+        private Button btn_odbij_lek;
+        private Button btn_potvrdi_lek;
+        private TextBox tb_rejection;
+
         public MyICommand ReturnOptionCommand { get; set; }
         public MyICommand RejectDrugCommand { get; set; }
         public MyICommand ApproveDrugCommand { get; set; }
 
-        public DrugOperationsViewModel(int id, int id_doc, Window window)
+        public DrugOperationsViewModel(int id, int id_doc, Window window, Button btn_odbij_lek, Button btn_potvrdi_lek, TextBox tb_rejection)
         {
             this.id = id;
             this.id_doc = id_doc;
             this.thisWindow = window;
+            this.tb_rejection = tb_rejection;
+            this.btn_odbij_lek = btn_odbij_lek;
+            this.btn_potvrdi_lek = btn_potvrdi_lek;
 
             ReturnOptionCommand = new MyICommand(ReturnOption);
             RejectDrugCommand = new MyICommand(RejectDrug);
@@ -86,8 +94,8 @@ namespace Hospital.ViewModel.Doctor
             set
             {
                 selectedDrugApproved = value;
-                //ovako nesto DeleteCommand.RaiseCanExecuteChanged();
-
+                btn_potvrdi_lek.IsEnabled = false;
+                btn_odbij_lek.IsEnabled = false;
             }
         }
 
@@ -97,8 +105,8 @@ namespace Hospital.ViewModel.Doctor
             set
             {
                 selectedDrugPending = value;
-                //ovako nesto DeleteCommand.RaiseCanExecuteChanged();
-
+                btn_potvrdi_lek.IsEnabled = true;
+                btn_odbij_lek.IsEnabled = true;
             }
         }
 
@@ -123,11 +131,16 @@ namespace Hospital.ViewModel.Doctor
         {
             if (selectedDrugPending != null)
             {
+                rejectText = tb_rejection.Text;
+
                 Drug tmp = SelectedDrugPending;
                 tmp.Status = DrugStatus.REJECTED;
                 drugController.UpdateDrugNoInventoryPart(tmp);
                 drugController.RejectDrug(tmp.Id, id_doc, rejectText);
                 drugsPending.Remove(tmp);
+                btn_potvrdi_lek.IsEnabled = false;
+                btn_odbij_lek.IsEnabled = false;
+                MessageBox.Show("Lek uspesno odbijen.");
             }
             else
             {
@@ -145,6 +158,9 @@ namespace Hospital.ViewModel.Doctor
                 drugController.UpdateDrugNoInventoryPart(tmp);
                 drugsPending.Remove(tmp);
                 drugsApproved.Add(tmp);
+                btn_potvrdi_lek.IsEnabled = false;
+                btn_odbij_lek.IsEnabled = false;
+                MessageBox.Show("Lek uspesno odobren.");
             }
             else
             {
@@ -193,7 +209,7 @@ namespace Hospital.ViewModel.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(id, id_doc);
+            Window s = new SearchPatientMVVM(id, id_doc);
             s.Show();
             thisWindow.Close();
         }

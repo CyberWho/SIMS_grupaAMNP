@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital.Controller;
 using Hospital.Model;
+using Hospital.View.Doctor;
 using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
@@ -55,6 +56,7 @@ namespace Hospital.xaml_windows.Doctor
             this.GoToScheduleCommand = new MyICommand(GoToSchedule);
             this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
         }
+     
 
         private void FillEquipmentOptions()
         {
@@ -138,6 +140,7 @@ namespace Hospital.xaml_windows.Doctor
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             if (lbi != null)
             {
+                btn_trazi_sobe.IsEnabled = true;
                 id_room = int.Parse(lbi.Content.ToString().Split(' ')[1]);
                 //MessageBox.Show(id_room.ToString());
             }
@@ -182,6 +185,11 @@ namespace Hospital.xaml_windows.Doctor
                         timeSlotController.GetAppointmentTimeSlotByDateAndDoctorId(dt.AddMinutes(30 * i), id_doc));
                 }
 
+                lb_rooms.Items.Clear();
+                lb_operation_start.Items.Clear();
+                btn_trazi_sobe.IsEnabled = false;
+                btn_zakazi_operaciju.IsEnabled = false;
+
                 MessageBox.Show("Operacija kreirana");
             }
             else
@@ -195,6 +203,7 @@ namespace Hospital.xaml_windows.Doctor
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             if (lbi != null)
             {
+                btn_zakazi_operaciju.IsEnabled = true;
                 id_time_slot = int.Parse(lbi.Content.ToString().Split('|')[0]);
             }
         }
@@ -241,7 +250,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(id_doc_as_employee, id_doc);
+            Window s = new SearchPatientMVVM(id_doc_as_employee, id_doc);
             s.Show();
             this.Close();
         }
@@ -253,5 +262,123 @@ namespace Hospital.xaml_windows.Doctor
             s.Show();
             this.Close();
         }
+
+        /***
+
+     Drag & Drop
+      lb_options lb_selected
+      ***/
+
+
+        Point LB1StartMousePos;
+        Point LB2StartMousePos;
+
+        private void LB1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LB1StartMousePos = e.GetPosition(null);
+        }
+
+        private void LB2_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LB2StartMousePos = e.GetPosition(null);
+        }
+
+        private void LB1_Drop(object sender, DragEventArgs e)
+        {
+            // This casts 'e.Data.GetData()' as a ListBoxItem and if it isn't null
+            // then the code will "execute" sort of. basically, listItem will always be 
+            // a ListBoxItem (atleast i think it will)
+            if (e.Data.GetData(DataFormats.FileDrop) is ListBoxItem listItem)
+            {
+                lb_options.Items.Add(listItem);
+            }
+        }
+
+        private void LB2_Drop(object sender, DragEventArgs e)
+        {
+            // This casts 'e.Data.GetData()' as a ListBoxItem and if it isn't null
+            // then the code will "execute" sort of. basically, listItem will always be 
+            // a ListBoxItem (atleast i think it will)
+            if (e.Data.GetData(DataFormats.FileDrop) is ListBoxItem listItem)
+            {
+                lb_selected.Items.Add(listItem);
+            }
+        }
+
+        private void LB1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point mPos = e.GetPosition(null);
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                Math.Abs(mPos.X) > SystemParameters.MinimumHorizontalDragDistance &&
+                Math.Abs(mPos.Y) > SystemParameters.MinimumVerticalDragDistance)
+            {
+                try
+                {
+                    // This gets the selected item
+                    ListBoxItem selectedItem = (ListBoxItem)lb_options.SelectedItem;
+                    // You need to remove it before adding it to another listbox.
+                    // if  you dont, it throws an error (due to referencing between 2 listboxes)
+                    lb_options.Items.Remove(selectedItem);
+
+                    // The actual dragdrop thingy
+                    // DragDropEffects.Copy... i dont think this matters but oh well.
+                    DragDrop.DoDragDrop(this, new DataObject(DataFormats.FileDrop, selectedItem), DragDropEffects.Copy);
+
+                    // This code will check if the listboxitem is inside a ListBox or not.
+                    // This will stop the ListBoxItem you dragged from vanishing if you dont
+                    // Drop it inside a listbox (drop it in the titlebar or something lol)
+
+                    // ListBoxItems are objects obviously, and objects are passed and moved by reference.
+                    // Any change to an object affects every reference. 'selectedItem' is a reference
+                    // To LB2.SelectedItem, and they both will NEVER be different :)
+
+                    if (selectedItem.Parent == null)
+                    {
+                        lb_options.Items.Add(selectedItem);
+                    }
+                }
+                catch { }
+            }
+        }
+
+        private void LB2_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point mPos = e.GetPosition(null);
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                Math.Abs(mPos.X) > SystemParameters.MinimumHorizontalDragDistance &&
+                Math.Abs(mPos.Y) > SystemParameters.MinimumVerticalDragDistance)
+            {
+                try
+                {
+                    // This gets the selected item
+                    ListBoxItem selectedItem = (ListBoxItem)lb_selected.SelectedItem;
+                    // You need to remove it before adding it to another listbox.
+                    // if  you dont, it throws an error (due to referencing between 2 listboxes)
+                    lb_selected.Items.Remove(selectedItem);
+
+                    // The actual dragdrop thingy
+                    // DragDropEffects.Copy... i dont think this matters but oh well.
+                    DragDrop.DoDragDrop(this, new DataObject(DataFormats.FileDrop, selectedItem), DragDropEffects.Copy);
+
+                    // This code will check if the listboxitem is inside a ListBox or not.
+                    // This will stop the ListBoxItem you dragged from vanishing if you dont
+                    // Drop it inside a listbox (drop it in the titlebar or something lol)
+
+                    // ListBoxItems are objects obviously, and objects are passed and moved by reference.
+                    // Any change to an object affects every reference. 'selectedItem' is a reference
+                    // To LB2.SelectedItem, and they both will NEVER be different :)
+
+                    if (selectedItem.Parent == null)
+                    {
+                        lb_selected.Items.Add(selectedItem);
+                    }
+                }
+                catch { }
+            }
+        }
     }
+
+
 }

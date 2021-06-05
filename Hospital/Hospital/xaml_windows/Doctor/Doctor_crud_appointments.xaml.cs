@@ -14,6 +14,7 @@ using Xceed.Wpf.Toolkit.Core.Converters;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Hospital.View.Doctor;
 using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
@@ -66,6 +67,9 @@ namespace Hospital.xaml_windows.Doctor
             get { return selectedAppointment; }
             set
             {
+                btn_brisi.IsEnabled = true;
+                if (selectedTimeSlot != null)
+                    btn_azuriraj.IsEnabled = true;
                 selectedAppointment = value;
             }
         }
@@ -75,6 +79,8 @@ namespace Hospital.xaml_windows.Doctor
             get { return selectedTimeSlot; }
             set
             {
+                if (selectedAppointment != null)
+                    btn_azuriraj.IsEnabled = true;
                 selectedTimeSlot = value;
             }
         }
@@ -141,11 +147,13 @@ namespace Hospital.xaml_windows.Doctor
                 selectedAppointment.doctor = this.doctor;
                 appointmentController.ChangeStartTime(selectedAppointment, newTimeSlot.StartTime);
                 selectedAppointment.StartTime = newTimeSlot.StartTime;
-                MessageBox.Show(SelectedAppointment.StartTime.ToString());
+                //MessageBox.Show(SelectedAppointment.StartTime.ToString());
 
                 timeSlots.Remove(selectedTimeSlot);
                 updateMoreInfoOnPatient();
                 MessageBox.Show("Uspesno azuriranje termina");
+                btn_azuriraj.IsEnabled = false;
+                btn_brisi.IsEnabled = false;
             }
             else
             {
@@ -170,7 +178,7 @@ namespace Hospital.xaml_windows.Doctor
         }*/
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new DoctorUI(this.id);
+            Window s = new DoctorUIwindow(this.id);
             s.Show();
             this.Close();
         }
@@ -182,16 +190,20 @@ namespace Hospital.xaml_windows.Doctor
             more_info.Text = "";
             selectedAppointment = null;
             appointments.Remove(selectedAppointment);
+            btn_azuriraj.IsEnabled = false;
+            btn_brisi.IsEnabled = false;
+            MessageBox.Show("Termin uspesno obrisan.");
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (selectedAppointment != null)
             {
-                MessageBox.Show(selectedAppointment.Id.ToString());
+                //MessageBox.Show(selectedAppointment.Id.ToString());
                 updateMoreInfoOnPatient();
             }
         }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -237,7 +249,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void GoToPatientSearch()
         {
-            Window s = new SearchPatient(id, id_doc);
+            Window s = new SearchPatientMVVM(id, id_doc);
             s.Show();
             this.Close();
         }
@@ -249,7 +261,6 @@ namespace Hospital.xaml_windows.Doctor
             s.Show();
             this.Close();
         }
-
 
     }
 }

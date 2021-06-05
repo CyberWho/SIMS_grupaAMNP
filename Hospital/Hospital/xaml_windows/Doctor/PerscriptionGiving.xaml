@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.xaml_windows.Doctor"
         mc:Ignorable="d"
         Title="PerscriptionGiving" Height="768" Width="1024">
-       
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -78,10 +78,10 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <ListBox x:Name="lb_drugs" SelectionChanged="DrugChange" SelectionMode="Single" Margin="509,98,49.6,179"/>
-            <TextBox x:Name ="Perscription_description" HorizontalAlignment="Left" Height="140" Margin="311,169,0,0" TextWrapping="Wrap" Text="Opis recepta" VerticalAlignment="Top" Width="175"/>
-            <Button Content="Dodaj recept" HorizontalAlignment="Left" Margin="411,332,0,0" VerticalAlignment="Top" Width="99" Height="29" Click="AddPerscriptionToDb"/>
-            <Button Content="Odustani" HorizontalAlignment="Left" Margin="528,332,0,0" VerticalAlignment="Top" Width="113"  Height="48" Click="ReturnOption"/>
+            <ListBox x:Name="lb_drugs" SelectionChanged="DrugChange" SelectionMode="Single" Margin="482,168,263.6,180" FontFamily="Courier New" FontSize="15"/>
+            <TextBox x:Name ="Perscription_description" HorizontalAlignment="Left" Height="140" Margin="261,168,0,0" TextWrapping="Wrap" Text="Opis recepta" VerticalAlignment="Top" Width="175" FontSize="15" FontFamily="Courier New"/>
+            <Button IsEnabled="False" Name="btn_dodaj" Content="Dodaj recept" HorizontalAlignment="Left" Margin="579,331,0,0" VerticalAlignment="Top" Width="175" Height="35" FontSize="15" Click="AddPerscriptionToDb" FontFamily="Courier New"/>
+            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="260,331,0,0" VerticalAlignment="Top" Width="175"  Height="35" FontSize="15" Click="ReturnOption" RenderTransformOrigin="-1.703,0.754" FontFamily="Courier New"/>
 
         </Grid>
 
