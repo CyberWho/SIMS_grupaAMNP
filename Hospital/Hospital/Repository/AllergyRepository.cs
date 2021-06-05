@@ -141,7 +141,7 @@ namespace Hospital.Repository
 
         public Boolean DeleteAllergyById(int id)
         {
-            
+            setConnection();
 
             OracleCommand cmd = connection.CreateCommand();
             cmd.CommandText = "DELETE FROM allergy WHERE id = " + id;

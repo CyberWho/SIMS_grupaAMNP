@@ -482,8 +482,24 @@ namespace Hospital.Repository
                 connection.Dispose();
 
                 appointment.Id = next_id;
-                appointment.doctor = this.doctorRepository.GetDoctorById(appointment.Doctor_Id);
-                appointment.patient = this.patientRepository.GetPatientById(appointment.Patient_Id);
+                if (appointment.Doctor_Id == 0)
+                {
+                    appointment.doctor = this.doctorRepository.GetDoctorById(appointment.doctor.Id);
+                }
+                else
+                {
+                    appointment.doctor = this.doctorRepository.GetDoctorById(appointment.Doctor_Id);
+                }
+
+                if (appointment.Patient_Id == 0)
+                {
+                    appointment.patient = this.patientRepository.GetPatientById(appointment.patient.Id);
+                }
+                else
+                {
+                    appointment.patient = this.patientRepository.GetPatientById(appointment.Patient_Id);
+                }
+
 
                 NotifyDoctor(appointment, "Kreiran termin");
                 NotifyPatient(appointment, "Kreiran termin");

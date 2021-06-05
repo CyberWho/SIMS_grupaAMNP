@@ -142,13 +142,19 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = current_app_id.Id;
-            if (appointmentController.CancelAppointmentById(appointmentId))
+            if (MessageBox.Show("Da li zaista zelite da obrisete termin?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
-                update();
+                MessageBox.Show("Niste obrisali termin!");
             }
-
-
+            else
+            {
+                int appointmentId = current_app_id.Id;
+                if (appointmentController.CancelAppointmentById(appointmentId))
+                {
+                    MessageBox.Show("Uspesno ste obrisali termin!");
+                    update();
+                }
+            }
         }
 
         private void ZakaziNoviTermin_Click(object sender, RoutedEventArgs e)

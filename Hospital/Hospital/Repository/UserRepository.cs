@@ -284,8 +284,8 @@ namespace Hospital.Repository
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
 
-            globalConnection.Close();
-            globalConnection.Dispose();
+            connection.Close();
+            connection.Dispose();
 
             return last_id;
         }

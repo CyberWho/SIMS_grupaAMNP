@@ -11,9 +11,9 @@
             <ColumnDefinition Width="422" />
         </Grid.ColumnDefinitions>
 
-        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="360" Margin="10,10,0,0" VerticalAlignment="Top" Width="402">
+        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="624" Margin="10,10,0,0" VerticalAlignment="Top" Width="402">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="25"/>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime}" Width="*"/>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding WorkHours.doctor.Id}" Width="*"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding WorkHours.doctor.User.Name}" Width="*"/>
@@ -21,20 +21,56 @@
                 <DataGridTextColumn Header="Soba" Binding="{Binding WorkHours.doctor.room.Id}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Id" HorizontalAlignment="Left" Margin="190,372,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.185,0.539" d:LayoutOverrides="HorizontalAlignment"/>
-        <Label Content="Vreme" HorizontalAlignment="Left" Margin="190,401,0,0" VerticalAlignment="Top"/>
-        <Label Content="Oznaka doktora" HorizontalAlignment="Left" Margin="190,429,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.308"/>
-        <Label Content="Ime doktora" HorizontalAlignment="Left" Margin="190,457,0,0" VerticalAlignment="Top"/>
-        <Label Content="Prezime doktora" HorizontalAlignment="Left" Margin="190,485,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soba" HorizontalAlignment="Left" Margin="190,513,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="timeslot_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,375,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,432,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_name_txt" HorizontalAlignment="Left" Height="23" Margin="292,460,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_surname_txt" HorizontalAlignment="Left" Height="23" Margin="292,488,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="room_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,516,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Zakazi termin" x:Name="Zakazi" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="95" Click="Zakazi_Click" Height="30"/>
+        <Grid Visibility="Hidden">
 
-        <DatePicker x:Name="datepicker_txt" HorizontalAlignment="Left" Margin="292,403,0,0" VerticalAlignment="Top" SelectedDate="{Binding SelectedItem.StartTime,ElementName=myGrid}" Width="120"/>
+            <Label Content="Id" HorizontalAlignment="Left" Margin="190,372,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.185,0.539" d:LayoutOverrides="HorizontalAlignment"/>
+            <Label Content="Vreme" HorizontalAlignment="Left" Margin="190,401,0,0" VerticalAlignment="Top"/>
+            <Label Content="Oznaka doktora" HorizontalAlignment="Left" Margin="190,429,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.308"/>
+            <Label Content="Ime doktora" HorizontalAlignment="Left" Margin="190,457,0,0" VerticalAlignment="Top"/>
+            <Label Content="Prezime doktora" HorizontalAlignment="Left" Margin="190,485,0,0" VerticalAlignment="Top"/>
+            <Label Content="Soba" HorizontalAlignment="Left" Margin="190,513,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="timeslot_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,375,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="doctor_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,432,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="doctor_name_txt" HorizontalAlignment="Left" Height="23" Margin="292,460,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="doctor_surname_txt" HorizontalAlignment="Left" Height="23" Margin="292,488,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="room_id_txt" HorizontalAlignment="Left" Height="23" Margin="292,516,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+            <Button Content="Zakazi termin" x:Name="Zakazi" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="95" Click="Zakazi_Click" Height="30"/>
 
+            <DatePicker x:Name="datepicker_txt" HorizontalAlignment="Left" Margin="292,403,0,0" VerticalAlignment="Top" SelectedDate="{Binding SelectedItem.StartTime,ElementName=myGrid}" Width="120"/>
+
+        </Grid>
+        <Button ToolTip="Klikom na dugme prikazuju se predlozi termina" 
+                Click="Zakazi_Click"
+                x:Name="openDoctorProfile" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="135,0,137,21" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="         &#x1f5c2;&#xFE0F;&#xA;Zakazi termin" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
     </Grid>
 </Window>

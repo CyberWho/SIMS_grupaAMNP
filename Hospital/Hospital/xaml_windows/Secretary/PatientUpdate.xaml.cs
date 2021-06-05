@@ -28,6 +28,14 @@ namespace Hospital.xaml_windows.Secretary
         HealthRecordController healthRecordController = new HealthRecordController();
         AddressController addressController = new AddressController();
         UserController userController = new UserController();
+
+
+        public ObservableCollection<Allergy> hasAllergies { get; set; }
+        public ObservableCollection<Allergy> missingAllergies { get; set; }
+
+
+
+
         #region NotifyProperties
         private string _id_address;
         private string _atype;
@@ -107,9 +115,17 @@ namespace Hospital.xaml_windows.Secretary
         }
         private void Obrisi_alergen(object sender, RoutedEventArgs e)
         {
-            _ = this.allergyController.DeleteAllergyByUserIdAndAllergyTypeId(user_id, currentAllergyTypeId);
-            fill_data();
-            refresh();
+            if (MessageBox.Show("Da li zaista zelite da obrisete alergiju?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                MessageBox.Show("Niste obrisali alergiju!");
+            }
+            else
+            {
+                _ = this.allergyController.DeleteAllergyByUserIdAndAllergyTypeId(user_id, currentAllergyTypeId);
+                MessageBox.Show("Uspesno ste obrisali alergiju!");
+                fill_data();
+                refresh();
+            }
         }
         private void Dodaj_alergiju(object sender, RoutedEventArgs e)
         {
@@ -163,6 +179,11 @@ namespace Hospital.xaml_windows.Secretary
 
         }
 
+        private void LB1_PreviewMouseLeftButtonDown(object sender, SelectedCellsChangedEventArgs e)
+        {
+
+        }
+
         private void selection_loaded(object sender, RoutedEventArgs e)
         {
             ObservableCollection<AllergyType> allergyTypes = this.allergyTypeController.GetAllMissingAllergyTypesByUserId(user_id);
@@ -191,5 +212,11 @@ namespace Hospital.xaml_windows.Secretary
 
             this.selection.ItemsSource = types;
         }
+
+        private Point DataGridHasAlergies;
+        private Point DataGridAvailableAlergies;
+
+
+
     }
 }

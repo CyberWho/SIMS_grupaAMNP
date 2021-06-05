@@ -11,7 +11,7 @@
 
         <DataGrid x:Name="notifications" ItemsSource="{Binding systemNotifications}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
-                  Height="346" Margin="10,45,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="dataGridnotifications">
+                  Height="437" Margin="10,45,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="dataGridnotifications">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="27"/>
                 <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
@@ -23,10 +23,116 @@
 
 
 
-        <Button ToolTip="Klikom na dugme moci cete da unesete podatke radi kreiranja novog obavestenja" Content="Kreirajte novo obavestenje" Margin="10,0,0,294.8" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="148" Click="Add_Notification" Height="30"/>
-        <Button Content="Refresh" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="Refresh" Height="30" HorizontalAlignment="Right" Width="148"/>
-        <Button ToolTip="Klikom na dugme obrisace se selektovano obavestenje" Content="Obrisi obavestenje" Margin="10,0,0,224.8" VerticalAlignment="Bottom" Click="Delete_Notification" Height="30" HorizontalAlignment="Left" Width="148"/>
-        <Button ToolTip="Klikom na dugme moci cete da izmenite podatke o selektovanom obavestenju" Content="Izmeni obavestenje" HorizontalAlignment="Left" Margin="10,0,0,259.8" VerticalAlignment="Bottom" Width="148" Click="Update_Notification" Height="30"/>
+        <Button Visibility="Hidden" ToolTip="Klikom na dugme moci cete da unesete podatke radi kreiranja novog obavestenja" Content="Kreirajte novo obavestenje" Margin="10,0,0,294.8" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="148" Click="Add_Notification" Height="30"/>
+
+        <Button Visibility="Hidden" Content="Refresh" Margin="0,0,10,10" VerticalAlignment="Bottom" Click="Refresh" Height="30" HorizontalAlignment="Right" Width="148"/>
+
+        <Button Visibility="Hidden" ToolTip="Klikom na dugme obrisace se selektovano obavestenje" Content="Obrisi obavestenje" Margin="10,0,0,224.8" VerticalAlignment="Bottom" Click="Delete_Notification" Height="30" HorizontalAlignment="Left" Width="148"/>
+
+        <Button Visibility="Hidden" ToolTip="Klikom na dugme moci cete da izmenite podatke o selektovanom obavestenju" Content="Izmeni obavestenje" HorizontalAlignment="Left" Margin="10,0,0,259.8" VerticalAlignment="Bottom" Width="148" Click="Update_Notification" Height="30"/>
+
+        <Button ToolTip="Klikom na dugme brisete selektovano obavestenje" 
+                Click="Delete_Notification"
+                x:Name="deleteUser" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="135,0,137,142" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="              &#x1f5d1;&#xFE0F;&#xA;Obrisi obavestenje" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+
+        <Button ToolTip="Klikom na dugme menjate podatke obavestenja" 
+                Click="Update_Notification"
+                    x:Name="updateUser" Grid.Row="0" 
+                    VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                    Foreground="{x:Null}"  Margin="135,0,137,92" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="                &#x1f5c2;&#xFE0F;&#xA;Izmenite obavestenje" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+
+        <Button ToolTip="Klikom na dugme otvara se novi prozor za kreiranje obavestenja" 
+                Click="Add_Notification"
+                x:Name="createAppointment" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="135,0,137,42" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="               ➕&#xA;Kreirajte obavestenje" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+
 
     </Grid>
 </Window>

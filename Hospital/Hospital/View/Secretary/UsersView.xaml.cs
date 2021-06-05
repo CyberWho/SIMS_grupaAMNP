@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Hospital.ViewModel.Secretary;
 
 namespace Hospital.View.Secretary
 {
@@ -20,9 +21,10 @@ namespace Hospital.View.Secretary
     /// </summary>
     public partial class UsersView : Window
     {
-        public UsersView()
+        public UsersView(bool isDemo = false)
         {
             InitializeComponent();
+            this.DataContext = new UsersViewModel(isDemo);
         }
     }
 }

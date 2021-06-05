@@ -8,39 +8,80 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="402">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding StartTime}" Width="*"/>
 
+        <Grid>
+            <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,234,0,0" TextWrapping="Wrap" Text="{Binding Path=DurationInMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
 
-            </DataGrid.Columns>
-        </DataGrid>
+            <TextBox x:Name="room_id_txtbx" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,346,0,0" TextWrapping="Wrap" Text="{Binding Path=RoomId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
 
+            <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,458,0,0" TextWrapping="Wrap" Text="{Binding Path=NName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
 
-        <TextBox x:Name="duration_mins_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,490,0,0" TextWrapping="Wrap" Text="{Binding Path=DurationInMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="room_id_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,546,0,0" TextWrapping="Wrap" Text="{Binding Path=RoomId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_name_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,602,0,0" TextWrapping="Wrap" Text="{Binding Path=NName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,630,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="doctor_surname_txtbx" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,514,0,0" TextWrapping="Wrap" Text="{Binding Path=Surname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
 
-        <Button x:Name="Izmeni" Content="Izmeni termin" Grid.Column="1" HorizontalAlignment="Left" Margin="10,405,0,0" VerticalAlignment="Top" Width="83" Click="Izmeni_Click" Height="30"/>
-        <Label Content="Trajanje" Grid.Column="1" HorizontalAlignment="Left" Margin="188,487,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vreme" Grid.Column="1" HorizontalAlignment="Left" Margin="188,515,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soba" Grid.Column="1" HorizontalAlignment="Left" Margin="188,543,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="188,599,0,0" VerticalAlignment="Top"/>
-        <Label Content="Prezime doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="188,630,0,0" VerticalAlignment="Top" Height="23" Width="99"/>
-        <Label Content="Oznaka doktora" Grid.Column="1" HorizontalAlignment="Left" Margin="188,571,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="doctor_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,574,0,0" TextWrapping="Wrap" Text="{Binding Path=DoctorId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Oznaka termina" Grid.Column="1" HorizontalAlignment="Left" Margin="188,458,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="app_id_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,461,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Trajanje" HorizontalAlignment="Left" Margin="106,234,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="99"/>
 
-        <Label Content="Status termina" Grid.Column="1" HorizontalAlignment="Left" Margin="188,402,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tip termina" Grid.Column="1" HorizontalAlignment="Left" Margin="188,430,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="app_stat_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,405,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="app_type_txt" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,433,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="timeslot_id_txt" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="292,518,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Vreme" HorizontalAlignment="Left" Margin="106,290,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="99"/>
+
+            <Label Content="Soba" HorizontalAlignment="Left" Margin="106,346,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Width="99"/>
+
+            <Label Content="Ime doktora" HorizontalAlignment="Left" Margin="106,458,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Width="99"/>
+
+            <Label Content="Prezime doktora" HorizontalAlignment="Left" Margin="106,514,0,0" VerticalAlignment="Top" Height="23" Width="99" d:LayoutOverrides="HorizontalAlignment"/>
+
+            <Label Content="Oznaka doktora" HorizontalAlignment="Left" Margin="106,402,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Width="99"/>
+
+            <TextBox x:Name="doctor_id_txt" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,402,0,0" TextWrapping="Wrap" Text="{Binding Path=DoctorId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+
+            <Label Content="Oznaka termina" HorizontalAlignment="Left" Margin="106,178,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="99"/>
+
+            <TextBox x:Name="app_id_txt" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+
+            <Label Content="Status termina" HorizontalAlignment="Left" Margin="106,66,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="99"/>
+
+            <Label Content="Tip termina" HorizontalAlignment="Left" Margin="106,122,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="99"/>
+
+            <TextBox x:Name="app_stat_txt" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,66,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+
+            <TextBox x:Name="app_type_txt" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="210,122,0,0" TextWrapping="Wrap" Text="{Binding Path=AppointmentType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+
+            <TextBox x:Name="timeslot_id_txt" HorizontalAlignment="Left" Height="23" Margin="210,290,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Id,ElementName=myGrid}" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+
+        </Grid>
+
+        <Button ToolTip="Klikom na dugme unesene izmene se cuvaju" 
+                Click="Izmeni_Click"
+                x:Name="openDoctorProfile" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="135,0,137,21" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="           &#x1f5c2;&#xFE0F;&#xA;Sacuvaj izmene" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
 
     </Grid>
 </Window>

@@ -220,9 +220,16 @@ namespace Hospital.ViewModel.Secretary
         
         private void Delete_user()
         {
-            this.doctorController.DeleteDoctorById(current_doctor_id);
-            MessageBox.Show("Uspesno ste obrisali lekara!");
-            thisWindow.Close();
+            if (MessageBox.Show("Da li zaista zelite da obrisete lekara?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                MessageBox.Show("Niste obrisali lekara!");
+            }
+            else
+            {
+                this.doctorController.DeleteDoctorById(current_doctor_id);
+                MessageBox.Show("Uspesno ste obrisali lekara!");
+                thisWindow.Close();
+            }
         }
 
         private void Update_user()

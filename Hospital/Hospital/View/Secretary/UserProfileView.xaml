@@ -14,7 +14,7 @@
         <Label Content="Email" HorizontalAlignment="Left" Margin="118,296,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.447,-2.346" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="87"/>
 
 
-        <TextBox HorizontalAlignment="Left" Text ="{Binding NName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="210,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+        <TextBox Name="tbName"  HorizontalAlignment="Left" Text ="{Binding NName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="210,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
         <TextBox HorizontalAlignment="Left" Text ="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="210,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
         <TextBox HorizontalAlignment="Left" Text ="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="210,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
         <TextBox HorizontalAlignment="Left" Text ="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="210,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
@@ -26,7 +26,7 @@
                 CommandParameter="doctor_view" 
                 x:Name="deleteUser" Grid.Row="0" 
                 VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
-                Foreground="{x:Null}"  Margin="133,0,139,203" >
+                Foreground="{x:Null}"  Margin="133,0,137,203" >
             <Button.Effect>
                 <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
             </Button.Effect>
@@ -50,6 +50,41 @@
                 </Style>
             </Button.Style>
             <TextBlock FontFamily="Segoe UI Symbol" Text="            &#x1f5d1;&#xFE0F;&#xA;Obrisi korisnika" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+
+        <Button ToolTip="Klikom na dugme otvarate prozor za pregled alergija" 
+                Command="{Binding viewAllergies}" 
+                CommandParameter="doctor_view" 
+                x:Name="updateAlergies" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="133,0,137,253" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="           &#x1f5d1;&#xFE0F;&#xA;Pregled alergija" Foreground="#e8ebed" FontSize="15" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
                 </TextBlock.Effect>
@@ -119,7 +154,7 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
-            <TextBlock FontFamily="Segoe UI Symbol" Text="           ➕&#xA;Kreirajte termin" Foreground="#e8ebed" FontSize="15" >
+            <TextBlock FontFamily="Segoe UI Symbol" Text="           📖&#xA;Pregled termina" Foreground="#e8ebed" FontSize="15" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
                 </TextBlock.Effect>

@@ -7,17 +7,46 @@
         mc:Ignorable="d"
         Title="CreateNotification" Height="750" Width="430">
     <Grid>
-        <Menu Margin="0,0,0,679"/>
-        <Label Content="Naziv obavestenja" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top"/>
-        <Label Content="Prvi dan vazenja" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="Opis" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top"/>
-        <Label Content="Poslednji dan vazenja" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="start_date" Margin="158,60,162,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
-        <DatePicker x:Name="end_date" Margin="158,91,162,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
-        <TextBox x:Name="not_title"  Height="23" Margin="158,122,10,0" TextWrapping="Wrap" Text="Unesite naziv obavestenja" VerticalAlignment="Top"/>
-        <TextBox x:Name="not_desc" Height="150" Margin="158,153,10,0" TextWrapping="Wrap" Text="Unesite opis obavestenja" VerticalAlignment="Top"/>
-
-        <Button Content="Izmeni obavestenje" Margin="0,308,10,0" Click="Update_Notification" HorizontalAlignment="Right" Height="30" VerticalAlignment="Top" Width="123"/>
-
+        <Label FontFamily="Segoe UI Symbol" Content="Prvi dan vazenja" HorizontalAlignment="Left" Margin="75,78,0,0" VerticalAlignment="Top" Width="123"/>
+        <Label FontFamily="Segoe UI Symbol" Content="Opis" Margin="75,260,79,0" VerticalAlignment="Top"/>
+        <Label FontFamily="Segoe UI Symbol" Content="Poslednji dan vazenja" Margin="75,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.527,-2.075" HorizontalAlignment="Left"/>
+        <Label Content="Naziv obavestenja" HorizontalAlignment="Left" Margin="75,202,0,0" VerticalAlignment="Top" Width="123"/>
+        <DatePicker x:Name="start_date" Margin="0,78,79,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="120"/>
+        <DatePicker x:Name="end_date" Margin="0,140,79,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="120"/>
+        <TextBox x:Name="not_desc" Margin="75,322,79,247" TextWrapping="Wrap"/>
+        <Button ToolTip="Klikom na ovo dugme, obavestenje ce biti izmenjeno" 
+            Click="Update_Notification"
+            x:Name="doctors" Grid.Row="0" 
+            VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+            Foreground="{x:Null}"  Margin="136,0,136,166" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="             📅&#xA;Izmeni obavestenje" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+        <TextBox x:Name="not_title" HorizontalAlignment="Right" Height="23" Margin="0,202,79,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

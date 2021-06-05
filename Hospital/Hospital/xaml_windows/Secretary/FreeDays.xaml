@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="FreeDays" Height="750" Width="430">
     <Grid>
-        <Menu Margin="0,0,0,679"/>
         <Label FontFamily="Segoe UI Symbol" Content="Prvi dan vazenja" HorizontalAlignment="Left" Margin="75,78,0,0" VerticalAlignment="Top" Width="123"/>
 
         <Label FontFamily="Segoe UI Symbol" Content="Opis" Margin="75,260,79,0" VerticalAlignment="Top"/>

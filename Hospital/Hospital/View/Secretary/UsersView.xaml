@@ -9,9 +9,6 @@
              mc:Ignorable="d" 
              Height="750" Width="430">
 
-    <Window.DataContext>
-        <secretary:UsersViewModel/>
-    </Window.DataContext>
 
     <Grid>
         <DataGrid x:Name="dataGridDoctors" ItemsSource="{Binding users}"

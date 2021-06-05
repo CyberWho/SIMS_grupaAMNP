@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Data;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
+using Hospital.Model;
 using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace Hospital.xaml_windows.Secretary
@@ -19,6 +21,8 @@ namespace Hospital.xaml_windows.Secretary
         ObservableCollection<Model.Doctor> Doctors = new ObservableCollection<Model.Doctor>();
         DoctorController doctorController = new DoctorController();
         private PatientController patientController = new PatientController();
+        public Model.Doctor selectedDoctor { get; set; }
+        public AppDTO selectedApp { get; set; }
         int priority = 0;
 
         public PatientNewAppointment(int id, bool isUserId = false)
@@ -49,7 +53,9 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Predlozi_Click(object sender, RoutedEventArgs e)
         {
-            int doctorId = int.Parse(doc_id_txt.Text);
+            var doctor = myDataGrid.SelectedItem;
+
+            int doctorId = (doctor as Model.Doctor).Id;
             DateTime startDate = DateTime.Parse(date_txt.Text);
             DateTime endDate = DateTime.Parse(date_end_txt.Text);
             if (endDate <= startDate)
@@ -84,7 +90,6 @@ namespace Hospital.xaml_windows.Secretary
         {
             this.priority = 0;
         }
-
         private void VremePrioritet_Checked(object sender, RoutedEventArgs e)
         {
             this.priority = 1;

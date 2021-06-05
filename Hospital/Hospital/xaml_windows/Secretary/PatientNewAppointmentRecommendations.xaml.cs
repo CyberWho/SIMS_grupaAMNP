@@ -44,6 +44,10 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Zakazi_Click(object sender, RoutedEventArgs e)
         {
+            var selection = myGrid.SelectedItem;
+            Model.Doctor selectedDoctor = (selection as Model.Doctor);
+            TimeSlot selectedTS = (selection as TimeSlot);
+
             Appointment appointment = new Appointment();
             Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientById(id);
@@ -58,7 +62,13 @@ namespace Hospital.xaml_windows.Secretary
             appointment.room = room;
             appointment.room.Id = int.Parse(room_id_txt.Text);
             appointmentController.ReserveAppointment(appointment);
+
+            MessageBox.Show("Uspesno ste zakazali termin!");
+            
             var s = new PatientAppointment(id);
+
+
+
             s.Show();
             this.Close();
         }

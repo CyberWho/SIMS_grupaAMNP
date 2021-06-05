@@ -315,7 +315,7 @@ namespace Hospital.Repository
             TimeSlot timeSlot = new TimeSlot();
 
             // month i day se menjaju
-            DateTime dateTime = new DateTime(2021, 6, 5, 0, 0, 0);
+            DateTime dateTime = new DateTime(2021, 6, 14, 0, 0, 0);
             TimeSpan timeSpan = new TimeSpan(0, 30, 0);
 
             for (int j = 0; j < 17; j++)

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 using Hospital.Controller;
 using Hospital.Model;
 using Hospital.Repository;
@@ -30,6 +32,7 @@ namespace Hospital.ViewModel.Secretary
         public MyICommand updateUser { get; set; }
         public MyICommand createUser { get; set; }
         public MyICommand viewApps { get; set; }
+        public MyICommand viewAllergies { get; set; }
 
         #endregion
 
@@ -141,32 +144,96 @@ namespace Hospital.ViewModel.Secretary
         #endregion
 
 
-        public UserViewModel(Window window, User user = null)
+        public UserViewModel(Window window, bool demoFlag, User user = null)
         {
-            if (user != null)
+            this.thisWindow = window;
+            if (demoFlag)
             {
-                isNull = false;
-                this.user = user;
-                current_user_id = this.user.Id;
-                fill_user_data(user);
+                demoFunc();
+
             }
             else
             {
-                isNull = true;
+                if (user != null)
+                {
+                    isNull = false;
+                    this.user = user;
+                    current_user_id = this.user.Id;
+                    fill_user_data(user);
+                }
+                else
+                {
+                    isNull = true;
+                }
+                this.thisWindow = window;
+                this.deleteUser = new MyICommand(Delete_user, Can_delete);
+                this.updateUser = new MyICommand(Update_user, Can_update);
+                this.createUser = new MyICommand(Create_user, Can_create);
+                this.viewApps = new MyICommand(View_apps, Can_view_apps);
+                this.viewAllergies = new MyICommand(View_alergies, Can_view_allergies);
             }
+        }
 
-            this.thisWindow = window;
-            this.deleteUser = new MyICommand(Delete_user, Can_delete);
-            this.updateUser = new MyICommand(Update_user, Can_update);
-            this.createUser = new MyICommand(Create_user, Can_create);
-            this.viewApps = new MyICommand(View_apps, Can_view_apps);
+        private async void demoFunc()
+        {
+            AutoClosingMessageBox.Show(
+                "Sledi popunjavanje regija za unos podataka. U odgovarajuce regije uneti odgovarajuce podatke. Demo ce popuniti neophodne podatke, imajte na umu da program sam generise lozinku koja odgovara korisnickom imenu napisanom malim slovima", 5000);
+
+            await Task.Delay(1000);
+            User demoUser = new User(
+                    1000,
+                    "demo username",
+                    "demo username",
+                    "demo ime",
+                    "demo prezime",
+                    "12345",
+                    "demo@demo.demo"
+                );
+            NName = demoUser.Name;
+            await Task.Delay(1000);
+            Surname = demoUser.Surname;
+            await Task.Delay(1000);
+            Username = demoUser.Username;
+            await Task.Delay(1000);
+            PhoneNumber = demoUser.PhoneNumber;
+            await Task.Delay(1000);
+            Email = demoUser.EMail;
+            await Task.Delay(1000);
+
+            AutoClosingMessageBox.Show(
+                "Uneti podaci se smatraju dobro unetim i sada ih je potrebno sacuvati. Podaci se cuvaju klikom na dugme: 'Kreirajte korisnika'.", 5000);
+
+            await Task.Delay(3000);
+
+
+            this.thisWindow.Close();
+
+        }
+
+        private void View_alergies()
+        {
+            Window s = new PatientUpdate(current_user_id);
+            s.Show();
+
+        }
+
+        private bool Can_view_allergies()
+        {
+            return this.user != null;
         }
 
         private void Delete_user()
         {
-            this.userController.DeleteUserById(current_user_id);
-            MessageBox.Show("Uspesno ste obrisali korisnika!");
-            thisWindow.Close();
+            if (MessageBox.Show("Da li zaista zelite da obrisete korisnika?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                MessageBox.Show("Niste obrisali korisnika!");
+            }
+            else
+            {
+                this.userController.DeleteUserById(current_user_id);
+                MessageBox.Show("Uspesno ste obrisali korisnika!");
+                thisWindow.Close();
+            }
         }
 
         private bool Can_delete()

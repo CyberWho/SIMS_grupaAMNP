@@ -30,7 +30,7 @@ namespace Hospital.xaml_windows.Secretary
             new ObservableCollection<SystemNotification>();
 
         private SystemNotificationsController systemNotificationsController = new SystemNotificationsController();
-
+        
         public Notifications(int id)
         {
             InitializeComponent();
@@ -75,8 +75,17 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Delete_Notification(object sender, RoutedEventArgs e)
         {
-            this.systemNotificationsController.DeleteSystemNotificationById(current_notifcation_id);
-            Update();
+            if (MessageBox.Show("Da li zaista zelite da obrisete obavestenje?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                MessageBox.Show("Niste obrisali obavestenje!");
+            }
+            else
+            {
+                this.systemNotificationsController.DeleteSystemNotificationById(current_notifcation_id);
+                MessageBox.Show("Uspesno ste obrisali obavestenje!");
+                Update();
+            }
+
         }
 
         private void Update_Notification(object sender, RoutedEventArgs e)

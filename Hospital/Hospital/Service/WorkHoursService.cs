@@ -18,8 +18,8 @@ namespace Hospital.Service
       {
           WorkHours newWH = this.workHoursRepository.NewWorkHours(workHours);
           this.timeSlotRepository.generateTimeSlots(newWH.Id);
-         return null;
-      }
+            return null;
+        }
       
       public Model.WorkHours UpdateWorkHours(Model.WorkHours workHours)
       {

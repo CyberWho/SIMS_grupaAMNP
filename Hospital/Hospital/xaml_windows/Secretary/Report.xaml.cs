@@ -11,20 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Hospital.Model;
-using Hospital.ViewModel.Secretary;
 
-namespace Hospital.View.Secretary
+namespace Hospital.xaml_windows.Secretary
 {
     /// <summary>
-    /// Interaction logic for UserProfileView.xaml
+    /// Interaction logic for Report.xaml
     /// </summary>
-    public partial class UserProfileView : Window
+    public partial class Report : Window
     {
-        public UserProfileView(User user, bool demoFlag = false)
+        public Report()
         {
             InitializeComponent();
-            this.DataContext = new UserViewModel(this, demoFlag, user);
         }
     }
 }

@@ -21,14 +21,17 @@ namespace Hospital.ViewModel.Secretary
         private string fnText;
         private string lnText;
 
+        private bool isDemo;
+
         public MyICommand AddCommand { get; set; }
         public MyICommand OpenUser { get; set; }
 
-        public UsersViewModel()
+        public UsersViewModel(bool isDemo = false)
         {
             loadUsers();
             this.AddCommand = new MyICommand(Add_user);
             this.OpenUser = new MyICommand(Open_user, Can_open);
+            this.isDemo = isDemo;
         }
 
         public User SelectedUser
@@ -44,6 +47,19 @@ namespace Hospital.ViewModel.Secretary
         public void loadUsers()
         {
             this.users = this.userController.GetAllUsers();
+            if (this.isDemo)
+            {
+                users.Add(new User(
+                        10000,
+                        "demo username",
+                        "demo username",
+                        "demo ime",
+                        "demo prezime",
+                        "12345",
+                        "demo@demo.demo"
+                    ));
+            }
+
         }
         private bool Can_open()
         {

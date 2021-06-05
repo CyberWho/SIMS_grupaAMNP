@@ -43,6 +43,11 @@ namespace Hospital.Repository
             Patient p = pr.GetPatientById(id);
             User u = ur.GetUserById(p.user_id);
 
+            PatientRepository patientRepository = new PatientRepository();
+            UserRepository userRepository = new UserRepository();
+
+            Patient patient = patientRepository.GetPatientById(id);
+            User user = userRepository.GetUserById(patient.user_id);
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
@@ -52,11 +57,6 @@ namespace Hospital.Repository
 
             HealthRecord healthRecord = new HealthRecord();
 
-            PatientRepository patientRepository = new PatientRepository();
-            UserRepository userRepository = new UserRepository();
-
-            Patient patient = patientRepository.GetPatientById(id);
-            User user = userRepository.GetUserById(patient.user_id);
             patient.User = user;
             healthRecord.Id = int.Parse(reader.GetString(0));
             healthRecord.patient_id = int.Parse(reader.GetString(1));
@@ -113,7 +113,6 @@ namespace Hospital.Repository
             healthRecord.PlaceOfBirth = new CityRepository().GetCityById(city_id);
             healthRecord.Gender = gender;
             healthRecord.MaritalStatus = maritalStatus;
-            connection.Close();
             
 
 

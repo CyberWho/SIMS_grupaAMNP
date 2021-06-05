@@ -177,7 +177,7 @@ namespace Hospital.xaml_windows.Secretary
             RoomId = appointment.room.Id;
             NName = appointment.doctor.User.Name;
             Surname = appointment.doctor.User.Surname;
-            updateMyGrid();
+            //updateMyGrid();
         }
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
@@ -191,20 +191,56 @@ namespace Hospital.xaml_windows.Secretary
             this.Close();
         }
 
-        private void updateMyGrid()
-        {
-            this.DataContext = this;
-            // int doctorId = int.Parse(doctor_id_txt.Text);
-            Appointment appointment = new Appointment();
+        //private void updateMyGrid()
+        //{
+        //    this.DataContext = this;
+        //    // int doctorId = int.Parse(doctor_id_txt.Text);
+        //    Appointment appointment = new Appointment();
 
-            appointment = appointmentController.GetAppointmentById(appointmentId);
-            int doctorId = appointment.doctor.Id;
-            DateTime dateTime = appointment.StartTime;
-            TimeSlots = timeSlotController.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(dateTime, doctorId);
-            DataTable dt = new DataTable();
-            myGrid.DataContext = dt;
-            myGrid.ItemsSource = TimeSlots;
-        }
+        //    appointment = appointmentController.GetAppointmentById(appointmentId);
+        //    int doctorId = appointment.doctor.Id;
+        //    DateTime dateTime = appointment.StartTime;
+        //    TimeSlots = timeSlotController.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(dateTime, doctorId);
+        //    DataTable dt = new DataTable();
+        //    myGrid.DataContext = dt;
+        //    myGrid.ItemsSource = TimeSlots;
+        //}
+        /*
+        <Button ToolTip = "Klikom na dugme prikazuju se predlozi termina"
+                Click="Izmeni_Click"
+                x:Name="openDoctorProfile" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="135,0,137,21" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth = "4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType = "{x:Type Button}" >
+                    < Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property = "Template" >
+                        < Setter.Value >
+                            < ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background = "{TemplateBinding Background}" >
+                                    < ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property = "IsMouseOver" Value="True">
+                            <Setter Property = "Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily = "Segoe UI Symbol" Text="         &#x1f5c2;&#xFE0F;&#xA;Izmeni termin" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth = "3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+                    */
+
 
     }
 }
