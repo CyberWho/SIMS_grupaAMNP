@@ -94,6 +94,7 @@ namespace Hospital.ViewModel.Patient
         }
         private void OnDoctorRate()
         {
+            this.RateError = "";
             if(!ValidateSelection()) return;
             ;
             if (appointmentController.CheckForAppointmentsByPatientIdAndDoctorId(patientController.GetPatientByUserId(userId).Id, SelectedItem.Id) == false)
