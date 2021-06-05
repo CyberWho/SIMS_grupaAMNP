@@ -24,7 +24,7 @@ namespace Hospital.View.Secretary
         public DoctorProfileView(Model.Doctor doctor)
         {
             InitializeComponent();
-            this.DataContext = new DoctorProfileViewModel(doctor);
+            this.DataContext = new DoctorProfileViewModel(this, doctor);
         }
     }
 }

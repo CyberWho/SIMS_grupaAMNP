@@ -7,22 +7,21 @@
         mc:Ignorable="d"
         Title="UrgentAppointment" Height="750" Width="430">
     <Grid>
-        <Button Content="Kreiraj hitan termin" Margin="0,0,10,56" VerticalAlignment="Bottom" Height="30" Click="Move_Reserved_Appointment" HorizontalAlignment="Right" Width="138"/>
-        <Label Content="Odabrani pacijent" Margin="0,348,10,345" HorizontalAlignment="Right" Width="138"/>
-
-        <TextBlock x:Name="PatName" Margin="0,0,10,314" Text="Ime pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
-        <TextBlock x:Name="Surname" Margin="0,0,10,283" Text="Prezime pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
-        <TextBlock x:Name="Username" Margin="0,0,10,190" Text="Korisnicko ime pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
-        <TextBlock x:Name="PhoneNumber" Margin="0,0,10,252" Text="Kontakt telefon pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
-        <TextBlock x:Name="Email" Margin="0,0,10,221" Text="Email adresa pacijenta" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Right" Width="138"/>
-
-        <Label Content="Odaberite oblast lekara" Margin="0,0,10,159" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="138"/>
-        <ComboBox ToolTip="Selektovati specijalizaciju koja vam je potrebna" Name ="selection" Loaded="selection_loaded" Margin="0,0,10,132" VerticalAlignment="Bottom" SelectionChanged="selection_SelectionChanged" HorizontalAlignment="Right" Width="138"/>
 
 
-        <DataGrid ToolTip="Odaberite vreme u koje zelite da pomerite prethodno zakazan termin" x:Name="available_timeslots" ItemsSource="{Binding timeSlots}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="333" Margin="10,10,0,0" VerticalAlignment="Top" Width="402" SelectionChanged="Selected_TimeSlot_In_Which_To_Move_Appointment" d:LayoutOverrides="VerticalAlignment">
+        <Label Content="Odaberite oblast lekara" Margin="55,0,0,94" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="138" Padding="0" Height="26"/>
+        <ComboBox ToolTip="Selektovati specijalizaciju koja vam je potrebna" Name ="selection" Loaded="selection_loaded" Margin="0,0,40,98" VerticalAlignment="Bottom" SelectionChanged="selection_SelectionChanged" HorizontalAlignment="Right" Width="138"/>
+
+
+        <DataGrid x:Name="available_timeslots" 
+                  ToolTip="Odaberite vreme u koje zelite da pomerite prethodno zakazan termin"
+                  ItemsSource="{Binding timeSlots}"
+                  AutoGenerateColumns="False" 
+                  HorizontalAlignment="Left" 
+                  Height="569" Margin="10,10,0,0" VerticalAlignment="Top" Width="402" 
+                  SelectionChanged="Selected_TimeSlot_In_Which_To_Move_Appointment">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="30"/>
                 <DataGridTextColumn Header="Pocetak" Binding="{Binding StartTime}" Width="*"/>
                 <!--
                 <DataGridTextColumn Header="Prezime" Binding="{Binding User.Surname}" Width="*"/>
@@ -31,6 +30,40 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <Button ToolTip="Klikom na ovo dugme, obavestenje ce biti kreirano" 
+                Click="Move_Reserved_Appointment"
+                CommandParameter="doctor_view" 
+                x:Name="doctors" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="135,0,137,31" >
+            <TextBlock FontFamily="Segoe UI Symbol" Text="              📅&#xa;Kreiraj hitan termin" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
     </Grid>
 </Window>

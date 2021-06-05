@@ -146,8 +146,7 @@ namespace Hospital.Controller
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
-            return false;
+            return this.userService.DeleteUserById(id);
         }
 
         public Boolean DeleteUserByUsername(String username)

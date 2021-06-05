@@ -10,19 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Hospital.Model;
+using Hospital.ViewModel.Secretary;
 
 namespace Hospital.View.Secretary
 {
     /// <summary>
-    /// Interaction logic for UsersView.xaml
+    /// Interaction logic for UserProfileView.xaml
     /// </summary>
-    public partial class UsersView : Window
+    public partial class UserProfileView : Window
     {
-        public UsersView()
+        public UserProfileView(User user)
         {
             InitializeComponent();
+            this.DataContext = new UserViewModel(this, user);
         }
     }
 }

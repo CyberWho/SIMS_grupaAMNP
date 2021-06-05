@@ -17,6 +17,7 @@ namespace Hospital.Model
         public Boolean Approved { get; set; }
 
         public Doctor doctor { get; set; }
+        public int doctor_id { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Doctor GetDoctor()
@@ -50,6 +51,13 @@ namespace Hospital.Model
             dateRange = new DateRange(shiftStart, shiftEnd);
             Approved = approved;
             this.doctor = doctor;
+        }
+        public WorkHours(int id, DateTime shiftStart, DateTime shiftEnd, bool approved, int doctor_id)
+        {
+            Id = id;
+            dateRange = new DateRange(shiftStart, shiftEnd);
+            Approved = approved;
+            this.doctor_id = doctor_id;
         }
 
         public WorkHours()

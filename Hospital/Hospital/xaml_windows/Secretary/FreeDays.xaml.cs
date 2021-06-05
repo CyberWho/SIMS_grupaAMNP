@@ -39,7 +39,6 @@ namespace Hospital.xaml_windows.Secretary
             string doctor_name = "Lekar: ";
             doctor = this.doctorController.GetDoctorById(doctor_id);
             doctor_name += doctor.User.Name + " " + doctor.User.Surname;
-            this.doctor_name.ContentStringFormat = doctor_name;
         }
 
         private void Make_Free_Days(object sender, RoutedEventArgs e)

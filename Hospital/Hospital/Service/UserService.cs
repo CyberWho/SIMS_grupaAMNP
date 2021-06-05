@@ -14,6 +14,8 @@ namespace Hospital.Service
     public class UserService
     {
         public UserRepository userRepository = new UserRepository();
+        private HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
+        private PatientRepository patientRepository = new PatientRepository();
 
         public Boolean IsGuest;
         public int MinPasswordLength;
@@ -65,8 +67,11 @@ namespace Hospital.Service
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
-            return false;
+            int patient_id = this.patientRepository.GetPatientByUserId(id).Id;
+
+            return (this.healthRecordRepository.DeleteHealthRecordByPatientId(patient_id) &&
+                    this.patientRepository.DeletePatientById(patient_id) &&
+                    this.userRepository.DeleteUserById(id));
         }
 
         public Boolean DeleteUserByUsername(String username)

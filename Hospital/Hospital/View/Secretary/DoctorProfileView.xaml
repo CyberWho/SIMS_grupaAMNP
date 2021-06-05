@@ -8,47 +8,221 @@
         mc:Ignorable="d"
         Title="DoctorProfile" Height="750" Width="430">
 
-    
 
     <Grid>
-        <Label Content="Ime" HorizontalAlignment="Left" Margin="29,66,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Width="36"/>
-        <Label Content="Prezime" HorizontalAlignment="Left" Margin="29,97,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
-        <Label Content="Korisnicko ime" HorizontalAlignment="Left" Margin="29,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,0.923" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
-        <Label Content="Kontakt" HorizontalAlignment="Left" Margin="29,159,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
-        <Label Content="Email" HorizontalAlignment="Left" Margin="29,190,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.447,-2.346" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
-        <Label Content="Plata" HorizontalAlignment="Left" Margin="29,221,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.447,-2.346" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
-        <Label Content="Specijalizacija" HorizontalAlignment="Left" Margin="29,250,196,0" VerticalAlignment="Top" Width="117"/>
-        <Label Content="Soba" Margin="29,276,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
 
-        <Grid>
-            <TextBox HorizontalAlignment="Left" Text ="{Binding doctor.User.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
-            <TextBox HorizontalAlignment="Left" Text ="{Binding doctor.User.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
-            <TextBox HorizontalAlignment="Left" Text ="{Binding doctor.User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
-            <TextBox HorizontalAlignment="Left" Text ="{Binding doctor.User.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
-            <TextBox HorizontalAlignment="Left" Text ="{Binding doctor.User.EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
-            <TextBox HorizontalAlignment="Left" Text ="{Binding doctor.Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="161,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+        <Grid HorizontalAlignment="Center">
+            <TextBox ToolTip="Unesite ime" HorizontalAlignment="Left" Text ="{Binding NName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="209,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="209,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="209,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="209,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="209,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
+            <TextBox HorizontalAlignment="Left" Text ="{Binding Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="209,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:LayoutOverrides="VerticalAlignment"/>
 
             <ComboBox x:Name ="specialization_selection" 
                       ItemsSource="{Binding Path=specializationsTypes}"
                       SelectedItem="{Binding Path=selectedSpecialization}"
-                      Margin="161,247,91,0" VerticalAlignment="Top"/>
+                      Margin="209,346,93,0" VerticalAlignment="Top" Width="120" d:LayoutOverrides="HorizontalAlignment"/>
 
             <ComboBox x:Name ="room_selection" 
                       ItemsSource="{Binding Path=room_ids}"
                       SelectedItem="{Binding Path=selectedRoomId}"
-                      Margin="161,274,91,0" VerticalAlignment="Top"/>
+                      Margin="209,401,93,0" VerticalAlignment="Top" Width="120" d:LayoutOverrides="HorizontalAlignment"/>
+            <Label Content="Korisnicko ime" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,122,0,0" 
+                   VerticalAlignment="Top" 
+                   RenderTransformOrigin="0.508,0.923" 
+                   d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" 
+                   Width="117"/>
+            <Label Content="Ime" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,10,0,0" 
+                   VerticalAlignment="Top" 
+                   d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" 
+                   Width="117"/>
+            <Label Content="Prezime" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,66,0,0" 
+                   VerticalAlignment="Top" 
+                   d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" 
+                   Width="117"/>
+            <Label Content="Kontakt" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,178,0,0" 
+                   VerticalAlignment="Top" 
+                   d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" 
+                   Width="117"/>
+            <Label Content="Email" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,234,0,0" 
+                   VerticalAlignment="Top" 
+                   RenderTransformOrigin="-1.447,-2.346" 
+                   d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" 
+                   Width="117"/>
+            <Label Content="Plata" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,290,0,0" 
+                   VerticalAlignment="Top" 
+                   RenderTransformOrigin="-1.447,-2.346" 
+                   d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" 
+                   Width="117"/>
+            <Label Content="Specijalizacija" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,346,0,342"
+                   Width="117" />
+
+            <Label Content="Soba" 
+                   HorizontalAlignment="Left" 
+                   Margin="87,0,0,292" 
+                   VerticalAlignment="Bottom" 
+                   d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" 
+                   Width="117"/>
+
+            <Button ToolTip="Klikom na dugme brisete selektovanog lekara" 
+                Command="{Binding deleteDoctor}" 
+                CommandParameter="doctor_view" 
+                x:Name="deleteDoctorButton" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="133,0,139,203" >
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Button.Effect>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#3499eb"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="RoyalBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock FontFamily="Segoe UI Symbol" Text="        &#x1f5d1;&#xFE0F;&#xA;Obrisi lekara" Foreground="#e8ebed" FontSize="15" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+
+            <Button ToolTip="Klikom na dugme menjate podatke lekara" 
+                    Command="{Binding updateDoctor}"
+                    CommandParameter="doctor_view" 
+                    x:Name="updateDoctorButton" Grid.Row="0" 
+                    VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                    Foreground="{x:Null}"  Margin="133,0,139,153" >
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Button.Effect>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#3499eb"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="RoyalBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock FontFamily="Segoe UI Symbol" Text="          &#x1f5c2;&#xFE0F;&#xA;Izmenite lekara" Foreground="#e8ebed" FontSize="15" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+
+            <Button ToolTip="Klikom na dugme otvarate prozor za kreiranje slobodnih dana" 
+                    Command="{Binding freeDays}"
+                    CommandParameter="doctor_view" 
+                    x:Name="freeDaysButton" Grid.Row="0" 
+                    VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                    Foreground="{x:Null}"  Margin="133,0,139,103" >
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Button.Effect>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#3499eb"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="RoyalBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock FontFamily="Segoe UI Symbol" Text="             📅&#xA;Novi slobodni dani" Foreground="#e8ebed" FontSize="15" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+
+            <Button ToolTip="Klikom na dugme kreirate novog lekara, prethodno je neophodno popuniti sve podatke" 
+                    Command="{Binding createDoctor}"
+                    CommandParameter="doctor_view" 
+                    x:Name="createDoctorButton" Grid.Row="0" 
+                    VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                    Foreground="{x:Null}"  Margin="133,0,139,53" >
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Button.Effect>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#3499eb"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="RoyalBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock FontFamily="Segoe UI Symbol" Text="          ➕&#xA;Kreirajte lekara" Foreground="#e8ebed" FontSize="15" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+
+
+
         </Grid>
-
-
-
-        <Button Name="deleteDoctor" ToolTip="Klikom na dugme brisete selektovanog lekara" Content="Obrisi lekara" Margin="29,345,0,0" VerticalAlignment="Top" Command="{Binding deleteDoctor}" Height="30" HorizontalAlignment="Left" Width="129"/>
-
-        <Button Name="updateDoctor"  ToolTip="Klikom na dugme menjate podatke koje ste izmenili u poljima iznad" Content="Izmeni lekara" Margin="29,380,0,0" VerticalAlignment="Top" Command="{Binding updateDoctor}" Height="30" HorizontalAlignment="Left" Width="129"/>
-
-        <Button Name="freeDays" ToolTip="Klikom na dugme otvara se prozor vezan za upravljanjem slobodnim danima lekara"  Content="Slobodni dani lekara" Margin="29,415,0,0" VerticalAlignment="Top" Height="30" Command="{Binding freeDays}" HorizontalAlignment="Left" Width="129"/>
-
-        <Button Name="createDoctor" ToolTip="Kreiranje lekara, prethodno popuniti sve neophodne podatke"  Content="Kreiraj lekara" HorizontalAlignment="Left" Margin="29,450,0,0" VerticalAlignment="Top" Width="129" Height="30" Visibility="Hidden" Command="{Binding createDoctor}"/>
 
     </Grid>
 </Window>

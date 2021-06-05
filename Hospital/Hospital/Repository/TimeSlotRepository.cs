@@ -304,7 +304,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public void generateTimeSlots()
+        public void generateTimeSlots(int work_hours_id)
         {
             //TimeSlot timeSlot = new TimeSlot();
             //timeSlot.StartTime = new DateTime(2021, 5, 4, 21, 0, 0);
@@ -315,7 +315,7 @@ namespace Hospital.Repository
             TimeSlot timeSlot = new TimeSlot();
 
             // month i day se menjaju
-            DateTime dateTime = new DateTime(2021, 5, 26, 8, 0, 0);
+            DateTime dateTime = new DateTime(2021, 6, 5, 0, 0, 0);
             TimeSpan timeSpan = new TimeSpan(0, 30, 0);
 
             for (int j = 0; j < 17; j++)
@@ -324,7 +324,7 @@ namespace Hospital.Repository
                 timeSlot.StartTime = dateTime;
 
                 // work_hours_id se menja
-                timeSlot.workHours_id = 122;
+                timeSlot.workHours_id = work_hours_id;
 
                 AddTimeSlot(timeSlot);
 

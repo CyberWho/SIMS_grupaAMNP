@@ -217,6 +217,7 @@
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
     <Compile Include="ViewModel\Secretary\UsersViewModel.cs" />
+    <Compile Include="ViewModel\Secretary\UserViewModel.cs" />
     <Compile Include="View\Secretary\CreateNotificationView.xaml.cs">
       <DependentUpon>CreateNotificationView.xaml</DependentUpon>
     </Compile>
@@ -228,6 +229,9 @@
     </Compile>
     <Compile Include="View\Secretary\SecretaryUIWindow.xaml.cs">
       <DependentUpon>SecretaryUIWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\UserProfileView.xaml.cs">
+      <DependentUpon>UserProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\UsersView.xaml.cs">
       <DependentUpon>UsersView.xaml</DependentUpon>
@@ -435,6 +439,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\SecretaryUIWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\UserProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

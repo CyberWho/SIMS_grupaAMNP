@@ -5,17 +5,19 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Model;
 using Hospital.Repository;
 
 namespace Hospital.Service
 {
    public class WorkHoursService
    {
-       
+       private TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
 
       public Hospital.Model.WorkHours AddWorkHours(Hospital.Model.WorkHours workHours)
       {
-          this.workHoursRepository.NewWorkHours(workHours);
+          WorkHours newWH = this.workHoursRepository.NewWorkHours(workHours);
+          this.timeSlotRepository.generateTimeSlots(newWH.Id);
          return null;
       }
       

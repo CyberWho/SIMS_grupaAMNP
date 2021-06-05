@@ -17,7 +17,7 @@
         <DataGrid x:Name="dataGridDoctors" ItemsSource="{Binding doctors}"
                   IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
-                  Height="546" Margin="10,45,0,0" VerticalAlignment="Top" Width="402" 
+                  Height="546" Margin="10,10,0,0" VerticalAlignment="Top" Width="402" 
                   SelectedItem="{Binding SelectedDoctor}">
 
 
@@ -33,13 +33,78 @@
 
 
         </DataGrid>
-        <Menu Margin="0,0,0,679"/>
 
-        <Button ToolTip="Klikom na dugme kreiracete korisnika cije ste podatke prethodno uneli u poljima iznad"
-                Content="Dodaj lekara" Margin="151,652,151,0" VerticalAlignment="Top"
-                Command="{Binding openDoctorCommand}" Height="30" />
+        <Button ToolTip="Klikom na dugme kreiracete korisnika cije ste podatke prethodno uneli u poljima iznad" 
+                Command="{Binding openDoctorCommand}"
+                CommandParameter="doctor_view" 
+                x:Name="openDoctorProfile" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="139,0,133,86" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="             &#x1f5c2;&#xFE0F;&#xA;Otvori profil lekara" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
 
 
+
+        <Button ToolTip="Klikom na dugme prelazite na prozor za kreiranje lekara" 
+                Command="{Binding addDoctorCommand}"
+                CommandParameter="doctor_view" 
+                x:Name="createDoctorButton" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="139,0,133,36" >
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <TextBlock FontFamily="Segoe UI Symbol" Text="          ➕&#xA;Kreirajte lekara" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
 
 
 

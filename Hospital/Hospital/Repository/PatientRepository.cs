@@ -195,7 +195,20 @@ namespace Hospital.Repository
 
         public Boolean DeletePatientById(int id)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM patient WHERE id = " + id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return true;
+            }
+            connection.Close();
+            connection.Dispose();
+            
             return false;
         }
 

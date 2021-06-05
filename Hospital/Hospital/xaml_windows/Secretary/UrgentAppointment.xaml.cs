@@ -31,8 +31,7 @@ namespace Hospital.xaml_windows.Secretary
         private int selected_time_slot_id;
         private string selectedSpecialization;
         private User user;
-        private ObservableCollection<Model.Doctor> doctors;
-        private ObservableCollection<TimeSlot> timeSlots;
+        private ObservableCollection<TimeSlot> timeSlots { get; set; }
         private UserController userController = new UserController();
         private PatientController patientController = new PatientController();
         private HealthRecordController healthRecordController = new HealthRecordController();
@@ -44,8 +43,8 @@ namespace Hospital.xaml_windows.Secretary
         public UrgentAppointment(int id)
         {
             InitializeComponent();
-            this.id = id;
             this.DataContext = this;
+            this.id = id;
             Update();
         }
 
@@ -54,17 +53,15 @@ namespace Hospital.xaml_windows.Secretary
             if (id > 0)
             {
                 user = this.userController.GetUserById(id);
-
-                PatName.Text = user.Name;
-                Surname.Text = user.Surname;
-                Username.Text = user.Username;
-                PhoneNumber.Text = user.PhoneNumber;
-                Email.Text = user.EMail;
+                
             }
             else
             {
                 user = this.userController.GuestUser();
+                this.id = user.Id;
             }
+
+
 
         }
 

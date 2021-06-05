@@ -19,6 +19,8 @@ namespace Hospital.xaml_windows.Secretary
         AppointmentController appointmentController = new AppointmentController();
         ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
 
+        public Appointment current_app_id { get; set; }
+
         #region NotifyProperties
         private string _room_id;
         private string _doctor_id;
@@ -97,10 +99,17 @@ namespace Hospital.xaml_windows.Secretary
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public PatientAppointment(int id)
+        public PatientAppointment(int id, bool isUserId = false)
         {
+            if (isUserId)
+            {
+                this.patient_id = this.patientController.GetPatientByUserId(id).Id;
+            }
+            else
+            {
+                this.patient_id = id;
+            }
             InitializeComponent();
-            this.patient_id = id;
             update();
         }
         private void update()
@@ -115,7 +124,7 @@ namespace Hospital.xaml_windows.Secretary
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             Appointment appointment = new Appointment();
-            int appointmentId = int.Parse(app_id_txt.Text);
+            int appointmentId = current_app_id.Id;
             appointment = appointmentController.GetAppointmentById(appointmentId);
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
 
@@ -133,7 +142,7 @@ namespace Hospital.xaml_windows.Secretary
 
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
-            int appointmentId = int.Parse(app_id_txt.Text);
+            int appointmentId = current_app_id.Id;
             if (appointmentController.CancelAppointmentById(appointmentId))
             {
                 update();
@@ -151,6 +160,7 @@ namespace Hospital.xaml_windows.Secretary
 
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
 
         }
     }

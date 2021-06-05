@@ -9,12 +9,18 @@ using System.Windows;
 using System.Windows.Controls;
 using Hospital.Controller;
 using Hospital.Model;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace Hospital.ViewModel.Secretary
 {
     class DoctorProfileViewModel : BindableBase
     {
+        #region attributes
+
+        private Window thisWindow;
+
         public Model.Doctor doctor { get; set; }
+        private bool isNull;
 
         public ObservableCollection<Specialization> specializations { get; set; }
         public ObservableCollection<String> specializationsTypes { get; set; }
@@ -23,23 +29,6 @@ namespace Hospital.ViewModel.Secretary
         public ObservableCollection<Room> rooms { get; set; }
         public ObservableCollection<int> room_ids { get; set; }
         public int selectedRoomId { get; set; }
-
-
-        public DoctorProfileViewModel(Model.Doctor doctor)
-        {
-            this.doctor = doctor;
-            loadSpecializations();
-            loadRooms();
-            deleteDoctor = new MyICommand(Delete_user);
-            updateDoctor = new MyICommand(Update_user);
-        }
-
-        public MyICommand deleteDoctor { get; set; }
-        public MyICommand updateDoctor { get; set; }
-        public MyICommand freeDays { get; set; }
-        public MyICommand createDoctor { get; set; }
-
-
 
         private DoctorController doctorController = new DoctorController();
 
@@ -52,6 +41,38 @@ namespace Hospital.ViewModel.Secretary
         private int room_id;
 
         private int current_doctor_id;
+
+
+        public MyICommand deleteDoctor { get; set; }
+        public MyICommand updateDoctor { get; set; }
+        public MyICommand freeDays { get; set; }
+        public MyICommand createDoctor { get; set; }
+
+        #endregion
+
+
+        public DoctorProfileViewModel(Window window, Model.Doctor doctor = null)
+        {
+            if (doctor != null)
+            {
+                isNull = false;
+                this.doctor = doctor;
+                current_doctor_id = this.doctor.Id;
+                fill_user_data(doctor);
+            }
+            else
+            {
+                isNull = true;
+                loadSpecializations();
+                loadRooms();
+            }
+
+            this.thisWindow = window;
+            deleteDoctor = new MyICommand(Delete_user, Can_delete);
+            updateDoctor = new MyICommand(Update_user, Can_update);
+            freeDays = new MyICommand(Manage_free_days, Can_view_free_days);
+            createDoctor = new MyICommand(Create_user, Can_create);
+        }
 
         #region NotifyProperties
         private string _username;
@@ -163,50 +184,45 @@ namespace Hospital.ViewModel.Secretary
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
+        #region validations
+        private bool Can_create()
+        {
+            return this.isNull;
+        }
 
-        //public DoctorPopUp(Model.Doctor doctor)
-        //{
-        //    InitializeComponent();
-        //    this.DataContext = this;
+        private bool Can_delete()
+        {
+            return !this.isNull;
+        }
+        private bool Can_update()
+        {
+            return !this.isNull;
+        }
 
-        //    if (doctor != null)
-        //    {
-        //        this.doctor = doctor;
-        //        fill_user_data(this.doctor);
-        //    }
-        //    else
-        //    {
-        //        createDoctor.Visibility = Visibility.Visible;
-        //        deleteDoctor.Visibility = Visibility.Hidden;
-        //        updateDoctor.Visibility = Visibility.Hidden;
-        //        freeDays.Visibility = Visibility.Hidden;
-        //    }
-        //}
+        private bool Can_view_free_days()
+        {
+            return !this.isNull;
+        }
+        #endregion
 
-        private void CreateUser(object sender, RoutedEventArgs e)
+        private void Create_user()
         {
             Employee employee = makeEmployee();
 
             Model.Doctor doctor = new Model.Doctor();
             doctor.employee_id = employee.Id;
-            doctor.room_id = room_id;
-            doctor = this.doctorController.AddDoctor(doctor, specialization);
+            doctor.room_id = getRoomId();
+            doctor = this.doctorController.AddDoctor(doctor, getSpecialization());
+            this.doctor = doctor;
+            MessageBox.Show("Uspesno ste kreirali lekara!");
+            thisWindow.Close();
         }
-
-        private void fill_user_data(Model.Doctor doctor)
-        {
-            NName = doctor.User.Name;
-            Surname = doctor.User.Surname;
-            Username = doctor.User.Username;
-            PhoneNumber = doctor.User.PhoneNumber;
-            Email = doctor.User.EMail;
-            Salary = doctor.Salary.ToString();
-        }
-
+        
         private void Delete_user()
         {
             this.doctorController.DeleteDoctorById(current_doctor_id);
-            //this.Close();
+            MessageBox.Show("Uspesno ste obrisali lekara!");
+            thisWindow.Close();
         }
 
         private void Update_user()
@@ -222,8 +238,28 @@ namespace Hospital.ViewModel.Secretary
             employee.Id = this.employeeController.getEmployeeIdByDoctorId(current_doctor_id);
 
             _ = this.employeeController.UpdateEmployee(employee);
+
+            MessageBox.Show("Uspesno ste izmenili podatke lekara");
+            thisWindow.Close();
+        }
+        private void Manage_free_days()
+        {
+            Window s = new xaml_windows.Secretary.FreeDays(current_doctor_id);
+            s.Show();
+            thisWindow.Close();
         }
 
+        #region helper functions, data loading
+
+        private void fill_user_data(Model.Doctor doctor)
+        {
+            NName = doctor.User.Name;
+            Surname = doctor.User.Surname;
+            Username = doctor.User.Username;
+            PhoneNumber = doctor.User.PhoneNumber;
+            Email = doctor.User.EMail;
+            Salary = doctor.Salary.ToString();
+        }
         private Employee makeEmployee()
         {
             User user = makeUser();
@@ -235,57 +271,52 @@ namespace Hospital.ViewModel.Secretary
 
             return this.employeeController.AddEmployee(employee);
         }
-
-        private Employee getEmployeeData(User user, Role role)
-        {
-            Employee employee = new Employee();
-            employee.Id = 0;
-            employee.User = user;
-            employee.role = role;
-            employee.YearsOfService = 0;
-
-            if (int.Parse(Salary) != null)
-            {
-                employee.Salary = int.Parse(Salary);
-            }
-            else
-            {
-                MessageBox.Show("Morate uneti iznos plate pri kreiranju lekara!");
-            }
-
-
-            return employee;
-        }
-
         private User makeUser()
         {
             User user = parseUserData();
             return this.userController.newUser(user);
         }
-
         private User parseUserData()
         {
-            User user = new User();
-
-            user.Username = Username;
-            user.Password = Username.ToLower();
-            user.Name = NName;
-            user.Surname = Surname;
-            user.PhoneNumber = PhoneNumber;
-            user.EMail = Email;
+            User user = new User(
+                    Username, 
+                    Username.ToLower(),
+                    NName,
+                    Surname, 
+                    PhoneNumber, 
+                    Email);
 
             return user;
         }
+        private Employee getEmployeeData(User user, Role role)
+        {
+            Employee employee = new Employee(
+                    0,
+                    int.Parse(Salary),
+                    0,
+                    user,
+                    role);
 
-        private void getSpecialization()
+            return employee;
+        }
+        private string getSpecialization()
         {
             if (selectedSpecialization != null)
             {
-                
+                return selectedSpecialization;
             }
 
+            return "";
         }
+        private int getRoomId()
+        {
+            if (selectedRoomId != null)
+            {
+                return selectedRoomId;
+            }
 
+            return 0;
+        }
         private void loadSpecializations()
         {
             ObservableCollection<Specialization> specializations = this.specializationContoller.GetAllSpecializations(false);
@@ -296,12 +327,6 @@ namespace Hospital.ViewModel.Secretary
                 specializationsTypes.Add(s.Type);
             }
         }
-
-        private void getRoom()
-        {
-            
-        }
-
         private void loadRooms()
         {
             RoomType rt = new RoomType(3, "Soba za preglede", null);
@@ -313,11 +338,7 @@ namespace Hospital.ViewModel.Secretary
                 room_ids.Add(r.Id);
             }
         }
+        #endregion
 
-        private void manage_free_days(object sender, RoutedEventArgs e)
-        {
-            //Window s = new Secretary.FreeDays(current_doctor_id);
-            //s.Show();
-        }
     }
 }

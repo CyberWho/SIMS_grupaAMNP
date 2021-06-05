@@ -13,9 +13,9 @@ namespace Hospital.Controller
 {
     public class TimeSlotController
     {
-        public void generateTimeSlots()
+        public void generateTimeSlots(int wh_id)
         {
-            timeSlotService.generateTimeSlots();
+            timeSlotService.generateTimeSlots(wh_id);
         }
 
 

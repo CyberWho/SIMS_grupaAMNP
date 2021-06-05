@@ -26,11 +26,21 @@ namespace Hospital
             string user = Username.Text;
             string pass = Password.Password;
 
-            /*if(new UserController().LoginUser(user, pass))
-               this.Close();*/
+            //if(new UserController().LoginUser(user, pass))
+            //   this.Close();
 
-               Window s = new SecretaryUIWindow();
-               s.Show();
+            #region MARKO HCI, OBRISATI
+            WorkHoursController WHC = new WorkHoursController();
+            TimeSlotController TSC = new TimeSlotController();
+
+            //WHC.AddWorkHours(null);
+            //TSC.generateTimeSlots(141);
+
+            #endregion
+
+            Window s = new SecretaryUIWindow();
+            s.Show();
+            this.Close();
         }
 
     }

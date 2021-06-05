@@ -7,6 +7,7 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Runtime.Remoting.Messaging;
 
 namespace Hospital.Repository
 {
@@ -133,7 +134,20 @@ namespace Hospital.Repository
 
         public Boolean DeleteHealthRecordByPatientId(int patientId)
         {
-            // TODO: implement
+            setConnection();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM health_record WHERE patient_id = " + patientId;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return true;
+            }
+            connection.Close();
+            connection.Dispose();
+            
             return false;
         }
 

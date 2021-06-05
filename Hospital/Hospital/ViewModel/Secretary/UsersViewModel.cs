@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Hospital.Controller;
 using Hospital.Model;
+using Hospital.View.Secretary;
 
 namespace Hospital.ViewModel.Secretary
 {
@@ -15,19 +17,18 @@ namespace Hospital.ViewModel.Secretary
 
         public ObservableCollection<User> users { get; set; }
         private User selectedUser;
-
-        private string usernameText;
+        
         private string fnText;
         private string lnText;
 
-        public MyICommand DeleteCommand { get; set; }
         public MyICommand AddCommand { get; set; }
+        public MyICommand OpenUser { get; set; }
 
         public UsersViewModel()
         {
             loadUsers();
-            DeleteCommand = new MyICommand(onDelete, canDelete);
-            AddCommand = new MyICommand(onAdd);
+            this.AddCommand = new MyICommand(Add_user);
+            this.OpenUser = new MyICommand(Open_user, Can_open);
         }
 
         public User SelectedUser
@@ -36,7 +37,7 @@ namespace Hospital.ViewModel.Secretary
             set
             {
                 selectedUser = value;
-                DeleteCommand.RaiseCanExecuteChanged();
+                OpenUser.RaiseCanExecuteChanged();
             }
         }
 
@@ -44,16 +45,20 @@ namespace Hospital.ViewModel.Secretary
         {
             this.users = this.userController.GetAllUsers();
         }
-
-        private bool canDelete()
+        private bool Can_open()
         {
-            return SelectedUser != null;
+            return this.selectedUser != null;
         }
 
         private void onDelete()
         {
             this.userController.DeleteUserByUsername(selectedUser.Username);
             users.Remove(selectedUser);
+        }
+        private void Open_user()
+        {
+            Window s = new UserProfileView(selectedUser);
+            s.Show();
         }
 
         #region binding attributes
@@ -82,24 +87,12 @@ namespace Hospital.ViewModel.Secretary
                 }
             }
         }
-
-        public string UNText
-        {
-            get { return usernameText; }
-            set
-            {
-                if (usernameText != value)
-                {
-                    usernameText = value;
-                    OnPropertyChanged("UNText");
-                }
-            }
-        }
         #endregion
 
-        private void onAdd()
+        private void Add_user()
         {
-            users.Add(new User { Name = FNText, Surname = LNText });
+            Window s = new UserProfileView(null);
+            s.Show();
         }
 
     }

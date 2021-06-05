@@ -32,11 +32,8 @@ namespace Hospital.xaml_windows.Patient
             Obrisi.IsEnabled = false;
         }
 
-       
-
         private int getPatientId()
         {
-
             Model.Patient patient = new Model.Patient();
             patient = patientController.GetPatientByUserId(userId);
             return patient.Id;

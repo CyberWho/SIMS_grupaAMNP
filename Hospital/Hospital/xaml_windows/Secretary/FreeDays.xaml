@@ -8,16 +8,64 @@
         Title="FreeDays" Height="750" Width="430">
     <Grid>
         <Menu Margin="0,0,0,679"/>
-        <Label Content="Prvi dan vazenja" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top"/>
-        <Label Content="Opis" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
-        <Label Content="Poslednji dan vazenja" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="start_date" Margin="158,76,162,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
-        <DatePicker x:Name="end_date" Margin="158,107,162,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
-        <TextBox x:Name="not_desc" Height="150" Margin="158,170,10,0" TextWrapping="Wrap" Text="Unesite obrazlozenje: " VerticalAlignment="Top"/>
-        <Button ToolTip="Obavestenje ce biti kreirano klikom na ovo dugme" Content="Kreiraj slobodne dane" HorizontalAlignment="Right" Margin="0,325,10,0" Width="132" Click="Make_Free_Days" Height="30" VerticalAlignment="Top"/>
-        <Label Name="doctor_name" Content="Lekar:" Margin="10,45,10,0" VerticalAlignment="Top"/>
-        <Label Content="Tip: " HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="123"/>
-        <ComboBox Name="type" Loaded="type_selection_loaded" SelectionChanged="type_selection_changed" Margin="158,138,144,0" VerticalAlignment="Top" RenderTransformOrigin="0.333,0.318"/>
+        <Label FontFamily="Segoe UI Symbol" Content="Prvi dan vazenja" HorizontalAlignment="Left" Margin="75,78,0,0" VerticalAlignment="Top" Width="123"/>
+
+        <Label FontFamily="Segoe UI Symbol" Content="Opis" Margin="75,260,79,0" VerticalAlignment="Top"/>
+
+        <Label FontFamily="Segoe UI Symbol" Content="Poslednji dan vazenja" Margin="75,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.527,-2.075" HorizontalAlignment="Left"/>
+
+        <Label Content="Tip: " HorizontalAlignment="Left" Margin="75,202,0,0" VerticalAlignment="Top" Width="123"/>
+
+        <DatePicker x:Name="start_date" Margin="0,78,79,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="120"/>
+
+        <DatePicker x:Name="end_date" Margin="0,140,79,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="120"/>
+
+        <TextBox x:Name="not_desc" Margin="75,322,79,247" TextWrapping="Wrap" Text="Unesite obrazlozenje: "/>
+
+        <ComboBox Name="type" Loaded="type_selection_loaded" SelectionChanged="type_selection_changed" Margin="0,202,79,0" VerticalAlignment="Top" RenderTransformOrigin="0.333,0.318" HorizontalAlignment="Right" Width="120"/>
+
+        <Button ToolTip="Klikom na ovo dugme, obavestenje ce biti kreirano" 
+                Click="Make_Free_Days"
+                CommandParameter="doctor_view" 
+                x:Name="doctors" Grid.Row="0" 
+                VerticalAlignment="Bottom" Width="150" Height="45"  BorderBrush="{x:Null}"
+                Foreground="{x:Null}"  Margin="79,0,79,166" >
+            <TextBlock FontFamily="Segoe UI Symbol" Text="                📅&#xa;Kreiraj slobodne dane" Foreground="#e8ebed" FontSize="15" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="4" Direction="330" Color="Gray" BlurRadius="4"/>
+            </Button.Effect>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#3499eb"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="RoyalBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+
+
+
+
+
+
+
 
     </Grid>
 </Window>

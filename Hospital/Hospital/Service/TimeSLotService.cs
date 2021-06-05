@@ -25,9 +25,9 @@ namespace Hospital.Service
         private DoctorRepository doctorRepository = new DoctorRepository();
 
 
-        public void generateTimeSlots()
+        public void generateTimeSlots(int wh_id)
         {
-            timeSlotRepository.generateTimeSlots();
+            timeSlotRepository.generateTimeSlots(wh_id);
         }
 
         public TimeSlot GetTimeSlotById(int id)

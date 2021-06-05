@@ -29,6 +29,15 @@ namespace Hospital.Model
         public User()
         {
         }
+        public User(string username, string password, string name, string surname, string phoneNumber, string eMail)
+        {
+            Username = username;
+            Password = password;
+            Name = name;
+            Surname = surname;
+            PhoneNumber = phoneNumber;
+            EMail = eMail;
+        }
 
         public User(string name, string surname)
         {

@@ -100,17 +100,18 @@ namespace Hospital.Repository
                 "INSERT INTO work_hours (shift_start, shift_end, approved, doctor_id) VALUES (:shift_start, :shift_end, :approved, :doctor_id)";
 
             // samo se menjaju dan i mesec
-            DateTime start = new DateTime(2021, 5, 26, 8, 0, 0);
-            DateTime end = new DateTime(2021, 5, 26, 16, 0, 0);
+            DateTime start = new DateTime(2021, 6, 5, 0, 0, 0);
+            DateTime end = new DateTime(2021, 6, 5, 8, 0, 0);
 
             command.Parameters.Add(":shift_start", OracleDbType.Date).Value = start;
             command.Parameters.Add("shift_end", OracleDbType.Date).Value = end;
             command.Parameters.Add("approved", OracleDbType.Int32).Value = 1;
-            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = 6;
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = 7;
 
             if (command.ExecuteNonQuery() > 0)
             {
-                return null;
+                WorkHours ret = new WorkHours(GetLastId(), start, end, true, 7);
+                return ret;
             }
 
 

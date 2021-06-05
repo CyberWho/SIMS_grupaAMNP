@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Data;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace Hospital.xaml_windows.Secretary
 {
@@ -13,14 +14,25 @@ namespace Hospital.xaml_windows.Secretary
     public partial class PatientNewAppointment : Window
     {
         int id;
+        private int user_id;
+        private bool is_user;
         ObservableCollection<Model.Doctor> Doctors = new ObservableCollection<Model.Doctor>();
         DoctorController doctorController = new DoctorController();
+        private PatientController patientController = new PatientController();
         int priority = 0;
 
-        public PatientNewAppointment(int id)
+        public PatientNewAppointment(int id, bool isUserId = false)
         {
+            if (isUserId)
+            {
+                this.user_id = id;
+                this.is_user = true;
+            }
+            else
+            {
+                this.id = id;
+            }
             InitializeComponent();
-            this.id = id;
             this.DataContext = this;
             updateDataGrid();
         }
@@ -53,7 +65,16 @@ namespace Hospital.xaml_windows.Secretary
                 }
                 else
                 {
-                    var s = new PatientNewAppointmentRecommendations(id, startDate, endDate, doctorId, priority);
+                    Window s;
+                    if (this.is_user)
+                    {
+                        int patient_id = this.patientController.GetPatientByUserId(this.user_id).Id;
+                        s = new PatientNewAppointmentRecommendations(patient_id, startDate, endDate, doctorId, priority);
+                    }
+                    else
+                    {
+                        s = new PatientNewAppointmentRecommendations(id, startDate, endDate, doctorId, priority);
+                    }
                     s.Show();
                     this.Close();
                 }
