@@ -97,7 +97,7 @@
             </StackPanel>
         </Button>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2,2,566.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding medicalTreatments}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,90,0,0" VerticalAlignment="Top" Width="468">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding medicalTreatments}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,90,0,0" VerticalAlignment="Top" Width="468">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Naziv leka" Binding="{Binding Drug.Name}" Width="*"/>
@@ -121,8 +121,8 @@
         <Label Content="Vremenski interval&#xD;&#xA; za izveštaj:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,236,0,0" VerticalAlignment="Top" Height="63" Width="140" RenderTransformOrigin="0.479,0.117"/>
         <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="17,314,0,0" TextWrapping="Wrap" Text="{Binding ReportError}" VerticalAlignment="Top" Height="36" Width="283"/>
         <Button Content="Generiši izveštaj" ToolTip="Klikom na dugme možete da generišete izveštaj o konzumaciji leka (Ctrl+O)" Command="{Binding GenerateReport}" FontSize="16" Height="34" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}"  Grid.Column="1" HorizontalAlignment="Left" Margin="157,350,0,0" VerticalAlignment="Top" Width="144"/>
-        <xctk:DateTimePicker BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" FontSize="16" Foreground="DeepSkyBlue" Text="{Binding reportStartTime}" VerticalAlignment="Top" Grid.Column="1" Margin="157,236,0,0" Height="34" Width="144"/>
-        <xctk:DateTimePicker BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="DeepSkyBlue" Text="{Binding reportEndTime}" Grid.Column="1" Margin="156,275,0,0" Height="34" Width="144"/>
+        <xctk:DateTimePicker  BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" FontSize="16" Foreground="DeepSkyBlue" Text="{Binding reportStartTime}" VerticalAlignment="Top" Grid.Column="1" Margin="157,236,0,0" Height="34" Width="144"/>
+        <xctk:DateTimePicker  BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="DeepSkyBlue" Text="{Binding reportEndTime}" Grid.Column="1" Margin="156,275,0,0" Height="34" Width="144"/>
 
 
     </Grid>

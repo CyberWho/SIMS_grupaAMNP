@@ -76,7 +76,7 @@
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
 
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding ReferralForSpecialists}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="304" Margin="365.8,80,0,0" VerticalAlignment="Top" Width="458">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding ReferralForSpecialists}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="304" Margin="365.8,80,0,0" VerticalAlignment="Top" Width="458">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="DoctorId" Binding="{Binding Doctor.Id}" Width="*" Visibility="Hidden"/>

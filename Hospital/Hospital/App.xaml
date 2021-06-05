@@ -147,13 +147,11 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#3499eb" TargetName="Border"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Background" Value="#838b90" TargetName="Border"/>
                                 </Trigger>
                                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                    <Setter Property="Background" Value="#0471c9"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

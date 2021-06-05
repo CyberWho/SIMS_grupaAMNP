@@ -28,12 +28,12 @@
         <TextBox Padding="3,3,3,0" Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Height="34" Margin="180,148,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
         <TextBox Padding="3,3,3,0" Text="{Binding Specialization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="DeepSkyBlue" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="34" Margin="180,187,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229" RenderTransformOrigin="0.781,0.343"/>
         <TextBox Padding="3,3,3,0" x:Name="description_txt" BorderBrush="DeepSkyBlue" Text="{Binding Description}" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="94" Margin="180,283,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Width="229"/>
-        <Button x:Name="OceniDoktora" ToolTip="Klikom na dugme potvrdjujete ocenu za doktora (Ctrl+O)" Command="{Binding RateDoctor}" Foreground="White" Content="Oceni doktora" Background="DeepSkyBlue" FontSize="16" Style="{StaticResource patientRegularBtn}" Margin="214,401,135.6,35.4" Width="144" Height="34"/>
 
 
         <xctk:IntegerUpDown BorderBrush="DeepSkyBlue" x:Name="rate_txt" Text="{Binding Rate}" Style="{StaticResource RoundedIntegerUpDown}" Foreground="DeepSkyBlue" FontSize="16" DefaultValue="1" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="180,226,0,0" VerticalAlignment="Top" Width="229" Height="34"/>
         <TextBlock HorizontalAlignment="Left" Text="{Binding RateError,UpdateSourceTrigger=Default,Mode=TwoWay}" Foreground="Red" x:Name="RateBox"  Margin="180,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="229"/>
         <TextBlock HorizontalAlignment="Left" Foreground="Red" x:Name="DescriptionBox"  Margin="180,382,0,0" TextWrapping="Wrap" Text="{Binding DescriptionError,UpdateSourceTrigger=Default,Mode=TwoWay}" VerticalAlignment="Top" Height="19" Width="229"/>
+        <Button Content="Potvrdi" FontSize="16" ToolTip="Klikom na dugme potvrđujete ocenu (Ctrl + O)" Command="{Binding RateDoctor}" Background="DeepSkyBlue" HorizontalAlignment="Left" Margin="221,401,0,0" VerticalAlignment="Top" Width="144"/>
 
 
     </Grid>

@@ -80,7 +80,7 @@
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" AllowDrop="True" ItemsSource="{Binding personalReminders}" MouseMove="MyDataGrid_OnMouseMove" PreviewMouseLeftButtonDown="MyDataGrid_OnPreviewMouseLeftButtonDown" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" AllowDrop="True" ItemsSource="{Binding personalReminders}" MouseMove="MyDataGrid_OnMouseMove" PreviewMouseLeftButtonDown="MyDataGrid_OnPreviewMouseLeftButtonDown" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Id podsetnika" Binding="{Binding reminderId}" Width="*" Visibility="Hidden"/>
@@ -90,7 +90,7 @@
                 <DataGridTextColumn Header="Učestalost" Binding="{Binding PersonalReminderFrequency}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="myDataGridDrop" ToolTip="Ovde možete prevući podsetnike koje želite da obrišete" AllowDrop="True" ItemsSource="{Binding SelectedPersonalReminders}" DragOver="MyDataGridDrop_OnDragOver" Drop="MyDataGridDrop_OnDrop"  CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="91" Margin="348.8,330,0,0" VerticalAlignment="Top" Width="475" SelectionChanged="myDataGridDrop_SelectionChanged">
+        <DataGrid x:Name="myDataGridDrop" IsReadOnly="True" ToolTip="Ovde možete prevući podsetnike koje želite da obrišete" AllowDrop="True" ItemsSource="{Binding SelectedPersonalReminders}" DragOver="MyDataGridDrop_OnDragOver" Drop="MyDataGridDrop_OnDrop"  CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="91" Margin="348.8,330,0,0" VerticalAlignment="Top" Width="475" SelectionChanged="myDataGridDrop_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Id podsetnika" Binding="{Binding reminderId}" Width="*" Visibility="Hidden"/>
@@ -124,6 +124,6 @@
             </StackPanel>
         </Button>
         <TextBlock Grid.Column="1" Foreground="red" HorizontalAlignment="Left" Margin="9.8,292,0,0" TextWrapping="Wrap" x:Name="Error" VerticalAlignment="Top" Height="26" Width="289"/>
-        <Button Content="Osveži" ToolTip="Klikom na dugme osvežićete tabelu podsetnika" Background="Green" Height="34" Click="Refresh_OnClick" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,375,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Osveži" FontSize="16" ToolTip="Klikom na dugme osvežićete tabelu podsetnika" Background="Green" Height="34" Click="Refresh_OnClick" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,375,0,0" Style="{StaticResource patientRegularBtn}" VerticalAlignment="Top" Width="144"/>
     </Grid>
 </Window>

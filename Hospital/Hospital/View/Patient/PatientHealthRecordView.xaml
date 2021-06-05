@@ -88,7 +88,7 @@
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="1.8,2,571.6,422.4" Height="Auto"/>
         <Button Content="Moji specijalistički uputi" ToolTip="Klikom na dugme prikazaće Vam se svi aktivni uputi za specijalističke preglede (Ctrl+S)" x:Name="MojiUputi" Command="{Binding ShowReferrals}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,82,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
         <Button Content="Moje alergije" ToolTip="Klikom na dugme prikazaće Vam se sve Vaše alergije (Ctrl+A)" FontSize="24" x:Name="MojeAlergije" Command="{Binding ShowAllergies}" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,182,0,0" VerticalAlignment="Top" Width="347" Height="38"/>
         <Button Content="Moje anamneze" ToolTip="Klikom na dugme prikazaće Vam se sve Vaše anamneze (Ctrl+M)" x:Name="MojeAnamneze" Command="{Binding ShowAnamnesis}" FontSize="24" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="423.8,232,0,0" VerticalAlignment="Top" Width="347" Height="38"/>

@@ -73,7 +73,7 @@
                 </MenuItem.Header>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="295" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding Reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="295" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
