@@ -35,7 +35,7 @@
 
         <Grid  Margin="0 30 0 0" >
             <ListView Name="lv_lekovi" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,183,10,0" Height="50" VerticalAlignment="Top" >
-                <ListViewItem Width="440">
+                <ListViewItem Width="392">
                     <Grid HorizontalAlignment="Stretch" Width="383">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -44,15 +44,15 @@
                         <TextBlock Text="Ukupno pregleda : 40" Grid.Column="0" FontSize="15" FontWeight="ExtraLight"  />
                     </Grid>
                 </ListViewItem>
-                <ListBoxItem Width="440">
-                    <Rectangle Fill="Black" Height="1" Margin="0,2,0,2" Opacity="0.5" Width="425"/>
+                <ListBoxItem Width="392">
+                    <Rectangle Fill="Black" Height="1" Margin="0,2,0,2" Opacity="0.5" Width="382"/>
                 </ListBoxItem>
             </ListView>
         </Grid>
 
         <Grid  Margin="0 30 0 0" >
             <ListView Name="aa" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,244,10,253" >
-                <ListViewItem Width="440">
+                <ListViewItem Width="392">
                     <Grid HorizontalAlignment="Stretch" Width="383">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -61,8 +61,8 @@
                         <TextBlock Text="Ukupno operacija : 6" Grid.Column="0" FontSize="15" FontWeight="ExtraLight"  />
                     </Grid>
                 </ListViewItem>
-                <ListBoxItem Width="440">
-                    <Rectangle Fill="Black" Height="1" Margin="0,2,0,2" Opacity="0.5" Width="425"/>
+                <ListBoxItem Width="392">
+                    <Rectangle Fill="Black" Height="1" Margin="0,2,0,2" Opacity="0.5" Width="382"/>
                 </ListBoxItem>
             </ListView>
         </Grid>

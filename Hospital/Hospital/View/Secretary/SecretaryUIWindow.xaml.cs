@@ -19,7 +19,7 @@ namespace Hospital.View.Secretary
     /// </summary>
     public partial class SecretaryUIWindow : Window
     {
-        public SecretaryUIWindow()
+        public SecretaryUIWindow(int id)
         {
             InitializeComponent();
         }

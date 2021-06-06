@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Hospital.Controller;
 using Hospital.Model;
 using System.Windows;
+using System.Windows.Controls;
 using Hospital.View.Secretary;
 using Hospital.xaml_windows.Patient;
 using Hospital.xaml_windows.Secretary;
@@ -89,11 +90,16 @@ namespace Hospital.ViewModel.Secretary
         {
             Window s = new Report();
             s.Show();
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(s, "Izvestaj");
+            }
         }
 
         private async void demo()
         {
-            if (MessageBox.Show("Upravo ste pokrenuli demo koji pokazuje kreiranje korisnika! Da li zelite da pokrenete demo ? ", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show("Upravo ste pokrenuli demo koji pokazuje kreiranje korisnika! Da li zelite da pokrenete demo?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 MessageBox.Show("Demo je prekinut!");
             }

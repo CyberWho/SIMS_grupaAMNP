@@ -15,6 +15,7 @@ using Hospital.xaml_windows.Secretary;
 using System.Windows;
 using System.Windows.Annotations;
 using Hospital.Service;
+using Hospital.View.Secretary;
 
 namespace Hospital.Controller
 {
@@ -92,7 +93,7 @@ namespace Hospital.Controller
                     s.Show();
                     break;
                 case "Secretary":
-                    s = new SecretaryUI(id);
+                    s = new SecretaryUIWindow(id);
                     s.Show();
                     break;
             }

@@ -26,7 +26,7 @@ namespace Hospital
             string user = Username.Text;
             string pass = Password.Password;
 
-            //if (new UserController().LoginUser(user, pass)) this.Close();
+            if (new UserController().LoginUser(user, pass)) this.Close();
 
             #region MARKO HCI, OBRISATI
             WorkHoursController WHC = new WorkHoursController();
@@ -37,7 +37,7 @@ namespace Hospital
 
             #endregion
 
-            Window s = new SecretaryUIWindow(); s.Show(); this.Close();
+            // Window s = new SecretaryUIWindow(); s.Show(); this.Close();
         }
 
     }
