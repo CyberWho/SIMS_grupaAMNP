@@ -79,9 +79,9 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <ListBox Name="lb_doctors" SelectionChanged="DoctorSelectionChanged" HorizontalAlignment="Left" Height="221" Margin="488,108,0,0" VerticalAlignment="Top" Width="272" FontFamily="Courier New" FontSize="15"/>
+            <ListBox Name="lb_doctors" SelectionChanged="DoctorSelectionChanged" HorizontalAlignment="Left" Height="221" Margin="488,108,0,0" VerticalAlignment="Top" Width="354" FontFamily="Courier New" FontSize="15"/>
             <TextBox Name="tb_description" HorizontalAlignment="Left" Height="221" Margin="250,108,0,0" TextWrapping="Wrap" Text="Opis uputa" VerticalAlignment="Top" Width="196" FontFamily="Courier New" FontSize="15"/>
-            <Button IsEnabled="False" Name="btn_zadaj_uput" Content="Zadaj uput" HorizontalAlignment="Left" Margin="488,341,0,0" VerticalAlignment="Top" Width="272" Click="GiveReferral" FontFamily="Courier New" FontSize="15" Height="35"/>
+            <Button IsEnabled="False" Name="btn_zadaj_uput" Content="Zadaj uput" HorizontalAlignment="Left" Margin="488,341,0,0" VerticalAlignment="Top" Width="354" Click="GiveReferral" FontFamily="Courier New" FontSize="15" Height="35"/>
             <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="249,341,0,0" VerticalAlignment="Top" Width="196" Click="ReturnOpetion" FontFamily="Courier New" FontSize="15" Height="35"/>
 
         </Grid>

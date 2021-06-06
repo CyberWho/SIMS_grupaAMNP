@@ -1,4 +1,5 @@
-﻿using Hospital.Controller;
+﻿using System;
+using Hospital.Controller;
 using Hospital.Model;
 using System.Windows;
 using System.Windows.Controls;
@@ -78,6 +79,8 @@ namespace Hospital.xaml_windows.Doctor
             if (lbi != null)
             {
                 int drugId = int.Parse(lbi.Content.ToString().Split(' ')[0]);
+                if (lbi.Content.ToString().Contains("ALERGIJA"))
+                    MessageBox.Show("PACIJENT JE ALERGICAN NA IZABRANI LEK");
                 foreach (Drug drug in _drugs)
                     if (drug.Id == drugId)
                         _selectedDrug = drug;

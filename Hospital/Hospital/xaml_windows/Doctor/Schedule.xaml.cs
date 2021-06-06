@@ -27,6 +27,8 @@ namespace Hospital.xaml_windows.Doctor
             appointments = appointmentContoller.GetAllAppointmentsByDoctorId(this.id_doc);
             foreach (Appointment ap in appointments)
             {
+                if(ap.Patient_Id == 0)
+                    continue;
                // MessageBox.Show(ap.Patient_Id.ToString());
                 ListBoxItem itm = new ListBoxItem();
                 ap.patient = patientController.GetPatientById(ap.Patient_Id);

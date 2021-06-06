@@ -1,0 +1,92 @@
+﻿<Window x:Class="Hospital.View.Doctor.Tutorial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Doctor"
+        mc:Ignorable="d"
+        Title="Tutorial" Height="768" Width="1024">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150">
+            </RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="4" Background="CadetBlue">
+
+            <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="0,0,917.6,65.4"/>
+
+            <TextBlock FontFamily="Segoe UI Symbol" Text="🏥 ZDRAVO KORPORACIJA 🏥" Foreground="black" FontSize="20" Height="30" Margin="732,110,9.6,10.4" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="50" Margin="10,90,0,0" BorderBrush="CadetBlue" Command="{Binding GoToPatientSearchCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Trazi pacijenta&#xE11A;&#xA;" Foreground="black" FontSize="20" Height="30" Width="150" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="275,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToDrugOperationCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Pregled lekova&#x1f48a;" Foreground="black" FontSize="20" Height="30" Width="150" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="105,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToAppointmentsCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Termini&#xE008;" Foreground="black" FontSize="20" Height="30" Width="96" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="615,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToScheduleCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Pregled zauzeca&#x1f516;" Foreground="black" FontSize="20" Height="30" Width="160" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="445,10,0,0" BorderBrush="CadetBlue" Command="{Binding GoToCreateAppointmentCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Dodaj termin &#x2795;" Foreground="black" FontSize="20" Height="30" Width="143" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="50" Margin="838,10,0,0" BorderBrush="CadetBlue" Command="{Binding ReturnOptionCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Izloguj se &#x1f5f7;" Foreground="black" FontSize="20" Height="30" Width="111" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="4">
+            <StackPanel Grid.Row="1">
+                <MediaElement Source="C:\Users\Nikola\Desktop\mvvm\SIMS_grupaAMNP\Hospital\Hospital\Resources\Video\lekarTutorijal.mp4" LoadedBehavior="Manual" Name="mePlayer" Margin="76,0,76,0" Height="488" />
+                <Label x:Name="lblStatus" Content="Tutorijal nije pusten..." HorizontalContentAlignment="Center" Margin="5,5,4.6,5" FontSize="20"/>
+                <WrapPanel HorizontalAlignment="Center">
+                    <Button Name="btnPlay" Click="btnPlay_Click" Background="white" BorderThickness="0" Height="30" Width="30" FontSize="20">▶</Button>
+                    <Button Name="btnPause" Margin="5,0" Click="btnPause_Click" Background="white" BorderThickness="0" Height="30" Width="30" FontSize="20">⏸</Button>
+                    <Button Name="btnStop" Click="btnStop_Click" Background="white" BorderThickness="0" Height="30" Width="30" FontSize="20">⏹</Button>
+                </WrapPanel>
+            </StackPanel>
+        </Grid>
+
+
+    </Grid>
+</Window>

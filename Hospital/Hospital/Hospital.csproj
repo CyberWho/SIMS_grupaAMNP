@@ -195,6 +195,7 @@
     <Compile Include="ViewModel\Doctor\DrugOperationsViewModel.cs" />
     <Compile Include="ViewModel\Doctor\MyICommand.cs" />
     <Compile Include="ViewModel\Doctor\SearchPatientViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\TutorialViewModel.cs" />
     <Compile Include="ViewModel\Manager\ManagerUIViewModel.cs" />
     <Compile Include="ViewModel\Manager\MyICommand.cs" />
     <Compile Include="ViewModel\Patient\MyICommand.cs" />
@@ -209,6 +210,9 @@
     </Compile>
     <Compile Include="View\Doctor\SearchPatientMVVM.xaml.cs">
       <DependentUpon>SearchPatientMVVM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\Tutorial.xaml.cs">
+      <DependentUpon>Tutorial.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Doctor\ClinicalTreatmentGiving.xaml.cs">
       <DependentUpon>ClinicalTreatmentGiving.xaml</DependentUpon>
@@ -409,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\SearchPatientMVVM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\Tutorial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -756,6 +764,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-undo-90.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Video\lekarTutorijal.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

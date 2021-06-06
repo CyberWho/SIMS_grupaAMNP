@@ -85,6 +85,13 @@
                 </TextBlock>
             </Button>
             <Image Source="/Hospital;component/Resources/Icons/icons8-hospital-3-96.png" Margin="369,262,369.6,-282.6"/>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Height="50" Margin="210,90,0,0" BorderBrush="CadetBlue" Command="{Binding GoToTutorialCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="Tutorijal&#x1f3a5;" Foreground="black" FontSize="20" Height="30" Width="97" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
         </Grid>
 
 

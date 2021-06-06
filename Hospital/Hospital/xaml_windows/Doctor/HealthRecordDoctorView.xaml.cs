@@ -91,9 +91,7 @@ namespace Hospital.xaml_windows.Doctor
                 Anamnesis_Text_Box.Text = getSelectedAnamnesisDescription();
 
                 btn_1.IsEnabled = true;
-                btn_2.IsEnabled = true;
-                btn_3.IsEnabled = true;
-                btn_4.IsEnabled = true;
+
 
             }
 
@@ -106,9 +104,15 @@ namespace Hospital.xaml_windows.Doctor
                 if (anamnesis.appointment.Id == selected_appointment_id)
                 {
                     selected_anamensis = anamnesis;
+                    btn_2.IsEnabled = true;
+                    btn_3.IsEnabled = true;
+                    btn_4.IsEnabled = true;
                     return anamnesis.Description;
-                }
 
+                }
+            btn_2.IsEnabled = false;
+            btn_3.IsEnabled = false;
+            btn_4.IsEnabled = false;
             return "Nema anamneze";
         }
 
@@ -216,6 +220,11 @@ namespace Hospital.xaml_windows.Doctor
         {
             Window s = new Report(healthRecord, appointments, patient);
             s.Show();
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(s, "Anamneze i recepti");
+            }
             //this.Close();
         }
     }

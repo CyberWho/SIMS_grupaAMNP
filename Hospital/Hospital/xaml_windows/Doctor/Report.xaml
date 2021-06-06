@@ -63,9 +63,9 @@
                                         <TextBlock Text="Opis termina" Grid.Column="2" FontSize="15" FontWeight="ExtraLight"/>
                                     </Grid>
                                 </ListViewItem>
-                                <ListBoxItem Width="440">
+                                <ListViewItem Width="440">
                                     <Rectangle Fill="Black" Height="1" Margin="0,2,0,2" Opacity="0.5" Width="425"/>
-                                </ListBoxItem>
+                                </ListViewItem>
                             </ListView>
                         </Grid>
 
@@ -81,9 +81,9 @@
                                         <TextBlock Text="Opis recepta" Grid.Column="1" FontSize="15" FontWeight="ExtraLight" />
                                     </Grid>
                                 </ListViewItem>
-                                <ListBoxItem Width="440">
+                                <ListViewItem Width="440">
                                     <Rectangle Fill="Black" Height="1" Margin="0,2,0,2" Opacity="0.5" Width="425"/>
-                                </ListBoxItem>
+                                </ListViewItem>
                             </ListView>
                         </Grid>
 

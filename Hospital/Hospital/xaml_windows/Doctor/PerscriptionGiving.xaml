@@ -78,10 +78,11 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <ListBox x:Name="lb_drugs" SelectionChanged="DrugChange" SelectionMode="Single" Margin="482,168,263.6,180" FontFamily="Courier New" FontSize="15"/>
-            <TextBox x:Name ="Perscription_description" HorizontalAlignment="Left" Height="140" Margin="261,168,0,0" TextWrapping="Wrap" Text="Opis recepta" VerticalAlignment="Top" Width="175" FontSize="15" FontFamily="Courier New"/>
-            <Button IsEnabled="False" Name="btn_dodaj" Content="Dodaj recept" HorizontalAlignment="Left" Margin="579,331,0,0" VerticalAlignment="Top" Width="175" Height="35" FontSize="15" Click="AddPerscriptionToDb" FontFamily="Courier New"/>
-            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="260,331,0,0" VerticalAlignment="Top" Width="175"  Height="35" FontSize="15" Click="ReturnOption" RenderTransformOrigin="-1.703,0.754" FontFamily="Courier New"/>
+            <ListBox x:Name="lb_drugs" SelectionChanged="DrugChange" SelectionMode="Single" Margin="457,172,220.6,176" FontFamily="Courier New" FontSize="15"/>
+            <TextBox x:Name ="Perscription_description" HorizontalAlignment="Left" Height="140" Margin="236,172,0,0" TextWrapping="Wrap" Text="Opis recepta" VerticalAlignment="Top" Width="175" FontSize="15" FontFamily="Courier New"/>
+            <Button IsEnabled="False" Name="btn_dodaj" Content="Dodaj recept" HorizontalAlignment="Left" Margin="457,335,0,0" VerticalAlignment="Top" Width="175" Height="35" FontSize="15" Click="AddPerscriptionToDb" FontFamily="Courier New"/>
+            <Button Content="&#x1f448;Nazad" HorizontalAlignment="Left" Margin="235,335,0,0" VerticalAlignment="Top" Width="175"  Height="35" FontSize="15" Click="ReturnOption" RenderTransformOrigin="-1.703,0.754" FontFamily="Courier New"/>
+            <TextBlock HorizontalAlignment="Left" Margin="457,151,0,0" TextWrapping="Wrap" Text="Potvrdjeni lekovi:" VerticalAlignment="Top" FontSize="15" FontFamily="Courier New" Width="180"/>
 
         </Grid>
 

@@ -91,7 +91,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="4">
-            <TextBlock x:Name="more_info" Margin="326,106,413.6,187" FontFamily="Courier New" FontSize="15"/>
+            <TextBlock x:Name="more_info" Margin="326,106,413.6,187" FontFamily="Courier New" FontSize="15"><Run Text="Izaberite termin za vise"/><LineBreak/><Run Text="informacija."/></TextBlock>
             <DataGrid ItemsSource="{Binding   timeSlots, Mode= TwoWay}"   Margin="71,106,707.6,187" AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow" CanUserResizeColumns="False" EnableColumnVirtualization="False" IsReadOnly="True" CanUserResizeRows="False" SelectionMode="Single" FontFamily="Courier New" FontSize="15"
 
                       SelectedItem="{Binding SelectedTimeSlot, Mode= TwoWay}">

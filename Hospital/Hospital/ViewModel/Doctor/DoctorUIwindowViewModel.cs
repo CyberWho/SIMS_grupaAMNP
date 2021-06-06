@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 using Hospital.Controller;
 using Hospital.View.Doctor;
 using Hospital.xaml_windows.Doctor;
@@ -25,7 +26,7 @@ namespace Hospital.ViewModel.Doctor
         public MyICommand GoToCreateAppointmentCommand { get; set; }
         public MyICommand GoToScheduleCommand { get; set; }
         public MyICommand GoToPatientSearchCommand { get; set; }
-
+        public MyICommand GoToTutorialCommand { get; set; }
 
         private int id;
         private int id_doc;
@@ -50,12 +51,20 @@ namespace Hospital.ViewModel.Doctor
             this.GoToCreateAppointmentCommand = new MyICommand(GoToCreateAppointment);
             this.GoToScheduleCommand = new MyICommand(GoToSchedule);
             this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
+            this.GoToTutorialCommand = new MyICommand(GoToTutorial);
 
             this.thisWindow = window;
         }
 
         public DoctorUIwindowViewModel()
         {
+        }
+
+        public void GoToTutorial()
+        {
+            Window s = new Tutorial(this.id);
+            s.Show();
+            thisWindow.Close();
         }
 
         public void ReturnOption()

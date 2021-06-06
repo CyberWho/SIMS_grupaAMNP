@@ -122,21 +122,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void UpdateAppointment(object sender, RoutedEventArgs e)
         {
-            /*
-            if (selected_appointment != null && time_slot_for_update != null)
-            {
-                TimeSlot toFree = timeSlotController.GetAppointmentTimeSlotByDateAndDoctorId(selectedAppointment.StartTime, doctor.Id);
-                timeSlotController.FreeTimeSlot(toFree);
-                TimeSlot newTimeSlot = getTimeSlotFromUi();
-                timeSlotController.TakeTimeSlot(newTimeSlot);
 
-                appointmentController.ChangeStartTime(selectedAppointment, newTimeSlot.StartTime);
-                selectedAppointment.StartTime = newTimeSlot.StartTime;
-                updateUi(toFree);
-
-
-            }
-            */
             if (selectedAppointment != null && selectedTimeSlot != null)
             {
                 TimeSlot toFree = timeSlotController.GetAppointmentTimeSlotByDateAndDoctorId(selectedAppointment.StartTime, doctor.Id);
