@@ -89,18 +89,18 @@
                 <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="1.8,2,571.6,422.4" Height="Auto"/>
        
-        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding Path=allergies}" SelectedItem="{Binding SelectedItem}" Style="{StaticResource MaterialDesignDataGrid}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="355.8,88,0,0" VerticalAlignment="Top" Width="468">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding Path=allergies}" SelectedItem="{Binding SelectedItem}" Style="{StaticResource MaterialDesignDataGrid}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="355.8,96,0,0" VerticalAlignment="Top" Width="468">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Binding="{Binding allergyType.Type}" Width="*"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Naziv alergije:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,88,0,0" VerticalAlignment="Top" Height="32" Width="124"/>
-        <TextBox x:Name="allergy_name_txt" IsReadOnly="True" Foreground="DeepSkyBlue" Background="white" BorderBrush="DeepSkyBlue" FontSize="16" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="34" Margin="145.8,87,0,0" Padding="3,3,3,0" TextWrapping="Wrap" Text="{Binding SelectedItem.allergyType.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Odabrana alergija:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.6,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,-0.8" Width="197"/>
-        <Label Content="Moje alergije:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="356,42,0,0" VerticalAlignment="Top"/>
+        <Label Content="Naziv alergije:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,98,0,0" VerticalAlignment="Top" Height="32" Width="124"/>
+        <TextBox x:Name="allergy_name_txt" IsReadOnly="True" Foreground="DeepSkyBlue" Background="white" BorderBrush="DeepSkyBlue" FontSize="16" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="34" Margin="145.8,96,0,0" Padding="3,3,3,0" TextWrapping="Wrap" Text="{Binding SelectedItem.allergyType.Type,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Odabrana alergija:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,-0.8" Width="197"/>
+        <Label Content="Moje alergije:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="355.8,52,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Content="Pomoć" Unchecked="CheckBox_OnUnchecked" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
         <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Style="{StaticResource buttonPatient}" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">

@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:Hospital.View.Patient"
         xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
         mc:Ignorable="d"
-        Title="Wizard3View" Height="500" Width="900">
+        Title="Wizard3View" Height="500" Width="900" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:Wizard3ViewModel/>
     </Window.DataContext>
     <Grid>
         <Label Content="Upravljanje tabelarno predstavljenim podacima" Foreground="DeepSkyBlue" FontSize="40" HorizontalAlignment="Left" Margin="24,10,0,0" VerticalAlignment="Top"/>
         <Label  Foreground="DeepSkyBlue" FontSize="16" Content="Na tabelarnim stranicama sa desne strane imaćete predstavljene podatke u tabeli u kojoj treba da selektujete željeni red," HorizontalAlignment="Left" Margin="16,74,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" Foreground="DeepSkyBlue" Content="a zatim će željeni podaci biti smešteni u polja sa Vaše leve strane, a zatim možete da upravljate odbranim podacima" HorizontalAlignment="Left" Margin="29,111,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" Foreground="DeepSkyBlue" Content="a zatim će željeni podaci biti smešteni u polja sa Vaše leve strane, a zatim možete da upravljate odbranim podacima" HorizontalAlignment="Left" Margin="24,104,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding doctors}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="218" Margin="408,175,0,0" VerticalAlignment="Top" Width="416">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" MaxWidth="0"/>

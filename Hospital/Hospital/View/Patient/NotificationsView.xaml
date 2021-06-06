@@ -73,7 +73,7 @@
         </Menu>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
 
-        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="1.8,2,571.6,422.4" Height="Auto"/>
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="5.8,2,567.6,422.4" Height="Auto"/>
         <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
@@ -84,7 +84,7 @@
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding SystemNotifications}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="355.8,80,0,0" VerticalAlignment="Top" Width="468">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding SystemNotifications}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="355.8,96,0,0" VerticalAlignment="Top" Width="468">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Naslov" Binding="{Binding Name}" Width="*"/>
@@ -92,12 +92,12 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Naslov:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.634" Height="32" Width="115"/>
-        <Label Content="Tekst:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,119,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,1.052" Height="32" Width="94"/>
-        <TextBox Padding="3,3,3,0" x:Name="app_stat_txt" IsReadOnly="True" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="34" Margin="154.8,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
-        <TextBox Padding="3,3,3,0" x:Name="app_type_txt" IsReadOnly="True" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="90" Margin="154.8,119,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Description,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Odabrano obaveštenje:" Foreground="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,38,0,0" VerticalAlignment="Top"/>
-        <Label Content="Obaveštenja:" Foreground="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="355.8,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.138,-0.316"/>
+        <Label Content="Naslov:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.634" Height="32" Width="115"/>
+        <Label Content="Tekst:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,1.052" Height="32" Width="94"/>
+        <TextBox Padding="3,3,3,0" x:Name="app_stat_txt" IsReadOnly="True" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="34" Margin="154.8,96,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox Padding="3,3,3,0" x:Name="app_type_txt" IsReadOnly="True" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="90" Margin="154.8,135,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Description,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Odabrano obaveštenje:" Foreground="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,52,0,0" VerticalAlignment="Top"/>
+        <Label Content="Obaveštenja:" Foreground="DeepSkyBlue" FontSize="24" Grid.Column="1" HorizontalAlignment="Left" Margin="355.8,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.138,-0.316"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
         <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Style="{StaticResource buttonPatient}" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">

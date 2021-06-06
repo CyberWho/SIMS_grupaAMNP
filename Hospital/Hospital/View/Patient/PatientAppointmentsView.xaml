@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
         mc:Ignorable="d"
-        Title="PatientAppointmentsView" Height="500" Width="900">
+        Title="PatientAppointmentsView" Height="500" Width="900" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:PatientAppointmentsViewModel/>
     </Window.DataContext>

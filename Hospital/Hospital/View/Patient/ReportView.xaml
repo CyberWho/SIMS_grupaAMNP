@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View.Patient"
         xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
         mc:Ignorable="d"
-        Title="Izveštaj" Height="500" Width="900">
+        Title="Izveštaj" Height="500" Width="900" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:ReportViewModel/>
     </Window.DataContext>

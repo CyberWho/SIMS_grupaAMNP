@@ -76,7 +76,7 @@
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
 
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding ReferralForSpecialists}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="304" Margin="365.8,80,0,0" VerticalAlignment="Top" Width="458">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding ReferralForSpecialists}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow"  AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="304" Margin="365.8,96,0,0" VerticalAlignment="Top" Width="458">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="DoctorId" Binding="{Binding Doctor.Id}" Width="*" Visibility="Hidden"/>
@@ -102,24 +102,24 @@
                 <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Label Content="Ime doktora:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.492,-0.6"/>
-        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="6.8,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.512,0.943"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,159,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vremenski interval:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,254,0,0" VerticalAlignment="Top"/>
-        <TextBox Padding="3,3,3,0" x:Name="doc_name_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="2" HorizontalAlignment="Left" Height="34" Margin="166,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Doctor.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
-        <TextBox Padding="3,3,3,0" x:Name="doc_surname_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="165.8,120,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" Text="{Binding SelectedItem.Doctor.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
-        <TextBox Padding="3,3,3,0" x:Name="room_id_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" Grid.Column="1" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignOutlinedTextBox}" Height="90" Margin="165.8,159,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Description,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Ime doktora:" Grid.Column="1" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="16.8,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.492,-0.6"/>
+        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="16.8,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.512,0.943"/>
+        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="16.8,175,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vremenski interval:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,270,0,0" VerticalAlignment="Top"/>
+        <TextBox Padding="3,3,3,0" x:Name="doc_name_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="165.8,96,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Doctor.User.Name,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox Padding="3,3,3,0" x:Name="doc_surname_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="165.8,136,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" Text="{Binding SelectedItem.Doctor.User.Surname,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox Padding="3,3,3,0" x:Name="room_id_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" Grid.Column="1" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignOutlinedTextBox}" Height="90" Margin="165.8,175,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Description,ElementName=myDataGrid}" VerticalAlignment="Top" Width="144"/>
 
-        <xctk:DateTimePicker BorderBrush="DeepSkyBlue" x:Name="date_txt" Text="{Binding startTime}"  Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="165.8,254,0,0" VerticalAlignment="Top" Width="144" Height="34"/>
+        <xctk:DateTimePicker BorderBrush="DeepSkyBlue" x:Name="date_txt" Text="{Binding startTime}"  Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="165.8,270,0,0" VerticalAlignment="Top" Width="144" Height="34"/>
 
 
-        <xctk:DateTimePicker BorderBrush="DeepSkyBlue" x:Name="date_end_txt" Text="{Binding endTime}" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="165.8,293,0,0" VerticalAlignment="Top" Width="144" Height="34"/>
-        <Button x:Name="Predlozi" Height="34" ToolTip="Klikom na dugme prikazaće Vam se predlozi termina kod doktora specijaliste" Style="{StaticResource patientRegularBtn}" Foreground="White" Content="Prikaži predloge" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="165.8,360,0,0" VerticalAlignment="Top" Width="144" Command="{Binding ShowRecommendations}" RenderTransformOrigin="0.631,1.255"/>
+        <xctk:DateTimePicker BorderBrush="DeepSkyBlue" x:Name="date_end_txt" Text="{Binding endTime}" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="165.8,309,0,0" VerticalAlignment="Top" Width="144" Height="34"/>
+        <Button x:Name="Predlozi" Height="34" ToolTip="Klikom na dugme prikazaće Vam se predlozi termina kod doktora specijaliste" Style="{StaticResource patientRegularBtn}" Foreground="White" Content="Prikaži predloge" FontSize="16" Background="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="165.8,376,0,0" VerticalAlignment="Top" Width="144" Command="{Binding ShowRecommendations}" RenderTransformOrigin="0.631,1.255"/>
 
-        <Label Content="Iskoristi odabrani uput:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
-        <Label Content="Moji uputi:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="365.6,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.68"/>
+        <Label Content="Iskoristi odabrani uput:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="16.8,52,0,0" VerticalAlignment="Top"/>
+        <Label Content="Moji uputi:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="365.8,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.68"/>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked"  Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
-        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="9.8,332,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Height="23" Width="300"/>
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="9.8,348,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Height="28" Width="300"/>
         <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Style="{StaticResource buttonPatient}" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>

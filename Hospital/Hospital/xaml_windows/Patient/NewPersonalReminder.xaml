@@ -12,18 +12,18 @@
 
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="50,2,178.6,423.4" Height="Auto"/>
         <Label Content="Kreiraj novi podsetnik:" FontSize="26" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="50,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.279,-0.511"/>
-        <Label Content="Naziv:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="50,127,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vreme:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="50,170,0,0" VerticalAlignment="Top"/>
-        <Label Content="Učestalost:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="50,212,0,0" VerticalAlignment="Top"/>
-        <Label Content="Opis:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="50,271,0,0" VerticalAlignment="Top"/>
-        <TextBox Padding="3,3,3,0" x:Name="name_txt" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="34" Margin="166,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="229"/>
-        <TextBox Padding="3,3,3,0" x:Name="description_txt" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="90" Margin="166,271,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="229"/>
-        <ComboBox x:Name="frequency_txt" BorderBrush="DeepSkyBlue" SelectedValuePath="Value" DisplayMemberPath="Display" HorizontalAlignment="Left" Margin="166,208,0,0" ItemsSource="{Binding }" VerticalAlignment="Top" Height="34" Width="229" FontSize="16" Foreground="DeepSkyBlue"/>
-        <xctk:DateTimePicker x:Name="alarm_time_txt" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" FontSize="16" Foreground="DeepSkyBlue" Margin="166,166,0,0"  VerticalAlignment="Top" Height="34" Width="229"/>
-        <Button Content="Potvrda" Height="34" ToolTip="Klikom na dugme potvdjujete kreiranje podsetnika" x:Name="Potvrda" Click="Potvrda_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" HorizontalAlignment="Left" Margin="213,387,0,0" VerticalAlignment="Top" Width="144"/>
-        <TextBlock Foreground="Red" Name="NameBlock" HorizontalAlignment="Left" Margin="166,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="209"/>
-        <TextBlock HorizontalAlignment="Left" Margin="166,202,0,0" TextWrapping="Wrap" Foreground="Red" Name="TimeBlock" VerticalAlignment="Top" Height="14" Width="209"/>
-        <TextBlock HorizontalAlignment="Left" Margin="166,242,0,0" TextWrapping="Wrap" Foreground="Red" Name="FreqBlock" VerticalAlignment="Top" Height="29" Width="229"/>
+        <Label Content="Naziv:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,102,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vreme:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Učestalost:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,209,0,0" VerticalAlignment="Top"/>
+        <Label Content="Opis:" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="56,266,0,0" VerticalAlignment="Top"/>
+        <TextBox Padding="3,3,3,0" x:Name="name_txt" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="34" Margin="166,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="229"/>
+        <TextBox Padding="3,3,3,0" x:Name="description_txt" BorderBrush="DeepSkyBlue" FontSize="16" Foreground="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Height="90" Margin="166,266,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="229"/>
+        <ComboBox x:Name="frequency_txt" BorderBrush="DeepSkyBlue" SelectedValuePath="Value" DisplayMemberPath="Display" HorizontalAlignment="Left" Margin="166,209,0,0" ItemsSource="{Binding }" VerticalAlignment="Top" Height="34" Width="229" FontSize="16" Foreground="DeepSkyBlue"/>
+        <xctk:DateTimePicker x:Name="alarm_time_txt" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" FontSize="16" Foreground="DeepSkyBlue" Margin="166,154,0,0"  VerticalAlignment="Top" Height="34" Width="229"/>
+        <Button Content="Potvrda" Height="34" ToolTip="Klikom na dugme potvdjujete kreiranje podsetnika" x:Name="Potvrda" Click="Potvrda_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" HorizontalAlignment="Left" Margin="204,387,0,0" VerticalAlignment="Top" Width="144"/>
+        <TextBlock Foreground="Red" Name="NameBlock" HorizontalAlignment="Left" Margin="166,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="229"/>
+        <TextBlock HorizontalAlignment="Left" Margin="166,188,0,0" TextWrapping="Wrap" Foreground="Red" Name="TimeBlock" VerticalAlignment="Top" Height="16" Width="229"/>
+        <TextBlock HorizontalAlignment="Left" Margin="166,242,0,0" TextWrapping="Wrap" Foreground="Red" Name="FreqBlock" VerticalAlignment="Top" Height="24" Width="229"/>
         <TextBlock HorizontalAlignment="Left" Margin="166,362,0,0" TextWrapping="Wrap" Foreground="Red" Name="DescriptionBlock" VerticalAlignment="Top" Height="25" Width="229"/>
 
 
