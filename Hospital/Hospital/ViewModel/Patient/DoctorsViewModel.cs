@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Hospital.Controller;
+using Hospital.Repository;
 using Hospital.View.Patient;
 using Hospital.xaml_windows.Patient;
+using Xceed.Wpf.Toolkit.Core;
 
 namespace Hospital.ViewModel.Patient
 {
@@ -20,7 +23,16 @@ namespace Hospital.ViewModel.Patient
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         private DoctorController doctorController = new DoctorController();
         private AppointmentController appointmentController = new AppointmentController();
-        public ObservableCollection<Model.Doctor> doctors { get; set; }
+        private ObservableCollection<Model.Doctor> _doctors;
+
+        public ObservableCollection<Model.Doctor> doctors
+        {
+            get { return _doctors; }
+            set
+            {
+                SetProperty(ref _doctors,value);
+            }
+        }
         public MyICommand HomePage { get; set; }
         public MyICommand MyProfile { get; set; }
         public MyICommand MyAppointments { get; set; }
@@ -32,6 +44,29 @@ namespace Hospital.ViewModel.Patient
         public MyICommand Help { get; set; }
         public MyICommand DoctorRate { get; set; }
         public Model.Doctor SelectedItem { get; set; }
+        private string _searchString;
+
+        public string SearchString
+        {
+            /* get { return _searchString; }
+             set
+             {
+                 this.doctors = new DoctorRepository().SearchDoctorByNameAndSurname(SearchString);
+                 SetProperty(ref _searchString,value);
+             }*/
+            get
+            {
+                return _searchString;
+            }
+            set
+            {
+                if (value != _searchString)
+                {
+                    this.doctors = new DoctorRepository().SearchDoctorByNameAndSurname(value);
+                    _searchString = value;
+                }
+            }
+        }
         public bool CanRate { get; set; }
         private string _rateError;
 
@@ -55,6 +90,7 @@ namespace Hospital.ViewModel.Patient
             this.ToolTipChecked = toolTipChecked;
             this.thisWindow = thisWindow;
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
+            this.SearchString = null;
             InstanceMyICommands();
             ShowAllDoctors();
             CanRate = false;
