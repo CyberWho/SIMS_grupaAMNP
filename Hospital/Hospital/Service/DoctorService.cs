@@ -39,6 +39,10 @@ namespace Hospital.Service
             return this.doctorRepository.GetAllDoctorsBySpecializationId(specializationId);
         }
 
+        public ObservableCollection<Doctor> searchDoctorByNameAndSurname(string identifyString)
+        {
+            return doctorRepository.SearchDoctorByNameAndSurname(identifyString);
+        }
         public ObservableCollection<Doctor> GetAllGeneralPurposeDoctors()
         {
             ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();

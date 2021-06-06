@@ -54,7 +54,16 @@ namespace Hospital.ViewModel.Patient
         private AppointmentController appointmentController = new AppointmentController();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
         private PatientLogsController patientLogsController = new PatientLogsController();
-        public ObservableCollection<Appointment> Appointments { get; set; }
+        private ObservableCollection<Appointment> _appointments;
+
+        public ObservableCollection<Appointment> Appointments
+        {
+            get { return _appointments; }
+            set
+            {
+                SetProperty(ref _appointments, value);
+            }
+        }
         public BindableBase CurrentViewModel
         {
             get { return currentViewModel; }
@@ -226,7 +235,7 @@ namespace Hospital.ViewModel.Patient
         private void updateDataGrid()
         {
             Model.Patient patient = new PatientController().GetPatientByUserId(userId);
-            Appointments = appointmentController.GetAllReservedAppointmentsByPatientId(patient.Id);
+            this.Appointments = appointmentController.GetAllReservedAppointmentsByPatientId(patient.Id);
 
         }
         private void OnMyProfile()

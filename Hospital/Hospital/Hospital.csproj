@@ -971,6 +971,7 @@
     <Content Include="Help\PersonalRemindersHelp.html" />
     <Content Include="Help\Report.html" />
     <Content Include="Help\TreatmentRemindersHelp.html" />
+    <Resource Include="Resources\Icons\icons8-print-100.png" />
     <Resource Include="Resources\Icons\icons8-hospital-sign-96.png" />
     <Resource Include="Resources\Icons\icons8-help-100 %281%29.png" />
   </ItemGroup>

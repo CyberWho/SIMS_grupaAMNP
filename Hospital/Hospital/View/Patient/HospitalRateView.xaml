@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="HospitalRateView" Height="500" Width="500">
+        Title="HospitalRateView" Height="500" Width="500" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:HospitalRateViewModel/>
     </Window.DataContext>
@@ -19,12 +19,12 @@
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="54,0,174.6,420.4" Height="Auto"/>
         <Label Content="Ocenite bolnicu:" Foreground="DeepSkyBlue" FontSize="22" HorizontalAlignment="Left" Margin="54,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Ocena:" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="54,105,0,0" VerticalAlignment="Top"/>
-        <Label Content="Komentar:" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="54,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Komentar:" Foreground="DeepSkyBlue" FontSize="16" HorizontalAlignment="Left" Margin="54,163,0,0" VerticalAlignment="Top"/>
         <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" BorderBrush="DeepSkyBlue" Text="{Binding Description}" FontSize="16" Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="DeepSkyBlue" x:Name="description_txt" Height="109" Margin="148,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" />
         <xctk:IntegerUpDown Height="34" BorderBrush="DeepSkyBlue" FontSize="16" Text="{Binding Rate}" Foreground="DeepSkyBlue" x:Name="rate_txt" Minimum="1" Maximum="10" HorizontalAlignment="Left" Margin="148,105,0,0" VerticalAlignment="Top" Width="232"/>
-        <Button x:Name="Potvrda" ToolTip="Klikom na dugme potvrdjujete ocenu (Ctrl+O)" Command="{Binding RateHospital}" Content="Potvrda" Foreground="White" FontSize="16" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" HorizontalAlignment="Left" Margin="201,295,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.459,2.338" Height="28"/>
-        <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block" Text="{Binding RateError,UpdateSourceTrigger=Default,Mode=TwoWay}" Margin="151,137,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="21" Width="229"/>
-        <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block1" Text="{Binding DescriptionError,UpdateSourceTrigger=Default,Mode=TwoWay}" Margin="151,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="224" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="Potvrda" ToolTip="Klikom na dugme potvrdjujete ocenu (Ctrl+O)" Command="{Binding RateHospital}" Content="Potvrda" Foreground="White" FontSize="16" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" HorizontalAlignment="Left" Margin="190,295,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.459,2.338" Height="28"/>
+        <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block" Text="{Binding RateError,UpdateSourceTrigger=Default,Mode=TwoWay}" Margin="151,137,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="26" Width="229"/>
+        <TextBlock Foreground="Red" HorizontalAlignment="Left" x:Name="Block1" Text="{Binding DescriptionError,UpdateSourceTrigger=Default,Mode=TwoWay}" Margin="151,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="224" RenderTransformOrigin="0.5,0.5">
 
         </TextBlock>
 

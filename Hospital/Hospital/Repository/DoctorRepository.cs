@@ -4,6 +4,7 @@ using Oracle.ManagedDataAccess.Client;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Documents;
 
 namespace Hospital.Repository
@@ -205,6 +206,26 @@ namespace Hospital.Repository
 
 
             return null;
+        }
+
+        public ObservableCollection<Doctor> SearchDoctorByNameAndSurname(string identifyString)
+        {
+            setConnection();
+            ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText =
+                "SELECT * FROM DOCTOR,EMPLOYEE,USERS WHERE DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID and users.name like '%" + identifyString + "%' UNION SELECT * FROM DOCTOR,EMPLOYEE,USERS WHERE DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID and users.surname like '%" + identifyString +"%'";
+
+            OracleDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var doctor = GetDoctorById(reader.GetInt32(0));
+                doctors.Add(doctor);
+            }
+            
+            connection.Close();
+            return doctors;
+
         }
 
         #region marko_kt5

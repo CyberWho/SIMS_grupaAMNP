@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Hospital.Model;
 using Hospital.Repository;
 using MedicalTreatment = Hospital.Model.MedicalTreatment;
@@ -22,6 +23,8 @@ namespace Hospital.ViewModel.Patient
         public string PatientName { get; set; }
         public string PatientSurname { get; set; }
         public string DrugName { get; set; }
+        public MyICommand Print { get; set; }
+        public string ReportGenerated { get; set; }
         public ReportViewModel()
         {
 
@@ -36,7 +39,27 @@ namespace Hospital.ViewModel.Patient
             this.thisWindow = thisWindow;
             this.startTime = startTime;
             this.endTime = endTime;
+            DateTime now = DateTime.Now;
+            DateTime nowDate = now.Date;
+            ReportGenerated = nowDate.ToString();
+            Print = new MyICommand(OnPrint);
             ShowReportInfo();
+        }
+
+        private void OnPrint()
+        {
+            try
+            {
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(thisWindow,"Izvestaj");
+                }
+            }
+            finally
+            {
+               
+            }
         }
 
         private void ShowReportInfo()

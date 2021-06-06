@@ -57,6 +57,10 @@ namespace Hospital.Controller
             return this.doctorService.UpdateDoctor(doctor);
         }
 
+        public ObservableCollection<Doctor> searchDoctorByNameAndSurname(string identifyString)
+        {
+            return doctorService.searchDoctorByNameAndSurname(identifyString);
+        }
         public Doctor AddDoctor(Doctor doctor, string specialization)
         {
             return this.doctorService.AddDoctor(doctor, specialization);
