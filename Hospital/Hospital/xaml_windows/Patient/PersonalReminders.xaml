@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
-            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" HorizontalAlignment="Left" Click="PocetnaStranica_Click" Height="45">
+            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Click="PocetnaStranica_Click" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
@@ -25,35 +25,35 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" HorizontalAlignment="Left" Background="White" Click="MojProfil_Click" Height="45">
+            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Background="White" Click="MojProfil_Click" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" HorizontalAlignment="Left" Click="MojiPregledi_Click" Height="45" Background="White">
+            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Click="MojiPregledi_Click" Height="45" Background="White">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="41" Height="43" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" HorizontalAlignment="Left" Click="ZdravstveniKarton_Click" Background="White" Height="45">
+            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Click="ZdravstveniKarton_Click" Background="White" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Height="45" HorizontalAlignment="Left" Click="Doktori_Click">
+            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Style="{StaticResource menuItemPatient}" Background="White" Height="45" HorizontalAlignment="Left" Click="Doktori_Click">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Background="White" Height="45" HorizontalAlignment="Left" Click="MojiPodsetnici_Click">
+            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Style="{StaticResource menuItemPatient}" Background="White" Height="45" HorizontalAlignment="Left" Click="MojiPodsetnici_Click">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
@@ -61,26 +61,26 @@
                 </MenuItem.Header>
             </MenuItem>
         </Menu>
-        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
+        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Click="LogOut_Click" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
             </StackPanel>
         </Button>
         <CheckBox x:Name="CheckBox" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="ToggleButton_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
 
-        <Button x:Name="Undo" ToolTip="Povratak na izbor podsetnika (Alt+U)" HorizontalAlignment="Left" Grid.Column="1" Click="Undo_OnClick" Background="White" Width="48" Margin="615.8,0,0,422.4">
+        <Button x:Name="Undo" ToolTip="Povratak na izbor podsetnika (Alt+U)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Click="Undo_OnClick" Background="White" Width="48" Margin="615.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)"  HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
+        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Click="Notifications_Click" Background="White" Width="48" Margin="723,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" AllowDrop="True" ItemsSource="{Binding personalReminders}" MouseMove="MyDataGrid_OnMouseMove" PreviewMouseLeftButtonDown="MyDataGrid_OnPreviewMouseLeftButtonDown" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480" SelectionChanged="myDataGrid_SelectionChanged">
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" AllowDrop="True" ItemsSource="{Binding personalReminders}" MouseMove="MyDataGrid_OnMouseMove" PreviewMouseLeftButtonDown="MyDataGrid_OnPreviewMouseLeftButtonDown" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="343.8,87,0,0" VerticalAlignment="Top" Width="480" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Id podsetnika" Binding="{Binding reminderId}" Width="*" Visibility="Hidden"/>
@@ -90,7 +90,7 @@
                 <DataGridTextColumn Header="Učestalost" Binding="{Binding PersonalReminderFrequency}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="myDataGridDrop" ToolTip="Ovde možete prevući podsetnike koje želite da obrišete" AllowDrop="True" ItemsSource="{Binding SelectedPersonalReminders}" DragOver="MyDataGridDrop_OnDragOver" Drop="MyDataGridDrop_OnDrop"  CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="73" Margin="348.8,330,0,0" VerticalAlignment="Top" Width="475" SelectionChanged="myDataGridDrop_SelectionChanged">
+        <DataGrid x:Name="myDataGridDrop" IsReadOnly="True" ToolTip="Ovde možete prevući podsetnike koje želite da obrišete" AllowDrop="True" ItemsSource="{Binding SelectedPersonalReminders}" DragOver="MyDataGridDrop_OnDragOver" Drop="MyDataGridDrop_OnDrop"  CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="91" Margin="348.8,330,0,0" VerticalAlignment="Top" Width="475" SelectionChanged="myDataGridDrop_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Id podsetnika" Binding="{Binding reminderId}" Width="*" Visibility="Hidden"/>
@@ -100,28 +100,30 @@
                 <DataGridTextColumn Header="Učestalost" Binding="{Binding PersonalReminderFrequency}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="8.8,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Ime:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="16.8,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="16.8,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
 
 
 
 
-        <Label Content="Vreme oglašavanja:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="8.8,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
-        <Label Content="Učestalost:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="6.8,107,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
-        <TextBox HorizontalAlignment="Left"  x:Name="name_txt" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,80,0,0"/>
-        <TextBox HorizontalAlignment="Left" x:Name="description_txt" Height="111" Style="{StaticResource RoundedTextBox}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.8,180,0,0"/>
-        <xctk:DateTimePicker x:Name="alarm_time_txt" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="154.8,150,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
-        <Label Content="Odabrani podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
-        <Label Content="Moji podsetnici:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="344,42,0,0" VerticalAlignment="Top"/>
-        <ComboBox Grid.Column="1"  x:Name="frequency_txt" HorizontalAlignment="Left" Margin="154.8,112,0,0" SelectedValue="{Binding SelectedItem.PersonalReminderFrequency, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" FontSize="16" Foreground="DeepSkyBlue"/>
-        <Button Content="Izmeni podsetnik" ToolTip="Klikom na dugme izmenićete podsetnik" x:Name="Izmeni" Click="Izmeni_Click" FontSize="16" Foreground="White" Background="RoyalBlue" Style="{StaticResource RoundedButton}"  Grid.Column="1" HorizontalAlignment="Left" Margin="29.8,318,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Obriši podsetnik" ToolTip="Klikom na dugme obrisaćete podsetnik" x:Name="Obrisi" Click="Obrisi_Click" FontSize="16" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,318,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="1.627,0.417"/>
-        <Button Content="Kreiraj novi podsetnik" ToolTip="Klikom na dugme možete kreirati novi podsetnik" x:Name="Kreiraj" Click="Kreiraj_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" Grid.Column="1" HorizontalAlignment="Left" Margin="93.8,348,0,0" VerticalAlignment="Top" Width="171"/>
-        <Button Content="Obriši sve podsetnike" Click="DeleteAll_OnClick" ToolTip="Klikom na dugme možete obrisati sve podsetnike iz tabele" x:Name="DeleteAll" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="487.8,426,0,0" VerticalAlignment="Top" Width="182" Height="24"/>
-        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Click="ButtonBase_OnClick" Background="White" Width="48" Margin="669.8,0,0,422.4">
+        <Label Content="Vreme oglašavanja:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,158,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
+        <Label Content="Učestalost:" Foreground="DeepSkyBlue" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,119,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.56,0.648"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left"  x:Name="name_txt" BorderBrush="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="DeepSkyBlue" FontSize="16" Height="34" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="166.8,80,0,0"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" x:Name="description_txt" BorderBrush="DeepSkyBlue" Height="90" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" Text="{Binding SelectedItem.Description, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="166.8,197,0,0"/>
+        <xctk:DateTimePicker x:Name="alarm_time_txt" BorderBrush="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Height="34" Foreground="DeepSkyBlue" Margin="166.8,158,0,0" Value="{Binding SelectedItem.AlarmTime,ElementName=myDataGrid}"  VerticalAlignment="Top" Width="144"/>
+        <Label Content="Odabrani podsetnik:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,42,0,0" VerticalAlignment="Top"/>
+        <Label Content="Moji podsetnici:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="344,52,0,0" VerticalAlignment="Top"/>
+        <ComboBox Grid.Column="1" Height="34" BorderBrush="DeepSkyBlue"  x:Name="frequency_txt" HorizontalAlignment="Left" Margin="166.8,119,0,0" Style="{StaticResource MaterialDesignComboBox}" SelectedValue="{Binding SelectedItem.PersonalReminderFrequency, ElementName=myDataGrid}" VerticalAlignment="Top" Width="144" FontSize="16" Foreground="DeepSkyBlue"/>
+        <Button Content="Izmeni podsetnik" ToolTip="Klikom na dugme izmenićete podsetnik" Height="34" x:Name="Izmeni" Click="Izmeni_Click" FontSize="16" Foreground="White" Background="RoyalBlue" Style="{StaticResource patientRegularBtn}"  Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,323,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Obriši podsetnik" ToolTip="Klikom na dugme obrisaćete podsetnik" Height="34" x:Name="Obrisi" Click="Obrisi_Click" FontSize="16" Foreground="White" Background="Red" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,323,0,0" VerticalAlignment="Top" Width="144" RenderTransformOrigin="1.627,0.417"/>
+        <Button Content="Kreiraj" ToolTip="Klikom na dugme možete kreirati novi podsetnik" Height="34" x:Name="Kreiraj" Click="Kreiraj_Click" FontSize="16" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,374,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Obriši sve podsetnike" Click="DeleteAll_OnClick" ToolTip="Klikom na dugme možete obrisati sve podsetnike iz tabele" x:Name="DeleteAll" Foreground="White" Background="Red" Style="{StaticResource patientRegularBtn}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" Margin="494.8,426,0,0" VerticalAlignment="Top" Width="182" Height="34"/>
+        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Style="{StaticResource buttonPatient}" Grid.Column="1" Click="ButtonBase_OnClick" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
+        <TextBlock Grid.Column="1" Foreground="red" HorizontalAlignment="Left" Margin="16.8,292,0,0" TextWrapping="Wrap" x:Name="Error" VerticalAlignment="Top" Height="26" Width="294"/>
+        <Button Content="Osveži" FontSize="16" ToolTip="Klikom na dugme osvežićete tabelu podsetnika" Background="Green" Height="34" Click="Refresh_OnClick" Grid.Column="1" HorizontalAlignment="Left" Margin="199.8,375,0,0" Style="{StaticResource patientRegularBtn}" VerticalAlignment="Top" Width="144"/>
     </Grid>
 </Window>

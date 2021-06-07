@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    public class FreeDays
+    public class FreeDays : IEntity
     {
         public int id { get; set; }
         public FreeDaysStatus status { get; set; }

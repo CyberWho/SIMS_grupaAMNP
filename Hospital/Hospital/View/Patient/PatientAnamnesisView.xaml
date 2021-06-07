@@ -28,7 +28,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
-            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)"  HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
+            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" Style="{StaticResource menuItemPatient}"  HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
@@ -36,35 +36,35 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)"  HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
+            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" Style="{StaticResource menuItemPatient}"  HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
+            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="41" Height="43" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
+            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
+            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Style="{StaticResource menuItemPatient}" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
+            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Style="{StaticResource menuItemPatient}" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
@@ -74,18 +74,18 @@
         </Menu>
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
 
-        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
+        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
             </StackPanel>
         </Button>
-        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
+        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding anamneses}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,90,0,0" VerticalAlignment="Top" Width="468">
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2,2,566.6,422.4" Height="Auto"/>
+        <DataGrid x:Name="myDataGrid" IsReadOnly="True" ItemsSource="{Binding anamneses}" CanUserAddRows="False" SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="356,96,0,0" VerticalAlignment="Top" Width="468">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Termin" Binding="{Binding appointment.StartTime}" Width="*"/>
                 <DataGridTextColumn Header="Ime doktora" Binding="{Binding appointment.doctor.User.Name}" Width="*"/>
@@ -96,22 +96,22 @@
         </DataGrid>
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
 
-        <Label Content="Odabrana anamneza:" FontSize="24" Foreground="DeepSkyBlue" Grid.Column="1" Margin="11.6,48,575.6,375.4" />
-        <Label Content="Termin:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="12,90,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
-        <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="12,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
-        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="12,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
-        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="12,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.appointment.StartTime,ElementName=myDataGrid}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,97,0,0"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.appointment.doctor.User.Name, ElementName=myDataGrid}" Foreground="DeepSkyBlue" FontSize="16" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,129,0,0"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.appointment.doctor.User.Surname, ElementName=myDataGrid}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="154.6,161,0,0"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True"  Style="{StaticResource RoundedTextBox}" Text="{Binding Path=SelectedItem.Description, ElementName=myDataGrid}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,193,0,0" Height="87"/>
-        <Label Content="Moje anamneze:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="356,50,0,0" VerticalAlignment="Top"/>
-        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
+        <Label Content="Odabrana anamneza:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" Margin="16.8,52,575.6,373.4" />
+        <Label Content="Termin:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="17,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,1.178"/>
+        <Label Content="Ime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="17,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.661,1.1"/>
+        <Label Content="Prezime doktora:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="17,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <Label Content="Opis:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="17,214,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.552,2.488" Height="32"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" IsReadOnly="True" BorderBrush="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SelectedItem.appointment.StartTime,ElementName=myDataGrid}" Foreground="DeepSkyBlue" FontSize="16" Height="34" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,96,0,0"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" IsReadOnly="True" BorderBrush="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SelectedItem.appointment.doctor.User.Name, ElementName=myDataGrid}" Foreground="DeepSkyBlue" FontSize="16" Height="34" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,136,0,0"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" IsReadOnly="True" BorderBrush="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SelectedItem.appointment.doctor.User.Surname, ElementName=myDataGrid}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="144" Grid.Column="1" Margin="155,175,0,0"/>
+        <TextBox Padding="3,3,3,0" HorizontalAlignment="Left" IsReadOnly="True" BorderBrush="DeepSkyBlue" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SelectedItem.Description, ElementName=myDataGrid}" FontSize="16" Foreground="DeepSkyBlue" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Grid.Column="1" Margin="155,214,0,0" Height="90"/>
+        <Label Content="Moje anamneze:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="356,52,0,0" VerticalAlignment="Top"/>
+        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Style="{StaticResource buttonPatient}" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="Undo" ToolTip="Povratak na pregled zdravstvenog kartona (Alt+U)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Undo}" Background="White" Width="48" Margin="615.8,0,0,422.4">
+        <Button x:Name="Undo" ToolTip="Povratak na pregled zdravstvenog kartona (Alt+U)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Undo}" Background="White" Width="48" Margin="615.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>

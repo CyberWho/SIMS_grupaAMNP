@@ -30,7 +30,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu Style="{StaticResource Horizontal}" Background="White" Margin="0,42,836.6,0.4" Grid.ColumnSpan="2">
-            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
+            <MenuItem x:Name="PocetnaStranica" ToolTip="Početna stranica (Alt+H)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding HomePage}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-home-96.png"/>
@@ -38,35 +38,35 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
+            <MenuItem x:Name="MojProfil" ToolTip="Moj profil (Alt+P)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Background="White" Command="{Binding MyProfile}" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-male-user-96.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
+            <MenuItem x:Name="MojiPregledi" ToolTip="Moji termini (Alt+A)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding MyAppointments}" Height="45" Background="White">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="41" Height="43" Source="/Resources/Icons/icons8-calendar-52.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
+            <MenuItem x:Name="ZdravstveniKarton" ToolTip="Zdravstveni karton (Alt+M)" Style="{StaticResource menuItemPatient}" HorizontalAlignment="Left" Command="{Binding MyHealthRecord}" Background="White" Height="45">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-heart-health-100.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
+            <MenuItem x:Name="Doktori" ToolTip="Doktori (Alt+D)" Background="White" Style="{StaticResource menuItemPatient}" Height="45" HorizontalAlignment="Left" Command="{Binding ShowDoctors}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Height="43" Width="43" Source="/Resources/Icons/icons8-stethoscope-48.png"/>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
+            <MenuItem x:Name="MojiPodsetnici" ToolTip="Podsetnik (Alt+R)" Style="{StaticResource menuItemPatient}" Background="White" Height="45" HorizontalAlignment="Left" Command="{Binding MyReminders}">
                 <MenuItem.Header>
                     <StackPanel>
                         <Image Width="43" Height="43" Source="/Resources/Icons/icons8-notification-96.png"/>
@@ -77,7 +77,7 @@
         <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="0,-215,0.4,205.4"/>
 
         <Label Content="ZDRAVO KORPORACIJA" Foreground="DeepSkyBlue" FontSize="24" HorizontalAlignment="Center" Width="265" Grid.Column="1" Margin="2.6,2,575.6,422.4" Height="Auto"/>
-        <DataGrid x:Name="myGrid" ItemsSource="{Binding TimeSlots}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="285" Margin="347.8,82,0,0" VerticalAlignment="Top" Width="476">
+        <DataGrid x:Name="myGrid" IsReadOnly="True" ItemsSource="{Binding TimeSlots}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Grid.Column="1" HorizontalAlignment="Left" Height="285" Margin="347.8,96,0,0" VerticalAlignment="Top" Width="476">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime}" Width="*"/>
@@ -87,37 +87,37 @@
                 <DataGridTextColumn Header="Soba" Binding="{Binding WorkHours.doctor.room.Id}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Vreme:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,139,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ime doktora:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,75,0,0" VerticalAlignment="Top"/>
-        <Label Content="Prezime doktora:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,107,0,0" VerticalAlignment="Top"/>
-        <Label Content="Soba:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="9.8,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.645,1.814"/>
-        <TextBox x:Name="doctor_name_txt" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="155,80,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
-        <TextBox x:Name="doctor_surname_txt" IsReadOnly="True" FontSize="16" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="155,112,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
-        <TextBox x:Name="room_id_txt" IsReadOnly="True" FontSize="16" Grid.Column="2" Style="{StaticResource RoundedTextBox}" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Height="23" Margin="155,176,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Zakaži" ToolTip="Klikom na dugme zakazaćete termin (Ctrl+Z)" FontSize="16" Style="{StaticResource RoundedButton}" Background="DeepSkyBlue" Foreground="White" x:Name="Zakazi" Grid.Column="1" HorizontalAlignment="Left" Margin="154.8,224,0,0" VerticalAlignment="Top" Width="144" Command="{Binding New}"/>
+        <Label Content="Vreme:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,176,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ime doktora:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,96,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prezime doktora:" FontSize="16" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="16.8,135,0,0" VerticalAlignment="Top"/>
+        <Label Content="Soba:" FontSize="16" Grid.Column="1" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="16.8,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.645,1.814"/>
+        <TextBox Padding="3,3,3,0" x:Name="doctor_name_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" FontSize="16" Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="154.8,96,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Name, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox Padding="3,3,3,0" x:Name="doctor_surname_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" FontSize="16" Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="154.8,135,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.User.Surname, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
+        <TextBox Padding="3,3,3,0" x:Name="room_id_txt" BorderBrush="DeepSkyBlue" IsReadOnly="True" FontSize="16" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Height="34" Margin="154.8,213,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.WorkHours.doctor.room.Id, ElementName=myGrid}" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Zakaži" ToolTip="Klikom na dugme zakazaćete termin (Ctrl+Z)" Height="34" FontSize="16" Style="{StaticResource patientRegularBtn}" Background="DeepSkyBlue" Foreground="White" x:Name="Zakazi" Grid.Column="1" HorizontalAlignment="Left" Margin="154.8,277,0,0" VerticalAlignment="Top" Width="144" Command="{Binding New}"/>
 
         <CheckBox x:Name="CheckBox" IsChecked="{Binding ToolTipChecked}" Unchecked="CheckBox_OnUnchecked" Content="Pomoć" Checked="CheckBox_OnChecked" Foreground="DeepSkyBlue" Style="{StaticResource RoundedCheckBox}" ToolTip="Klikom na dugme možete uključiti/isključiti pomoćnika" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="73"/>
 
-        <xctk:DateTimePicker x:Name="datepicker_txt" FontSize="16" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="155,144,0,0" Value="{Binding SelectedItem.StartTime,ElementName=myGrid}"  VerticalAlignment="Top"  Width="144" RenderTransformOrigin="0.507,-1.51"/>
-        <Label Content="Odabrani termin:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
-        <Label Content="Predlozi termina:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="348,42,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
+        <xctk:DateTimePicker Height="34" BorderBrush="DeepSkyBlue" x:Name="datepicker_txt" FontSize="16" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Foreground="DeepSkyBlue" Margin="154.8,174,0,0" Value="{Binding SelectedItem.StartTime,ElementName=myGrid}"  VerticalAlignment="Top"  Width="144" RenderTransformOrigin="0.507,-1.51"/>
+        <Label Content="Odabrani termin:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="2" HorizontalAlignment="Left" Margin="16.8,52,0,0" VerticalAlignment="Top"/>
+        <Label Content="Predlozi termina:" FontSize="22" Foreground="DeepSkyBlue" Grid.Column="1" HorizontalAlignment="Left" Margin="347.8,52,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="LogOut" ToolTip="Odjavi se (Alt+L)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LogOut}" Background="White" Margin="776,0,0,422.4" Width="48">
             <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
                 <Image Source="/Resources/Icons/icons8-exit-52.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
             </StackPanel>
         </Button>
-        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
+        <Button x:Name="Notifications" ToolTip="Obaveštenja (Alt+N)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding ShowNotifications}" Background="White" Width="48" Margin="723,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-read-message-96.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="Undo" ToolTip="Povratak na izbor doktora (Alt+U)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Undo}" Background="White" Width="48" Margin="615.8,0,0,422.4">
+        <Button x:Name="Undo" ToolTip="Povratak na izbor doktora (Alt+U)" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Undo}" Background="White" Width="48" Margin="615.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-undo-90.png" HorizontalAlignment="Center" Height="40" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>
         </Button>
-        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="9.8,204,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Width="289" Height="20"/>
-        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
+        <TextBlock Grid.Column="1" Foreground="Red" HorizontalAlignment="Left" Margin="16.8,252,0,0" TextWrapping="Wrap" Text="{Binding SelectionError}" VerticalAlignment="Top" Width="282" Height="25"/>
+        <Button ToolTip="Pomoćnik (Alt+S)" HorizontalAlignment="Left" Style="{StaticResource buttonPatient}" Grid.Column="1" Command="{Binding Help}" Background="White" Width="48" Margin="669.8,0,0,422.4">
             <StackPanel Height="45" Width="45">
                 <Image Source="/Resources/Icons/icons8-help-100 (1).png" HorizontalAlignment="Center" Height="37" Width="40" Margin="2,0,2.8,0"/>
             </StackPanel>

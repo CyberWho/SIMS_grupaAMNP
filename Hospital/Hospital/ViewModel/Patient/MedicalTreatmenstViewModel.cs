@@ -38,6 +38,8 @@ namespace Hospital.ViewModel.Patient
         public MyICommand GenerateReport { get; set; }
         public string reportStartTime { get; set; }
         public string reportEndTime { get; set; }
+        public DateTime minDate { get; set; }
+        public DateTime maxDate { get; set; }
         public MedicalTreatment SelectedItem { get; set; }
         private string _reportError;
         public string ReportError
@@ -62,6 +64,8 @@ namespace Hospital.ViewModel.Patient
             dispatcherTimerForReminder = new DispatcherTimerForReminder(userId);
             InstanceMyICommands();
             ShowMedicalTreatments();
+            minDate = DateTime.Now;
+            maxDate = DateTime.Now;
         }
 
         private void InstanceMyICommands()
@@ -83,8 +87,10 @@ namespace Hospital.ViewModel.Patient
         {
             if (!DataValidation()) return;
             ObservableCollection<Reminder> reminders = GenerateRemindersForMedicalTreatment(SelectedItem, reportStartTime, reportEndTime);
-            Window window = new ReportView(userId, reminders, SelectedItem, DateTime.Parse(reportStartTime),
-                DateTime.Parse(reportEndTime));
+           Window window = new ReportView(userId, reminders, SelectedItem, DateTime.Parse(reportStartTime),
+               DateTime.Parse(reportEndTime));
+           //  Window window = new ReportCalendarView(userId, SelectedItem, DateTime.Parse(reportStartTime),
+            //     DateTime.Parse(reportEndTime));
             window.Show();
         }
 
@@ -121,6 +127,8 @@ namespace Hospital.ViewModel.Patient
         private bool DataValidation()
         {
             if (!SelectionValidation()) return false;
+            minDate = SelectedItem.dateRange.StartTime;
+            maxDate = SelectedItem.dateRange.EndTime;
             if (!StartTimeVal()) return false;
             if (!EndTimeVal()) return false;
             DateTime startDateTime = DateTime.Parse(reportStartTime);

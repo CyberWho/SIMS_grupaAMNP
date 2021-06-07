@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
-    public class SystemNotification
+    public class SystemNotification : IEntity
     {
         public int Id { get; set; }
         public String Name { get; set; }
@@ -42,7 +42,7 @@ namespace Hospital.Model
                 AddUser(oUser);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddUser(User newUser)
         {
             if (newUser == null)

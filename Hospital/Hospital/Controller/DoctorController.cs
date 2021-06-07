@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {
@@ -57,6 +58,10 @@ namespace Hospital.Controller
             return this.doctorService.UpdateDoctor(doctor);
         }
 
+        public ObservableCollection<Doctor> searchDoctorByNameAndSurname(string identifyString)
+        {
+            return doctorService.searchDoctorByNameAndSurname(identifyString);
+        }
         public Doctor AddDoctor(Doctor doctor, string specialization)
         {
             return this.doctorService.AddDoctor(doctor, specialization);

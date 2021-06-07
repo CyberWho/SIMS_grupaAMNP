@@ -51,7 +51,7 @@ namespace Hospital.Service
         #region marko_kt5
         public ObservableCollection<Room> GetAllRoomsByRoomType(RoomType roomType)
         {
-            List<int> usedRooms = this.doctorRepository.getAllUsedRoomsId();
+            List<int> usedRooms = this.doctorRepository.GetAllUsedRoomsId();
             ObservableCollection<Room> rooms = this.roomRepository.GetAllRoomsByRoomType(roomType);
 
             return this.reduceRooms(usedRooms, rooms);
@@ -173,7 +173,7 @@ namespace Hospital.Service
 
             ObservableCollection<TimeSlot> doctorTimeSlots =
             new ObservableCollection<TimeSlot>(from i in
-                timeSlotRepository.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(startTime, id_doc)
+                timeSlotRepository.GetAllFreeForNext48HoursByDateAndDoctorId(startTime, id_doc)
                                                orderby i.StartTime
                                                select i);
             for (int i = 0; i < doctorTimeSlots.Count - 3; i++)

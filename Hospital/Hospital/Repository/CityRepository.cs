@@ -5,13 +5,15 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Hospital.IRepository;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
-    public class CityRepository
+    public class CityRepository : ICityRepo<City>
    {
         OracleConnection con = null;
         private void setConnection()
@@ -29,7 +31,7 @@ namespace Hospital.Repository
             }
         }
 
-        public City GetCityById(int id)
+        public City GetById(int id)
         {
             setConnection();
             City city = new City();
@@ -45,29 +47,18 @@ namespace Hospital.Repository
             int state_id = int.Parse(reader.GetString(3));
 
             con.Close();
-            city.State = new StateRepository().GetStateById(state_id);
+            city.State = new StateRepository().GetById(state_id);
             return city;
         }
+        
       
-      public City GetCityByName(String name)
+      public City Add(City city)
       {
          // TODO: implement
          return null;
       }
       
-      public City NewCity(City city)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAll()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAllByStateId()
+      public ObservableCollection<City> GetAll()
       {
          // TODO: implement
          return null;
@@ -78,6 +69,15 @@ namespace Hospital.Repository
          // TODO: implement
          return 0;
       }
-   
-   }
+
+        public bool DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public City Update(City t)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

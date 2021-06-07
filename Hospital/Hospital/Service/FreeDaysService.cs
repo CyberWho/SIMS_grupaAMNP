@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 using Hospital.Repository;
 
@@ -13,6 +14,12 @@ namespace Hospital.Service
 {
     public class FreeDaysService
     {
+        private IFreeDaysRepo<FreeDays> freeDaysRepository;
+
+        public FreeDaysService()
+        {
+            freeDaysRepository = new FreeDaysRepository();
+        }
         public FreeDays GetFreeDaysById(int id)
         {
             // TODO: implement
@@ -39,7 +46,7 @@ namespace Hospital.Service
 
         public FreeDays AddFreeDays(FreeDays freeDays)
         {
-            return this.freeDaysRepository.AddFreeDays(freeDays);
+            return this.freeDaysRepository.Add(freeDays);
         }
 
         public Boolean DeleteFreeDaysById(int id)
@@ -48,7 +55,6 @@ namespace Hospital.Service
             return false;
         }
 
-        public FreeDaysRepository freeDaysRepository = new FreeDaysRepository();
 
     }
 }

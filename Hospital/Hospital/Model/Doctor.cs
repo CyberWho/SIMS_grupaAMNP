@@ -60,7 +60,7 @@ namespace Hospital.Model
                 AddWorkHours(oWorkHours);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddWorkHours(WorkHours newWorkHours)
         {
             if (newWorkHours == null)
@@ -146,7 +146,7 @@ namespace Hospital.Model
                 AddAppointment(oAppointment);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddAppointment(Appointment newAppointment)
         {
             if (newAppointment == null)
@@ -232,8 +232,8 @@ namespace Hospital.Model
             this.role = role;
             this.specialization = specialization;
 
-
-            this.room_id = (int)room.Id;
+            //Ovde se dodeljuje room.id, a room nikad nece biti definisano
+            //this.room_id = room.Id;
             this.employee_id = id;
             this.specialization_id = specialization.id;
         }

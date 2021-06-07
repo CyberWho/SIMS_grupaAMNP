@@ -5,6 +5,8 @@ using System.Windows.Controls;
 
 using Hospital.Controller;
 using Hospital.Model;
+using Hospital.View.Doctor;
+using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -40,6 +42,14 @@ namespace Hospital.xaml_windows.Doctor
             FillFreeTimeSlotsToUi();
             FillPatientsToUi();
 
+            this.DataContext = this;
+            this.ReturnOptionCommand = new MyICommand(ReturnOption);
+            this.GoToDrugOperationCommand = new MyICommand(GoToDrugOperation);
+            this.GoToAppointmentsCommand = new MyICommand(GoToAppointments);
+            this.GoToCreateAppointmentCommand = new MyICommand(GoToCreateAppointment);
+            this.GoToScheduleCommand = new MyICommand(GoToSchedule);
+            this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
+
         }
 
         void AddAppointment(object sender, RoutedEventArgs e)
@@ -52,7 +62,7 @@ namespace Hospital.xaml_windows.Doctor
                     AppointmentStatus.RESERVED, doctor, getPatientFromUi(), doctrorsRoom);
                 appointmentController.ReserveAppointment(newAppointment);
                 timeSlotController.TakeTimeSlot(getTimeSlotFromUi());
-
+                MessageBox.Show("Termin kreiran.");
             }
         }
 
@@ -64,7 +74,20 @@ namespace Hospital.xaml_windows.Doctor
                 if (timeSlot.Free)
                 {
                     ListBoxItem item = new ListBoxItem();
-                    item.Content = timeSlot.Id + "|" + timeSlot.StartTime;
+                    item.Content = timeSlot.Id;
+                    int i = timeSlot.Id;
+                    int size = 6;
+                    while (i != 0)
+                    {
+                        i /= 10;
+                        size -= 1;
+                    }
+
+                    while (size-- != 0)
+                    {
+                        item.Content += " ";
+                    }
+                    item.Content += timeSlot.StartTime.ToString();
                     lb_time_slots.Items.Add(item);
                 }
             }
@@ -75,8 +98,22 @@ namespace Hospital.xaml_windows.Doctor
             foreach (Model.Patient patient in patientController.GetAllPatients())
             {
                 ListBoxItem item = new ListBoxItem();
-                item.Content = patient.Id + "|" + patient.JMBG + " " + patient.User.Name + " " + patient.User.Surname;
+                item.Content = patient.Id;
                 lb_patients.Items.Add(item);
+                int i = patient.Id;
+                int size = 3;
+                while (i != 0)
+                {
+                    i /= 10;
+                    size -= 1;
+                }
+
+                while (size-- != 0)
+                {
+                    item.Content += " ";
+                }
+                item.Content +=/*+ patient.JMBG + " " */patient.User.Name + " " + patient.User.Surname;
+                
             }
         }
 
@@ -89,6 +126,8 @@ namespace Hospital.xaml_windows.Doctor
             {
                 patient_for_create = lbi;
             }
+            if (patient_for_create != null && time_slot_for_create != null)
+                btn_novi_pregled.IsEnabled = true;
         }
         private void TimeSlotFocusSwitch(object sender, SelectionChangedEventArgs e)
         {
@@ -97,6 +136,8 @@ namespace Hospital.xaml_windows.Doctor
             {
                 time_slot_for_create = lbi;
             }
+            if (patient_for_create != null && time_slot_for_create != null)
+                btn_novi_pregled.IsEnabled = true;
         }
 
         //object creation from ui information
@@ -127,9 +168,68 @@ namespace Hospital.xaml_windows.Doctor
         //go back to prev window
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new DoctorUI(this.doctor_id_as_user);
+            Window s = new DoctorUIwindow(this.doctor_id_as_user);
             s.Show();
             this.Close();
         }
+
+        /***************************
+        ***
+        Dodavanje navigacije
+        ***
+        ***************************/
+        public MyICommand ReturnOptionCommand { get; set; }
+        public MyICommand GoToDrugOperationCommand { get; set; }
+        public MyICommand GoToAppointmentsCommand { get; set; }
+        public MyICommand GoToCreateAppointmentCommand { get; set; }
+        public MyICommand GoToScheduleCommand { get; set; }
+        public MyICommand GoToPatientSearchCommand { get; set; }
+
+        public void ReturnOption()
+        {
+            Window s = new MainWindow();
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToAppointments()
+        {
+            Window s = new Doctor_crud_appointments(doctor_id_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToCreateAppointment()
+        {
+            Window s = new Create_appointment(doctor_id_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToSchedule()
+        {
+            Window s = new Schedule(doctor_id_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToPatientSearch()
+        {
+            Window s = new SearchPatientMVVM(doctor_id_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToDrugOperation() // Obradjuje se
+        {
+
+            Window s = new View.Doctor.DrugOperations(doctor_id_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+
+
+
     }
 }

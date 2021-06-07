@@ -36,7 +36,6 @@ namespace Hospital.xaml_windows.Patient
         private PersonalReminderController personalReminderController = new PersonalReminderController();
         private ObservableCollection<PersonalReminder> personalReminders = new ObservableCollection<PersonalReminder>();
         private DispatcherTimerForReminder dispatcherTimerForReminder;
-
         public PersonalReminders(int userId,bool tooltipChecked)
         {
             this.userId = userId;
@@ -46,6 +45,7 @@ namespace Hospital.xaml_windows.Patient
             // FillComboBox();
             frequency_txt.ItemsSource = Enum.GetValues(typeof(PersonalReminderFrequency));
             ToolTipChecked(tooltipChecked);
+            Error.Text = "";
         }
         private void ToolTipChecked(bool tooltipChecked)
         {
@@ -177,6 +177,8 @@ namespace Hospital.xaml_windows.Patient
 
             if (!AlarmTimeValidation()) return false;
 
+            if (!AlarmTimeNowValidation()) return false;
+
             if (!FrequencyValidation()) return false;
 
             return true;
@@ -186,7 +188,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (frequency_txt.Text == null)
             {
-                MessageBox.Show("Potrebno je da odaberete učestalost oglašavanja podsetnika!");
+                Error.Text = "Potrebno je da odaberete učestalost oglašavanja podsetnika!";
                 return false;
             }
 
@@ -197,7 +199,18 @@ namespace Hospital.xaml_windows.Patient
         {
             if (alarm_time_txt.Text == null)
             {
-                MessageBox.Show("Potrebno je da unesete vreme oglašavanja podsetnika!");
+                Error.Text = "Potrebno je da unesete vreme oglašavanja podsetnika!";
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool AlarmTimeNowValidation()
+        {
+            if (DateTime.Parse(alarm_time_txt.Text) <= DateTime.Now)
+            {
+                Error.Text = "Vreme oglašavanja ne sme biti u prošlosti!";
                 return false;
             }
 
@@ -206,9 +219,9 @@ namespace Hospital.xaml_windows.Patient
 
         private bool DescriptionValidation()
         {
-            if (description_txt.Text == "")
-            {
-                MessageBox.Show("Potrebno je da unesete opis podsetnika!");
+            if (description_txt.Text == "") {
+                
+                Error.Text = "Potrebno je da unesete opis podsetnika!";
                 return false;
             }
 
@@ -219,7 +232,7 @@ namespace Hospital.xaml_windows.Patient
         {
             if (name_txt.Text == "")
             {
-                MessageBox.Show("Potrebno je da unesete naziv podsetnika!");
+                Error.Text = "Potrebno je da unesete naziv podsetnika!";
                 return false;
             }
 
@@ -228,6 +241,7 @@ namespace Hospital.xaml_windows.Patient
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
+            Error.Text = "";
             if(!DataValidation()) return;
             
             PersonalReminder personalReminder = personalReminderController.GetPersonalReminderById(GetPersonalReminderId());
@@ -382,6 +396,11 @@ namespace Hospital.xaml_windows.Patient
         {
             string str = "PersonalRemindersHelp";
             HelpProvider.ShowHelp(str, this);
+        }
+
+        private void Refresh_OnClick(object sender, RoutedEventArgs e)
+        {
+            updateDataGrid();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Windows;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Controller;
+using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -64,5 +65,7 @@ namespace Hospital.xaml_windows.Doctor
             s.Show();
             this.Close();
         }
+
+
     }
 }

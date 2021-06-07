@@ -6,13 +6,16 @@
         xmlns:local="clr-namespace:Hospital.View.Patient"
         xmlns:viewModel="clr-namespace:Hospital.ViewModel.Patient"
         mc:Ignorable="d"
-        Title="Izveštaj" Height="500" Width="900">
+        Title="Izveštaj" Height="500" Width="900" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:ReportViewModel/>
     </Window.DataContext>
-    <Grid>
-        <Label Content="ZDRAVO KORPORACIJA" Foreground="Black" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="55,1,573.6,423.4" Height="Auto"/>
-        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="5,1,843.6,423.4"/>
+    <Window.InputBindings>
+        <KeyBinding Key="Print" Command="{Binding Print}"/>
+    </Window.InputBindings>
+    <Grid Margin="0,0,-0.4,0.4">
+        <Label Content="ZDRAVO KORPORACIJA" Foreground="Black" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="55,5,574,417" Height="Auto"/>
+        <Image Source="/Resources/Icons/icons8-heart-with-pulse-100.png" Margin="6,0,844,417"/>
         <Label Content="Izveštaj o konzumaciji leka" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="219,47,0,0"/>
         <Label Content="Naziv leka:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,116,0,0"/>
         <Label Content="Početak izveštaja:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,227,0,0"/>
@@ -20,18 +23,26 @@
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DrugName}" VerticalAlignment="Top" Width="144" Margin="202,124,0,0"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding startTime}" VerticalAlignment="Top" Width="144" Margin="202,235,0,0"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding endTime}" VerticalAlignment="Top" Width="144" Margin="202,272,0,0"/>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="295" Margin="380,124,0,0" VerticalAlignment="Top" Width="480">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding reminders}" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="254" Margin="380,116,0,0" VerticalAlignment="Top" Width="504">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*"/>
-                <DataGridTextColumn Header="Vreme oglašavanja" Binding="{Binding AlarmTime}" Width="*"/>
+                <DataGridTextColumn Header="Vreme konzumacije leka" Binding="{Binding AlarmTime}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Ime pacijenta:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,153,0,0"/>
         <Label Content="Prezime pacijenta:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,190,0,0" RenderTransformOrigin="0.443,-3.122"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding PatientName}" VerticalAlignment="Top" Width="144" Margin="202,162,0,0"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding PatientSurname}" VerticalAlignment="Top" Width="144" Margin="202,198,0,0"/>
+        <Button ToolTip="Štampaj izveštaj" Style="{StaticResource buttonPatient}" HorizontalAlignment="Left" Command="{Binding Print}" Background="White" Margin="822,416,0,6" Width="48">
+            <StackPanel Height="45" Width="55" RenderTransformOrigin="13.165,-3.438">
+                <Image Source="/Resources/Icons/icons8-print-100.png" HorizontalAlignment="Center" Height="35" Width="40" Margin="0,0,7.2,0" />
+            </StackPanel>
+        </Button>
+        <Label Content="Datum:" FontSize="16" HorizontalAlignment="Left" Margin="679,10,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Padding="3,3,3,0" Height="30" FontSize="16" Margin="764,10,0,0" TextWrapping="Wrap" Text="{Binding ReportGenerated}" VerticalAlignment="Top" Width="120"/>
+
 
     </Grid>
 </Window>

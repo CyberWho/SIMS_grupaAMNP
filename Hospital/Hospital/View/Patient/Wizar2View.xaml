@@ -11,9 +11,9 @@
         <viewModel:Wizard2ViewModel/>
     </Window.DataContext>
     <Grid>
-        <Button Content="Prethodni korak" x:Name="undo" Command="{Binding Undo}" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="21,427,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Sledeći korak" x:Name="next" Command="{Binding Next}" Foreground="White" Background="Green" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="729,427,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button Content="Odustani" x:Name="cancel" Command="{Binding Cancel}" Foreground="White" Background="Red" Style="{StaticResource RoundedButton}" FontSize="16" HorizontalAlignment="Left" Margin="568,427,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Prethodni korak" Height="34" x:Name="undo" Command="{Binding Undo}" Foreground="White" Background="DeepSkyBlue" Style="{StaticResource patientRegularBtn}" FontSize="16" HorizontalAlignment="Left" Margin="21,412,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Sledeći korak" Height="34" x:Name="next" Command="{Binding Next}" Foreground="White" Background="Green" Style="{StaticResource patientRegularBtn}" FontSize="16" HorizontalAlignment="Left" Margin="713,412,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button Content="Odustani" Height="34" x:Name="cancel" Command="{Binding Cancel}" Foreground="White" Background="Red" Style="{StaticResource patientRegularBtn}" FontSize="16" HorizontalAlignment="Left" Margin="549,412,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Upoznavanje sa ikonicama" FontSize="40" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="219,33,0,0" VerticalAlignment="Top"/>
         <Image Source="/Resources/Icons/icons8-home-96.png" Margin="100,113,728.6,318.4" RenderTransformOrigin="0.705,0.422"/>
         <Label Content="Početna stranica" FontSize="16" Foreground="DeepSkyBlue" HorizontalAlignment="Left" Margin="70,152,0,0" VerticalAlignment="Top"/>

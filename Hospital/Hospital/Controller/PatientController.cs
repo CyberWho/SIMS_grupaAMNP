@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
@@ -42,12 +43,6 @@ namespace Hospital.Controller
         public ObservableCollection<Patient> GetAllPatients()
         {
             return patientService.GetAllPatients();
-        }
-
-        public ObservableCollection<Patient> GetAllPatientsByDoctorId(int doctorId)
-        {
-            // TODO: implement
-            return null;
         }
 
         public Boolean DeletePatientById(int id)

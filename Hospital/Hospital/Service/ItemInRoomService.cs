@@ -157,7 +157,7 @@ namespace Hospital.Service
         {
             /*ObservableCollection<ItemInRoom> allItems = itemInRoomRepository.GetAllItemsInRoom();
             ObservableCollection<ItemInRoom> mergedItems = new ObservableCollection<ItemInRoom>();
-            mergedItems.Add(allItems[0]);
+            mergedItems.New(allItems[0]);
 
             foreach (ItemInRoom item in allItems)
             {
@@ -171,7 +171,7 @@ namespace Hospital.Service
                     }
                     else
                     {
-                        mergedItems.Add(item);
+                        mergedItems.New(item);
                     }
                     count++;
                 } while (count != mergedItems.Count);

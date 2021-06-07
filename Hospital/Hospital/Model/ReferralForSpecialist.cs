@@ -6,7 +6,7 @@
 
 namespace Hospital.Model
 {
-    public class ReferralForSpecialist
+    public class ReferralForSpecialist : IEntity
     {
         public int Id { get; set; }
         public string Description { get; set; }

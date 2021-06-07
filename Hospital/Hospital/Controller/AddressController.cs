@@ -6,6 +6,7 @@
 
 using System;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller

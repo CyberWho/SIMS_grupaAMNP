@@ -34,14 +34,14 @@ public static class Globals
         if (globalConnection == null || globalConnection.State != ConnectionState.Closed)
         {
             globalConnection = new OracleConnection(conString);
-            try
+            //try
             {
                 globalConnection.Open();
             }
-            catch (Exception exp)
+            /*catch (Exception exp)
             {
                 ThrowException(exp);
-            }
+            }*/
         }
     }
 }

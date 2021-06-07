@@ -114,7 +114,7 @@ namespace Hospital.Repository
             }
             reader.Read();
             int doctorID = reader.GetInt32(2);
-            Doctor rejectionDoctor = doctorRepository.GetDoctorById(doctorID);
+            Doctor rejectionDoctor = doctorRepository.GetById(doctorID);
             string RejectionInfo = "(dr " + rejectionDoctor.User.Surname + ")\n";
             RejectionInfo += reader.GetString(3);
 

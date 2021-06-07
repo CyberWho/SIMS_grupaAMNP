@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hospital.Model;
 
-namespace Hospital.ViewModel.Doctor
+namespace Hospital.IRepository
 {
-    class DoctorUIViewModel
+    public interface IRoleRepo<T> : IRepo<T> where T : IEntity
     {
+
     }
 }

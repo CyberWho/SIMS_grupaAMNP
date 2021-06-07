@@ -6,7 +6,7 @@
 
 namespace Hospital.Model
 {
-    public class Allergy
+    public class Allergy : IEntity
     {
         public int Id { get; set; }
         public int allergy_type_id { get; set; }

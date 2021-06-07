@@ -2,7 +2,7 @@ using System;
 
 namespace Hospital.Model
 {
-    public class Appointment
+    public class Appointment : IEntity
     {
 
 

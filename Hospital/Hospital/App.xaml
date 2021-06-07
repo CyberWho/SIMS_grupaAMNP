@@ -132,7 +132,49 @@
                     </Trigger>
                 </Style.Triggers>
            </Style>
-            
+            <Style x:Key="patientRegularBtn" TargetType="Button">
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3" />
+                    </Style>
+                </Style.Resources>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="#838b90" TargetName="Border"/>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Background" Value="#3499eb"/>
+                <Setter Property="Foreground" Value="#e8ebed"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Width" Value="180"/>
+                <Setter Property="Height" Value="40"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect ShadowDepth="5" BlurRadius="4"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <Style x:Key="managerTextBlock" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#e8ebed"/>
                 <Setter Property="Effect">
@@ -150,6 +192,10 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="patientTextBox" TargetType="TextBox">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+            </Style>
 
 
             <Style x:Key="managerDataGrid" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
@@ -157,7 +203,9 @@
                 <Setter Property="SelectionUnit" Value="FullRow"/>
             </Style>
 
-
+            <Style x:Key="buttonPatient" TargetType="Button">
+            </Style>
+            <Style x:Key="menuItemPatient" TargetType="MenuItem"></Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

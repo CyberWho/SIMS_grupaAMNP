@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
@@ -65,8 +66,8 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-   
-      public PerscriptionService perscriptionService;
-   
+
+      public PerscriptionService perscriptionService = new PerscriptionService();
+
    }
 }

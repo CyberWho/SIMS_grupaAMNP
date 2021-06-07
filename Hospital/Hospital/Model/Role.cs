@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace Hospital.Model
 {
-    public class Role
+    public class Role : IEntity
     {
         public int Id { get; set; }
         public string RoleType { get; set; }
@@ -31,7 +31,7 @@ namespace Hospital.Model
                 AddEmployee(oEmployee);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddEmployee(Employee newEmployee)
         {
             if (newEmployee == null)

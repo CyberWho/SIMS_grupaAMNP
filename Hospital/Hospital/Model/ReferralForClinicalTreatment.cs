@@ -8,7 +8,7 @@ using System;
 
 namespace Hospital.Model
 {
-   public class ReferralForClinicalTreatment
+   public class ReferralForClinicalTreatment : IEntity
    {
       public int Id { get; set; }
       public Boolean IsActive { get; set; }

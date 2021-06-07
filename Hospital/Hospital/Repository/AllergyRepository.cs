@@ -9,11 +9,12 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    /// GetAllergiesByTypeId vraca konkretno sve id-eve kartona koji su alergicni na to i to cije je id TypeId
-    public class AllergyRepository
+    /// GetAllByTypeId vraca konkretno sve id-eve kartona koji su alergicni na to i to cije je id TypeId
+    public class AllergyRepository : IAllergyRepo<Allergy>
     {
         OracleConnection connection = null;
         UserRepository userRepository = new UserRepository();
@@ -53,7 +54,7 @@ namespace Hospital.Repository
         }
 
 
-        public ObservableCollection<Allergy> GetAllAllergiesByUserId(int userId)
+        public ObservableCollection<Allergy> GetAllByUserId(int userId)
         {
             setConnection();
 
@@ -88,13 +89,13 @@ namespace Hospital.Repository
             return allergies;
         }
 
-        public System.Collections.ArrayList GetAllergiesByTypeId(int allergyTypeId)
+        public ObservableCollection<Allergy> GetAllByTypeId(int allergyTypeId)
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
+        public ObservableCollection<Allergy> GetAllByHealthRecordId(int healthRecordId)
         {
             setConnection();
             ObservableCollection<Allergy> allergies = new ObservableCollection<Allergy>();
@@ -113,17 +114,17 @@ namespace Hospital.Repository
 
         private static Allergy ParseAllergy(OracleDataReader reader)
         {
-            HealthRecord healthRecord = new HealthRecordRepository().GetHealthRecordById(reader.GetInt32(2));
-            Allergy allergy = new Allergy(reader.GetInt32(0),new AllergyTypeRepository().GetAllergyTypeById(reader.GetInt32(1)),healthRecord);
+            HealthRecord healthRecord = new HealthRecordRepository().GetById(reader.GetInt32(2));
+            Allergy allergy = new Allergy(reader.GetInt32(0),new AllergyTypeRepository().GetById(reader.GetInt32(1)),healthRecord);
             return allergy;
         }
 
-        public Boolean DeleteAllergyByUserIdAndAllergyTypeId(int userId, int atId)
+        public Boolean DeleteByUserIdAndAllergyTypeId(int userId, int atId)
         {
             setConnection();
 
-            Patient patient = this.patientRepository.GetPatientByUserId(userId);
-            HealthRecord healthRecord = this.healthRecordRepository.GetHealthRecordByPatientId(patient.Id);
+            Patient patient = this.patientRepository.GetByUserId(userId);
+            HealthRecord healthRecord = this.healthRecordRepository.GetByPatientId(patient.Id);
 
             OracleCommand command = connection.CreateCommand();
 
@@ -136,10 +137,10 @@ namespace Hospital.Repository
             connection.Close();
             connection.Dispose();
 
-            return this.DeleteAllergyById(allergyId);
+            return this.DeleteById(allergyId);
         }
 
-        public Boolean DeleteAllergyById(int id)
+        public Boolean DeleteById(int id)
         {
             
 
@@ -159,19 +160,19 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Boolean DeleteAllergiesByHealthRecordId(int healthRecordId)
+        public Boolean DeleteAllByHealthRecordId(int healthRecordId)
         {
             // TODO: implement
             return false;
         }
 
-        public Allergy UpdateAllergy(Allergy allergy)
+        public Allergy Update(Allergy allergy)
         {
             // TODO: implement
             return null;
         }
 
-        public Allergy NewAllergy(Allergy allergy)
+        public Allergy Add(Allergy allergy)
         {
             setConnection();
 
@@ -194,13 +195,13 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Allergy GetAllergyById(int id)
+        public Allergy GetById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public System.Collections.ArrayList GetAllAllergies()
+        public ObservableCollection<Allergy> GetAll()
         {
             // TODO: implement
             return null;

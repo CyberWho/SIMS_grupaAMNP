@@ -12,10 +12,11 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 using System.Security.Claims;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class FreeDaysRepository
+    public class FreeDaysRepository : IFreeDaysRepo<FreeDays>
     {
         OracleConnection connection = null;
         private void setConnection()
@@ -33,7 +34,7 @@ namespace Hospital.Repository
             }
         }
 
-        public ObservableCollection<FreeDays> GetFreeDaysByDoctorId(int doctor_id)
+        public ObservableCollection<FreeDays> GetAllByDoctorId(int doctor_id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -65,31 +66,31 @@ namespace Hospital.Repository
 
         }
 
-        public FreeDays GetFreeDaysById(int id)
+        public FreeDays GetById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<FreeDays> GetAllPendingFreeDays()
+        public ObservableCollection<FreeDays> GetAllPending()
         {
             // TODO: implement
             return null;
         }
 
-        public FreeDays ApproveFreeDays(FreeDays freeDays)
+        public FreeDays Approve(FreeDays freeDays)
         {
             // TODO: implement
             return null;
         }
 
-        public FreeDays RejectFreeDays(FreeDays freeDays)
+        public FreeDays Reject(FreeDays freeDays)
         {
             // TODO: implement
             return null;
         }
 
-        public FreeDays AddFreeDays(FreeDays freeDays)
+        public FreeDays Add(FreeDays freeDays)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -141,13 +142,13 @@ namespace Hospital.Repository
             }
         }
 
-        public Boolean DeleteFreeDaysById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        private int GetLastId()
+        public int GetLastId()
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -166,5 +167,14 @@ namespace Hospital.Repository
             return id;
         }
 
+        public ObservableCollection<FreeDays> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public FreeDays Update(FreeDays t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
