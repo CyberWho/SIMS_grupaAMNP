@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
@@ -15,9 +16,9 @@ namespace Hospital.Service
    {
        private IReferralForSpecialistRepo<ReferralForSpecialist> referralForSpecialistRepository;
 
-       public ReferralForSpecialistService(IReferralForSpecialistRepo<ReferralForSpecialist> iReferralForSpecialistRepo)
+       public ReferralForSpecialistService()
        {
-           referralForSpecialistRepository = iReferralForSpecialistRepo;
+           referralForSpecialistRepository = new ReferralForSpecialistRepository();
        }
         public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {

@@ -73,7 +73,7 @@ namespace Hospital.Controller
             return null;
         }
 
-        public AnamnesisService anamnesisService = new AnamnesisService(new AnamnesisRepository(),new PerscriptionRepository());
+        public AnamnesisService anamnesisService = new AnamnesisService();
 
     }
 }

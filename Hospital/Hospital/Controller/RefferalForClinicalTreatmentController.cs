@@ -119,7 +119,7 @@ namespace Hospital.Controller
         }
 
 
-        public Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService = new ReferralForClinicalTreatmentService(new ReferralForClinicalTreatmentRepository());
+        public Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService = new ReferralForClinicalTreatmentService();
 
     }
 }

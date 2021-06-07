@@ -14,7 +14,7 @@ namespace Hospital.Controller
 {
     public class PatientController
     {
-        public PatientService patientService = new PatientService(new PatientRepository());
+        public PatientService patientService = new PatientService();
 
         public Patient GetPatientByUserId(int id)
         {

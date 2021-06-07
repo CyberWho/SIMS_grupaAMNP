@@ -16,9 +16,9 @@ namespace Hospital.Service
     {
         public IPatientRepo<Patient> patientRepository;
 
-        public PatientService(IPatientRepo<Patient> iPatientRepo)
+        public PatientService()
         {
-            this.patientRepository = iPatientRepo;
+            this.patientRepository = new PatientRepository();
         }
         public Patient GetPatientByUserId(int id)
         {

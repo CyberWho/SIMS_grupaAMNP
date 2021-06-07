@@ -30,7 +30,7 @@ namespace Hospital.Controller
          return null;
       }
 
-      public StateService stateService = new StateService(new StateRepository());
+      public StateService stateService = new StateService();
 
    }
 }

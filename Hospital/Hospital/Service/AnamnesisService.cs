@@ -17,11 +17,10 @@ namespace Hospital.Service
         private IAnamnesisRepo<Anamnesis> anamnesisRepository;
         private IPerscriptionRepo<Perscription> perscriptionRepository;
 
-        public AnamnesisService(IAnamnesisRepo<Anamnesis> iAnamnesisRepo,
-            IPerscriptionRepo<Perscription> iPerscriptionRepo)
+        public AnamnesisService()
         {
-            anamnesisRepository = iAnamnesisRepo;
-            perscriptionRepository = iPerscriptionRepo;
+            anamnesisRepository = new AnamnesisRepository();
+            perscriptionRepository = new PerscriptionRepository();
         }
         public Model.Anamnesis AddAnamnesis(Model.Anamnesis anamnesis)
         {

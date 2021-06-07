@@ -61,7 +61,7 @@ namespace Hospital.Controller
       }
 
       public Service.MedicalTreatmentService medicalTreatmentService =
-          new MedicalTreatmentService(new Repository.MedicalTreatment());
+          new MedicalTreatmentService();
 
    }
 }

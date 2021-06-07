@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 
 namespace Hospital.Service
@@ -16,9 +17,9 @@ namespace Hospital.Service
     {
         private IAllergyTypeRepo<AllergyType> allergyTypeRepository;
 
-        public AllergyTypeService(IAllergyTypeRepo<AllergyType> iAllergyTypeRepo)
+        public AllergyTypeService()
         {
-            allergyTypeRepository = iAllergyTypeRepo;
+            allergyTypeRepository = new AllergyTypeRepository();
         }
 
         public System.Collections.ArrayList GetAllAllergyTypes()

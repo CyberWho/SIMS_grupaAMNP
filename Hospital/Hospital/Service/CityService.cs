@@ -7,6 +7,7 @@
 using System;
 using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
@@ -14,9 +15,9 @@ namespace Hospital.Service
    {
        private ICityRepo<City> cityRepository;
 
-       public CityService(ICityRepo<City> iCityRepo)
+       public CityService()
        {
-           this.cityRepository = iCityRepo;
+           this.cityRepository = new CityRepository();
        }
       public Model.City GetCityById(int id)
       {

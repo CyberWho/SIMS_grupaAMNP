@@ -19,9 +19,9 @@ namespace Hospital.Service
         public Boolean IsGuest;
         public int MinPasswordLength;
 
-        public UserService(IUserRepo<User> userRepo)
+        public UserService()
         {
-            userRepository = userRepo;
+            userRepository = new UserRepository();
         }
         public User GuestUser()
         {

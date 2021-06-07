@@ -49,7 +49,7 @@ namespace Hospital.Controller
             return false;
         }
 
-        public FreeDaysService freeDaysService = new FreeDaysService(new FreeDaysRepository());
+        public FreeDaysService freeDaysService = new FreeDaysService();
 
     }
 }

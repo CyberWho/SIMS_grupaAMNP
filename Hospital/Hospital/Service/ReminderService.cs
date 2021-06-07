@@ -8,6 +8,8 @@ using System;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using Hospital.IRepository;
+using Hospital.Repository;
+using MedicalTreatment = Hospital.Model.MedicalTreatment;
 
 namespace Hospital.Service
 {
@@ -15,9 +17,9 @@ namespace Hospital.Service
    {
        private IReminerRepo<Reminder> reminderRepository;
 
-       public ReminderService(IReminerRepo<Reminder> iReminderRepository)
+       public ReminderService()
        {
-           reminderRepository = iReminderRepository;
+           reminderRepository = new ReminderRepository();
        }
         public Reminder GetReminderById(int id)
       {

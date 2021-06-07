@@ -74,7 +74,7 @@ namespace Hospital.Controller
         }
 
 
-      public Service.ReminderService reminderService = new Service.ReminderService(new ReminderRepository());
+      public Service.ReminderService reminderService = new Service.ReminderService();
    
    }
 }

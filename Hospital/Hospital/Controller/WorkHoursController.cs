@@ -74,7 +74,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.WorkHoursService workHoursService = new WorkHoursService(new WorkHoursRepository());
+      public Hospital.Service.WorkHoursService workHoursService = new WorkHoursService();
    
    }
 }

@@ -7,14 +7,15 @@
 using System;
 using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
    public class StateService
    {
-       public StateService(IStateRepo<State> iStateRepo)
+       public StateService()
        {
-           this.stateRepository = iStateRepo;
+           this.stateRepository = new StateRepository();
        }
       public Model.State GetStateById(int id)
       {

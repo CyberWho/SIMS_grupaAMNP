@@ -15,9 +15,9 @@ namespace Hospital.Service
    {
        private IAddressRepo<Address> addressRepository;
 
-       public AddressService(IAddressRepo<Address> iAddressRepo)
+       public AddressService()
        {
-           this.addressRepository = iAddressRepo;
+           this.addressRepository = new AddressRepository();
        }
         public Address GetAddressByPatientId(int id)
         {

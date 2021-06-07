@@ -16,9 +16,9 @@ namespace Hospital.Service
 
        private IWorkHoursRepo<WorkHours> workHoursRepository;
 
-       public WorkHoursService(IWorkHoursRepo<WorkHours> iWorkHoursRepo)
+       public WorkHoursService()
        {
-           workHoursRepository = iWorkHoursRepo;
+           workHoursRepository = new WorkHoursRepository();
        }
         public Hospital.Model.WorkHours AddWorkHours(Hospital.Model.WorkHours workHours)
       {

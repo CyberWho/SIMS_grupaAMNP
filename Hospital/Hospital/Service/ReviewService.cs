@@ -2,15 +2,16 @@
 using System.Collections.ObjectModel;
 using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
     class ReviewService
     {
         private IReviewRepo<Review> reviewRepository;
-        public ReviewService(IReviewRepo<Review> iReviewRepo)
+        public ReviewService()
         {
-            reviewRepository = iReviewRepo;
+            reviewRepository = new ReviewRepository();
         }
         public ObservableCollection<Review> GetAllReviews()
         {

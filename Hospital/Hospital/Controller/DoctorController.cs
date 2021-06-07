@@ -67,7 +67,7 @@ namespace Hospital.Controller
             return this.doctorService.AddDoctor(doctor, specialization);
         }
 
-        public Service.DoctorService doctorService = new Service.DoctorService(new DoctorRepository(),new EmployeesRepository(),new UserRepository(),new SpecializationRepository());
+        public Service.DoctorService doctorService = new Service.DoctorService();
 
     }
 }

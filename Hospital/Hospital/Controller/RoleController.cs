@@ -50,7 +50,7 @@ namespace Hospital.Controller
          return null;
       }
 
-      public Service.RoleService roleService = new RoleService(new RoleRepository());
+      public Service.RoleService roleService = new RoleService();
 
    }
 }

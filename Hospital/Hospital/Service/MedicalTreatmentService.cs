@@ -15,9 +15,9 @@ namespace Hospital.Service
    {
        private IMedicalTreatmentRepo<Model.MedicalTreatment> medicalTreatment;
 
-       public MedicalTreatmentService(IMedicalTreatmentRepo<Model.MedicalTreatment> iMedicalTreatmentRepo)
+       public MedicalTreatmentService()
        {
-           medicalTreatment = iMedicalTreatmentRepo;
+           medicalTreatment = new Repository.MedicalTreatment();
        }
         public Model.MedicalTreatment GetMedicalTreatmentById(int id)
       {

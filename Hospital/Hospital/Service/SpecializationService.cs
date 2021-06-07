@@ -14,9 +14,9 @@ namespace Hospital.Service
     {
         private ISpecializationRepo<Specialization> specializationRepository;
 
-        public SpecializationService(ISpecializationRepo<Specialization> iSpecializationRepo)
+        public SpecializationService()
         {
-            this.specializationRepository = iSpecializationRepo;
+            this.specializationRepository = new SpecializationRepository();
         }
         public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD)
         {

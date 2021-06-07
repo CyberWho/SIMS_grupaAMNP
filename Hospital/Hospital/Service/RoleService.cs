@@ -7,14 +7,15 @@
 using System;
 using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
    public class RoleService
    {
-       public RoleService(IRoleRepo<Role> iRoleRepo)
+       public RoleService()
        {
-           roleRepository = iRoleRepo;
+           roleRepository = new RoleRepository();
        }
       public Model.Role GetRoleById(int id)
       {

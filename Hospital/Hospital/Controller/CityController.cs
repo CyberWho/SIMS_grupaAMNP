@@ -30,7 +30,7 @@ namespace Hospital.Controller
          return null;
       }
 
-      public Service.CityService cityService = new CityService(new CityRepository());
+      public Service.CityService cityService = new CityService();
 
    }
 }

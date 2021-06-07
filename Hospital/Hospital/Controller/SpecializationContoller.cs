@@ -12,7 +12,7 @@ namespace Hospital.Controller
 {
     class SpecializationContoller
     {
-        private SpecializationService specializationService = new SpecializationService(new SpecializationRepository());
+        private SpecializationService specializationService = new SpecializationService();
 
         public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD = true)
         {

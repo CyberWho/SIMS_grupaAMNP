@@ -8,6 +8,7 @@ using Hospital.Model;
 using System;
 using System.Collections.ObjectModel;
 using Hospital.IRepository;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
@@ -15,9 +16,9 @@ namespace Hospital.Service
     {
         private IAllergyRepo<Allergy> allergyRepository;
 
-        public AllergyService(IAllergyRepo<Allergy> iAllergyRepo)
+        public AllergyService()
         {
-            allergyRepository = iAllergyRepo;
+            allergyRepository = new AllergyRepository();
         }
         public ObservableCollection<Allergy> GetAllAllergiesByUserId(int userId)
         {

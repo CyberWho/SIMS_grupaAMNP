@@ -14,7 +14,7 @@ namespace Hospital.Controller
 {
     public class HealthRecordController
     {
-        public HealthRecordService healthRecordService = new HealthRecordService(new HealthRecordRepository());
+        public HealthRecordService healthRecordService = new HealthRecordService();
 
         public HealthRecord GetHealthRecordById(int id)
         {
