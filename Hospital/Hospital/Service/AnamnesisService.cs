@@ -7,12 +7,22 @@
 using Hospital.Repository;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 
 namespace Hospital.Service
 {
     public class AnamnesisService
     {
+        private IAnamnesisRepo<Anamnesis> anamnesisRepository;
+        private IPerscriptionRepo<Perscription> perscriptionRepository;
+
+        public AnamnesisService(IAnamnesisRepo<Anamnesis> iAnamnesisRepo,
+            IPerscriptionRepo<Perscription> iPerscriptionRepo)
+        {
+            anamnesisRepository = iAnamnesisRepo;
+            perscriptionRepository = iPerscriptionRepo;
+        }
         public Model.Anamnesis AddAnamnesis(Model.Anamnesis anamnesis)
         {
             // TODO: implement
@@ -27,16 +37,16 @@ namespace Hospital.Service
 
         public ObservableCollection<Anamnesis> GetAllAnamnesesByHealthRecordId(int healthRecordId)
         {
-            return anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
+            return anamnesisRepository.GetAllByHealthRecordId(healthRecordId);
         }
 
         public ObservableCollection<Perscription> GetAllActivePerscriptionsByHealthRecordId(int healthRecordId)
         {
-            ObservableCollection<Anamnesis> anamneses = anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
+            ObservableCollection<Anamnesis> anamneses = anamnesisRepository.GetAllByHealthRecordId(healthRecordId);
             ObservableCollection<Perscription> perscriptions = new ObservableCollection<Perscription>();
             foreach(Anamnesis anamnesis in anamneses)
             {
-                ObservableCollection<Perscription> perscriptionInAnamnesis = perscriptionRepository.GetAllActivePerscriptionsByAnamnesisId(anamnesis.Id);
+                ObservableCollection<Perscription> perscriptionInAnamnesis = perscriptionRepository.GetAllActiveByAnamnesisId(anamnesis.Id);
                 foreach(Perscription perscription in perscriptionInAnamnesis)
                 {
                     perscriptions.Add(perscription);
@@ -47,7 +57,7 @@ namespace Hospital.Service
 
         internal ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByHealthRecordId(int healthRecordId)
         {
-            ObservableCollection<Anamnesis> anamneses = anamnesisRepository.GetAllAnamnesesByHealthRecordId(healthRecordId);
+            ObservableCollection<Anamnesis> anamneses = anamnesisRepository.GetAllByHealthRecordId(healthRecordId);
             ObservableCollection<Model.MedicalTreatment> medicalTreatments = new ObservableCollection<Model.MedicalTreatment>();
             foreach (Anamnesis anamnesis in anamneses)
             {
@@ -76,12 +86,12 @@ namespace Hospital.Service
 
         public Model.Anamnesis UpdateAnamnesis(Model.Anamnesis anamnesis)
         {
-            return new AnamnesisRepository().UpdateAnamnesis(anamnesis);
+            return new AnamnesisRepository().Update(anamnesis);
         }
 
         public Model.Anamnesis NewAnamnesis(Model.Anamnesis anamnesis)
         {
-            return new AnamnesisRepository().NewAnamnesis(anamnesis);
+            return new AnamnesisRepository().Add(anamnesis);
         }
 
         public Model.Anamnesis AddMedicalTreatmentToAnamnesis(Model.Anamnesis anamnesis, Model.MedicalTreatment medicalTreatment)
@@ -96,8 +106,6 @@ namespace Hospital.Service
             return null;
         }
 
-        public AnamnesisRepository anamnesisRepository = new AnamnesisRepository();
-        public PerscriptionRepository perscriptionRepository = new PerscriptionRepository();
 
     }
 }

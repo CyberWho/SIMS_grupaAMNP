@@ -7,7 +7,9 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
+using MedicalTreatment = Hospital.Model.MedicalTreatment;
 
 namespace Hospital.Controller
 {
@@ -52,12 +54,12 @@ namespace Hospital.Controller
 
         public Anamnesis UpdateAnamnesis(Anamnesis anamnesis)
         {
-            return new AnamnesisService().UpdateAnamnesis(anamnesis);
+            return anamnesisService.UpdateAnamnesis(anamnesis);
         }
 
         public Anamnesis NewAnamnesis(Anamnesis anamnesis)
         {
-            return new AnamnesisService().NewAnamnesis(anamnesis);
+            return anamnesisService.NewAnamnesis(anamnesis);
         }
         public Anamnesis AddMedicalTreatmentToAnamnesis(Anamnesis anamnesis, MedicalTreatment medicalTreatment)
         {
@@ -71,7 +73,7 @@ namespace Hospital.Controller
             return null;
         }
 
-        public AnamnesisService anamnesisService = new AnamnesisService();
+        public AnamnesisService anamnesisService = new AnamnesisService(new AnamnesisRepository(),new PerscriptionRepository());
 
     }
 }

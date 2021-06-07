@@ -128,6 +128,7 @@
     <Compile Include="IRepository\IAddressRepo.cs" />
     <Compile Include="IRepository\IAllergyRepo.cs" />
     <Compile Include="IRepository\IAllergyTypeRepo.cs" />
+    <Compile Include="IRepository\IAnamnesisRepo.cs" />
     <Compile Include="IRepository\IAppointmentRepo.cs" />
     <Compile Include="IRepository\ICityRepo.cs" />
     <Compile Include="IRepository\IDoctorRepo.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="IRepository\IFreeDaysRepo.cs" />
     <Compile Include="IRepository\IHealthRecordRepo.cs" />
     <Compile Include="IRepository\IPatientRepo.cs" />
+    <Compile Include="IRepository\IPerscriptionRepo.cs" />
     <Compile Include="IRepository\IReminerRepo.cs" />
     <Compile Include="IRepository\IRepo.cs" />
     <Compile Include="IRepository\IReviewRepo.cs" />

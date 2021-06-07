@@ -9,10 +9,11 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class AnamnesisRepository
+    public class AnamnesisRepository : IAnamnesisRepo<Anamnesis>
     {
         OracleConnection connection = null;
 
@@ -30,7 +31,7 @@ namespace Hospital.Repository
                 Trace.WriteLine(exp.ToString());
             }
         }
-        public Anamnesis GetAnamnesisById(int id)
+        public Anamnesis GetById(int id)
         {
 
             //health record repo dopunjava jos anamnezu
@@ -46,7 +47,7 @@ namespace Hospital.Repository
             return anamnesis;
         }
 
-        public ObservableCollection<Anamnesis> GetAllAnamnesesByHealthRecordId(int healthRecordId)
+        public ObservableCollection<Anamnesis> GetAllByHealthRecordId(int healthRecordId)
         {
 
             setConnection();
@@ -75,24 +76,24 @@ namespace Hospital.Repository
             anamnesis.Id = reader.GetInt32(0);
             anamnesis.Description = reader.GetString(1);
             anamnesis.MedicalTreatments = new MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(reader.GetInt32(0));
-            anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(reader.GetInt32(0));
+            anamnesis.Perscriptions = new PerscriptionRepository().GetAllByAnamnesisId(reader.GetInt32(0));
             anamnesis.appointment = new AppointmentRepository().GetById(reader.GetInt32(3));
             return anamnesis;
         }
 
-        public Boolean DeleteAnamnesisById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DeleteAnamnesisByHealthRecordId(int healthRecordId)
+        public Boolean DeleteAllByHealthRecordId(int healthRecordId)
         {
             // TODO: implement
             return false;
         }
 
-        public Anamnesis UpdateAnamnesis(Anamnesis anamnesis)
+        public Anamnesis Update(Anamnesis anamnesis)
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
@@ -105,7 +106,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Anamnesis NewAnamnesis(Anamnesis anamnesis)
+        public Anamnesis Add(Anamnesis anamnesis)
         {
           
             setConnection();
@@ -125,5 +126,9 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public ObservableCollection<Anamnesis> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

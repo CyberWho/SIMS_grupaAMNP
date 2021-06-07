@@ -108,7 +108,7 @@ namespace Hospital.Repository
             connection.Dispose();
 
 
-           // healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
+           // healthRecord.anamnesis = new AnamnesisRepository().GetAllByHealthRecordId(record_id);
             healthRecord.patient_id = patientId;
             healthRecord.Patient = patient;
             healthRecord.PlaceOfBirth = new CityRepository().GetById(city_id);

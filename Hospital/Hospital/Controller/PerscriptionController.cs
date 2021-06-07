@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
@@ -57,7 +58,7 @@ namespace Hospital.Controller
       
       public Perscription AddPerscription(Perscription perscription)
       {
-         return new PerscriptionService().AddPerscription(perscription);
+         return new PerscriptionService(new PerscriptionRepository()).AddPerscription(perscription);
       }
       
       public Perscription DeactivatePerscription(Perscription perscription)
@@ -65,8 +66,8 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-   
-      public PerscriptionService perscriptionService;
-   
+
+      public PerscriptionService perscriptionService = new PerscriptionService(new PerscriptionRepository());
+
    }
 }

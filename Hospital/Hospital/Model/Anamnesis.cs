@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
-    public class Anamnesis
+    public class Anamnesis : IEntity
     {
         public int Id { get; set; }
         public String Description { get; set; }

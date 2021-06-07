@@ -48,7 +48,7 @@ namespace Hospital.Repository
         private static Model.MedicalTreatment ParseMedicalTreatment(OracleDataReader reader)
         {
            // Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment(reader.GetInt32(0),reader.GetInt32(1),reader.GetDateTime(2),
-            //    reader.GetDateTime(3),reader.GetString(6),new DrugRepository().GetDrugById(reader.GetInt32(5)),new AnamnesisRepository().GetAnamnesisById(reader.GetInt32(4)));
+            //    reader.GetDateTime(3),reader.GetString(6),new DrugRepository().GetDrugById(reader.GetInt32(5)),new AnamnesisRepository().GetById(reader.GetInt32(4)));
             //kreiranje i vranjacanje isto za get by anam id isto tako i za perscription onda uraditi za anamnezu za karton
             Model.MedicalTreatment medicalTreatment = new Model.MedicalTreatment();
             medicalTreatment.Id = reader.GetInt32(0);
