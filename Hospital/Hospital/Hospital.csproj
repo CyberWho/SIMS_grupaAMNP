@@ -125,6 +125,12 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AbstractEmployee.cs" />
+    <Compile Include="Model\AbstractPatient.cs" />
+    <Compile Include="Model\AbstractUser.cs" />
+    <Compile Include="Model\_EmployeeFactory.cs" />
+    <Compile Include="Model\_PatientFactory.cs" />
+    <Compile Include="Model\_UserFactory.cs" />
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />
     <Compile Include="Model\DrugDTO.cs" />
