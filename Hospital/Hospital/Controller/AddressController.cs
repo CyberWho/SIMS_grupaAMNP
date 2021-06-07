@@ -6,13 +6,14 @@
 
 using System;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
 {
     public class AddressController
     {
-        public AddressService addressService = new AddressService();
+        public AddressService addressService = new AddressService(new AddressRepository());
        
         public Address GetAddressByPatientId(int id)
         {

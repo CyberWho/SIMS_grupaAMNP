@@ -130,7 +130,7 @@ namespace Hospital.Repository
                 patient.User = user;
             }
 
-            //patient.Address = new AddressRepository().GetAddressById(patient.addres_id);
+            //patient.Address = new AddressRepository().GetById(patient.addres_id);
 
             return patient;
         }
@@ -164,7 +164,7 @@ namespace Hospital.Repository
                 User user = new UserRepository().GetById(reader.GetInt32(4));
                 user.Id = reader.GetInt32(4);
                 if (user.Name == null) continue;
-                var patient = new Patient(reader.GetInt32(0),reader.GetString(1),reader.GetDateTime(2),user,addressRepository.GetAddressById(3));
+                var patient = new Patient(reader.GetInt32(0),reader.GetString(1),reader.GetDateTime(2),user,addressRepository.GetById(3));
                 patient.addres_id = 
                 patients.Add(patient);
             }

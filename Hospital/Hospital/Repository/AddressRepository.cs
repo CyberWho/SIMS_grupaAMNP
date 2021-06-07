@@ -8,10 +8,12 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Diagnostics;
+using Hospital.IRepository;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Repository
 {
-    public class AddressRepository
+    public class AddressRepository : IAddressRepo<Address>
     {
         
         private CityRepository cityRepository = new CityRepository();
@@ -33,27 +35,27 @@ namespace Hospital.Repository
         }
 
 
-        public Address GetAddressByPatientId(int id)
+        public Address GetByPatientId(int patientId)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT address_id FROM patient WHERE id = " + id;
+            command.CommandText = "SELECT address_id FROM patient WHERE patientId = " + patientId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int addressId = reader.GetInt32(0);
-            var address = GetAddressById(addressId);
+            var address = GetById(addressId);
             connection.Close();
             connection.Dispose();
 
             return address;
         }
 
-        public Address GetAddressById(int id)
+        public Address GetById(int id)
         {
             setConnection();
 
             OracleCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM address WHERE id = " + id;
+            command.CommandText = "SELECT * FROM address WHERE patientId = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
@@ -86,19 +88,19 @@ namespace Hospital.Repository
             return address;
         }
 
-        public Boolean DeleteAddressById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Address UpdateAddress(Address address)
+        public Address Update(Address address)
         {
             // TODO: implement
             return null;
         }
 
-        public Address NewAddress(Address address)
+        public Address Add(Address address)
         {
             // TODO: implement
             return null;
@@ -110,5 +112,9 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public ObservableCollection<Address> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

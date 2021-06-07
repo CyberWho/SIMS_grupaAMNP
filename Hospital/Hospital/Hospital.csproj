@@ -125,6 +125,7 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IRepository\IAddressRepo.cs" />
     <Compile Include="IRepository\IDoctorRepo.cs" />
     <Compile Include="IRepository\IEmployeeRepo.cs" />
     <Compile Include="IRepository\IPatientRepo.cs" />
