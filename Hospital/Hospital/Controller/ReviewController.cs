@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.ObjectModel;
-using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {
@@ -35,7 +36,7 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Service.ReviewService reviewService = new Service.ReviewService();
+        public Service.ReviewService reviewService = new Service.ReviewService(new ReviewRepository());
 
     }
 }

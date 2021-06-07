@@ -131,6 +131,7 @@
     <Compile Include="IRepository\IEmployeeRepo.cs" />
     <Compile Include="IRepository\IPatientRepo.cs" />
     <Compile Include="IRepository\IRepo.cs" />
+    <Compile Include="IRepository\IReviewRepo.cs" />
     <Compile Include="IRepository\IRoleRepo.cs" />
     <Compile Include="IRepository\ISpecializationRepo.cs" />
     <Compile Include="IRepository\IStateRepo.cs" />
