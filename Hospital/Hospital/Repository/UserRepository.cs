@@ -49,7 +49,7 @@ namespace Hospital.Repository
 
             Patient patient = new Patient();
             patient.user_id = user.Id;
-            patient = this.patientRepository.NewPatient(patient, 1);
+            patient = this.patientRepository.New(patient, 1);
 
             HealthRecord healthRecord = new HealthRecord();
             healthRecord.patient_id = patient.Id;

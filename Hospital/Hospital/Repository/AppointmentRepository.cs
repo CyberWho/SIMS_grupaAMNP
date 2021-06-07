@@ -120,7 +120,7 @@ namespace Hospital.Repository
             Room room = roomRepository.GetAppointmentRoomById(roomId); 
             appointment.room = room;
 
-            Patient patient = patientRepository.GetPatientById(patientId);
+            Patient patient = patientRepository.GetById(patientId);
             appointment.patient = patient;
 
             Doctor doctor = doctorRepository.GetAppointmentDoctorById(doctorId);
@@ -467,7 +467,7 @@ namespace Hospital.Repository
 
                 appointment.Id = next_id;
                 appointment.doctor = this.doctorRepository.GetById(appointment.Doctor_Id);
-                appointment.patient = this.patientRepository.GetPatientById(appointment.Patient_Id);
+                appointment.patient = this.patientRepository.GetById(appointment.Patient_Id);
 
                 NotifyDoctor(appointment, "Kreiran termin");
                 NotifyPatient(appointment, "Kreiran termin");

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Hospital.Model
 {
-    public class Patient
+    public class Patient : IEntity
     {
 
         public int Id { get; set; }

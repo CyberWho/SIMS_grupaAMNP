@@ -122,7 +122,7 @@ namespace Hospital.Repository
         {
             setConnection();
 
-            Patient patient = this.patientRepository.GetPatientByUserId(userId);
+            Patient patient = this.patientRepository.GetByUserId(userId);
             HealthRecord healthRecord = this.healthRecordRepository.GetHealthRecordByPatientId(patient.Id);
 
             OracleCommand command = connection.CreateCommand();
