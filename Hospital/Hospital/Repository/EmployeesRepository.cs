@@ -91,7 +91,7 @@ namespace Hospital.Repository
 
             User user = new UserRepository().GetById(id); 
             
-            Role role = new RoleRepository().GetRoleById(reader.GetInt32(4));
+            Role role = new RoleRepository().GetById(reader.GetInt32(4));
             
             Employee employee = new Employee(reader.GetInt32(0),reader.GetInt32(1),reader.GetInt32(2),user,role);
             return employee;

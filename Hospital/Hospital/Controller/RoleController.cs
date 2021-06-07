@@ -7,6 +7,8 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -47,8 +49,8 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-   
-      public Service.RoleService roleService;
-   
+
+      public Service.RoleService roleService = new RoleService(new RoleRepository());
+
    }
 }

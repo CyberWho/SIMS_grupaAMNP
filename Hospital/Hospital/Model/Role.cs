@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace Hospital.Model
 {
-    public class Role
+    public class Role : IEntity
     {
         public int Id { get; set; }
         public string RoleType { get; set; }

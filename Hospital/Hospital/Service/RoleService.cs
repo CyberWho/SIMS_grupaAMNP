@@ -5,11 +5,17 @@
  ***********************************************************************/
 
 using System;
+using Hospital.IRepository;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
    public class RoleService
    {
+       public RoleService(IRoleRepo<Role> iRoleRepo)
+       {
+           roleRepository = iRoleRepo;
+       }
       public Model.Role GetRoleById(int id)
       {
          // TODO: implement
@@ -45,8 +51,8 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
-      public Repository.RoleRepository roleRepository;
-   
+
+      public IRoleRepo<Role> roleRepository;
+
    }
 }
