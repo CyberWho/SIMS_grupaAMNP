@@ -306,7 +306,7 @@ namespace Hospital.xaml_windows.Secretary
 
             foreach (Room r in rooms)
             {
-                roomsIds.Add(r.Id);
+                roomsIds.Add((int)r.Id);
             }
 
             this.room_selection.ItemsSource = roomsIds;

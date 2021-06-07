@@ -99,7 +99,8 @@ namespace Hospital.Controller
                     s.Show();
                     break;
                 case "Manager":
-                    s = new ManagerUI(id);
+                    //s = new View.Manager.ManagerUIView();
+                    s = new Wizard1();
                     s.Show();
                     break;
                 case "Secretary":

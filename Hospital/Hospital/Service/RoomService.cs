@@ -350,7 +350,7 @@ namespace Hospital.Service
 
             foreach (Room room in rooms)//get item in room
             {
-                room.itemInRoom = itemInRoomRepository.GetAllItemsInRoomByRoomId(room.Id);
+                room.itemInRoom = itemInRoomRepository.GetAllItemsInRoomByRoomId((int)room.Id);
                 foreach (ItemInRoom itemInRoom in room.itemInRoom)
                 {
                     //test += "U sobi " + room.Id + " ima: " + itemInRoom.inventoryItem.Name + "\n";

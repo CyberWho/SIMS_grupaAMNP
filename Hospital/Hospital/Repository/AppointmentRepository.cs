@@ -62,6 +62,34 @@ namespace Hospital.Repository
             return this.GetAppointmentById(appointment_id);
         }
 
+        public ObservableCollection<Appointment> GetAppointmentByDoctorIdAndTimePeriod(Doctor doctor, DateTime start_time, DateTime end_time)
+        {
+            setConnection();
+
+            // 4/21/2021 9:00:00 AM 2
+
+            int doctor_id = doctor.Id;
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM appointment WHERE doctor_id = :doctor_id AND date_time BETWEEN :start_time AND :end_time";
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctor_id;
+            command.Parameters.Add("start_time", OracleDbType.Date).Value = start_time;
+            command.Parameters.Add("end_time", OracleDbType.Date).Value = end_time;
+
+
+            OracleDataReader reader = command.ExecuteReader();
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            while (reader.Read())
+            {
+                appointments.Add(ParseAppointment(reader));
+            }
+
+            
+            connection.Close();
+            connection.Dispose();
+
+            return appointments;
+        }
+
 
         public Appointment GetAppointmentById(int id)
         {

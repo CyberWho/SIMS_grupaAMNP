@@ -200,7 +200,7 @@ namespace Hospital.xaml_windows.Patient
             AppointmentId = appointment.Id;
             DurationInMinutes = appointment.DurationInMinutes;
             DoctorId = appointment.doctor.Id;
-            RoomId = appointment.room.Id;
+            RoomId = (int)appointment.room.Id;
             NName = appointment.doctor.User.Name;
             Surname = appointment.doctor.User.Surname;
         }

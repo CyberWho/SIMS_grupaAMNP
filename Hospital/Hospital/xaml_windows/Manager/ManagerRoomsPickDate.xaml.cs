@@ -35,7 +35,7 @@ namespace Hospital.xaml_windows.Manager
             DateTime? dateTime = DateTime.Parse(date_pckr.Text);
             ReservedItem newReservedItem = new ReservedItem(0, dateTime, destinationRoom, itemInRoom);
             reservedItemController.AddReservedItem(newReservedItem);
-            Window newWindow = new ManagerRoomsCRUD(ManagerID);
+            Window newWindow = new View.Manager.RoomsCRUDView();
             newWindow.Show();
             newWindow.Topmost = true;
             this.Close();

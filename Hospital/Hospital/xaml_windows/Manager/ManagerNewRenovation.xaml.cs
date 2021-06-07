@@ -147,7 +147,7 @@ namespace Hospital.xaml_windows.Manager
                     ShowErrorBox("Za spajanje prostorija potrebno je da izaberete najmanje 2 prostorije.");
                     return true;
                 }
-                int floorOfFirstElement = SelectedRooms.First().Floor;
+                int floorOfFirstElement = (int)SelectedRooms.First().Floor;
                 foreach (Room selectedRoom in SelectedRooms)
                 {
                     if (selectedRoom.Floor != floorOfFirstElement)

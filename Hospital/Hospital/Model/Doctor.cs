@@ -222,7 +222,7 @@ namespace Hospital.Model
             
             this.room = room;
 
-            this.room_id = room.Id;
+            this.room_id = (int)room.Id;
             //this.employee_id = id;
             this.specialization_id = specialization.id;
         }
@@ -233,7 +233,7 @@ namespace Hospital.Model
             this.specialization = specialization;
 
 
-            this.room_id = room.Id;
+            this.room_id = (int)room.Id;
             this.employee_id = id;
             this.specialization_id = specialization.id;
         }

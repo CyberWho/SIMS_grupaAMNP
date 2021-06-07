@@ -243,7 +243,7 @@ namespace Hospital.Repository
             if (doctor.specialization_id == 0) doctor.specialization_id = doctor.specialization.id;
             else if (doctor.specialization == null) doctor.specialization.id = doctor.specialization_id;
 
-            if (doctor.room_id == 0) doctor.room_id = doctor.room.Id;
+            if (doctor.room_id == 0) doctor.room_id = (int)doctor.room.Id;
 
 
             return doctor;

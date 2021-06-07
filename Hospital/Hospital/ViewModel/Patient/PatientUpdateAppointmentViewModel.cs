@@ -200,7 +200,7 @@ namespace Hospital.ViewModel.Patient
             AppointmentId = appointment.Id;
             DurationInMinutes = appointment.DurationInMinutes;
             DoctorId = appointment.doctor.Id;
-            RoomId = appointment.room.Id;
+            RoomId = (int)appointment.room.Id;
             Name = appointment.doctor.User.Name;
             Surname = appointment.doctor.User.Surname;
         }

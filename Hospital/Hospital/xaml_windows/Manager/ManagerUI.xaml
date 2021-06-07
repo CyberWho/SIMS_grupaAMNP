@@ -24,6 +24,9 @@
         <Button x:Name="logout_btn" HorizontalAlignment="Left" Margin="860,18,0,0" VerticalAlignment="Top" Width="180" Height="50" Click="logout_btn_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Style="{StaticResource managerRegularBtn}">
             <TextBlock Text="&#xE127; Izlogujte se" FontSize="20" Style="{StaticResource managerTextBlock}"/>
         </Button>
+        <Button x:Name="help_btn" HorizontalAlignment="Left" Margin="860,18,0,0" VerticalAlignment="Top" Width="180" Height="50" Click="logout_btn_Click" GotFocus="btn_GotFocus" LostFocus="btn_LostFocus" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE127; Izlogujte se" FontSize="20" Style="{StaticResource managerTextBlock}"/>
+        </Button>
         <Canvas Grid.Row="1">
             <Image Source="/Hospital;component/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="10,21,1018.6,624.4">
                 <Image.RenderTransform>

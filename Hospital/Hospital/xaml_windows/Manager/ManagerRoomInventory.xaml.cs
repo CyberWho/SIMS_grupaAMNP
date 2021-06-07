@@ -23,7 +23,7 @@ namespace Hospital.xaml_windows.Manager
             InitializeComponent();
             ManagerID = mngrID;
             currentRoom = room;
-            roomNo_txtbx.Text = currentRoom.Id.ToString();
+            roomID_txtbx.Text = room.Id.ToString();
         }
 
         private void MoveInventory_Click(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace Hospital.xaml_windows.Manager
 
         private void GoToNextWindow(uint quantity)
         {
-            Window newWindow = new ManagerRoomInventorySelectDestinationRoom(ManagerID, currentRoom.Id, (ItemInRoom)myDataGrid.SelectedItem, quantity);
+            Window newWindow = new ManagerRoomInventorySelectDestinationRoom(ManagerID, (int)currentRoom.Id, (ItemInRoom)myDataGrid.SelectedItem, quantity);
             newWindow.Show();
         }
 
@@ -82,7 +82,7 @@ namespace Hospital.xaml_windows.Manager
         {
             this.DataContext = this;
             
-            ItemsInRoom = itemInRoomController.GetAllItemsInRoomByRoomId(currentRoom.Id);
+            ItemsInRoom = itemInRoomController.GetAllItemsInRoomByRoomId((int)currentRoom.Id);
             fillTable();
             
         }
@@ -96,10 +96,19 @@ namespace Hospital.xaml_windows.Manager
 
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window newWindow = new ManagerRoomsCRUD(ManagerID);
+            Window newWindow = new View.Manager.RoomsCRUDView();
             newWindow.Show();
-            
             this.Close();
+        }
+
+        private void roomID_txtbx_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ErrorTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void roomID_txtbx_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ErrorTextBlock.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -1,0 +1,45 @@
+﻿<Window x:Class="Hospital.View.Manager.ManagerUIView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Hospital.View.Manager"
+        mc:Ignorable="d"
+        Title="Upravnik" Height="720" Width="1080" WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI Symbol">
+    <Grid>
+        <Button x:Name="roomsBtn"  HorizontalAlignment="Left" Margin="302,134,0,0" VerticalAlignment="Top" Width="200" Command="{Binding Rooms}" Height="200" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="      &#x1f3e2;&#xa;Prostorije" FontSize="30" Style="{StaticResource managerTextBlock}" />
+        </Button>
+        <Button x:Name="inventorySearchBtn" HorizontalAlignment="Left" Margin="549,134,0,0" VerticalAlignment="Top" Width="200" Command="{Binding InventorySearch}" Height="200" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="     &#xE11A;&#xa;Pretraga&#xa;inventara" FontSize="30" Style="{StaticResource managerTextBlock}" />
+        </Button>
+        <Button x:Name="drugsBtn" HorizontalAlignment="Left" Margin="302,369,0,0" VerticalAlignment="Top" Width="200" Command="{Binding Drugs}" Height="200" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="   &#x1f48a;&#xa;Lekovi" FontSize="30" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="renovationsBtn" HorizontalAlignment="Left" Margin="549,369,0,0" VerticalAlignment="Top" Width="200" Command="{Binding Renovations}" Height="200" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="      &#xE15E;&#xa;Renovacije" FontSize="30" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="logout_btn" HorizontalAlignment="Left" Margin="860,18,0,0" VerticalAlignment="Top" Width="180" Height="50" Command="{Binding LogOut}"  Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE127; Izlogujte se" FontSize="20" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="help_btn" HorizontalAlignment="Left" Margin="792,18,0,0" VerticalAlignment="Top" Width="50" Height="50" Command="{Binding Help}" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE11B;" FontSize="20" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Canvas Grid.Row="1">
+            <Image Source="/Hospital;component/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="10,21,1018.6,624.4">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="bgTranslate"/>
+                </Image.RenderTransform>
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Image.Effect>
+            </Image>
+            <TextBlock Text="ZDRAVO KORPORACIJA" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37" Style="{StaticResource managerTextBlock}"/>
+        </Canvas>
+        <Button x:Name="reportBtn" HorizontalAlignment="Left" Margin="302,604,0,0" VerticalAlignment="Top" Width="447" Height="50" Command="{Binding Report}"  Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE160; Izveštaj o zauzetosti lekara" FontSize="20" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+    </Grid>
+</Window>
