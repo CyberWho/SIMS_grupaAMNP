@@ -177,6 +177,8 @@ namespace Hospital.xaml_windows.Patient
 
             if (!AlarmTimeValidation()) return false;
 
+            if (!AlarmTimeNowValidation()) return false;
+
             if (!FrequencyValidation()) return false;
 
             return true;
@@ -198,6 +200,17 @@ namespace Hospital.xaml_windows.Patient
             if (alarm_time_txt.Text == null)
             {
                 Error.Text = "Potrebno je da unesete vreme oglašavanja podsetnika!";
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool AlarmTimeNowValidation()
+        {
+            if (DateTime.Parse(alarm_time_txt.Text) <= DateTime.Now)
+            {
+                Error.Text = "Vreme oglašavanja ne sme biti u prošlosti!";
                 return false;
             }
 

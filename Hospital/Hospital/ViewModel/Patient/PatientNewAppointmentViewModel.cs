@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,21 +146,31 @@ namespace Hospital.ViewModel.Patient
         {
             if (endDate <= startDate)
             {
-                MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!", "Zdravo korporacija", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.SelectionError =
+                    "Nije moguće da označite vremenski interval gde je krajnji datum manji od početnog!";
             }
             else
             {
                 var dayDifference = (endDate - startDate).TotalDays;
                 if (dayDifference > 5)
                 {
-                    MessageBox.Show("Interval ne sme biti duzi od 5 dana!", "Zdravo korporacija", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.SelectionError = "Interval ne sme biti duži od 5 dana!";
                 }
                 else
                 {
-                    ShowNewAppointmentRecommendations(endDate, startDate, doctorId);
-                }
+                    if(endDate < DateTime.Now || startDate < DateTime.Now)
+                    {
+                        this.SelectionError = "Ne smete označiti datum u prošlosti!";
+                    }
+                    else
+                    {
+                        ShowNewAppointmentRecommendations(endDate, startDate, doctorId);
+                    }
+                } 
+                
             }
         }
+
         private void ShowNewAppointmentRecommendations(DateTime endDate, DateTime startDate, int doctorId)
         {
             var s = new PatientNewAppointmentRecommendationsView(userId, startDate, endDate, doctorId, priority, 0, ToolTipChecked);
