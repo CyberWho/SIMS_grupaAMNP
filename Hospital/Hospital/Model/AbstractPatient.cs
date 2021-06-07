@@ -16,7 +16,6 @@ namespace Hospital.Model
         private string _surname;
         private string _phone_number;
         private string _email;
-        // patient fields
         private string _jmbg;
         private DateTime _date_of_birth;
 
@@ -30,7 +29,6 @@ namespace Hospital.Model
             this._surname = surname;
             this._phone_number = phone_number;
             this._email = email;
-
             this._jmbg = jmbg;
             this._date_of_birth = date_of_birth;
         }
@@ -81,13 +79,14 @@ namespace Hospital.Model
             get { return _email; }
             set { _email = value; }
         }
-        public string jmbg
+
+        public override string jmbg
         {
             get { return _jmbg; }
             set { _jmbg = value; }
         }
 
-        public DateTime date_of_birth
+        public override DateTime date_of_birth
         {
             get { return _date_of_birth; }
             set { _date_of_birth = value; }

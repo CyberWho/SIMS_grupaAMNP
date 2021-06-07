@@ -458,6 +458,9 @@
     <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
       <DependentUpon>CreateNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\CreateUserWindow.xaml.cs">
+      <DependentUpon>CreateUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\FreeDays.xaml.cs">
       <DependentUpon>FreeDays.xaml</DependentUpon>
     </Compile>
@@ -797,6 +800,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Secretary\CreateNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\CreateUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

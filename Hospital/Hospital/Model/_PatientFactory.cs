@@ -16,7 +16,6 @@ namespace Hospital.Model
         private string _surname;
         private string _phone_number;
         private string _email;
-        // patient fields
         private string _jmbg;
         private DateTime _date_of_birth;
 
@@ -29,7 +28,6 @@ namespace Hospital.Model
             this._surname = surname;
             this._phone_number = phone_number;
             this._email = email;
-
             this._jmbg = jmbg;
             this._date_of_birth = date_of_birth;
         }
