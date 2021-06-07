@@ -231,7 +231,7 @@ namespace Hospital.Repository
             Appointment appointment = new Appointment();
             appointment = GetAppointmentById(id);
 
-            appointment.doctor.employee_id = employeesRepository.GetEmployeeByUserId(appointment.doctor.User.Id).Id;
+            appointment.doctor.employee_id = employeesRepository.GetByUserId(appointment.doctor.User.Id).Id;
 
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -268,9 +268,9 @@ namespace Hospital.Repository
             systemNotification.user_id = app.patient.user_id;
             systemNotification.Name = Name;
 
-            Employee employee = this.employeesRepository.GetEmployeeByUserId(app.doctor.User.Id);
+            Employee employee = this.employeesRepository.GetByUserId(app.doctor.User.Id);
 
-            int doctor_user_id = this.employeesRepository.GetUserIdByEmployeeId(employee.Id);
+            int doctor_user_id = this.employeesRepository.GetUserIdById(employee.Id);
             User doctorUser = this.userRepository.GetById(doctor_user_id);
             String desc = Name + " zakazan za: " + app.StartTime + " kod lekara " + doctorUser.Name + " " + doctorUser.Surname;
             systemNotification.Description = desc;

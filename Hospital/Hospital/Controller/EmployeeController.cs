@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {
@@ -50,7 +51,7 @@ namespace Hospital.Controller
             return this.employeeService.AddEmployee(employee);
         }
 
-        public Service.EmployeeService employeeService = new Service.EmployeeService();
+        public Service.EmployeeService employeeService = new Service.EmployeeService(new EmployeesRepository(),new UserRepository());
 
     }
 }

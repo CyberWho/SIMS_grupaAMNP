@@ -12,7 +12,7 @@ namespace Hospital.IRepository
     {
         T GetById(int id);
         ObservableCollection<T> GetAll();
-        void Add(T t);
+        T Add(T t);
         bool DeleteById(int id);
         T Update(T t);
         int GetLastId();

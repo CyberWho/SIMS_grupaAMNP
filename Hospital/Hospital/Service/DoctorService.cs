@@ -54,14 +54,14 @@ namespace Hospital.Service
         {
             Doctor doctor = this.doctorRepository.GetDoctorById(doctorId);
             
-            int employee_id = this.employeesRepository.getEmployeeIdByDoctorId(doctorId);
-            Employee employee = this.employeesRepository.GetEmployeeById(employee_id);
+            int employee_id = this.employeesRepository.GetIdByDoctorId(doctorId);
+            Employee employee = this.employeesRepository.GetById(employee_id);
 
             User user = this.userRepository.GetById(employee.User.Id);
 
 
             if (this.doctorRepository.DeleteDoctorById(doctorId) &&
-                this.employeesRepository.DeleteEmployeeById(employee_id) && 
+                this.employeesRepository.DeleteById(employee_id) && 
                 this.userRepository.DeleteById(user.Id))
 
                 return true;

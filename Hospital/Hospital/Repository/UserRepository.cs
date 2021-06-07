@@ -321,11 +321,11 @@ namespace Hospital.Repository
                         role: role
                     );
 
-            this.employeesRepository.NewEmployee(employee);
+            this.employeesRepository.Add(employee);
 
         }
 
-        public void Add(User t)
+        public User Add(User user)
         {
             throw new NotImplementedException();
         }

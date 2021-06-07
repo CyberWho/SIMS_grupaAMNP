@@ -125,6 +125,7 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IRepository\IEmployeeRepo.cs" />
     <Compile Include="IRepository\IRepo.cs" />
     <Compile Include="IRepository\IUserRepo.cs" />
     <Compile Include="Model\DateRange.cs" />
