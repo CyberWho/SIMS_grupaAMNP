@@ -126,11 +126,13 @@
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="IRepository\IAddressRepo.cs" />
+    <Compile Include="IRepository\ICityRepo.cs" />
     <Compile Include="IRepository\IDoctorRepo.cs" />
     <Compile Include="IRepository\IEmployeeRepo.cs" />
     <Compile Include="IRepository\IPatientRepo.cs" />
     <Compile Include="IRepository\IRepo.cs" />
     <Compile Include="IRepository\ISpecializationRepo.cs" />
+    <Compile Include="IRepository\IStateRepo.cs" />
     <Compile Include="IRepository\IUserRepo.cs" />
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />

@@ -109,7 +109,7 @@ namespace Hospital.Repository
            // healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
             healthRecord.patient_id = id;
             healthRecord.Patient = patient;
-            healthRecord.PlaceOfBirth = new CityRepository().GetCityById(city_id);
+            healthRecord.PlaceOfBirth = new CityRepository().GetById(city_id);
             healthRecord.Gender = gender;
             healthRecord.MaritalStatus = maritalStatus;
             connection.Close();

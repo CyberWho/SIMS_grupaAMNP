@@ -5,11 +5,17 @@
  ***********************************************************************/
 
 using System;
+using Hospital.IRepository;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
    public class StateService
    {
+       public StateService(IStateRepo<State> iStateRepo)
+       {
+           this.stateRepository = iStateRepo;
+       }
       public Model.State GetStateById(int id)
       {
          // TODO: implement
@@ -27,8 +33,8 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
-      public Repository.StateRepository stateRepository;
-   
+
+      private IStateRepo<State> stateRepository;
+
    }
 }

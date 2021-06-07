@@ -5,12 +5,14 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Model;
 
 namespace Hospital.Repository
 {
-    public class StateRepository
+    public class StateRepository : IStateRepo<State>
    {
         OracleConnection con = null;
         private void setConnection()
@@ -27,7 +29,7 @@ namespace Hospital.Repository
 
             }
         }
-        public State GetStateById(int id)
+        public State GetById(int id)
       {
             setConnection();
             OracleCommand cmd = con.CreateCommand();
@@ -41,20 +43,14 @@ namespace Hospital.Repository
             con.Close();
          return state;
       }
-      
-      public State GetStateByName(String name)
+        
+      public State Add(State state)
       {
          // TODO: implement
          return null;
       }
       
-      public State NewState(State state)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public System.Collections.ArrayList GetAll()
+      public ObservableCollection<State> GetAll()
       {
          // TODO: implement
          return null;
@@ -65,6 +61,15 @@ namespace Hospital.Repository
          // TODO: implement
          return 0;
       }
-   
-   }
+
+        public bool DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public State Update(State t)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

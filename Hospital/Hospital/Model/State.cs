@@ -8,7 +8,7 @@ using System;
 
 namespace Hospital.Model
 {
-    public class State
+    public class State : IEntity
     {
         public int Id { get; set; }
         public String Name { get; set; }

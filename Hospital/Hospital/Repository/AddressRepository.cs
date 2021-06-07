@@ -68,7 +68,7 @@ namespace Hospital.Repository
             connection.Close();
             connection.Dispose();
 
-            address.City = cityRepository.GetCityById(city_id);
+            address.City = cityRepository.GetById(city_id);
 
 
 
@@ -83,7 +83,7 @@ namespace Hospital.Repository
                 Id = int.Parse(reader.GetString(0)),
                 Name = reader.GetString(1),
                 city_id = int.Parse(reader.GetString(3)),
-                City = cityRepository.GetCityById(reader.GetInt32(3))
+                City = cityRepository.GetById(reader.GetInt32(3))
             };
             return address;
         }

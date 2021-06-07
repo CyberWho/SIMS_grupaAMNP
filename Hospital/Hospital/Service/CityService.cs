@@ -5,11 +5,19 @@
  ***********************************************************************/
 
 using System;
+using Hospital.IRepository;
+using Hospital.Model;
 
 namespace Hospital.Service
 {
    public class CityService
    {
+       private ICityRepo<City> cityRepository;
+
+       public CityService(ICityRepo<City> iCityRepo)
+       {
+           this.cityRepository = iCityRepo;
+       }
       public Model.City GetCityById(int id)
       {
          // TODO: implement
@@ -27,8 +35,6 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
-      public Repository.CityRepository cityRepository;
-   
+
    }
 }

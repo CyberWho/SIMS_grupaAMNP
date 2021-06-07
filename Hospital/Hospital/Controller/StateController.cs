@@ -5,6 +5,8 @@
  ***********************************************************************/
 
 using System;
+using Hospital.Repository;
+using Hospital.Service;
 
 namespace Hospital.Controller
 {
@@ -27,8 +29,8 @@ namespace Hospital.Controller
          // TODO: implement
          return null;
       }
-   
-      public Service.StateService stateService;
-   
+
+      public StateService stateService = new StateService(new StateRepository());
+
    }
 }
