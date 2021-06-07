@@ -57,12 +57,12 @@ namespace Hospital.Service
             int employee_id = this.employeesRepository.getEmployeeIdByDoctorId(doctorId);
             Employee employee = this.employeesRepository.GetEmployeeById(employee_id);
 
-            User user = this.userRepository.GetUserById(employee.User.Id);
+            User user = this.userRepository.GetById(employee.User.Id);
 
 
             if (this.doctorRepository.DeleteDoctorById(doctorId) &&
                 this.employeesRepository.DeleteEmployeeById(employee_id) && 
-                this.userRepository.DeleteUserById(user.Id))
+                this.userRepository.DeleteById(user.Id))
 
                 return true;
 

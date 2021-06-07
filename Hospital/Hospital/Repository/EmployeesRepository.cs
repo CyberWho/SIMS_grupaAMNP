@@ -89,7 +89,7 @@ namespace Hospital.Repository
 
             }
 
-            User user = new UserRepository().GetUserById(id); 
+            User user = new UserRepository().GetById(id); 
             
             Role role = new RoleRepository().GetRoleById(reader.GetInt32(4));
             

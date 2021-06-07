@@ -40,7 +40,7 @@ namespace Hospital.Repository
             PatientRepository pr = new PatientRepository();
             UserRepository ur = new UserRepository();
             Patient p = pr.GetPatientById(id);
-            User u = ur.GetUserById(p.user_id);
+            User u = ur.GetById(p.user_id);
 
             setConnection();
 
@@ -55,7 +55,7 @@ namespace Hospital.Repository
             UserRepository userRepository = new UserRepository();
 
             Patient patient = patientRepository.GetPatientById(id);
-            User user = userRepository.GetUserById(patient.user_id);
+            User user = userRepository.GetById(patient.user_id);
             patient.User = user;
             healthRecord.Id = int.Parse(reader.GetString(0));
             healthRecord.patient_id = int.Parse(reader.GetString(1));

@@ -49,7 +49,7 @@ namespace Hospital.Service
                 employee.User.Id = this.employeesRepository.GetUserIdByEmployeeId(employee.Id);
             }
 
-            employee.User = this.userRepository.UpdateUser(employee.User);
+            employee.User = this.userRepository.Update(employee.User);
 
             return employee;
 

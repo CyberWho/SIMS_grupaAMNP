@@ -271,7 +271,7 @@ namespace Hospital.Repository
             Employee employee = this.employeesRepository.GetEmployeeByUserId(app.doctor.User.Id);
 
             int doctor_user_id = this.employeesRepository.GetUserIdByEmployeeId(employee.Id);
-            User doctorUser = this.userRepository.GetUserById(doctor_user_id);
+            User doctorUser = this.userRepository.GetById(doctor_user_id);
             String desc = Name + " zakazan za: " + app.StartTime + " kod lekara " + doctorUser.Name + " " + doctorUser.Surname;
             systemNotification.Description = desc;
 

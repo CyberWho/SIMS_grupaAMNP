@@ -14,6 +14,7 @@ using Hospital.xaml_windows.Patient;
 using Hospital.xaml_windows.Secretary;
 using System.Windows;
 using System.Windows.Annotations;
+using Hospital.Repository;
 using Hospital.Service;
 using Hospital.View.Patient;
 
@@ -21,7 +22,7 @@ namespace Hospital.Controller
 {
     public class UserController
     {
-        public UserService userService = new UserService();
+        public UserService userService = new UserService(new UserRepository());
         PatientController patientController = new PatientController();
         PatientLogsController patientLogsController = new PatientLogsController();
         public bool LoginUser(String username, String password)

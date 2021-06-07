@@ -110,7 +110,7 @@ namespace Hospital.Repository
         private static Patient ParsePatient(OracleDataReader reader)
         {
             Patient patient = new Patient();
-            User user = new UserRepository().GetUserById(reader.GetInt32(4));
+            User user = new UserRepository().GetById(reader.GetInt32(4));
             if (user.Username.Contains("guestUser"))
             {
                 patient.Id = int.Parse(reader.GetString(0));
@@ -160,7 +160,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                User user = new UserRepository().GetUserById(reader.GetInt32(4));
+                User user = new UserRepository().GetById(reader.GetInt32(4));
                 user.Id = reader.GetInt32(4);
                 if (user.Name == null) continue;
                 var patient = new Patient(reader.GetInt32(0),reader.GetString(1),reader.GetDateTime(2),user,addressRepository.GetAddressById(3));

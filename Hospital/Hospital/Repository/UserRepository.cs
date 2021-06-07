@@ -8,10 +8,11 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepo<User>
     {
         PatientRepository patientRepository = new PatientRepository();
         HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
@@ -61,7 +62,7 @@ namespace Hospital.Repository
         }
 
 
-        public User GetUserById(int id)
+        public User GetById(int id)
         {
             //setConnection();
 
@@ -98,13 +99,13 @@ namespace Hospital.Repository
             return user;
         }
 
-        public User GetUserByUsername(String username)
+        public User GetByUsername(String username)
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<User> GetAllUsers()
+        public ObservableCollection<User> GetAll()
         {
             setConnection();
 
@@ -150,7 +151,7 @@ namespace Hospital.Repository
             return users;
         }
 
-        public Boolean DeleteUserById(int id)
+        public Boolean DeleteById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -169,14 +170,14 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Boolean DeleteUserByUsername(String username)
+        public Boolean DeleteByUsername(String username)
         {
             // TODO: implement
             return false;
         }
 
         #region marko_kt5
-        public User UpdateUser(User user)
+        public User Update(User user)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -274,7 +275,7 @@ namespace Hospital.Repository
             return last_id;
         }
 
-        public void makeDoctorUser()
+        public void MakeDoctorUser()
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -322,6 +323,11 @@ namespace Hospital.Repository
 
             this.employeesRepository.NewEmployee(employee);
 
+        }
+
+        public void Add(User t)
+        {
+            throw new NotImplementedException();
         }
 
         private EmployeesRepository employeesRepository = new EmployeesRepository();

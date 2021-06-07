@@ -52,7 +52,7 @@ namespace Hospital.Repository
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
-            User doctorUser = new UserRepository().GetUserById(reader.GetInt32(0));
+            User doctorUser = new UserRepository().GetById(reader.GetInt32(0));
             Employee employee = new EmployeesRepository().GetEmployeeById(reader.GetInt32(7));
             Specialization specialization = new SpecializationRepository().GetSpecializationById(reader.GetInt32(15));
             Doctor doctor = new Doctor(employee.Id,employee.Salary,employee.YearsOfService,doctorUser,employee.role,specialization);

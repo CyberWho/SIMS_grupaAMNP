@@ -125,12 +125,15 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IRepository\IRepo.cs" />
+    <Compile Include="IRepository\IUserRepo.cs" />
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />
     <Compile Include="Model\DrugDTO.cs" />
     <Compile Include="Model\FreeDays.cs" />
     <Compile Include="Model\FreeDaysStatus.cs" />
     <Compile Include="Model\Globals.cs" />
+    <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
     <Compile Include="Model\PatientLogs.cs" />
     <Compile Include="Model\RenovationDTO.cs" />
