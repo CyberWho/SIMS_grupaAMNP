@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
-    public class SystemNotification
+    public class SystemNotification : IEntity
     {
         public int Id { get; set; }
         public String Name { get; set; }

@@ -133,6 +133,7 @@
     <Compile Include="IRepository\IRepo.cs" />
     <Compile Include="IRepository\ISpecializationRepo.cs" />
     <Compile Include="IRepository\IStateRepo.cs" />
+    <Compile Include="IRepository\ISystemNotificationRepo.cs" />
     <Compile Include="IRepository\IUserRepo.cs" />
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />

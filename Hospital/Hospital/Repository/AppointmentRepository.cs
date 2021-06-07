@@ -275,7 +275,7 @@ namespace Hospital.Repository
             String desc = Name + " zakazan za: " + app.StartTime + " kod lekara " + doctorUser.Name + " " + doctorUser.Surname;
             systemNotification.Description = desc;
 
-            this.systemNotificationRepository.NewSystemNotification(systemNotification);
+            this.systemNotificationRepository.Add(systemNotification);
         }
         private void NotifyDoctor(Appointment app, String Name)
         {
@@ -286,7 +286,7 @@ namespace Hospital.Repository
             String desc = Name + " zakazan za: " + app.StartTime + " za pacijenta " + app.patient.User.Name + " " + app.patient.User.Surname;
             systemNotification.Description = desc;
 
-            this.systemNotificationRepository.NewSystemNotification(systemNotification);
+            this.systemNotificationRepository.Add(systemNotification);
         }
 
         public Boolean DeleteAllReservedAppointmentsByPatientId(int patientId)
