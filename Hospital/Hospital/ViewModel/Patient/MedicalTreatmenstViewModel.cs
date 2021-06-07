@@ -87,8 +87,10 @@ namespace Hospital.ViewModel.Patient
         {
             if (!DataValidation()) return;
             ObservableCollection<Reminder> reminders = GenerateRemindersForMedicalTreatment(SelectedItem, reportStartTime, reportEndTime);
-            Window window = new ReportView(userId, reminders, SelectedItem, DateTime.Parse(reportStartTime),
-                DateTime.Parse(reportEndTime));
+           Window window = new ReportView(userId, reminders, SelectedItem, DateTime.Parse(reportStartTime),
+               DateTime.Parse(reportEndTime));
+           //  Window window = new ReportCalendarView(userId, SelectedItem, DateTime.Parse(reportStartTime),
+            //     DateTime.Parse(reportEndTime));
             window.Show();
         }
 
