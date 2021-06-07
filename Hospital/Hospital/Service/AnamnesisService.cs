@@ -62,7 +62,7 @@ namespace Hospital.Service
             foreach (Anamnesis anamnesis in anamneses)
             {
                 ObservableCollection<Model.MedicalTreatment> medicalTreatmentsInAnamnesis =
-                    new Repository.MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(anamnesis.Id);
+                    new Repository.MedicalTreatment().GetAllByAnamnesisId(anamnesis.Id);
                 foreach (Model.MedicalTreatment medicalTreatment in medicalTreatmentsInAnamnesis)
                 {
                     medicalTreatments.Add(medicalTreatment);

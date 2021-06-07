@@ -6,13 +6,20 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Repository;
 
 namespace Hospital.Service
 {
    public class MedicalTreatmentService
    {
-      public Model.MedicalTreatment GetMedicalTreatmentById(int id)
+       private IMedicalTreatmentRepo<Model.MedicalTreatment> medicalTreatment;
+
+       public MedicalTreatmentService(IMedicalTreatmentRepo<Model.MedicalTreatment> iMedicalTreatmentRepo)
+       {
+           medicalTreatment = iMedicalTreatmentRepo;
+       }
+        public Model.MedicalTreatment GetMedicalTreatmentById(int id)
       {
          // TODO: implement
          return null;
@@ -20,7 +27,7 @@ namespace Hospital.Service
       
       public ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
       {
-          return medicalTreatment.GetAllMedicalTreatmentsByAnamnesisId(anamnesisId);
+          return medicalTreatment.GetAllByAnamnesisId(anamnesisId);
       }
       
       public Boolean DeleteMedicalTreatmentById(int id)
@@ -58,8 +65,6 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-
-      public Repository.MedicalTreatment medicalTreatment = new MedicalTreatment();
 
    }
 }

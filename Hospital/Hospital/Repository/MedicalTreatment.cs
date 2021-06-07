@@ -7,11 +7,12 @@
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 
 namespace Hospital.Repository
 {
-    public class MedicalTreatment
+    public class MedicalTreatment : IMedicalTreatmentRepo<Model.MedicalTreatment>
     {
         OracleConnection connection = null;
 
@@ -29,7 +30,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Model.MedicalTreatment GetMedicalTreatmentById(int id)
+        public Model.MedicalTreatment GetById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -62,7 +63,7 @@ namespace Hospital.Repository
             return medicalTreatment;
         }
 
-        public ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
+        public ObservableCollection<Model.MedicalTreatment> GetAllByAnamnesisId(int anamnesisId)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -83,25 +84,25 @@ namespace Hospital.Repository
             return medicalTreatments;
         }
 
-        public Boolean DeleteMedicalTreatmentById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DelelteAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
+        public Boolean DeleteAllByAnamnesisId(int anamnesisId)
         {
             // TODO: implement
             return false;
         }
 
-        public Model.MedicalTreatment UpdateMedicalTreatment(Model.MedicalTreatment medicalTreatment)
+        public Model.MedicalTreatment Update(Model.MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;
         }
 
-        public Model.MedicalTreatment NewMedicalTreatment(Model.MedicalTreatment medicalTreatment)
+        public Model.MedicalTreatment Add(Model.MedicalTreatment medicalTreatment)
         {
             // TODO: implement
             return null;
@@ -113,5 +114,9 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public ObservableCollection<Model.MedicalTreatment> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
