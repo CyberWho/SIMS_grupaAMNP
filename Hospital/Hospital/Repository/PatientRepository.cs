@@ -78,7 +78,7 @@ namespace Hospital.Repository
 
             connection.Close();
             connection.Dispose();
-            User user = new UserRepository().GetUserById(idGetUserById);
+            User user = new UserRepository().GetById(idGetUserById);
             tmp.User = user;
             return tmp;
         }
