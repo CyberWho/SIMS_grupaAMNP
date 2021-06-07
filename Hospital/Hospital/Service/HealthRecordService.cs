@@ -7,13 +7,18 @@
 using Hospital.Model;
 using Hospital.Repository;
 using System;
+using Hospital.IRepository;
 
 namespace Hospital.Service
 {
     public class HealthRecordService
     {
-        public HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
+        private IHealthRecordRepo<HealthRecord> healthRecordRepository;
 
+        public HealthRecordService()
+        {
+            healthRecordRepository = new HealthRecordRepository();
+        }
         public HealthRecord GetHealthRecordById(int id)
         {
             // TODO: implement
@@ -22,7 +27,7 @@ namespace Hospital.Service
 
         public HealthRecord GetHealthRecordByPatientId(int id)
         {
-            return this.healthRecordRepository.GetHealthRecordByPatientId(id);
+            return this.healthRecordRepository.GetByPatientId(id);
         }
 
         public System.Collections.ArrayList GetAllHealthRecords()

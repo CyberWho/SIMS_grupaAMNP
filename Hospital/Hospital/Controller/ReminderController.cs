@@ -7,6 +7,8 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
+using MedicalTreatment = Hospital.Model.MedicalTreatment;
 
 namespace Hospital.Controller
 {

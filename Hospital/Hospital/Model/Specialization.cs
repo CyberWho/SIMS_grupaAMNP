@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace Hospital.Model
 {
-    public class Specialization
+    public class Specialization : IEntity
     {
         public int id { get; set; }
         public string Type { get; set; }
@@ -32,7 +32,7 @@ namespace Hospital.Model
                 AddDoctor(oDoctor);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddDoctor(Doctor newDoctor)
         {
             if (newDoctor == null)

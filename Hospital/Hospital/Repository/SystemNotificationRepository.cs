@@ -8,10 +8,11 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class SystemNotificationRepository
+    public class SystemNotificationRepository : ISystemNotificationRepo<SystemNotification>
     {
         OracleConnection connection = null;
         private void setConnection()
@@ -68,7 +69,7 @@ namespace Hospital.Repository
             return systemNotifications;
         }
 
-        public SystemNotification GetSystemNotificationById(int id)
+        public SystemNotification GetById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -119,7 +120,7 @@ namespace Hospital.Repository
             return systemNotification;
         }
 
-        public ObservableCollection<SystemNotification> GetAllSystemNotificationsByUserId(int userId)
+        public ObservableCollection<SystemNotification> GetAllByUserId(int userId)
         {
             setConnection();
             ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
@@ -148,7 +149,7 @@ namespace Hospital.Repository
             return systemNotifications;
         }
 
-        public Boolean DeleteSystemNotificationById(int id)
+        public Boolean DeleteById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -169,13 +170,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Boolean DeleteAllSystemNotificationsByUserId(int userId)
+        public Boolean DeleteAllByUserId(int userId)
         {
             // TODO: implement
             return false;
         }
 
-        public SystemNotification UpdateSystemNotification(SystemNotification systemNotification)
+        public SystemNotification Update(SystemNotification systemNotification)
         {
             setConnection();
             // maybe this is where were having issues, opening a connection while another one is open
@@ -203,7 +204,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public SystemNotification NewSystemNotification(SystemNotification systemNotification)
+        public SystemNotification Add(SystemNotification systemNotification)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -221,7 +222,7 @@ namespace Hospital.Repository
                 command.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
                 command.Parameters.Add("user_id", OracleDbType.Int32).Value = systemNotification.user_id.ToString();
                 command.Parameters.Add("viewed", OracleDbType.Int32).Value = viewed.ToString();
-                //command.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
+                //command.Parameters.New("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
                 command.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
             }
             else
@@ -229,7 +230,7 @@ namespace Hospital.Repository
                 command.CommandText = "INSERT INTO system_notification (name, description, viewed, global, creation_date, expiration_date) VALUES (:name, :description, 0, 1, :c_date, :e_date)";
                 command.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
                 command.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
-                //command.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
+                //command.Parameters.New("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
                 command.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
                 command.Parameters.Add("e_date", OracleDbType.Date).Value = systemNotification.expirationDateTime;
             }
@@ -262,5 +263,9 @@ namespace Hospital.Repository
             return id;
         }
 
+        public ObservableCollection<SystemNotification> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

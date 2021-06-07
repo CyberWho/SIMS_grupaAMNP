@@ -6,16 +6,21 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 
 namespace Hospital.Service
 {
     public class AllergyTypeService
     {
-        public Repository.AllergyTypeRepository allergyTypeRepository = new Repository.AllergyTypeRepository();
+        private IAllergyTypeRepo<AllergyType> allergyTypeRepository;
 
-
+        public AllergyTypeService()
+        {
+            allergyTypeRepository = new AllergyTypeRepository();
+        }
 
         public System.Collections.ArrayList GetAllAllergyTypes()
         {
@@ -43,19 +48,19 @@ namespace Hospital.Service
 
         public AllergyType GetAllergyTypeByType(string type)
         {
-            return this.allergyTypeRepository.GetAllergyTypeByType(type);
+            return this.allergyTypeRepository.GetByType(type);
         }
         public ObservableCollection<AllergyType> GetAllMissingAllergyTypesByUserId(int userId)
         {
-            return this.allergyTypeRepository.GetAllMissingAllergyTypesByUserId(userId);
+            return this.allergyTypeRepository.GetAllMissingTypesByUserId(userId);
         }
         public ObservableCollection<AllergyType> GetAllTypesByHealthRecordId(int id)
         {
-            return this.allergyTypeRepository.GetAllTypesByHealthRecordId(id);
+            return this.allergyTypeRepository.GetAllByHealthRecordId(id);
         }
         public AllergyType GetAllergyTypeById(int id)
         {
-            return this.allergyTypeRepository.GetAllergyTypeById(id);
+            return this.allergyTypeRepository.GetById(id);
         }
 
 

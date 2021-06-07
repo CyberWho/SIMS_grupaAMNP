@@ -8,48 +8,47 @@ using Hospital.Model;
 using Hospital.Repository;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Service
 {
     public class PatientService
     {
-        public PatientRepository patientRepository = new PatientRepository();
+        public IPatientRepo<Patient> patientRepository;
 
+        public PatientService()
+        {
+            this.patientRepository = new PatientRepository();
+        }
         public Patient GetPatientByUserId(int id)
         {
-            return this.patientRepository.GetPatientByUserId(id);
+            return this.patientRepository.GetByUserId(id);
         }
 
         public Patient GetPatientById(int id)
         {
-            return this.patientRepository.GetPatientById(id);
+            return this.patientRepository.GetById(id);
         }
 
         public Patient GetPatientByPatientId(int id)
         {
-            Patient patient = this.patientRepository.GetPatientByPatientId(id);
+            Patient patient = this.patientRepository.GetById(id);
             return patient;
         }
         public ObservableCollection<Patient> GetAllPatients()
         {
-            return patientRepository.GetAllPatients();
+            return patientRepository.GetAll();
         }
 
         public bool CheckIfPatientHasBeenLogedByPatientId(int patientId)
         {
-            return patientRepository.CheckIfPatientHasBeenLogedByPatientId(patientId);
+            return patientRepository.CheckIfPatientHasBeenLogedById(patientId);
         }
 
         public void UpdateHasBeenLogedByPatientId(int patientId)
         {
-            patientRepository.UpdateHasBeenLogedByPatientId(patientId);
+            patientRepository.UpdateHasBeenLogedById(patientId);
         }
-        public System.Collections.ArrayList GetAllPatientsByDoctorId(int doctorId)
-        {
-            // TODO: implement
-            return null;
-        }
-
         public Boolean DeletePatientById(int id)
         {
             // TODO: implement

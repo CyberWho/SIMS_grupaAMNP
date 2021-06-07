@@ -2,7 +2,7 @@
 
 namespace Hospital.Model
 {
-    class Review
+    class Review : IEntity
     {
         public int Id { get; set; }
         public int Rate { get; set; }

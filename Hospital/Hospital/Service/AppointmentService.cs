@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 using Hospital.Repository;
 
@@ -13,16 +14,21 @@ namespace Hospital.Service
 {
     public class AppointmentService
     {
+        private IAppointmentRepo<Appointment> appointmentRepository;
 
+        public AppointmentService()
+        {
+            appointmentRepository = new AppointmentRepository();
+        }
         public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time)
         {
-            return this.appointmentRepository.GetAppointmentByDoctorIdAndTime(doctor, time);
+            return this.appointmentRepository.GetByDoctorIdAndTime(doctor, time);
         }
 
         public Hospital.Model.Appointment GetAppointmentById(int id)
         {
             Appointment appointment = new Appointment();
-            appointment = appointmentRepository.GetAppointmentById(id);
+            appointment = appointmentRepository.GetById(id);
             return appointment;
         }
 
@@ -40,29 +46,29 @@ namespace Hospital.Service
 
         public ObservableCollection<Appointment> GetAllAppointmentsByDoctorId(int doctorId)
         {
-            return new AppointmentRepository().GetAllAppointmentsByDoctorId(doctorId);
+            return new AppointmentRepository().GetAllByDoctorId(doctorId);
         }
 
         public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
         {
-            return appointmentRepository.GetAllReservedAppointmentsByPatientId(patientId);
+            return appointmentRepository.GetAllReservedByPatientId(patientId);
         }
 
         public Boolean CancelAppointmentById(int id)
         {
-            appointmentRepository.DeleteAppointmentById(id);
+            appointmentRepository.DeleteById(id);
             return true;
         }
 
         public Boolean DeleteAllReservedAppointmentsByPatientId(int patientId)
         {
 
-            return appointmentRepository.DeleteAllReservedAppointmentsByPatientId(patientId); 
+            return appointmentRepository.DeleteAllReservedByPatientId(patientId); 
         }
 
         public Appointment ReserveAppointment(Appointment appointment)
         {
-            appointmentRepository.NewAppointment(appointment);
+            appointmentRepository.Add(appointment);
             return appointment;
         }
 
@@ -80,7 +86,7 @@ namespace Hospital.Service
 
         public Appointment ChangeStartTime(Appointment appointment, DateTime newStartTime)
         {
-            appointmentRepository.UpdateAppointmentStartTime(appointment, newStartTime);
+            appointmentRepository.UpdateStartTime(appointment, newStartTime);
             return appointment;
         }
 
@@ -112,14 +118,14 @@ namespace Hospital.Service
 
         public Boolean DeleteAppointmentById(int id)
         {
-            return appointmentRepository.DeleteAppointmentById(id);
+            return appointmentRepository.DeleteById(id);
         }
         public int GetLastId()
         {
             return appointmentRepository.GetLastId();
         }
 
-        public Hospital.Repository.AppointmentRepository appointmentRepository = new Repository.AppointmentRepository();
+       
 
     }
 }

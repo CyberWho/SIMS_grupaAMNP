@@ -8,16 +8,21 @@ using Hospital.Model;
 using Hospital.Repository;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Service
 {
     public class UserService
     {
-        public UserRepository userRepository = new UserRepository();
+        public IUserRepo<User> userRepository;
 
         public Boolean IsGuest;
         public int MinPasswordLength;
 
+        public UserService()
+        {
+            userRepository = new UserRepository();
+        }
         public User GuestUser()
         {
             return this.userRepository.GuestUser();
@@ -49,7 +54,7 @@ namespace Hospital.Service
 
         public User GetUserById(int id)
         {
-            return this.userRepository.GetUserById(id);
+            return this.userRepository.GetById(id);
         }
 
         public User GetUserByUsername(String username)
@@ -60,7 +65,7 @@ namespace Hospital.Service
 
         public ObservableCollection<User> GetAllUsers()
         {
-            return this.userRepository.GetAllUsers();
+            return this.userRepository.GetAll();
         }
 
         public Boolean DeleteUserById(int id)
@@ -78,12 +83,12 @@ namespace Hospital.Service
         #region marko_kt5
         public User UpdateUser(User user)
         {
-            return this.userRepository.UpdateUser(user);
+            return this.userRepository.Update(user);
         }
 
         public void makeDoctorUser()
         {
-            this.userRepository.makeDoctorUser();
+            this.userRepository.MakeDoctorUser();
         }
 
         public User newUser(User user)

@@ -1,6 +1,7 @@
 ﻿using System;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.Repository;
 
 /***********************************************************************
  * Module:  TimeSlotController.cs

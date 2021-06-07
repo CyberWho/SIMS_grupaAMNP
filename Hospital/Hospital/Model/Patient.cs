@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Hospital.Model
 {
-    public class Patient
+    public class Patient : IEntity
     {
 
         public int Id { get; set; }
@@ -33,7 +33,7 @@ namespace Hospital.Model
                 AddAppointments(oAppointment);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddAppointments(Appointment newAppointment)
         {
             if (newAppointment == null)

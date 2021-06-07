@@ -8,6 +8,7 @@ using Hospital.Model;
 using Hospital.Service;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {

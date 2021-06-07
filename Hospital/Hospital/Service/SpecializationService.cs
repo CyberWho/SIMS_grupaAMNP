@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hospital.IRepository;
 using Hospital.Model;
 using Hospital.Repository;
 
@@ -11,15 +12,19 @@ namespace Hospital.Service
 {
     class SpecializationService
     {
-        private SpecializationRepository specializationRepository = new SpecializationRepository();
+        private ISpecializationRepo<Specialization> specializationRepository;
 
+        public SpecializationService()
+        {
+            this.specializationRepository = new SpecializationRepository();
+        }
         public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD)
         {
-            return this.specializationRepository.GetAllSpecializations(withoutGPD);
+            return this.specializationRepository.GetAll(withoutGPD);
         }
         public int GetSpecializationByType(string selectedSpecialization)
         {
-            return this.specializationRepository.GetSpecializationByType(selectedSpecialization);
+            return this.specializationRepository.GetByType(selectedSpecialization);
         }
     }
 }

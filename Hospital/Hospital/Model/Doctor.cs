@@ -60,7 +60,7 @@ namespace Hospital.Model
                 AddWorkHours(oWorkHours);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddWorkHours(WorkHours newWorkHours)
         {
             if (newWorkHours == null)
@@ -146,7 +146,7 @@ namespace Hospital.Model
                 AddAppointment(oAppointment);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddAppointment(Appointment newAppointment)
         {
             if (newAppointment == null)

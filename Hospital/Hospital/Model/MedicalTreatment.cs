@@ -9,7 +9,7 @@ using System;
 namespace Hospital.Model
 {
     /// Period: 2 (na svaka dva sata treba da se pije lek)
-    public class MedicalTreatment
+    public class MedicalTreatment : IEntity
     {
         public int Id { get; set; }
         public int Period { get; set; }

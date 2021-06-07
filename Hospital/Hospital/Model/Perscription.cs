@@ -8,7 +8,7 @@ using System;
 
 namespace Hospital.Model
 {
-    public class Perscription
+    public class Perscription : IEntity
     {
         public int Id { get; set; }
         public Boolean IsActive { get; set; }

@@ -7,16 +7,21 @@
 using Hospital.Model;
 using Hospital.Repository;
 using System;
+using Hospital.IRepository;
 
 namespace Hospital.Service
 {
    public class AddressService
-    {
-        public AddressRepository addressRepository = new AddressRepository();
+   {
+       private IAddressRepo<Address> addressRepository;
 
+       public AddressService()
+       {
+           this.addressRepository = new AddressRepository();
+       }
         public Address GetAddressByPatientId(int id)
         {
-            return this.addressRepository.GetAddressByPatientId(id);
+            return this.addressRepository.GetByPatientId(id);
         }
         public Address AddAddress(Address address)
       {

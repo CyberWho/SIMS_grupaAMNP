@@ -62,8 +62,8 @@ namespace Hospital.ViewModel.Patient
 
         private void ShowReportInfo()
         {
-            PatientName = new UserRepository().GetUserById(userId).Name;
-            PatientSurname = new UserRepository().GetUserById(userId).Surname;
+            PatientName = new UserRepository().GetById(userId).Name;
+            PatientSurname = new UserRepository().GetById(userId).Surname;
             DrugName = medicalTreatment.Drug.Name;
 
         }

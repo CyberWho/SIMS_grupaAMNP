@@ -7,14 +7,13 @@
 using System;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {
     public class AllergyTypeController
     {
         public Service.AllergyTypeService allergyTypeService = new Service.AllergyTypeService();
-
-        
 
         public ObservableCollection<AllergyType> GetAllAllergyTypes()
         {
