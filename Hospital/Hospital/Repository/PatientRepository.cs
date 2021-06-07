@@ -166,7 +166,7 @@ namespace Hospital.Repository
                 if (user.Name == null) continue;
                 var patient = new Patient(reader.GetInt32(0),reader.GetString(1),reader.GetDateTime(2),user,addressRepository.GetById(3));
                 patient.addres_id = 
-                patients.Add(patient);
+                patients.New(patient);
             }
 
             

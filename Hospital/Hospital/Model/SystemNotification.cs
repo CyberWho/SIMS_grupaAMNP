@@ -42,7 +42,7 @@ namespace Hospital.Model
                 AddUser(oUser);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddUser(User newUser)
         {
             if (newUser == null)

@@ -53,7 +53,7 @@ namespace Hospital.Repository
 
             HealthRecord healthRecord = new HealthRecord();
             healthRecord.patient_id = patient.Id;
-            healthRecord = this.healthRecordRepository.NewHealthRecord(healthRecord, 1);
+            healthRecord = this.healthRecordRepository.New(healthRecord, 1);
 
             connection.Close();
             connection.Dispose();

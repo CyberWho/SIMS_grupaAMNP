@@ -32,7 +32,7 @@ namespace Hospital.Model
                 AddDoctor(oDoctor);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddDoctor(Doctor newDoctor)
         {
             if (newDoctor == null)

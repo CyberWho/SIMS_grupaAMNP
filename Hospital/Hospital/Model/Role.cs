@@ -31,7 +31,7 @@ namespace Hospital.Model
                 AddEmployee(oEmployee);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddEmployee(Employee newEmployee)
         {
             if (newEmployee == null)

@@ -7,13 +7,14 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
 {
     public class HealthRecordController
     {
-        public HealthRecordService healthRecordService = new HealthRecordService();
+        public HealthRecordService healthRecordService = new HealthRecordService(new HealthRecordRepository());
 
         public HealthRecord GetHealthRecordById(int id)
         {

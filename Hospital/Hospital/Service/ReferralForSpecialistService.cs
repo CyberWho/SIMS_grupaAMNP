@@ -96,7 +96,7 @@ namespace Hospital.Service
             AddReferralForSpecialistServiceB(oReferralForSpecialistService);
       }
       
-      /// <pdGenerated>default Add</pdGenerated>
+      /// <pdGenerated>default New</pdGenerated>
       public void AddReferralForSpecialistServiceB(ReferralForSpecialistService newReferralForSpecialistService)
       {
          if (newReferralForSpecialistService == null)

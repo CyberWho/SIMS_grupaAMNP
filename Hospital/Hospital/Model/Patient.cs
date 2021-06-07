@@ -33,7 +33,7 @@ namespace Hospital.Model
                 AddAppointments(oAppointment);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddAppointments(Appointment newAppointment)
         {
             if (newAppointment == null)

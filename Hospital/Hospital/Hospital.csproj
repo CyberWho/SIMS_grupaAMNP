@@ -131,6 +131,7 @@
     <Compile Include="IRepository\IDoctorRepo.cs" />
     <Compile Include="IRepository\IEmployeeRepo.cs" />
     <Compile Include="IRepository\IFreeDaysRepo.cs" />
+    <Compile Include="IRepository\IHealthRecordRepo.cs" />
     <Compile Include="IRepository\IPatientRepo.cs" />
     <Compile Include="IRepository\IReminerRepo.cs" />
     <Compile Include="IRepository\IRepo.cs" />

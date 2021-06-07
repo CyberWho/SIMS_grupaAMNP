@@ -305,7 +305,7 @@ namespace Hospital.Repository
             //timeSlot.StartTime = new DateTime(2021, 5, 4, 21, 0, 0);
             //timeSlot.workHours_id = 57;
             //timeSlot.Free = true;
-            //Add(timeSlot);
+            //New(timeSlot);
 
             TimeSlot timeSlot = new TimeSlot();
 

@@ -222,7 +222,7 @@ namespace Hospital.Repository
                 command.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
                 command.Parameters.Add("user_id", OracleDbType.Int32).Value = systemNotification.user_id.ToString();
                 command.Parameters.Add("viewed", OracleDbType.Int32).Value = viewed.ToString();
-                //command.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
+                //command.Parameters.New("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
                 command.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
             }
             else
@@ -230,7 +230,7 @@ namespace Hospital.Repository
                 command.CommandText = "INSERT INTO system_notification (name, description, viewed, global, creation_date, expiration_date) VALUES (:name, :description, 0, 1, :c_date, :e_date)";
                 command.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
                 command.Parameters.Add("description", OracleDbType.Varchar2).Value = systemNotification.Description;
-                //command.Parameters.Add("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
+                //command.Parameters.New("global", OracleDbType.Int32).Value = systemNotification.applicationWideNotification.ToString();
                 command.Parameters.Add("c_date", OracleDbType.Date).Value = systemNotification.creationDateTime;
                 command.Parameters.Add("e_date", OracleDbType.Date).Value = systemNotification.expirationDateTime;
             }

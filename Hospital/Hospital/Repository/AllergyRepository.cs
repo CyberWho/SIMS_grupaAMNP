@@ -113,7 +113,7 @@ namespace Hospital.Repository
 
         private static Allergy ParseAllergy(OracleDataReader reader)
         {
-            HealthRecord healthRecord = new HealthRecordRepository().GetHealthRecordById(reader.GetInt32(2));
+            HealthRecord healthRecord = new HealthRecordRepository().GetById(reader.GetInt32(2));
             Allergy allergy = new Allergy(reader.GetInt32(0),new AllergyTypeRepository().GetAllergyTypeById(reader.GetInt32(1)),healthRecord);
             return allergy;
         }
@@ -123,7 +123,7 @@ namespace Hospital.Repository
             setConnection();
 
             Patient patient = this.patientRepository.GetByUserId(userId);
-            HealthRecord healthRecord = this.healthRecordRepository.GetHealthRecordByPatientId(patient.Id);
+            HealthRecord healthRecord = this.healthRecordRepository.GetByPatientId(patient.Id);
 
             OracleCommand command = connection.CreateCommand();
 
