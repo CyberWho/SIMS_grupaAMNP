@@ -15,6 +15,7 @@ using Hospital.xaml_windows.Secretary;
 using System.Windows;
 using System.Windows.Annotations;
 using Hospital.Service;
+using Hospital.View.Doctor;
 using Hospital.View.Patient;
 
 namespace Hospital.Controller
@@ -95,7 +96,7 @@ namespace Hospital.Controller
                     }
                     break;
                 case "Doctor":
-                    s = new DoctorUI(id);
+                    s = new DoctorUIwindow(id);
                     s.Show();
                     break;
                 case "Manager":
