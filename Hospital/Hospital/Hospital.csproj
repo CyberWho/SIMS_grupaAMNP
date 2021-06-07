@@ -138,6 +138,8 @@
     <Compile Include="IRepository\IMedicalTreatmentRepo.cs" />
     <Compile Include="IRepository\IPatientRepo.cs" />
     <Compile Include="IRepository\IPerscriptionRepo.cs" />
+    <Compile Include="IRepository\IReferralForClinicalTreatmentRepo.cs" />
+    <Compile Include="IRepository\IReferralForSpecialistRepo.cs" />
     <Compile Include="IRepository\IReminerRepo.cs" />
     <Compile Include="IRepository\IRepo.cs" />
     <Compile Include="IRepository\IReviewRepo.cs" />

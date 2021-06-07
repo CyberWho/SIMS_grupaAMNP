@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {
@@ -75,7 +76,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService();
+      public Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService(new ReferralForSpecialistRepository());
    
    }
 }

@@ -6,13 +6,20 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 
 namespace Hospital.Service
 {
    public class ReferralForSpecialistService
    {
-      public ReferralForSpecialist GetReferralForSpecialistById(int id)
+       private IReferralForSpecialistRepo<ReferralForSpecialist> referralForSpecialistRepository;
+
+       public ReferralForSpecialistService(IReferralForSpecialistRepo<ReferralForSpecialist> iReferralForSpecialistRepo)
+       {
+           referralForSpecialistRepository = iReferralForSpecialistRepo;
+       }
+        public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
          // TODO: implement
          return null;
@@ -31,7 +38,7 @@ namespace Hospital.Service
       }
         public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
         {
-            return referralForSpecialistRepository.GetReferralForSpecialistsByHealthRecordId(healthRecordId);
+            return referralForSpecialistRepository.GetAllByHealthRecordId(healthRecordId);
         }
 
 
@@ -44,7 +51,7 @@ namespace Hospital.Service
       public Boolean DeleteReferralById(int id)
       {
         
-         return referralForSpecialistRepository.DeleteReferralForSpecialistById(id);
+         return referralForSpecialistRepository.DeleteById(id);
       }
       
       public Boolean DeleteReferralByPatientId(int patientId)
@@ -68,7 +75,7 @@ namespace Hospital.Service
       public ReferralForSpecialist AddReferral(ReferralForSpecialist referral)
       {
          
-         return referralForSpecialistRepository.NewReferralForSpecialist(referral) ;
+         return referralForSpecialistRepository.Add(referral) ;
       }
       
       public ReferralForSpecialist DeactivateReferral(ReferralForSpecialist referral)
@@ -76,8 +83,7 @@ namespace Hospital.Service
          // TODO: implement
          return null;
       }
-   
-      public Repository.ReferralForSpecialistRepository referralForSpecialistRepository = new Repository.ReferralForSpecialistRepository();
+      
       public System.Collections.ArrayList referralForSpecialistServiceB;
       
       /// <pdGenerated>default getter</pdGenerated>

@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
@@ -118,7 +119,7 @@ namespace Hospital.Controller
         }
 
 
-        public Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService = new ReferralForClinicalTreatmentService();
+        public Service.ReferralForClinicalTreatmentService referralForClinicalTreatmentService = new ReferralForClinicalTreatmentService(new ReferralForClinicalTreatmentRepository());
 
     }
 }
