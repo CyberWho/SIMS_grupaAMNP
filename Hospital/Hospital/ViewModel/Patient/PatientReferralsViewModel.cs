@@ -131,18 +131,26 @@ namespace Hospital.ViewModel.Patient
         {
             if (endDate <= startDate)
             {
-                MessageBox.Show("Nije moguce da oznacite vremenski interval gde je krajnji datum manji od pocetnog!");
+                this.SelectionError =
+                    "Nije moguće da označite vremenski interval gde je krajnji datum manji od početnog!";
             }
             else
             {
                 var dayDifference = (endDate - startDate).TotalDays;
                 if (dayDifference > 5)
                 {
-                    MessageBox.Show("Interval ne sme biti duzi od 5 dana!");
+                    this.SelectionError = "Interval ne sme biti duži od 5 dana!";
                 }
                 else
                 {
-                    ShowPatientNewAppointmentRecommendations(endDate, startDate, doctorId);
+                    if (endDate < DateTime.Now || startDate < DateTime.Now)
+                    {
+                        this.SelectionError = "Ne smete označiti datum u prošlosti!";
+                    }
+                    else
+                    {
+                        ShowPatientNewAppointmentRecommendations(endDate,startDate,doctorId);
+                    }
                 }
             }
         }

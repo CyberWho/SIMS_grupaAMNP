@@ -115,7 +115,19 @@ namespace Hospital.xaml_windows.Patient
 
             if (!FrequencyValidation()) return false;
 
+            if (!AlarmTimeNowValidation()) return false;
+
             if (!DescriptionValidation()) return false;
+
+            return true;
+        }
+        private bool AlarmTimeNowValidation()
+        {
+            if (DateTime.Parse(alarm_time_txt.Text) <= DateTime.Now)
+            {
+                TimeBlock.Text = "Vreme oglašavanja ne sme biti u prošlosti!";
+                return false;
+            }
 
             return true;
         }
