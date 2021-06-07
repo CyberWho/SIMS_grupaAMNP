@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.xaml_windows.Doctor"
         mc:Ignorable="d"
-        Title="DrugOperations" Height="450" Width="800">
+        Title="DrugOperations" Height="768" Width="1024">
     <Grid>
         <ListBox Name="lb_unconfirmed" SelectionChanged="SelectedPendingDrugFocusChange" HorizontalAlignment="Left" Height="215" Margin="201,90,0,0" VerticalAlignment="Top" Width="289"/>
         <ListBox Name="lb_confirmed" SelectionChanged="SelectedApprovedDrugFocusChange" HorizontalAlignment="Left" Height="215" Margin="495,90,0,0" VerticalAlignment="Top" Width="289"/>

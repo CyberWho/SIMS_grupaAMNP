@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using Hospital.Controller;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.View.Doctor;
+using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -34,6 +36,16 @@ namespace Hospital.xaml_windows.Doctor
             appointments = appointmentController.GetAllReservedAppointmentsByPatientId(id_patient);
             patient = patientController.GetPatientByPatientId(id_patient);
             fillAppointmentsToUi();
+
+            tb_name.Text = patient.User.Surname + " " + patient.User.Name;
+
+            this.DataContext = this;
+            this.ReturnOptionCommand = new MyICommand(ReturnOption);
+            this.GoToDrugOperationCommand = new MyICommand(GoToDrugOperation);
+            this.GoToAppointmentsCommand = new MyICommand(GoToAppointments);
+            this.GoToCreateAppointmentCommand = new MyICommand(GoToCreateAppointment);
+            this.GoToScheduleCommand = new MyICommand(GoToSchedule);
+            this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
         }
 
         private void fillAppointmentsToUi()
@@ -53,6 +65,7 @@ namespace Hospital.xaml_windows.Doctor
             {
                 selected_anamensis.Description = Anamnesis_Text_Box.Text;
                 new AnamnesisController().UpdateAnamnesis(selected_anamensis);
+                MessageBox.Show("Uspesno izmenjena anamneza");
             }
             else
             {
@@ -76,6 +89,10 @@ namespace Hospital.xaml_windows.Doctor
             {
                 selected_appointment_id = int.Parse(lbi.Content.ToString().Split(' ')[0]);
                 Anamnesis_Text_Box.Text = getSelectedAnamnesisDescription();
+
+                btn_1.IsEnabled = true;
+
+
             }
 
         }
@@ -87,9 +104,15 @@ namespace Hospital.xaml_windows.Doctor
                 if (anamnesis.appointment.Id == selected_appointment_id)
                 {
                     selected_anamensis = anamnesis;
+                    btn_2.IsEnabled = true;
+                    btn_3.IsEnabled = true;
+                    btn_4.IsEnabled = true;
                     return anamnesis.Description;
-                }
 
+                }
+            btn_2.IsEnabled = false;
+            btn_3.IsEnabled = false;
+            btn_4.IsEnabled = false;
             return "Nema anamneze";
         }
 
@@ -106,7 +129,7 @@ namespace Hospital.xaml_windows.Doctor
 
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new SearchPatient(id_doc_as_user, id_doc);
+            Window s = new SearchPatientMVVM(id_doc_as_user, id_doc);
             s.Show();
             this.Close();
         }
@@ -136,6 +159,73 @@ namespace Hospital.xaml_windows.Doctor
                 s.Show();
                 this.Close();
             }
+        }
+
+        /***************************
+        ***
+        Dodavanje navigacije
+        ***
+        ***************************/
+        public MyICommand ReturnOptionCommand { get; set; }
+        public MyICommand GoToDrugOperationCommand { get; set; }
+        public MyICommand GoToAppointmentsCommand { get; set; }
+        public MyICommand GoToCreateAppointmentCommand { get; set; }
+        public MyICommand GoToScheduleCommand { get; set; }
+        public MyICommand GoToPatientSearchCommand { get; set; }
+
+        public void ReturnOption()
+        {
+            Window s = new MainWindow();
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToAppointments()
+        {
+            Window s = new Doctor_crud_appointments(id_doc_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToCreateAppointment()
+        {
+            Window s = new Create_appointment(id_doc_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToSchedule()
+        {
+            Window s = new Schedule(id_doc_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToPatientSearch()
+        {
+            Window s = new SearchPatient(id_doc_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToDrugOperation() // Obradjuje se
+        {
+
+            Window s = new View.Doctor.DrugOperations(id_doc_as_user, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToReport(object sender, RoutedEventArgs e)
+        {
+            Window s = new Report(healthRecord, appointments, patient);
+            s.Show();
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(s, "Anamneze i recepti");
+            }
+            //this.Close();
         }
     }
 }

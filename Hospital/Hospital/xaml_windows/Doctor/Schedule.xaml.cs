@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using Hospital.Controller;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.View.Doctor;
+using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -25,18 +27,51 @@ namespace Hospital.xaml_windows.Doctor
             appointments = appointmentContoller.GetAllAppointmentsByDoctorId(this.id_doc);
             foreach (Appointment ap in appointments)
             {
+                if(ap.Patient_Id == 0)
+                    continue;
                // MessageBox.Show(ap.Patient_Id.ToString());
                 ListBoxItem itm = new ListBoxItem();
                 ap.patient = patientController.GetPatientById(ap.Patient_Id);
+                itm.Content = ap.Patient_Id;
+                int i = ap.Patient_Id;
+                int size = 3;
+                while (i != 0)
+                {
+                    i /= 10;
+                    size -= 1;
+                }
 
-                itm.Content = ap.Id.ToString() + "/" + ap.Patient_Id.ToString() + " " + ap.patient.User.Name + " " + ap.StartTime;
+                while (size-- != 0)
+                {
+                    itm.Content += " ";
+                }
+                itm.Content += ap.patient.User.Name + " " + ap.patient.User.Surname + "\n" + ap.StartTime + " ";
+
+                switch (ap.Type)
+                {
+                    case AppointmentType.EXAMINATION:
+                        itm.Content += "Pregled";
+                        break;
+                    case AppointmentType.OPERATION:
+                        itm.Content += "Operacija";
+                        break;
+                    case AppointmentType.REFERRAL:
+                        itm.Content += "Uput";
+                        break;
+                }
 
                 lb_appointments.Items.Add(itm);
 
-               
-
             }
 
+
+            this.DataContext = this;
+            this.ReturnOptionCommand = new MyICommand(ReturnOption);
+            this.GoToDrugOperationCommand = new MyICommand(GoToDrugOperation);
+            this.GoToAppointmentsCommand = new MyICommand(GoToAppointments);
+            this.GoToCreateAppointmentCommand = new MyICommand(GoToCreateAppointment);
+            this.GoToScheduleCommand = new MyICommand(GoToSchedule);
+            this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
         }
 
 
@@ -46,7 +81,7 @@ namespace Hospital.xaml_windows.Doctor
             ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
             if (lbi != null)
             {
-                int id_patient_split = int.Parse((lbi.Content.ToString().Split(' '))[0].Split('/')[1]);
+                int id_patient_split = int.Parse((lbi.Content.ToString().Split(' '))[0]);
                 //more_info.Text += id_pat.ToString();
                 foreach(Appointment ap in appointments)
                     if(ap.Patient_Id == id_patient_split)
@@ -69,9 +104,65 @@ namespace Hospital.xaml_windows.Doctor
 
         private void ReturnOption(object sender, RoutedEventArgs e)
         {
-            Window s = new DoctorUI(this.id);
+            Window s = new DoctorUIwindow(this.id);
             s.Show();
             this.Close();
         }
+
+        /***************************
+        ***
+        Dodavanje navigacije
+        ***
+        ***************************/
+        public MyICommand ReturnOptionCommand { get; set; }
+        public MyICommand GoToDrugOperationCommand { get; set; }
+        public MyICommand GoToAppointmentsCommand { get; set; }
+        public MyICommand GoToCreateAppointmentCommand { get; set; }
+        public MyICommand GoToScheduleCommand { get; set; }
+        public MyICommand GoToPatientSearchCommand { get; set; }
+
+        public void ReturnOption()
+        {
+            Window s = new MainWindow();
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToAppointments()
+        {
+            Window s = new Doctor_crud_appointments(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToCreateAppointment()
+        {
+            Window s = new Create_appointment(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToSchedule()
+        {
+            Window s = new Schedule(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToPatientSearch()
+        {
+            Window s = new SearchPatientMVVM(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToDrugOperation() // Obradjuje se
+        {
+
+            Window s = new View.Doctor.DrugOperations(id, id_doc);
+            s.Show();
+            this.Close();
+        }
+
     }
 }

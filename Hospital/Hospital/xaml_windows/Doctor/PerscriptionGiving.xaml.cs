@@ -1,8 +1,11 @@
-﻿using Hospital.Controller;
+﻿using System;
+using Hospital.Controller;
 using Hospital.Model;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using Hospital.View.Doctor;
+using MVVM1;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -33,6 +36,14 @@ namespace Hospital.xaml_windows.Doctor
             _drugAllergyIds = _drugController.getDrugAllergy(healthRecord.Id);
             _drugs = _drugController.GetAllDrugs();
             FillUi();
+
+            this.DataContext = this;
+            this.ReturnOptionCommand = new MyICommand(ReturnOption);
+            this.GoToDrugOperationCommand = new MyICommand(GoToDrugOperation);
+            this.GoToAppointmentsCommand = new MyICommand(GoToAppointments);
+            this.GoToCreateAppointmentCommand = new MyICommand(GoToCreateAppointment);
+            this.GoToScheduleCommand = new MyICommand(GoToSchedule);
+            this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
         }
 
 
@@ -68,9 +79,12 @@ namespace Hospital.xaml_windows.Doctor
             if (lbi != null)
             {
                 int drugId = int.Parse(lbi.Content.ToString().Split(' ')[0]);
+                if (lbi.Content.ToString().Contains("ALERGIJA"))
+                    MessageBox.Show("PACIJENT JE ALERGICAN NA IZABRANI LEK");
                 foreach (Drug drug in _drugs)
                     if (drug.Id == drugId)
                         _selectedDrug = drug;
+                btn_dodaj.IsEnabled = true;
             }
         }
 
@@ -80,5 +94,62 @@ namespace Hospital.xaml_windows.Doctor
             s.Show();
             this.Close();
         }
+
+        /***************************
+        ***
+        Dodavanje navigacije
+        ***
+        ***************************/
+        public MyICommand ReturnOptionCommand { get; set; }
+        public MyICommand GoToDrugOperationCommand { get; set; }
+        public MyICommand GoToAppointmentsCommand { get; set; }
+        public MyICommand GoToCreateAppointmentCommand { get; set; }
+        public MyICommand GoToScheduleCommand { get; set; }
+        public MyICommand GoToPatientSearchCommand { get; set; }
+
+        public void ReturnOption()
+        {
+            Window s = new MainWindow();
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToAppointments()
+        {
+            Window s = new Doctor_crud_appointments(_idDocAsEmoloyee, _idDoc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToCreateAppointment()
+        {
+            Window s = new Create_appointment(_idDocAsEmoloyee, _idDoc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToSchedule()
+        {
+            Window s = new Schedule(_idDocAsEmoloyee, _idDoc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToPatientSearch()
+        {
+            Window s = new SearchPatientMVVM(_idDocAsEmoloyee, _idDoc);
+            s.Show();
+            this.Close();
+        }
+
+        private void GoToDrugOperation() // Obradjuje se
+        {
+
+            Window s = new View.Doctor.DrugOperations(_idDocAsEmoloyee, _idDoc);
+            s.Show();
+            this.Close();
+        }
+
+      
     }
 }
