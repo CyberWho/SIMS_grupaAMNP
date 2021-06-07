@@ -78,7 +78,14 @@ namespace Hospital.xaml_windows.Manager
                 return;
             }
 
-            Window newWindow = new ManagerRoomsCRUD(ManagerID);
+            Window newWindow = new View.Manager.RoomsCRUDView();
+            newWindow.Show();
+            this.Close();
+        }
+
+        private void BackBtnClick(object sender, RoutedEventArgs e)
+        {
+            Window newWindow = new View.Manager.RoomsCRUDView();
             newWindow.Show();
             this.Close();
         }

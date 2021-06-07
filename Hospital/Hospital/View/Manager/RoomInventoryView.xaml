@@ -1,0 +1,57 @@
+﻿<Window x:Class="Hospital.View.Manager.RoomInventoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Manager"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:manager="clr-namespace:Hospital.ViewModel.Manager"
+        mc:Ignorable="d"
+        FontFamily="Segoe UI Symbol"
+        Title="Prikaz inventara" Height="720" Width="1080" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <manager:RoomsInventoryViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding ItemsInRoom}" SelectedItem="{Binding SelectedItem}" AutoGenerateColumns="False" CanUserAddRows="False" Height="482" Margin="30,173,29.6,0" VerticalAlignment="Top" SelectionUnit="FullRow" SelectionMode="Single" Style="{StaticResource managerDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding inventoryItem.Name}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Količina" Binding="{Binding Quantity}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cena" Binding="{Binding inventoryItem.Price}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Jedinica" Binding="{Binding inventoryItem.Unit}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding inventoryItem.Type}" Width="*" IsReadOnly="True"/>
+                <DataGridTemplateColumn Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.MoveInventory}" Style="{StaticResource managerRegularBtn}" Width="80">
+                                <TextBlock Text="Premesti" Style="{StaticResource managerTextBlock}" FontSize="12"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="backBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding Back}" Style="{StaticResource managerRegularBtn}" Margin="860,18,0,0">
+            <TextBlock Text="&#xE112; Nazad" Foreground="#e8ebed" FontSize="20" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <TextBox x:Name="roomID_txtbx" IsReadOnly="True" materialDesign:HintAssist.Hint="Izabrana soba" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding SelectedRoom.Id}" Margin="30,117,821.6,0" VerticalAlignment="Top" GotFocus="roomID_txtbx_GotFocus" LostFocus="roomID_txtbx_LostFocus"/>
+        <TextBlock x:Name="ErrorTextBlock" HorizontalAlignment="Left" Margin="272,133,0,0" TextWrapping="Wrap" Text="Nije moguće izmeniti vrednost ovog polja." Foreground="Red" VerticalAlignment="Top" Height="33" Width="233" Visibility="Hidden"/>
+        <Canvas Grid.Row="1">
+            <Image Source="/Hospital;component/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="10,21,1018.6,624.4">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="bgTranslate"/>
+                </Image.RenderTransform>
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Image.Effect>
+            </Image>
+            <TextBlock Text="ZDRAVO KORPORACIJA" Foreground="#e8ebed" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+        </Canvas>
+    </Grid>
+</Window>

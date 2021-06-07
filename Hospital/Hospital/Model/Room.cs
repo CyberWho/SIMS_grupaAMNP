@@ -13,15 +13,15 @@ namespace Hospital.Model
     {
 
 
-        public int Id { get; set; }
-        public int Floor { get; set; }
-        public double Area { get; set; }
+        public int? Id { get; set; }
+        public int? Floor { get; set; }
+        public double? Area { get; set; }
         public string Description { get; set; }
 
         public Renovation Renovation { get; set; }
         public ArrayList appointment;
 
-        public Room(int id, int floor, double area, string description, RoomType newRoomType)
+        public Room(int? id, int? floor, double? area, string description, RoomType newRoomType)
         {
             Id = id;
             Floor = floor;

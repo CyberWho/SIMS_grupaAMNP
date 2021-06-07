@@ -1,0 +1,38 @@
+﻿<Window x:Class="Hospital.xaml_windows.Manager.ManagerRoomInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
+        FontFamily="Segoe UI Symbol"
+        mc:Ignorable="d"
+        Title="Inventar" Height="720" Width="1080" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding ItemsInRoom}" AutoGenerateColumns="False" CanUserAddRows="False" Height="482" Margin="30,96,30,0" VerticalAlignment="Top" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged" Style="{StaticResource managerDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding inventoryItem.Name}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Količina" Binding="{Binding Quantity}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cena" Binding="{Binding inventoryItem.Price}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Jedinica" Binding="{Binding inventoryItem.Unit}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding inventoryItem.Type}" Width="*" IsReadOnly="True"/>
+                <DataGridTemplateColumn Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="MoveInventory_Click" Style="{StaticResource managerRegularBtn}" Width="80">
+                                <TextBlock Text="Premesti" Style="{StaticResource managerTextBlock}" FontSize="12"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="backBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Click="backBtn_Click" Style="{StaticResource managerRegularBtn}" Margin="860,18,0,0">
+            <TextBlock Text="&#xE112; Nazad" Foreground="#e8ebed" FontSize="20" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <TextBox x:Name="roomID_txtbx" IsReadOnly="True" materialDesign:HintAssist.Hint="Izabrana soba" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="30,54,821.6,0" VerticalAlignment="Top" GotFocus="roomID_txtbx_GotFocus" LostFocus="roomID_txtbx_LostFocus"/>
+        <TextBlock x:Name="ErrorTextBlock" HorizontalAlignment="Left" Margin="272,70,0,0" TextWrapping="Wrap" Text="Nije moguće izmeniti vrednost ovog polja." Foreground="Red" VerticalAlignment="Top" Height="33" Width="233" Visibility="Hidden"/>
+
+    </Grid>
+</Window>

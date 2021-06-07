@@ -64,7 +64,7 @@ namespace Hospital.Service
             }
             foreach(Room renovatedRoom in renovation.Rooms)
             {
-                foreach(ItemInRoom itemInRenovatedRoom in itemInRoomService.GetAllItemsInRoomByRoomId(renovatedRoom.Id))
+                foreach(ItemInRoom itemInRenovatedRoom in itemInRoomService.GetAllItemsInRoomByRoomId((int)renovatedRoom.Id))
                 {
                     itemInRoomService.MoveWholeItemNowToMainStorage(itemInRenovatedRoom);
                 }

@@ -1,0 +1,31 @@
+﻿<Window x:Class="Hospital.xaml_windows.Manager.ManagerRoomInventorySelectDestinationRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        FontFamily="Segoe UI Symbol"
+        Title="Inventar" Height="720" Width="1080" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid x:Name="myDataGrid" CanUserAddRows="False" ItemsSource="{Binding Rooms}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="469" Margin="60,163,0,0" VerticalAlignment="Top" Width="711" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Sprat" Binding="{Binding Floor}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Površina" Binding="{Binding Area}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding roomType.Type}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Odaberite odredišnu prostoriju:" HorizontalAlignment="Left" Margin="60,117,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="IIRID_txtbx" IsReadOnly="True" HorizontalAlignment="Left"  Margin="860,264,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Izabrana soba" Text="{Binding SelectedItem.Id, ElementName=myDataGrid}" VerticalAlignment="Top" Width="180" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <Button x:Name="moveBtn" IsEnabled="False" HorizontalAlignment="Left" Margin="860,323,0,0" VerticalAlignment="Top" Click="moveBtn_Click" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="Prebaci" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="backBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackBtnClick" Style="{StaticResource managerRegularBtn}" Margin="860,18,-246.4,0">
+            <TextBlock Text="&#xE112; Odustani" Foreground="#e8ebed" FontSize="20" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+
+    </Grid>
+</Window>

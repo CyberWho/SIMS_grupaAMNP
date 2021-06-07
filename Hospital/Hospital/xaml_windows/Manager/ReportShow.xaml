@@ -1,0 +1,55 @@
+﻿<Window x:Class="Hospital.xaml_windows.Manager.ReportShow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
+        FontFamily="Segoe UI Symbol"
+        mc:Ignorable="d"
+        Title="ReportShow" Height="1080" Width="720" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Canvas Grid.Row="1">
+            <Image Source="/Hospital;component/Resources/Icons/icons8-heart-with-pulse-100.png" Width="45" Height="45" Margin="10,21,1018.6,624.4">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="bgTranslate"/>
+                </Image.RenderTransform>
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Gray" BlurRadius="4"/>
+                </Image.Effect>
+            </Image>
+            <TextBlock Text="ZDRAVO KORPORACIJA" Foreground="Black" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="black" BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+        </Canvas>
+        <Button x:Name="toPdfBtn" HorizontalAlignment="Left" Margin="362,18,0,0" VerticalAlignment="Top" Width="102" Height="50" Click="toPdfBtn_Click"  Style="{x:Null}" BorderThickness="0" Background="Transparent">
+            <TextBlock Text="&#xE160; PDF" FontSize="20" Style="{x:Null}" Foreground="Black"/>
+        </Button>
+        <Button x:Name="printBtn" HorizontalAlignment="Left" Margin="482,18,0,0" VerticalAlignment="Top" Width="102" Height="50" Click="printBtn_Click"   Style="{x:Null}" BorderThickness="0" Background="Transparent">
+            <TextBlock Text="&#x2399; Štampaj" FontSize="20" Style="{x:Null}" Foreground="Black"/>
+        </Button>
+        <Button x:Name="backBtn" HorizontalAlignment="Left" Margin="602,18,0,0" VerticalAlignment="Top" Width="102" Height="50" Click="backBtn_Click"   Style="{x:Null}" BorderThickness="0" Background="Transparent">
+            <TextBlock Text="&#xE10F; Početna" FontSize="20" Style="{x:Null}" Foreground="Black"/>
+        </Button>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Appointments}" Background="Transparent" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="902" Margin="10,138,0,0" VerticalAlignment="Top" Width="694" SelectionUnit="FullRow" SelectionMode="Single" GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding doctor.Id}" Width="*" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding doctor.User.Name}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding doctor.User.Surname}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Specijalizacija" Binding="{Binding doctor.specialization.Type}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Dužina (min)" Binding="{Binding DurationInMinutes}" Width="Auto" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="116" >
+            <Run FontWeight="Bold">Izveštaj za doktora:</Run>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="10,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="103">
+            <Run FontWeight="Bold">Period</Run>
+        </TextBlock>
+        <TextBlock x:Name="DoctorTxtBlk" HorizontalAlignment="Left" Margin="126,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Width="267"/>
+        <TextBlock x:Name="PeriodTxtBlk" HorizontalAlignment="Left" Margin="126,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Width="267" RenderTransformOrigin="0.747,0.714"/>
+    </Grid>
+</Window>
