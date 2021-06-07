@@ -8,7 +8,7 @@ using System;
 
 namespace Hospital.Model
 {
-    public class WorkHours
+    public class WorkHours : IEntity
     {
 
 

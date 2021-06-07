@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
@@ -48,7 +49,7 @@ namespace Hospital.Controller
             return false;
         }
 
-        public FreeDaysService freeDaysService = new FreeDaysService();
+        public FreeDaysService freeDaysService = new FreeDaysService(new FreeDaysRepository());
 
     }
 }

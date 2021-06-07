@@ -76,7 +76,7 @@ namespace Hospital.Repository
             anamnesis.Description = reader.GetString(1);
             anamnesis.MedicalTreatments = new MedicalTreatment().GetAllMedicalTreatmentsByAnamnesisId(reader.GetInt32(0));
             anamnesis.Perscriptions = new PerscriptionRepository().GetAllPerscriptionsByAnamnesisId(reader.GetInt32(0));
-            anamnesis.appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(3));
+            anamnesis.appointment = new AppointmentRepository().GetById(reader.GetInt32(3));
             return anamnesis;
         }
 

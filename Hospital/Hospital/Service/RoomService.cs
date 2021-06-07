@@ -173,7 +173,7 @@ namespace Hospital.Service
 
             ObservableCollection<TimeSlot> doctorTimeSlots =
             new ObservableCollection<TimeSlot>(from i in
-                timeSlotRepository.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(startTime, id_doc)
+                timeSlotRepository.GetAllFreeForNext48HoursByDateAndDoctorId(startTime, id_doc)
                                                orderby i.StartTime
                                                select i);
             for (int i = 0; i < doctorTimeSlots.Count - 3; i++)

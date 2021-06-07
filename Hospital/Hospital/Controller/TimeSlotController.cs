@@ -1,6 +1,7 @@
 ﻿using System;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.Repository;
 
 /***********************************************************************
  * Module:  TimeSlotController.cs
@@ -103,7 +104,7 @@ namespace Hospital.Controller
             return true;
         }
 
-        public Service.TimeSlotService timeSlotService = new Service.TimeSlotService();
+        public Service.TimeSlotService timeSlotService = new Service.TimeSlotService(new TimeSlotRepository(),new AppointmentRepository(),new WorkHoursRepository(),new DoctorRepository(),new FreeDaysRepository());
 
     }
 }

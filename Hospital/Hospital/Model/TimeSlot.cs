@@ -12,7 +12,7 @@ using System.Threading.Tasks;
  ***********************************************************************/
 namespace Hospital.Model
 {
-    public class TimeSlot : IComparable 
+    public class TimeSlot : IComparable,IEntity
     {
         public int Id { get; set; }
 

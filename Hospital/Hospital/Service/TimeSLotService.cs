@@ -3,7 +3,10 @@ using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
+using System.Security.AccessControl;
 using System.Windows.Navigation;
+using Hospital.IRepository;
 using Hospital.Repository;
 
 
@@ -20,20 +23,31 @@ namespace Hospital.Service
     {
         // edge case time is :30 maybe
 
-        private AppointmentRepository appointmentRepository = new AppointmentRepository();
-        private WorkHoursRepository workHoursRepository = new WorkHoursRepository();
-        private DoctorRepository doctorRepository = new DoctorRepository();
+        private IAppointmentRepo<Appointment> appointmentRepository;
+        private IWorkHoursRepo<WorkHours> workHoursRepository;
+        private IDoctorRepo<Doctor> doctorRepository;
+        private ITimeSlotRepo<TimeSlot> timeSlotRepository;
+        private IFreeDaysRepo<FreeDays> freeDaysRepository;
 
-
+        public TimeSlotService(ITimeSlotRepo<TimeSlot> iTimeSlotRepo, IAppointmentRepo<Appointment> iAppointmentRepo,
+            IWorkHoursRepo<WorkHours> iWorkHoursRepo, IDoctorRepo<Doctor> iDoctorRepo,
+            IFreeDaysRepo<FreeDays> iFreeDaysRepo)
+        {
+            timeSlotRepository = iTimeSlotRepo;
+            appointmentRepository = iAppointmentRepo;
+            workHoursRepository = iWorkHoursRepo;
+            freeDaysRepository = iFreeDaysRepo;
+            doctorRepository = iDoctorRepo;
+        }
         public void generateTimeSlots()
         {
-            timeSlotRepository.generateTimeSlots();
+            timeSlotRepository.GenerateTimeSlots();
         }
 
         public TimeSlot GetTimeSlotById(int id)
         {
             TimeSlot timeSlot = new TimeSlot();
-            timeSlot = timeSlotRepository.GetTimeSlotById(id);
+            timeSlot = timeSlotRepository.GetById(id);
             return timeSlot;
         }
 
@@ -44,17 +58,17 @@ namespace Hospital.Service
             // testing
             // now = new DateTime(2021, 5, 4, 12, 0, 0);
             
-            TimeSlot timeSlot = this.timeSlotRepository.GetTimeSlotById(timeSlot_id);
+            TimeSlot timeSlot = this.timeSlotRepository.GetById(timeSlot_id);
             int workHours_id = timeSlot.workHours_id;
-            WorkHours workHours = this.workHoursRepository.GetWorkHoursById(workHours_id);
+            WorkHours workHours = this.workHoursRepository.GetById(workHours_id);
             int doctor_id = workHours.doctor.Id;
             Doctor doctor = this.doctorRepository.GetById(doctor_id);
 
             // now = new DateTime(2021, 4, 20, 9, 0, 0);
 
-            Appointment appointment = this.appointmentRepository.GetAppointmentByDoctorIdAndTime(doctor, now);
+            Appointment appointment = this.appointmentRepository.GetByDoctorIdAndTime(doctor, now);
 
-            appointment = this.appointmentRepository.UpdateAppointmentStartTime(appointment, timeSlot.StartTime);
+            appointment = this.appointmentRepository.UpdateStartTime(appointment, timeSlot.StartTime);
 
             if (appointment != null)
             {
@@ -67,7 +81,7 @@ namespace Hospital.Service
 
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId, int patient_id)
         {
-            ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetlAllFreeTimeSlotsBySpecializationId(specializationId);
+            ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetAllFreeBySpecializationId(specializationId);
             // special case, if the time slot isn't taken, return type will be the same, only it will contain only one element
             ObservableCollection<TimeSlot> timeSlot = new ObservableCollection<TimeSlot>();
             DateTime now = fix_time();
@@ -87,7 +101,7 @@ namespace Hospital.Service
             {
                 if (ts.StartTime.Equals(now))
                 {
-                    WorkHours workHours = this.workHoursRepository.GetWorkHoursById(ts.workHours_id);
+                    WorkHours workHours = this.workHoursRepository.GetById(ts.workHours_id);
                     Doctor doctor = workHours.doctor;
                     
                     Appointment appointment = new Appointment();
@@ -97,7 +111,7 @@ namespace Hospital.Service
                     appointment.Doctor_Id = doctor.Id;
                     appointment.Patient_Id = patient_id;
 
-                    this.appointmentRepository.NewAppointment(appointment); 
+                    this.appointmentRepository.Add(appointment); 
                     
                     timeSlot.Add(ts);
 
@@ -117,7 +131,7 @@ namespace Hospital.Service
             // testing
             // now = new DateTime(2021, 5, 4, 12, 0, 0);
 
-            ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(specializationId, now);
+            ObservableCollection<TimeSlot> timeSlots = this.timeSlotRepository.GetAllFreeBySpecializationIdAfterCurrentTime(specializationId, now);
             // special case, if the time slot isn't taken, return type will be the same, only it will contain only one element
             ObservableCollection<TimeSlot> timeSlot = new ObservableCollection<TimeSlot>();
 
@@ -126,7 +140,7 @@ namespace Hospital.Service
                 if (isDateEqual(ts.StartTime, now))
                 // if (/*ts.StartTime.Equals(now)*/ DateTime.Compare(now, ts.StartTime) == 0)
                 {
-                    WorkHours workHours = this.workHoursRepository.GetWorkHoursById(ts.workHours_id);
+                    WorkHours workHours = this.workHoursRepository.GetById(ts.workHours_id);
                     Doctor doctor = workHours.doctor;
 
                     Appointment appointment = new Appointment();
@@ -136,7 +150,7 @@ namespace Hospital.Service
                     appointment.Doctor_Id = doctor.Id;
                     appointment.Patient_Id = patientId;
 
-                    this.appointmentRepository.NewAppointment(appointment);
+                    this.appointmentRepository.Add(appointment);
 
                     timeSlot.Add(ts);
 
@@ -197,7 +211,7 @@ namespace Hospital.Service
         public ObservableCollection<TimeSlot> GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(DateTime date, int doctorId)
         {
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            timeSlots = timeSlotRepository.GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(date, doctorId);
+            timeSlots = timeSlotRepository.GetAllFreeForNext48HoursByDateAndDoctorId(date, doctorId);
             return timeSlots;
         }
 
@@ -209,22 +223,22 @@ namespace Hospital.Service
 
         public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
         {
-            return timeSlotRepository.GetAllFreeTimeSlotsByDoctorId(doctorId);
+            return timeSlotRepository.GetAllFreeByDoctorId(doctorId);
         }
         public ObservableCollection<TimeSlot> GetTimeSlotRecomendationsByDatesAndDoctorIdAndPriority(DateTime startTime,DateTime endTime,int doctorId,int priority)
         {
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            timeSlots = timeSlotRepository.GetTimeSlotsByDatesAndDoctorId(startTime, endTime, doctorId);
+            timeSlots = timeSlotRepository.GetAllByDatesAndDoctorId(startTime, endTime, doctorId);
 
             if (timeSlots.Count == 0)
             {
                 if (priority == 0)
                 {
-                    timeSlots = timeSlotRepository.GetAllFreeTimeSlotsByDoctorId(doctorId);
+                    timeSlots = timeSlotRepository.GetAllFreeByDoctorId(doctorId);
                 } 
                 else
                 {
-                    timeSlots = timeSlotRepository.GetAllFreeTimeSlotsByDates(startTime, endTime);
+                    timeSlots = timeSlotRepository.GetAllFreeByDates(startTime, endTime);
                 }
             }
 
@@ -235,7 +249,7 @@ namespace Hospital.Service
 
         private ObservableCollection<TimeSlot> reduceTimeSlots(ObservableCollection<TimeSlot> timeSlots, int doctor_id)
         {
-            ObservableCollection<FreeDays> freeDays = this.freeDaysRepository.GetFreeDaysByDoctorId(doctor_id);
+            ObservableCollection<FreeDays> freeDays = this.freeDaysRepository.GetAllByDoctorId(doctor_id);
             ObservableCollection<TimeSlot> reducedTimeSlots = new ObservableCollection<TimeSlot>();
 
             bool flag = false;
@@ -301,9 +315,6 @@ namespace Hospital.Service
             timeSlotRepository.FreeTimeSlot(timeSlot);
             return true;
         }
-
-        public TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
-        private FreeDaysRepository freeDaysRepository = new FreeDaysRepository();
 
     }
 }

@@ -33,7 +33,7 @@ namespace Hospital.Repository
         {
             setConnection();
             OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.userId LEFT OUTER JOIN role on role.userId = employee.role_id WHERE users.userId = " + userId.ToString();
+            cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.user.Id LEFT OUTER JOIN role on role.userId = employee.role_id WHERE users.userId = " + userId.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
 
             var employee = ParseEmployee(reader);

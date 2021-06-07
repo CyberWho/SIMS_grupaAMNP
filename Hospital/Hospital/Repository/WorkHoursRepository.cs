@@ -5,13 +5,15 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
 using System.Net.WebSockets;
+using Hospital.IRepository;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
-    public class WorkHoursRepository
+    public class WorkHoursRepository : IWorkHoursRepo<WorkHours>
     {
         private DoctorRepository doctorRepository = new DoctorRepository();
 
@@ -32,7 +34,7 @@ namespace Hospital.Repository
         }
 
 
-        public WorkHours GetWorkHoursById(int id)
+        public WorkHours GetById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -62,37 +64,37 @@ namespace Hospital.Repository
             return workHours;
         }
 
-        public System.Collections.ArrayList GetAllWorkHoursByDoctorId(int doctorId)
+        public ObservableCollection<WorkHours> GetAllByDoctorId(int doctorId)
         {
             // TODO: implement
             return null;
         }
 
-        public System.Collections.ArrayList GetAllApprovedWorkHoursByDoctorId(int doctorId)
+        public ObservableCollection<WorkHours> GetAllApprovedByDoctorId(int doctorId)
         {
             // TODO: implement
             return null;
         }
 
-        public Boolean DeleteWorkHoursById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DeleteAllWorkHoursByDoctorId(int doctorId)
+        public Boolean DeleteAllByDoctorId(int doctorId)
         {
             // TODO: implement
             return false;
         }
 
-        public Hospital.Model.WorkHours UpdateWorkHours(Hospital.Model.WorkHours workHours)
+        public Hospital.Model.WorkHours Update(Hospital.Model.WorkHours workHours)
         {
             // TODO: implement
             return null;
         }
 
-        public WorkHours NewWorkHours(WorkHours workHours)
+        public WorkHours Add(WorkHours workHours)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -117,7 +119,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public System.Collections.ArrayList GetAllPendingWorkHoursByDoctorId(int doctorId)
+        public ObservableCollection<WorkHours> GetAllPendingByDoctorId(int doctorId)
         {
             // TODO: implement
             return null;
@@ -129,5 +131,9 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public ObservableCollection<WorkHours> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

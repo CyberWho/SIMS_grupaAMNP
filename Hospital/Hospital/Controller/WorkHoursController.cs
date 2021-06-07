@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
@@ -73,7 +74,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Hospital.Service.WorkHoursService workHoursService = new WorkHoursService();
+      public Hospital.Service.WorkHoursService workHoursService = new WorkHoursService(new WorkHoursRepository());
    
    }
 }

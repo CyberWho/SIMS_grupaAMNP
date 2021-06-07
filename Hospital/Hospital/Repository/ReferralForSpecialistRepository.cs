@@ -64,7 +64,7 @@ namespace Hospital.Repository
             referralForSpecialist.Description = reader.GetString(1);
             referralForSpecialist.Doctor = new DoctorRepository().GetAppointmentDoctorById(reader.GetInt32(2));
             referralForSpecialist.HealthRecord = new HealthRecordRepository().GetHealthRecordById(reader.GetInt32(3));
-            referralForSpecialist.Appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(4));
+            referralForSpecialist.Appointment = new AppointmentRepository().GetById(reader.GetInt32(4));
             return referralForSpecialist;
         }
 

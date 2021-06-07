@@ -9,10 +9,11 @@ using Oracle.ManagedDataAccess.Client;
 using System.Collections.ObjectModel;
 using Hospital.Model;
 using System.Diagnostics;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class AppointmentRepository
+    public class AppointmentRepository : IAppointmentRepo<Appointment>
     {
         private RoomRepository roomRepository = new RoomRepository();
         private PatientRepository patientRepository = new PatientRepository();
@@ -39,7 +40,7 @@ namespace Hospital.Repository
             }
         }
 
-        public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time)
+        public Appointment GetByDoctorIdAndTime(Doctor doctor, DateTime time)
         {
             setConnection();
 
@@ -59,11 +60,11 @@ namespace Hospital.Repository
             connection.Close();
             connection.Dispose();
 
-            return this.GetAppointmentById(appointment_id);
+            return this.GetById(appointment_id);
         }
 
 
-        public Appointment GetAppointmentById(int id)
+        public Appointment GetById(int id)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -128,7 +129,7 @@ namespace Hospital.Repository
             return appointment;
         }
 
-        public ObservableCollection<Appointment> GetAllReservedAppointments()
+        public ObservableCollection<Appointment> GetAllReserved()
         {
             setConnection();
 
@@ -144,13 +145,13 @@ namespace Hospital.Repository
             return null;
         }
 
-        public System.Collections.ArrayList GetAllReservedAppointmentsWeekly()
+        public ObservableCollection<Appointment> GetAllReservedWeekly()
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<Appointment> GetAllAppointmentsByDoctorId(int doctorId)
+        public ObservableCollection<Appointment> GetAllByDoctorId(int doctorId)
         {
             ObservableCollection<Appointment> appointmnets = new ObservableCollection<Appointment>();
 
@@ -205,7 +206,7 @@ namespace Hospital.Repository
             return appointmnets;
         }
 
-        public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
+        public ObservableCollection<Appointment> GetAllReservedByPatientId(int patientId)
         {
             ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
             setConnection();
@@ -226,10 +227,10 @@ namespace Hospital.Repository
             return appointments;
         }
 
-        public Boolean DeleteAppointmentById(int id)
+        public Boolean DeleteById(int id)
         {
             Appointment appointment = new Appointment();
-            appointment = GetAppointmentById(id);
+            appointment = GetById(id);
 
             appointment.doctor.employee_id = employeesRepository.GetByUserId(appointment.doctor.User.Id).Id;
 
@@ -289,24 +290,24 @@ namespace Hospital.Repository
             this.systemNotificationRepository.Add(systemNotification);
         }
 
-        public Boolean DeleteAllReservedAppointmentsByPatientId(int patientId)
+        public Boolean DeleteAllReservedByPatientId(int patientId)
         {
             setConnection();
             
-            ObservableCollection<Appointment> appointments = GetAllReservedAppointmentsByPatientId(patientId);
+            ObservableCollection<Appointment> appointments = GetAllReservedByPatientId(patientId);
             foreach(Appointment appointment in appointments)
             {
                 if(appointment.Type == AppointmentType.OPERATION)
                 {
                     continue;
                 }
-                DeleteAppointmentById(appointment.Id);
+                DeleteById(appointment.Id);
             }
             connection.Close();
             return true;
         }
 
-        public Appointment UpdateAppointmentStartTime(Appointment appointment, DateTime startTime)
+        public Appointment UpdateStartTime(Appointment appointment, DateTime startTime)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -339,7 +340,7 @@ namespace Hospital.Repository
             return appointment;
         }
 
-        public Appointment UpdateAppointmentRoom(Appointment appointment, Room room)
+        public Appointment UpdateRoom(Appointment appointment, Room room)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -401,7 +402,7 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Appointment UpdateAppointmentStatus(Appointment appointment, AppointmentStatus appointmentStatus)
+        public Appointment UpdateStatus(Appointment appointment, AppointmentStatus appointmentStatus)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -414,7 +415,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Appointment NewAppointment(Appointment appointment)
+        public Appointment Add(Appointment appointment)
         {
             setConnection();
             OracleCommand command = connection.CreateCommand();
@@ -524,5 +525,14 @@ namespace Hospital.Repository
             return appointments;
         }
 
+        public ObservableCollection<Appointment> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Appointment Update(Appointment t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
