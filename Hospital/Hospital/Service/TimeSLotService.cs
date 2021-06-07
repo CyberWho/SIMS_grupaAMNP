@@ -48,7 +48,7 @@ namespace Hospital.Service
             int workHours_id = timeSlot.workHours_id;
             WorkHours workHours = this.workHoursRepository.GetWorkHoursById(workHours_id);
             int doctor_id = workHours.doctor.Id;
-            Doctor doctor = this.doctorRepository.GetDoctorById(doctor_id);
+            Doctor doctor = this.doctorRepository.GetById(doctor_id);
 
             // now = new DateTime(2021, 4, 20, 9, 0, 0);
 

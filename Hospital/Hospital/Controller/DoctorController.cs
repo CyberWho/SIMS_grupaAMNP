@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {
@@ -66,7 +67,7 @@ namespace Hospital.Controller
             return this.doctorService.AddDoctor(doctor, specialization);
         }
 
-        public Service.DoctorService doctorService = new Service.DoctorService();
+        public Service.DoctorService doctorService = new Service.DoctorService(new DoctorRepository(),new EmployeesRepository(),new UserRepository(),new SpecializationRepository());
 
     }
 }

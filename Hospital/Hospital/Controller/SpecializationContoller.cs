@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hospital.Model;
+using Hospital.Repository;
 using Hospital.Service;
 
 namespace Hospital.Controller
 {
     class SpecializationContoller
     {
-        private SpecializationService specializationService = new SpecializationService();
+        private SpecializationService specializationService = new SpecializationService(new SpecializationRepository());
 
         public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD = true)
         {

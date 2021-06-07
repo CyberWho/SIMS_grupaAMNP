@@ -45,7 +45,7 @@ namespace Hospital.Repository
             DateTime shiftEndTime = reader.GetDateTime(2);
             Boolean approved = int.Parse(reader.GetString(3)) == 1 ? true : false;
             int doctor_id = int.Parse(reader.GetString(4));
-            Doctor doctor = this.doctorRepository.GetDoctorById(doctor_id);
+            Doctor doctor = this.doctorRepository.GetById(doctor_id);
 
             WorkHours workHours = new 
                 WorkHours(  

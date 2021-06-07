@@ -125,8 +125,10 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IRepository\IDoctorRepo.cs" />
     <Compile Include="IRepository\IEmployeeRepo.cs" />
     <Compile Include="IRepository\IRepo.cs" />
+    <Compile Include="IRepository\ISpecializationRepo.cs" />
     <Compile Include="IRepository\IUserRepo.cs" />
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />

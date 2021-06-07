@@ -51,7 +51,7 @@ namespace Hospital.Service
         #region marko_kt5
         public ObservableCollection<Room> GetAllRoomsByRoomType(RoomType roomType)
         {
-            List<int> usedRooms = this.doctorRepository.getAllUsedRoomsId();
+            List<int> usedRooms = this.doctorRepository.GetAllUsedRoomsId();
             ObservableCollection<Room> rooms = this.roomRepository.GetAllRoomsByRoomType(roomType);
 
             return this.reduceRooms(usedRooms, rooms);

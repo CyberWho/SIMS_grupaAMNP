@@ -316,7 +316,7 @@ namespace Hospital.Repository
             TimeSlot newTimeSlot = new TimeSlot();
             newTimeSlot = timeSlotRepository.GetAppointmentTimeSlotByDateAndDoctorId(startTime, appointment.doctor.Id);
             timeSlotRepository.TakeTimeSlot(newTimeSlot);
-            appointment.doctor = this.doctorRepository.GetDoctorById(appointment.doctor.Id);
+            appointment.doctor = this.doctorRepository.GetById(appointment.doctor.Id);
             command.CommandText = "UPDATE APPOINTMENT SET DATE_TIME = :DATE_TIME WHERE ID = :ID";
             command.Parameters.Add("DATE_TIME", OracleDbType.Date).Value = startTime;
             command.Parameters.Add("ID", OracleDbType.Int32).Value = appointment.Id.ToString();
@@ -466,7 +466,7 @@ namespace Hospital.Repository
                 connection.Dispose();
 
                 appointment.Id = next_id;
-                appointment.doctor = this.doctorRepository.GetDoctorById(appointment.Doctor_Id);
+                appointment.doctor = this.doctorRepository.GetById(appointment.Doctor_Id);
                 appointment.patient = this.patientRepository.GetPatientById(appointment.Patient_Id);
 
                 NotifyDoctor(appointment, "Kreiran termin");
