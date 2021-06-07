@@ -7,6 +7,8 @@
 using System;
 using System.Collections.ObjectModel;
 using Hospital.Model;
+using Hospital.Repository;
+using MedicalTreatment = Hospital.Model.MedicalTreatment;
 
 namespace Hospital.Controller
 {
@@ -72,7 +74,7 @@ namespace Hospital.Controller
         }
 
 
-      public Service.ReminderService reminderService = new Service.ReminderService();
+      public Service.ReminderService reminderService = new Service.ReminderService(new ReminderRepository());
    
    }
 }

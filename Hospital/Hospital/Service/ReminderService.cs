@@ -7,12 +7,19 @@
 using System;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Service
 {
    public class ReminderService
    {
-      public Reminder GetReminderById(int id)
+       private IReminerRepo<Reminder> reminderRepository;
+
+       public ReminderService(IReminerRepo<Reminder> iReminderRepository)
+       {
+           reminderRepository = iReminderRepository;
+       }
+        public Reminder GetReminderById(int id)
       {
          // TODO: implement
          return null;
@@ -20,13 +27,13 @@ namespace Hospital.Service
 
         public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
         {
-            return reminderRepository.GetReminderByAlarmTimeAndPatientId(alarmTime, patientId);
+            return reminderRepository.GetAllByAlarmTimeAndPatientId(alarmTime, patientId);
         }
 
 
       public ObservableCollection<Reminder> GetAllRemindersByPatientId(int patientId)
       {
-            return reminderRepository.GetAllRemindersByPatientId(patientId);
+            return reminderRepository.GetAllByPatientId(patientId);
       }
         public ObservableCollection<Reminder> GetAllPastRemindersByPatientId(int patientId)
         {
@@ -40,7 +47,7 @@ namespace Hospital.Service
 
         public ObservableCollection<Reminder> GetAllRemindersByPersonalReminderId(int personalReminderId)
         {
-            return reminderRepository.GetAllRemindersByPersonalReminderId(personalReminderId);
+            return reminderRepository.GetAllByPersonalReminderId(personalReminderId);
         }
 
       public Boolean DeleteReminderById(int id)
@@ -69,7 +76,7 @@ namespace Hospital.Service
                 reminder.Patient = medicalTreatment.anamnesis.healthRecord.Patient;
                 start = start.AddHours(medicalTreatment.Period);
                 reminder.personalReminderId = 0;
-                reminderRepository.NewReminder(reminder);
+                reminderRepository.Add(reminder);
             }
          
             return true;
@@ -77,7 +84,7 @@ namespace Hospital.Service
        
       public Reminder UpdateReminder(Reminder reminder)
       {
-            return reminderRepository.UpdateReminder(reminder);
+            return reminderRepository.Update(reminder);
       }
       
       public Reminder AddReminder(Reminder reminder)
@@ -97,7 +104,5 @@ namespace Hospital.Service
         }
 
 
-      public Repository.ReminderRepository reminderRepository = new Repository.ReminderRepository();
-   
    }
 }
