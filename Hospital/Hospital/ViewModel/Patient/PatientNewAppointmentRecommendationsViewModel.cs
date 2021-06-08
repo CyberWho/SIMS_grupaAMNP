@@ -140,12 +140,16 @@ namespace Hospital.ViewModel.Patient
             Model.Doctor doctor = doctorController.GetWorkHoursDoctorById(doctorId);
             TimeSlot timeSlot = timeSlotController.GetTimeSlotById(SelectedItem.Id);
             Appointment appointment = new Appointment(30, timeSlot.StartTime, AppointmentType.EXAMINATION, AppointmentStatus.RESERVED, doctor, patient, room);
-            appointmentController.ReserveAppointment(appointment);
+            Execute(appointment,new ModifyAppointment(),new AppointmentCommand(appointment,AppointmentAction.ADD));
             CheckIfReferralForSpecialistIsUsed();
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
         }
-
+        private static void Execute(Appointment appointment, ModifyAppointment modifyAppointment, ICommand appointmentCommand)
+        {
+            modifyAppointment.SetCommand(appointmentCommand);
+            modifyAppointment.Invoke();
+        }
         private bool SelectionValidation()
         {
             if (SelectedItem == null)

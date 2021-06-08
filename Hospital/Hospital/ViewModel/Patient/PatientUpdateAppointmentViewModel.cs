@@ -128,10 +128,7 @@ namespace Hospital.ViewModel.Patient
         private void OnAdd()
         {
             if(!SelectionValidation()) return;
-            ModifyAppointment modifyAppointment = new ModifyAppointment();
-            //TimeSlot timeSlot = timeSlotController.GetTimeSlotById(SelectedItem.Id);
-            Execute(appointment,modifyAppointment,new AppointmentCommand(appointment,AppointmentAction.UPDATE,SelectedItem.StartTime));
-            //appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
+            Execute(appointment,new ModifyAppointment(),new AppointmentCommand(appointment,AppointmentAction.UPDATE,SelectedItem.StartTime));
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);

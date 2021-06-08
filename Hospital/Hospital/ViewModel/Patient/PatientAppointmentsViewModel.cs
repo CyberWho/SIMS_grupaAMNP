@@ -210,8 +210,7 @@ namespace Hospital.ViewModel.Patient
             int patientId = getPatientId();
             appointment = appointmentController.GetAppointmentById(GetAppointmentId());
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
-            //DateValidationForUpdate(hours, patientId, GetAppointmentId());
-            ShowPatientUpdateAppointment(patientId, appointment.Id);
+            DateValidationForUpdate(hours, patientId, GetAppointmentId());
         }
         private int GetAppointmentId()
         {
