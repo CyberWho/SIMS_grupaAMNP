@@ -99,11 +99,11 @@ namespace Hospital.ViewModel.Patient
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
             Update = new MyICommand(OnUpdate);
-            Delete = new MyICommand(OnDelete);
             New = new MyICommand(OnNew);
             MyHealthRecord = new MyICommand(OnHealthRecord);
             SelectionChanged = new MyICommand(OnSelectionChanged);
             LogOut = new MyICommand(OnLogOut);
+            Delete = new MyICommand(OnDelete);
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
@@ -155,14 +155,24 @@ namespace Hospital.ViewModel.Patient
         private void OnDelete()
         {
             if(!SelectionValidation()) return;
-            
-            appointmentController.CancelAppointmentById(GetAppointmentId());
-            Model.Patient patient = patientController.GetPatientByUserId(userId);
-            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
-            CheckIfPatientIsBlocked(patient.Id);
+            var modifyAppointment = new ModifyAppointment();
+            Execute(selectedItem,modifyAppointment,new AppointmentCommand(selectedItem,AppointmentAction.DELETE));
+            BlockChecking();
             updateDataGrid();
         }
 
+        private void BlockChecking()
+        {
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
+            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
+            CheckIfPatientIsBlocked(patient.Id);
+        }
+
+        private static void Execute(Appointment appointment, ModifyAppointment modifyAppointment, ICommand appointmentCommand)
+        {
+            modifyAppointment.SetCommand(appointmentCommand);
+            modifyAppointment.Invoke();
+        }
         private bool SelectionValidation()
         {
             if (selectedItem == null)
@@ -200,7 +210,8 @@ namespace Hospital.ViewModel.Patient
             int patientId = getPatientId();
             appointment = appointmentController.GetAppointmentById(GetAppointmentId());
             var hours = (appointment.StartTime - DateTime.Now).TotalHours;
-            DateValidationForUpdate(hours, patientId, GetAppointmentId());
+            //DateValidationForUpdate(hours, patientId, GetAppointmentId());
+            ShowPatientUpdateAppointment(patientId, appointment.Id);
         }
         private int GetAppointmentId()
         {
