@@ -6,7 +6,7 @@
 
 namespace Hospital.Model
 {
-    public class User
+    public class User : IRoleDescriptior
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -29,5 +29,17 @@ namespace Hospital.Model
         public User()
         {
         }
+
+        public string describeMyRole()
+        {
+            return "Vi ste korisnik: " + Name + " " + Surname + "\n";
+        }
+
+        public int howMuchAmIPaid()
+        {
+            return 0;
+        }
+
+
     }
 }

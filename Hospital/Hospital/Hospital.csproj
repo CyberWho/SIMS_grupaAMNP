@@ -131,12 +131,16 @@
     <Compile Include="Model\FreeDays.cs" />
     <Compile Include="Model\FreeDaysStatus.cs" />
     <Compile Include="Model\Globals.cs" />
+    <Compile Include="Model\IRoleDescriptior.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
+    <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\PatientLogs.cs" />
     <Compile Include="Model\RenovationDTO.cs" />
     <Compile Include="Model\PersonalReminder.cs" />
     <Compile Include="Model\PersonalReminderFrequency.cs" />
     <Compile Include="Model\Review.cs" />
+    <Compile Include="Model\RoleDescriptionBase.cs" />
+    <Compile Include="Model\Secretary.cs" />
     <Compile Include="Model\TimeSlot.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
@@ -197,6 +201,7 @@
     <Compile Include="Service\ReviewService.cs" />
     <Compile Include="Service\RoleService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\RoomServiceAlgorithms.cs" />
     <Compile Include="Service\SpecializationService.cs" />
     <Compile Include="Service\StateService.cs" />
     <Compile Include="Service\SystemNotificationService.cs" />
@@ -333,6 +338,9 @@
     </Compile>
     <Compile Include="xaml_windows\Doctor\Create_operation.xaml.cs">
       <DependentUpon>Create_operation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Doctor\DoctorToManager.xaml.cs">
+      <DependentUpon>DoctorToManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Doctor\DoctorUI2.xaml.cs">
       <DependentUpon>DoctorUI2.xaml</DependentUpon>
@@ -650,6 +658,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Doctor\Create_operation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Doctor\DoctorToManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

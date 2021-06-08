@@ -8,14 +8,14 @@ namespace Hospital.Repository
 {
     class ReviewRepository
     {
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -43,8 +43,8 @@ namespace Hospital.Repository
 
         public Review NewReview(Review review)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "INSERT INTO REVIEW (RATE,DESCRIPTION,PATIENT_ID,DOCTOR_ID,REVIEW_DATE) VALUES (:rate,:description,:patient_id,:doctor_id,:review_date)";
             command.Parameters.Add("rate", OracleDbType.Int32).Value = review.Rate.ToString();
             command.Parameters.Add("description", OracleDbType.Varchar2).Value = review.Description;
@@ -52,7 +52,7 @@ namespace Hospital.Repository
             command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = review.doctor.Id;
             command.Parameters.Add("review_date", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
             int executer = command.ExecuteNonQuery();
-            connection.Close();
+            
             return review;
         }
 

@@ -17,14 +17,14 @@ namespace Hospital.Repository
 {
     public class FreeDaysRepository
     {
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -35,8 +35,8 @@ namespace Hospital.Repository
 
         public ObservableCollection<FreeDays> GetFreeDaysByDoctorId(int doctor_id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM free_days WHERE doctor_id = " + doctor_id;
             OracleDataReader reader = command.ExecuteReader();
 
@@ -58,8 +58,8 @@ namespace Hospital.Repository
                 freeDays.Add(freeDay);
             }
             
-            connection.Close();
-            connection.Dispose();
+            
+            
             
             return freeDays;
 
@@ -91,8 +91,8 @@ namespace Hospital.Repository
 
         public FreeDays AddFreeDays(FreeDays freeDays)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText =
                 "INSERT INTO free_days (id, start_date, end_date, status, description, doctor_id) VALUES (:id, :start_date, :end_date, :status, :description, :doctor_id)";
 
@@ -109,13 +109,13 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return freeDays;
             }
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }
@@ -149,8 +149,8 @@ namespace Hospital.Repository
 
         private int GetLastId()
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT MAX(id) FROM free_days";
             OracleDataReader reader = command.ExecuteReader();
 
@@ -160,8 +160,8 @@ namespace Hospital.Repository
                 id = int.Parse(reader.GetString(0));
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return id;
         }

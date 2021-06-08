@@ -13,15 +13,15 @@ namespace Hospital.Repository
 {
     public class MedicalTreatment
     {
-        OracleConnection connection = null;
+        
 
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -31,16 +31,16 @@ namespace Hospital.Repository
         }
         public Model.MedicalTreatment GetMedicalTreatmentById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM medical_treatment WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
             var medicalTreatment = ParseMedicalTreatment(reader);
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return medicalTreatment;
         }
@@ -64,8 +64,8 @@ namespace Hospital.Repository
 
         public ObservableCollection<Model.MedicalTreatment> GetAllMedicalTreatmentsByAnamnesisId(int anamnesisId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "select * from medical_treatment where anamnesis_id = " + anamnesisId;
             OracleDataReader reader = command.ExecuteReader();
             ObservableCollection<Model.MedicalTreatment> medicalTreatments = new ObservableCollection<Model.MedicalTreatment>();
@@ -77,8 +77,8 @@ namespace Hospital.Repository
                 medicalTreatments.Add(medicalTreatment);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
             
             return medicalTreatments;
         }

@@ -15,27 +15,10 @@ namespace Hospital.Repository
     {
         private DoctorRepository doctorRepository = new DoctorRepository();
 
-        OracleConnection connection = null;
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-
-            }
-        }
-
-
         public WorkHours GetWorkHoursById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM work_hours WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -47,8 +30,8 @@ namespace Hospital.Repository
             int doctor_id = int.Parse(reader.GetString(4));
             Doctor doctor = this.doctorRepository.GetDoctorById(doctor_id);
 
-            WorkHours workHours = new 
-                WorkHours(  
+            WorkHours workHours = new
+                WorkHours(
                     id,
                     shiftStartTime,
                     shiftEndTime,
@@ -57,8 +40,8 @@ namespace Hospital.Repository
                 );
 
 
-            connection.Close();
-            connection.Dispose();
+            
+            
             return workHours;
         }
 
@@ -94,8 +77,8 @@ namespace Hospital.Repository
 
         public WorkHours NewWorkHours(WorkHours workHours)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText =
                 "INSERT INTO work_hours (shift_start, shift_end, approved, doctor_id) VALUES (:shift_start, :shift_end, :approved, :doctor_id)";
 

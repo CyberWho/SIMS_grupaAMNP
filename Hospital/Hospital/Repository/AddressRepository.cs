@@ -13,46 +13,27 @@ namespace Hospital.Repository
 {
     public class AddressRepository
     {
-        
+
         private CityRepository cityRepository = new CityRepository();
-
-        OracleConnection connection = null;
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-                Trace.WriteLine(exp.ToString());
-            }
-        }
 
 
         public Address GetAddressByPatientId(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT address_id FROM patient WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int addressId = reader.GetInt32(0);
             var address = GetAddressById(addressId);
-            connection.Close();
-            connection.Dispose();
-
             return address;
         }
 
         public Address GetAddressById(int id)
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM address WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -63,9 +44,6 @@ namespace Hospital.Repository
             address.city_id = int.Parse(reader.GetString(3));
 
             int city_id = reader.GetInt32(3);
-            connection.Close();
-            connection.Dispose();
-
             address.City = cityRepository.GetCityById(city_id);
 
 

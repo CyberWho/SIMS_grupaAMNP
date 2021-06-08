@@ -18,21 +18,7 @@ namespace Hospital.Repository
         PatientRepository patientRepository = new PatientRepository();
         HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
 
-        OracleConnection connection = null;
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-                Trace.WriteLine(exp.ToString());
-            }
-        }
+        
         public System.Collections.ArrayList GetAllAllergyTypes()
         {
             // TODO: implement
@@ -67,10 +53,10 @@ namespace Hospital.Repository
 
         public AllergyType GetAllergyTypeByType(string type)
         {
-            setConnection();
+            
 
             AllergyType at = new AllergyType();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM allergy_type WHERE name LIKE '" + type + "'";
             //////////////////////////////////////////////////////////////////////////
             OracleDataReader reader = command.ExecuteReader();
@@ -79,23 +65,16 @@ namespace Hospital.Repository
             at.Id = int.Parse(reader.GetString(0));
             at.Type = reader.GetString(1);
 
-            connection.Close();
-            connection.Dispose();
-
             return at;
         }
 
         public ObservableCollection<AllergyType> GetAllMissingAllergyTypesByUserId(int userId)
         {
-            setConnection();
-
-            /////////////////////////////////////////////////////////////////////////////////////
-            /// ispraviti ovo gore
-            /////////////////////////////////////////////////////////////////////////////////////
+            
 
             ObservableCollection<AllergyType> allergyTypes = new ObservableCollection<AllergyType>();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM patient WHERE user_id = " + userId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -118,34 +97,34 @@ namespace Hospital.Repository
                 allergyTypes.Add(allergyType);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return allergyTypes;
         }
 
         public AllergyType GetAllergyTypeById(int id)
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM allergy_type WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
             AllergyType allergyType = new AllergyType(reader.GetInt32(0), reader.GetString(1));
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return allergyType;
         }
         public ObservableCollection<AllergyType> GetAllTypesByHealthRecordId(int id)
         {
-            setConnection();
+            
 
             ObservableCollection<AllergyType> allergyTypes = new ObservableCollection<AllergyType>();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
             command.CommandText = "SELECT allergy_type.id, allergy_type.name FROM allergy, allergy_type WHERE allergy.allergy_type_id = allergy_type.id AND health_record_id = " + id;
             OracleDataReader reader = command.ExecuteReader();
@@ -158,9 +137,6 @@ namespace Hospital.Repository
 
                 allergyTypes.Add(allergyType);
             }
-
-            connection.Close();
-            connection.Dispose();
 
             return allergyTypes;
         }

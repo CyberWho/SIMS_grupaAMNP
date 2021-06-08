@@ -17,26 +17,13 @@ namespace Hospital.Repository
     public class DrugRepository
     {
 
-        OracleConnection connection = null;
+        
         const string SelectAllCommandText = "SELECT * FROM drug, inventory_item WHERE drug.INVENTORY_ITEM_ID = inventory_item.ID";
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-                Trace.Write(exp.ToString());
-            }
-        }
+        
         public Drug GetDrugById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM DRUG,INVENTORY_ITEM WHERE DRUG.ID = :id AND DRUG.INVENTORY_ITEM_ID = INVENTORY_ITEM.ID";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -44,32 +31,28 @@ namespace Hospital.Repository
             reader.Read();
             Drug newDrug = ParseFromReader(reader);
 
-            connection.Close();
             return newDrug;
         }
 
         public ObservableCollection<Drug> GetAllDrugs()
         {
             ObservableCollection<Drug> drugs = new ObservableCollection<Drug>();
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = SelectAllCommandText;
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 drugs.Add(ParseFromReader(reader));
-                
             }
-            connection.Close();
-            connection.Dispose();
             return drugs;
         }
 
         public ObservableCollection<Drug> GetAllDrugsByDrugTypeId(int drugTypeId)
         {
-            setConnection();
+            
             ObservableCollection<Drug> drugs = new ObservableCollection<Drug>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = SelectAllCommandText + "and drug_type_id = " + drugTypeId;
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -82,9 +65,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<Drug> GetAllDrugsPending()
         {
-            setConnection();
+            
             ObservableCollection<Drug> pendingDrugs = new ObservableCollection<Drug>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = SelectAllCommandText + "and drug_status = 2";
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -93,13 +76,12 @@ namespace Hospital.Repository
                 pendingDrugs.Add(ParseFromReader(reader));
             }
 
-            connection.Close();
             return pendingDrugs;
         }
         public DrugDTO GetRejectionInfo(DrugDTO newDrugDTO)
         {
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = Globals.globalConnection.CreateCommand();
             query.CommandText = "SELECT * FROM drug_rejection WHERE drug_id = " + newDrugDTO.Id;
             OracleDataReader reader;
             try
@@ -109,7 +91,7 @@ namespace Hospital.Repository
             catch (Exception exp)
             {
                 ThrowException(exp);
-                connection.Close();
+                
                 return null;
             }
             reader.Read();
@@ -120,14 +102,13 @@ namespace Hospital.Repository
 
             newDrugDTO.RejectionInfo = RejectionInfo;
 
-            connection.Close();
             return newDrugDTO;
         }
 
         public bool DeleteDrugById(int id, int invID)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "DELETE FROM drug WHERE id = " + id.ToString();
 
             try
@@ -155,8 +136,8 @@ namespace Hospital.Repository
         public Drug UpdateDrugNoInventoryPart(Drug drug)
         {
             int needsPerscription = drug.NeedsPerscription ? 1 : 0;
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText =
                 "UPDATE drug " +
                 "SET grams = " + drug.Grams.ToString() + ", " +
@@ -171,7 +152,7 @@ namespace Hospital.Repository
             catch (Exception exp)
             {
                 Trace.WriteLine(exp.ToString());
-                connection.Close();
+                
                 return null;
             }
 
@@ -180,8 +161,8 @@ namespace Hospital.Repository
         public Drug UpdateDrug(Drug drug)
         {
             int needsPerscription = drug.NeedsPerscription ? 1 : 0;
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText =
                 "UPDATE drug " +
                 "SET grams = " + drug.Grams.ToString() + ", " +
@@ -197,7 +178,7 @@ namespace Hospital.Repository
             catch (Exception exp)
             {
                 Trace.WriteLine(exp.ToString());
-                connection.Close();
+                
                 return null;
             }
 
@@ -212,21 +193,21 @@ namespace Hospital.Repository
             try
             {
                 cmd.ExecuteNonQuery();
-                connection.Close();
+                
                 return drug;
             }
             catch (Exception exp)
             {
                 Trace.WriteLine(exp.ToString());
-                connection.Close();
+                
                 return null;
             }
         }
 
         public Drug NewDrug(Drug drug)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
             InventoryItem inventoryItem = inventoryItemRepository.NewInventoryItem(new InventoryItem(-1, drug.Name, drug.Price, drug.Unit, drug.Type));
 
@@ -252,8 +233,8 @@ namespace Hospital.Repository
 
         public int GetLastId()
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT MAX(id) FROM drug";
 
             OracleDataReader reader = cmd.ExecuteReader();
@@ -289,20 +270,20 @@ namespace Hospital.Repository
 
         public void RejectDrug(int id_drug, int id_doctor, String description)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "insert into drug_rejection (drug_id, doctor_id, description) values (" + id_drug + "," +
                               id_doctor + ",'" + description + "')";
             cmd.ExecuteNonQuery();
-            connection.Close();
-            connection.Dispose();
+            
+            
         }
 
         public ObservableCollection<int> getDrugAllergy(int health_record_id)
         {
-            setConnection();
+            
             ObservableCollection<int> ids = new ObservableCollection<int>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText =
                 "SELECT drug.ID FROM allergy, allergy_type, drug_allergies, drug where allergy.allergy_type_id = allergy_type.id and " + 
                 "drug_allergies.ALLERGY_TYPE_ID = allergy_type.ID  and drug.DRUG_TYPE_ID = drug_allergies.ALLERGY_TYPE_ID and health_record_id = " +
@@ -313,8 +294,8 @@ namespace Hospital.Repository
                 int i = reader.GetInt32(0);
                 ids.Add(i);
             }
-            connection.Close();
-            connection.Dispose();
+            
+            
             return ids;
         }
 

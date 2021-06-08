@@ -15,7 +15,7 @@ namespace Hospital.Repository
 {
    public class ItemInRoomRepository
    {
-        OracleConnection connection = null;
+        
         string SelectAllCommandText = "SELECT * FROM item_in_room LEFT OUTER JOIN INVENTORY_ITEM ON inventory_item.ID = ITEM_IN_ROOM.inventory_item_ID LEFT OUTER JOIN room ON room_id = room.id LEFT OUTER JOIN room_type ON room.RTYPE_ID = room_type.ID";
         bool GotAllItemsInRoom = false;
         ObservableCollection<ItemInRoom> AllItemsInRoom = new ObservableCollection<ItemInRoom>();
@@ -23,10 +23,10 @@ namespace Hospital.Repository
         private void setConnection()
         {
             string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
             }
             catch (Exception exp)
             {
@@ -35,8 +35,8 @@ namespace Hospital.Repository
         }
         public ItemInRoom GetItemInRoomById(int id)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT * FROM item_in_room WHERE id = " + id.ToString();
             OracleDataReader reader;
             try
@@ -52,8 +52,8 @@ namespace Hospital.Repository
             ItemInRoom newItemInRoom = new ItemInRoom(reader.GetInt32(0), uint.Parse(reader.GetInt32(2).ToString()), null, null);
             newItemInRoom.inventoryItem_id = reader.GetInt32(1);
             newItemInRoom.room_id = reader.GetInt32(3);
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             newItemInRoom.room = roomRepository.GetRoomById(newItemInRoom.room_id);
             newItemInRoom.inventoryItem = inventoryItemRepository.GetInventoryItemById(newItemInRoom.inventoryItem_id);
@@ -63,9 +63,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<ItemInRoom> GetAllItemsInRoomByRoomId(int id)
         {
-            setConnection();
+            
             ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = SelectAllCommandText + " WHERE room_ID = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -76,8 +76,8 @@ namespace Hospital.Repository
                 itemsInRoom.Add(newItemInRoom);
 
             }
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             foreach (ItemInRoom itemInRoom in itemsInRoom)
             {
@@ -93,8 +93,8 @@ namespace Hospital.Repository
         {
             if (!GotAllItemsInRoom)
             {
-                setConnection();
-                OracleCommand cmd = connection.CreateCommand();
+                
+                OracleCommand cmd = Globals.globalConnection.CreateCommand();
                 cmd.CommandText = SelectAllCommandText;
                 OracleDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -102,7 +102,7 @@ namespace Hospital.Repository
                     AllItemsInRoom.Add(ParseFromReader(reader));
                 }
 
-                connection.Close();
+                
                 GotAllItemsInRoom = true;
             }
             return AllItemsInRoom;
@@ -115,9 +115,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<ItemInRoom> GetAllItemsInRoomByItemType(ItemType type)
         {
-            setConnection();
+            
             ObservableCollection<ItemInRoom> itemsInRoom = new ObservableCollection<ItemInRoom>();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = SelectAllCommandText + " WHERE item_type = " + ((int)type).ToString();
             OracleDataReader reader;
             try
@@ -135,29 +135,29 @@ namespace Hospital.Repository
                 itemsInRoom.Add(ParseFromReader(reader));
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
             return itemsInRoom;
         }
 
         public bool DeleteItemInRoomById(int id)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "DELETE FROM item_in_room WHERE id = " + id.ToString();
 
             try
             {
                 cmd.ExecuteNonQuery();
-                connection.Close();
-                connection.Dispose();
+                
+                
                 return true;
             }
             catch (Exception exp)
             {
                 Trace.WriteLine(exp.ToString());
-                connection.Close();
-                connection.Dispose();
+                
+                
                 return false;
             }
         }
@@ -170,8 +170,8 @@ namespace Hospital.Repository
 
         public ItemInRoom UpdateItemInRoom(ItemInRoom itemInRoom)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText =
                 "UPDATE item_in_room "     +
                 "SET inventory_item_id = " + itemInRoom.inventoryItem.Id.ToString() + ", " +
@@ -183,14 +183,14 @@ namespace Hospital.Repository
             try
             {
                 cmd.ExecuteNonQuery();
-                connection.Close();
-                connection.Dispose();
+                
+                
                 return itemInRoom;  
             }
             catch (Exception exp)
             {
-                connection.Close();
-                connection.Dispose();
+                
+                
                 Trace.WriteLine("UPDATE ITEM IN ROOM ERROR: " + exp.ToString());
 
                 return null;
@@ -200,8 +200,8 @@ namespace Hospital.Repository
 
         public ItemInRoom NewItemInRoom(ItemInRoom itemInRoom)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "INSERT INTO item_in_room (inventory_item_id, quantity, room_id) VALUES (" +
                 itemInRoom.inventoryItem.Id.ToString() + ", " +
                 itemInRoom.Quantity.ToString()         + ", " +
@@ -210,16 +210,16 @@ namespace Hospital.Repository
             {
                 cmd.ExecuteNonQuery();
                 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return itemInRoom;
             }
             catch (Exception exp)
             {
                 Trace.WriteLine("NewItemInRoom ERROR: \n" + exp.ToString());
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return null;
             }
@@ -227,9 +227,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<ItemInRoom> SearchByName(string name)
         {
-            setConnection();
+            
             ObservableCollection<ItemInRoom> searchResults = new ObservableCollection<ItemInRoom>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = SelectAllCommandText + " WHERE name like '%" + name + "%'";
             OracleDataReader reader;
 
@@ -240,8 +240,8 @@ namespace Hospital.Repository
             catch (Exception exp)
             {
                 Trace.WriteLine("SEARCH BY NAME ERROR: " + exp.ToString());
-                connection.Close();
-                connection.Dispose();
+                
+                
                 return null;
             }
 

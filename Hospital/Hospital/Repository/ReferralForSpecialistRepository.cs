@@ -13,14 +13,14 @@ namespace Hospital.Repository
 {
     public class ReferralForSpecialistRepository
     {
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -43,9 +43,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
         {
-            setConnection();
+            
             ObservableCollection<ReferralForSpecialist> referralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM REFERRAL_FOR_SPECIALIST WHERE HEALTH_RECORD_ID = :health_record_id";
             command.Parameters.Add("health_record_id", OracleDbType.Int32).Value = healthRecordId.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -76,12 +76,12 @@ namespace Hospital.Repository
 
         public Boolean DeleteReferralForSpecialistById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "DELETE FROM REFERRAL_FOR_SPECIALIST WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             command.ExecuteNonQuery();
-            connection.Close();
+            
             return true;
         }
 
@@ -105,15 +105,15 @@ namespace Hospital.Repository
 
         public Hospital.Model.ReferralForSpecialist NewReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "insert into  REFERRAL_FOR_SPECIALIST (description, doctor_id, health_record_id, appointment_id) values " +
                               "('" + referralForSpecialist.Description + "'," + referralForSpecialist.doctor_id + "," + referralForSpecialist.doctor_id
                               + ", " + referralForSpecialist.appointment_id + ")";
             command.ExecuteReader();
-            connection.Close();
-            connection.Dispose();
+            
+            
             return referralForSpecialist;
 
         }

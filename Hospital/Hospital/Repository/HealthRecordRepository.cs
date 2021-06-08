@@ -13,21 +13,7 @@ namespace Hospital.Repository
     public class HealthRecordRepository
     {
 
-        OracleConnection connection = null;
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-
-            }
-        }
+        
 
         public HealthRecord GetHealthRecordById(int id)
         {
@@ -42,9 +28,9 @@ namespace Hospital.Repository
             Patient p = pr.GetPatientById(id);
             User u = ur.GetUserById(p.user_id);
 
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM health_record WHERE patient_id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -102,17 +88,17 @@ namespace Hospital.Repository
 
             int city_id = int.Parse(reader.GetString(4));
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
 
-           // healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
+                healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
             healthRecord.patient_id = id;
             healthRecord.Patient = patient;
             healthRecord.PlaceOfBirth = new CityRepository().GetCityById(city_id);
             healthRecord.Gender = gender;
             healthRecord.MaritalStatus = maritalStatus;
-            connection.Close();
+            
             
 
 
@@ -145,8 +131,8 @@ namespace Hospital.Repository
 
         public HealthRecord NewHealthRecord(HealthRecord healthRecord, int guest = 0)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
             int last_id = this.GetLastId() + 1;
             healthRecord.Id = last_id;
@@ -160,8 +146,8 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
-                    connection.Close();
-                    connection.Dispose();
+                    
+                    
 
                     return healthRecord;
                 }
@@ -171,8 +157,8 @@ namespace Hospital.Repository
 
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }

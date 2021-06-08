@@ -15,39 +15,24 @@ namespace Hospital.Repository
     /// GetAllergiesByTypeId vraca konkretno sve id-eve kartona koji su alergicni na to i to cije je id TypeId
     public class AllergyRepository
     {
-        OracleConnection connection = null;
         UserRepository userRepository = new UserRepository();
         PatientRepository patientRepository = new PatientRepository();
         HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
 
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-                Trace.WriteLine(exp.ToString());
-            }
-        }
         public int GetLastId()
         {
-            setConnection();
+            
 
             int id = 0;
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT MAX(ID) FROM allergy";
             OracleDataReader reader = command.ExecuteReader();
             reader = command.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
             
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return id;
         }
@@ -55,11 +40,11 @@ namespace Hospital.Repository
 
         public ObservableCollection<Allergy> GetAllAllergiesByUserId(int userId)
         {
-            setConnection();
+            
 
             ObservableCollection<Allergy> allergies = new ObservableCollection<Allergy>();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM patient WHERE user_id = " + userId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -82,8 +67,8 @@ namespace Hospital.Repository
                 allergies.Add(allergy);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return allergies;
         }
@@ -96,9 +81,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
         {
-            setConnection();
+            
             ObservableCollection<Allergy> allergies = new ObservableCollection<Allergy>();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM ALLERGY WHERE HEALTH_RECORD_ID = :health_record_id";
             command.Parameters.Add("health_record_id", OracleDbType.Int32).Value = healthRecordId.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -107,7 +92,7 @@ namespace Hospital.Repository
                 var allergy = ParseAllergy(reader);
                 allergies.Add(allergy);
             }
-            connection.Close();
+            
             return allergies;
         }
 
@@ -120,12 +105,12 @@ namespace Hospital.Repository
 
         public Boolean DeleteAllergyByUserIdAndAllergyTypeId(int userId, int atId)
         {
-            setConnection();
+            
 
             Patient patient = this.patientRepository.GetPatientByUserId(userId);
             HealthRecord healthRecord = this.healthRecordRepository.GetHealthRecordByPatientId(patient.Id);
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
             command.CommandText = "SELECT allergy.id FROM allergy, allergy_type WHERE allergy.allergy_type_id = " + atId + " AND health_record_id = " + healthRecord.Id;
             OracleDataReader reader = command.ExecuteReader();
@@ -133,29 +118,21 @@ namespace Hospital.Repository
 
             int allergyId = int.Parse(reader.GetString(0));
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return this.DeleteAllergyById(allergyId);
         }
 
         public Boolean DeleteAllergyById(int id)
         {
-            
-
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "DELETE FROM allergy WHERE id = " + id;
 
             if (cmd.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
                 return true;
             }
-
-            connection.Close();
-            connection.Dispose();
-
             return false;
         }
 
@@ -173,9 +150,9 @@ namespace Hospital.Repository
 
         public Allergy NewAllergy(Allergy allergy)
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "INSERT INTO allergy (allergy_type_id, health_record_id) VALUES (:at_id, :hr_id)";
 
             command.Parameters.Add("at_id", OracleDbType.Int32).Value = allergy.allergy_type_id.ToString();
@@ -183,14 +160,8 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
                 return allergy;
             }
-            
-            connection.Close();
-            connection.Dispose();
-
             return null;
         }
 

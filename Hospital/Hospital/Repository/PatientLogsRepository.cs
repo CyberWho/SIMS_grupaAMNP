@@ -8,14 +8,14 @@ namespace Hospital.Repository
 {
     class PatientLogsRepository
     {
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -37,8 +37,8 @@ namespace Hospital.Repository
 
         public PatientLogs GetPatientLogsByPatientId(int patientId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM PATIENT_LOGS WHERE PATIENT_ID = :patient_id";
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -56,8 +56,8 @@ namespace Hospital.Repository
 
         public Boolean CheckIfPatientIsBlockedByPatientId(int patientId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM PATIENT_LOGS WHERE PATIENT_ID = :patient_id";
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -68,7 +68,7 @@ namespace Hospital.Repository
             {
                 return true;
             }
-            connection.Close();
+            
             return false;
             
         }
@@ -83,13 +83,13 @@ namespace Hospital.Repository
             PatientLogs patientLogs = GetPatientLogsByPatientId(patientId);
             int nextLogCounter = patientLogs.LogCounter;
             nextLogCounter += 1;
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = :log_counter WHERE PATIENT_ID = :patient_id";
             command.Parameters.Add("log_counter", OracleDbType.Int32).Value = nextLogCounter.ToString();
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             command.ExecuteNonQuery();
-            connection.Close();
+            
             return true;
         }
 
@@ -107,23 +107,23 @@ namespace Hospital.Repository
         }
         public Boolean UpdateLogCounterByPatientId(int patientId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE PATIENT_LOGS SET LOG_COUNTER = 0 WHERE PATIENT_ID = :patient_id";
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             int executer = command.ExecuteNonQuery();
-            connection.Close();
+            
             return true;
         }
         public Boolean UpdateLastCounterResetByPatientId(int patientId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE PATIENT_LOGS SET LAST_COUNTER_RESET = :last_counter_reset WHERE PATIENT_ID = :patient_id";
             command.Parameters.Add("last_counter_reset", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             int executer = command.ExecuteNonQuery();
-            connection.Close();
+            
             return true;
         }
         public Boolean DeletePatientLogsByPatientId(int patientId)
@@ -140,13 +140,13 @@ namespace Hospital.Repository
 
         public Boolean NewPatientLogs(int patientId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "INSERT INTO PATIENT_LOGS (PATIENT_ID,LOG_COUNTER,LAST_COUNTER_RESET) VALUES (:patient_id,0,:last_counter_reset)";
             command.Parameters.Add("patient_id", OracleDbType.Int32).Value = patientId.ToString();
             command.Parameters.Add("last_counter_reset", OracleDbType.Date).Value = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond);
             command.ExecuteNonQuery();
-            connection.Close();
+            
             return true;
         }
 

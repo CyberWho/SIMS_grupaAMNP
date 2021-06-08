@@ -15,14 +15,14 @@ namespace Hospital.Repository
     public class TimeSlotRepository
     {
         private DoctorRepository doctorRepository = new DoctorRepository();
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -32,8 +32,8 @@ namespace Hospital.Repository
         }
         public TimeSlot GetTimeSlotById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM TIME_SLOT WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -52,8 +52,8 @@ namespace Hospital.Repository
             timeSlot.StartTime = reader.GetDateTime(2);
             timeSlot.workHours_id = int.Parse(reader.GetString(3));
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return timeSlot;
         }
@@ -66,10 +66,10 @@ namespace Hospital.Repository
 
         public ObservableCollection<TimeSlot> GetTimeSlotsByDatesAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
         {
-            setConnection();
+            
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            OracleCommand command = connection.CreateCommand();
-            command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
+            command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
 
             command.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
@@ -84,8 +84,8 @@ namespace Hospital.Repository
 
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return timeSlots;
         }
@@ -111,9 +111,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDates(DateTime startTime, DateTime endTime)
         {
-            setConnection();
+            
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND TIME_SLOT.START_TIME BETWEEN :start_time AND :end_time AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.SPEC_ID=1 AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
             command.Parameters.Add("start_time", OracleDbType.Date).Value = startTime;
             command.Parameters.Add("end_time", OracleDbType.Date).Value = endTime;
@@ -124,8 +124,8 @@ namespace Hospital.Repository
                 timeSlots.Add(timeSlot);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return timeSlots;
 
@@ -134,8 +134,8 @@ namespace Hospital.Repository
 
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText =
                 "SELECT * FROM time_slot, work_hours, doctor WHERE time_slot.free = 1 AND time_slot.work_hours_id = work_hours.id AND work_hours.doctor_id = doctor.id AND doctor.spec_id = :specialization_id";
             command.Parameters.Add("specialization_id", OracleDbType.Int32).Value = specializationId;
@@ -163,16 +163,16 @@ namespace Hospital.Repository
             ObservableCollection<TimeSlot> sortedTimeSlots =
                 new ObservableCollection<TimeSlot>(from i in timeSlots orderby i.StartTime select i);
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return sortedTimeSlots;
         }
 
         public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(int specializationId, DateTime now)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText =
                 "SELECT * FROM time_slot, work_hours, doctor WHERE time_slot.free = 1 AND time_slot.work_hours_id = work_hours.id AND work_hours.doctor_id = doctor.id AND doctor.spec_id = :specialization_id AND time_slot.start_time >= :start_time";
             command.Parameters.Add("specialization_id", OracleDbType.Int32).Value = specializationId;
@@ -201,8 +201,8 @@ namespace Hospital.Repository
             ObservableCollection<TimeSlot> sortedTimeSlots =
                 new ObservableCollection<TimeSlot>(from i in timeSlots orderby i.StartTime select i);
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return sortedTimeSlots;
         }
@@ -210,10 +210,10 @@ namespace Hospital.Repository
 
         public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
         {
-            setConnection();
+            
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            OracleCommand command = connection.CreateCommand();
-            command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
+            command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM TIME_SLOT,WORK_HOURS,DOCTOR,EMPLOYEE,USERS WHERE TIME_SLOT.FREE = 1 AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = DOCTOR.ID AND DOCTOR.EMPLOYEE_ID = EMPLOYEE.ID AND EMPLOYEE.USER_ID = USERS.ID";
             command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
 
@@ -225,19 +225,19 @@ namespace Hospital.Repository
                 timeSlots.Add(timeSlot);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return timeSlots;
         }
 
         public ObservableCollection<TimeSlot> GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(DateTime date, int doctorId)
         {
-            setConnection();
+            
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             DateTime lastDate = date.AddHours(48);
-            command = connection.CreateCommand();
+            command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME BETWEEN :start_date AND :last_date";
             command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
             command.Parameters.Add("start_date", OracleDbType.Date).Value = date;
@@ -251,17 +251,17 @@ namespace Hospital.Repository
                 timeSlots.Add(timeSlot);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return timeSlots;
         }
 
         public TimeSlot GetAppointmentTimeSlotByDateAndDoctorId(DateTime date, int doctorId)
         {
-            setConnection();
+            
             TimeSlot timeSlot = new TimeSlot();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM WORK_HOURS,TIME_SLOT WHERE TIME_SLOT.WORK_HOURS_ID = WORK_HOURS.ID AND WORK_HOURS.DOCTOR_ID = :doctor_id AND TIME_SLOT.START_TIME = :start_time";
             command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctorId.ToString();
             command.Parameters.Add("start_time", OracleDbType.Date).Value = date;
@@ -279,8 +279,8 @@ namespace Hospital.Repository
             }
             timeSlot.StartTime = reader.GetDateTime(7);
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return timeSlot;
         }
@@ -295,8 +295,8 @@ namespace Hospital.Repository
         // not necessary 
         public Boolean DeleteSlotByWorkhoursId(int workHoursId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             workHoursId = 56;
             command.CommandText = "DELETE FROM time_slot WHERE work_hours_id = " + workHoursId;
 
@@ -336,8 +336,8 @@ namespace Hospital.Repository
 
         public TimeSlot AddTimeSlot(TimeSlot timeSlot)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "INSERT INTO time_slot (free, start_time, work_hours_id) VALUES (:free, :start_time, :work_hours_id)";
 
             Boolean free = timeSlot.Free;
@@ -365,43 +365,43 @@ namespace Hospital.Repository
 
         public Boolean TakeTimeSlot(TimeSlot timeSlot)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE TIME_SLOT SET FREE = 0 WHERE ID = " + timeSlot.Id;
 
             if (command.ExecuteNonQuery() > 0)
             {
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return true;
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return false;
         }
 
         public Boolean FreeTimeSlot(TimeSlot timeSlot)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
-            command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
+            command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE TIME_SLOT SET FREE = 1 WHERE ID = " + timeSlot.Id;
 
             if (command.ExecuteNonQuery() > 0)
             {
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return true;
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return false;
         }

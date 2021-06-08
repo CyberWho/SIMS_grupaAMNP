@@ -29,6 +29,7 @@ namespace Hospital.xaml_windows.Doctor
         {
             InitializeComponent();
             this._healthRecord = hr;
+            MessageBox.Show(hr.Id.ToString());
             this._appointments = aps;
             this._patient = pt;
 

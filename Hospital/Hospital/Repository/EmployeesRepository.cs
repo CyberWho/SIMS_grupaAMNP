@@ -13,16 +13,14 @@ namespace Hospital.Repository
 {
     public class EmployeesRepository
     {
-        OracleConnection connection = null;
-
 
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
             }
             catch (Exception exp)
             {
@@ -31,25 +29,23 @@ namespace Hospital.Repository
         }
         public Employee GetEmployeeByUserId(int id)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.id LEFT OUTER JOIN role on role.id = employee.role_id WHERE users.id = " + id.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
 
             var employee = ParseEmployee(reader);
-            connection.Close();
-            connection.Dispose();
 
             return employee;
         }
 
         public int GetUserIdByEmployeeId(int employee_id)
         {
-            setConnection();
+            
 
             int user_id;
 
-            OracleCommand commannd = connection.CreateCommand();
+            OracleCommand commannd = Globals.globalConnection.CreateCommand();
             commannd.CommandText = "SELECT user_id FROM employee WHERE id = " + employee_id;
             OracleDataReader reader = commannd.ExecuteReader();
             reader.Read();
@@ -61,16 +57,14 @@ namespace Hospital.Repository
 
         public Employee GetEmployeeById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM EMPLOYEE WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
 
             OracleDataReader reader = command.ExecuteReader();
             var employee = ParseEmployee(reader);
-            connection.Close();
-            connection.Dispose();
-            
+
             return employee;
         }
 
@@ -89,11 +83,11 @@ namespace Hospital.Repository
 
             }
 
-            User user = new UserRepository().GetUserById(id); 
-            
+            User user = new UserRepository().GetUserById(id);
+
             Role role = new RoleRepository().GetRoleById(reader.GetInt32(4));
-            
-            Employee employee = new Employee(reader.GetInt32(0),reader.GetInt32(1),reader.GetInt32(2),user,role);
+
+            Employee employee = new Employee(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), user, role);
             return employee;
         }
 
@@ -111,8 +105,8 @@ namespace Hospital.Repository
 
         public int getEmployeeIdByDoctorId(int doctor_id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT employee_id FROM doctor WHERE id = " + doctor_id;
 
             OracleDataReader reader = command.ExecuteReader();
@@ -121,45 +115,45 @@ namespace Hospital.Repository
             int id = int.Parse(reader.GetString(0));
             return id;
         }
-        
+
 
         public Boolean DeleteEmployeeById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "DELETE FROM employee WHERE id = " + id;
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
+
+
 
                 return true;
             }
-            connection.Close();
-            connection.Dispose();
+
+
 
             return false;
         }
 
         public Employee UpdateEmployee(Employee employee)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE employee SET salary = :salary WHERE id = :id";
             command.Parameters.Add("salary", OracleDbType.Int32).Value = employee.Salary;
             command.Parameters.Add("id", OracleDbType.Int32).Value = employee.Id;
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
-                
+
+
+
                 return employee;
             }
 
-            connection.Close();
-            connection.Dispose();
+
+
 
             return null;
         }
@@ -167,9 +161,9 @@ namespace Hospital.Repository
         #region marko_kt5
         public Employee NewEmployee(Employee employee)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
             
+            OracleCommand command = Globals.globalConnection.CreateCommand();
+
             command.CommandText = "INSERT INTO employee (id, salary, years_of_service, user_id, role_id) VALUES (:id, :salary, :years_of_service, :user_id, :role_id)";
 
             int id = GetLastId() + 1;
@@ -180,35 +174,35 @@ namespace Hospital.Repository
             command.Parameters.Add("years_of_service", OracleDbType.Int32).Value = employee.YearsOfService;
             command.Parameters.Add("user_id", OracleDbType.Int32).Value = employee.User.Id;
             command.Parameters.Add("role_id", OracleDbType.Int32).Value = employee.role.Id;
-            
+
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
+
+
 
                 return employee;
             }
 
-            connection.Close();
-            connection.Dispose();
+
+
 
             return null;
         }
         #endregion
 
         public int GetLastId()
-        {   
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+        {
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
             command.CommandText = "SELECT MAX(id) FROM employee";
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int id = int.Parse(reader.GetString(0));
 
-            connection.Close();
-            connection.Dispose();
+
+
 
             return id;
         }
