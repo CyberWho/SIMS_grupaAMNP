@@ -62,7 +62,7 @@ namespace Hospital.Repository
             personalReminder.Name = reader.GetString(4);
             personalReminder.Description = reader.GetString(5);
             personalReminder.AlarmTime = reader.GetDateTime(6);
-            personalReminder.Patient = new PatientRepository().GetPatientById(reader.GetInt32(7));
+            personalReminder.Patient = new PatientRepository().GetById(reader.GetInt32(7));
             return personalReminder;
         }
 

@@ -14,6 +14,7 @@ using Hospital.xaml_windows.Patient;
 using Hospital.xaml_windows.Secretary;
 using System.Windows;
 using System.Windows.Annotations;
+using Hospital.Repository;
 using Hospital.Service;
 using Hospital.View.Doctor;
 using Hospital.View.Patient;
@@ -100,7 +101,8 @@ namespace Hospital.Controller
                     s.Show();
                     break;
                 case "Manager":
-                    s = new ManagerUI(id);
+                    //s = new View.Manager.ManagerUIView();
+                    s = new Wizard1();
                     s.Show();
                     break;
                 case "Secretary":

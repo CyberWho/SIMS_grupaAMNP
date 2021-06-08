@@ -7,11 +7,12 @@
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 
 namespace Hospital.Repository
 {
-    public class PerscriptionRepository
+    public class PerscriptionRepository : IPerscriptionRepo<Perscription>
     {
 
         
@@ -30,7 +31,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Model.Perscription GetPerscriptionById(int id)
+        public Model.Perscription GetById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -46,7 +47,7 @@ namespace Hospital.Repository
             return perscription;
         }
 
-        public ObservableCollection<Model.Perscription> GetAllPerscriptionsByAnamnesisId(int anamnesisId)
+        public ObservableCollection<Model.Perscription> GetAllByAnamnesisId(int anamnesisId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -67,13 +68,13 @@ namespace Hospital.Repository
             return perscriptions;
         }
 
-        public System.Collections.ArrayList GetAllActivePerscriptions()
+        public ObservableCollection<Perscription> GetAllActive()
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<Perscription> GetAllActivePerscriptionsByAnamnesisId(int anamnesisId)
+        public ObservableCollection<Perscription> GetAllActiveByAnamnesisId(int anamnesisId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -104,25 +105,25 @@ namespace Hospital.Repository
             return perscription;
         }
 
-        public Boolean DeletePerscriptionById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DeleteAllPerscriptionsByAnamnesisId(int anamnesisId)
+        public Boolean DeleteAllByAnamnesisId(int anamnesisId)
         {
             // TODO: implement
             return false;
         }
 
-        public Model.Perscription UpdatePerscription(Model.Perscription perscription)
+        public Model.Perscription Update(Model.Perscription perscription)
         {
             // TODO: implement
             return null;
         }
 
-        public Model.Perscription NewPerscription(Model.Perscription perscription)
+        public Model.Perscription Add(Model.Perscription perscription)
         {
             
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
@@ -141,5 +142,9 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public ObservableCollection<Perscription> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -5,13 +5,15 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Model;
 using System.Diagnostics;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class RoleRepository
+    public class RoleRepository : IRoleRepo<Role>
    {
        
 
@@ -29,7 +31,7 @@ namespace Hospital.Repository
                Trace.WriteLine(exp.ToString());
            }
        }
-        public Model.Role GetRoleById(int id)
+        public Model.Role GetById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -41,32 +43,27 @@ namespace Hospital.Repository
             
             return role;
         }
+        
       
-      public Model.Role GetRoleByRole(String role)
+      public ObservableCollection<Role> GetAll()
       {
          // TODO: implement
          return null;
       }
       
-      public System.Collections.ArrayList GetAllRoles()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean DeleteRoleById(int id)
+      public Boolean DeleteById(int id)
       {
          // TODO: implement
          return false;
       }
       
-      public Model.Role UpdateRole(Model.Role role)
+      public Model.Role Update(Role role)
       {
          // TODO: implement
          return null;
       }
       
-      public Model.Role NewRole(Model.Role role)
+      public Model.Role Add(Role role)
       {
          // TODO: implement
          return null;

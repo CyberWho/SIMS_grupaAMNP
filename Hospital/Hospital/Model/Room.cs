@@ -13,15 +13,15 @@ namespace Hospital.Model
     {
 
 
-        public int Id { get; set; }
-        public int Floor { get; set; }
-        public double Area { get; set; }
+        public int? Id { get; set; }
+        public int? Floor { get; set; }
+        public double? Area { get; set; }
         public string Description { get; set; }
 
         public Renovation Renovation { get; set; }
         public ArrayList appointment;
 
-        public Room(int id, int floor, double area, string description, RoomType newRoomType)
+        public Room(int? id, int? floor, double? area, string description, RoomType newRoomType)
         {
             Id = id;
             Floor = floor;
@@ -46,7 +46,7 @@ namespace Hospital.Model
                 AddAppointment(oAppointment);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddAppointment(Appointment newAppointment)
         {
             if (newAppointment == null)
@@ -132,7 +132,7 @@ namespace Hospital.Model
                 AddItemInRoom(oItemInRoom);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddItemInRoom(ItemInRoom newItemInRoom)
         {
             if (newItemInRoom == null)
@@ -191,7 +191,7 @@ namespace Hospital.Model
                 AddDoctor(oDoctor);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddDoctor(Doctor newDoctor)
         {
             if (newDoctor == null)

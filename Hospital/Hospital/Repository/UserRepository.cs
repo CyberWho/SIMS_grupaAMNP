@@ -8,10 +8,11 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepo<User>
     {
         PatientRepository patientRepository = new PatientRepository();
         HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
@@ -29,7 +30,7 @@ namespace Hospital.Repository
 
             Patient patient = new Patient();
             patient.user_id = user.Id;
-            patient = this.patientRepository.NewPatient(patient, 1);
+            patient = this.patientRepository.New(patient, 1);
 
             HealthRecord healthRecord = new HealthRecord();
             healthRecord.patient_id = patient.Id;
@@ -38,7 +39,7 @@ namespace Hospital.Repository
         }
 
 
-        public User GetUserById(int id)
+        public User GetById(int id)
         {
 
             User user = new User();
@@ -65,13 +66,13 @@ namespace Hospital.Repository
             return user;
         }
 
-        public User GetUserByUsername(String username)
+        public User GetByUsername(String username)
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<User> GetAllUsers()
+        public ObservableCollection<User> GetAll()
         {
             ObservableCollection<User> users = new ObservableCollection<User>();
 
@@ -112,7 +113,7 @@ namespace Hospital.Repository
             return users;
         }
 
-        public Boolean DeleteUserById(int id)
+        public Boolean DeleteById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -126,14 +127,14 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Boolean DeleteUserByUsername(String username)
+        public Boolean DeleteByUsername(String username)
         {
             // TODO: implement
             return false;
         }
 
         #region marko_kt5
-        public User UpdateUser(User user)
+        public User Update(User user)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -210,7 +211,7 @@ namespace Hospital.Repository
             return last_id;
         }
 
-        public void makeDoctorUser()
+        public void MakeDoctorUser()
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -253,8 +254,13 @@ namespace Hospital.Repository
                         role: role
                     );
 
-            this.employeesRepository.NewEmployee(employee);
+            this.employeesRepository.Add(employee);
 
+        }
+
+        public User Add(User user)
+        {
+            throw new NotImplementedException();
         }
 
         private EmployeesRepository employeesRepository = new EmployeesRepository();

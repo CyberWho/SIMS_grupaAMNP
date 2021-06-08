@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 using Hospital.Repository;
 
@@ -14,6 +15,12 @@ namespace Hospital.Service
 
     public class ReferralForClinicalTreatmentService
     {
+        private IReferralForClinicalTreatmentRepo<ReferralForClinicalTreatment> referralForClinicalTreatmentRepository;
+
+        public ReferralForClinicalTreatmentService()
+        {
+            referralForClinicalTreatmentRepository = new ReferralForClinicalTreatmentRepository();
+        }
         public System.Collections.ArrayList GetAllReferralsForClinicalTreatment()
         {
             // TODO: implement
@@ -33,7 +40,7 @@ namespace Hospital.Service
         }
         public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(int healthRecordId)
         {
-            return referralForClinicalTreatmentRepository.GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(healthRecordId);
+            return referralForClinicalTreatmentRepository.GetAllActiveByHealthRecordId(healthRecordId);
         }
 
 
@@ -116,11 +123,9 @@ namespace Hospital.Service
 
         public ClinicalTreatment createClinicalTreatment(ClinicalTreatment clinicalTreatment)
         {
-            return referralForClinicalTreatmentRepository.createClinicalTreatment(clinicalTreatment);
+            return referralForClinicalTreatmentRepository.Create(clinicalTreatment);
         }
 
-
-        public Repository.ReferralForClinicalTreatmentRepository referralForClinicalTreatmentRepository = new ReferralForClinicalTreatmentRepository();
 
     }
 }

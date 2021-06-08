@@ -5,17 +5,24 @@
  ***********************************************************************/
 
 using System;
+using Hospital.IRepository;
+using Hospital.Model;
 using Hospital.Repository;
 
 namespace Hospital.Service
 {
    public class WorkHoursService
    {
-       
 
-      public Hospital.Model.WorkHours AddWorkHours(Hospital.Model.WorkHours workHours)
+       private IWorkHoursRepo<WorkHours> workHoursRepository;
+
+       public WorkHoursService()
+       {
+           workHoursRepository = new WorkHoursRepository();
+       }
+        public Hospital.Model.WorkHours AddWorkHours(Hospital.Model.WorkHours workHours)
       {
-          this.workHoursRepository.NewWorkHours(workHours);
+          this.workHoursRepository.Add(workHours);
          return null;
       }
       
@@ -73,7 +80,7 @@ namespace Hospital.Service
          return null;
       }
    
-      public Hospital.Repository.WorkHoursRepository workHoursRepository = new WorkHoursRepository();
+      
    
    }
 }

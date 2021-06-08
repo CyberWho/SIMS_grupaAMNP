@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 
 
 namespace Hospital.Repository
 {
-    class ReviewRepository
+    class ReviewRepository : IReviewRepo<Review>
     {
         
         private void setConnection()
@@ -23,13 +24,13 @@ namespace Hospital.Repository
 
             }
         }
-        public ObservableCollection<Review> GetAllReviews()
+        public ObservableCollection<Review> GetAll()
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<Review> GetAllReviewsByDoctorId(int doctorId)
+        public ObservableCollection<Review> GetAllByDoctorId(int doctorId)
         {
             // TODO: implement
             return null;
@@ -41,7 +42,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public Review NewReview(Review review)
+        public Review Add(Review review)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -56,11 +57,25 @@ namespace Hospital.Repository
             return review;
         }
 
-        public Boolean DeleteReviewById(int reviewId)
+        public Boolean DeleteById(int reviewId)
         {
             // TODO: implement
             return false;
         }
 
+        public Review GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Review Update(Review t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetLastId()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -113,7 +113,7 @@ namespace Hospital.xaml_windows.Doctor
             foreach (Room room in rooms)
                 foreach (ItemInRoom itemInRoom in room.itemInRoom)
                     if (itemInRoom.inventoryItem_id == krevet_id &&
-                        itemInRoom.Quantity > refferalForClinicalTreatmentController.GetMaxTakenBeds(room.Id, dateRange))
+                        itemInRoom.Quantity > refferalForClinicalTreatmentController.GetMaxTakenBeds((int)room.Id, dateRange))
                         this.rooms.Add(room);
         }
 

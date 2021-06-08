@@ -10,11 +10,11 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
 using System.Collections.ObjectModel;
-using System.IO.Packaging;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class PatientRepository
+    public class PatientRepository : IPatientRepo<Patient>
     {
 
         private AddressRepository addressRepository = new AddressRepository();
@@ -39,7 +39,7 @@ namespace Hospital.Repository
         }
 
 
-        public Patient GetPatientById(int id)
+        public Patient GetById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -63,7 +63,7 @@ namespace Hospital.Repository
             return tmp;
         }
 
-        public bool CheckIfPatientHasBeenLogedByPatientId(int patientId)
+        public bool CheckIfPatientHasBeenLogedById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -81,7 +81,7 @@ namespace Hospital.Repository
             }
         }
 
-        public void UpdateHasBeenLogedByPatientId(int patientId)
+        public void UpdateHasBeenLogedById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -96,7 +96,7 @@ namespace Hospital.Repository
         private static Patient ParsePatient(OracleDataReader reader)
         {
             Patient patient = new Patient();
-            User user = new UserRepository().GetUserById(reader.GetInt32(4));
+            User user = new UserRepository().GetById(reader.GetInt32(4));
             if (user.Username.Contains("guestUser"))
             {
                 patient.Id = int.Parse(reader.GetString(0));
@@ -115,12 +115,12 @@ namespace Hospital.Repository
                 patient.User = user;
             }
 
-            //patient.Address = new AddressRepository().GetAddressById(patient.addres_id);
+            //patient.Address = new AddressRepository().GetById(patient.addres_id);
 
             return patient;
         }
 
-        public Patient GetPatientByPatientId(int id)
+        /*public Patient GetPatientById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -138,7 +138,7 @@ namespace Hospital.Repository
 
 
 
-        public ObservableCollection<Patient> GetAllPatients()
+        public ObservableCollection<Patient> GetAll()
         {
             
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
@@ -184,25 +184,19 @@ namespace Hospital.Repository
             return patients;
         }
 
-        public System.Collections.ArrayList GetAllPatientsByDoctorId(int doctorId)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public Boolean DeletePatientById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Patient UpdatePatient(Patient patient)
+        public Patient Update(Patient patient)
         {
             // TODO: implement
             return null;
         }
 
-        public Patient NewPatient(Patient patient, int guest = 0)
+        public Patient New(Patient patient, int guest = 0)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -212,9 +206,9 @@ namespace Hospital.Repository
 
             if (guest == 1)
             {
-                command.CommandText = "INSERT INTO patient (id, user_id) VALUES (:id, :user_id)";
+                command.CommandText = "INSERT INTO patient (userId, user_id) VALUES (:userId, :user_id)";
 
-                command.Parameters.Add("id", OracleDbType.Int32).Value = patient.Id;
+                command.Parameters.Add("userId", OracleDbType.Int32).Value = patient.Id;
                 command.Parameters.Add("user_id", OracleDbType.Int32).Value = patient.user_id;
 
                 if (command.ExecuteNonQuery() > 0)
@@ -249,5 +243,9 @@ namespace Hospital.Repository
             return last_id;
         }
 
+        public Patient Add(Patient t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

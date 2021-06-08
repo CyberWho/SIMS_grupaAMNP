@@ -63,10 +63,10 @@ namespace Hospital.Service
         public ItemInRoom MoveWholeItemNowToMainStorage(ItemInRoom itemInRoom)
         {
             Room mainStorage = roomRepository.GetRoomById(5);
-            itemInRoom.room_id = mainStorage.Id;
+            itemInRoom.room_id = (int)mainStorage.Id;
             itemInRoom.room.Id = mainStorage.Id;
 
-            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, mainStorage.Id);
+            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, (int)mainStorage.Id);
             if (itemInDestinationRoom != null)
             {
                 itemInDestinationRoom.Quantity += itemInRoom.Quantity;
@@ -94,7 +94,7 @@ namespace Hospital.Service
 
         private bool Move(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
         {
-            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, destinationRoom.Id);
+            ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, (int)destinationRoom.Id);
             if (itemInDestinationRoom != null)
             {
                 itemInDestinationRoom.Quantity += quantity;
@@ -157,7 +157,7 @@ namespace Hospital.Service
         {
             /*ObservableCollection<ItemInRoom> allItems = itemInRoomRepository.GetAllItemsInRoom();
             ObservableCollection<ItemInRoom> mergedItems = new ObservableCollection<ItemInRoom>();
-            mergedItems.Add(allItems[0]);
+            mergedItems.New(allItems[0]);
 
             foreach (ItemInRoom item in allItems)
             {
@@ -171,7 +171,7 @@ namespace Hospital.Service
                     }
                     else
                     {
-                        mergedItems.Add(item);
+                        mergedItems.New(item);
                     }
                     count++;
                 } while (count != mergedItems.Count);

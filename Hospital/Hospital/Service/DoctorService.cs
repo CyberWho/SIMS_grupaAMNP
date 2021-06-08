@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
 using Hospital.Repository;
 
@@ -13,14 +14,26 @@ namespace Hospital.Service
 {
     public class DoctorService
     {
+        private IDoctorRepo<Doctor> doctorRepository;
+        private IEmployeeRepo<Employee> employeesRepository;
+        private IUserRepo<User> userRepository;
+        private ISpecializationRepo<Specialization> specializationRepository;
+
+        public DoctorService()
+        {
+            this.doctorRepository = new DoctorRepository();
+            this.employeesRepository = new EmployeesRepository();
+            this.userRepository = new UserRepository();
+            this.specializationRepository = new SpecializationRepository();
+        }
         public Doctor GetDoctorById(int id)
         {
-            return doctorRepository.GetDoctorById(id);
+            return doctorRepository.GetById(id);
         }
 
         public Hospital.Model.Doctor GetDoctorByUserId(int id)
         {
-            return doctorRepository.GetDoctorByUserId(id);
+            return doctorRepository.GetByUserId(id);
         }
 
         public Doctor GetWorkHoursDoctorById(int id)
@@ -31,17 +44,17 @@ namespace Hospital.Service
         }
         public ObservableCollection<Doctor> GetAllDoctors()
         {
-            return doctorRepository.GetAllDoctors();
+            return doctorRepository.GetAll();
         }
 
         public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
         {
-            return this.doctorRepository.GetAllDoctorsBySpecializationId(specializationId);
+            return this.doctorRepository.GetAllBySpecializationId(specializationId);
         }
 
         public ObservableCollection<Doctor> searchDoctorByNameAndSurname(string identifyString)
         {
-            return doctorRepository.SearchDoctorByNameAndSurname(identifyString);
+            return doctorRepository.SearchByNameAndSurname(identifyString);
         }
         public ObservableCollection<Doctor> GetAllGeneralPurposeDoctors()
         {
@@ -52,17 +65,17 @@ namespace Hospital.Service
         #region marko_kt5
         public Boolean DeleteDoctorById(int doctorId)
         {
-            Doctor doctor = this.doctorRepository.GetDoctorById(doctorId);
+            Doctor doctor = this.doctorRepository.GetById(doctorId);
             
-            int employee_id = this.employeesRepository.getEmployeeIdByDoctorId(doctorId);
-            Employee employee = this.employeesRepository.GetEmployeeById(employee_id);
+            int employee_id = this.employeesRepository.GetIdByDoctorId(doctorId);
+            Employee employee = this.employeesRepository.GetById(employee_id);
 
-            User user = this.userRepository.GetUserById(employee.User.Id);
+            User user = this.userRepository.GetById(employee.User.Id);
 
 
-            if (this.doctorRepository.DeleteDoctorById(doctorId) &&
-                this.employeesRepository.DeleteEmployeeById(employee_id) && 
-                this.userRepository.DeleteUserById(user.Id))
+            if (this.doctorRepository.DeleteById(doctorId) &&
+                this.employeesRepository.DeleteById(employee_id) && 
+                this.userRepository.DeleteById(user.Id))
 
                 return true;
 
@@ -71,14 +84,14 @@ namespace Hospital.Service
 
         public Doctor UpdateDoctor(Doctor doctor)
         {
-            return this.doctorRepository.UpdateDoctor(doctor);
+            return this.doctorRepository.Update(doctor);
         }
 
         private Doctor setSpecialization(Doctor doctor, string specialization)
         {
             if (doctor.specialization_id == 0)
             {
-                doctor.specialization_id = this.specializationRepository.GetSpecializationByType(specialization);
+                doctor.specialization_id = this.specializationRepository.GetByType(specialization);
             }
 
             return doctor;
@@ -87,14 +100,10 @@ namespace Hospital.Service
         {
             doctor = setSpecialization(doctor, specialization);
 
-            return this.doctorRepository.NewDoctor(doctor);
+            return this.doctorRepository.Add(doctor);
         }
         #endregion
 
-        public SpecializationRepository specializationRepository = new SpecializationRepository();
 
-        public DoctorRepository doctorRepository = new DoctorRepository();
-        private EmployeesRepository employeesRepository = new EmployeesRepository();
-        private UserRepository userRepository = new UserRepository();
     }
 }

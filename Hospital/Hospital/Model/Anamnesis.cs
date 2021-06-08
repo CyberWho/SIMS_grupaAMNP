@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
-    public class Anamnesis
+    public class Anamnesis : IEntity
     {
         public int Id { get; set; }
         public String Description { get; set; }
@@ -33,7 +33,7 @@ namespace Hospital.Model
                 AddPerscriptions(oPerscription);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddPerscriptions(Perscription newPerscription)
         {
             if (newPerscription == null)
@@ -93,7 +93,7 @@ namespace Hospital.Model
                 AddMedicalTreatments(oMedicalTreatment);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddMedicalTreatments(MedicalTreatment newMedicalTreatment)
         {
             if (newMedicalTreatment == null)

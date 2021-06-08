@@ -50,7 +50,7 @@ namespace Hospital.Repository
         private PatientLogs ParsePatientLogs(int patientId,OracleDataReader reader)
         {
             PatientLogs patientLogs = new PatientLogs(reader.GetInt32(0), reader.GetInt32(2),
-                new PatientRepository().GetPatientById(patientId), reader.GetDateTime(3));
+                new PatientRepository().GetById(patientId), reader.GetDateTime(3));
             return patientLogs;
         }
 

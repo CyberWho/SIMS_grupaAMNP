@@ -7,10 +7,12 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class HealthRecordRepository
+    public class HealthRecordRepository : IHealthRecordRepo<HealthRecord>
     {
 
         
@@ -21,12 +23,12 @@ namespace Hospital.Repository
             return null;
         }
 
-        public HealthRecord GetHealthRecordByPatientId(int id)
+        public HealthRecord GetByPatientId(int patientId)
         {
             PatientRepository pr = new PatientRepository();
             UserRepository ur = new UserRepository();
-            Patient p = pr.GetPatientById(id);
-            User u = ur.GetUserById(p.user_id);
+            Patient p = pr.GetById(patientId);
+            User u = ur.GetById(p.user_id);
 
             
 
@@ -40,8 +42,8 @@ namespace Hospital.Repository
             PatientRepository patientRepository = new PatientRepository();
             UserRepository userRepository = new UserRepository();
 
-            Patient patient = patientRepository.GetPatientById(id);
-            User user = userRepository.GetUserById(patient.user_id);
+            Patient patient = patientRepository.GetById(patientId);
+            User user = userRepository.GetById(patient.user_id);
             patient.User = user;
             healthRecord.Id = int.Parse(reader.GetString(0));
             healthRecord.patient_id = int.Parse(reader.GetString(1));
@@ -95,7 +97,7 @@ namespace Hospital.Repository
                 healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
             healthRecord.patient_id = id;
             healthRecord.Patient = patient;
-            healthRecord.PlaceOfBirth = new CityRepository().GetCityById(city_id);
+            healthRecord.PlaceOfBirth = new CityRepository().GetById(city_id);
             healthRecord.Gender = gender;
             healthRecord.MaritalStatus = maritalStatus;
             
@@ -105,31 +107,31 @@ namespace Hospital.Repository
             return healthRecord;
         }
 
-        public System.Collections.ArrayList GetAllHealthRecords()
+        public ObservableCollection<HealthRecord> GetAll()
         {
             // TODO: implement
             return null;
         }
 
-        public Boolean DeleteHealthRecordById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DeleteHealthRecordByPatientId(int patientId)
+        public Boolean DeleteByPatientId(int patientId)
         {
             // TODO: implement
             return false;
         }
 
-        public HealthRecord UpdateHealthRecord(HealthRecord healthRecord)
+        public HealthRecord Update(HealthRecord healthRecord)
         {
             // TODO: implement
             return null;
         }
 
-        public HealthRecord NewHealthRecord(HealthRecord healthRecord, int guest = 0)
+        public HealthRecord New(HealthRecord healthRecord, int guest = 0)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -141,7 +143,7 @@ namespace Hospital.Repository
             {
                 command.CommandText = "INSERT INTO health_record (patient_id) VALUES (:patient_id)";
 
-                //command.Parameters.Add("id", OracleDbType.Int32).Value = healthRecord.Id;
+                //command.Parameters.New("patientId", OracleDbType.Int32).Value = healthRecord.Id;
                 command.Parameters.Add("patient_id", OracleDbType.Int32).Value = healthRecord.patient_id;
 
                 if (command.ExecuteNonQuery() > 0)
@@ -169,5 +171,9 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public HealthRecord Add(HealthRecord t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

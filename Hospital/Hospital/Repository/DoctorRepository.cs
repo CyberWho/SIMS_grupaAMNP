@@ -6,10 +6,11 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class DoctorRepository
+    public class DoctorRepository : IDoctorRepo<Doctor>
     {
 
         public Doctor GetDoctorById(int id)
@@ -26,7 +27,7 @@ namespace Hospital.Repository
 
         }
 
-        public Hospital.Model.Doctor GetDoctorByUserId(int id)
+        public Hospital.Model.Doctor GetByUserId(int userId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -49,9 +50,9 @@ namespace Hospital.Repository
 
         private static Doctor ParseDoctor(OracleDataReader reader)
         {
-           Employee employee = new EmployeesRepository().GetEmployeeById(reader.GetInt32(1));
+           Employee employee = new EmployeesRepository().GetById(reader.GetInt32(1));
            Room room = new RoomRepository().GetRoomById(reader.GetInt32(2));
-           Specialization specialization = new SpecializationRepository().GetSpecializationById(reader.GetInt32(3));
+           Specialization specialization = new SpecializationRepository().GetById(reader.GetInt32(3));
            Doctor doctor = new Doctor(employee.Id,employee.Salary,employee.YearsOfService,employee.User,employee.role,specialization,room);
            doctor.Id = reader.GetInt32(0);
            return doctor;
@@ -104,7 +105,7 @@ namespace Hospital.Repository
             return doctor;
         }
 
-        public ObservableCollection<Doctor> GetAllDoctors()
+        public ObservableCollection<Doctor> GetAll()
         {
             
             ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
@@ -120,7 +121,7 @@ namespace Hospital.Repository
             return doctors;
         }
 
-        public ObservableCollection<Doctor> GetAllDoctorsBySpecializationId(int specializationId)
+        public ObservableCollection<Doctor> GetAllBySpecializationId(int specializationId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -149,7 +150,7 @@ namespace Hospital.Repository
             return doctors;
         }
 
-        public Boolean DeleteDoctorById(int doctorId)
+        public Boolean DeleteById(int doctorId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -163,13 +164,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Doctor UpdateDoctor(Doctor doctor)
+        public Doctor Update(Doctor doctor)
         {
 
             return null;
         }
 
-        public ObservableCollection<Doctor> SearchDoctorByNameAndSurname(string identifyString)
+        public ObservableCollection<Doctor> SearchByNameAndSurname(string identifyString)
         {
             
             ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
@@ -180,7 +181,7 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                var doctor = GetDoctorById(reader.GetInt32(0));
+                var doctor = GetById(reader.GetInt32(0));
                 doctors.Add(doctor);
             }
             
@@ -198,7 +199,7 @@ namespace Hospital.Repository
 
             doctor.Id = id;
 
-            command.Parameters.Add("id", OracleDbType.Int32).Value = doctor.Id;
+            command.Parameters.Add("userId", OracleDbType.Int32).Value = doctor.Id;
             command.Parameters.Add("employee_id", OracleDbType.Int32).Value = doctor.employee_id;
             command.Parameters.Add("room_id", OracleDbType.Int32).Value = doctor.room_id;
             command.Parameters.Add("spec_id", OracleDbType.Int32).Value = doctor.specialization_id;
@@ -212,20 +213,20 @@ namespace Hospital.Repository
             return null;
         }
         #endregion
-
-        private Doctor getAllData(Doctor doctor)
+        //nikad nije referencirano
+        /*    private Doctor getAllData(Doctor doctor)
         {
-            if (doctor.specialization_id == 0) doctor.specialization_id = doctor.specialization.id;
-            else if (doctor.specialization == null) doctor.specialization.id = doctor.specialization_id;
+            if (doctor.specialization_id == 0) doctor.specialization_id = doctor.specialization.userId;
+            else if (doctor.specialization == null) doctor.specialization.userId = doctor.specialization_id;
 
-            if (doctor.room_id == 0) doctor.room_id = doctor.room.Id;
+            if (doctor.room_id == 0) doctor.room_id = (int)doctor.room.Id;
 
 
             return doctor;
-        }
+        }*/
 
         // marko kt5
-        public List<int> getAllUsedRoomsId()
+        public List<int> GetAllUsedRoomsId()
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -253,6 +254,11 @@ namespace Hospital.Repository
 
 
             return last_id;
+        }
+
+        public Doctor Add(Doctor t)
+        {
+            throw new NotImplementedException();
         }
 
     }

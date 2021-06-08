@@ -7,11 +7,13 @@
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using OracleInternal.SqlAndPlsqlParser.LocalParsing;
 
 namespace Hospital.Repository
 {
-    public class EmployeesRepository
+    public class EmployeesRepository : IEmployeeRepo<Employee>
     {
 
         private void setConnection()
@@ -27,7 +29,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Employee GetEmployeeByUserId(int id)
+        public Employee GetByUserId(int userId)
         {
             
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
@@ -39,7 +41,7 @@ namespace Hospital.Repository
             return employee;
         }
 
-        public int GetUserIdByEmployeeId(int employee_id)
+        public int GetUserIdById(int id)
         {
             
 
@@ -55,7 +57,7 @@ namespace Hospital.Repository
             return user_id;
         }
 
-        public Employee GetEmployeeById(int id)
+        public Employee GetById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -91,19 +93,19 @@ namespace Hospital.Repository
             return employee;
         }
 
-        public System.Collections.ArrayList GetAllEmployees()
+        public ObservableCollection<Employee> GetAll()
         {
             // TODO: implement
             return null;
         }
 
-        public System.Collections.ArrayList GetAllEmployeesByRoleId(int roleId)
+        public ObservableCollection<Employee> GetAllByRoleId(int roleId)
         {
             // TODO: implement
             return null;
         }
 
-        public int getEmployeeIdByDoctorId(int doctor_id)
+        public int GetIdByDoctorId(int doctorId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -117,7 +119,7 @@ namespace Hospital.Repository
         }
 
 
-        public Boolean DeleteEmployeeById(int id)
+        public Boolean DeleteById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -136,13 +138,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public Employee UpdateEmployee(Employee employee)
+        public Employee Update(Employee employee)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE employee SET salary = :salary WHERE id = :id";
             command.Parameters.Add("salary", OracleDbType.Int32).Value = employee.Salary;
-            command.Parameters.Add("id", OracleDbType.Int32).Value = employee.Id;
+            command.Parameters.Add("userId", OracleDbType.Int32).Value = employee.Id;
 
             if (command.ExecuteNonQuery() > 0)
             {
@@ -159,7 +161,7 @@ namespace Hospital.Repository
         }
 
         #region marko_kt5
-        public Employee NewEmployee(Employee employee)
+        public Employee Add(Employee employee)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -169,7 +171,7 @@ namespace Hospital.Repository
             int id = GetLastId() + 1;
             employee.Id = id;
 
-            command.Parameters.Add("id", OracleDbType.Int32).Value = employee.Id;
+            command.Parameters.Add("userId", OracleDbType.Int32).Value = employee.Id;
             command.Parameters.Add("salary", OracleDbType.Int32).Value = employee.Salary;
             command.Parameters.Add("years_of_service", OracleDbType.Int32).Value = employee.YearsOfService;
             command.Parameters.Add("user_id", OracleDbType.Int32).Value = employee.User.Id;
@@ -196,7 +198,7 @@ namespace Hospital.Repository
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
 
-            command.CommandText = "SELECT MAX(id) FROM employee";
+            command.CommandText = "SELECT MAX(userId) FROM employee";
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int id = int.Parse(reader.GetString(0));

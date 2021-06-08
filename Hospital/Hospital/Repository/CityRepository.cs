@@ -5,7 +5,9 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Hospital.IRepository;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 

@@ -4,12 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hospital.IRepository;
 using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
-    public class SpecializationRepository
+    public class SpecializationRepository : ISpecializationRepo<Specialization>
     {
 
         
@@ -29,7 +30,7 @@ namespace Hospital.Repository
 
         private ObservableCollection<Specialization> specializations;
 
-        public ObservableCollection<Specialization> GetAllSpecializations(bool withoutGPD)
+        public ObservableCollection<Specialization> GetAll(bool withoutGPD)
         {
             
             specializations = new ObservableCollection<Specialization>();
@@ -70,7 +71,7 @@ namespace Hospital.Repository
             return specializations;
         }
 
-        public int GetSpecializationByType(string type)
+        public int GetByType(string type)
         {
             
 
@@ -87,7 +88,7 @@ namespace Hospital.Repository
             return id;
         }
 
-        public Specialization GetSpecializationById(int id)
+        public Specialization GetById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -101,6 +102,29 @@ namespace Hospital.Repository
             return specialization;
         }
 
+        public ObservableCollection<Specialization> GetAll()
+        {
+            throw new NotImplementedException();
+        }
 
+        public Specialization Add(Specialization t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Specialization Update(Specialization t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetLastId()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

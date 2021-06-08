@@ -9,10 +9,11 @@ using Oracle.ManagedDataAccess.Client;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class ReminderRepository
+    public class ReminderRepository : IReminerRepo<Reminder>
     {
         
         private void setConnection()
@@ -29,7 +30,7 @@ namespace Hospital.Repository
 
             }
         }
-        public Reminder GetReminderById(int id)
+        public Reminder GetById(int id)
       {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -79,7 +80,7 @@ namespace Hospital.Repository
 
             return reminders;
         }
-        public ObservableCollection<Reminder> GetReminderByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
+        public ObservableCollection<Reminder> GetAllByAlarmTimeAndPatientId(DateTime alarmTime, int patientId)
         {
             
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
@@ -136,7 +137,7 @@ namespace Hospital.Repository
             return reminders;
         }
       
-        public ObservableCollection<Reminder> GetAllRemindersByPatientId(int patientId)
+        public ObservableCollection<Reminder> GetAllByPatientId(int patientId)
         {
             
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
@@ -156,7 +157,7 @@ namespace Hospital.Repository
 
             return reminders;
         }
-        public ObservableCollection<Reminder> GetAllRemindersByPersonalReminderId(int personalReminderId)
+        public ObservableCollection<Reminder> GetAllByPersonalReminderId(int personalReminderId)
         {
             
             ObservableCollection<Reminder> reminders = new ObservableCollection<Reminder>();
@@ -177,7 +178,7 @@ namespace Hospital.Repository
             return reminders;
         }
 
-        public Boolean DeleteReminderById(int id)
+        public Boolean DeleteById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -187,14 +188,8 @@ namespace Hospital.Repository
             
             return true;
         }
-      
-      public Boolean DeleteAllRemindersByPatientId(int patientId)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Reminder UpdateReminder(Reminder reminder)
+        
+      public Reminder Update(Reminder reminder)
       {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -211,7 +206,7 @@ namespace Hospital.Repository
             return reminder;
       }
       
-      public Reminder NewReminder(Reminder reminder)
+      public Reminder Add(Reminder reminder)
       {
             
             OracleCommand command = new OracleCommand();
@@ -245,5 +240,9 @@ namespace Hospital.Repository
             return id;
         }
 
+        public ObservableCollection<Reminder> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

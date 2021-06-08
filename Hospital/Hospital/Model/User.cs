@@ -6,7 +6,7 @@
 
 namespace Hospital.Model
 {
-    public class User : IRoleDescriptior
+    public class User : IEntity, IRoleDescriptior
     {
         public int Id { get; set; }
         public string Username { get; set; }

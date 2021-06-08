@@ -8,10 +8,12 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Diagnostics;
+using Hospital.IRepository;
+using System.Collections.ObjectModel;
 
 namespace Hospital.Repository
 {
-    public class AddressRepository
+    public class AddressRepository : IAddressRepo<Address>
     {
 
         private CityRepository cityRepository = new CityRepository();
@@ -29,7 +31,7 @@ namespace Hospital.Repository
             return address;
         }
 
-        public Address GetAddressById(int id)
+        public Address GetById(int id)
         {
             
 
@@ -59,24 +61,24 @@ namespace Hospital.Repository
                 Id = int.Parse(reader.GetString(0)),
                 Name = reader.GetString(1),
                 city_id = int.Parse(reader.GetString(3)),
-                City = cityRepository.GetCityById(reader.GetInt32(3))
+                City = cityRepository.GetById(reader.GetInt32(3))
             };
             return address;
         }
 
-        public Boolean DeleteAddressById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Address UpdateAddress(Address address)
+        public Address Update(Address address)
         {
             // TODO: implement
             return null;
         }
 
-        public Address NewAddress(Address address)
+        public Address Add(Address address)
         {
             // TODO: implement
             return null;
@@ -88,5 +90,9 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public ObservableCollection<Address> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

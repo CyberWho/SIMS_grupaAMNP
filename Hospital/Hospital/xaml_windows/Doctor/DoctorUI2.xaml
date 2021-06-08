@@ -9,7 +9,7 @@
     <Grid>
         <Button Content="Appointments" HorizontalAlignment="Left" Margin="160,150,0,0" VerticalAlignment="Top" Width="130" Height="55" Click="Button_Click_1" />
         <Button Content="Logout" HorizontalAlignment="Left" Margin="504,150,0,0" VerticalAlignment="Top" Width="130" Height="55" Click="ReturnOption"/>
-        <Button Content="Add appointment" HorizontalAlignment="Left" Margin="160,228,0,0" VerticalAlignment="Top" Width="130" Height="55" Click="GoToCreateAppointment" />
+        <Button Content="New appointment" HorizontalAlignment="Left" Margin="160,228,0,0" VerticalAlignment="Top" Width="130" Height="55" Click="GoToCreateAppointment" />
         <Button Content="Pregled zauzeca" HorizontalAlignment="Left" Margin="160,309,0,0" VerticalAlignment="Top" Width="130" Height="55" Click="GoToSchedule"/>
         <Button Content="Trazi pacijenta" HorizontalAlignment="Left" Margin="295,309,0,0" VerticalAlignment="Top" Width="130" Height="55" Click="GoToPatientSearch" RenderTransformOrigin="0.486,1.891" />
         <Button Content="Pregled lekova" HorizontalAlignment="Left" Margin="295,228,0,0" VerticalAlignment="Top" Width="130" Height="55" Click="GoToDrugOperation" />

@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="MaterialDesignColors, Version=2.0.1.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.1\lib\net452\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.1.0.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.4.1.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
@@ -46,6 +47,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -71,18 +73,23 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.Toolkit, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.4.1.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +132,31 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IRepository\IAddressRepo.cs" />
+    <Compile Include="IRepository\IAllergyRepo.cs" />
+    <Compile Include="IRepository\IAllergyTypeRepo.cs" />
+    <Compile Include="IRepository\IAnamnesisRepo.cs" />
+    <Compile Include="IRepository\IAppointmentRepo.cs" />
+    <Compile Include="IRepository\ICityRepo.cs" />
+    <Compile Include="IRepository\IDoctorRepo.cs" />
+    <Compile Include="IRepository\IEmployeeRepo.cs" />
+    <Compile Include="IRepository\IFreeDaysRepo.cs" />
+    <Compile Include="IRepository\IHealthRecordRepo.cs" />
+    <Compile Include="IRepository\IMedicalTreatmentRepo.cs" />
+    <Compile Include="IRepository\IPatientRepo.cs" />
+    <Compile Include="IRepository\IPerscriptionRepo.cs" />
+    <Compile Include="IRepository\IReferralForClinicalTreatmentRepo.cs" />
+    <Compile Include="IRepository\IReferralForSpecialistRepo.cs" />
+    <Compile Include="IRepository\IReminerRepo.cs" />
+    <Compile Include="IRepository\IRepo.cs" />
+    <Compile Include="IRepository\IReviewRepo.cs" />
+    <Compile Include="IRepository\IRoleRepo.cs" />
+    <Compile Include="IRepository\ISpecializationRepo.cs" />
+    <Compile Include="IRepository\IStateRepo.cs" />
+    <Compile Include="IRepository\ISystemNotificationRepo.cs" />
+    <Compile Include="IRepository\ITimeSlotRepo.cs" />
+    <Compile Include="IRepository\IUserRepo.cs" />
+    <Compile Include="IRepository\IWorkHoursRepo.cs" />
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />
     <Compile Include="Model\DrugDTO.cs" />
@@ -132,6 +164,7 @@
     <Compile Include="Model\FreeDaysStatus.cs" />
     <Compile Include="Model\Globals.cs" />
     <Compile Include="Model\IRoleDescriptior.cs" />
+    <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
     <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\PatientLogs.cs" />
@@ -214,8 +247,11 @@
     <Compile Include="ViewModel\Doctor\MyICommand.cs" />
     <Compile Include="ViewModel\Doctor\SearchPatientViewModel.cs" />
     <Compile Include="ViewModel\Doctor\TutorialViewModel.cs" />
+    <Compile Include="ViewModel\Manager\BindableBase.cs" />
     <Compile Include="ViewModel\Manager\ManagerUIViewModel.cs" />
     <Compile Include="ViewModel\Manager\MyICommand.cs" />
+    <Compile Include="ViewModel\Manager\RoomsCRUDViewModel.cs" />
+    <Compile Include="ViewModel\Manager\RoomsInventoryViewModel.cs" />
     <Compile Include="ViewModel\Patient\AllergiesViewModel.cs" />
     <Compile Include="ViewModel\Patient\BindableBase.cs" />
     <Compile Include="ViewModel\Patient\ClinicalTreatmentReferralsViewModel.cs" />
@@ -246,6 +282,18 @@
     <Compile Include="ViewModel\Patient\WizardHomeViewModel.cs" />
     <Compile Include="ViewModel\Secretary\MyICommand.cs" />
     <Compile Include="ViewModel\Secretary\SecretaryUIViewModel.cs" />
+    <Compile Include="View\Manager\DrugsCRUDView.xaml.cs">
+      <DependentUpon>DrugsCRUDView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\ManagerUIView.xaml.cs">
+      <DependentUpon>ManagerUIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\RoomInventoryView.xaml.cs">
+      <DependentUpon>RoomInventoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\RoomsCRUDView.xaml.cs">
+      <DependentUpon>RoomsCRUDView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\AllergiesView.xaml.cs">
       <DependentUpon>AllergiesView.xaml</DependentUpon>
     </Compile>
@@ -369,38 +417,53 @@
     <Compile Include="xaml_windows\Doctor\SpecialistReferal.xaml.cs">
       <DependentUpon>SpecialistReferal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerDrugsCRUD.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerDrugsCRUD.xaml.cs">
       <DependentUpon>ManagerDrugsCRUD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerInventorySearch.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerInventorySearch.xaml.cs">
       <DependentUpon>ManagerInventorySearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerActiveRenovations.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerActiveRenovations.xaml.cs">
       <DependentUpon>ManagerActiveRenovations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerNewRenovation.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerNewRenovation.xaml.cs">
       <DependentUpon>ManagerNewRenovation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerRenovationHistory.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerRenovationHistory.xaml.cs">
       <DependentUpon>ManagerRenovationHistory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerRenovations.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerRenovations.xaml.cs">
       <DependentUpon>ManagerRenovations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerRoomInventory.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerRoomInventory.xaml.cs">
       <DependentUpon>ManagerRoomInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerRoomInventorySelectDestinationRoom.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerRoomInventorySelectDestinationRoom.xaml.cs">
       <DependentUpon>ManagerRoomInventorySelectDestinationRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerRoomsCRUD.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerRoomsCRUD.xaml.cs">
       <DependentUpon>ManagerRoomsCRUD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerRoomsPickDate.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerRoomsPickDate.xaml.cs">
       <DependentUpon>ManagerRoomsPickDate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\ManagerUI.xaml.cs">
+    <Compile Include="xaml_windows\Manager\ManagerUI.xaml.cs">
       <DependentUpon>ManagerUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\ReportShow.xaml.cs">
+      <DependentUpon>ReportShow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\Wizard1.xaml.cs">
+      <DependentUpon>Wizard1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\Wizard2.xaml.cs">
+      <DependentUpon>Wizard2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Manager\Wizard3.xaml.cs">
+      <DependentUpon>Wizard3.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Patient\Allergies.xaml.cs">
       <DependentUpon>Allergies.xaml</DependentUpon>
@@ -537,6 +600,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Manager\DrugsCRUDView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\ManagerUIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\RoomInventoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\RoomsCRUDView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Patient\AllergiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -685,43 +764,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerDrugsCRUD.xaml">
+    <Page Include="xaml_windows\Manager\ManagerDrugsCRUD.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Manager\ManagerInventorySearch.xaml">
+    <Page Include="xaml_windows\Manager\ManagerInventorySearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Manager\ManagerActiveRenovations.xaml">
+    <Page Include="xaml_windows\Manager\ManagerActiveRenovations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Manager\ManagerNewRenovation.xaml">
+    <Page Include="xaml_windows\Manager\ManagerNewRenovation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerRenovationHistory.xaml">
+    <Page Include="xaml_windows\Manager\ManagerRenovationHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerRenovations.xaml">
+    <Page Include="xaml_windows\Manager\ManagerRenovations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerRoomInventory.xaml">
+    <Page Include="xaml_windows\Manager\ManagerRoomInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerRoomInventorySelectDestinationRoom.xaml">
+    <Page Include="xaml_windows\Manager\ManagerRoomInventorySelectDestinationRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerRoomsCRUD.xaml">
+    <Page Include="xaml_windows\Manager\ManagerRoomsCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerRoomsPickDate.xaml">
+    <Page Include="xaml_windows\Manager\ManagerRoomsPickDate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -741,7 +820,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\ManagerUI.xaml">
+    <Page Include="xaml_windows\Manager\ManagerUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\ReportShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\Wizard1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\Wizard2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Manager\Wizard3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1006,7 +1105,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
-    <Folder Include="xaml_windows\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-undo-90.png" />
@@ -1030,6 +1128,7 @@
     <Content Include="Help\PersonalRemindersHelp.html" />
     <Content Include="Help\Report.html" />
     <Content Include="Help\TreatmentRemindersHelp.html" />
+    <Resource Include="Resources\Icons\Image1.png" />
     <Resource Include="Resources\Icons\icons8-print-100.png" />
     <Resource Include="Resources\Icons\icons8-hospital-sign-96.png" />
     <Resource Include="Resources\Icons\icons8-help-100 %281%29.png" />

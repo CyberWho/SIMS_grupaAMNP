@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace Hospital.Model
 {
-    public class HealthRecord
+    public class HealthRecord : IEntity
     {
         public int Id { get; set; }
         public int patient_id { get; set; }
@@ -40,7 +40,7 @@ namespace Hospital.Model
                 AddAllergy(oAllergy);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddAllergy(Allergy newAllergy)
         {
             if (newAllergy == null)
@@ -98,7 +98,7 @@ namespace Hospital.Model
                 AddAnamnesis(oAnamnesis);
         }
 
-        /// <pdGenerated>default Add</pdGenerated>
+        /// <pdGenerated>default New</pdGenerated>
         public void AddAnamnesis(Anamnesis newAnamnesis)
         {
             if (newAnamnesis == null)

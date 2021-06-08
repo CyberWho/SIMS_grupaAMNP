@@ -9,10 +9,11 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class AllergyTypeRepository
+    public class AllergyTypeRepository : IAllergyTypeRepo<AllergyType>
     {
         UserRepository userRepository = new UserRepository();
         PatientRepository patientRepository = new PatientRepository();
@@ -27,19 +28,19 @@ namespace Hospital.Repository
 
         
 
-        public Boolean DeleteAllergieTypeById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public AllergyType UpdateAllergyType(int allergyType)
+        public AllergyType Update(AllergyType allergyType)
         {
             // TODO: implement
             return null;
         }
 
-        public AllergyType NewAllergyType(AllergyType allergyType)
+        public AllergyType Add(AllergyType allergyType)
         {
             // TODO: implement
             return null;
@@ -51,7 +52,7 @@ namespace Hospital.Repository
             return 0;
         }
 
-        public AllergyType GetAllergyTypeByType(string type)
+        public AllergyType GetByType(string type)
         {
             
 
@@ -68,7 +69,7 @@ namespace Hospital.Repository
             return at;
         }
 
-        public ObservableCollection<AllergyType> GetAllMissingAllergyTypesByUserId(int userId)
+        public ObservableCollection<AllergyType> GetAllMissingTypesByUserId(int userId)
         {
             
 
@@ -103,7 +104,7 @@ namespace Hospital.Repository
             return allergyTypes;
         }
 
-        public AllergyType GetAllergyTypeById(int id)
+        public AllergyType GetById(int id)
         {
             
 
@@ -118,7 +119,7 @@ namespace Hospital.Repository
 
             return allergyType;
         }
-        public ObservableCollection<AllergyType> GetAllTypesByHealthRecordId(int id)
+        public ObservableCollection<AllergyType> GetAllByHealthRecordId(int id)
         {
             
 

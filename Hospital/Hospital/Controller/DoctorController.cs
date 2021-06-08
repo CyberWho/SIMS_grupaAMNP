@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Controller
 {

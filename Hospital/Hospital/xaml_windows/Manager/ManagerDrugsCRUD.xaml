@@ -1,0 +1,63 @@
+﻿<Window x:Class="Hospital.xaml_windows.Manager.ManagerDrugs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.xaml_windows.Manager"
+        FontFamily="Segoe UI Symbol"
+        mc:Ignorable="d"
+        Title="ManagerDrugs" Height="720" Width="1080" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding DrugDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="442" Margin="335,147,0,0" VerticalAlignment="Top" Width="715" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged" MouseDoubleClick="myDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="InventoryItemID" Binding="{Binding InventoryItemID}" Width="*" Visibility="Hidden" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cena" Binding="{Binding Price}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Jedinica" Binding="{Binding Unit}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding Type}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gramaza" Binding="{Binding Grams}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="ToolTip" Value="{Binding RejectionInfo}"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Recept" Binding="{Binding NeedsPrescription}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackButton_Click" Style="{StaticResource managerRegularBtn}" Margin="860,18,0,0"/>
+        <Label Content="Naziv" HorizontalAlignment="Left" Margin="88,200,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cena" HorizontalAlignment="Left" Margin="88,232,0,0" VerticalAlignment="Top"/>
+        <Label Content="Jedinica" HorizontalAlignment="Left" Margin="88,262,0,0" VerticalAlignment="Top"/>
+        <Label Content="Broj" HorizontalAlignment="Left" Margin="88,294,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tip" HorizontalAlignment="Left" Margin="88,324,0,0" VerticalAlignment="Top"/>
+        <Label Content="Gramaza" HorizontalAlignment="Left" Margin="88,354,0,0" VerticalAlignment="Top"/>
+        <Label Content="Recept" HorizontalAlignment="Left" Margin="88,386,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="name_txtbx" Text="{Binding SelectedItem.Name, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="148,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="price_txtbx" Text="{Binding SelectedItem.Price, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="24" Margin="148,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="unit_txtbx" Text="{Binding SelectedItem.Unit, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="148,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="id_txtbx" Text="{Binding SelectedItem.Id, ElementName=myDataGrid, Mode=OneWay}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="148,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="LightGray"/>
+        <ComboBox x:Name="dtype_cmbbx" SelectedValue="{Binding SelectedItem.Drug.drugType.Id, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Margin="147,324,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
+        <TextBox x:Name="grams_txtbx" Text="{Binding SelectedItem.Grams, ElementName=myDataGrid, Mode=OneWay}" HorizontalAlignment="Left" Height="24" Margin="148,352,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="needsPrescription_cmbbx" SelectedValue="{Binding SelectedItem.Drug.NeedsPerscription, ElementName=myDataGrid, Mode=OneWay}"  HorizontalAlignment="Left" Margin="147,384,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Display" SelectedValuePath="Value"/>
+
+
+        <Button x:Name="add_btn" HorizontalAlignment="Left" Margin="88,431,0,0" VerticalAlignment="Top" Style="{StaticResource managerRegularBtn}" Click="add_btn_Click">
+            <TextBlock x:Name="add_txtblk" Text="&#xE109; Dodaj" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="update_btn" HorizontalAlignment="Left" Margin="88,480,0,0" VerticalAlignment="Top" Click="update_btn_Click" Style="{StaticResource managerRegularBtn}" IsEnabled="False">
+            <TextBlock x:Name="update_txtblk" Text="&#xE104; Ažuriraj" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="delete_btn" HorizontalAlignment="Left" Margin="88,527,0,0" VerticalAlignment="Top" Click="delete_btn_Click" IsEnabled="False" Style="{StaticResource managerRegularBtn}">
+            <TextBlock x:Name="delete_txtblk" Text="&#xE107; Obriši" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="clear_btn" HorizontalAlignment="Left" Margin="88,577,0,0" VerticalAlignment="Top"  Click="clear_btn_Click" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="&#xE106; Očisti" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+        <Button x:Name="resubmit_btn" HorizontalAlignment="Left" Margin="88,626,0,0" VerticalAlignment="Top" Click="resubmit_btn_Click" Visibility="Hidden" Style="{StaticResource managerRegularBtn}">
+            <TextBlock Text="Ponovna recenzija" Style="{StaticResource managerTextBlock}"/>
+        </Button>
+    </Grid>
+</Window>

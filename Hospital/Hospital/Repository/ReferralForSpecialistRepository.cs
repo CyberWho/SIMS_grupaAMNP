@@ -8,10 +8,11 @@ using System;
 using Oracle.ManagedDataAccess.Client;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 
 namespace Hospital.Repository
 {
-    public class ReferralForSpecialistRepository
+    public class ReferralForSpecialistRepository : IReferralForSpecialistRepo<ReferralForSpecialist>
     {
         
         private void setConnection()
@@ -29,19 +30,19 @@ namespace Hospital.Repository
             }
         }
 
-        public System.Collections.ArrayList GetAllReferralsForSpecialist()
+        public ObservableCollection<ReferralForSpecialist> GetAll()
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<ReferralForSpecialist> GetAllReferralsForSpecialistByPatientId(int patientId)
+        public ObservableCollection<ReferralForSpecialist> GetAllByPatientId(int patientId)
         {
             //TODO: implement
             return null;
         }
 
-        public ObservableCollection<ReferralForSpecialist> GetReferralForSpecialistsByHealthRecordId(int healthRecordId)
+        public ObservableCollection<ReferralForSpecialist> GetAllByHealthRecordId(int healthRecordId)
         {
             
             ObservableCollection<ReferralForSpecialist> referralForSpecialists = new ObservableCollection<ReferralForSpecialist>();
@@ -63,18 +64,18 @@ namespace Hospital.Repository
             referralForSpecialist.Id = reader.GetInt32(0);
             referralForSpecialist.Description = reader.GetString(1);
             referralForSpecialist.Doctor = new DoctorRepository().GetAppointmentDoctorById(reader.GetInt32(2));
-            referralForSpecialist.HealthRecord = new HealthRecordRepository().GetHealthRecordById(reader.GetInt32(3));
-            referralForSpecialist.Appointment = new AppointmentRepository().GetAppointmentById(reader.GetInt32(4));
+            referralForSpecialist.HealthRecord = new HealthRecordRepository().GetById(reader.GetInt32(3));
+            referralForSpecialist.Appointment = new AppointmentRepository().GetById(reader.GetInt32(4));
             return referralForSpecialist;
         }
 
-        public System.Collections.ArrayList GetAllReferralsForSpecialistByDoctorId(int doctorId)
+        public ObservableCollection<ReferralForSpecialist> GetAllByDoctorId(int doctorId)
         {
             // TODO: implement
             return null;
         }
 
-        public Boolean DeleteReferralForSpecialistById(int id)
+        public Boolean DeleteById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -85,25 +86,25 @@ namespace Hospital.Repository
             return true;
         }
 
-        public Boolean DeleteReferralForSpecialistByPatientId(int patientId)
+        public Boolean DeleteAllByPatientId(int patientId)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DeleteReferralForSpecialistByDoctorId(int doctorId)
+        public Boolean DeleteAllByDoctorId(int doctorId)
         {
             // TODO: implement
             return false;
         }
 
-        public Hospital.Model.ReferralForSpecialist UpdateReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
+        public Hospital.Model.ReferralForSpecialist Update(Hospital.Model.ReferralForSpecialist referralForSpecialist)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.ReferralForSpecialist NewReferralForSpecialist(Hospital.Model.ReferralForSpecialist referralForSpecialist)
+        public Hospital.Model.ReferralForSpecialist Add(Hospital.Model.ReferralForSpecialist referralForSpecialist)
         {
             
 
@@ -118,13 +119,13 @@ namespace Hospital.Repository
 
         }
 
-        public System.Collections.ArrayList GetAllActiveReferralsForSpecialistByPatientId(int patientId)
+        public ObservableCollection<ReferralForSpecialist> GetAllActiveByPatientId(int patientId)
         {
             // TODO: implement
             return null;
         }
 
-        public Hospital.Model.ReferralForSpecialist GetReferralForSpecialistById(int id)
+        public Hospital.Model.ReferralForSpecialist GetById(int id)
         {
             // TODO: implement
             return null;

@@ -8,11 +8,12 @@ using System;
 using System.Collections.ObjectModel;
 using Oracle.ManagedDataAccess.Client;
 using System.Diagnostics;
+using Hospital.IRepository;
 using Hospital.Model;
 
 namespace Hospital.Repository
 {
-    public class ReferralForClinicalTreatmentRepository
+    public class ReferralForClinicalTreatmentRepository : IReferralForClinicalTreatmentRepo<ReferralForClinicalTreatment>
     {
         
         private void setConnection()
@@ -29,31 +30,31 @@ namespace Hospital.Repository
                 Trace.WriteLine(exp.ToString());
             }
         }
-        public System.Collections.ArrayList GetAllReferralsForClinicalTreatment()
+        public ObservableCollection<ReferralForClinicalTreatment> GetAll()
         {
             // TODO: implement
             return null;
         }
 
-        public System.Collections.ArrayList GetAllReferralsForClinicalTreatmentByPatientId(int patientId)
+        public ObservableCollection<ReferralForClinicalTreatment> GetAllByPatientId(int patientId)
         {
             // TODO: implement
             return null;
         }
 
-        public System.Collections.ArrayList GetAllReferralsForClinicalTreatmentByDoctorId(int doctorId)
+        public ObservableCollection<ReferralForClinicalTreatment> GetAllByDoctorId(int doctorId)
         {
             // TODO: implement
             return null;
         }
 
-        public System.Collections.ArrayList GetAllReferralsForClinicalTreatmentByRoomId(int roomId)
+        public ObservableCollection<ReferralForClinicalTreatment> GetAllByRoomId(int roomId)
         {
             // TODO: implement
             return null;
         }
 
-        public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveReferralsForClinicalTreatmentByHealthRecordId(int healthRecordId)
+        public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveByHealthRecordId(int healthRecordId)
         {
             
             ObservableCollection<ReferralForClinicalTreatment> referralForClinicalTreatments = new ObservableCollection<ReferralForClinicalTreatment>();
@@ -84,37 +85,37 @@ namespace Hospital.Repository
             return referralForClinicalTreatment;
         }
 
-        public Model.ReferralForClinicalTreatment GetReferralForClinicalTreatmentById()
+        public Model.ReferralForClinicalTreatment GetById(int id)
         {
             // TODO: implement
             return null;
         }
 
-        public Boolean DeleteReferralForClinicalTreatmentById(int id)
+        public Boolean DeleteById(int id)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DeleteReferralForClinicalTreatmentByPatientId(int patientId)
+        public Boolean DeleteAllByPatientId(int patientId)
         {
             // TODO: implement
             return false;
         }
 
-        public Boolean DeleteReferralForClinicalTreatmentByDoctorId(int doctorId)
+        public Boolean DeleteAllByDoctorId(int doctorId)
         {
             // TODO: implement
             return false;
         }
 
-        public Model.ReferralForClinicalTreatment UpdateReferralForClinicalTreatment(Model.ReferralForClinicalTreatment referralForClinicalTreatment)
+        public Model.ReferralForClinicalTreatment Update(Model.ReferralForClinicalTreatment referralForClinicalTreatment)
         {
             // TODO: implement
             return null;
         }
 
-        public Model.ReferralForClinicalTreatment NewReferralForClinicalTreatment(Model.ReferralForClinicalTreatment referral)
+        public Model.ReferralForClinicalTreatment Add(Model.ReferralForClinicalTreatment referral)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -146,11 +147,6 @@ namespace Hospital.Repository
             return 0;
         }
 
-        public System.Collections.ArrayList GetAllActiveReferralsForClinicalTreatmentByPatientId(int patientId)
-        {
-            // TODO: implement
-            return null;
-        }
 
         public int GetMaxTakenBeds(int room_id, DateRange dateRange)
         {
@@ -179,7 +175,7 @@ namespace Hospital.Repository
             return ret;
         }
 
-        public ClinicalTreatment createClinicalTreatment (ClinicalTreatment clinicalTreatment)
+        public ClinicalTreatment Create (ClinicalTreatment clinicalTreatment)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();

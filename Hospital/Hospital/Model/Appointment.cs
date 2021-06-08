@@ -2,7 +2,7 @@ using System;
 
 namespace Hospital.Model
 {
-    public class Appointment
+    public class Appointment : IEntity
     {
 
 
@@ -112,7 +112,7 @@ namespace Hospital.Model
             this.room = room;
             Doctor_Id = doctor.Id;
             Patient_Id = patient.Id;
-            Room_Id = room.Id;
+            Room_Id = (int)room.Id;
         }
         public Appointment(int durationInMinutes, DateTime startTime, AppointmentType type, AppointmentStatus status, Doctor doctor, Patient patient, Room room)
         {
@@ -126,7 +126,7 @@ namespace Hospital.Model
             this.room = room;
             Doctor_Id = doctor.Id;
             Patient_Id = patient.Id;
-            Room_Id = room.Id;
+            Room_Id = (int)room.Id;
         }
 
         public Appointment(int id, int durationInMinutes, DateTime startTime, AppointmentType type, AppointmentStatus status, int doctor_Id, int patient_Id, int room_Id)

@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
 using Hospital.Model;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
     class ReviewService
     {
+        private IReviewRepo<Review> reviewRepository;
+        public ReviewService()
+        {
+            reviewRepository = new ReviewRepository();
+        }
         public ObservableCollection<Review> GetAllReviews()
         {
             // TODO: implement
@@ -26,7 +33,7 @@ namespace Hospital.Service
 
         public Review AddReview(Review review)
         {
-            return reviewRepository.NewReview(review);
+            return reviewRepository.Add(review);
         }
 
         public Boolean DeleteReviewById(int reviewId)
@@ -35,6 +42,5 @@ namespace Hospital.Service
             return false;
         }
 
-        public Repository.ReviewRepository reviewRepository = new Repository.ReviewRepository();
     }
 }

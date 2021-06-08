@@ -3,6 +3,7 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Hospital.IRepository;
 
 /***********************************************************************
  * Module:  TimeSlotRepository.cs
@@ -12,7 +13,7 @@ using System.Linq;
 
 namespace Hospital.Repository
 {
-    public class TimeSlotRepository
+    public class TimeSlotRepository : ITimeSlotRepo<TimeSlot>
     {
         private DoctorRepository doctorRepository = new DoctorRepository();
         
@@ -30,7 +31,7 @@ namespace Hospital.Repository
 
             }
         }
-        public TimeSlot GetTimeSlotById(int id)
+        public TimeSlot GetById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -64,7 +65,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public ObservableCollection<TimeSlot> GetTimeSlotsByDatesAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
+        public ObservableCollection<TimeSlot> GetAllByDatesAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
         {
             
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
@@ -104,12 +105,12 @@ namespace Hospital.Repository
             }
 
             timeSlot.StartTime = reader.GetDateTime(2);
-            timeSlot.WorkHours = new WorkHoursRepository().GetWorkHoursById(reader.GetInt32(3));
+            timeSlot.WorkHours = new WorkHoursRepository().GetById(reader.GetInt32(3));
             timeSlot.workHours_id = timeSlot.WorkHours.Id;
             return timeSlot;
         }
 
-        public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDates(DateTime startTime, DateTime endTime)
+        public ObservableCollection<TimeSlot> GetAllFreeByDates(DateTime startTime, DateTime endTime)
         {
             
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
@@ -132,7 +133,7 @@ namespace Hospital.Repository
         }
 
 
-        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationId(int specializationId)
+        public ObservableCollection<TimeSlot> GetAllFreeBySpecializationId(int specializationId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -169,7 +170,7 @@ namespace Hospital.Repository
             return sortedTimeSlots;
         }
 
-        public ObservableCollection<TimeSlot> GetlAllFreeTimeSlotsBySpecializationIdAfterCurrentTime(int specializationId, DateTime now)
+        public ObservableCollection<TimeSlot> GetAllFreeBySpecializationIdAfterCurrentTime(int specializationId, DateTime now)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -208,7 +209,7 @@ namespace Hospital.Repository
         }
 
 
-        public ObservableCollection<TimeSlot> GetAllFreeTimeSlotsByDoctorId(int doctorId)
+        public ObservableCollection<TimeSlot> GetAllFreeByDoctorId(int doctorId)
         {
             
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
@@ -231,7 +232,7 @@ namespace Hospital.Repository
             return timeSlots;
         }
 
-        public ObservableCollection<TimeSlot> GetFreeTimeSlotsForNext48HoursByDateAndDoctorId(DateTime date, int doctorId)
+        public ObservableCollection<TimeSlot> GetAllFreeForNext48HoursByDateAndDoctorId(DateTime date, int doctorId)
         {
             
             ObservableCollection<TimeSlot> timeSlots = new ObservableCollection<TimeSlot>();
@@ -285,15 +286,9 @@ namespace Hospital.Repository
             return timeSlot;
         }
 
-        public ObservableCollection<TimeSlot> GetAllByDateRangeAndDoctorId(DateTime startTime, DateTime endTime, int doctorId)
-        {
-            // TODO: implement
-            return null;
-        }
-
 
         // not necessary 
-        public Boolean DeleteSlotByWorkhoursId(int workHoursId)
+        public Boolean DeleteByWorkhoursId(int workHoursId)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -304,13 +299,13 @@ namespace Hospital.Repository
             return false;
         }
 
-        public void generateTimeSlots()
+        public void GenerateTimeSlots()
         {
             //TimeSlot timeSlot = new TimeSlot();
             //timeSlot.StartTime = new DateTime(2021, 5, 4, 21, 0, 0);
             //timeSlot.workHours_id = 57;
             //timeSlot.Free = true;
-            //AddTimeSlot(timeSlot);
+            //New(timeSlot);
 
             TimeSlot timeSlot = new TimeSlot();
 
@@ -326,7 +321,7 @@ namespace Hospital.Repository
                 // work_hours_id se menja
                 timeSlot.workHours_id = 122;
 
-                AddTimeSlot(timeSlot);
+                Add(timeSlot);
 
                 dateTime = dateTime.Add(timeSpan);
             }
@@ -334,7 +329,7 @@ namespace Hospital.Repository
 
         }
 
-        public TimeSlot AddTimeSlot(TimeSlot timeSlot)
+        public TimeSlot Add(TimeSlot timeSlot)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -356,12 +351,6 @@ namespace Hospital.Repository
             return null;
         }
 
-
-        public System.Array NewTimeSlots(int workHoursId)
-        {
-            // TODO: implement
-            return null;
-        }
 
         public Boolean TakeTimeSlot(TimeSlot timeSlot)
         {
@@ -406,5 +395,24 @@ namespace Hospital.Repository
             return false;
         }
 
+        public ObservableCollection<TimeSlot> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TimeSlot Update(TimeSlot t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetLastId()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

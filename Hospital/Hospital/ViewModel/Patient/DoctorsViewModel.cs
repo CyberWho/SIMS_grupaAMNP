@@ -51,7 +51,7 @@ namespace Hospital.ViewModel.Patient
             /* get { return _searchString; }
              set
              {
-                 this.doctors = new DoctorRepository().SearchDoctorByNameAndSurname(SearchString);
+                 this.doctors = new DoctorRepository().SearchByNameAndSurname(SearchString);
                  SetProperty(ref _searchString,value);
              }*/
             get
@@ -62,7 +62,7 @@ namespace Hospital.ViewModel.Patient
             {
                 if (value != _searchString)
                 {
-                    this.doctors = new DoctorRepository().SearchDoctorByNameAndSurname(value);
+                    this.doctors = new DoctorRepository().SearchByNameAndSurname(value);
                     _searchString = value;
                 }
             }

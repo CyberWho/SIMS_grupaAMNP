@@ -8,7 +8,7 @@ using System;
 
 namespace Hospital.Model
 {
-    public class Address
+    public class Address : IEntity
     {
         public int Id { get; set; }
         public int city_id { get; set; }

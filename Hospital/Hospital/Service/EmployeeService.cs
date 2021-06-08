@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using Hospital.IRepository;
 using Hospital.Model;
 using Hospital.Repository;
 
@@ -12,9 +13,17 @@ namespace Hospital.Service
 {
     public class EmployeeService
     {
+        private IEmployeeRepo<Employee> employeesRepository;
+        private IUserRepo<User> userRepository;
+
+        public EmployeeService()
+        {
+            this.employeesRepository = new EmployeesRepository();
+            this.userRepository = new UserRepository();
+        }
         public Model.Employee GetEmployeeByUserId(int id)
         {
-            return employeesRepository.GetEmployeeByUserId(id);
+            return employeesRepository.GetByUserId(id);
         }
 
         public System.Collections.ArrayList GetAllEmployees()
@@ -32,7 +41,7 @@ namespace Hospital.Service
         #region marko_kt5
         public int getEmployeeIdByDoctorId(int doctor_id)
         {
-            return this.employeesRepository.getEmployeeIdByDoctorId(doctor_id);
+            return this.employeesRepository.GetIdByDoctorId(doctor_id);
         }
         public Boolean DeleteEmployeeById(int id)
         {
@@ -42,14 +51,14 @@ namespace Hospital.Service
 
         public Employee UpdateEmployee(Employee employee)
         {
-            employee = this.employeesRepository.UpdateEmployee(employee);
+            employee = this.employeesRepository.Update(employee);
 
             if (employee.User.Id == 0)
             {
-                employee.User.Id = this.employeesRepository.GetUserIdByEmployeeId(employee.Id);
+                employee.User.Id = this.employeesRepository.GetUserIdById(employee.Id);
             }
 
-            employee.User = this.userRepository.UpdateUser(employee.User);
+            employee.User = this.userRepository.Update(employee.User);
 
             return employee;
 
@@ -57,14 +66,11 @@ namespace Hospital.Service
 
         public Model.Employee AddEmployee(Model.Employee employee)
         {
-            return this.employeesRepository.NewEmployee(employee);
+            return this.employeesRepository.Add(employee);
         }
 
         #endregion
 
-
-        public EmployeesRepository employeesRepository = new EmployeesRepository();
-        private UserRepository userRepository = new UserRepository();
 
     }
 }

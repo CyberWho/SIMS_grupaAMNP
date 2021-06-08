@@ -7,25 +7,31 @@
 using Hospital.Model;
 using System;
 using System.Collections.ObjectModel;
+using Hospital.IRepository;
+using Hospital.Repository;
 
 namespace Hospital.Service
 {
     public class AllergyService
     {
-        public Repository.AllergyRepository allergyRepository = new Repository.AllergyRepository();
+        private IAllergyRepo<Allergy> allergyRepository;
 
+        public AllergyService()
+        {
+            allergyRepository = new AllergyRepository();
+        }
         public ObservableCollection<Allergy> GetAllAllergiesByUserId(int userId)
         {
-            return this.allergyRepository.GetAllAllergiesByUserId(userId);
+            return this.allergyRepository.GetAllByUserId(userId);
         }
         public Boolean DeleteAllergyByUserIdAndAllergyTypeId(int userId, int atId)
         {
-            return this.allergyRepository.DeleteAllergyByUserIdAndAllergyTypeId(userId, atId);
+            return this.allergyRepository.DeleteByUserIdAndAllergyTypeId(userId, atId);
         }
 
         public Allergy AddAllergy(Allergy allergy)
         {
-            return this.allergyRepository.NewAllergy(allergy);
+            return this.allergyRepository.Add(allergy);
         }
 
         public System.Collections.ArrayList GetAllergiesByTypeId(int allergyTypeId)
@@ -36,7 +42,7 @@ namespace Hospital.Service
 
         public ObservableCollection<Allergy> GetAllAllergiesByHealthRecordId(int healthRecordId)
         {
-            return allergyRepository.GetAllAllergiesByHealthRecordId(healthRecordId);
+            return allergyRepository.GetAllByHealthRecordId(healthRecordId);
         }
 
         public Boolean DeleteAllergyById(int id)

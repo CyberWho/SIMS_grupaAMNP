@@ -6,7 +6,7 @@
 
 namespace Hospital.Model
 {
-    public class Employee : RoleDescriptionBase
+    public class Employee : RoleDescriptionBase, IEntity
     {
 
         public int Id { get; set; }
