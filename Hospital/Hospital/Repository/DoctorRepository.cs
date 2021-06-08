@@ -66,6 +66,33 @@ namespace Hospital.Repository
 
         }
 
+        internal AbstractEmployee insertAbstractDoctorData(AbstractEmployee abstractUser)
+        {
+            int id = GetLastId() + 1;
+            abstractUser.doctor_id = id;
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            
+            command.CommandText = "INSERT INTO doctor (id, employee_id, room_id, spec_id) VALUES (:id, :employee_id, :room_id, :spec_id)";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = abstractUser.doctor_id;
+            command.Parameters.Add("employee_id", OracleDbType.Int32).Value = abstractUser.employee_id;
+            command.Parameters.Add("room_id", OracleDbType.Int32).Value =  abstractUser.room_id;
+            command.Parameters.Add("spec_id", OracleDbType.Int32).Value = abstractUser.specialization_id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return abstractUser;
+            }
+            connection.Close();
+            connection.Dispose();
+
+            return null;
+        }
+
         private static Doctor ParseDoctor(OracleDataReader reader)
         {
            Employee employee = new EmployeesRepository().GetEmployeeById(reader.GetInt32(1));

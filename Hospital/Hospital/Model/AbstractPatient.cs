@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    class AbstractPatient : AbstractUser
+    public class AbstractPatient : AbstractUser
     {
         private string _user_type;
         private int _id;
@@ -19,7 +19,15 @@ namespace Hospital.Model
         private string _jmbg;
         private DateTime _date_of_birth;
 
-        public AbstractPatient(int id, string username, string password, string name, string surname, string phone_number, string email, string jmbg, DateTime date_of_birth)
+        public int patient_id;
+        public int health_record_id;
+
+        public override string getUserType()
+        {
+            return "patient";
+        }
+
+        public AbstractPatient(int id, string username, string password, string name, string surname, string phone_number, string email, string jmbg, DateTime date_of_birth, int patient_id, int health_record_id)
         {
             this._user_type = "patient";
             this._id = id;
@@ -31,6 +39,9 @@ namespace Hospital.Model
             this._email = email;
             this._jmbg = jmbg;
             this._date_of_birth = date_of_birth;
+
+            this.patient_id = patient_id;
+            this.health_record_id = health_record_id;
         }
 
         #region  get, set
@@ -91,7 +102,6 @@ namespace Hospital.Model
             get { return _date_of_birth; }
             set { _date_of_birth = value; }
         }
-
         #endregion
     }
 }

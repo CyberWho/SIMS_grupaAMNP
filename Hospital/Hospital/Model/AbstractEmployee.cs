@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace Hospital.Model
 {
-    class AbstractEmployee : AbstractUser
+    public class AbstractEmployee : AbstractUser
     {
         private string _user_type;
         private int _id;
@@ -24,7 +24,24 @@ namespace Hospital.Model
         private int _years_of_service;
         private Role _role;
 
-        public AbstractEmployee(int id, string username, string password, string name, string surname, string phone_number, string email, string jmbg, DateTime date_of_birth, int salary, int years_of_service, Role role)
+        public int _room_id { get; set; }
+        public int _specialization_id { get; set; }
+
+        public int employee_id { get; set; }
+        public int doctor_id { get; set; }
+
+
+        public override string getUserType()
+        {
+            return "employee";
+        }
+
+        public AbstractEmployee()
+        {
+
+        }
+
+        public AbstractEmployee(int id, string username, string password, string name, string surname, string phone_number, string email, string jmbg, DateTime date_of_birth, int salary, int years_of_service, Role role, int room_id, int specialization_id, int employee_id, int doctor_id)
         {
             this._user_type = "employee";
             this._id = id;
@@ -33,12 +50,19 @@ namespace Hospital.Model
             this._name = name;
             this._surname = surname;
             this._phone_number = phone_number;
+            this._email = email;
             this._jmbg = jmbg;
             this._date_of_birth = date_of_birth;
 
             this._salary = salary;
             this._years_of_service = years_of_service;
             this._role = role;
+
+            this._room_id = room_id;
+            this._specialization_id = specialization_id;
+
+            this.employee_id = employee_id;
+            this.doctor_id = doctor_id;
         }
 
         #region  get, set
@@ -116,6 +140,18 @@ namespace Hospital.Model
         {
             get { return _role;}
             set { _role = value; }
+        }
+
+        public int room_id
+        {
+            get { return _room_id; }
+            set { _room_id = value; }
+        }
+
+        public int specialization_id
+        {
+            get { return _specialization_id; }
+            set { _specialization_id = value; }
         }
 
         #endregion

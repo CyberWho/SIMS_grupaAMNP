@@ -33,6 +33,36 @@ namespace Hospital.Repository
             }
         }
 
+        public AbstractUser makeAbstractUser(AbstractUser abstractUser)
+        {
+            int id = GetLastId() + 1;
+            abstractUser.id = id;
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO users (id, username, password, name, surname, phone_number, email) VALUES (:id, :username, :password, :name, :surname, :phone_number, :email)";
+
+            command.Parameters.Add("id", OracleDbType.Int32).Value = abstractUser.id;
+            command.Parameters.Add("username", OracleDbType.Varchar2).Value = abstractUser.username;
+            command.Parameters.Add("password", OracleDbType.Varchar2).Value = abstractUser.password;
+            command.Parameters.Add("name", OracleDbType.Varchar2).Value = abstractUser.name;
+            command.Parameters.Add("surname", OracleDbType.Varchar2).Value = abstractUser.surname;
+            command.Parameters.Add("phone_number", OracleDbType.Varchar2).Value = abstractUser.phone_number;
+            command.Parameters.Add("email", OracleDbType.Varchar2).Value = abstractUser.email;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return abstractUser;
+            }
+            connection.Close();
+            connection.Dispose();
+
+            return null;
+        }
+
 
         public User GuestUser()
         {

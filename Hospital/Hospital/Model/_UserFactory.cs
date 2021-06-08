@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    abstract class _UserFactory
+    public abstract class _UserFactory
     {
         public abstract AbstractUser getAbstractUser();
     }

@@ -29,6 +29,35 @@ namespace Hospital.Repository
             }
         }
 
+        internal AbstractPatient insertAbstractHealthRecordData(AbstractPatient abstractUser)
+        {
+            int id = GetLastId() + 1;
+            abstractUser.health_record_id = id;
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+
+            command.CommandText = "INSERT INTO health_record (patient_id, gender_id, marital_status_id, birth_place_id) VALUES (:patient_id, :gender_id, :spec_id, :birth_place_id)";
+            //command.Parameters.Add("id", OracleDbType.Int32).Value = abstractUser.health_record_id;
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = abstractUser.patient_id;
+            command.Parameters.Add("gender_id", OracleDbType.Int32).Value = 0;
+            command.Parameters.Add("marital_status_id", OracleDbType.Int32).Value = 0;
+            command.Parameters.Add("birth_place_id", OracleDbType.Int32).Value = 0;
+
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return abstractUser;
+            }
+            connection.Close();
+            connection.Dispose();
+
+            return null;
+        }
+
         public HealthRecord GetHealthRecordById(int id)
         {
             // TODO: implement

@@ -7,22 +7,72 @@
         mc:Ignorable="d"
         Title="CreateUserWindow" Height="750" Width="430">
     <Grid>
+
         <Label Content="Korisnicko ime:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200"/>
-        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,10,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label Content="Ime:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="200"/>
         <Label Content="Prezime:" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="200"/>
         <Label Content="Kontakt telefon: " HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Width="200"/>
         <Label Content="E-mail: " HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="200"/>
         <Label Content="JMBG: " HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="200"/>
         <Label Content="Datum rodjenja: " HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top" Width="200"/>
-        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,39,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,68,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,97,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,126,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,155,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <DatePicker Margin="0,184,10,0" VerticalAlignment="Top" Height="23" HorizontalAlignment="Right" Width="120"/>
-        <Label Content="Tip korisnika kojeg zelite da kreirate: " HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="200" d:LayoutOverrides="HorizontalAlignment"/>
 
+        <Label
+            x:Name="specLabel"
+            Visibility="Hidden"
+            Content="Specijalizacija: " HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label 
+            x:Name="roomLabel"
+            Visibility="Hidden"
+            Content="ID sobe: " HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" Width="200"/>
+
+
+        <TextBox 
+            Text="{Binding user.username, Mode=TwoWay}" 
+            HorizontalAlignment="Right" Height="23" Margin="0,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <TextBox 
+            Text="{Binding user.name, Mode=TwoWay}"
+            HorizontalAlignment="Right" Height="23" Margin="0,39,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <TextBox 
+            Text="{Binding user.surname, Mode=TwoWay}"
+            HorizontalAlignment="Right" Height="23" Margin="0,68,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <TextBox 
+            Text="{Binding user.phone_number, Mode=TwoWay}"
+            HorizontalAlignment="Right" Height="23" Margin="0,97,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <TextBox 
+            Text="{Binding user.email, Mode=TwoWay}"
+            HorizontalAlignment="Right" Height="23" Margin="0,126,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <TextBox 
+            Text="{Binding user.jmbg, Mode=TwoWay}"
+            HorizontalAlignment="Right" Height="23" Margin="0,155,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <DatePicker 
+            Text="{Binding user.date_of_birth, Mode=TwoWay}"
+            Margin="0,184,10,0" VerticalAlignment="Top" Height="23" HorizontalAlignment="Right" Width="120"/>
+
+        
+        <ComboBox 
+            Visibility="Hidden"
+            Name ="room_selection" Loaded="room_selection_loaded" SelectionChanged="room_selection_SelectionChanged" HorizontalAlignment="Right" Margin="0,268,10,0" VerticalAlignment="Top" Width="120"/>
+
+
+
+
+        <ComboBox 
+            Visibility="Hidden"
+            Name ="specialization_selection" Loaded="specialization_selection_loaded" HorizontalAlignment="Right" Margin="0,238,10,0" VerticalAlignment="Top" Width="120" SelectionChanged="specialization_selection_SelectionChanged"/>
+
+
+
+
+
+
+
+        <Label Content="Tip korisnika kojeg zelite da kreirate: " HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="200" d:LayoutOverrides="HorizontalAlignment"/>
 
         <RadioButton 
             Checked="Doctor_OnChecked"
@@ -34,6 +84,11 @@
             x:Name="Patient" 
             GroupName="userType" 
             Content="Pacijent" HorizontalAlignment="Right" Margin="0,215,10,0" VerticalAlignment="Top"/>
+
+
+
+        <Button Content="Kreirajte korisnika" Margin="10,0,10,45" VerticalAlignment="Bottom" d:LayoutOverrides="Height" Click="CreateUser"/>
+        
 
     </Grid>
 </Window>

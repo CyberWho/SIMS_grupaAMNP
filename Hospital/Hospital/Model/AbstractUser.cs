@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Hospital.Model
 {
-    abstract class AbstractUser
+    public abstract class AbstractUser
     {
         public abstract string user_type { get; }
         public abstract int id { get; set; }
@@ -20,7 +20,9 @@ namespace Hospital.Model
         public abstract string email { get; set; }
         public abstract string jmbg { get; set; }
         public abstract DateTime date_of_birth { get; set; }
-        
+
+
+        public abstract string getUserType();
 
     }
 }

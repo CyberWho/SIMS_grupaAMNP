@@ -33,7 +33,60 @@ namespace Hospital.Repository
             }
         }
 
+        public int insertAbstractEmployeeData(AbstractEmployee abstractEmployee)
+        {
+            int id = GetLastId() + 1;
+            setConnection();
 
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText =
+                "INSERT INTO employee (id, salary, years_of_service, user_id, role_id) VALUES (:id, :salary, :years_of_service, :user_id, :role_id)";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id;
+            command.Parameters.Add("salary", OracleDbType.Int32).Value = abstractEmployee.salary;
+            command.Parameters.Add("years_of_service", OracleDbType.Int32).Value = abstractEmployee.years_of_service;
+            command.Parameters.Add("user_id", OracleDbType.Int32).Value = abstractEmployee.id;
+            command.Parameters.Add("role_id", OracleDbType.Int32).Value = abstractEmployee.role.Id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return id;
+            }
+            connection.Close();
+            connection.Dispose();
+
+            return 0;
+        }
+
+        public AbstractPatient insertAbstractPatientData(AbstractPatient abstractPatient)
+        {
+            int id = GetLastId() + 1;
+            abstractPatient.patient_id = id;
+            setConnection();
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText =
+                "INSERT INTO patient (id, jmbg, date_of_birth, address_id, user_id) VALUES (:id, :jmbg, :date_of_birth, :address_id, :user_id)";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = abstractPatient.patient_id;
+            command.Parameters.Add("jmbg", OracleDbType.Int32).Value = abstractPatient.jmbg;
+            command.Parameters.Add("date_of_birth", OracleDbType.Date).Value = abstractPatient.date_of_birth;
+            command.Parameters.Add("address_id", OracleDbType.Int32).Value = 150;
+            command.Parameters.Add("user_id", OracleDbType.Int32).Value = abstractPatient.id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return abstractPatient;
+            }
+            connection.Close();
+            connection.Dispose();
+
+            return null;
+        }
 
         public Patient GetPatientByUserId(int id)
         {
