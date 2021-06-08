@@ -16,24 +16,11 @@ namespace Hospital.Repository
     public class EmployeesRepository : IEmployeeRepo<Employee>
     {
 
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            Globals.globalConnection = new OracleConnection(conString);
-            try
-            {
-                Globals.globalConnection.Open();
-            }
-            catch (Exception exp)
-            {
-
-            }
-        }
         public Employee GetByUserId(int userId)
         {
             
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.id LEFT OUTER JOIN role on role.id = employee.role_id WHERE users.id = " + id.ToString();
+            cmd.CommandText = "SELECT * FROM employee LEFT OUTER JOIN users ON employee.user_id = users.id LEFT OUTER JOIN role on role.id = employee.role_id WHERE users.id = " + userId.ToString();
             OracleDataReader reader = cmd.ExecuteReader();
 
             var employee = ParseEmployee(reader);
@@ -48,7 +35,7 @@ namespace Hospital.Repository
             int user_id;
 
             OracleCommand commannd = Globals.globalConnection.CreateCommand();
-            commannd.CommandText = "SELECT user_id FROM employee WHERE id = " + employee_id;
+            commannd.CommandText = "SELECT user_id FROM employee WHERE id = " + id;
             OracleDataReader reader = commannd.ExecuteReader();
             reader.Read();
 
@@ -85,9 +72,9 @@ namespace Hospital.Repository
 
             }
 
-            User user = new UserRepository().GetUserById(id);
+            User user = new UserRepository().GetById(id);
 
-            Role role = new RoleRepository().GetRoleById(reader.GetInt32(4));
+            Role role = new RoleRepository().GetById(reader.GetInt32(4));
 
             Employee employee = new Employee(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), user, role);
             return employee;
@@ -109,7 +96,7 @@ namespace Hospital.Repository
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
-            command.CommandText = "SELECT employee_id FROM doctor WHERE id = " + doctor_id;
+            command.CommandText = "SELECT employee_id FROM doctor WHERE id = " + doctorId;
 
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();

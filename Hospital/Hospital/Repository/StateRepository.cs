@@ -13,10 +13,10 @@ using Hospital.Model;
 namespace Hospital.Repository
 {
     public class StateRepository : IStateRepo<State>
-   {
-        
-        public State GetStateById(int id)
-      {
+    {
+
+        public State GetById(int id)
+        {
             
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT * FROM STATE WHERE ID = :id";
@@ -27,25 +27,25 @@ namespace Hospital.Repository
             state.Id = reader.GetInt32(0);
             state.Name = reader.GetString(1);
             return state;
-      }
-        
-      public State Add(State state)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public ObservableCollection<State> GetAll()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public int GetLastId()
-      {
-         // TODO: implement
-         return 0;
-      }
+        }
+
+        public State Add(State state)
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public ObservableCollection<State> GetAll()
+        {
+            // TODO: implement
+            return null;
+        }
+
+        public int GetLastId()
+        {
+            // TODO: implement
+            return 0;
+        }
 
         public bool DeleteById(int id)
         {

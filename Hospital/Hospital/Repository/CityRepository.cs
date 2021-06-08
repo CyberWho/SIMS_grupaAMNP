@@ -13,9 +13,10 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace Hospital.Repository
 {
-    public class CityRepository
+    public class CityRepository : ICityRepo<City>
     {
-        public City GetCityById(int id)
+
+        public City GetById(int id)
         {
             
             City city = new City();
@@ -30,29 +31,18 @@ namespace Hospital.Repository
 
             int state_id = int.Parse(reader.GetString(3));
 
-            city.State = new StateRepository().GetStateById(state_id);
+            city.State = new StateRepository().GetById(state_id);
             return city;
         }
 
-        public City GetCityByName(String name)
+
+        public City Add(City city)
         {
             // TODO: implement
             return null;
         }
 
-        public City NewCity(City city)
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public System.Collections.ArrayList GetAll()
-        {
-            // TODO: implement
-            return null;
-        }
-
-        public System.Collections.ArrayList GetAllByStateId()
+        public ObservableCollection<City> GetAll()
         {
             // TODO: implement
             return null;
@@ -64,5 +54,14 @@ namespace Hospital.Repository
             return 0;
         }
 
+        public bool DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public City Update(City t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

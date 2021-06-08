@@ -16,7 +16,8 @@ namespace Hospital.Repository
     public class AnamnesisRepository : IAnamnesisRepo<Anamnesis>
     {
         
-        public Anamnesis GetAnamnesisById(int id)
+
+        public Anamnesis GetById(int id)
         {
 
             //health record repo dopunjava jos anamnezu
@@ -27,8 +28,6 @@ namespace Hospital.Repository
             reader.Read();
             var anamnesis = ParseAnamnesis(reader);
             
-            
-
             return anamnesis;
         }
 
@@ -48,13 +47,16 @@ namespace Hospital.Repository
                 anamneses.Add(anamnesis);
             }
 
+            
+            
+
             return anamneses;
         }
 
         private static Anamnesis ParseAnamnesis(OracleDataReader reader)
         {
             Anamnesis anamnesis = new Anamnesis();
-           
+
             anamnesis.Id = reader.GetInt32(0);
             anamnesis.Description = reader.GetString(1);
             anamnesis.MedicalTreatments = new MedicalTreatment().GetAllByAnamnesisId(reader.GetInt32(0));
@@ -79,19 +81,25 @@ namespace Hospital.Repository
         {
             
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
-            cmd.CommandText = "UPDATE anamnesis SET Description = '" + anamnesis.Description +"' WHERE ID = " + anamnesis.Id;
+            cmd.CommandText = "UPDATE anamnesis SET Description = '" + anamnesis.Description + "' WHERE ID = " + anamnesis.Id;
             cmd.ExecuteNonQuery();
+
+            
+            
 
             return null;
         }
 
         public Anamnesis Add(Anamnesis anamnesis)
         {
-          
+
             
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
-            cmd.CommandText = "insert into anamnesis(description, health_record_id, appointment_id) values('" + anamnesis.Description + "'," +  anamnesis.healthRecord.Id + "," + anamnesis.appointment.Id + ")";
+            cmd.CommandText = "insert into anamnesis(description, health_record_id, appointment_id) values('" + anamnesis.Description + "'," + anamnesis.healthRecord.Id + "," + anamnesis.appointment.Id + ")";
             cmd.ExecuteNonQuery();
+
+            
+            
 
             return null;
         }

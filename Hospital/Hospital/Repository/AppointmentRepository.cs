@@ -24,7 +24,6 @@ namespace Hospital.Repository
         private UserRepository userRepository = new UserRepository();
 
 
-       
 
         public Appointment GetByDoctorIdAndTime(Doctor doctor, DateTime time)
         {
@@ -43,14 +42,42 @@ namespace Hospital.Repository
 
             int appointment_id = int.Parse(reader.GetString(0));
 
-            return this.GetAppointmentById(appointment_id);
+            
+            
+
+            return this.GetById(appointment_id);
         }
 
         public ObservableCollection<Appointment> GetAppointmentByDoctorIdAndTimePeriod(Doctor doctor, DateTime start_time, DateTime end_time)
         {
-            setConnection();
+            
 
-        public Appointment GetAppointmentById(int id)
+            // 4/21/2021 9:00:00 AM 2
+
+            int doctor_id = doctor.Id;
+            OracleCommand command = Globals.globalConnection.CreateCommand();
+            command.CommandText = "SELECT * FROM appointment WHERE doctor_id = :doctor_id AND date_time BETWEEN :start_time AND :end_time";
+            command.Parameters.Add("doctor_id", OracleDbType.Int32).Value = doctor_id;
+            command.Parameters.Add("start_time", OracleDbType.Date).Value = start_time;
+            command.Parameters.Add("end_time", OracleDbType.Date).Value = end_time;
+
+
+            OracleDataReader reader = command.ExecuteReader();
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            while (reader.Read())
+            {
+                appointments.Add(ParseAppointment(reader));
+            }
+
+
+            
+            
+
+            return appointments;
+        }
+
+
+        public Appointment GetById(int id)
         {
             
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -59,6 +86,9 @@ namespace Hospital.Repository
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             var appointment = ParseAppointment(reader);
+
+            
+            
 
             return appointment;
         }
@@ -101,7 +131,7 @@ namespace Hospital.Repository
                     break;
             }
 
-            Room room = roomRepository.GetAppointmentRoomById(roomId); 
+            Room room = roomRepository.GetAppointmentRoomById(roomId);
             appointment.room = room;
 
             Patient patient = patientRepository.GetById(patientId);
@@ -121,6 +151,9 @@ namespace Hospital.Repository
             OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM appointment WHERE appstat_id = " + id;
             OracleDataReader reader = command.ExecuteReader();
+
+            
+            
 
             return null;
         }
@@ -273,11 +306,11 @@ namespace Hospital.Repository
         public Boolean DeleteAllReservedByPatientId(int patientId)
         {
             
-            
+
             ObservableCollection<Appointment> appointments = GetAllReservedByPatientId(patientId);
-            foreach(Appointment appointment in appointments)
+            foreach (Appointment appointment in appointments)
             {
-                if(appointment.Type == AppointmentType.OPERATION)
+                if (appointment.Type == AppointmentType.OPERATION)
                 {
                     continue;
                 }
@@ -420,7 +453,7 @@ namespace Hospital.Repository
             }
 
 
-            command.CommandText = "INSERT INTO APPOINTMENT (ID,DURATIONS_MINS,DATE_TIME,ROOM_ID,PATIENT_ID,DOCTOR_ID,APPTYPE_ID,APPSTAT_ID) VALUES (:ID,"+appointment.DurationInMinutes+",:DATE_TIME,:ROOM_ID,:PATIENT_ID,:DOCTOR_ID,"+ appointment_type_id + ",1)";
+            command.CommandText = "INSERT INTO APPOINTMENT (ID,DURATIONS_MINS,DATE_TIME,ROOM_ID,PATIENT_ID,DOCTOR_ID,APPTYPE_ID,APPSTAT_ID) VALUES (:ID," + appointment.DurationInMinutes + ",:DATE_TIME,:ROOM_ID,:PATIENT_ID,:DOCTOR_ID," + appointment_type_id + ",1)";
 
             int id = GetLastId();
             int next_id = id + 1;

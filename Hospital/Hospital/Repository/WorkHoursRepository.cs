@@ -17,9 +17,9 @@ namespace Hospital.Repository
     {
         private DoctorRepository doctorRepository = new DoctorRepository();
 
-        public WorkHours GetWorkHoursById(int id)
+        public WorkHours GetById(int id)
         {
-
+            
             OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM work_hours WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();

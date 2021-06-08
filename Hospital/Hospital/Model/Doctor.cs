@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Hospital.Model
 {
-    public class Doctor : RoleDescriptionBase//: Employee
+    public class Doctor : RoleDescriptionBase, IEntity//: Employee
     {
 
         public Room room { get; set; }

@@ -15,9 +15,8 @@ namespace Hospital.Repository
     public class HealthRecordRepository : IHealthRecordRepo<HealthRecord>
     {
 
-        
 
-        public HealthRecord GetHealthRecordById(int id)
+        public HealthRecord GetById(int id)
         {
             // TODO: implement
             return null;
@@ -33,7 +32,7 @@ namespace Hospital.Repository
             
 
             OracleCommand command = Globals.globalConnection.CreateCommand();
-            command.CommandText = "SELECT * FROM health_record WHERE patient_id = " + id;
+            command.CommandText = "SELECT * FROM health_record WHERE patient_id = " + patientId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
@@ -82,7 +81,7 @@ namespace Hospital.Repository
                     break;
             }
 
-           
+
             healthRecord = new HealthRecord(int.Parse(reader.GetString(0)), gender,
                                                          maritalStatus, int.Parse(reader.GetString(4)));
 
@@ -94,14 +93,14 @@ namespace Hospital.Repository
             
 
 
-                healthRecord.anamnesis = new AnamnesisRepository().GetAllAnamnesesByHealthRecordId(record_id);
-            healthRecord.patient_id = id;
+            healthRecord.anamnesis = new AnamnesisRepository().GetAllByHealthRecordId(record_id);
+            healthRecord.patient_id = patientId;
             healthRecord.Patient = patient;
             healthRecord.PlaceOfBirth = new CityRepository().GetById(city_id);
             healthRecord.Gender = gender;
             healthRecord.MaritalStatus = maritalStatus;
             
-            
+
 
 
             return healthRecord;

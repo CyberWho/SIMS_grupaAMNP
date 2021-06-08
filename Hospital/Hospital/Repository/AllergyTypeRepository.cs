@@ -19,14 +19,14 @@ namespace Hospital.Repository
         PatientRepository patientRepository = new PatientRepository();
         HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
 
-        
-        public System.Collections.ArrayList GetAllAllergyTypes()
+
+        public ObservableCollection<AllergyType> GetAll()
         {
             // TODO: implement
             return null;
         }
 
-        
+
 
         public Boolean DeleteById(int id)
         {
@@ -54,7 +54,6 @@ namespace Hospital.Repository
 
         public AllergyType GetByType(string type)
         {
-            
 
             AllergyType at = new AllergyType();
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -71,11 +70,12 @@ namespace Hospital.Repository
 
         public ObservableCollection<AllergyType> GetAllMissingTypesByUserId(int userId)
         {
-            
+
 
             ObservableCollection<AllergyType> allergyTypes = new ObservableCollection<AllergyType>();
 
             OracleCommand command = Globals.globalConnection.CreateCommand();
+
             command.CommandText = "SELECT * FROM patient WHERE user_id = " + userId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -98,15 +98,13 @@ namespace Hospital.Repository
                 allergyTypes.Add(allergyType);
             }
 
-            
-            
+ 
 
             return allergyTypes;
         }
 
         public AllergyType GetById(int id)
         {
-            
 
             OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM allergy_type WHERE id = " + id;
@@ -114,14 +112,12 @@ namespace Hospital.Repository
             reader.Read();
 
             AllergyType allergyType = new AllergyType(reader.GetInt32(0), reader.GetString(1));
-            
-            
+
 
             return allergyType;
         }
         public ObservableCollection<AllergyType> GetAllByHealthRecordId(int id)
         {
-            
 
             ObservableCollection<AllergyType> allergyTypes = new ObservableCollection<AllergyType>();
 
@@ -138,6 +134,7 @@ namespace Hospital.Repository
 
                 allergyTypes.Add(allergyType);
             }
+
 
             return allergyTypes;
         }

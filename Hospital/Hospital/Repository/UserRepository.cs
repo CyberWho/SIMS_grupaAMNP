@@ -20,6 +20,8 @@ namespace Hospital.Repository
 
         public User GuestUser()
         {
+            
+
             int last_id = this.GetLastId();
 
             User user = new User();
@@ -34,14 +36,19 @@ namespace Hospital.Repository
 
             HealthRecord healthRecord = new HealthRecord();
             healthRecord.patient_id = patient.Id;
-            healthRecord = this.healthRecordRepository.NewHealthRecord(healthRecord, 1);
+            healthRecord = this.healthRecordRepository.New(healthRecord, 1);
+
+            
+            
+
             return user;
         }
 
 
         public User GetById(int id)
         {
-
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            
             User user = new User();
 
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -63,6 +70,9 @@ namespace Hospital.Repository
             user.PhoneNumber = reader.GetString(5);
             user.EMail = reader.GetString(6);
 
+            
+            
+
             return user;
         }
 
@@ -74,6 +84,8 @@ namespace Hospital.Repository
 
         public ObservableCollection<User> GetAll()
         {
+            
+
             ObservableCollection<User> users = new ObservableCollection<User>();
 
             OracleCommand command = Globals.globalConnection.CreateCommand();
@@ -110,6 +122,9 @@ namespace Hospital.Repository
                 users.Add(nUser);
             }
 
+            
+            
+
             return users;
         }
 
@@ -121,9 +136,14 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
+                
+                
+
                 return true;
             }
             
+            
+
             return false;
         }
 
@@ -153,8 +173,15 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
+                
+                
+
                 return user;
             }
+
+            
+            
+
             return null;
         }
 
@@ -174,6 +201,9 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
+                    
+                    
+
                     return user;
                 }
             }
@@ -193,20 +223,31 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
+                    
+                    
+
                     return user;
                 }
             }
+
+            
+            
 
             return null;
         }
         #endregion
         public int GetLastId()
         {
+            
+
             OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT MAX(id) FROM users";
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
+
+            
+            
 
             return last_id;
         }
@@ -238,6 +279,9 @@ namespace Hospital.Repository
             command.Parameters.Add("email", OracleDbType.Varchar2).Value = user.EMail;
 
             command.ExecuteNonQuery();
+
+            
+            
 
             Role role = new
                 Role(

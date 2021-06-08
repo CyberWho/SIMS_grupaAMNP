@@ -19,24 +19,25 @@ namespace Hospital.Repository
         private CityRepository cityRepository = new CityRepository();
 
 
-        public Address GetAddressByPatientId(int id)
+
+
+        public Address GetByPatientId(int patientId)
         {
-            
             OracleCommand command = Globals.globalConnection.CreateCommand();
-            command.CommandText = "SELECT address_id FROM patient WHERE id = " + id;
+            command.CommandText = "SELECT address_id FROM patient WHERE patientId = " + patientId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int addressId = reader.GetInt32(0);
-            var address = GetAddressById(addressId);
+            var address = GetById(addressId);
+  
             return address;
         }
 
         public Address GetById(int id)
         {
-            
 
             OracleCommand command = Globals.globalConnection.CreateCommand();
-            command.CommandText = "SELECT * FROM address WHERE id = " + id;
+            command.CommandText = "SELECT * FROM address WHERE patientId = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
@@ -46,7 +47,9 @@ namespace Hospital.Repository
             address.city_id = int.Parse(reader.GetString(3));
 
             int city_id = reader.GetInt32(3);
-            address.City = cityRepository.GetCityById(city_id);
+
+
+            address.City = cityRepository.GetById(city_id);
 
 
 
