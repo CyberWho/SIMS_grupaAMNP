@@ -9,19 +9,46 @@ using Hospital.Repository;
 using System;
 using System.Collections.ObjectModel;
 using Hospital.IRepository;
+using System.Drawing.Printing;
 
 namespace Hospital.Service
 {
     public class UserService
     {
         public IUserRepo<User> userRepository;
+        //public UserRepository userRepository = new UserRepository();
+        private EmployeesRepository employeesRepository = new EmployeesRepository();
+        private DoctorRepository doctorRepository = new DoctorRepository();
+        private PatientRepository patientRepository = new PatientRepository();
+        private HealthRecordRepository healthRecordRepository = new HealthRecordRepository();
 
         public Boolean IsGuest;
         public int MinPasswordLength;
 
-        public UserService()
+
+        public AbstractUser makeAbstractUser(AbstractUser abstractUser)
         {
-            userRepository = new UserRepository();
+            abstractUser = this.userRepository.makeAbstractUser(abstractUser);
+            if (abstractUser.getUserType().Equals("employee"))
+            {
+                abstractUser = this.employeesRepository.insertAbstractEmployeeData((AbstractEmployee) abstractUser);
+
+                abstractUser = this.doctorRepository.insertAbstractDoctorData((AbstractEmployee) abstractUser);
+            }
+            else
+            {
+                abstractUser = this.patientRepository.insertAbstractPatientData((AbstractPatient) abstractUser);
+
+                abstractUser = this.healthRecordRepository.insertAbstractHealthRecordData((AbstractPatient) abstractUser);
+            }
+
+            return abstractUser;
+        }
+
+
+        public UserService(IUserRepo<User> iUserRepo)
+        {
+            userRepository = iUserRepo;
         }
         public User GuestUser()
         {
@@ -70,8 +97,7 @@ namespace Hospital.Service
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
-            return false;
+            return userRepository.DeleteById(id);
         }
 
         public Boolean DeleteUserByUsername(String username)

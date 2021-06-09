@@ -132,6 +132,12 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AbstractEmployee.cs" />
+    <Compile Include="Model\AbstractPatient.cs" />
+    <Compile Include="Model\AbstractUser.cs" />
+    <Compile Include="Model\_EmployeeFactory.cs" />
+    <Compile Include="Model\_PatientFactory.cs" />
+    <Compile Include="Model\_UserFactory.cs" />
     <Compile Include="IRepository\IAddressRepo.cs" />
     <Compile Include="IRepository\IAllergyRepo.cs" />
     <Compile Include="IRepository\IAllergyTypeRepo.cs" />
@@ -157,20 +163,31 @@
     <Compile Include="IRepository\ITimeSlotRepo.cs" />
     <Compile Include="IRepository\IUserRepo.cs" />
     <Compile Include="IRepository\IWorkHoursRepo.cs" />
+    <Compile Include="Model\AppointmentAction.cs" />
+    <Compile Include="Model\AppointmentCommand.cs" />
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />
     <Compile Include="Model\DrugDTO.cs" />
+    <Compile Include="Model\Executer.cs" />
     <Compile Include="Model\FreeDays.cs" />
     <Compile Include="Model\FreeDaysStatus.cs" />
     <Compile Include="Model\Globals.cs" />
+    <Compile Include="Model\IRoleDescriptior.cs" />
+    <Compile Include="Model\ICommand.cs" />
     <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
+    <Compile Include="Model\Manager.cs" />
+    <Compile Include="Model\Modify.cs" />
     <Compile Include="Model\PatientLogs.cs" />
     <Compile Include="Model\RenovationDTO.cs" />
     <Compile Include="Model\PersonalReminder.cs" />
     <Compile Include="Model\PersonalReminderFrequency.cs" />
     <Compile Include="Model\Review.cs" />
+    <Compile Include="Model\RoleDescriptionBase.cs" />
+    <Compile Include="Model\Secretary.cs" />
     <Compile Include="Model\TimeSlot.cs" />
+    <Compile Include="Model\UserAction.cs" />
+    <Compile Include="Model\UserCommand.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\AllergyRepository.cs" />
     <Compile Include="Repository\AllergyTypeRepository.cs" />
@@ -230,6 +247,7 @@
     <Compile Include="Service\ReviewService.cs" />
     <Compile Include="Service\RoleService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\RoomServiceAlgorithms.cs" />
     <Compile Include="Service\SpecializationService.cs" />
     <Compile Include="Service\StateService.cs" />
     <Compile Include="Service\SystemNotificationService.cs" />
@@ -382,6 +400,9 @@
     <Compile Include="xaml_windows\Doctor\Create_operation.xaml.cs">
       <DependentUpon>Create_operation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Doctor\DoctorToManager.xaml.cs">
+      <DependentUpon>DoctorToManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Doctor\DoctorUI2.xaml.cs">
       <DependentUpon>DoctorUI2.xaml</DependentUpon>
     </Compile>
@@ -533,6 +554,9 @@
     </Compile>
     <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
       <DependentUpon>CreateNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="xaml_windows\Secretary\CreateUserWindow.xaml.cs">
+      <DependentUpon>CreateUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml_windows\Secretary\FreeDays.xaml.cs">
       <DependentUpon>FreeDays.xaml</DependentUpon>
@@ -729,6 +753,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Doctor\Create_operation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Doctor\DoctorToManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -929,6 +957,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Secretary\CreateNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\CreateUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

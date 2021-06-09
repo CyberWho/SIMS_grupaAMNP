@@ -15,7 +15,7 @@ public static class Globals
         Trace.WriteLine(sf.GetFileName() + " " + sf.GetMethod().Name + " ERROR: " + exp.ToString());
         globalConnection.Close();
     }
-    public static void QuickTrace(string content) 
+    public static void QuickTrace(string content)
     {
         Trace.WriteLine(content);
     }
@@ -27,21 +27,26 @@ public static class Globals
     {
         MessageBox.Show(content, title, MessageBoxButton.OK, MessageBoxImage.Information);
     }
+
+    public static bool made = true;
     public static void SetGlobalConnection()
     {
-        string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-
-        if (globalConnection == null || globalConnection.State != ConnectionState.Closed)
+        if (made)
         {
-            globalConnection = new OracleConnection(conString);
-            //try
+            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            if (globalConnection == null || globalConnection.State == ConnectionState.Closed)
             {
-                globalConnection.Open();
+                globalConnection = new OracleConnection(conString);
+                try
+                {
+                    globalConnection.Open();
+                }
+                catch (Exception exp)
+                {
+                    ThrowException(exp);
+                }
             }
-            /*catch (Exception exp)
-            {
-                ThrowException(exp);
-            }*/
+            made = false;
         }
     }
 }

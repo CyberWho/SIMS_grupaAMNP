@@ -166,12 +166,13 @@ namespace Hospital.xaml_windows.Secretary
                 current_doctor_id = int.Parse(content);
                 Model.Doctor doctor = this.doctorController.GetDoctorById(current_doctor_id);
 
-                fill_user_data(doctor);
+                //fill_user_data(doctor);
 
                 dataGridDoctors.UnselectAll();
             }
         }
 
+        /*
         private void fill_user_data(Model.Doctor doctor)
         {
             NName = doctor.User.Name;
@@ -260,6 +261,7 @@ namespace Hospital.xaml_windows.Secretary
 
             _ = this.employeeController.UpdateEmployee(employee);
         }
+        */
 
         private void Refresh(object sender, RoutedEventArgs e)
         {
@@ -267,6 +269,7 @@ namespace Hospital.xaml_windows.Secretary
             dataGridDoctors.ItemsSource = doctors;
         }
 
+        /*
         private void specialization_selection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (specialization_selection.SelectedItem != null)
@@ -311,6 +314,7 @@ namespace Hospital.xaml_windows.Secretary
 
             this.room_selection.ItemsSource = roomsIds;
         }
+        */
 
         private void manage_free_days(object sender, RoutedEventArgs e)
         {

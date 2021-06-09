@@ -16,6 +16,7 @@ namespace Hospital
             InitializeComponent();
             if (OracleConfiguration.TnsAdmin == null)
                 OracleConfiguration.TnsAdmin = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Oracle\network\admin\DBTIM1";
+            Globals.SetGlobalConnection();
         }
 
         private void Potvrda_Click(object sender, RoutedEventArgs e)
@@ -23,7 +24,6 @@ namespace Hospital
 
              string user = Username.Text;
              string pass = Password.Password;
-
              if(new UserController().LoginUser(user, pass))
                  this.Close();
         }

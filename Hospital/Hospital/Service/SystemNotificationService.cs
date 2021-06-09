@@ -16,9 +16,9 @@ namespace Hospital.Service
     {
         private ISystemNotificationRepo<SystemNotification> systemNotificationRepository;
 
-        public SystemNotificationService()
+        public SystemNotificationService(ISystemNotificationRepo<SystemNotification> iSystemNotificationRepo)
         {
-            systemNotificationRepository = new SystemNotificationRepository();
+            systemNotificationRepository = iSystemNotificationRepo;
         }
 
         public ObservableCollection<SystemNotification> GetAllSystemWideSystemNotifications()

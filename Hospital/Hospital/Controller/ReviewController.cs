@@ -36,7 +36,7 @@ namespace Hospital.Controller
             return false;
         }
 
-        public Service.ReviewService reviewService = new Service.ReviewService();
+        public Service.ReviewService reviewService = new Service.ReviewService(new ReviewRepository());
 
     }
 }

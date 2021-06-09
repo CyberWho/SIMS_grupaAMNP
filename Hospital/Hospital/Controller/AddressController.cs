@@ -13,7 +13,7 @@ namespace Hospital.Controller
 {
     public class AddressController
     {
-        public AddressService addressService = new AddressService();
+        public AddressService addressService = new AddressService(new AddressRepository());
        
         public Address GetAddressByPatientId(int id)
         {

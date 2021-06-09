@@ -14,7 +14,7 @@ namespace Hospital.Controller
 {
     public class SystemNotificationsController
     {
-        public SystemNotificationService systemNotificationService = new SystemNotificationService();
+        public SystemNotificationService systemNotificationService = new SystemNotificationService(new SystemNotificationRepository());
 
         public ObservableCollection<SystemNotification> GetAllSystemWideSystemNotifications()
         {

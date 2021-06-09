@@ -36,8 +36,8 @@ namespace Hospital.Repository
         }
         public ObservableCollection<Renovation> GetAllRenovations()
         {
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             query.CommandText = SelectAllCommandText;
             OracleDataReader reader;
 
@@ -56,8 +56,8 @@ namespace Hospital.Repository
         }
         public ObservableCollection<Renovation> GetAllActiveRenovations()
         {
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             query.CommandText = SelectAllCommandText + " WHERE ended = 0";
             OracleDataReader reader;
 
@@ -77,8 +77,8 @@ namespace Hospital.Repository
 
         public Renovation GetRenovationById(int id)
         {
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             query.CommandText = SelectAllCommandText + " WHERE renovation_id = " + id.ToString();
             OracleDataReader reader;
 
@@ -96,8 +96,8 @@ namespace Hospital.Repository
         }
         public ObservableCollection<Room> GetAllRoomsNotInRenovation()
         {
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             ObservableCollection<int> RoomIDs = new ObservableCollection<int>();
             query.CommandText = "SELECT DISTINCT room_id FROM renovation_rooms inner join renovation on renovation.id = renovation_id WHERE ended = 0";
             OracleDataReader reader;
@@ -141,8 +141,8 @@ namespace Hospital.Repository
 
         public Renovation UpdateRenovation(Renovation renovation)
         {
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             string ended = renovation.Ended ? "1" : "0";
             query.CommandText = "UPDATE renovation SET " +
                 "start_time = to_date('" + renovation.StartDate.ToString() + "','DD-MON-YY HH:MI:SS PM'), " +
@@ -200,8 +200,8 @@ namespace Hospital.Repository
         {
             string ended = renovation.Ended ? "1" : "0";
 
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             query.CommandText = "INSERT INTO renovation (start_time, type, ended, new_area) VALUES (to_date('" + renovation.StartDate.ToString() + "','DD-MON-YY HH:MI:SS PM'), " +
                 + (int)renovation.Type + ", " + ended + ", " + renovation.NewArea.ToString() + ")";
             
@@ -234,8 +234,8 @@ namespace Hospital.Repository
 
         public int GetLastId()
         {
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             query.CommandText = "SELECT max(id) FROM renovation";
             OracleDataReader reader;
 

@@ -16,9 +16,9 @@ namespace Hospital.Service
     {
         private IAllergyRepo<Allergy> allergyRepository;
 
-        public AllergyService()
+        public AllergyService(IAllergyRepo<Allergy> iAllergyRepo)
         {
-            allergyRepository = new AllergyRepository();
+            allergyRepository = iAllergyRepo;
         }
         public ObservableCollection<Allergy> GetAllAllergiesByUserId(int userId)
         {

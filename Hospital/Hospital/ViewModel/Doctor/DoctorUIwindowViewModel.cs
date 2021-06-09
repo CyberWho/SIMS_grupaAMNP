@@ -28,6 +28,8 @@ namespace Hospital.ViewModel.Doctor
         public MyICommand GoToPatientSearchCommand { get; set; }
         public MyICommand GoToTutorialCommand { get; set; }
 
+        public MyICommand GoToDoctorToManagerCommand { get; set; }
+
         private int id;
         private int id_doc;
 
@@ -52,6 +54,7 @@ namespace Hospital.ViewModel.Doctor
             this.GoToScheduleCommand = new MyICommand(GoToSchedule);
             this.GoToPatientSearchCommand = new MyICommand(GoToPatientSearch);
             this.GoToTutorialCommand = new MyICommand(GoToTutorial);
+            this.GoToDoctorToManagerCommand = new MyICommand(GoToDoctorToManager);
 
             this.thisWindow = window;
         }
@@ -60,6 +63,12 @@ namespace Hospital.ViewModel.Doctor
         {
         }
 
+        public void GoToDoctorToManager()
+        {
+            Window s = new DoctorToManager(this.id);
+            s.Show();
+            thisWindow.Close();
+        }
         public void GoToTutorial()
         {
             Window s = new Tutorial(this.id);

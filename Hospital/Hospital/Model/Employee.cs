@@ -6,7 +6,7 @@
 
 namespace Hospital.Model
 {
-    public class Employee : IEntity
+    public class Employee : RoleDescriptionBase, IEntity
     {
 
         public int Id { get; set; }
@@ -17,6 +17,9 @@ namespace Hospital.Model
         public Role role { get; set; }
 
         /// <pdGenerated>default parent getter</pdGenerated>
+
+        
+
         public Role GetRole()
         {
             return role;
@@ -52,6 +55,21 @@ namespace Hospital.Model
 
         public Employee()
         {
+        }
+        public Employee(int id, RoleDescriptionBase rdb)
+        {
+            this.Id = id;
+            this.wrappee = rdb;
+        }
+
+        public override string describeMyRole()
+        {
+            return wrappee.describeMyRole() + "Vi se u nasoj kopaniji cenjeni radnik\n";
+        }
+
+        public override int howMuchAmIPaid()
+        {
+            return wrappee.howMuchAmIPaid() + 10000;
         }
     }
 }

@@ -17,9 +17,9 @@ namespace Hospital.Service
     {
         private IReferralForClinicalTreatmentRepo<ReferralForClinicalTreatment> referralForClinicalTreatmentRepository;
 
-        public ReferralForClinicalTreatmentService()
+        public ReferralForClinicalTreatmentService(IReferralForClinicalTreatmentRepo<ReferralForClinicalTreatment> iReferralForClinicalTreatmentRepo)
         {
-            referralForClinicalTreatmentRepository = new ReferralForClinicalTreatmentRepository();
+            referralForClinicalTreatmentRepository = iReferralForClinicalTreatmentRepo;
         }
         public System.Collections.ArrayList GetAllReferralsForClinicalTreatment()
         {

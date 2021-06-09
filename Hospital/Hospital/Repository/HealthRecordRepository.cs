@@ -15,20 +15,30 @@ namespace Hospital.Repository
     public class HealthRecordRepository : IHealthRecordRepo<HealthRecord>
     {
 
-        OracleConnection connection = null;
-        private void setConnection()
+
+            
+
+        internal AbstractPatient insertAbstractHealthRecordData(AbstractPatient abstractUser)
         {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
+            int id = GetLastId() + 1;
+            abstractUser.health_record_id = id;
 
-            }
-            catch (Exception exp)
-            {
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
+            command.CommandText = "INSERT INTO health_record (patient_id, gender_id, marital_status_id, birth_place_id) VALUES (:patient_id, :gender_id, :spec_id, :birth_place_id)";
+            //command.Parameters.Add("id", OracleDbType.Int32).Value = abstractUser.health_record_id;
+            command.Parameters.Add("patient_id", OracleDbType.Int32).Value = abstractUser.patient_id;
+            command.Parameters.Add("gender_id", OracleDbType.Int32).Value = 0;
+            command.Parameters.Add("marital_status_id", OracleDbType.Int32).Value = 0;
+            command.Parameters.Add("birth_place_id", OracleDbType.Int32).Value = 0;
+
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                return abstractUser;
             }
+
+            return null;
         }
 
         public HealthRecord GetById(int id)
@@ -44,9 +54,9 @@ namespace Hospital.Repository
             Patient p = pr.GetById(patientId);
             User u = ur.GetById(p.user_id);
 
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM health_record WHERE patient_id = " + patientId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -96,7 +106,7 @@ namespace Hospital.Repository
                     break;
             }
 
-           
+
             healthRecord = new HealthRecord(int.Parse(reader.GetString(0)), gender,
                                                          maritalStatus, int.Parse(reader.GetString(4)));
 
@@ -104,18 +114,18 @@ namespace Hospital.Repository
 
             int city_id = int.Parse(reader.GetString(4));
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
 
-           // healthRecord.anamnesis = new AnamnesisRepository().GetAllByHealthRecordId(record_id);
+            healthRecord.anamnesis = new AnamnesisRepository().GetAllByHealthRecordId(record_id);
             healthRecord.patient_id = patientId;
             healthRecord.Patient = patient;
             healthRecord.PlaceOfBirth = new CityRepository().GetById(city_id);
             healthRecord.Gender = gender;
             healthRecord.MaritalStatus = maritalStatus;
-            connection.Close();
             
+
 
 
             return healthRecord;
@@ -147,8 +157,8 @@ namespace Hospital.Repository
 
         public HealthRecord New(HealthRecord healthRecord, int guest = 0)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
             int last_id = this.GetLastId() + 1;
             healthRecord.Id = last_id;
@@ -162,8 +172,8 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
-                    connection.Close();
-                    connection.Dispose();
+                    
+                    
 
                     return healthRecord;
                 }
@@ -173,8 +183,8 @@ namespace Hospital.Repository
 
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }

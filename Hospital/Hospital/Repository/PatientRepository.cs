@@ -17,48 +17,56 @@ namespace Hospital.Repository
     public class PatientRepository : IPatientRepo<Patient>
     {
 
-        OracleConnection connection = null;
+        
         private AddressRepository addressRepository = new AddressRepository();
-        private void setConnection()
+
+
+           
+
+        
+
+        public AbstractPatient insertAbstractPatientData(AbstractPatient abstractPatient)
         {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
+            int id = GetLastId() + 1;
+            abstractPatient.patient_id = id;
 
-            }
-            catch (Exception exp)
-            {
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
+            command.CommandText =
+                "INSERT INTO patient (id, jmbg, date_of_birth, address_id, user_id) VALUES (:id, :jmbg, :date_of_birth, :address_id, :user_id)";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = abstractPatient.patient_id;
+            command.Parameters.Add("jmbg", OracleDbType.Int32).Value = abstractPatient.jmbg;
+            command.Parameters.Add("date_of_birth", OracleDbType.Date).Value = abstractPatient.date_of_birth;
+            command.Parameters.Add("address_id", OracleDbType.Int32).Value = 150;
+            command.Parameters.Add("user_id", OracleDbType.Int32).Value = abstractPatient.id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                return abstractPatient;
             }
+
+            return null;
         }
-
-
 
         public Patient GetByUserId(int userId)
         {
-           
-            setConnection();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM patient WHERE user_id = :userId";
             command.Parameters.Add("userId", OracleDbType.Int32).Value = userId.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
 
             var patient = ParsePatient(reader);
-            connection.Close();
-            connection.Dispose();
-
+            
             return patient;
         }
 
 
         public Patient GetById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM PATIENT WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -76,8 +84,8 @@ namespace Hospital.Repository
 
 
 
-            connection.Close();
-            connection.Dispose();
+            
+            
             User user = new UserRepository().GetById(idGetUserById);
             tmp.User = user;
             return tmp;
@@ -85,37 +93,37 @@ namespace Hospital.Repository
 
         public bool CheckIfPatientHasBeenLogedById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM HAS_BEEN_LOGED WHERE PATIENT_ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             if (reader.GetInt32(2) == 0)
             {
-                connection.Close();
-                connection.Dispose();
-                return false;
                 
+                
+                return false;
+
             }
             else
             {
-                connection.Close();
-                connection.Dispose();
+                
+                
                 return true;
             }
-           
+
         }
 
         public void UpdateHasBeenLogedById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "UPDATE HAS_BEEN_LOGED SET HAS_BEEN_LOGED = 1 WHERE PATIENT_ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             command.ExecuteNonQuery();
-            connection.Close();
-            connection.Dispose();
+            
+            
 
         }
 
@@ -148,25 +156,25 @@ namespace Hospital.Repository
 
         /*public Patient GetPatientById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM PATIENT WHERE ID = :userId";
             command.Parameters.Add("userId", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             var patient = ParsePatient(reader);
-            connection.Close();
-            connection.Dispose(); 
+            
+             
 
             return patient;
         }*/
 
         /*public ObservableCollection<Patient> GetAll()
         {
-            setConnection();
+            
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM PATIENT";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -182,8 +190,8 @@ namespace Hospital.Repository
 
             
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return patients;
         }*/
@@ -191,10 +199,10 @@ namespace Hospital.Repository
 
         public ObservableCollection<Patient> GetAll()
         {
-            setConnection();
+            
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM USERS,PATIENT WHERE USERS.ID = PATIENT.USER_ID";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -229,8 +237,8 @@ namespace Hospital.Repository
                 patients.Add(patient);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return patients;
         }
@@ -249,8 +257,8 @@ namespace Hospital.Repository
 
         public Patient New(Patient patient, int guest = 0)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
 
             int last_id = this.GetLastId() + 1;
             patient.Id = last_id;
@@ -264,8 +272,8 @@ namespace Hospital.Repository
 
                 if (command.ExecuteNonQuery() > 0)
                 {
-                    connection.Close();
-                    connection.Dispose();
+                    
+                    
 
                     return patient;
                 }
@@ -275,24 +283,24 @@ namespace Hospital.Repository
 
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }
 
         public int GetLastId()
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT MAX(id) FROM patient";
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int last_id = int.Parse(reader.GetString(0));
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return last_id;
         }

@@ -32,7 +32,7 @@ namespace Hospital.xaml_windows.Doctor
             this.id_doc_as_user = idDocAsUser;
             this.id_patient = id_patient;
             healthRecord = healthRecordControleller.GetHealthRecordByPatientId(id_patient);
-            //MessageBox.Show(id_patient.ToString());
+            MessageBox.Show(healthRecord.Id.ToString());
             appointments = appointmentController.GetAllReservedAppointmentsByPatientId(id_patient);
             patient = patientController.GetPatientByPatientId(id_patient);
             fillAppointmentsToUi();

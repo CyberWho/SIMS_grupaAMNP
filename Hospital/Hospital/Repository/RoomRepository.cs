@@ -12,15 +12,15 @@ namespace Hospital.Repository
     public class RoomRepository
     {
 
-        OracleConnection connection = null;
+        
 
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -31,8 +31,8 @@ namespace Hospital.Repository
         public Room GetRoomById(int id)
         {
             Room room = new Room();
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id WHERE room.id = " + id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -43,17 +43,17 @@ namespace Hospital.Repository
             RoomType newRoomType = new RoomType(reader.GetInt32(4), reader.GetString(5), null);
             room.roomType = newRoomType;
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return room;
         }
 
         public Room GetAppointmentRoomById(int id)
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM ROOM WHERE ID = :id";
             command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
             OracleDataReader reader = null; //prvo inicijalizacija na null resava operation on closed object
@@ -64,8 +64,8 @@ namespace Hospital.Repository
             room.Floor = reader.GetInt32(1);
             room.Area = reader.GetDouble(2);
             room.Description = reader.GetString(3);
-            connection.Close();
-            connection.Dispose();
+            
+            
             return room;
         }
 
@@ -78,8 +78,8 @@ namespace Hospital.Repository
             }
             IDsString = IDsString.Remove(IDsString.Length - 2);
 
-            setConnection();
-            OracleCommand query = connection.CreateCommand();
+            
+            OracleCommand query = globalConnection.CreateCommand();
             query.CommandText = "SELECT * FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id WHERE room.id not in (" + IDsString + ") and rtype_id != 5 order by room.id";
             OracleDataReader reader;
             
@@ -112,21 +112,21 @@ namespace Hospital.Repository
         public Room GetRoomByDoctorId(int doctorId)
         {
             //select room_id from doctor where id = 1;
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "select room_id from doctor where id = " + doctorId;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
             int room_id = reader.GetInt32(0);
-            connection.Close();
+            
             return GetAppointmentRoomById(room_id);
         }
 
         public ObservableCollection<Room> GetAllRooms()
         {
-            setConnection();
+            
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT room.id, floor, area, description, rtype, room_type.id ROOMTYPEID FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id ORDER BY room.id";
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -137,8 +137,8 @@ namespace Hospital.Repository
                 rooms.Add(newRoom);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return rooms;
         }
@@ -152,9 +152,9 @@ namespace Hospital.Repository
         #region marko_kt5
         public ObservableCollection<Room> GetAllRoomsByRoomType(RoomType roomType)
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM room WHERE rtype_id = " + roomType.Id;
             OracleDataReader reader = command.ExecuteReader();
 
@@ -181,10 +181,10 @@ namespace Hospital.Repository
 
         public ObservableCollection<RoomType> GetAllRoomTypesForEachRoom()
         {
-            setConnection();
+            
 
             ObservableCollection<RoomType> roomTypes = new ObservableCollection<RoomType>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT * FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id ORDER BY room.id";
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -198,17 +198,17 @@ namespace Hospital.Repository
                 roomTypes.Add(roomType);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return roomTypes;
         }
 
         public ObservableCollection<RoomType> GetAllRoomTypes()
         {
-            setConnection();
+            
             ObservableCollection<RoomType> roomTypes = new ObservableCollection<RoomType>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT * FROM room_type";
             OracleDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -217,16 +217,16 @@ namespace Hospital.Repository
                 roomTypes.Add(roomType);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return roomTypes;
         }
         public ObservableCollection<int> GetAllRoomIDs()
         {
-            setConnection();
+            
             ObservableCollection<int> roomIDs = new ObservableCollection<int>();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT id FROM room";
             OracleDataReader reader;
             try
@@ -248,24 +248,24 @@ namespace Hospital.Repository
 
         public Boolean DeleteRoomById(int id)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "DELETE FROM room WHERE id = " + id.ToString();
 
             try
             {
                 cmd.ExecuteNonQuery();
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return true;
             }
             catch (Exception e)
             {
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return false;
             }
@@ -285,8 +285,8 @@ namespace Hospital.Repository
 
         public Room UpdateRoom(Room room)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText =
                 "UPDATE room " +
                 "SET floor = " + room.Floor.ToString() + ", " +
@@ -299,16 +299,16 @@ namespace Hospital.Repository
             {
                 cmd.ExecuteNonQuery();
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return room;
             }
             catch (Exception e)
             {
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return null;
             }
@@ -316,8 +316,8 @@ namespace Hospital.Repository
 
         public Room NewRoom(Room room)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT max(id) FROM room";
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
@@ -334,8 +334,8 @@ namespace Hospital.Repository
             {
                 cmd.ExecuteNonQuery();
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return room;
             }
@@ -343,8 +343,8 @@ namespace Hospital.Repository
             {
                 Trace.WriteLine("Failed adding room with ID " + (reader.GetInt32(0)+1).ToString() + " .");
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return null;
             }
@@ -352,19 +352,19 @@ namespace Hospital.Repository
 
         public int GetLastId()
         {
-            setConnection();
+            
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return 0;
         }
         public RoomType GetRoomTypeByType(string Type)
         {
-            setConnection();
+            
             try
             {
-                OracleCommand cmd = connection.CreateCommand();
+                OracleCommand cmd = Globals.globalConnection.CreateCommand();
                 RoomType roomType = new RoomType();
                 cmd.CommandText = "SELECT * FROM room_type WHERE rtype = '" + Type + "'";
                 OracleDataReader reader = cmd.ExecuteReader();
@@ -372,16 +372,16 @@ namespace Hospital.Repository
                 roomType.Id = reader.GetInt32(0);
                 roomType.Type = reader.GetString(1);
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return roomType;
             }
             catch (Exception exp)
             {
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 throw new Exception(exp.ToString());
             }
@@ -389,9 +389,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<Room> GetAllRoomsExceptSource(int id)
         {
-            setConnection();
+            
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT room.id, floor, area, description, rtype, room_type.id ROOMTYPEID FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id " +
                 "WHERE room.id != " + id.ToString() +
                 " ORDER BY room.id";
@@ -404,8 +404,8 @@ namespace Hospital.Repository
                 rooms.Add(newRoom);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return rooms;
         }

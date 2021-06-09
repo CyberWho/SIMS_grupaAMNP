@@ -15,43 +15,27 @@ namespace Hospital.Repository
 {
     public class AnamnesisRepository : IAnamnesisRepo<Anamnesis>
     {
-        OracleConnection connection = null;
+        
 
-        private void setConnection()
-        {
-            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
-            try
-            {
-                connection.Open();
-
-            }
-            catch (Exception exp)
-            {
-                Trace.WriteLine(exp.ToString());
-            }
-        }
         public Anamnesis GetById(int id)
         {
 
             //health record repo dopunjava jos anamnezu
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "select * from anamnesis where id = " + id;
             OracleDataReader reader = cmd.ExecuteReader();
             reader.Read();
             var anamnesis = ParseAnamnesis(reader);
-            connection.Close();
-            connection.Dispose();
-
+            
             return anamnesis;
         }
 
         public ObservableCollection<Anamnesis> GetAllByHealthRecordId(int healthRecordId)
         {
 
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "select * from anamnesis where health_record_id = " + healthRecordId;
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -63,8 +47,8 @@ namespace Hospital.Repository
                 anamneses.Add(anamnesis);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return anamneses;
         }
@@ -72,7 +56,7 @@ namespace Hospital.Repository
         private static Anamnesis ParseAnamnesis(OracleDataReader reader)
         {
             Anamnesis anamnesis = new Anamnesis();
-           
+
             anamnesis.Id = reader.GetInt32(0);
             anamnesis.Description = reader.GetString(1);
             anamnesis.MedicalTreatments = new MedicalTreatment().GetAllByAnamnesisId(reader.GetInt32(0));
@@ -95,27 +79,27 @@ namespace Hospital.Repository
 
         public Anamnesis Update(Anamnesis anamnesis)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "UPDATE anamnesis SET Description = '" + anamnesis.Description +"' WHERE ID = " + anamnesis.Id;
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
+            cmd.CommandText = "UPDATE anamnesis SET Description = '" + anamnesis.Description + "' WHERE ID = " + anamnesis.Id;
             cmd.ExecuteNonQuery();
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }
 
         public Anamnesis Add(Anamnesis anamnesis)
         {
-          
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "insert into anamnesis(description, health_record_id, appointment_id) values('" + anamnesis.Description + "'," +  anamnesis.healthRecord.Id + "," + anamnesis.appointment.Id + ")";
+
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
+            cmd.CommandText = "insert into anamnesis(description, health_record_id, appointment_id) values('" + anamnesis.Description + "'," + anamnesis.healthRecord.Id + "," + anamnesis.appointment.Id + ")";
             cmd.ExecuteNonQuery();
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }

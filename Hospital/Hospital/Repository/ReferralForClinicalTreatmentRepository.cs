@@ -15,14 +15,14 @@ namespace Hospital.Repository
 {
     public class ReferralForClinicalTreatmentRepository : IReferralForClinicalTreatmentRepo<ReferralForClinicalTreatment>
     {
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
 
             }
             catch (Exception exp)
@@ -56,9 +56,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<ReferralForClinicalTreatment> GetAllActiveByHealthRecordId(int healthRecordId)
         {
-            setConnection();
+            
             ObservableCollection<ReferralForClinicalTreatment> referralForClinicalTreatments = new ObservableCollection<ReferralForClinicalTreatment>();
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM REFERRAL_FOR_CLINICAL_TREATMENT WHERE HEALTH_RECORD_ID = :health_record_id AND ACTIVE = 1";
             command.Parameters.Add("health_record_id", OracleDbType.Int32).Value = healthRecordId.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -68,7 +68,7 @@ namespace Hospital.Repository
                 referralForClinicalTreatments.Add(referralForClinicalTreatment);
             }
 
-            connection.Close();
+            
             return referralForClinicalTreatments;
         }
 
@@ -117,8 +117,8 @@ namespace Hospital.Repository
 
         public Model.ReferralForClinicalTreatment Add(Model.ReferralForClinicalTreatment referral)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText =
                 "INSERT INTO referral_for_clinical_treatment (active, start_time, end_time, appointment_id, health_record_id, description) VALUES " +
                 "('false', " + referral.dateRange.StartTime + ", " + referral.dateRange.EndTime + ", "
@@ -150,8 +150,8 @@ namespace Hospital.Repository
 
         public int GetMaxTakenBeds(int room_id, DateRange dateRange)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "select count(*) from(" +
                                   "select * from clinical_treatment where not start_date < :DATE_TIME " +
                                   "or not end_date < :DATE_TIME1 union " +
@@ -170,15 +170,15 @@ namespace Hospital.Repository
 
             if (reader.Read())
                 ret = reader.GetInt32(0);
-            connection.Close();
-            connection.Dispose();
+            
+            
             return ret;
         }
 
         public ClinicalTreatment Create (ClinicalTreatment clinicalTreatment)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "insert into clinical_treatment(health_record_id, room_id, start_date, end_date) " +
                                   "values (" + clinicalTreatment.HealthRecordId + ", " + clinicalTreatment.RoomId + 
                                   ", :DATE_TIME1 , :DATE_TIME2)";
@@ -186,8 +186,8 @@ namespace Hospital.Repository
             command.Parameters.Add("DATE_TIME2", OracleDbType.Date).Value = clinicalTreatment.dateRange.EndTime;
 
             command.ExecuteNonQuery();
-            connection.Close();
-            connection.Dispose();
+            
+            
             return clinicalTreatment;
         }
 

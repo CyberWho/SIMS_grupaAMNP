@@ -23,7 +23,7 @@ namespace Hospital.Controller
 {
     public class UserController
     {
-        public UserService userService = new UserService();
+        public UserService userService = new UserService(new UserRepository());
         PatientController patientController = new PatientController();
         PatientLogsController patientLogsController = new PatientLogsController();
         public bool LoginUser(String username, String password)
@@ -114,6 +114,11 @@ namespace Hospital.Controller
             return true;
         }
 
+        public AbstractUser makeAbstractUser(AbstractUser abstractUser)
+        {
+            return this.userService.makeAbstractUser(abstractUser);
+        }
+
         public User GuestUser()
         {
             return this.userService.GuestUser();
@@ -160,8 +165,7 @@ namespace Hospital.Controller
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
-            return false;
+            return userService.DeleteUserById(id);
         }
 
         public Boolean DeleteUserByUsername(String username)
@@ -172,7 +176,7 @@ namespace Hospital.Controller
 
         public User UpdateUser(User user)
         {
-            return this.userService.UpdateUser(user);
+            return userService.UpdateUser(user);
         }
 
         public void makeDoctorUser()

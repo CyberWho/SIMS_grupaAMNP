@@ -15,14 +15,14 @@ namespace Hospital.Repository
 {
    public class InventoryItemRepository
    {
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
             }
             catch (Exception exp)
             {
@@ -31,8 +31,8 @@ namespace Hospital.Repository
         }
         public InventoryItem GetInventoryItemById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM inventory_item WHERE id = " + id.ToString();
             InventoryItem item = new InventoryItem();
             OracleDataReader reader = command.ExecuteReader();
@@ -44,8 +44,8 @@ namespace Hospital.Repository
             item.Unit = reader.GetString(3);
             item.Type = (ItemType)reader.GetInt32(4);
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return item;
         }
@@ -58,8 +58,8 @@ namespace Hospital.Repository
 
         public ObservableCollection<InventoryItem> GetAllInvenotryItemsByItemTypeId(int itemTypeId)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "select * from inventory_item where item_type = " + itemTypeId;
             ObservableCollection<InventoryItem> items = new ObservableCollection<InventoryItem>();
             OracleDataReader reader = command.ExecuteReader();
@@ -90,8 +90,8 @@ namespace Hospital.Repository
 
         public InventoryItem NewInventoryItem(InventoryItem inventoryItem)
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "INSERT INTO inventory_item (name, price, unit, item_type) VALUES ('" +
                 inventoryItem.Name                   + "', " +
                 inventoryItem.Price.ToString()       + ", '" +
@@ -115,8 +115,8 @@ namespace Hospital.Repository
 
         public int GetLastId()
         {
-            setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT max(id) FROM inventory_item";
             OracleDataReader reader = null;
             try

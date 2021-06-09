@@ -20,14 +20,14 @@ namespace Hospital.Repository
         private ItemInRoomRepository itemInRoomRepository = new ItemInRoomRepository();
         private RoomRepository roomRepository = new RoomRepository();
 
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
+                Globals.globalConnection.Open();
             }
             catch (Exception exp)
             {
@@ -42,9 +42,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<ReservedItem> GetAllReservedItems()
         {
-            //SetGlobalConnection();
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            //
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             ObservableCollection<ReservedItem> reservedItems = new ObservableCollection<ReservedItem>();
             command.CommandText = "select * from reserved_item";
             OracleDataReader reader = command.ExecuteReader();
@@ -63,8 +63,8 @@ namespace Hospital.Repository
 
                 reservedItems.Add(reservedItem);
             }
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             /*foreach (ReservedItem reservedItem in reservedItems)
             {
@@ -113,7 +113,7 @@ namespace Hospital.Repository
 
         public ReservedItem NewReservedItem(ReservedItem reservedItem)
         {
-            SetGlobalConnection();
+            
             OracleCommand cmd = globalConnection.CreateCommand();
 
             if (reservedItem.ReservedDate == null)

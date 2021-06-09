@@ -9,13 +9,46 @@ using System.Windows.Controls;
 
 namespace Hospital.Model
 {
-    public class Doctor : Employee
+    public class Doctor : RoleDescriptionBase, IEntity//: Employee
     {
+
         public Room room { get; set; }
 
+        public Employee employee = new Employee();
         public int employee_id { get; set; }
         public int room_id { get; set; }
         public int specialization_id { get; set; }
+
+        //uklanjanje nasledjivanja
+        public int Id
+        {
+            get { return this.employee.Id; }
+            set { this.employee.Id = value; }
+        }
+
+        public int Salary
+        {
+            get { return this.employee.Salary; }
+            set { this.employee.Salary = value;  }
+        }
+
+        public int YearsOfService
+        {
+            get { return this.employee.YearsOfService; }
+            set { this.employee.YearsOfService = value; }
+        }
+
+        public User User
+        {
+            get { return this.employee.User; }
+            set { this.employee.User = value; }
+        }
+
+        public Role role
+        {
+            get { return this.employee.role; }
+            set { this.employee.role = value; }
+        }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Room GetRoom()
@@ -188,6 +221,7 @@ namespace Hospital.Model
             }
         }
 
+
         public Doctor(int id, int employee_id, int room_id, int specialization_id)
         {
             this.Id = id;
@@ -209,12 +243,16 @@ namespace Hospital.Model
         {
         }
 
-        public Doctor(int id, int salary, int yearsOfService, User user, Role role) : base(id, salary, yearsOfService, user, role)
+        public Doctor(int id, int salary, int yearsOfService, User user,Role role,Specialization specialization,Room room) 
         {
+            //: base(id, salary, yearsOfService, user, role)
+            this.Id = id;
+            this.Salary = salary;
+            this.YearsOfService = yearsOfService;
+            this.User = user;
+            this.role = role;
 
-        }
-        public Doctor(int id, int salary, int yearsOfService, User user,Role role,Specialization specialization,Room room) : base(id, salary, yearsOfService, user, role)
-        {
+
             this.User = user;
             this.role = role;
             this.specialization = specialization;
@@ -226,8 +264,15 @@ namespace Hospital.Model
             //this.employee_id = id;
             this.specialization_id = specialization.id;
         }
-        public Doctor(int id, int salary, int yearsOfService, User user, Role role, Specialization specialization) : base(id, salary, yearsOfService, user, role)
+        public Doctor(int id, int salary, int yearsOfService, User user, Role role, Specialization specialization) 
         {
+            //: base(id, salary, yearsOfService, user, role)
+            this.Id = id;
+            this.Salary = salary;
+            this.YearsOfService = yearsOfService;
+            this.User = user;
+            this.role = role;
+
             this.User = user;
             this.role = role;
             this.specialization = specialization;
@@ -236,6 +281,20 @@ namespace Hospital.Model
             //this.room_id = room.Id;
             this.employee_id = id;
             this.specialization_id = specialization.id;
+        }
+        public Doctor(int id, IRoleDescriptior rdb)
+        {
+            this.wrappee = rdb;
+            this.Id = id;
+        }
+        public override int howMuchAmIPaid()
+        {
+            return wrappee.howMuchAmIPaid() + 77000;
+        }
+
+        public override string describeMyRole()
+        {
+            return wrappee.describeMyRole() + "Vi ste jedan od doktora [" + this.Id + "] u nasoj kompaniji\n";
         }
     }
 }

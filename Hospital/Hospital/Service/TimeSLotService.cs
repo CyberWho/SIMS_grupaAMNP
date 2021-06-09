@@ -29,13 +29,13 @@ namespace Hospital.Service
         private ITimeSlotRepo<TimeSlot> timeSlotRepository;
         private IFreeDaysRepo<FreeDays> freeDaysRepository;
 
-        public TimeSlotService()
+        public TimeSlotService(ITimeSlotRepo<TimeSlot> iTimeSlotRepo,IAppointmentRepo<Appointment> iAppointmentRepo,IWorkHoursRepo<WorkHours> iWorkHoursRepo,IFreeDaysRepo<FreeDays> iFreeDaysRepo,IDoctorRepo<Doctor> iDoctorRepo)
         {
-            timeSlotRepository = new TimeSlotRepository();
-            appointmentRepository = new AppointmentRepository();
-            workHoursRepository = new WorkHoursRepository();
-            freeDaysRepository = new FreeDaysRepository();
-            doctorRepository = new DoctorRepository();
+            timeSlotRepository = iTimeSlotRepo;
+            appointmentRepository = iAppointmentRepo;
+            workHoursRepository = iWorkHoursRepo;
+            freeDaysRepository = iFreeDaysRepo;
+            doctorRepository = iDoctorRepo;
         }
         public void generateTimeSlots()
         {

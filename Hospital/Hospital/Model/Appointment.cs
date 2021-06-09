@@ -1,4 +1,5 @@
 using System;
+using Hospital.Controller;
 
 namespace Hospital.Model
 {
@@ -146,6 +147,21 @@ namespace Hospital.Model
 
         public Appointment()
         {
+        }
+
+        public void CreateNewAppointment()
+        {
+            new AppointmentController().ReserveAppointment(this);
+        }
+
+        public void DeleteAppointment()
+        {
+            new AppointmentController().DeleteAppointmentById(Id);
+        }
+
+        public void UpdateAppointmentStartTime(DateTime newStartTime)
+        {
+            new AppointmentController().ChangeStartTime(this, newStartTime);
         }
     }
 }

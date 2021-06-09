@@ -92,6 +92,13 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </Button>
+            <Button Background="CadetBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Height="50" Margin="445,90,0,0" BorderBrush="CadetBlue" Command="{Binding GoToDoctorToManagerCommand}">
+                <TextBlock FontFamily="Segoe UI Symbol" Text="'profil'" Foreground="black" FontSize="20" Height="30" Width="57" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="330" Color="white" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
         </Grid>
 
 

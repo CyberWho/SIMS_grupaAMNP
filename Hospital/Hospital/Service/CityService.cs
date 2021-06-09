@@ -15,9 +15,9 @@ namespace Hospital.Service
    {
        private ICityRepo<City> cityRepository;
 
-       public CityService()
+       public CityService(ICityRepo<City> iCityRepo)
        {
-           this.cityRepository = new CityRepository();
+           this.cityRepository = iCityRepo;
        }
       public Model.City GetCityById(int id)
       {

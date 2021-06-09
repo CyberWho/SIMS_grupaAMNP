@@ -4,9 +4,11 @@
  * Purpose: Definition of the Class User
  ***********************************************************************/
 
+using Hospital.Controller;
+
 namespace Hospital.Model
 {
-    public class User : IEntity
+    public class User : IEntity, IRoleDescriptior
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -28,6 +30,31 @@ namespace Hospital.Model
         }
         public User()
         {
+        }
+
+        public string describeMyRole()
+        {
+            return "Vi ste korisnik: " + Name + " " + Surname + "\n";
+        }
+
+        public int howMuchAmIPaid()
+        {
+            return 0;
+        }
+
+        public void CreateNewUser()
+        {
+            new UserController().newUser(this);
+        }
+
+        public void UpdateUser()
+        {
+            new UserController().UpdateUser(this);
+        }
+
+        public void DeleteUser()
+        {
+            new UserController().DeleteUserById(Id);
         }
     }
 }

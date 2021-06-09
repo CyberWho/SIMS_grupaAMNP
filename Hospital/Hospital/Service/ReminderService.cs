@@ -17,9 +17,9 @@ namespace Hospital.Service
    {
        private IReminerRepo<Reminder> reminderRepository;
 
-       public ReminderService()
+       public ReminderService(IReminerRepo<Reminder> iReminderRepository)
        {
-           reminderRepository = new ReminderRepository();
+           reminderRepository = iReminderRepository;
        }
         public Reminder GetReminderById(int id)
       {

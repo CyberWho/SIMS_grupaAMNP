@@ -14,9 +14,9 @@ namespace Hospital.Service
    {
        private IPerscriptionRepo<Perscription> perscriptionRepository;
 
-       public PerscriptionService()
+       public PerscriptionService(IPerscriptionRepo<Perscription> iPerscriptionRepo)
        {
-           perscriptionRepository = new PerscriptionRepository();
+           perscriptionRepository = iPerscriptionRepo;
        }
         public Model.Perscription GetPerscriptionById(int id)
       {

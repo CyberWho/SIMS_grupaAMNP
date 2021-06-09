@@ -14,15 +14,15 @@ namespace Hospital.Repository
 {
     public class SystemNotificationRepository : ISystemNotificationRepo<SystemNotification>
     {
-        OracleConnection connection = null;
+        
         private void setConnection()
         {
             String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
-            connection = new OracleConnection(conString);
+            Globals.globalConnection = new OracleConnection(conString);
             try
             {
-                connection.Open();
-                //command = connection.CreateCommand();
+                Globals.globalConnection.Open();
+                //command = Globals.globalConnection.CreateCommand();
             }
             catch (Exception exp)
             {
@@ -32,9 +32,9 @@ namespace Hospital.Repository
 
         public ObservableCollection<SystemNotification> GetAllSystemWideSystemNotifications()
         {
-            setConnection();
+            
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText =
                 "SELECT id, name, description, creation_date, expiration_date FROM system_notification WHERE viewed = 0 AND global = 1";
 
@@ -63,16 +63,16 @@ namespace Hospital.Repository
                 systemNotifications.Add(systemNotification);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return systemNotifications;
         }
 
         public SystemNotification GetById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM system_notification WHERE id = " + id;
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
@@ -114,18 +114,18 @@ namespace Hospital.Repository
                     );
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return systemNotification;
         }
 
         public ObservableCollection<SystemNotification> GetAllByUserId(int userId)
         {
-            setConnection();
+            
             ObservableCollection<SystemNotification> systemNotifications = new ObservableCollection<SystemNotification>();
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "SELECT * FROM SYSTEM_NOTIFICATION WHERE USER_ID = :user_id OR GLOBAL = 1";
             command.Parameters.Add("user_id", OracleDbType.Int32).Value = userId.ToString();
             OracleDataReader reader = command.ExecuteReader();
@@ -143,29 +143,29 @@ namespace Hospital.Repository
                 systemNotifications.Add(systemNotification);
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return systemNotifications;
         }
 
         public Boolean DeleteById(int id)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText = "DELETE FROM system_notification WHERE id = " + id;
 
             if (command.ExecuteNonQuery() > 0)
             {
 
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return true;
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return false;
         }
@@ -178,10 +178,10 @@ namespace Hospital.Repository
 
         public SystemNotification Update(SystemNotification systemNotification)
         {
-            setConnection();
-            // maybe this is where were having issues, opening a connection while another one is open
+            
+            // maybe this is where were having issues, opening a Globals.globalConnection while another one is open
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             command.CommandText =
                 "UPDATE system_notification SET name = :name, description = :description, creation_date = :creation_date, expiration_date = :expiration_date WHERE id = :id";
             command.Parameters.Add("name", OracleDbType.Varchar2).Value = systemNotification.Name;
@@ -192,22 +192,22 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return systemNotification;
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }
 
         public SystemNotification Add(SystemNotification systemNotification)
         {
-            setConnection();
-            OracleCommand command = connection.CreateCommand();
+            
+            OracleCommand command = Globals.globalConnection.CreateCommand();
             int viewed = 0;
 
             // thinking about using the viewed field when creating system wide notifications to say that the notification expiration date has gone by, and so using this field, when generating the notification board im making sure the expired ones don't get pulled
@@ -237,29 +237,29 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
+                
+                
 
                 return systemNotification;
             }
 
-            connection.Close();
-            connection.Dispose();
+            
+            
 
             return null;
         }
 
         public int GetLastId()
         {
-            setConnection();
+            
             int id = 0;
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "SELECT MAX(ID) FROM APPOINTMENT";
             OracleDataReader reader = cmd.ExecuteReader();
             reader = cmd.ExecuteReader();
             reader.Read();
             id = int.Parse(reader.GetString(0));
-            connection.Close();
+            
             return id;
         }
 
