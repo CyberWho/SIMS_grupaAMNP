@@ -14,5 +14,6 @@ namespace Hospital.IRepository
         Boolean DeleteByUsername(string username);
         void MakeDoctorUser();
         T NewUser(T t, int guest = 0);
+        AbstractUser makeAbstractUser(AbstractUser abstractUser);
     }
 }

@@ -16,7 +16,7 @@ namespace Hospital.Service
     public class UserService
     {
         public IUserRepo<User> userRepository;
-        public UserRepository userRepository = new UserRepository();
+        //public UserRepository userRepository = new UserRepository();
         private EmployeesRepository employeesRepository = new EmployeesRepository();
         private DoctorRepository doctorRepository = new DoctorRepository();
         private PatientRepository patientRepository = new PatientRepository();
