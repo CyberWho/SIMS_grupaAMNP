@@ -58,7 +58,7 @@ namespace Hospital.Controller
       
       public Perscription AddPerscription(Perscription perscription)
       {
-         return new PerscriptionService().AddPerscription(perscription);
+         return new PerscriptionService(new PerscriptionRepository()).AddPerscription(perscription);
       }
       
       public Perscription DeactivatePerscription(Perscription perscription)
@@ -67,7 +67,7 @@ namespace Hospital.Controller
          return null;
       }
 
-      public PerscriptionService perscriptionService = new PerscriptionService();
+      public PerscriptionService perscriptionService = new PerscriptionService(new PerscriptionRepository());
 
    }
 }

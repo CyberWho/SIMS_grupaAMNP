@@ -76,7 +76,7 @@ namespace Hospital.Controller
          return null;
       }
    
-      public Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService();
+      public Service.ReferralForSpecialistService referralForSpecialistService = new Service.ReferralForSpecialistService(new ReferralForSpecialistRepository());
    
    }
 }

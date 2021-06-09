@@ -168,7 +168,7 @@ namespace Hospital.xaml_windows.Secretary
         // TODO: ispraviti
         private void Delete_user(object sender, RoutedEventArgs e)
         {
-            string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+           /* string conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
             OracleConnection connection = new OracleConnection(conString);
             OracleCommand cmd = connection.CreateCommand();
 
@@ -182,21 +182,25 @@ namespace Hospital.xaml_windows.Secretary
             MessageBox.Show("Uspesno izmenjeno " + userRowsAffected.ToString() + " redova u bazi!");
 
             connection.Close();
-            connection.Dispose();
+            connection.Dispose();*/
+           User user = new UserController().GetUserById(current_user_id);
+           new Executer(user, new Modify(), new UserCommand(user, UserAction.DELETE));
             this.Refresh(sender, e);
         }
         // ispravljeno
         private void Update_user(object sender, RoutedEventArgs e)
         {
             User uUser = new User();
-
+            uUser.Id = current_user_id;
             uUser.Username = Username;
             uUser.Name = NName;
             uUser.Surname = Surname;
             uUser.PhoneNumber = PhoneNumber;
             uUser.EMail = Email;
 
-            this.Update(uUser);
+            //this.Update(uUser);
+            User user = new UserController().GetUserById(current_user_id);
+            new Executer(user, new Modify(), new UserCommand(uUser, UserAction.UPDATE));
             this.Refresh(sender, e);
             // KADA SE KORISTI LISTVIEW NE KREIRA SE NPR NEW ROOM OBJEKAT NEGO SAMO OBJEKAT NEW {} I TO JE TO
         }
@@ -207,7 +211,6 @@ namespace Hospital.xaml_windows.Secretary
             s.Show();
 
             User nUser = new User();
-
             nUser.Username = Username;
             nUser.Name = NName;
             nUser.Surname = Surname;

@@ -17,9 +17,9 @@ namespace Hospital.Service
     {
         private IAllergyTypeRepo<AllergyType> allergyTypeRepository;
 
-        public AllergyTypeService()
+        public AllergyTypeService(IAllergyTypeRepo<AllergyType> iAllergyTypeRepo)
         {
-            allergyTypeRepository = new AllergyTypeRepository();
+            allergyTypeRepository = iAllergyTypeRepo;
         }
 
         public System.Collections.ArrayList GetAllAllergyTypes()

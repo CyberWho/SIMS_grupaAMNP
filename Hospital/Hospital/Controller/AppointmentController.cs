@@ -40,7 +40,7 @@ namespace Hospital.Controller
 
         public ObservableCollection<Appointment> GetAllAppointmentsByDoctorId(int doctorId)
         {
-            return new AppointmentService().GetAllAppointmentsByDoctorId(doctorId);
+            return new AppointmentService(new AppointmentRepository()).GetAllAppointmentsByDoctorId(doctorId);
         }
 
         public ObservableCollection<Appointment> GetAllReservedAppointmentsByPatientId(int patientId)
@@ -112,7 +112,7 @@ namespace Hospital.Controller
             return appointmentService.GetLastId();
         }
 
-        public Hospital.Service.AppointmentService appointmentService = new Service.AppointmentService();
+        public Hospital.Service.AppointmentService appointmentService = new Service.AppointmentService(new AppointmentRepository());
 
     }
 }

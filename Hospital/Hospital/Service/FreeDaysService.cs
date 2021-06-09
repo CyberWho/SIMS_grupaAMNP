@@ -16,9 +16,9 @@ namespace Hospital.Service
     {
         private IFreeDaysRepo<FreeDays> freeDaysRepository;
 
-        public FreeDaysService()
+        public FreeDaysService(IFreeDaysRepo<FreeDays> iFreeDaysRepo)
         {
-            freeDaysRepository = new FreeDaysRepository();
+            freeDaysRepository = iFreeDaysRepo;
         }
         public FreeDays GetFreeDaysById(int id)
         {

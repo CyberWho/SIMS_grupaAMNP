@@ -15,9 +15,9 @@ namespace Hospital.Service
     {
         private IHealthRecordRepo<HealthRecord> healthRecordRepository;
 
-        public HealthRecordService()
+        public HealthRecordService(IHealthRecordRepo<HealthRecord> iHealthRecordRepo)
         {
-            healthRecordRepository = new HealthRecordRepository();
+            healthRecordRepository = iHealthRecordRepo;
         }
         public HealthRecord GetHealthRecordById(int id)
         {

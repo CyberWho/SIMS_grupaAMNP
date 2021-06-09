@@ -13,9 +13,9 @@ namespace Hospital.Service
 {
    public class StateService
    {
-       public StateService()
+       public StateService(IStateRepo<State> iStateRepo)
        {
-           this.stateRepository = new StateRepository();
+           this.stateRepository = iStateRepo;
        }
       public Model.State GetStateById(int id)
       {

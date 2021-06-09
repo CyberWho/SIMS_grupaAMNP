@@ -99,11 +99,11 @@ namespace Hospital.ViewModel.Patient
             MyProfile = new MyICommand(OnMyProfile);
             MyAppointments = new MyICommand(OnMyAppointments);
             Update = new MyICommand(OnUpdate);
-            Delete = new MyICommand(OnDelete);
             New = new MyICommand(OnNew);
             MyHealthRecord = new MyICommand(OnHealthRecord);
             SelectionChanged = new MyICommand(OnSelectionChanged);
             LogOut = new MyICommand(OnLogOut);
+            Delete = new MyICommand(OnDelete);
             ShowDoctors = new MyICommand(OnShowDoctors);
             MyReminders = new MyICommand(OnMyReminders);
             ShowNotifications = new MyICommand(OnShowNotifications);
@@ -155,14 +155,17 @@ namespace Hospital.ViewModel.Patient
         private void OnDelete()
         {
             if(!SelectionValidation()) return;
-            
-            appointmentController.CancelAppointmentById(GetAppointmentId());
-            Model.Patient patient = patientController.GetPatientByUserId(userId);
-            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
-            CheckIfPatientIsBlocked(patient.Id);
+            new Executer(selectedItem,new Modify(),new AppointmentCommand(selectedItem,AppointmentAction.DELETE));
+            BlockChecking();
             updateDataGrid();
         }
 
+        private void BlockChecking()
+        {
+            Model.Patient patient = patientController.GetPatientByUserId(userId);
+            patientLogsController.IncrementLogCounterByPatientId(patient.Id);
+            CheckIfPatientIsBlocked(patient.Id);
+        }
         private bool SelectionValidation()
         {
             if (selectedItem == null)

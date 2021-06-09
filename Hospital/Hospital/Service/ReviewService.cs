@@ -9,9 +9,9 @@ namespace Hospital.Service
     class ReviewService
     {
         private IReviewRepo<Review> reviewRepository;
-        public ReviewService()
+        public ReviewService(IReviewRepo<Review> iReviewRepo)
         {
-            reviewRepository = new ReviewRepository();
+            reviewRepository = iReviewRepo;
         }
         public ObservableCollection<Review> GetAllReviews()
         {

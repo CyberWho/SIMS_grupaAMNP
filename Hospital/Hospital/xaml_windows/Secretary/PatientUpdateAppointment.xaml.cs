@@ -185,7 +185,8 @@ namespace Hospital.xaml_windows.Secretary
             TimeSlot timeSlot = new TimeSlot();
             int timeSlotId = int.Parse(timeslot_id_txt.Text);
             timeSlot = timeSlotController.GetTimeSlotById(timeSlotId);
-            appointmentController.ChangeStartTime(appointment, timeSlot.StartTime);
+            new Executer(appointment, new Modify(),
+                new AppointmentCommand(appointment, AppointmentAction.UPDATE, timeSlot.StartTime));
             var s = new PatientAppointment(id);
             s.Show();
             this.Close();
