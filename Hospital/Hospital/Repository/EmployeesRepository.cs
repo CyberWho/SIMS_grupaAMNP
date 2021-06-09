@@ -21,10 +21,10 @@ namespace Hospital.Repository
         public AbstractEmployee insertAbstractEmployeeData(AbstractEmployee abstractEmployee)
         {
             int id = GetLastId() + 1;
-            setConnection();
             abstractEmployee.employee_id = id;
 
-            OracleCommand command = connection.CreateCommand();
+            OracleCommand command = Globals.globalConnection.CreateCommand();
+
             command.CommandText =
                 "INSERT INTO employee (id, salary, years_of_service, user_id, role_id) VALUES (:id, :salary, :years_of_service, :user_id, :role_id)";
             command.Parameters.Add("id", OracleDbType.Int32).Value = abstractEmployee.employee_id;
@@ -35,13 +35,8 @@ namespace Hospital.Repository
 
             if (command.ExecuteNonQuery() > 0)
             {
-                connection.Close();
-                connection.Dispose();
-
                 return abstractEmployee;
             }
-            connection.Close();
-            connection.Dispose();
 
             return null;
         }
