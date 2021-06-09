@@ -52,6 +52,7 @@ namespace Hospital.Model
         
         public override AbstractUser getAbstractUser()
         {
+            // ovde je problem, znaci prosledjivanje razlicitih tipova parametara konstruktorima razlicitih objekata, a nema mi mnogo smisla da AbstractEmployee cuva podatke i o doktorima, i o menadzerima i o sekretarima ako vec pravim Abstract(respected) klase
             /*
             switch (this._role.Id)
             {
