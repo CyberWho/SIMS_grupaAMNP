@@ -43,9 +43,9 @@ namespace Hospital.Model
                     break;
             }
             Rooms = "";
-            foreach(Room room in renovation.Rooms)
+            foreach(int? RoomID in renovation.RoomIDs)
             {
-                Rooms += room.Id.ToString() + ", ";
+                Rooms += RoomID.ToString() + ", ";
             }
             Rooms = Rooms.Remove(Rooms.Length - 2);
 

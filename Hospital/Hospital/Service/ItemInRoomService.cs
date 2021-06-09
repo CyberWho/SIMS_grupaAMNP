@@ -78,28 +78,13 @@ namespace Hospital.Service
                 return itemInRoomRepository.UpdateItemInRoom(itemInRoom);
             }
         }
-        public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
-        {
-            /*if (IsExpendable(itemInRoom)) 
-            {
-                return MoveExpendable(itemInRoom, destinationRoom, quantity);
-            }
-            else
-            {
-                return 
-            }*/
-            
-            return Move(itemInRoom, destinationRoom, quantity);
-        }
-
-        private bool Move(ItemInRoom itemInRoom, Room destinationRoom, uint quantity)
-        {
+        public bool MoveItem(ItemInRoom itemInRoom, Room destinationRoom, uint quantity) {
             ItemInRoom itemInDestinationRoom = AlreadyExists(itemInRoom, (int)destinationRoom.Id);
             if (itemInDestinationRoom != null)
             {
                 itemInDestinationRoom.Quantity += quantity;
                 itemInRoomRepository.UpdateItemInRoom(itemInDestinationRoom);
-                if(itemInRoom.Quantity == quantity)
+                if (itemInRoom.Quantity == quantity)
                 {
                     itemInRoomRepository.DeleteItemInRoomById(itemInRoom.Id);
                 }
@@ -134,7 +119,6 @@ namespace Hospital.Service
             }
             return true;
         }
-
 
         private ItemInRoom AlreadyExists(ItemInRoom itemInRoom, int destinationRoomID)
         {

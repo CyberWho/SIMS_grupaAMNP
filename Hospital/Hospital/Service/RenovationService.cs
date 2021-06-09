@@ -97,6 +97,7 @@ namespace Hospital.Service
                     EndSplitRenovation(renovation);
                     break;
                 case RenovationType.MERGE:
+                    EndMergeRenovation(renovation);
                     break;
                 default:
                     return null;
@@ -105,18 +106,51 @@ namespace Hospital.Service
             return renovationRepository.UpdateRenovation(renovation);
         }
 
+        private void EndMergeRenovation(Renovation renovation)
+        {
+            Room NewRoom = GetRoomWithSmallestRoomID(renovation.Rooms);
+            NewRoom = MergeAreasAndInventories(renovation, NewRoom);
+            DeleteAllMergedRoomsExceptNewRoom(renovation, NewRoom);
+            roomRepository.UpdateRoom(NewRoom);
+        }
+        private Room MergeAreasAndInventories(Renovation renovation, Room NewRoom)
+        {
+            foreach (Room renovatedRoom in renovation.Rooms)
+            {
+                if (NewRoom.Id != renovatedRoom.Id)
+                {
+                    NewRoom.Area += renovatedRoom.Area;
+                    //itemInRoomRepository.MoveAllItemsFromRoom(renovatedRoom, NewRoom);
+                }
+            }
+            QuickTrace("Nova soba ima površinu: " + NewRoom.Area.ToString() + ", a broj sobe je: " + NewRoom.Id.ToString());
+            return NewRoom;
+        }
+        private void DeleteAllMergedRoomsExceptNewRoom(Renovation renovation, Room NewRoom)
+        {
+            foreach(Room RoomToDelete in renovation.Rooms)
+            {
+                if(RoomToDelete.Id != NewRoom.Id)
+                    roomRepository.DeleteRoomById((int)RoomToDelete.Id);
+            }
+        }
+        private Room GetRoomWithSmallestRoomID(ObservableCollection<Room> Rooms)
+        {
+            return Rooms.Aggregate((curMin, x) => (curMin == null || (x.Id ?? int.MaxValue) < curMin.Id ? x : curMin));
+        }
         private void EndSplitRenovation(Renovation renovation)
         {
             renovation.Rooms.First().Area -= renovation.NewArea;
-            roomService.UpdateRoom(renovation.Rooms.First());
+            roomRepository.UpdateRoom(renovation.Rooms.First());
             Room newRoom = renovation.Rooms.First();
             newRoom.Area = renovation.NewArea;
             newRoom.roomType = renovation.Rooms.First().roomType;
-            roomService.AddRoom(newRoom);
+            roomRepository.NewRoom(newRoom);
         }
 
         public Repository.RenovationRepository renovationRepository = new Repository.RenovationRepository();
         public ItemInRoomService itemInRoomService = new ItemInRoomService();
-        public RoomService roomService = new RoomService();
+        public Repository.RoomRepository roomRepository = new Repository.RoomRepository();
+        public Repository.ItemInRoomRepository itemInRoomRepository = new Repository.ItemInRoomRepository();
    }
 }

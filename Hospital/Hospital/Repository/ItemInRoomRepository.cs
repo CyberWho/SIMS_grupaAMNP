@@ -140,6 +140,26 @@ namespace Hospital.Repository
             return itemsInRoom;
         }
 
+        public void MoveAllItemsFromRoom(Room sourceRoom, Room destinationRoom)
+        {
+            setConnection();
+            OracleCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "UPDATE item_in_room SET room_id = " + destinationRoom.Id.ToString() + " WHERE room_id = " + sourceRoom.Id.ToString();
+            OracleDataReader reader;
+            Trace.WriteLine("SQL COMMAND: " + cmd.CommandText);
+            try
+            {
+                reader = cmd.ExecuteReader();
+            }
+            catch(Exception exp)
+            {
+                Trace.WriteLine("MoveAllItemsFromRoom ERROR: " + exp.ToString());
+                return;
+            }
+            connection.Close();
+            connection.Dispose();
+        }
+
         public bool DeleteItemInRoomById(int id)
         {
             setConnection();

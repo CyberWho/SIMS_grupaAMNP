@@ -17,10 +17,27 @@ namespace Hospital.Repository
    public class RenovationRepository
    {
         readonly string SelectAllCommandText = "SELECT * FROM renovation_rooms inner join renovation on renovation.id = renovation_id";
+
+        OracleConnection connection = null;
+
+        private void setConnection()
+        {
+            String conString = "User Id = ADMIN; password = Passzacloud1.; Data Source = dbtim1_high;";
+            connection = new OracleConnection(conString);
+            try
+            {
+                connection.Open();
+
+            }
+            catch (Exception exp)
+            {
+                QuickTrace("FAILED TO OPEN CONNECTION IN RENOVATION REPOSITORY: " + exp.ToString());
+            }
+        }
         public ObservableCollection<Renovation> GetAllRenovations()
         {
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             query.CommandText = SelectAllCommandText;
             OracleDataReader reader;
 
@@ -39,8 +56,8 @@ namespace Hospital.Repository
         }
         public ObservableCollection<Renovation> GetAllActiveRenovations()
         {
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             query.CommandText = SelectAllCommandText + " WHERE ended = 0";
             OracleDataReader reader;
 
@@ -60,8 +77,8 @@ namespace Hospital.Repository
 
         public Renovation GetRenovationById(int id)
         {
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             query.CommandText = SelectAllCommandText + " WHERE renovation_id = " + id.ToString();
             OracleDataReader reader;
 
@@ -79,8 +96,8 @@ namespace Hospital.Repository
         }
         public ObservableCollection<Room> GetAllRoomsNotInRenovation()
         {
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             ObservableCollection<int> RoomIDs = new ObservableCollection<int>();
             query.CommandText = "SELECT DISTINCT room_id FROM renovation_rooms inner join renovation on renovation.id = renovation_id WHERE ended = 0";
             OracleDataReader reader;
@@ -124,8 +141,8 @@ namespace Hospital.Repository
 
         public Renovation UpdateRenovation(Renovation renovation)
         {
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             string ended = renovation.Ended ? "1" : "0";
             query.CommandText = "UPDATE renovation SET " +
                 "start_time = to_date('" + renovation.StartDate.ToString() + "','DD-MON-YY HH:MI:SS PM'), " +
@@ -183,8 +200,8 @@ namespace Hospital.Repository
         {
             string ended = renovation.Ended ? "1" : "0";
 
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             query.CommandText = "INSERT INTO renovation (start_time, type, ended, new_area) VALUES (to_date('" + renovation.StartDate.ToString() + "','DD-MON-YY HH:MI:SS PM'), " +
                 + (int)renovation.Type + ", " + ended + ", " + renovation.NewArea.ToString() + ")";
             
@@ -217,8 +234,8 @@ namespace Hospital.Repository
 
         public int GetLastId()
         {
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             query.CommandText = "SELECT max(id) FROM renovation";
             OracleDataReader reader;
 
@@ -243,10 +260,12 @@ namespace Hospital.Repository
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
             reader.Read();
             Renovation newRenovation = new Renovation(reader.GetInt32(1), reader.GetDateTime(5), (RenovationType)reader.GetInt32(4), null);
-            rooms.Add(roomRepository.GetRoomById(reader.GetInt32(2)));  
+            rooms.Add(roomRepository.GetRoomById(reader.GetInt32(2)));
+            newRenovation.RoomIDs.Add(reader.GetInt32(2));
             while (reader.Read())
             {
                 rooms.Add(roomRepository.GetRoomById(reader.GetInt32(2)));
+                newRenovation.RoomIDs.Add(reader.GetInt32(2));
             }
             newRenovation.Rooms = rooms;
             return newRenovation;
@@ -267,6 +286,7 @@ namespace Hospital.Repository
                 if(Renovations.Select(x => x.Id).Contains(existingRenovation.Id))
                 {
                     Renovations.Where(x => x.Id == existingRenovation.Id).FirstOrDefault().Rooms.Add(existingRenovation.Rooms.FirstOrDefault());
+                    Renovations.Where(x => x.Id == existingRenovation.Id).FirstOrDefault().RoomIDs.Add(existingRenovation.RoomIDs.FirstOrDefault());
                 }
                 else
                 {
@@ -282,8 +302,9 @@ namespace Hospital.Repository
                         {
                             newRoom
                         };
-            bool Ended = reader.GetInt32(6) == 1 ? true : false;
+            bool Ended = reader.GetInt32(6) == 1;
             Renovation newRenovation = new Renovation(reader.GetInt32(1), reader.GetDateTime(5), (RenovationType)reader.GetInt32(4), newRooms, Ended, uint.Parse(reader.GetInt32(7).ToString()));
+            newRenovation.RoomIDs.Add(reader.GetInt32(2));
             Renovations.Add(newRenovation);
         }
 

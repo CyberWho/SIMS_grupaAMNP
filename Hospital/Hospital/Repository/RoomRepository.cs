@@ -78,8 +78,8 @@ namespace Hospital.Repository
             }
             IDsString = IDsString.Remove(IDsString.Length - 2);
 
-            SetGlobalConnection();
-            OracleCommand query = globalConnection.CreateCommand();
+            setConnection();
+            OracleCommand query = connection.CreateCommand();
             query.CommandText = "SELECT * FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id WHERE room.id not in (" + IDsString + ") and rtype_id != 5 order by room.id";
             OracleDataReader reader;
             

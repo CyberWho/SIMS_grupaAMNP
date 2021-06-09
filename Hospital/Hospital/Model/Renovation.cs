@@ -18,6 +18,7 @@ namespace Hospital.Model
         public RenovationType Type { get; set; }
 
         public ObservableCollection<Room> Rooms { get; set; }
+        public ObservableCollection<int?> RoomIDs { get; set; } 
         public bool Ended { get; set; }
 
         public uint NewArea { get; set; }
@@ -28,6 +29,7 @@ namespace Hospital.Model
             StartDate = startDate;
             Type = type;
             Rooms = rooms;
+            RoomIDs = new ObservableCollection<int?>();
         }
 
         public Renovation(int id, DateTime startDate, RenovationType type, ObservableCollection<Room> rooms, bool ended, uint newArea)
@@ -38,6 +40,7 @@ namespace Hospital.Model
             Rooms = rooms;
             Ended = ended;
             NewArea = newArea;
+            RoomIDs = new ObservableCollection<int?>();
         }
 
         public Renovation(RenovationDTO DTO)
@@ -55,6 +58,11 @@ namespace Hospital.Model
                 Ended = true;
             }
             NewArea = DTO.NewArea;
+            RoomIDs = new ObservableCollection<int?>();
+            foreach(Room room in Rooms)
+            {
+                RoomIDs.Add(room.Id);
+            }
         }
 
         public Renovation()

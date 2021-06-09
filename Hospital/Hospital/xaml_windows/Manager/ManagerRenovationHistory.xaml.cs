@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Windows;
+using System.Linq;
+using static Globals;
 
 namespace Hospital.xaml_windows.Manager
 {
