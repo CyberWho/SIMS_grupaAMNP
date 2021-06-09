@@ -9,8 +9,6 @@ namespace Hospital.Model
         private AppointmentAction _appointmentAction;
         private DateTime _newStartTime;
 
-        public event EventHandler CanExecuteChanged;
-
         public AppointmentCommand(Appointment appointment,AppointmentAction appointmentAction)
         {
             _appointment = appointment;

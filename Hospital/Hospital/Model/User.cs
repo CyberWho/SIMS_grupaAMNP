@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class User
  ***********************************************************************/
 
+using Hospital.Controller;
+
 namespace Hospital.Model
 {
     public class User : IEntity
@@ -28,6 +30,21 @@ namespace Hospital.Model
         }
         public User()
         {
+        }
+
+        public void CreateNewUser()
+        {
+            new UserController().newUser(this);
+        }
+
+        public void UpdateUser()
+        {
+            new UserController().UpdateUser(this);
+        }
+
+        public void DeleteUser()
+        {
+            new UserController().DeleteUserById(Id);
         }
     }
 }

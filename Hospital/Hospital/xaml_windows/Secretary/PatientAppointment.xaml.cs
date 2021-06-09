@@ -134,10 +134,13 @@ namespace Hospital.xaml_windows.Secretary
         private void Obrisi_Click(object sender, RoutedEventArgs e)
         {
             int appointmentId = int.Parse(app_id_txt.Text);
-            if (appointmentController.CancelAppointmentById(appointmentId))
+            Appointment appointment = appointmentController.GetAppointmentById(appointmentId);
+            new Executer(appointment, new Modify(), new AppointmentCommand(appointment, AppointmentAction.DELETE));
+            update();
+           /* if (appointmentController.CancelAppointmentById(appointmentId))
             {
                 update();
-            }
+            }*/
 
 
         }

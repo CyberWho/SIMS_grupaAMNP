@@ -160,8 +160,7 @@ namespace Hospital.Controller
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
-            return false;
+            return userService.DeleteUserById(id);
         }
 
         public Boolean DeleteUserByUsername(String username)
@@ -172,7 +171,7 @@ namespace Hospital.Controller
 
         public User UpdateUser(User user)
         {
-            return this.userService.UpdateUser(user);
+            return userService.UpdateUser(user);
         }
 
         public void makeDoctorUser()

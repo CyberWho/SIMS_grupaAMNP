@@ -70,8 +70,7 @@ namespace Hospital.Service
 
         public Boolean DeleteUserById(int id)
         {
-            // TODO: implement
-            return false;
+            return userRepository.DeleteById(id);
         }
 
         public Boolean DeleteUserByUsername(String username)
