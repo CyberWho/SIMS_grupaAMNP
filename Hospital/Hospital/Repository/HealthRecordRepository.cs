@@ -41,7 +41,7 @@ namespace Hospital.Repository
             return null;
         }
 
-        public HealthRecord GetHealthRecordById(int id)
+        public HealthRecord GetById(int id)
         {
             // TODO: implement
             return null;
