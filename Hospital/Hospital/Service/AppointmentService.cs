@@ -16,9 +16,9 @@ namespace Hospital.Service
     {
         private IAppointmentRepo<Appointment> appointmentRepository;
 
-        public AppointmentService()
+        public AppointmentService(IAppointmentRepo<Appointment> iAppointmentRepo)
         {
-            appointmentRepository = new AppointmentRepository();
+            appointmentRepository = iAppointmentRepo;
         }
         public Appointment GetAppointmentByDoctorIdAndTime(Doctor doctor, DateTime time)
         {

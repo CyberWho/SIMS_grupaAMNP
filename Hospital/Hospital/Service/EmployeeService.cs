@@ -16,10 +16,10 @@ namespace Hospital.Service
         private IEmployeeRepo<Employee> employeesRepository;
         private IUserRepo<User> userRepository;
 
-        public EmployeeService()
+        public EmployeeService(IEmployeeRepo<Employee> iEmployeeRepo,IUserRepo<User> iUserRepo)
         {
-            this.employeesRepository = new EmployeesRepository();
-            this.userRepository = new UserRepository();
+            this.employeesRepository = iEmployeeRepo;
+            this.userRepository = iUserRepo;
         }
         public Model.Employee GetEmployeeByUserId(int id)
         {

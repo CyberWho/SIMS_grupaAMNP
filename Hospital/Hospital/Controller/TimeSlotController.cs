@@ -104,7 +104,7 @@ namespace Hospital.Controller
             return true;
         }
 
-        public Service.TimeSlotService timeSlotService = new Service.TimeSlotService();
+        public Service.TimeSlotService timeSlotService = new Service.TimeSlotService(new TimeSlotRepository(),new AppointmentRepository(),new WorkHoursRepository(),new FreeDaysRepository(),new DoctorRepository());
 
     }
 }

@@ -23,7 +23,7 @@ namespace Hospital.Controller
 {
     public class UserController
     {
-        public UserService userService = new UserService();
+        public UserService userService = new UserService(new UserRepository());
         PatientController patientController = new PatientController();
         PatientLogsController patientLogsController = new PatientLogsController();
         public bool LoginUser(String username, String password)

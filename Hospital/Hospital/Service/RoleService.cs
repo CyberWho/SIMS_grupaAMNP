@@ -13,9 +13,9 @@ namespace Hospital.Service
 {
    public class RoleService
    {
-       public RoleService()
+       public RoleService(IRoleRepo<Role> iRoleRepo)
        {
-           roleRepository = new RoleRepository();
+           roleRepository = iRoleRepo;
        }
       public Model.Role GetRoleById(int id)
       {

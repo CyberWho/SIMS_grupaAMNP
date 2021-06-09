@@ -19,12 +19,12 @@ namespace Hospital.Service
         private IUserRepo<User> userRepository;
         private ISpecializationRepo<Specialization> specializationRepository;
 
-        public DoctorService()
+        public DoctorService(IDoctorRepo<Doctor> iDoctorRepo,IEmployeeRepo<Employee> iEmployeeRepo,IUserRepo<User> iUserRepo,ISpecializationRepo<Specialization> iSpecializationRepo)
         {
-            this.doctorRepository = new DoctorRepository();
-            this.employeesRepository = new EmployeesRepository();
-            this.userRepository = new UserRepository();
-            this.specializationRepository = new SpecializationRepository();
+            this.doctorRepository = iDoctorRepo;
+            this.employeesRepository = iEmployeeRepo;
+            this.userRepository = iUserRepo;
+            this.specializationRepository = iSpecializationRepo;
         }
         public Doctor GetDoctorById(int id)
         {

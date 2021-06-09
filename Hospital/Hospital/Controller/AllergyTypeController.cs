@@ -13,7 +13,7 @@ namespace Hospital.Controller
 {
     public class AllergyTypeController
     {
-        public Service.AllergyTypeService allergyTypeService = new Service.AllergyTypeService();
+        public Service.AllergyTypeService allergyTypeService = new Service.AllergyTypeService(new AllergyTypeRepository());
 
         public ObservableCollection<AllergyType> GetAllAllergyTypes()
         {

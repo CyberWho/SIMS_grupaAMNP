@@ -16,9 +16,9 @@ namespace Hospital.Service
    {
        private IReferralForSpecialistRepo<ReferralForSpecialist> referralForSpecialistRepository;
 
-       public ReferralForSpecialistService()
+       public ReferralForSpecialistService(IReferralForSpecialistRepo<ReferralForSpecialist> iReferralForSpecialistRepo)
        {
-           referralForSpecialistRepository = new ReferralForSpecialistRepository();
+           referralForSpecialistRepository = iReferralForSpecialistRepo;
        }
         public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
