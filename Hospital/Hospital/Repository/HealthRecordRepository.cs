@@ -16,8 +16,6 @@ namespace Hospital.Repository
     {
 
 
-            
-
         internal AbstractPatient insertAbstractHealthRecordData(AbstractPatient abstractUser)
         {
             int id = GetLastId() + 1;
@@ -196,6 +194,11 @@ namespace Hospital.Repository
         }
 
         public HealthRecord Add(HealthRecord t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public HealthRecord GetById(int id)
         {
             throw new NotImplementedException();
         }

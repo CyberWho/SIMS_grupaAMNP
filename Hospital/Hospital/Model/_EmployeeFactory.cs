@@ -22,12 +22,8 @@ namespace Hospital.Model
         private int _salary;
         private int _years_of_service;
         private Role _role;
-        private int _room_id;
-        private int _specialization_id;
-        private int _doctor_id;
-        private int _employee_id;
 
-        public _EmployeeFactory(int id, string username, string password, string name, string surname, string phone_number, string email, string jmbg, DateTime date_of_birth, int room_id, int specialization_id, int employee_id, int doctor_id)
+        public _EmployeeFactory(int id, string username, string password, string name, string surname, string phone_number, string email, string jmbg, DateTime date_of_birth, Role role)
         {
             this._id = id;
             this._username = username;
@@ -41,13 +37,9 @@ namespace Hospital.Model
 
             this._salary = salary_calculator();
             this._years_of_service = 0;
-            this._role = new Role(1, "Doctor");
 
-            this._room_id = room_id;
-            this._specialization_id = specialization_id;
+            this._role = role;
 
-            this._employee_id = employee_id;
-            this._doctor_id = doctor_id;
         }
 
         private int salary_calculator()
@@ -57,9 +49,36 @@ namespace Hospital.Model
             return salary;
         }
 
+        
         public override AbstractUser getAbstractUser()
         {
-            return new AbstractEmployee(_id, _username, _password, _name, _surname, _phone_number, _email, _jmbg, _date_of_birth, _salary, _years_of_service, _role, _room_id, _specialization_id, _employee_id, _doctor_id);
+            /*
+            switch (this._role.Id)
+            {
+                case 1:
+                    // doctor
+                    return new _DoctorFactory()
+                    return new AbstractDoctor(_id, _username, _password, _name, _surname, _phone_number, _email, _jmbg, _date_of_birth, _salary, _years_of_service, _role);
+                
+                /*
+                case 2: 
+                    // manager
+
+                    break;
+                case 3: 
+                    // secretary
+
+                    break;
+                default:
+                    return new AbstractDoctor(_id, _username, _password, _name, _surname, _phone_number, _email, _jmbg, _date_of_birth, _salary, _years_of_service, _role);
+
+            }
+                */
+
+            throw new NotImplementedException();
+
+
         }
+        
     }
 }

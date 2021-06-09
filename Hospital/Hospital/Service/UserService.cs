@@ -16,7 +16,7 @@ namespace Hospital.Service
     public class UserService
     {
         public IUserRepo<User> userRepository;
-        public UserRepository userRepository = new UserRepository();
+        public UserRepository regularUserRepository = new UserRepository();
         private EmployeesRepository employeesRepository = new EmployeesRepository();
         private DoctorRepository doctorRepository = new DoctorRepository();
         private PatientRepository patientRepository = new PatientRepository();
@@ -28,7 +28,7 @@ namespace Hospital.Service
 
         public AbstractUser makeAbstractUser(AbstractUser abstractUser)
         {
-            abstractUser = this.userRepository.makeAbstractUser(abstractUser);
+            abstractUser = this.regularUserRepository.makeAbstractUser(abstractUser);
             if (abstractUser.getUserType().Equals("employee"))
             {
                 abstractUser = this.employeesRepository.insertAbstractEmployeeData((AbstractEmployee) abstractUser);

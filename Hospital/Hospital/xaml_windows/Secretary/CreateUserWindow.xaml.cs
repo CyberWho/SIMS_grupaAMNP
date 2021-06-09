@@ -38,7 +38,7 @@ namespace Hospital.xaml_windows.Secretary
         {
             InitializeComponent();
             this.DataContext = this;
-            user = new AbstractEmployee();
+            user = new AbstractDoctor();
         }
         
         private void Doctor_OnChecked(object sender, RoutedEventArgs e)
@@ -74,7 +74,8 @@ namespace Hospital.xaml_windows.Secretary
             if (doctorFlag)
             {
                 int spec_id =  this.specializationContoller.GetSpecializationByType(specialization);
-                factory = new _EmployeeFactory
+                Role role = new Role(1, "Doctor");
+                factory = new _DoctorFactory
                 (
                     id: 0,
                     username: user.username,
@@ -85,6 +86,7 @@ namespace Hospital.xaml_windows.Secretary
                     email: user.email,
                     jmbg: user.jmbg,
                     date_of_birth: user.date_of_birth,
+                    role: role,
                     room_id: room_id,
                     specialization_id: spec_id,
                     employee_id: 0,
@@ -126,7 +128,7 @@ namespace Hospital.xaml_windows.Secretary
 
             foreach (Room r in rooms)
             {
-                roomsIds.Add(r.Id);
+                roomsIds.Add((int)r.Id);
             }
 
             this.room_selection.ItemsSource = roomsIds;
