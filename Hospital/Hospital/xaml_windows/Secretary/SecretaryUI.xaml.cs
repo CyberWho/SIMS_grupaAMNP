@@ -378,5 +378,12 @@ namespace Hospital.xaml_windows.Secretary
             Window s = new ViewDoctors();
             s.Show();
         }
+
+        private void NewAbstractUser(object sender, RoutedEventArgs e)
+        {
+            Window s = new CreateUserWindow();
+            s.Show();
+            this.Close();
+        }
     }
 }

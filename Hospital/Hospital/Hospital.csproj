@@ -132,6 +132,12 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AbstractEmployee.cs" />
+    <Compile Include="Model\AbstractPatient.cs" />
+    <Compile Include="Model\AbstractUser.cs" />
+    <Compile Include="Model\_EmployeeFactory.cs" />
+    <Compile Include="Model\_PatientFactory.cs" />
+    <Compile Include="Model\_UserFactory.cs" />
     <Compile Include="IRepository\IAddressRepo.cs" />
     <Compile Include="IRepository\IAllergyRepo.cs" />
     <Compile Include="IRepository\IAllergyTypeRepo.cs" />
@@ -549,6 +555,9 @@
     <Compile Include="xaml_windows\Secretary\CreateNotification.xaml.cs">
       <DependentUpon>CreateNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="xaml_windows\Secretary\CreateUserWindow.xaml.cs">
+      <DependentUpon>CreateUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="xaml_windows\Secretary\FreeDays.xaml.cs">
       <DependentUpon>FreeDays.xaml</DependentUpon>
     </Compile>
@@ -948,6 +957,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="xaml_windows\Secretary\CreateNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="xaml_windows\Secretary\CreateUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

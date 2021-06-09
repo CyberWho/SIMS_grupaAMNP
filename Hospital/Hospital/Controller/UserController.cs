@@ -114,6 +114,11 @@ namespace Hospital.Controller
             return true;
         }
 
+        public AbstractUser makeAbstractUser(AbstractUser abstractUser)
+        {
+            return this.userService.makeAbstractUser(abstractUser);
+        }
+
         public User GuestUser()
         {
             return this.userService.GuestUser();

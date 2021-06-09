@@ -16,6 +16,40 @@ namespace Hospital.Repository
     public class EmployeesRepository : IEmployeeRepo<Employee>
     {
 
+
+
+        public AbstractEmployee insertAbstractEmployeeData(AbstractEmployee abstractEmployee)
+        {
+            int id = GetLastId() + 1;
+            setConnection();
+            abstractEmployee.employee_id = id;
+
+            OracleCommand command = connection.CreateCommand();
+            command.CommandText =
+                "INSERT INTO employee (id, salary, years_of_service, user_id, role_id) VALUES (:id, :salary, :years_of_service, :user_id, :role_id)";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = abstractEmployee.employee_id;
+            command.Parameters.Add("salary", OracleDbType.Int32).Value = abstractEmployee.salary;
+            command.Parameters.Add("years_of_service", OracleDbType.Int32).Value = abstractEmployee.years_of_service;
+            command.Parameters.Add("user_id", OracleDbType.Int32).Value = abstractEmployee.id;
+            command.Parameters.Add("role_id", OracleDbType.Int32).Value = abstractEmployee.role.Id;
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                connection.Close();
+                connection.Dispose();
+
+                return abstractEmployee;
+            }
+            connection.Close();
+            connection.Dispose();
+
+            return null;
+        }
+
+
+
+        
+        
         public Employee GetByUserId(int userId)
         {
             
