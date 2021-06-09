@@ -113,7 +113,8 @@ namespace Hospital.ViewModel.Patient
             if(!SelectionValidation()) return;
             DateTime startDate = DateTime.Parse(startTime);
             DateTime endDate = DateTime.Parse(endTime);
-            DateValidationForAppointmentRecommendations(endDate, startDate, SelectedItem.Doctor.Id);
+           // DateValidationForAppointmentRecommendations(endDate, startDate, SelectedItem.Doctor.Id);
+            ShowPatientNewAppointmentRecommendations(endDate, startDate, SelectedItem.Doctor.Id);
         }
 
         private bool SelectionValidation()

@@ -57,7 +57,7 @@ namespace Hospital.xaml_windows.Secretary
             Room room = new Room();
             appointment.room = room;
             appointment.room.Id = int.Parse(room_id_txt.Text);
-            new Executer(appointment, new Modify(), new AppointmentCommand(appointment, AppointmentAction.ADD));
+            new Executer(appointment, new Modify(), new AppointmentCommand(appointment,Model.Action.ADD));
             var s = new PatientAppointment(id);
             s.Show();
             this.Close();

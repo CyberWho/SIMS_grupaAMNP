@@ -135,7 +135,7 @@ namespace Hospital.xaml_windows.Secretary
         {
             int appointmentId = int.Parse(app_id_txt.Text);
             Appointment appointment = appointmentController.GetAppointmentById(appointmentId);
-            new Executer(appointment, new Modify(), new AppointmentCommand(appointment, AppointmentAction.DELETE));
+            new Executer(appointment, new Modify(), new AppointmentCommand(appointment, Model.Action.DELETE));
             update();
            /* if (appointmentController.CancelAppointmentById(appointmentId))
             {

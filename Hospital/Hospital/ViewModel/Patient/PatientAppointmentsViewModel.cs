@@ -155,7 +155,7 @@ namespace Hospital.ViewModel.Patient
         private void OnDelete()
         {
             if(!SelectionValidation()) return;
-            new Executer(selectedItem,new Modify(),new AppointmentCommand(selectedItem,AppointmentAction.DELETE));
+            new Executer(selectedItem,new Modify(),new AppointmentCommand(selectedItem,Model.Action.DELETE));
             BlockChecking();
             updateDataGrid();
         }
