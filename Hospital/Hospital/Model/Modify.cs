@@ -7,11 +7,11 @@ using System.Windows.Input;
 
 namespace Hospital.Model
 {
-    class ModifyAppointment
+    public class Modify
     {
         private ICommand _command;
 
-        public ModifyAppointment()
+        public Modify()
         {
         }
         public void SetCommand(ICommand command) => _command = command;

@@ -128,15 +128,10 @@ namespace Hospital.ViewModel.Patient
         private void OnAdd()
         {
             if(!SelectionValidation()) return;
-            Execute(appointment,new ModifyAppointment(),new AppointmentCommand(appointment,AppointmentAction.UPDATE,SelectedItem.StartTime));
+            new Executer(appointment,new Modify(),new AppointmentCommand(appointment,AppointmentAction.UPDATE,SelectedItem.StartTime));
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
-        }
-        private static void Execute(Appointment appointment, ModifyAppointment modifyAppointment, ICommand appointmentCommand)
-        {
-            modifyAppointment.SetCommand(appointmentCommand);
-            modifyAppointment.Invoke();
         }
         private bool SelectionValidation()
         {

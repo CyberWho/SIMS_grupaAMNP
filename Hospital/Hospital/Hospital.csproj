@@ -162,13 +162,14 @@
     <Compile Include="Model\DateRange.cs" />
     <Compile Include="Model\DispatcherTimerForReservedItems.cs" />
     <Compile Include="Model\DrugDTO.cs" />
+    <Compile Include="Model\Executer.cs" />
     <Compile Include="Model\FreeDays.cs" />
     <Compile Include="Model\FreeDaysStatus.cs" />
     <Compile Include="Model\Globals.cs" />
     <Compile Include="Model\ICommand.cs" />
     <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\ItemInRoomDTO.cs" />
-    <Compile Include="Model\ModifyAppointment.cs" />
+    <Compile Include="Model\Modify.cs" />
     <Compile Include="Model\PatientLogs.cs" />
     <Compile Include="Model\RenovationDTO.cs" />
     <Compile Include="Model\PersonalReminder.cs" />

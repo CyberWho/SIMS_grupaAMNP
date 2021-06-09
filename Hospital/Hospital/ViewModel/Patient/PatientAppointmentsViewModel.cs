@@ -155,8 +155,7 @@ namespace Hospital.ViewModel.Patient
         private void OnDelete()
         {
             if(!SelectionValidation()) return;
-            var modifyAppointment = new ModifyAppointment();
-            Execute(selectedItem,modifyAppointment,new AppointmentCommand(selectedItem,AppointmentAction.DELETE));
+            new Executer(selectedItem,new Modify(),new AppointmentCommand(selectedItem,AppointmentAction.DELETE));
             BlockChecking();
             updateDataGrid();
         }
@@ -166,12 +165,6 @@ namespace Hospital.ViewModel.Patient
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
-        }
-
-        private static void Execute(Appointment appointment, ModifyAppointment modifyAppointment, ICommand appointmentCommand)
-        {
-            modifyAppointment.SetCommand(appointmentCommand);
-            modifyAppointment.Invoke();
         }
         private bool SelectionValidation()
         {
