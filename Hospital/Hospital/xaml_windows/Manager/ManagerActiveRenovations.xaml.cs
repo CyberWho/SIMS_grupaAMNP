@@ -15,9 +15,9 @@ namespace Hospital.xaml_windows.Manager
     public partial class ManagerActiveRenovations : Window
     {
         ObservableCollection<Renovation> Renovations = new ObservableCollection<Renovation>();
-        ObservableCollection<RenovationDTO> RenovationDTOs = new ObservableCollection<RenovationDTO>();
+        ObservableCollection<IRenovationDto> RenovationDTOs = new ObservableCollection<IRenovationDto>();
         Controller.RenovationController renovationController = new Controller.RenovationController();
-        RenovationDTO selectedItem;
+        IRenovationDto selectedItem;
 
         public ManagerActiveRenovations()
         {
@@ -38,8 +38,8 @@ namespace Hospital.xaml_windows.Manager
             if(myDataGrid.SelectedItem != null)
             {
                 changeStartDate_btn.IsEnabled = true;
-                selectedItem = (RenovationDTO)myDataGrid.SelectedItem;
-                date_pckr.Text = selectedItem.StartDate.ToString();
+                selectedItem = (IRenovationDto)myDataGrid.SelectedItem;
+                date_pckr.Text = selectedItem.renovation.StartDate.ToString();
             }
         }
 
@@ -53,7 +53,18 @@ namespace Hospital.xaml_windows.Manager
             Renovations = renovationController.GetAllActiveRenovations();
             foreach(Renovation renovation in Renovations)
             {
-                RenovationDTOs.Add(new RenovationDTO(renovation));
+                switch (renovation.Type)
+                {
+                    case RenovationType.MERGE:
+                        RenovationDTOs.Add(new MergeRenovationDTO(renovation));
+                        break;
+                    case RenovationType.REGULAR:
+                        RenovationDTOs.Add(new RegularRenovationDTO(renovation));
+                        break;
+                    case RenovationType.SPLIT:
+                        RenovationDTOs.Add(new SplitRenovationDTO(renovation));
+                        break;
+                }
             }
             UpdateDataGrid();
         }
@@ -68,7 +79,7 @@ namespace Hospital.xaml_windows.Manager
 
         private void EndRenovation_Click(object sender, RoutedEventArgs e)
         {
-            if (renovationController.EndRenovation(new Renovation((RenovationDTO)myDataGrid.SelectedItem)) == null)
+            if (renovationController.EndRenovation(new Renovation((IRenovationDto)myDataGrid.SelectedItem)) == null)
             {
                 ShowErrorBox("Neuspešan završetak renovacije.");
                 return;
@@ -82,7 +93,7 @@ namespace Hospital.xaml_windows.Manager
         private void changeStartDate_btn_Click(object sender, RoutedEventArgs e)
         {
             Renovation renovationToUpdate = new Renovation(selectedItem);
-            selectedItem.StartDate = DateTime.Parse(date_pckr.Text);
+            selectedItem.renovation.StartDate = DateTime.Parse(date_pckr.Text);
             if (renovationController.ChangeStartDate(renovationToUpdate, DateTime.Parse(date_pckr.Text)) == null)
             {
                 ShowErrorBox("Izaberite datum koji nije u prošlosti.");

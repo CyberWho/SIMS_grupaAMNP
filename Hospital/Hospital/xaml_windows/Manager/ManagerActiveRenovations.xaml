@@ -19,10 +19,10 @@
             </Image>
             <TextBlock Text="ZDRAVO KORPORACIJA" FontSize="24" HorizontalAlignment="Center" Width="265" Margin="63,26,745.6,627.4" Height="37" Style="{StaticResource managerTextBlock}"/>
         </Canvas>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding RenovationDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="530" Margin="302,150,0,0" VerticalAlignment="Top" Width="762" SelectionUnit="FullRow" SelectionMode="Single" SelectionChanged="myDataGrid_SelectionChanged" Style="{StaticResource managerDataGrid}">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding RenovationDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="530" Margin="302,150,0,0" VerticalAlignment="Top" Width="762" SelectionChanged="myDataGrid_SelectionChanged" Style="{StaticResource managerDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto  "  IsReadOnly="True" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Datum početka" Binding="{Binding StartDate}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Datum početka" Binding="{Binding renovation.StartDate}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Tip renovacije" Binding="{Binding Type}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Prostorije" Binding="{Binding Rooms}" Width="*" IsReadOnly="True">
                     <DataGridTextColumn.CellStyle>
@@ -34,7 +34,9 @@
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="EndRenovation_Click" Content="Završi"/>
+                            <Button Click="EndRenovation_Click" Width="80" Style="{StaticResource managerRegularBtn}">
+                                <TextBlock Text="Završi" Style="{StaticResource managerTextBlock}"/>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

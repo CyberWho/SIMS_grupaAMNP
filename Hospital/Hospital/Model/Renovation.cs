@@ -6,6 +6,8 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Hospital.Repository;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace Hospital.Model
 {
@@ -43,30 +45,23 @@ namespace Hospital.Model
             RoomIDs = new ObservableCollection<int?>();
         }
 
-        public Renovation(RenovationDTO DTO)
+        public Renovation(IRenovationDto DTO) : this()
         {
-            Id = DTO.Id;
-            StartDate = DTO.StartDate;
-            Type = DTO.EnumType;
-            Rooms = DTO.RoomsList;
-            if (DTO.Ended.Equals("U toku"))
-            {
-                Ended = false;
-            }
-            else
-            {
-                Ended = true;
-            }
-            NewArea = DTO.NewArea;
+            Id = DTO.renovation.Id;
+            StartDate = DTO.renovation.StartDate;
+            Type = DTO.renovation.Type;
+            Rooms = DTO.renovation.Rooms;
+            Ended = DTO.renovation.Ended;
+            NewArea = DTO.renovation.NewArea;
             RoomIDs = new ObservableCollection<int?>();
-            foreach(Room room in Rooms)
-            {
-                RoomIDs.Add(room.Id);
-            }
         }
-
         public Renovation()
         {
+        }
+
+        public static Renovation EndRenovation(Renovation renovation, RenovationEnding renovationEnding, RenovationRepository repo)
+        {
+            return renovationEnding.EndRenovation(renovation, repo);
         }
     }
 }

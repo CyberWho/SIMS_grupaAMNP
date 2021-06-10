@@ -3,6 +3,7 @@ using Hospital.Model;
 using Oracle.ManagedDataAccess.Client;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using static Globals;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -43,9 +44,6 @@ namespace Hospital.Repository
             RoomType newRoomType = new RoomType(reader.GetInt32(4), reader.GetString(5), null);
             room.roomType = newRoomType;
 
-            
-            
-
             return room;
         }
 
@@ -71,11 +69,11 @@ namespace Hospital.Repository
 
         public ObservableCollection<Room> GetRoomByDiscardingIDList(ObservableCollection<int> IDs)
         {
-            string IDsString = "";
-            foreach(int ID in IDs)
+            if (IDs.Count == 0)
             {
-                IDsString += ID.ToString() + ", ";
+                return GetAllRooms();
             }
+            string IDsString = IDs.Aggregate("", (current, ID) => current + (ID.ToString() + ", "));
             IDsString = IDsString.Remove(IDsString.Length - 2);
 
             
@@ -285,6 +283,7 @@ namespace Hospital.Repository
 
         public Room UpdateRoom(Room room)
         {
+            QuickTrace("Usao gde treba");
             
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText =
@@ -298,18 +297,11 @@ namespace Hospital.Repository
             try
             {
                 cmd.ExecuteNonQuery();
-
-                
-                
-
                 return room;
             }
             catch (Exception e)
             {
-
-                
-                
-
+                QuickTrace("UpdateRoom ERROR: " + e.ToString());
                 return null;
             }
         }

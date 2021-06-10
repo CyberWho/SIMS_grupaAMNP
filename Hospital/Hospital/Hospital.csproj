@@ -132,9 +132,18 @@
     <Compile Include="HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\MergeRenovationDTO.cs" />
+    <Compile Include="Model\MergeRenovationEnding.cs" />
+    <Compile Include="Model\RegularRenovationEnding.cs" />
+    <Compile Include="Model\RenovationEnding.cs" />
+    <Compile Include="Model\SplitRenovationDTO.cs" />
     <Compile Include="Model\AbstractEmployee.cs" />
     <Compile Include="Model\AbstractPatient.cs" />
     <Compile Include="Model\AbstractUser.cs" />
+    <Compile Include="Model\IRenovationDto.cs" />
+    <Compile Include="Model\ISplitRenovationDto.cs" />
+    <Compile Include="Model\RegularRenovationDTO.cs" />
+    <Compile Include="Model\SplitRenovationEnding.cs" />
     <Compile Include="Model\_EmployeeFactory.cs" />
     <Compile Include="Model\_PatientFactory.cs" />
     <Compile Include="Model\_UserFactory.cs" />
@@ -179,7 +188,6 @@
     <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\Modify.cs" />
     <Compile Include="Model\PatientLogs.cs" />
-    <Compile Include="Model\RenovationDTO.cs" />
     <Compile Include="Model\PersonalReminder.cs" />
     <Compile Include="Model\PersonalReminderFrequency.cs" />
     <Compile Include="Model\Review.cs" />

@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="ManagerRenovationHistory" Height="720" Width="1080" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding RenovationDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" Height="448" Margin="60,120,60,0" VerticalAlignment="Top" SelectionUnit="FullRow" SelectionMode="Single">
+        <DataGrid x:Name="myDataGrid" ItemsSource="{Binding RenovationDTOs}" AutoGenerateColumns="False" CanUserAddRows="False" Height="448" Margin="60,120,60,0" VerticalAlignment="Top" SelectionUnit="FullRow" SelectionMode="Single" Style="{StaticResource MaterialDesignDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"  IsReadOnly="True" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Datum početka" Binding="{Binding StartDate}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Datum početka" Binding="{Binding renovation.StartDate}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Tip renovacije" Binding="{Binding Type}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Prostorije" Binding="{Binding Rooms}" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Ended}" Width="*" IsReadOnly="True"/>

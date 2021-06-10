@@ -92,18 +92,14 @@ namespace Hospital.Service
             switch (renovation.Type)
             {
                 case RenovationType.REGULAR:
-                    break;
+                    return Renovation.EndRenovation(renovation, new RegularRenovationEnding(), renovationRepository);
                 case RenovationType.SPLIT:
-                    EndSplitRenovation(renovation);
-                    break;
+                    return Renovation.EndRenovation(renovation, new SplitRenovationEnding(), renovationRepository);
                 case RenovationType.MERGE:
-                    EndMergeRenovation(renovation);
-                    break;
+                    return Renovation.EndRenovation(renovation, new MergeRenovationEnding(), renovationRepository);
                 default:
                     return null;
             }
-
-            return renovationRepository.UpdateRenovation(renovation);
         }
 
         private void EndMergeRenovation(Renovation renovation)
@@ -137,15 +133,6 @@ namespace Hospital.Service
         private Room GetRoomWithSmallestRoomID(ObservableCollection<Room> Rooms)
         {
             return Rooms.Aggregate((curMin, x) => (curMin == null || (x.Id ?? int.MaxValue) < curMin.Id ? x : curMin));
-        }
-        private void EndSplitRenovation(Renovation renovation)
-        {
-            renovation.Rooms.First().Area -= renovation.NewArea;
-            roomRepository.UpdateRoom(renovation.Rooms.First());
-            Room newRoom = renovation.Rooms.First();
-            newRoom.Area = renovation.NewArea;
-            newRoom.roomType = renovation.Rooms.First().roomType;
-            roomRepository.NewRoom(newRoom);
         }
 
         public Repository.RenovationRepository renovationRepository = new Repository.RenovationRepository();

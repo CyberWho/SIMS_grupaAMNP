@@ -13,7 +13,7 @@ namespace Hospital.xaml_windows.Manager
     public partial class ManagerRenovationHistory : Window
     {
         ObservableCollection<Renovation> Renovations = new ObservableCollection<Renovation>();
-        ObservableCollection<RenovationDTO> RenovationDTOs = new ObservableCollection<RenovationDTO>();
+        ObservableCollection<IRenovationDto> RenovationDTOs = new ObservableCollection<IRenovationDto>();
         Controller.RenovationController renovationController = new Controller.RenovationController();
         public ManagerRenovationHistory()
         {
@@ -37,7 +37,18 @@ namespace Hospital.xaml_windows.Manager
             Renovations = renovationController.GetAllRenovations();
             foreach (Renovation renovation in Renovations)
             {
-                RenovationDTOs.Add(new RenovationDTO(renovation));
+                switch (renovation.Type)
+                {
+                    case RenovationType.MERGE:
+                        RenovationDTOs.Add(new MergeRenovationDTO(renovation));
+                        break;
+                    case RenovationType.REGULAR:
+                        RenovationDTOs.Add(new RegularRenovationDTO(renovation));
+                        break;
+                    case RenovationType.SPLIT:
+                        RenovationDTOs.Add(new SplitRenovationDTO(renovation));
+                        break;
+                }
             }
             UpdateDataGrid();
         }

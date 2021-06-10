@@ -143,7 +143,7 @@ namespace Hospital.Repository
         public void MoveAllItemsFromRoom(Room sourceRoom, Room destinationRoom)
         {
             setConnection();
-            OracleCommand cmd = connection.CreateCommand();
+            OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "UPDATE item_in_room SET room_id = " + destinationRoom.Id.ToString() + " WHERE room_id = " + sourceRoom.Id.ToString();
             OracleDataReader reader;
             Trace.WriteLine("SQL COMMAND: " + cmd.CommandText);
@@ -156,8 +156,6 @@ namespace Hospital.Repository
                 Trace.WriteLine("MoveAllItemsFromRoom ERROR: " + exp.ToString());
                 return;
             }
-            connection.Close();
-            connection.Dispose();
         }
 
         public bool DeleteItemInRoomById(int id)

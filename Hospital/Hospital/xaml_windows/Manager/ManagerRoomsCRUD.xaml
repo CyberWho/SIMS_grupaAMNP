@@ -26,7 +26,7 @@
                 <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ShowInventory_Click" Style="{StaticResource managerRegularBtn}" Width="80">
+                            <Button Click="ShowInventory_Click" Style="{StaticResource managerRegularBtn}" Width="80 ">
                                 <TextBlock Text="Inventar" Style="{StaticResource managerTextBlock}" FontSize="12"/>
                             </Button>
                         </DataTemplate>
