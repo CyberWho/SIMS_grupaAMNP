@@ -9,6 +9,7 @@ using Hospital.Controller;
 using Hospital.Model;
 using Hospital.View.Patient;
 using Hospital.xaml_windows.Patient;
+using Action = Hospital.Model.Action;
 
 namespace Hospital.ViewModel.Patient
 {
@@ -140,7 +141,7 @@ namespace Hospital.ViewModel.Patient
             Model.Doctor doctor = doctorController.GetWorkHoursDoctorById(doctorId);
             TimeSlot timeSlot = timeSlotController.GetTimeSlotById(SelectedItem.Id);
             Appointment appointment = new Appointment(30, timeSlot.StartTime, AppointmentType.EXAMINATION, AppointmentStatus.RESERVED, doctor, patient, room);
-            new Executer(appointment,new Modify(),new AppointmentCommand(appointment,AppointmentAction.ADD));
+            new Executer(appointment,new Modify(),new AppointmentCommand(appointment,Model.Action.ADD));
             CheckIfReferralForSpecialistIsUsed();
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);
@@ -160,7 +161,10 @@ namespace Hospital.ViewModel.Patient
         {
             if (referralForSpecialistId != 0)
             {
-                refferalForSpecialistController.DeleteReferralById(referralForSpecialistId);
+                ReferralForSpecialist referralForSpecialist =
+                    refferalForSpecialistController.GetReferralForSpecialistById(referralForSpecialistId);
+                new Executer(referralForSpecialist, new Modify(),
+                    new ReferralForSpecialistCommand(referralForSpecialist, Action.DELETE));
             }
         }
 

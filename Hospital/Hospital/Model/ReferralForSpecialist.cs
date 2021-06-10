@@ -29,5 +29,20 @@ namespace Hospital.Model
         public ReferralForSpecialist()
         {
         }
+
+        public void CreateReferral()
+        {
+            new Controller.RefferalForSpecialistController().AddReferral(this);
+        }
+
+        public void DeleteReferral()
+        {
+            new Controller.RefferalForClinicalTreatmentController().DeleteReferralForClinicalTreatmentById(Id);
+        }
+
+        public void Update()
+        {
+            new Controller.RefferalForSpecialistController().UpdateReferral(this);
+        }
     }
 }

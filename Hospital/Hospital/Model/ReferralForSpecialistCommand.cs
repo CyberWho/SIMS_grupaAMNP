@@ -3,34 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hospital.Controller;
 
 namespace Hospital.Model
 {
-    public class UserCommand : ICommand
+    class ReferralForSpecialistCommand : ICommand
     {
-        private User _user;
+        private ReferralForSpecialist _referralForSpecialist;
         private Action _action;
-        
-        public UserCommand(User user, Action action)
+
+        public ReferralForSpecialistCommand(ReferralForSpecialist referralForSpecialist, Action action)
         {
-            _user = user;
-            _action = action;
+            this._referralForSpecialist = referralForSpecialist;
+            this._action = action;
             ExecuteAction();
         }
-
         public void ExecuteAction()
         {
             switch (_action)
             {
                 case Action.ADD:
-                    _user.CreateNewUser();
+                    _referralForSpecialist.CreateReferral();
                     break;
                 case Action.DELETE:
-                    _user.DeleteUser();
+                    _referralForSpecialist.DeleteReferral();
                     break;
                 case Action.UPDATE:
-                    _user.UpdateUser();
+                    _referralForSpecialist.Update();
                     break;
             }
         }

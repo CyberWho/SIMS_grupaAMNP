@@ -184,7 +184,7 @@ namespace Hospital.xaml_windows.Secretary
             connection.Close();
             connection.Dispose();*/
            User user = new UserController().GetUserById(current_user_id);
-           new Executer(user, new Modify(), new UserCommand(user, UserAction.DELETE));
+           new Executer(user, new Modify(), new UserCommand(user, Model.Action.DELETE));
             this.Refresh(sender, e);
         }
         // ispravljeno
@@ -200,7 +200,7 @@ namespace Hospital.xaml_windows.Secretary
 
             //this.Update(uUser);
             User user = new UserController().GetUserById(current_user_id);
-            new Executer(user, new Modify(), new UserCommand(uUser, UserAction.UPDATE));
+            new Executer(user, new Modify(), new UserCommand(uUser, Model.Action.UPDATE));
             this.Refresh(sender, e);
             // KADA SE KORISTI LISTVIEW NE KREIRA SE NPR NEW ROOM OBJEKAT NEGO SAMO OBJEKAT NEW {} I TO JE TO
         }

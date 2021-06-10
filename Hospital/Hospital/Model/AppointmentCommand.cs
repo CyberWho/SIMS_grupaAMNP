@@ -1,4 +1,5 @@
 ﻿using System;
+using Hospital.Controller;
 
 
 namespace Hospital.Model
@@ -6,39 +7,38 @@ namespace Hospital.Model
     public class AppointmentCommand : ICommand
     {
         private Appointment _appointment;
-        private AppointmentAction _appointmentAction;
+        private Action _action;
         private DateTime _newStartTime;
 
-        public AppointmentCommand(Appointment appointment,AppointmentAction appointmentAction)
+        public AppointmentCommand(Appointment appointment,Action action)
         {
             _appointment = appointment;
-            _appointmentAction = appointmentAction;
+            _action = action;
             ExecuteAction();
         }
-        public AppointmentCommand(Appointment appointment, AppointmentAction appointmentAction,DateTime startTime)
+        public AppointmentCommand(Appointment appointment, Action action,DateTime startTime)
         {
             _appointment = appointment;
-            _appointmentAction = appointmentAction;
+            _action = action;
             _newStartTime = startTime;
             ExecuteAction();
         }
 
         public void ExecuteAction()
         {
-            switch (_appointmentAction)
+            switch (_action)
             {
-                case AppointmentAction.ADD:
+                case Action.ADD:
                     _appointment.CreateNewAppointment();
                     break;
-                case AppointmentAction.DELETE:
+                case Action.DELETE:
                     _appointment.DeleteAppointment();
                     break;
-                case AppointmentAction.UPDATE:
+                case Action.UPDATE:
                     _appointment.UpdateAppointmentStartTime(_newStartTime);
                     break;
             }
+
         }
-
-
     }
 }

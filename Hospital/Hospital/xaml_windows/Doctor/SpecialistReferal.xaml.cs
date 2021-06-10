@@ -16,6 +16,7 @@ using Hospital.Model;
 using Hospital.Controller;
 using Hospital.View.Doctor;
 using MVVM1;
+using Action = Hospital.Model.Action;
 
 namespace Hospital.xaml_windows.Doctor
 {
@@ -80,7 +81,8 @@ namespace Hospital.xaml_windows.Doctor
                 referralForSpecialist.Description = tb_description.Text;
                 referralForSpecialist.appointment_id = this.selected_appointment_id;
                 referralForSpecialist.healthRecord_id = this.healthRecord.Id;
-                refferalForSpecialistController.AddReferral(referralForSpecialist);
+                new Executer(referralForSpecialist, new Modify(),
+                    new ReferralForSpecialistCommand(referralForSpecialist, Action.ADD));
                 MessageBox.Show("Uput uspesno zadat.");
             }
         }

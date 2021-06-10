@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    public enum UserAction
+    public enum Action
     {
         ADD,
         DELETE,

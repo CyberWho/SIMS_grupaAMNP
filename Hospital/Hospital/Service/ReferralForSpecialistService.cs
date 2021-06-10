@@ -21,10 +21,9 @@ namespace Hospital.Service
            referralForSpecialistRepository = iReferralForSpecialistRepo;
        }
         public ReferralForSpecialist GetReferralForSpecialistById(int id)
-      {
-         // TODO: implement
-         return null;
-      }
+        {
+            return referralForSpecialistRepository.GetById(id);
+        }
       
       public System.Collections.ArrayList GetAllReferrals()
       {

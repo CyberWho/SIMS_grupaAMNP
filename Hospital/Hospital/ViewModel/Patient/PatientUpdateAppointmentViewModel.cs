@@ -128,7 +128,7 @@ namespace Hospital.ViewModel.Patient
         private void OnAdd()
         {
             if(!SelectionValidation()) return;
-            new Executer(appointment,new Modify(),new AppointmentCommand(appointment,AppointmentAction.UPDATE,SelectedItem.StartTime));
+            new Executer(appointment,new Modify(),new AppointmentCommand(appointment,Model.Action.UPDATE,SelectedItem.StartTime));
             Model.Patient patient = patientController.GetPatientByUserId(userId);
             patientLogsController.IncrementLogCounterByPatientId(patient.Id);
             CheckIfPatientIsBlocked(patient.Id);

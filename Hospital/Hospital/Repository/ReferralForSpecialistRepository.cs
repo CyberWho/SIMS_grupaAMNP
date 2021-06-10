@@ -127,8 +127,12 @@ namespace Hospital.Repository
 
         public Hospital.Model.ReferralForSpecialist GetById(int id)
         {
-            // TODO: implement
-            return null;
+            OracleCommand command = Globals.globalConnection.CreateCommand();
+            command.CommandText = "select * from referral_for_specialist where id = :id";
+            command.Parameters.Add("id", OracleDbType.Int32).Value = id.ToString();
+            OracleDataReader reader = command.ExecuteReader();
+            var referral = ParseReferralForSpecialist(reader);
+            return referral;
         }
 
         public int GetLastId()

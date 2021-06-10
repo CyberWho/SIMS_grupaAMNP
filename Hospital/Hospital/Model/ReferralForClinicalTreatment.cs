@@ -38,5 +38,7 @@ namespace Hospital.Model
         {
             dateRange = new DateRange();
         }
+
+       
     }
 }

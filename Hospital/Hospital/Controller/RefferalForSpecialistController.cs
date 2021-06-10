@@ -15,8 +15,7 @@ namespace Hospital.Controller
    {
       public ReferralForSpecialist GetReferralForSpecialistById(int id)
       {
-         // TODO: implement
-         return null;
+          return referralForSpecialistService.GetReferralForSpecialistById(id);
       }
       
       public ObservableCollection<ReferralForSpecialist> GetAllReferrals()
