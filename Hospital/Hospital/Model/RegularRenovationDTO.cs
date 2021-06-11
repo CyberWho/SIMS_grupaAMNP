@@ -30,10 +30,5 @@ namespace Hospital.Model
             Ended = _renovation.Ended ? "Završena" : "U toku";
         }
         public RegularRenovationDTO(){}
-
-        public object CreateDto(Renovation _renovation)
-        {
-            return new RegularRenovationDTO(_renovation);
-        }
     }
 }

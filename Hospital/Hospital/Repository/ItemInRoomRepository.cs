@@ -146,7 +146,6 @@ namespace Hospital.Repository
             OracleCommand cmd = Globals.globalConnection.CreateCommand();
             cmd.CommandText = "UPDATE item_in_room SET room_id = " + destinationRoom.Id.ToString() + " WHERE room_id = " + sourceRoom.Id.ToString();
             OracleDataReader reader;
-            Trace.WriteLine("SQL COMMAND: " + cmd.CommandText);
             try
             {
                 reader = cmd.ExecuteReader();

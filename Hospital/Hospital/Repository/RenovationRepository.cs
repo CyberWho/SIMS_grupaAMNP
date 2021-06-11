@@ -164,9 +164,10 @@ namespace Hospital.Repository
             foreach (Room room in renovation.Rooms)
             {
                 bool exists = false;
-                foreach (Room existingRoom in existingRenovation.Rooms)
+                foreach (int? existingRoomId in existingRenovation.RoomIDs)
                 {
-                    if (room.Id == existingRoom.Id)
+                    if (existingRoomId == null) continue;
+                    if (room.Id == existingRoomId)
                     {
                         exists = true;
                         break;

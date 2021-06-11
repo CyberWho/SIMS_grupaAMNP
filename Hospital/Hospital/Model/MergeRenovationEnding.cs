@@ -11,10 +11,10 @@ namespace Hospital.Model
     {
         protected override void RoomsUpdate(Renovation renovation, Repository.RoomRepository repo)
         {
-            Room NewRoom = GetRoomWithSmallestRoomID(renovation.Rooms);
-            NewRoom = MergeAreasAndInventories(renovation, NewRoom);
-            DeleteAllMergedRoomsExceptNewRoom(renovation, NewRoom, repo);
-            repo.UpdateRoom(NewRoom);
+            var newRoom = GetRoomWithSmallestRoomID(renovation.Rooms);
+            newRoom = MergeAreasAndInventories(renovation, newRoom);
+            DeleteAllMergedRoomsExceptNewRoom(renovation, newRoom, repo);
+            repo.UpdateRoom(newRoom);
         }
 
         private Room MergeAreasAndInventories(Renovation renovation, Room newRoom)
@@ -39,7 +39,7 @@ namespace Hospital.Model
         }
         private Room GetRoomWithSmallestRoomID(ObservableCollection<Room> rooms)
         {
-            return rooms.Aggregate((curMin, x) => (curMin == null || (x.Id ?? int.MaxValue) < curMin.Id ? x : curMin));
+            return rooms.Aggregate((curMin, x) => curMin == null || (x.Id ?? int.MaxValue) < curMin.Id ? x : curMin);
         }
     }
 }

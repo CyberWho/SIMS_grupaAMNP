@@ -37,6 +37,10 @@ namespace Hospital.Repository
             command.CommandText = "SELECT * FROM room LEFT OUTER JOIN room_type ON room.rtype_id = room_type.id WHERE room.id = " + id.ToString();
             OracleDataReader reader = command.ExecuteReader();
             reader.Read();
+            if (!reader.HasRows)
+            {
+                return null;
+            }
             room.Id = reader.GetInt32(0);
             room.Floor = reader.GetInt32(1);
             room.Area = reader.GetDouble(2);
